@@ -1,6 +1,6 @@
 # Experiment report
 
-**Every number in this report comes either from simulated (synthetic) markets or from arithmetic on values printed in the 2025 paper. None comes from real market data.** The simulator is described in `src/niftygex/simulate.py`; its assumptions (in particular the size and form of the dealer-gamma effect) are ours, so the synthetic results show what the methods can and cannot do, not what the Nifty market does.
+**Every number in this report comes either from simulated (synthetic) markets or from arithmetic on values printed in the 2025 paper. None comes from real market data.** Results on real NSE data (from 2 November 2026) are kept in a separate document, `docs/REAL_DATA_RESULTS.md`, so the two can never be confused. The simulator is described in `src/niftygex/simulate.py`; its assumptions (in particular the size and form of the dealer-gamma effect) are ours, so the synthetic results show what the methods can and cannot do, not what the Nifty market does.
 
 Raw outputs are in `results/`. Each experiment can be rerun with the command shown.
 
