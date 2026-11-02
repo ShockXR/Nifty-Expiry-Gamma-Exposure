@@ -1,0 +1,8 @@
+cell,expiry_days_settlement_equals_close,expiry_days
+BANKNIFTY:monthly_only:auction,3,3
+BANKNIFTY:monthly_only:pre,21,21
+BANKNIFTY:weekly_options:pre,98,98
+NIFTY:multi_weekly:pre,98,98
+NIFTY:single_weekly_thu:pre,41,41
+NIFTY:single_weekly_tue:auction,13,13
+NIFTY:single_weekly_tue:pre,48,48

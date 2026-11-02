@@ -1,0 +1,7 @@
+n_days,n_expiry,n_clusters,gamma,gamma_se,gamma_ci_low,gamma_ci_high,gamma_p,d,d_se,d_ci_low,d_ci_high,d_p,item,mean_C4_expiry_from,mean_C4_expiry_to,change_C4,observed_gap_change,mechanism_needs,consistent,n_other,mean_y_expiry,mean_y_other,gap,gap_nifty_points
+1878.0,322.0,200.0,-0.027383443227323445,0.019950511482655617,-0.06672498490671594,0.01195809845206905,0.1714314739116646,-0.00470812914307478,0.005467786348454585,-0.015490366215480196,0.006074107929330637,0.39023756061170484,"C4 within-cell gamma (descriptive, not counted)",,,,,,,,,,,
+,,,,,,,,,,,,,"C4 consistency (post hoc rule): Nifty, multi-weekly to Thursday",5.122448979591836,1.5853658536585367,-3.5370831259332998,-0.06863034556417208,fewer weeklies,True,,,,,
+,,,,,,,,,,,,,"C4 consistency (post hoc rule): Nifty, Thursday to Tuesday",1.5853658536585367,1.5416666666666667,-0.04369918699186992,0.11533005606634808,more weeklies,False,,,,,
+,,,,,,,,,,,,,"C4 consistency (post hoc rule): Bank Nifty, weekly to monthly",5.122448979591836,0.23809523809523808,-4.884353741496598,0.028784839725471717,more weeklies,False,,,,,
+,33.0,,,,,,,,,,,,"A1: Nifty Thursday regime, before 4 Jul 2025",,,,,,,120.0,0.15354545454544924,0.24619166666666994,-0.0926462121212207,-4.6323106060610355
+,8.0,,,,,,,,,,,,"A1: Nifty Thursday regime, from 4 Jul 2025",,,,,,,31.0,0.21712499999999635,0.29580645161290087,-0.07868145161290452,-3.9340725806452257

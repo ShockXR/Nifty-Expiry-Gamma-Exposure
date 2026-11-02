@@ -1,0 +1,131 @@
+check,value,expected,ok,note
+expiry days in cell NIFTY:multi_weekly:pre,98,98.0,True,
+expiry days in cell NIFTY:single_weekly_thu:pre,41,41.0,True,
+expiry days in cell NIFTY:single_weekly_tue:pre,48,48.0,True,
+expiry days in cell NIFTY:single_weekly_tue:auction,13,13.0,True,
+expiry days in cell BANKNIFTY:weekly_options:pre,98,98.0,True,
+expiry days in cell BANKNIFTY:monthly_only:pre,21,21.0,True,
+expiry days in cell BANKNIFTY:monthly_only:auction,3,3.0,True,
+index-days in panel,1878,1878.0,True,
+lot size: udiff_contract_days,1138,,,
+lot size: agree_gcd_vs_NewBrdLotQty,0.8910369068541301,,,
+lot size: agree_turnover_vs_NewBrdLotQty,1.0,,,
+lot size: gcd_rule_used_for_legacy_days,False,,,
+lot size: legacy_contract_days,740,,,
+lot size: legacy_days_gcd_disagrees_with_turnover_rule,19,,,
+NIFTY: expiry days where futures-based monthly flag M equals pinning study's monthly label,198 of 200,,,
+NIFTY: monthly expiry days (M = 1),46,,,
+NIFTY: holiday-shifted expiry days (exploratory definition),11,,,
+NIFTY: days using a holiday re-dated contract,4,,,
+BANKNIFTY: expiry days where futures-based monthly flag M equals pinning study's monthly label,118 of 122,,,
+BANKNIFTY: monthly expiry days (M = 1),46,,,
+BANKNIFTY: holiday-shifted expiry days (exploratory definition),10,,,
+BANKNIFTY: days using a holiday re-dated contract,12,,,
+missing C1 (days),0,,,
+missing C2 (days),0,,,
+missing C3 (days),0,,,
+missing C5 (days),0,,,
+missing C6 (days),0,,,
+missing C4 (days),0,,,
+missing C1g (days),0,,,
+missing C1w (days),0,,,
+missing C2d (days),0,,,
+missing A1 (days),0,,,
+C4 source: weekly expiry dates of NIFTY,154,,,2023-01-05 to 2026-10-19
+C4 source: weekly expiry dates of BANKNIFTY,76,,,2023-01-05 to 2024-11-13
+C4 source: weekly expiry dates of SENSEX,139,,,2023-05-19 to 2026-10-22
+C4 source: weekly expiry dates of BANKEX,62,,,2023-05-19 to 2024-11-18
+C4 source: weekly expiry dates of FINNIFTY,77,,,2023-01-03 to 2024-11-19
+C4 source: weekly expiry dates of MIDCPNIFTY,77,,,2023-01-04 to 2024-11-18
+C4 source: weekly expiry dates of SENSEX50,76,,,2023-01-05 to 2024-11-14
+C1 NIFTY:multi_weekly:pre expiry days: within-cell SD of z / mean of raw value,1.0644,,,mean raw 0.089661; n 98
+C1 NIFTY:multi_weekly:pre other days: within-cell SD of z / mean of raw value,0.9803,,,mean raw 0.080526; n 364
+C1 NIFTY:single_weekly_thu:pre expiry days: within-cell SD of z / mean of raw value,0.7492,,,mean raw 0.073227; n 41
+C1 NIFTY:single_weekly_thu:pre other days: within-cell SD of z / mean of raw value,0.6478,,,mean raw 0.054782; n 151
+C1 NIFTY:single_weekly_tue:pre expiry days: within-cell SD of z / mean of raw value,0.9763,,,mean raw 0.075632; n 48
+C1 NIFTY:single_weekly_tue:pre other days: within-cell SD of z / mean of raw value,0.7383,,,mean raw 0.063795; n 178
+C1 NIFTY:single_weekly_tue:auction expiry days: within-cell SD of z / mean of raw value,0.8129,,,mean raw 0.08363; n 13
+C1 NIFTY:single_weekly_tue:auction other days: within-cell SD of z / mean of raw value,0.6467,,,mean raw 0.065216; n 46
+C1 BANKNIFTY:weekly_options:pre expiry days: within-cell SD of z / mean of raw value,0.9761,,,mean raw 0.075286; n 98
+C1 BANKNIFTY:weekly_options:pre other days: within-cell SD of z / mean of raw value,1.1092,,,mean raw 0.073453; n 364
+C1 BANKNIFTY:monthly_only:pre expiry days: within-cell SD of z / mean of raw value,0.915,,,mean raw 0.056133; n 21
+C1 BANKNIFTY:monthly_only:pre other days: within-cell SD of z / mean of raw value,1.2094,,,mean raw 0.043497; n 397
+C1 BANKNIFTY:monthly_only:auction expiry days: within-cell SD of z / mean of raw value,1.2881,,,mean raw 0.060619; n 3
+C1 BANKNIFTY:monthly_only:auction other days: within-cell SD of z / mean of raw value,1.7881,,,mean raw 0.056882; n 56
+C2 NIFTY:multi_weekly:pre expiry days: within-cell SD of z / mean of raw value,0.9625,,,mean raw 0.93325; n 98
+C2 NIFTY:multi_weekly:pre other days: within-cell SD of z / mean of raw value,30.7579,,,mean raw 0.69396; n 364
+C2 NIFTY:single_weekly_thu:pre expiry days: within-cell SD of z / mean of raw value,0.8221,,,mean raw 0.94149; n 41
+C2 NIFTY:single_weekly_thu:pre other days: within-cell SD of z / mean of raw value,31.2386,,,mean raw 0.69601; n 151
+C2 NIFTY:single_weekly_tue:pre expiry days: within-cell SD of z / mean of raw value,0.5574,,,mean raw 0.95072; n 48
+C2 NIFTY:single_weekly_tue:pre other days: within-cell SD of z / mean of raw value,31.7194,,,mean raw 0.69873; n 178
+C2 NIFTY:single_weekly_tue:auction expiry days: within-cell SD of z / mean of raw value,0.5285,,,mean raw 0.94635; n 13
+C2 NIFTY:single_weekly_tue:auction other days: within-cell SD of z / mean of raw value,31.2322,,,mean raw 0.70489; n 46
+C2 BANKNIFTY:weekly_options:pre expiry days: within-cell SD of z / mean of raw value,0.7974,,,mean raw 0.96479; n 98
+C2 BANKNIFTY:weekly_options:pre other days: within-cell SD of z / mean of raw value,53.0099,,,mean raw 0.71442; n 364
+C2 BANKNIFTY:monthly_only:pre expiry days: within-cell SD of z / mean of raw value,1.2432,,,mean raw 0.97401; n 21
+C2 BANKNIFTY:monthly_only:pre other days: within-cell SD of z / mean of raw value,27.3821,,,mean raw 0.92277; n 397
+C2 BANKNIFTY:monthly_only:auction expiry days: within-cell SD of z / mean of raw value,1.3888,,,mean raw 0.96179; n 3
+C2 BANKNIFTY:monthly_only:auction other days: within-cell SD of z / mean of raw value,22.6397,,,mean raw 0.93028; n 56
+C3 NIFTY:multi_weekly:pre expiry days: within-cell SD of z / mean of raw value,0.5747,,,mean raw 13.651; n 98
+C3 NIFTY:multi_weekly:pre other days: within-cell SD of z / mean of raw value,0.5756,,,mean raw 13.647; n 364
+C3 NIFTY:single_weekly_thu:pre expiry days: within-cell SD of z / mean of raw value,1.0336,,,mean raw 14.218; n 41
+C3 NIFTY:single_weekly_thu:pre other days: within-cell SD of z / mean of raw value,0.9779,,,mean raw 14.239; n 151
+C3 NIFTY:single_weekly_tue:pre expiry days: within-cell SD of z / mean of raw value,0.2464,,,mean raw 14.345; n 48
+C3 NIFTY:single_weekly_tue:pre other days: within-cell SD of z / mean of raw value,0.2396,,,mean raw 14.345; n 178
+C3 NIFTY:single_weekly_tue:auction expiry days: within-cell SD of z / mean of raw value,0.0836,,,mean raw 14.241; n 13
+C3 NIFTY:single_weekly_tue:auction other days: within-cell SD of z / mean of raw value,0.0773,,,mean raw 14.241; n 46
+C3 BANKNIFTY:weekly_options:pre expiry days: within-cell SD of z / mean of raw value,0.5516,,,mean raw 13.6; n 98
+C3 BANKNIFTY:weekly_options:pre other days: within-cell SD of z / mean of raw value,0.5448,,,mean raw 13.598; n 364
+C3 BANKNIFTY:monthly_only:pre expiry days: within-cell SD of z / mean of raw value,0.9221,,,mean raw 14.263; n 21
+C3 BANKNIFTY:monthly_only:pre other days: within-cell SD of z / mean of raw value,0.8432,,,mean raw 14.283; n 397
+C3 BANKNIFTY:monthly_only:auction expiry days: within-cell SD of z / mean of raw value,0.0939,,,mean raw 14.324; n 3
+C3 BANKNIFTY:monthly_only:auction other days: within-cell SD of z / mean of raw value,0.0617,,,mean raw 14.343; n 56
+C5 NIFTY:multi_weekly:pre expiry days: within-cell SD of z / mean of raw value,1.0246,,,mean raw 1.682; n 98
+C5 NIFTY:multi_weekly:pre other days: within-cell SD of z / mean of raw value,1.845,,,mean raw 2.0918; n 364
+C5 NIFTY:single_weekly_thu:pre expiry days: within-cell SD of z / mean of raw value,0.927,,,mean raw 1.3984; n 41
+C5 NIFTY:single_weekly_thu:pre other days: within-cell SD of z / mean of raw value,1.7702,,,mean raw 2.0728; n 151
+C5 NIFTY:single_weekly_tue:pre expiry days: within-cell SD of z / mean of raw value,0.8461,,,mean raw 1.4111; n 48
+C5 NIFTY:single_weekly_tue:pre other days: within-cell SD of z / mean of raw value,1.7064,,,mean raw 1.9722; n 178
+C5 NIFTY:single_weekly_tue:auction expiry days: within-cell SD of z / mean of raw value,0.8068,,,mean raw 1.2147; n 13
+C5 NIFTY:single_weekly_tue:auction other days: within-cell SD of z / mean of raw value,1.6474,,,mean raw 1.787; n 46
+C5 BANKNIFTY:weekly_options:pre expiry days: within-cell SD of z / mean of raw value,0.7591,,,mean raw 2.0306; n 98
+C5 BANKNIFTY:weekly_options:pre other days: within-cell SD of z / mean of raw value,1.6678,,,mean raw 2.4775; n 364
+C5 BANKNIFTY:monthly_only:pre expiry days: within-cell SD of z / mean of raw value,0.7045,,,mean raw 1.2978; n 21
+C5 BANKNIFTY:monthly_only:pre other days: within-cell SD of z / mean of raw value,1.0692,,,mean raw 2.2443; n 397
+C5 BANKNIFTY:monthly_only:auction expiry days: within-cell SD of z / mean of raw value,0.2732,,,mean raw 0.85242; n 3
+C5 BANKNIFTY:monthly_only:auction other days: within-cell SD of z / mean of raw value,1.284,,,mean raw 2.0371; n 56
+C6 NIFTY:multi_weekly:pre expiry days: within-cell SD of z / mean of raw value,0.9568,,,mean raw -1.0346; n 98
+C6 NIFTY:multi_weekly:pre other days: within-cell SD of z / mean of raw value,0.9684,,,mean raw -1.0373; n 364
+C6 NIFTY:single_weekly_thu:pre expiry days: within-cell SD of z / mean of raw value,0.7842,,,mean raw -1.3366; n 41
+C6 NIFTY:single_weekly_thu:pre other days: within-cell SD of z / mean of raw value,0.7747,,,mean raw -1.3349; n 151
+C6 NIFTY:single_weekly_tue:pre expiry days: within-cell SD of z / mean of raw value,1.0339,,,mean raw -1.2647; n 48
+C6 NIFTY:single_weekly_tue:pre other days: within-cell SD of z / mean of raw value,1.0096,,,mean raw -1.2525; n 178
+C6 NIFTY:single_weekly_tue:auction expiry days: within-cell SD of z / mean of raw value,0.8911,,,mean raw -1.0727; n 13
+C6 NIFTY:single_weekly_tue:auction other days: within-cell SD of z / mean of raw value,0.797,,,mean raw -1.0621; n 46
+C6 BANKNIFTY:weekly_options:pre expiry days: within-cell SD of z / mean of raw value,0.954,,,mean raw -1.3729; n 98
+C6 BANKNIFTY:weekly_options:pre other days: within-cell SD of z / mean of raw value,0.9343,,,mean raw -1.3658; n 364
+C6 BANKNIFTY:monthly_only:pre expiry days: within-cell SD of z / mean of raw value,1.199,,,mean raw -1.535; n 21
+C6 BANKNIFTY:monthly_only:pre other days: within-cell SD of z / mean of raw value,1.1254,,,mean raw -1.5157; n 397
+C6 BANKNIFTY:monthly_only:auction expiry days: within-cell SD of z / mean of raw value,0.5311,,,mean raw -1.4243; n 3
+C6 BANKNIFTY:monthly_only:auction other days: within-cell SD of z / mean of raw value,0.645,,,mean raw -1.3816; n 56
+C4 NIFTY:multi_weekly:pre expiry days: within-cell SD of z / mean of raw value,0.9806,,,mean raw 5.1224; n 98
+C4 NIFTY:multi_weekly:pre other days: within-cell SD of z / mean of raw value,0.9639,,,mean raw 5.2005; n 364
+C4 NIFTY:single_weekly_thu:pre expiry days: within-cell SD of z / mean of raw value,0.3862,,,mean raw 1.5854; n 41
+C4 NIFTY:single_weekly_thu:pre other days: within-cell SD of z / mean of raw value,0.3392,,,mean raw 1.5364; n 151
+C4 NIFTY:single_weekly_tue:pre expiry days: within-cell SD of z / mean of raw value,0.287,,,mean raw 1.5417; n 48
+C4 NIFTY:single_weekly_tue:pre other days: within-cell SD of z / mean of raw value,0.281,,,mean raw 1.573; n 178
+C4 NIFTY:single_weekly_tue:auction expiry days: within-cell SD of z / mean of raw value,0.3,,,mean raw 1.5385; n 13
+C4 NIFTY:single_weekly_tue:auction other days: within-cell SD of z / mean of raw value,0.2622,,,mean raw 1.6304; n 46
+C4 BANKNIFTY:weekly_options:pre expiry days: within-cell SD of z / mean of raw value,0.8467,,,mean raw 5.1224; n 98
+C4 BANKNIFTY:weekly_options:pre other days: within-cell SD of z / mean of raw value,0.8323,,,mean raw 5.2005; n 364
+C4 BANKNIFTY:monthly_only:pre expiry days: within-cell SD of z / mean of raw value,0.1456,,,mean raw 0.2381; n 21
+C4 BANKNIFTY:monthly_only:pre other days: within-cell SD of z / mean of raw value,0.2559,,,mean raw 1.6272; n 397
+C4 BANKNIFTY:monthly_only:auction expiry days: within-cell SD of z / mean of raw value,0.1927,,,mean raw 0.33333; n 3
+C4 BANKNIFTY:monthly_only:auction other days: within-cell SD of z / mean of raw value,0.2121,,,mean raw 1.6786; n 56
+NIFTY:multi_weekly:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,42.6,,,contract value 8.71 lakh; weekly count 5.12
+NIFTY:single_weekly_thu:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,66.46,,,contract value 16.00 lakh; weekly count 1.59
+NIFTY:single_weekly_tue:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,68.75,,,contract value 17.06 lakh; weekly count 1.54
+NIFTY:single_weekly_tue:auction expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,65.0,,,contract value 15.31 lakh; weekly count 1.54
+BANKNIFTY:weekly_options:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,17.96,,,contract value 8.21 lakh; weekly count 5.12
+BANKNIFTY:monthly_only:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,29.29,,,contract value 16.28 lakh; weekly count 0.24
+BANKNIFTY:monthly_only:auction expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count,30.0,,,contract value 16.64 lakh; weekly count 0.33

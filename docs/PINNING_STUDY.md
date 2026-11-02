@@ -15,6 +15,8 @@ Written for Shreyan Thanki, to discuss with Prof. Piyush Pandey. No finance or s
 
 **In one sentence:** expiry-day pinning on NSE indices is real in some periods (Nifty in late 2024 to mid 2025, Bank Nifty while it had weekly options) and absent in others (Nifty since September 2025), and none of our public-data proxies for dealer gamma explains when it happens.
 
+**Follow-up (P87, pre-registered, REAL DATA).** A pre-registered test of five market-structure explanations ([PINNING_MECHANISM.md](PINNING_MECHANISM.md)) finds that none explains when pinning appears and disappears. More open interest near the money goes with closes *farther* from strikes (+1.1 Nifty points per SD, p = 0.0099), and the one variable that helps day to day (open interest held into expiry rather than rolled) cannot account for the regime pattern.
+
 ## 1. The question in plain words
 
 **Options, strikes and expiry.** A Nifty call option with strike 24,000 pays the buyer the amount by which Nifty ends above 24,000 on the expiry day (a put pays the amount by which it ends below). NSE lists strikes every 50 points for Nifty and every 100 points for Bank Nifty near the current level. Index options are settled in cash at a single number: the index's official closing value on the expiry day.

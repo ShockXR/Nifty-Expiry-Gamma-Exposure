@@ -1,0 +1,138 @@
+study,source_file,what,n_items,reason
+R1,results/pipeline_nse/mcs_*.csv,Model Confidence Set p-values,6,set-level p-values (already adjusted for the model set) that answer the same question as the DM tests
+R1b,results/forecast_diagnostics/tails_and_last_hour_tests.csv,tail-share rows (top 1% share of QLIKE),21,"descriptive shares, no p-value"
+R1b,results/forecast_diagnostics/gains_by_subset.csv,descriptive table,1,no p-value
+R1b,results/forecast_diagnostics/largest_mcsgarch_errors.csv,descriptive table,1,no p-value
+AUCTION,results/closing_auction/r1_dm_tests.csv,rows on all test days,18,identical to results/pipeline_nse/tests_*.csv (counted under R1)
+AUCTION,results/closing_auction/r2_tuesday_split.csv,"'Tuesday regime, all' rows",2,same test as results/real_day_level/r2_expiry_effect_by_regime.csv (counted under R2)
+AUCTION,results/closing_auction/r5_without_auction.csv,'all days' rows,7,identical to results/momentum_gex/regressions.csv (counted under R5)
+AUCTION,results/closing_auction/auction_evidence.csv,evidence that the auction exists,1,"descriptive, no p-value"
+R3,results/real_day_level/r3_gex_regressions.csv,control and intercept coefficients,56,not hypotheses of the study
+R3,results/real_day_level/r3_robustness.csv,per_sd GEX-term rows,6,identical p to the regime x expiry rows of r3_gex_regressions.csv (counted once)
+R4,results/real_day_level/r4_pinning.csv,descriptive rows,8,group summaries without a p-value
+R5,results/momentum_gex/regressions.csv,"control coefficients (const, neg, regime terms, VIX terms, r_rod in interaction models)",171,not hypotheses of the study
+R5,results/momentum_gex/stability.csv,sub-period without negative-GEX days,1,no p-value
+R5,results/momentum_gex/gamma_states.csv,gamma-state summaries,1,"t statistics only, no p-value"
+REPL,results/replication_nse/table5_volume_daylevel.csv,paper_printed_p,96,"the paper's own printed p-values, not our tests"
+REPL,results/replication_nse/table6_volatility.csv,paper_printed_p,12,"the paper's own printed p-values, not our tests"
+REPL,results/replication_nse/tables34_changes.csv,tables34_changes.csv,1,"bootstrap intervals only, no p-value"
+REPL,results/replication_nse/tables34_connectedness.csv,tables34_connectedness.csv,1,"p_rule / p_used are VAR lag settings, not p-values"
+REPL,results/replication_nse/tables34_connectedness_grid.csv,tables34_connectedness_grid.csv,1,"p_rule / p_used are VAR lag settings, not p-values"
+REPL,results/replication_nse/table2_mcsgarch.csv,table2_mcsgarch.csv,1,"z statistics only (ours_z), no p-value"
+REPL,results/replication_nse/table1_descriptive.csv,table1_descriptive.csv,1,ADF and Anderson-Darling statistics only
+REPL,results/replication_nse/paper_printed_checks.csv,paper_printed_checks.csv,1,"checks of the paper's arithmetic, not hypothesis tests"
+REPL,results/replication_nse/rekey_check.csv,rekey_check.csv,1,"re-keying of printed numbers, not hypothesis tests"
+PIN,results/pinning/t3_target_strikes.csv,descriptive rows,18,group summaries without a p-value
+PIN,results/pinning/t4_intraday_movement.csv,descriptive rows,8,group summaries without a p-value
+PIN,results/pinning/t4_intraday_by_regime.csv,rows identical to t1_clustering,1,same difference and test as a t1 row (counted once)
+PIN,results/pinning/data_checks.csv,data_checks.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/day_panel_banknifty.csv,day_panel_banknifty.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/day_panel_nifty.csv,day_panel_nifty.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/design_log.csv,design_log.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/t2_days_to_expiry_profile.csv,t2_days_to_expiry_profile.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/t4_close_proxy_check.csv,t4_close_proxy_check.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/t5_sign_agreement.csv,t5_sign_agreement.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/t6_power.csv,t6_power.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/t6_power_mde.csv,t6_power_mde.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+PIN,results/pinning/t8_by_half_year.csv,t8_by_half_year.csv,1,"descriptive table, power calculation or sign agreement; no hypothesis test"
+EVENT,results/event_study/event_tests.csv,pre-trend p-values (pretrend_p),1116,"diagnostic of the design, not a hypothesis of the study"
+EVENT,results/event_study/premium_by_regime.csv,weekday rows identical to the own-expiry row,139,same weeks and values as an own-expiry row (counted once)
+EVENT,results/event_study/robustness_event_c.csv,'main' variant rows,24,identical to event_tests.csv rows (counted once)
+EVENT,results/event_study/robustness_event_c.csv,bootstrap-block and 8-lag HAC variants,72,alternative intervals or standard errors for the same estimate (the bootstrap variants keep the same hac_p)
+EVENT,results/event_study/negative_control_calibration.csv,negative_control_calibration.csv,1,"shares of rejections across tests, not a test"
+EVENT,results/event_study/placebo_c_did_main_6m.csv,placebo_c_did_main_6m.csv,1,placebo draws for the primary test (summarised by its ri_p)
+FALS,results/falsification/t7_family_A_original_tests.csv,family A (78 rows),78,re-estimates of R3 and R5 tests already counted under R3 and R5 (older code; 6 rows repeat another row's p)
+FALS,results/falsification/t7_headline_adjusted.csv,18 headline tests,18,the same tests as R3 and R5 headline rows (counted there); used for the cross-check
+FALS,results/falsification/t7_headline_permutation_adjusted.csv,12 headline permutation p-values,12,also in family B as T1 permutation rows (counted there)
+FALS,results/falsification/headline_in_sample.csv,headline re-estimates (4 regimes),36,near-duplicates of R3 and R5 headline tests; not separate hypotheses
+FALS,results/falsification/banknifty_daily_market.csv,banknifty_daily_market.csv,1,"data, chain recomputation or replication check; no hypothesis test"
+FALS,results/falsification/banknifty_gex_panel.csv,banknifty_gex_panel.csv,1,"data, chain recomputation or replication check; no hypothesis test"
+FALS,results/falsification/chain_gex_by_expiry_banknifty.csv.gz,chain_gex_by_expiry_banknifty.csv.gz,1,"data, chain recomputation or replication check; no hypothesis test"
+FALS,results/falsification/chain_gex_by_expiry_nifty.csv.gz,chain_gex_by_expiry_nifty.csv.gz,1,"data, chain recomputation or replication check; no hypothesis test"
+FALS,results/falsification/chain_recompute_check.csv,chain_recompute_check.csv,1,"data, chain recomputation or replication check; no hypothesis test"
+FALS,results/falsification/replication_check.csv,replication_check.csv,1,"data, chain recomputation or replication check; no hypothesis test"
+FALS,results/falsification/t1_permutation_draws.csv.gz,t1_permutation_draws.csv.gz,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t1_permutation_summary.csv,t1_permutation_summary.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t2_gex_persistence.csv,t2_gex_persistence.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t2_timing_placebo.csv,t2_timing_placebo.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t3_calendar_controls.csv,t3_calendar_controls.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t3_gross_and_oi.csv,t3_gross_and_oi.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t3_real_rules_in_cloud.csv,t3_real_rules_in_cloud.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t3_sign_rule_cloud.csv,t3_sign_rule_cloud.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t3_sign_rule_cloud_summary.csv,t3_sign_rule_cloud_summary.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t4_oos_forecasts.csv,t4_oos_forecasts.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t4_preregistered_f2.csv,t4_preregistered_f2.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t4_split_estimates.csv,t4_split_estimates.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t5_banknifty.csv,t5_banknifty.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t6_event_table_nifty.csv,t6_event_table_nifty.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t6_real_minus_placebo.csv,t6_real_minus_placebo.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t6_rolloff_iv.csv,t6_rolloff_iv.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+FALS,results/falsification/t6_rolloff_regressions.csv,t6_rolloff_regressions.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
+DSIGN,results/dealer_sign/direction_estimates.csv,rows identical to the base fit (same p and angle),4,same test (counted once)
+DSIGN,results/dealer_sign/direction_estimates.csv,joint rows,20,no Wald p (joint direction is summarised by the placebo LR test)
+DSIGN,results/dealer_sign/fixed_rule_fits.csv,US-rule signed-term rows,6,same test as the shares direction test (counted once there)
+DSIGN,results/dealer_sign/oos_dm.csv,identical-forecast rows,16,estimated and fixed forecasts are identical: no test
+DSIGN,results/dealer_sign/oos_summary.csv,rows with identical forecasts (same p and gain),26,same test (counted once)
+DSIGN,results/dealer_sign/robustness_oos.csv,identical-forecast and 'last refit direction' rows,68,no test (identical forecasts) or a direction estimate without a p-value
+DSIGN,results/dealer_sign/placebo_summary.csv,placebo p-values attached to other rows or duplicated,17,"alternative p-values of counted tests (alt_p), or lr_joint_participants = lr_b_participants (same statistic and p)"
+DSIGN,results/dealer_sign/kalman_states.csv,kalman_states.csv,1,"p_us_side columns are shares of probability mass, not p-values"
+DSIGN,results/dealer_sign/kalman_summary.csv,kalman_summary.csv,1,"p_us_side columns are shares of probability mass, not p-values"
+DSIGN,results/dealer_sign/lr_profiles.csv,lr_profiles.csv,1,"likelihood profile, no test"
+DSIGN,results/dealer_sign/synthetic_validation.csv,synthetic_validation.csv,1,"synthetic-data check, not a test of real data"
+DSIGN,results/dealer_sign/synthetic_validation_draws.csv,synthetic_validation_draws.csv,1,"synthetic-data check, not a test of real data"
+DSIGN,results/dealer_sign/synthetic_validation_null_seeds.csv,synthetic_validation_null_seeds.csv,1,"synthetic-data check, not a test of real data"
+INTRA,results/intraday_gamma/all_tests.csv,rows repeating another row (same coefficient and p),3,e.g. test 120 and 121 equal FH1 (118); 123 equals 122: counted once
+INTRA,results/intraday_gamma/data_checks.csv,data_checks.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/day_inputs.csv,day_inputs.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/descriptives_by_time.csv,descriptives_by_time.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/design_log.csv,design_log.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/fig_deciles_expiry_afternoon.csv,fig_deciles_expiry_afternoon.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/followup_banknifty_day_inputs.csv,followup_banknifty_day_inputs.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/followup_data_checks.csv,followup_data_checks.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/followup_descriptives.csv,followup_descriptives.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/followup_placebo_draws.csv,followup_placebo_draws.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/followup_placebo_summary.csv,followup_placebo_summary.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/followup_regressions.csv,followup_regressions.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/gamma_width_expiry_day.csv,gamma_width_expiry_day.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/oos_expiry_day_features.csv,oos_expiry_day_features.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/oos_forecasts.csv,oos_forecasts.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/oos_summary.csv,oos_summary.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/placebo_draws.csv,placebo_draws.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/placebo_summary.csv,placebo_summary.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/regressions.csv,regressions.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+INTRA,results/intraday_gamma/within_day_correlations.csv,within_day_correlations.csv,1,source or descriptive table; its tests are counted once in all_tests.csv
+CONN,results/connectedness_gamma/robustness.csv,rows without perm_p,1,"count of days, no test"
+CONN,results/connectedness_gamma/day_level_regression.csv,row repeating S7,1,same test as S7 (counted once)
+CONN,results/connectedness_gamma/day_level_regression.csv,hac_p_log_vix_prev,1,control coefficient
+SENSEX,results/sensex_confound/all_tests.csv,pre-trend p-values,1,"diagnostic, not a hypothesis"
+SENSEX,results/sensex_confound/calendar_check.csv,calendar_check.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/calendar_check_sensex_bars.csv,calendar_check_sensex_bars.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/i_levels_sensex_only_days.csv,i_levels_sensex_only_days.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/ii_change_tests.csv,ii_change_tests.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/ii_holiday_wednesdays.csv,ii_holiday_wednesdays.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/ii_iii_pooled_regression.csv,ii_iii_pooled_regression.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/iii_event_tests_with_sensex_control.csv,iii_event_tests_with_sensex_control.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/iii_own_premium_with_sensex_control.csv,iii_own_premium_with_sensex_control.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/iii_r2_with_sensex_control.csv,iii_r2_with_sensex_control.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+SENSEX,results/sensex_confound/sensex_expiry_days_used.csv,sensex_expiry_days_used.csv,1,source table of all_tests.csv (tests counted once there) or calendar data
+F2ECON,results/f2_economics/bootstrap_sharpe.csv,bootstrap_sharpe.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+F2ECON,results/f2_economics/cost_schedule.csv,cost_schedule.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+F2ECON,results/f2_economics/daily_pnl.csv,daily_pnl.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+F2ECON,results/f2_economics/dsr.csv,dsr.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+F2ECON,results/f2_economics/trades.csv,trades.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+F2ECON,results/f2_economics/walkforward_params.csv,walkforward_params.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+PINMECH,results/pinning_mechanism/decisions.csv,decisions.csv,1,repeats the primary and Holm-adjusted secondary p-values (p_used)
+PINMECH,results/pinning_mechanism/descriptive_c4_a1.csv,descriptive_c4_a1.csv,1,C4 and A1 are descriptive by design; the study marks the C4 p-value 'not counted'
+PINMECH,results/pinning_mechanism/between_regime.csv,between_regime.csv,1,predicted and observed regime gaps with intervals; no p-value
+PINMECH,results/pinning_mechanism/candidates.csv,candidates.csv,1,candidate variables (data)
+PINMECH,results/pinning_mechanism/candidate_checks.csv,candidate_checks.csv,1,data checks
+PINMECH,results/pinning_mechanism/design_log.csv,design_log.csv,1,design log
+POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
+EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
+EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods
+EXCLUDED,results/estimator_validation,estimator_validation,1,simulation checks of estimators
+EXCLUDED,results/paper_checks,paper_checks,1,arithmetic checks of the paper's printed numbers
+EXCLUDED,results/data_validation,data_validation,1,data validation against NSE official values (no hypothesis test)
+EXCLUDED,results/live,live,1,"live-data snapshots, no tests"
+EXCLUDED,results/power_study.csv,power_study.csv,1,simulation (power study on synthetic data)
+EXCLUDED,results/power_study_summary.csv,power_study_summary.csv,1,simulation (power study on synthetic data)
