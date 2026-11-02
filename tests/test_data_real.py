@@ -62,3 +62,17 @@ def test_load_bhavcopy_sorts_strikes(tmp_path):
     for is_call in (True, False):
         k = b.loc[b["is_call"] == is_call, "strike"].to_numpy()
         assert np.all(np.diff(k) > 0)
+
+
+def test_holiday_adjusted_expiries_maps_to_previous_trade_date():
+    from niftygex.data import holiday_adjusted_expiries
+    def chain(d, exps):
+        return pd.DataFrame({"date": pd.Timestamp(d), "expiry": pd.to_datetime(exps)})
+    bhav = {
+        pd.Timestamp("2023-06-26"): chain("2023-06-26", ["2023-06-29", "2023-07-06"]),
+        pd.Timestamp("2023-06-27"): chain("2023-06-27", ["2023-06-29", "2023-07-06"]),
+        pd.Timestamp("2023-06-28"): chain("2023-06-28", ["2023-06-28", "2023-07-06"]),
+        pd.Timestamp("2023-06-30"): chain("2023-06-30", ["2023-07-06", "2023-07-13"]),
+    }
+    m = holiday_adjusted_expiries(bhav)
+    assert m == {pd.Timestamp("2023-06-29"): pd.Timestamp("2023-06-28")}  # 6 and 13 July are after the last file

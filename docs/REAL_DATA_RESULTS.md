@@ -13,7 +13,11 @@ Sample: 942 trading days, 2 January 2023 to 2 November 2026, of which 200 are Ni
 | R4 | A first, crude look at pinning | same | same |
 | R5 | Does the market's move over the day carry on into the last 30 minutes, and does that depend on dealer gamma? | `python experiments/momentum_gex.py` | `results/momentum_gex/` |
 
-More real-data studies are being added: a replication of the paper's Tables 1 to 6 on its own window, a proper pinning study, an event study of four expiry rule changes, and a stronger version of R1. Each gets its own document and is linked here when it lands.
+Separate real-data studies, each with its own document:
+
+* `docs/REPLICATION_NSE.md`: the paper's Tables 1 to 6 rebuilt on NSE data. The "after" sample matches closely; the stated "before" window does not, and a 64-day window from 14 November 2022 to 10 February 2023 reproduces the printed "before" numbers (our main question for the authors).
+* `docs/PINNING_STUDY.md`: a full pinning study (replaces the crude R4 check below).
+* Still running: an event study of the expiry rule changes with Bank Nifty as a comparison, a stronger version of R1, and a falsification suite for R3 and R5.
 
 ---
 
@@ -113,7 +117,7 @@ How much to trust this: (1) the sign of dealer positions is not observed, only g
 
 ## R4. Pinning, first look
 
-On expiry days, does the official close move toward the strike with the largest open interest (or the max-pain strike, both from the previous evening's chain) more than on other days? File: `results/real_day_level/r4_pinning.csv`. No: the change in distance to the max-OI strike does not differ between expiry days and other days (Mann-Whitney p = 0.67), and for max pain p = 0.12. This is a crude check; a dedicated pinning study is in progress.
+On expiry days, does the official close move toward the strike with the largest open interest (or the max-pain strike, both from the previous evening's chain) more than on other days? File: `results/real_day_level/r4_pinning.csv`. No: the change in distance to the max-OI strike does not differ between expiry days and other days (Mann-Whitney p = 0.67), and for max pain p = 0.12. This is a crude check. The dedicated study (`docs/PINNING_STUDY.md`) measures distance to the nearest strike instead and finds pinning in some periods only: Nifty closed 4.5 points closer to a strike on expiry days from November 2024 to August 2025 (p = 0.0006), not at all since the move to Tuesday, and Bank Nifty pinned while it had weekly options (p = 0.008). None of the dealer-gamma proxies explains when pinning happens.
 
 ---
 

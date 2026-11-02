@@ -1,0 +1,510 @@
+REAL DATA. Expiry-day pinning study. NSE bhavcopy, participant OI and official index closes; third-party 1-minute bars validated against NSE.
+Loaded 944 NIFTY and 944 BANKNIFTY bhavcopy days, 944 participant files (37s)
+NIFTY: 939 days, 200 expiry days; settlement = official close on 200/200
+BANKNIFTY: 939 days, 122 expiry days; settlement = official close on 122/122
+
+== data_checks
+   symbol                                                                                check      value
+    NIFTY                                     expiry days in bhavcopies (data.actual_expiries)        200
+    NIFTY expiry days where every expiring option's settlement price equals the official close        200
+    NIFTY                                                                trading days in panel        939
+    NIFTY                                                         expiry days with a t-1 chain        200
+    NIFTY                                       max stale days of t-1 chain (missing bhavcopy)        0.0
+    NIFTY    days with a t-1 chain whose chain date is strictly before the day (no look-ahead) 939 of 939
+    NIFTY                  days whose t-1 chain had to use a re-dated contract (holiday shift)          4
+    NIFTY             expiry days whose nearest strike to the close is listed in the t-1 chain        200
+    NIFTY              median share of options with no IV (no time value) on expiry-eve chains     0.1779
+    NIFTY                                  expiry days, regime multi_weekly, weekday 2 (0=Mon)          5
+    NIFTY                                  expiry days, regime multi_weekly, weekday 3 (0=Mon)         93
+    NIFTY                             expiry days, regime single_weekly_thu, weekday 2 (0=Mon)          2
+    NIFTY                             expiry days, regime single_weekly_thu, weekday 3 (0=Mon)         39
+    NIFTY                             expiry days, regime single_weekly_tue, weekday 0 (0=Mon)          5
+    NIFTY                             expiry days, regime single_weekly_tue, weekday 1 (0=Mon)         56
+BANKNIFTY                                     expiry days in bhavcopies (data.actual_expiries)        122
+BANKNIFTY expiry days where every expiring option's settlement price equals the official close        122
+BANKNIFTY                                                                trading days in panel        939
+BANKNIFTY                                                         expiry days with a t-1 chain        122
+BANKNIFTY                                       max stale days of t-1 chain (missing bhavcopy)        0.0
+BANKNIFTY    days with a t-1 chain whose chain date is strictly before the day (no look-ahead) 939 of 939
+BANKNIFTY                  days whose t-1 chain had to use a re-dated contract (holiday shift)         12
+BANKNIFTY             expiry days whose nearest strike to the close is listed in the t-1 chain        122
+BANKNIFTY              median share of options with no IV (no time value) on expiry-eve chains     0.1922
+BANKNIFTY                                  expiry days, regime monthly_only, weekday 0 (0=Mon)          1
+BANKNIFTY                                  expiry days, regime monthly_only, weekday 1 (0=Mon)         14
+BANKNIFTY                                  expiry days, regime monthly_only, weekday 2 (0=Mon)          1
+BANKNIFTY                                  expiry days, regime monthly_only, weekday 3 (0=Mon)          8
+BANKNIFTY                                expiry days, regime weekly_options, weekday 1 (0=Mon)          4
+BANKNIFTY                                expiry days, regime weekly_options, weekday 2 (0=Mon)         56
+BANKNIFTY                                expiry days, regime weekly_options, weekday 3 (0=Mon)         38
+    NIFTY               expiry-eve chains whose strikes within 3% of spot are exactly 50 apart 200 of 200
+BANKNIFTY              expiry-eve chains whose strikes within 3% of spot are exactly 100 apart 122 of 122
+
+== t1_clustering
+   symbol                                                     sample  grid_pts  uniform_null_mean_pts  first_day   last_day  n_expiry  n_nonexpiry  mean_dist_expiry_pts  mean_dist_nonexpiry_pts  median_dist_expiry_pts  median_dist_nonexpiry_pts  diff_pts  diff_ci95_low  diff_ci95_high  diff_bp  p_perm  p_perm_weekday_strata  p_perm_share_within_tenth  p_expiry_vs_uniform  p_nonexpiry_vs_uniform  share_within_tenth_expiry  share_within_tenth_nonexpiry  placebo_share_tenth_expiry  placebo_share_tenth_nonexpiry  share_within_twentieth_expiry  share_within_twentieth_nonexpiry
+    NIFTY                                                        all      50.0                   12.5 2023-01-03 2026-10-27       200          739               11.5220                  12.6210                  11.400                     13.150   -1.0990        -2.2538          0.0266  -0.4135  0.0538                 0.1899                     0.2154               0.0548                  0.6439                     0.2500                        0.2084                      0.1650                         0.1976                         0.1400                            0.0893
+    NIFTY                                               multi_weekly      50.0                   12.5 2023-01-03 2024-11-19        98          364               10.9852                  12.0750                  10.825                     12.225   -1.0898        -2.6998          0.4705  -0.3633  0.1823                 0.4421                     0.2820               0.0350                  0.2617                     0.2755                        0.2198                      0.1633                         0.1703                         0.1327                            0.1044
+    NIFTY                                          single_weekly_thu      50.0                   12.5 2024-11-21 2025-08-29        41          151                8.2976                  12.8189                   6.750                     12.800   -4.5213        -6.8593         -2.1232  -1.8930  0.0006                 0.2180                     0.0132               0.0004                  0.5845                     0.3902                        0.1987                      0.0488                         0.2053                         0.2683                            0.0728
+    NIFTY                                          single_weekly_tue      50.0                   12.5 2025-09-01 2026-10-27        61          224               14.5516                  13.3748                  15.200                     14.375    1.1769        -0.7414          3.0586   0.5035  0.2676                 0.8266                     0.1822               0.0233                  0.0690                     0.1148                        0.1964                      0.2459                         0.2366                         0.0656                            0.0759
+    NIFTY single_weekly_tue, before closing auction (to 31 Jul 2026)      50.0                   12.5 2025-09-01 2026-07-31        48          178               14.5219                  13.2767                  15.025                     14.400    1.2452        -0.9382          3.4059   0.5215  0.2868                 0.7797                     0.2046               0.0464                  0.1529                     0.1042                        0.1854                      0.2292                         0.2247                         0.0625                            0.0730
+    NIFTY       single_weekly_tue, closing auction (from 3 Aug 2026)      50.0                   12.5 2026-08-03 2026-10-27        13           46               14.6615                  13.7543                  15.450                     14.375    0.9072        -3.6663          5.1326   0.4199  0.7124                 0.8366                     0.7054               0.2876                  0.2398                     0.1538                        0.2391                      0.3077                         0.2826                         0.0769                            0.0870
+    NIFTY                             monthly expiries vs non-expiry      50.0                   12.5 2023-01-03 2026-10-27        46          739               12.3652                  12.6210                  13.975                     13.150   -0.2558        -2.4385          1.8950  -0.0109  0.8229                 0.7956                     1.0000               0.9010                  0.6405                     0.2174                        0.2084                      0.1739                         0.1976                         0.1304                            0.0893
+    NIFTY                weekly (non-monthly) expiries vs non-expiry      50.0                   12.5 2023-01-03 2026-10-26       154          739               11.2701                  12.6210                  11.075                     13.150   -1.3508        -2.5913         -0.0812  -0.5337  0.0366                 0.0854                     0.1706               0.0355                  0.6443                     0.2597                        0.2084                      0.1623                         0.1976                         0.1429                            0.0893
+BANKNIFTY                                                        all     100.0                   25.0 2023-01-03 2026-10-27       122          817               21.0102                  24.8122                  18.150                     24.400   -3.8020        -6.5395         -1.0096  -0.4467  0.0073                 0.0063                     0.0317               0.0024                  0.7053                     0.2787                        0.1934                      0.1639                         0.1860                         0.1639                            0.1016
+BANKNIFTY                                             weekly_options     100.0                   25.0 2023-01-03 2024-11-19        98          364               20.2602                  24.5159                  17.200                     24.150   -4.2557        -7.3555         -0.9875  -0.8611  0.0076                 0.0105                     0.0229               0.0008                  0.5268                     0.2857                        0.1786                      0.1429                         0.1593                         0.1735                            0.0934
+BANKNIFTY                                               monthly_only     100.0                   25.0 2024-11-21 2026-10-27        24          453               24.0729                  25.0503                  24.400                     24.450   -0.9774        -7.3384          5.3933  -0.1566  0.7524                 0.7492                     0.6059               0.7499                  0.9430                     0.2500                        0.2053                      0.2500                         0.2075                         0.1250                            0.1082
+
+== t1_regime_heterogeneity
+   symbol          regime_a          regime_b  n_expiry_a  n_expiry_b  gap_a_pts  gap_b_pts  gap_a_minus_gap_b_pts  ci95_low  ci95_high  p_perm
+    NIFTY      multi_weekly single_weekly_thu          98          41    -1.0898    -4.5213                 3.4315    0.5340     6.3460  0.0225
+    NIFTY      multi_weekly single_weekly_tue          98          61    -1.0898     1.1769                -2.2667   -4.6922     0.2268  0.0914
+    NIFTY single_weekly_thu single_weekly_tue          41          61    -4.5213     1.1769                -5.6982   -8.7704    -2.5675  0.0008
+BANKNIFTY    weekly_options      monthly_only          98          24    -4.2557    -0.9774                -3.2783  -10.3168     3.5966  0.3615
+
+== t2_days_to_expiry_profile
+   symbol trading_days_to_expiry   n  mean_dist_pts  ci95_low  ci95_high  mean_dist_bp  share_within_tenth_grid  uniform_null_mean_pts
+    NIFTY                      0 200        11.5220   10.5355    12.5378        5.1830                   0.2500                   12.5
+    NIFTY                      1 200        12.7415   11.6882    13.7408        5.6680                   0.2350                   12.5
+    NIFTY                      2 200        12.4393   11.4510    13.4460        5.5551                   0.2050                   12.5
+    NIFTY                      3 196        13.0245   12.0599    13.9927        5.7329                   0.1633                   12.5
+    NIFTY                      4 143        12.1535   10.9587    13.3266        5.3671                   0.2378                   12.5
+BANKNIFTY                      0 122        21.0102   18.3873    23.6832        4.4355                   0.2787                   25.0
+BANKNIFTY                      1 122        24.8885   22.3467    27.4312        5.2225                   0.1967                   25.0
+BANKNIFTY                      2 122        24.8697   22.4270    27.3231        5.2487                   0.1803                   25.0
+BANKNIFTY                      3 118        24.1106   21.5211    26.7374        5.0362                   0.2373                   25.0
+BANKNIFTY                      4  93        24.6134   21.7537    27.4258        5.0816                   0.1505                   25.0
+BANKNIFTY                     5+ 362        25.0470   23.5138    26.5993        4.5425                   0.1934                   25.0
+
+== t3_target_strikes
+   symbol     target                                                      group          n  mean_dist_prev_close_pts  mean_dist_close_pts  median_dist_close_pts  hit_rate  placebo_hit_rate  excess_hit  mean_move_toward_pts  share_moved_toward  mean_change_in_dist_pts  estimate  ci95_low  ci95_high  p_value             test
+    NIFTY    K_maxoi                                               expiry (k=0)        200                  280.7255             319.5285                180.275    0.0300            0.0250      0.0050                0.3105              0.4950                  38.8030       NaN       NaN        NaN      NaN              NaN
+    NIFTY    K_maxoi                                    day before expiry (k=1)        200                  362.5407             391.0950                180.150    0.0150            0.0375     -0.0225                8.4748              0.5050                  28.5542       NaN       NaN        NaN      NaN              NaN
+    NIFTY    K_maxoi                                      all non-expiry (k>=1)        739                  394.2451             444.0747                189.050    0.0244            0.0365     -0.0122              -12.2023              0.4777                  49.8296       NaN       NaN        NaN      NaN              NaN
+    NIFTY    K_maxoi test: expiry excess hit (strike minus placebo strikes) = 0        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0050   -0.0225     0.0350   0.8654        sign-flip
+    NIFTY    K_maxoi         test: excess_hit, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0275   -0.0125     0.0675   0.2151 paired sign-flip
+    NIFTY    K_maxoi        test: move_toward, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN   -8.1643  -40.3469    25.2296   0.6305 paired sign-flip
+    NIFTY    K_maxoi               test: dist, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -71.5665 -133.7420   -13.4147   0.0159 paired sign-flip
+    NIFTY    K_maxoi              test: excess_hit, expiry minus all non-expiry 200 vs 739                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0172   -0.0135     0.0501   0.3253      permutation
+    NIFTY    K_maxoi             test: move_toward, expiry minus all non-expiry 200 vs 739                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN   12.5128  -14.7325    39.7344   0.3893      permutation
+    NIFTY  K_maxpain                                               expiry (k=0)        200                   51.4200             145.9215                111.200    0.0550            0.0375      0.0175              -23.6980              0.4450                  94.5015       NaN       NaN        NaN      NaN              NaN
+    NIFTY  K_maxpain                                    day before expiry (k=1)        200                   65.8402             138.2010                113.300    0.0250            0.0525     -0.0275               -6.6798              0.4600                  72.3608       NaN       NaN        NaN      NaN              NaN
+    NIFTY  K_maxpain                                      all non-expiry (k>=1)        739                   72.4556             151.0421                116.900    0.0379            0.0480     -0.0101                1.0530              0.4885                  78.5865       NaN       NaN        NaN      NaN              NaN
+    NIFTY  K_maxpain test: expiry excess hit (strike minus placebo strikes) = 0        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0175   -0.0200     0.0575   0.4384        sign-flip
+    NIFTY  K_maxpain         test: excess_hit, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0450   -0.0025     0.0925   0.0895 paired sign-flip
+    NIFTY  K_maxpain        test: move_toward, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -17.0182  -49.1580    15.3061   0.3057 paired sign-flip
+    NIFTY  K_maxpain               test: dist, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    7.7205  -12.7066    28.0779   0.4752 paired sign-flip
+    NIFTY  K_maxpain              test: excess_hit, expiry minus all non-expiry 200 vs 739                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0276   -0.0131     0.0703   0.1816      permutation
+    NIFTY  K_maxpain             test: move_toward, expiry minus all non-expiry 200 vs 739                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -24.7510  -51.3371     2.4219   0.0896      permutation
+    NIFTY K_maxgamma                                               expiry (k=0)        200                   46.0900             136.9405                101.825    0.0800            0.0400      0.0400              -16.4755              0.5000                  90.8505       NaN       NaN        NaN      NaN              NaN
+    NIFTY K_maxgamma                                    day before expiry (k=1)        200                   72.3717             142.3665                103.600    0.0200            0.0675     -0.0475               17.3008              0.5450                  69.9947       NaN       NaN        NaN      NaN              NaN
+    NIFTY K_maxgamma                                      all non-expiry (k>=1)        739                   82.2995             156.6884                119.300    0.0406            0.0514     -0.0108                4.2505              0.5250                  74.3889       NaN       NaN        NaN      NaN              NaN
+    NIFTY K_maxgamma test: expiry excess hit (strike minus placebo strikes) = 0        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0400   -0.0025     0.0850   0.0922        sign-flip
+    NIFTY K_maxgamma         test: excess_hit, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0875    0.0325     0.1450   0.0048 paired sign-flip
+    NIFTY K_maxgamma        test: move_toward, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -33.7763  -66.1011    -1.9697   0.0376 paired sign-flip
+    NIFTY K_maxgamma               test: dist, expiry minus day before (paired)        200                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN   -5.4260  -29.6086    17.7273   0.6518 paired sign-flip
+    NIFTY K_maxgamma              test: excess_hit, expiry minus all non-expiry 200 vs 739                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0508    0.0048     0.0992   0.0226      permutation
+    NIFTY K_maxgamma             test: move_toward, expiry minus all non-expiry 200 vs 739                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -20.7260  -48.6103     6.2797   0.1490      permutation
+BANKNIFTY    K_maxoi                                               expiry (k=0)        122                  822.8418             945.4217                501.100    0.0328            0.0205      0.0123              -47.4299              0.4344                 122.5799       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY    K_maxoi                                    day before expiry (k=1)        122                  922.3270            1110.1443                476.550    0.0164            0.0451     -0.0287             -113.4000              0.4180                 187.8172       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY    K_maxoi                                      all non-expiry (k>=1)        817                 1520.5107            1608.2444                613.500    0.0208            0.0233     -0.0024              -12.8972              0.5031                  87.7337       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY    K_maxoi test: expiry excess hit (strike minus placebo strikes) = 0        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0123   -0.0205     0.0492   0.6631        sign-flip
+BANKNIFTY    K_maxoi         test: excess_hit, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0410   -0.0082     0.0902   0.1370 paired sign-flip
+BANKNIFTY    K_maxoi        test: move_toward, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN   65.9701  -57.8169   216.5579   0.3798 paired sign-flip
+BANKNIFTY    K_maxoi               test: dist, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN -164.7225 -468.8125   107.3191   0.2743 paired sign-flip
+BANKNIFTY    K_maxoi              test: excess_hit, expiry minus all non-expiry 122 vs 817                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0147   -0.0223     0.0541   0.4154      permutation
+BANKNIFTY    K_maxoi             test: move_toward, expiry minus all non-expiry 122 vs 817                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -34.5327 -123.5435    57.2796   0.4591      permutation
+BANKNIFTY  K_maxpain                                               expiry (k=0)        122                  177.9057             365.0652                259.600    0.0656            0.0410      0.0246               -1.2480              0.4918                 187.1594       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY  K_maxpain                                    day before expiry (k=1)        122                  200.8344             414.3402                274.700    0.0328            0.0574     -0.0246               -3.4549              0.4590                 213.5057       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY  K_maxpain                                      all non-expiry (k>=1)        817                  389.7822             540.9802                371.250    0.0282            0.0441     -0.0159                0.8771              0.5031                 151.1980       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY  K_maxpain test: expiry excess hit (strike minus placebo strikes) = 0        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0246   -0.0246     0.0779   0.4554        sign-flip
+BANKNIFTY  K_maxpain         test: excess_hit, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0492   -0.0205     0.1189   0.2056 paired sign-flip
+BANKNIFTY  K_maxpain        test: move_toward, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    2.2070  -95.6026   100.9595   0.9647 paired sign-flip
+BANKNIFTY  K_maxpain               test: dist, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -49.2750 -131.2845    30.7283   0.2443 paired sign-flip
+BANKNIFTY  K_maxpain              test: excess_hit, expiry minus all non-expiry 122 vs 817                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0405   -0.0109     0.0964   0.0819      permutation
+BANKNIFTY  K_maxpain             test: move_toward, expiry minus all non-expiry 122 vs 817                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN   -2.1250  -92.9933    89.0608   0.9671      permutation
+BANKNIFTY K_maxgamma                                               expiry (k=0)        122                  148.6262             351.8463                251.350    0.0738            0.0287      0.0451              -17.1152              0.4672                 203.2201       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY K_maxgamma                                    day before expiry (k=1)        122                  191.7328             420.4566                272.475    0.0246            0.0451     -0.0205              -74.2434              0.4590                 228.7238       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY K_maxgamma                                      all non-expiry (k>=1)        817                  428.1540             567.3882                384.850    0.0294            0.0300     -0.0006              -17.4963              0.4945                 139.2342       NaN       NaN        NaN      NaN              NaN
+BANKNIFTY K_maxgamma test: expiry excess hit (strike minus placebo strikes) = 0        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0451   -0.0041     0.0984   0.1257        sign-flip
+BANKNIFTY K_maxgamma         test: excess_hit, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0656    0.0000     0.1311   0.0656 paired sign-flip
+BANKNIFTY K_maxgamma        test: move_toward, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN   57.1283  -68.5027   204.2723   0.4572 paired sign-flip
+BANKNIFTY K_maxgamma               test: dist, expiry minus day before (paired)        122                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN  -68.6102 -155.3755    16.7656   0.1176 paired sign-flip
+BANKNIFTY K_maxgamma              test: excess_hit, expiry minus all non-expiry 122 vs 817                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.0457   -0.0070     0.1023   0.0409      permutation
+BANKNIFTY K_maxgamma             test: move_toward, expiry minus all non-expiry 122 vs 817                       NaN                  NaN                    NaN       NaN               NaN         NaN                   NaN                 NaN                      NaN    0.3811  -89.2998    93.3197   0.9938      permutation
+
+== t4_intraday_movement
+   symbol                       start                                                                              group          n  mean_dist_at_start_pts  mean_move_toward_pts  share_moved_toward  mean_change_in_dist_pts  mean_abs_move_pts  estimate  ci95_low  ci95_high  p_value  mean_expiry_pts  mean_nonexpiry_pts
+    NIFTY                       14:30                                                                             expiry        200                 11.8028                5.9302              0.5950                  27.6007            39.6168       NaN       NaN        NaN      NaN              NaN                 NaN
+    NIFTY                       14:30                                                                         non-expiry        737                 12.6001               -1.1594              0.4749                  24.3241            33.6720       NaN       NaN        NaN      NaN              NaN                 NaN
+    NIFTY                       14:30                                         test: move toward, expiry minus non-expiry 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN    7.0896   -1.4835    15.7386   0.0662              NaN                 NaN
+    NIFTY                       14:30                                  test: change in distance, expiry minus non-expiry 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN    3.2767   -2.8839     9.6511   0.2396              NaN                 NaN
+    NIFTY                       14:30                                               test: move toward on expiry days = 0        200                     NaN                   NaN                 NaN                      NaN                NaN    5.9302   -1.7493    13.6804   0.1457              NaN                 NaN
+    NIFTY                       15:00                                                                             expiry        200                 11.6947                0.6347              0.5700                  13.2118            23.4402       NaN       NaN        NaN      NaN              NaN                 NaN
+    NIFTY                       15:00                                                                         non-expiry        737                 12.5736                0.3840              0.4980                  14.5411            23.6997       NaN       NaN        NaN      NaN              NaN                 NaN
+    NIFTY                       15:00                                         test: move toward, expiry minus non-expiry 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN    0.2508   -5.1530     5.6238   0.9255              NaN                 NaN
+    NIFTY                       15:00                                  test: change in distance, expiry minus non-expiry 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN   -1.3294   -5.3471     3.0102   0.5210              NaN                 NaN
+    NIFTY                       15:00                                               test: move toward on expiry days = 0        200                     NaN                   NaN                 NaN                      NaN                NaN    0.6347   -4.2697     5.3690   0.7967              NaN                 NaN
+    NIFTY              price at 14:30     test: distance to nearest strike, expiry minus non-expiry (all days with bars) 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN   -0.7974   -1.9442     0.3492   0.1597          11.8028             12.6001
+    NIFTY              price at 15:00     test: distance to nearest strike, expiry minus non-expiry (all days with bars) 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN   -0.8789   -2.0025     0.2967   0.1353          11.6947             12.5736
+    NIFTY              official close     test: distance to nearest strike, expiry minus non-expiry (all days with bars) 200 vs 737                     NaN                   NaN                 NaN                      NaN                NaN   -1.1021   -2.2338     0.0233   0.0553          11.5220             12.6241
+    NIFTY              price at 14:30 test: distance to nearest strike, expiry minus non-expiry (before closing auction) 187 vs 691                     NaN                   NaN                 NaN                      NaN                NaN   -0.6429   -1.7906     0.5271   0.2696          11.9083             12.5512
+    NIFTY              price at 15:00 test: distance to nearest strike, expiry minus non-expiry (before closing auction) 187 vs 691                     NaN                   NaN                 NaN                      NaN                NaN   -1.0763   -2.2897     0.1248   0.0728          11.5163             12.5926
+    NIFTY             15:29 bar close test: distance to nearest strike, expiry minus non-expiry (before closing auction) 186 vs 687                     NaN                   NaN                 NaN                      NaN                NaN   -0.8610   -1.9821     0.3154   0.1510          11.7659             12.6269
+    NIFTY mean of 15:00 to 15:29 bars test: distance to nearest strike, expiry minus non-expiry (before closing auction) 187 vs 691                     NaN                   NaN                 NaN                      NaN                NaN   -1.0715   -2.2327     0.0988   0.0711          11.6403             12.7118
+    NIFTY              official close test: distance to nearest strike, expiry minus non-expiry (before closing auction) 187 vs 691                     NaN                   NaN                 NaN                      NaN                NaN   -1.2451   -2.4094    -0.0634   0.0344          11.3037             12.5488
+BANKNIFTY                       14:30                                                                             expiry        115                 24.2430               10.2791              0.5391                  69.5722            90.9539       NaN       NaN        NaN      NaN              NaN                 NaN
+BANKNIFTY                       14:30                                                                         non-expiry        694                 25.8228               -2.8562              0.4654                  69.6777            90.3901       NaN       NaN        NaN      NaN              NaN                 NaN
+BANKNIFTY                       14:30                                         test: move toward, expiry minus non-expiry 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   13.1353  -12.0854    38.2532   0.3037              NaN                 NaN
+BANKNIFTY                       14:30                                  test: change in distance, expiry minus non-expiry 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -0.1055  -17.4897    18.7374   0.9902              NaN                 NaN
+BANKNIFTY                       14:30                                               test: move toward on expiry days = 0        115                     NaN                   NaN                 NaN                      NaN                NaN   10.2791  -13.2204    33.8098   0.4048              NaN                 NaN
+BANKNIFTY                       15:00                                                                             expiry        115                 24.9000               10.1596              0.6000                  33.0491            56.8039       NaN       NaN        NaN      NaN              NaN                 NaN
+BANKNIFTY                       15:00                                                                         non-expiry        694                 23.9366                0.3749              0.4971                  35.0517            53.3904       NaN       NaN        NaN      NaN              NaN                 NaN
+BANKNIFTY                       15:00                                         test: move toward, expiry minus non-expiry 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN    9.7847   -5.4031    24.9298   0.2004              NaN                 NaN
+BANKNIFTY                       15:00                                  test: change in distance, expiry minus non-expiry 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -2.0025  -12.7140     9.1083   0.7159              NaN                 NaN
+BANKNIFTY                       15:00                                               test: move toward on expiry days = 0        115                     NaN                   NaN                 NaN                      NaN                NaN   10.1596   -3.6474    24.5984   0.1696              NaN                 NaN
+BANKNIFTY              price at 14:30     test: distance to nearest strike, expiry minus non-expiry (all days with bars) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -1.5798   -4.4835     1.2708   0.2750          24.2430             25.8228
+BANKNIFTY              price at 15:00     test: distance to nearest strike, expiry minus non-expiry (all days with bars) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN    0.9634   -1.8050     3.6887   0.5088          24.9000             23.9366
+BANKNIFTY              official close     test: distance to nearest strike, expiry minus non-expiry (all days with bars) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -3.9921   -6.8460    -1.1270   0.0063          20.7752             24.7674
+BANKNIFTY              price at 14:30 test: distance to nearest strike, expiry minus non-expiry (before closing auction) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -1.5798   -4.4487     1.2625   0.2722          24.2430             25.8228
+BANKNIFTY              price at 15:00 test: distance to nearest strike, expiry minus non-expiry (before closing auction) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN    0.9634   -1.8338     3.7223   0.5041          24.9000             23.9366
+BANKNIFTY             15:29 bar close test: distance to nearest strike, expiry minus non-expiry (before closing auction) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -2.4009   -5.3725     0.5185   0.0963          23.4265             25.8274
+BANKNIFTY mean of 15:00 to 15:29 bars test: distance to nearest strike, expiry minus non-expiry (before closing auction) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -2.7218   -5.5003     0.0380   0.0631          21.7227             24.4445
+BANKNIFTY              official close test: distance to nearest strike, expiry minus non-expiry (before closing auction) 115 vs 694                     NaN                   NaN                 NaN                      NaN                NaN   -3.9921   -6.7967    -1.1073   0.0073          20.7752             24.7674
+
+== t4_close_proxy_check
+   symbol                               era                                                     proxy  n_days  median_abs_err_pts  p95_abs_err_pts  share_within_5pts
+    NIFTY            before closing auction                         mean of 15:00 to 15:29 bar closes     878              1.0267           4.4182             0.9647
+    NIFTY            before closing auction                                15:29 bar close (last bar)     873              9.4000          37.7000             0.2829
+    NIFTY            before closing auction 15:14 bar close (last continuous price under the auction)     878              4.8000          18.9150             0.5239
+    NIFTY            before closing auction                          price at 15:00 (14:59 bar close)     878             16.0750          62.2750             0.1708
+    NIFTY closing auction (from 3 Aug 2026)                         mean of 15:00 to 15:29 bar closes      59             23.8517          85.6277             0.0678
+    NIFTY closing auction (from 3 Aug 2026)                                15:29 bar close (last bar)      59              0.0000           0.0000             1.0000
+    NIFTY closing auction (from 3 Aug 2026) 15:14 bar close (last continuous price under the auction)      59             23.9000          83.5550             0.0339
+    NIFTY closing auction (from 3 Aug 2026)                          price at 15:00 (14:59 bar close)      59             34.1500         106.0150             0.0339
+BANKNIFTY            before closing auction                         mean of 15:00 to 15:29 bar closes     809              3.3633          15.5893             0.6539
+BANKNIFTY            before closing auction                                15:29 bar close (last bar)     809             26.8500         103.3600             0.0927
+BANKNIFTY            before closing auction 15:14 bar close (last continuous price under the auction)     809             14.5500          53.7300             0.1656
+BANKNIFTY            before closing auction                          price at 15:00 (14:59 bar close)     809             39.4500         154.8800             0.0643
+
+== t4_intraday_by_regime
+   symbol            regime                                           price  n_expiry  n_nonexpiry  mean_expiry_pts  mean_nonexpiry_pts  diff_pts  p_perm
+    NIFTY      multi_weekly                                  price at 14:30        98          363          11.4505             12.6691   -1.2186  0.1409
+    NIFTY      multi_weekly                                  price at 15:00        98          363          11.7643             12.5112   -0.7469  0.3729
+    NIFTY      multi_weekly                                  official close        98          363          10.9852             12.0963   -1.1111  0.1742
+    NIFTY      multi_weekly move toward strike from 15:00 to official close        98          363           0.7077              0.2992    0.4085  0.8971
+    NIFTY single_weekly_thu                                  price at 14:30        41          151          11.5915             12.3950   -0.8036  0.5203
+    NIFTY single_weekly_thu                                  price at 15:00        41          151           9.2988             13.0003   -3.7016  0.0034
+    NIFTY single_weekly_thu                                  official close        41          151           8.2976             12.8189   -4.5213  0.0004
+    NIFTY single_weekly_thu move toward strike from 15:00 to official close        41          151           3.8939              1.0232    2.8707  0.5760
+    NIFTY single_weekly_tue                                  price at 14:30        61          223          12.5107             12.6267   -0.1160  0.9101
+    NIFTY single_weekly_tue                                  price at 15:00        61          223          13.1934             12.3863    0.8071  0.4327
+    NIFTY single_weekly_tue                                  official close        61          223          14.5516             13.3513    1.2003  0.2535
+    NIFTY single_weekly_tue move toward strike from 15:00 to official close        61          223          -1.6730              0.0892   -1.7622  0.7761
+BANKNIFTY      monthly_only                                  price at 14:30        17          331          24.6382             26.4168   -1.7785  0.6046
+BANKNIFTY      monthly_only                                  price at 15:00        17          331          28.3706             24.3101    4.0605  0.2628
+BANKNIFTY      monthly_only                                  official close        17          331          23.7441             25.0479   -1.3038  0.7281
+BANKNIFTY      monthly_only move toward strike from 15:00 to official close        17          331          28.0676              0.4139   27.6537  0.1399
+BANKNIFTY    weekly_options                                  price at 14:30        98          363          24.1745             25.2813   -1.1068  0.5090
+BANKNIFTY    weekly_options                                  price at 15:00        98          363          24.2980             23.5960    0.7020  0.6661
+BANKNIFTY    weekly_options                                  official close        98          363          20.2602             24.5116   -4.2514  0.0069
+BANKNIFTY    weekly_options move toward strike from 15:00 to official close        98          363           7.0531              0.3393    6.7138  0.4357
+
+== t8_by_half_year
+   symbol half_year  n_expiry  n_nonexpiry  mean_dist_expiry_pts  se_expiry  mean_dist_nonexpiry_pts  share_within_tenth_expiry
+    NIFTY   2023 H1        26           95               13.7962     1.3342                  11.0779                     0.0769
+    NIFTY   2023 H2        26           97               11.7135     1.4871                  12.3881                     0.2692
+    NIFTY   2024 H1        26           94               10.2731     1.3711                  12.2372                     0.3462
+    NIFTY   2024 H2        26          100                6.6173     1.2418                  12.9110                     0.5000
+    NIFTY   2025 H1        26           96                8.5462     1.3697                  12.1396                     0.3846
+    NIFTY   2025 H2        27           99               11.5185     1.1715                  13.9995                     0.1481
+    NIFTY   2026 H1        26           93               17.2269     1.1236                  12.6672                     0.0385
+    NIFTY   2026 H2        17           65               12.9941     1.8563                  13.8777                     0.2353
+BANKNIFTY   2023 H1        26           95               24.8692     2.8769                  25.0289                     0.1923
+BANKNIFTY   2023 H2        26           97               19.7731     2.9818                  24.6129                     0.3462
+BANKNIFTY   2024 H1        26           94               17.8558     2.4199                  22.8681                     0.2692
+BANKNIFTY   2024 H2        22          104               17.9705     3.3114                  24.7389                     0.3636
+BANKNIFTY   2025 H1         6          116               22.3417     7.7825                  25.3918                     0.3333
+BANKNIFTY   2025 H2         6          120               26.2333     3.8965                  24.8817                     0.0000
+BANKNIFTY   2026 H1         6          113               21.2917     8.2574                  25.2381                     0.5000
+BANKNIFTY   2026 H2         4           78               30.9375     6.9432                  25.6513                     0.0000
+
+== t5_gamma_conditioning
+   symbol                               conditioning            rule                                            day_type  n_pos  n_neg  share_pos  mean_dist_pos_pts  mean_dist_neg_pts  diff_pos_minus_neg_pts  ci95_low  ci95_high  p_perm  spearman_signal_vs_dist  p_holm_3rules
+    NIFTY                  C1 sign at nearest strike   us_convention                                              expiry   97.0  103.0     0.4850            11.9247            11.1427                  0.7820   -1.2040     2.8404  0.4478                   0.0119         0.8955
+    NIFTY                  C1 sign at nearest strike   us_convention                                   day before expiry  117.0   83.0     0.5850            13.0325            12.3313                  0.7012   -1.3600     2.7740  0.5125                   0.0343            NaN
+    NIFTY                  C1 sign at nearest strike   us_convention                                      all non-expiry  415.0  324.0     0.5616            12.3105            13.0187                 -0.7082   -1.7556     0.3332  0.1854                  -0.0326            NaN
+    NIFTY                  C1 sign at nearest strike   us_convention difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  1.4902       NaN        NaN  0.1924                      NaN            NaN
+    NIFTY                  C1 sign at nearest strike participant_pro                                              expiry  101.0   99.0     0.5050            12.2149            10.8152                  1.3997   -0.6447     3.4129  0.1743                   0.1129         0.5228
+    NIFTY                  C1 sign at nearest strike participant_pro                                   day before expiry  102.0   98.0     0.5100            12.9618            12.5122                  0.4495   -1.5794     2.4830  0.6620                   0.0222            NaN
+    NIFTY                  C1 sign at nearest strike participant_pro                                      all non-expiry  406.0  333.0     0.5494            12.6562            12.5781                  0.0781   -0.9546     1.1416  0.8849                   0.0338            NaN
+    NIFTY                  C1 sign at nearest strike participant_pro difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  1.3216       NaN        NaN  0.2567                      NaN            NaN
+    NIFTY                  C1 sign at nearest strike   client_mirror                                              expiry  181.0   19.0     0.9050            11.5039            11.6947                 -0.1909   -4.0906     3.7275  0.9139                  -0.0214         0.9139
+    NIFTY                  C1 sign at nearest strike   client_mirror                                   day before expiry  181.0   19.0     0.9050            12.5390            14.6711                 -2.1321   -5.8475     1.6973  0.2370                   0.0263            NaN
+    NIFTY                  C1 sign at nearest strike   client_mirror                                      all non-expiry  683.0   56.0     0.9242            12.5633            13.3250                 -0.7617   -2.8712     1.3739  0.4523                   0.0089            NaN
+    NIFTY                  C1 sign at nearest strike   client_mirror difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  0.5709       NaN        NaN  0.7778                      NaN            NaN
+    NIFTY          C2 sign of day net GEX at forward   us_convention                                              expiry  175.0   25.0     0.8750            11.3214            12.9260                 -1.6046   -4.5172     1.4935  0.3158                  -0.0473            NaN
+    NIFTY          C2 sign of day net GEX at forward   us_convention                                   day before expiry  174.0   26.0     0.8700            12.4391            14.7654                 -2.3263   -5.2685     0.8013  0.1357                   0.0037            NaN
+    NIFTY          C2 sign of day net GEX at forward   us_convention                                      all non-expiry  659.0   80.0     0.8917            12.6220            12.6125                  0.0095   -1.6671     1.6535  0.9899                   0.0145            NaN
+    NIFTY          C2 sign of day net GEX at forward   us_convention difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                 -1.6141       NaN        NaN  0.3581                      NaN            NaN
+    NIFTY          C2 sign of day net GEX at forward participant_pro                                              expiry   91.0  109.0     0.4550            12.2302            10.9307                  1.2995   -0.6818     3.3388  0.2132                   0.1211            NaN
+    NIFTY          C2 sign of day net GEX at forward participant_pro                                   day before expiry   91.0  109.0     0.4550            13.1374            12.4110                  0.7264   -1.3099     2.8316  0.4893                   0.0871            NaN
+    NIFTY          C2 sign of day net GEX at forward participant_pro                                      all non-expiry  373.0  366.0     0.5047            12.8840            12.3529                  0.5312   -0.4983     1.5481  0.3182                   0.0611            NaN
+    NIFTY          C2 sign of day net GEX at forward participant_pro difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  0.7683       NaN        NaN  0.5115                      NaN            NaN
+    NIFTY          C2 sign of day net GEX at forward   client_mirror                                              expiry  189.0   11.0     0.9450            11.7370             7.8273                  3.9098   -0.7141     8.0002  0.0854                   0.0370            NaN
+    NIFTY          C2 sign of day net GEX at forward   client_mirror                                   day before expiry  188.0   12.0     0.9400            12.6902            13.5458                 -0.8557   -5.3338     3.6668  0.7025                   0.0754            NaN
+    NIFTY          C2 sign of day net GEX at forward   client_mirror                                      all non-expiry  711.0   28.0     0.9621            12.6297            12.4000                  0.2297   -2.4704     2.8798  0.8723                   0.0395            NaN
+    NIFTY          C2 sign of day net GEX at forward   client_mirror difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  3.6801       NaN        NaN  0.1694                      NaN            NaN
+    NIFTY C3 OI share at nearest strike above median none (unsigned)                                              expiry  100.0  100.0     0.5000            12.2135            10.8305                  1.3830   -0.5670     3.4325  0.1891                   0.0679            NaN
+    NIFTY C3 OI share at nearest strike above median none (unsigned)                                   day before expiry   72.0  128.0     0.3600            13.1069            12.5359                  0.5710   -1.5731     2.6520  0.6067                   0.0797            NaN
+    NIFTY C3 OI share at nearest strike above median none (unsigned)                                      all non-expiry  253.0  486.0     0.3424            12.6583            12.6015                  0.0568   -1.0606     1.1692  0.9186                   0.0368            NaN
+    NIFTY C3 OI share at nearest strike above median none (unsigned) difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  1.3262       NaN        NaN  0.2553                      NaN            NaN
+BANKNIFTY                  C1 sign at nearest strike   us_convention                                              expiry   57.0   65.0     0.4672            19.4991            22.3354                 -2.8363   -8.0072     2.4193  0.2906                  -0.0284         0.8717
+BANKNIFTY                  C1 sign at nearest strike   us_convention                                   day before expiry   64.0   58.0     0.5246            22.1219            27.9414                 -5.8195  -10.7493    -0.8975  0.0197                  -0.1634            NaN
+BANKNIFTY                  C1 sign at nearest strike   us_convention                                      all non-expiry  433.0  384.0     0.5300            23.9632            25.7697                 -1.8065   -3.7762     0.1844  0.0710                  -0.0346            NaN
+BANKNIFTY                  C1 sign at nearest strike   us_convention difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                 -1.0298       NaN        NaN  0.7237                      NaN            NaN
+BANKNIFTY                  C1 sign at nearest strike participant_pro                                              expiry   30.0   92.0     0.2459            21.7800            20.7592                  1.0208   -4.8244     6.8689  0.7419                   0.0248         1.0000
+BANKNIFTY                  C1 sign at nearest strike participant_pro                                   day before expiry   46.0   76.0     0.3770            25.6913            24.4026                  1.2887   -3.8679     6.3456  0.6210                   0.0980            NaN
+BANKNIFTY                  C1 sign at nearest strike participant_pro                                      all non-expiry  486.0  331.0     0.5949            24.6238            25.0890                 -0.4652   -2.4617     1.5204  0.6455                   0.0187            NaN
+BANKNIFTY                  C1 sign at nearest strike participant_pro difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  1.4860       NaN        NaN  0.6531                      NaN            NaN
+BANKNIFTY                  C1 sign at nearest strike   client_mirror                                              expiry  110.0   12.0     0.9016            20.7750            23.1667                 -2.3917   -9.9121     5.0324  0.5988                  -0.2684         1.0000
+BANKNIFTY                  C1 sign at nearest strike   client_mirror                                   day before expiry  112.0   10.0     0.9180            26.0964            11.3600                 14.7364    7.6960    20.8965  0.0009                   0.2203            NaN
+BANKNIFTY                  C1 sign at nearest strike   client_mirror                                      all non-expiry  785.0   32.0     0.9608            25.1189            17.2891                  7.8299    3.1099    12.2639  0.0018                   0.0705            NaN
+BANKNIFTY                  C1 sign at nearest strike   client_mirror difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                -10.2215       NaN        NaN  0.0448                      NaN            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   us_convention                                              expiry  107.0   15.0     0.8770            20.9079            21.7400                 -0.8321   -8.7183     7.2330  0.8349                   0.0273            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   us_convention                                   day before expiry  113.0    9.0     0.9262            25.1013            22.2167                  2.8847   -8.6676    14.1160  0.5580                   0.0037            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   us_convention                                      all non-expiry  737.0   80.0     0.9021            24.5499            27.2288                 -2.6788   -6.3730     1.1534  0.1186                   0.0044            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   us_convention difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                  1.8468       NaN        NaN  0.6839                      NaN            NaN
+BANKNIFTY          C2 sign of day net GEX at forward participant_pro                                              expiry   28.0   94.0     0.2295            20.8161            21.0681                 -0.2520   -6.5265     5.9909  0.9336                  -0.0316            NaN
+BANKNIFTY          C2 sign of day net GEX at forward participant_pro                                   day before expiry   36.0   86.0     0.2951            26.2417            24.3221                  1.9196   -3.4052     7.2507  0.4910                   0.0382            NaN
+BANKNIFTY          C2 sign of day net GEX at forward participant_pro                                      all non-expiry  437.0  380.0     0.5349            25.0219            24.5712                  0.4507   -1.5236     2.3959  0.6567                   0.0193            NaN
+BANKNIFTY          C2 sign of day net GEX at forward participant_pro difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                 -0.7027       NaN        NaN  0.8346                      NaN            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   client_mirror                                              expiry  109.0   13.0     0.8934            20.7229            23.4192                 -2.6963   -9.4756     4.0912  0.5411                  -0.2033            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   client_mirror                                   day before expiry  112.0   10.0     0.9180            25.9433            13.0750                 12.8683    6.0936    19.1101  0.0048                   0.1150            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   client_mirror                                      all non-expiry  792.0   25.0     0.9694            25.0751            16.4860                  8.5891    3.8749    12.9194  0.0034                   0.0531            NaN
+BANKNIFTY          C2 sign of day net GEX at forward   client_mirror difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                -11.2854       NaN        NaN  0.0342                      NaN            NaN
+BANKNIFTY C3 OI share at nearest strike above median none (unsigned)                                              expiry   61.0   61.0     0.5000            20.5082            21.5123                 -1.0041   -6.1698     4.2444  0.7015                  -0.0189            NaN
+BANKNIFTY C3 OI share at nearest strike above median none (unsigned)                                   day before expiry   53.0   69.0     0.4344            26.2028            23.8790                  2.3238   -2.8686     7.4092  0.3638                   0.0467            NaN
+BANKNIFTY C3 OI share at nearest strike above median none (unsigned)                                      all non-expiry  225.0  592.0     0.2754            24.8849            24.7846                  0.1003   -2.1698     2.2917  0.9315                   0.0131            NaN
+BANKNIFTY C3 OI share at nearest strike above median none (unsigned) difference in differences (expiry minus non-expiry)    NaN    NaN        NaN                NaN                NaN                 -1.1044       NaN        NaN  0.7017                      NaN            NaN
+
+== t5_sign_agreement
+   symbol measure          rule_a           rule_b  share_same_sign
+    NIFTY  g_near   us_convention  participant_pro           0.4600
+    NIFTY  g_near   us_convention    client_mirror           0.4400
+    NIFTY  g_near participant_pro    client_mirror           0.5700
+    NIFTY  g_near   us_convention (share positive)           0.4850
+    NIFTY  g_near participant_pro (share positive)           0.5050
+    NIFTY  g_near   client_mirror (share positive)           0.9050
+    NIFTY   g_day   us_convention  participant_pro           0.4100
+    NIFTY   g_day   us_convention    client_mirror           0.8200
+    NIFTY   g_day participant_pro    client_mirror           0.5000
+    NIFTY   g_day   us_convention (share positive)           0.8750
+    NIFTY   g_day participant_pro (share positive)           0.4550
+    NIFTY   g_day   client_mirror (share positive)           0.9450
+BANKNIFTY  g_near   us_convention  participant_pro           0.5000
+BANKNIFTY  g_near   us_convention    client_mirror           0.4508
+BANKNIFTY  g_near participant_pro    client_mirror           0.3443
+BANKNIFTY  g_near   us_convention (share positive)           0.4672
+BANKNIFTY  g_near participant_pro (share positive)           0.2459
+BANKNIFTY  g_near   client_mirror (share positive)           0.9016
+BANKNIFTY   g_day   us_convention  participant_pro           0.2541
+BANKNIFTY   g_day   us_convention    client_mirror           0.8033
+BANKNIFTY   g_day participant_pro    client_mirror           0.3033
+BANKNIFTY   g_day   us_convention (share positive)           0.8770
+BANKNIFTY   g_day participant_pro (share positive)           0.2295
+BANKNIFTY   g_day   client_mirror (share positive)           0.8934
+
+== t6_power
+                                                             design  grid_pts  n1  n0        model  effect  true_mean_shift_pts  power_5pct
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.00              -0.0158      0.0480
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.05              -0.5790      0.1645
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.10              -1.1284      0.4595
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.15              -1.6829      0.7840
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.20              -2.2452      0.9463
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.25              -2.8076      0.9922
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.30              -3.3809      0.9988
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.40              -4.4952      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.50              -5.6436      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739 pinned share    0.60              -6.7534      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.00               0.0021      0.0542
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.05              -0.6284      0.2117
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.10              -1.2525      0.6508
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.15              -1.8854      0.9595
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.20              -2.4970      0.9995
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.25              -3.1291      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.30              -3.7544      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.40              -5.0003      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.50              -6.2528      1.0000
+                                    Nifty expiry vs non-expiry (P1)      50.0 200 739         pull    0.60              -7.4977      1.0000
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.00              -0.0230      0.0553
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.05              -0.5568      0.0830
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.10              -1.1203      0.1878
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.15              -1.6748      0.3425
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.20              -2.2355      0.5443
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.25              -2.7947      0.7260
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.30              -3.3704      0.8705
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.40              -4.4884      0.9815
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.50              -5.6107      0.9998
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103 pinned share    0.60              -6.7508      1.0000
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.00               0.0035      0.0568
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.05              -0.6293      0.0943
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.10              -1.2515      0.2525
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.15              -1.8697      0.5010
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.20              -2.5157      0.7698
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.25              -3.1349      0.9320
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.30              -3.7413      0.9915
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.40              -4.9979      1.0000
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.50              -6.2610      1.0000
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)      50.0  97 103         pull    0.60              -7.4989      1.0000
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.00              -0.0116      0.0467
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.05              -0.5517      0.0775
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.10              -1.1059      0.1747
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.15              -1.6947      0.3648
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.20              -2.2425      0.5503
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.25              -2.8104      0.7425
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.30              -3.3689      0.8668
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.40              -4.4751      0.9838
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.50              -5.6340      0.9990
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99 pinned share    0.60              -6.7375      1.0000
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.00               0.0105      0.0475
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.05              -0.6349      0.0968
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.10              -1.2502      0.2432
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.15              -1.8662      0.4950
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.20              -2.5101      0.7765
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.25              -3.1124      0.9297
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.30              -3.7492      0.9918
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.40              -5.0041      1.0000
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.50              -6.2549      1.0000
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)      50.0 101  99         pull    0.60              -7.5089      1.0000
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.00               0.0143      0.0522
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.05              -0.5614      0.0625
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.10              -1.1289      0.0983
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.15              -1.6962      0.1450
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.20              -2.2543      0.2180
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.25              -2.8076      0.3270
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.30              -3.3835      0.4392
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.40              -4.4945      0.6757
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.50              -5.6201      0.8668
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19 pinned share    0.60              -6.7595      0.9685
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.00              -0.0036      0.0537
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.05              -0.6271      0.0653
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.10              -1.2686      0.0998
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.15              -1.8771      0.1675
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.20              -2.4968      0.2685
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.25              -3.1227      0.3942
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.30              -3.7593      0.5345
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.40              -5.0049      0.7955
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.50              -6.2441      0.9555
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)      50.0 181  19         pull    0.60              -7.5067      0.9960
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.00              -0.0053      0.0517
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.05              -0.5558      0.1003
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.10              -1.1115      0.2420
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.15              -1.7052      0.4900
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.20              -2.2538      0.7190
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.25              -2.8107      0.8680
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.30              -3.3627      0.9587
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.40              -4.5235      0.9995
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.50              -5.6159      1.0000
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364 pinned share    0.60              -6.7495      1.0000
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.00               0.0009      0.0522
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.05              -0.6260      0.1247
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.10              -1.2426      0.3708
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.15              -1.8756      0.7212
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.20              -2.5008      0.9515
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.25              -3.1217      0.9978
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.30              -3.7586      1.0000
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.40              -4.9966      1.0000
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.50              -6.2587      1.0000
+                            Nifty multi_weekly expiry vs non-expiry      50.0  98 364         pull    0.60              -7.4950      1.0000
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.00               0.0146      0.0535
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.05              -0.5862      0.0793
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.10              -1.0772      0.1220
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.15              -1.6672      0.2318
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.20              -2.2404      0.3633
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.25              -2.8075      0.5160
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.30              -3.3707      0.6727
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.40              -4.5308      0.8890
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.50              -5.6479      0.9712
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151 pinned share    0.60              -6.7578      0.9982
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.00              -0.0053      0.0500
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.05              -0.6077      0.0785
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.10              -1.2358      0.1720
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.15              -1.8590      0.3723
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.20              -2.4874      0.6240
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.25              -3.1091      0.8470
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.30              -3.7362      0.9623
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.40              -4.9987      1.0000
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.50              -6.2491      1.0000
+                       Nifty single_weekly_thu expiry vs non-expiry      50.0  41 151         pull    0.60              -7.4960      1.0000
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.00               0.0146      0.0515
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.05              -0.5559      0.0803
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.10              -1.1375      0.1765
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.15              -1.7215      0.3432
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.20              -2.2498      0.5055
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.25              -2.7825      0.6770
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.30              -3.3910      0.8365
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.40              -4.5058      0.9718
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.50              -5.6225      0.9968
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224 pinned share    0.60              -6.7622      1.0000
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.00              -0.0193      0.0483
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.05              -0.6229      0.0935
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.10              -1.2613      0.2547
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.15              -1.8704      0.5323
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.20              -2.4799      0.7870
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.25              -3.1074      0.9580
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.30              -3.7642      0.9965
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.40              -4.9993      1.0000
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.50              -6.2494      1.0000
+                       Nifty single_weekly_tue expiry vs non-expiry      50.0  61 224         pull    0.60              -7.5068      1.0000
+
+== t6_power_mde
+                                                             design        model  grid_pts  n1  n0  effect_80pct_power  mean_shift_pts_80pct
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2) pinned share      50.0 181  19              0.4651               -5.2268
+  Nifty expiry days, positive vs negative gamma, client_mirror (P2)         pull      50.0 181  19              0.4028               -5.0397
+Nifty expiry days, positive vs negative gamma, participant_pro (P2) pinned share      50.0 101  99              0.2731               -3.0688
+Nifty expiry days, positive vs negative gamma, participant_pro (P2)         pull      50.0 101  99              0.2077               -2.6025
+  Nifty expiry days, positive vs negative gamma, us_convention (P2) pinned share      50.0  97 103              0.2756               -3.0895
+  Nifty expiry days, positive vs negative gamma, us_convention (P2)         pull      50.0  97 103              0.2093               -2.6312
+                                    Nifty expiry vs non-expiry (P1) pinned share      50.0 200 739              0.1549               -1.7384
+                                    Nifty expiry vs non-expiry (P1)         pull      50.0 200 739              0.1242               -1.5585
+                            Nifty multi_weekly expiry vs non-expiry pinned share      50.0  98 364              0.2272               -2.5565
+                            Nifty multi_weekly expiry vs non-expiry         pull      50.0  98 364              0.1671               -2.0894
+                       Nifty single_weekly_thu expiry vs non-expiry pinned share      50.0  41 151              0.3588               -4.0533
+                       Nifty single_weekly_thu expiry vs non-expiry         pull      50.0  41 151              0.2395               -2.9781
+                       Nifty single_weekly_tue expiry vs non-expiry pinned share      50.0  61 224              0.2886               -3.2518
+                       Nifty single_weekly_tue expiry vs non-expiry         pull      50.0  61 224              0.2038               -2.5276
+
+== t7_robustness
+   symbol                                                    check          n  mean_expiry_pts  mean_nonexpiry_pts  estimate  ci95_low  ci95_high  p_value
+    NIFTY                       Thursdays: expiry minus non-expiry  132 vs 55          10.1561             13.5527   -3.3967   -5.6012    -1.1805   0.0035
+    NIFTY                        Tuesdays: expiry minus non-expiry  56 vs 134          14.7875             12.5272    2.2603    0.1073     4.4047   0.0391
+    NIFTY 100-point grid (round hundreds): expiry minus non-expiry 200 vs 739          24.2305             25.6436   -1.4131   -3.7718     0.9647   0.2163
+    NIFTY      only scheduled-weekday expiries (no holiday shifts) 188 vs 739          11.5356             12.6210   -1.0853   -2.2790     0.0807   0.0706
+BANKNIFTY                       Thursdays: expiry minus non-expiry  46 vs 141          22.6739             25.0773   -2.4034   -7.1015     2.2773   0.3007
+BANKNIFTY                        Tuesdays: expiry minus non-expiry  18 vs 172          22.3944             24.0544   -1.6599   -8.8113     5.4953   0.6553
+
+== design_log
+                item                                                                                                                                                 change                                                                                                                                                                                                                                    reason
+    settlement price                                                                    Use NSE's official close as the outcome, not the mean of 15:00 to 15:29 minute bars                                         The bhavcopy settlement price of every expiring option equals the official close exactly on every expiry day (checked here), while the minute-bar mean differs from it by about 1 point (median).
+    max-gamma strike                                                                                                           Defined from gross (unsigned) gamma exposure                                                                                         A signed 'largest net GEX' strike depends on the unobserved sign; the sign enters only in the conditioning step, where all three rules are shown.
+       movement test                                                                                   Added the signed move toward the strike as the main movement measure The change in absolute distance has a positive mean under a pure random walk (Jensen's inequality) that grows with volatility, and expiry days are more volatile; the signed move has mean zero under no pinning whatever the volatility.
+        implied vols                                                                                          Interpolate missing IVs along strikes after sorting by strike                     UDiFF bhavcopy rows are not in strike order; interpolating in file order fills deep options with IVs of unrelated strikes. (data.load_bhavcopy now sorts rows; the script sorts again so it does not depend on that.)
+   re-dated expiries                                                     If no contract with expiry E is listed on t-1, use the contract listed within 3 calendar days of E                                                      Holiday changes re-date contracts: on 27 Jun 2023 the Nifty contract was still listed for 29 Jun but expired on 28 Jun; Bank Nifty contracts were re-dated in Sep 2023 and Jan 2025.
+     closing auction Split the Tuesday regime at 3 Aug 2026 and restrict settlement-window bar measures (15:29 bar, 15:00 to 15:29 mean, intraday figure) to days before it     NSE's closing auction session went live on 3 Aug 2026 (circular NSE/CMTR/75479); the official close then comes from an auction and the minute index is frozen from 15:15, so the 30-minute bar mean no longer approximates the close.
+regime heterogeneity                                                       Added pairwise tests of whether the expiry effect differs between regimes, and a half-year table                                                                           The first run showed opposite signs in the Thursday and Tuesday regimes; whether they really differ is a test, not something to read off two separate p-values.
+ gamma near a strike                          Dealer gamma at a strike is evaluated as if the index sat at that strike with 30 trading minutes left (the settlement window)                                          With one full day left, gamma at a level spreads over about +/-5 strikes; with 30 minutes left it weights the strike itself and its immediate neighbours, which is what 'near the strike' means.
+
+Welch t-test p for P1 (Nifty expiry vs non-expiry distance): 0.0598 (permutation p: 0.0538)
+
+== HEADLINE (REAL DATA)
+P1 Nifty, all 200 expiry vs 739 other days: mean distance to nearest 50-pt strike 11.52 vs 12.62 pts (no clustering: 12.5); difference -1.10 pts [-2.25, 0.03], -0.41 bp; permutation p = 0.0538
+   multi_weekly: 10.99 vs 12.07 pts, diff -1.09 [-2.70, 0.47], p = 0.1823 (n = 98 expiry days)
+   single_weekly_thu: 8.30 vs 12.82 pts, diff -4.52 [-6.86, -2.12], p = 0.0006 (n = 41 expiry days)
+   single_weekly_tue: 14.55 vs 13.37 pts, diff 1.18 [-0.74, 3.06], p = 0.2676 (n = 61 expiry days)
+   Thursday single-weekly vs Tuesday regime, difference in expiry gap: -5.70 pts, p = 0.0008
+P2 Nifty expiry days, us_convention: positive 11.92 (n=97) vs negative 11.14 (n=103) pts, diff 0.78, p = 0.448, Holm p = 0.896
+P2 Nifty expiry days, participant_pro: positive 12.21 (n=101) vs negative 10.82 (n=99) pts, diff 1.40, p = 0.174, Holm p = 0.523
+P2 Nifty expiry days, client_mirror: positive 11.50 (n=181) vs negative 11.69 (n=19) pts, diff -0.19, p = 0.914, Holm p = 0.914
+Bank Nifty weekly-options era: 20.26 vs 24.52 pts (no clustering: 25), diff -4.26 [-7.36, -0.99], -0.86 bp, p = 0.0076 (n = 98)
+Power (P1, pinned share): 80% power at effect 0.155, i.e. a mean shift of -1.74 pts
+Power (P1, pull): 80% power at effect 0.124, i.e. a mean shift of -1.56 pts
+Figures written to results/pinning. Total run time 123s.

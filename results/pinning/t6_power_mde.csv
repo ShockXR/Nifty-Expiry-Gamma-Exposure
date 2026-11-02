@@ -1,0 +1,15 @@
+design,model,grid_pts,n1,n0,effect_80pct_power,mean_shift_pts_80pct
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",pinned share,50.0,181,19,0.4650523560209424,-5.226767008416013
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",pull,50.0,181,19,0.4028125000000001,-5.039726241822321
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",pinned share,50.0,101,99,0.2731388329979879,-3.0688382080199386
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",pull,50.0,101,99,0.2076672104404568,-2.6024592819473478
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",pinned share,50.0,97,103,0.27560553633217993,-3.0895016175214423
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",pull,50.0,97,103,0.2093220338983051,-2.6311680174525707
+Nifty expiry vs non-expiry (P1),pinned share,50.0,200,739,0.1549306625577812,-1.738364521151786
+Nifty expiry vs non-expiry (P1),pull,50.0,200,739,0.12417004048582997,-1.5584851710842793
+Nifty multi_weekly expiry vs non-expiry,pinned share,50.0,98,364,0.2271812080536913,-2.5565368392660712
+Nifty multi_weekly expiry vs non-expiry,pull,50.0,98,364,0.1671009771986971,-2.089408579590819
+Nifty single_weekly_thu expiry vs non-expiry,pinned share,50.0,41,151,0.3588439306358382,-4.053345214137817
+Nifty single_weekly_thu expiry vs non-expiry,pull,50.0,41,151,0.23946188340807176,-2.9780865243667844
+Nifty single_weekly_tue expiry vs non-expiry,pinned share,50.0,61,224,0.2885579937304075,-3.2517575784692387
+Nifty single_weekly_tue expiry vs non-expiry,pull,50.0,61,224,0.2038011695906433,-2.527609105694104

@@ -1,0 +1,34 @@
+symbol,check,value
+NIFTY,expiry days in bhavcopies (data.actual_expiries),200
+NIFTY,expiry days where every expiring option's settlement price equals the official close,200
+NIFTY,trading days in panel,939
+NIFTY,expiry days with a t-1 chain,200
+NIFTY,max stale days of t-1 chain (missing bhavcopy),0.0
+NIFTY,days with a t-1 chain whose chain date is strictly before the day (no look-ahead),939 of 939
+NIFTY,days whose t-1 chain had to use a re-dated contract (holiday shift),4
+NIFTY,expiry days whose nearest strike to the close is listed in the t-1 chain,200
+NIFTY,median share of options with no IV (no time value) on expiry-eve chains,0.17789624924379915
+NIFTY,"expiry days, regime multi_weekly, weekday 2 (0=Mon)",5
+NIFTY,"expiry days, regime multi_weekly, weekday 3 (0=Mon)",93
+NIFTY,"expiry days, regime single_weekly_thu, weekday 2 (0=Mon)",2
+NIFTY,"expiry days, regime single_weekly_thu, weekday 3 (0=Mon)",39
+NIFTY,"expiry days, regime single_weekly_tue, weekday 0 (0=Mon)",5
+NIFTY,"expiry days, regime single_weekly_tue, weekday 1 (0=Mon)",56
+BANKNIFTY,expiry days in bhavcopies (data.actual_expiries),122
+BANKNIFTY,expiry days where every expiring option's settlement price equals the official close,122
+BANKNIFTY,trading days in panel,939
+BANKNIFTY,expiry days with a t-1 chain,122
+BANKNIFTY,max stale days of t-1 chain (missing bhavcopy),0.0
+BANKNIFTY,days with a t-1 chain whose chain date is strictly before the day (no look-ahead),939 of 939
+BANKNIFTY,days whose t-1 chain had to use a re-dated contract (holiday shift),12
+BANKNIFTY,expiry days whose nearest strike to the close is listed in the t-1 chain,122
+BANKNIFTY,median share of options with no IV (no time value) on expiry-eve chains,0.19218033622007133
+BANKNIFTY,"expiry days, regime monthly_only, weekday 0 (0=Mon)",1
+BANKNIFTY,"expiry days, regime monthly_only, weekday 1 (0=Mon)",14
+BANKNIFTY,"expiry days, regime monthly_only, weekday 2 (0=Mon)",1
+BANKNIFTY,"expiry days, regime monthly_only, weekday 3 (0=Mon)",8
+BANKNIFTY,"expiry days, regime weekly_options, weekday 1 (0=Mon)",4
+BANKNIFTY,"expiry days, regime weekly_options, weekday 2 (0=Mon)",56
+BANKNIFTY,"expiry days, regime weekly_options, weekday 3 (0=Mon)",38
+NIFTY,expiry-eve chains whose strikes within 3% of spot are exactly 50 apart,200 of 200
+BANKNIFTY,expiry-eve chains whose strikes within 3% of spot are exactly 100 apart,122 of 122
