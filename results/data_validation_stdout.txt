@@ -1,0 +1,19 @@
+                                         0                   1
+index                             Nifty 50          Nifty Bank
+bar_file                    nifty_1min.csv  banknifty_1min.csv
+first_day                       2023-01-02          2023-01-02
+last_day                        2026-11-02          2026-04-22
+official_days                          944                 812
+days_compared                          943                 811
+official_days_without_bars               1                   1
+bar_days_not_official                    5                   5
+days_under_370_bars                      1                   3
+median_bars_per_day                  375.0               375.0
+high_within_5bp                        1.0            0.993835
+low_within_5bp                     0.99894            0.992602
+open_within_5bp                   0.997879            0.998767
+high_median_abs_bp                     0.0                 0.0
+low_median_abs_bp                      0.0                 0.0
+close_median_abs_bp               3.831376            5.338897
+close_p95_abs_bp                 15.169657           20.752325
+worst_high_or_low_bp              6.824444           23.347059

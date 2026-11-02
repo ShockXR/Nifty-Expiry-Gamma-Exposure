@@ -132,8 +132,15 @@ def build_daily_tables(out: Path) -> None:
     files = sorted((out / "index_close").glob("ind_close_all_*.csv"))
     if not files:
         return
-    df = pd.concat([pd.read_csv(f, dtype=str) for f in files], ignore_index=True)
-    df["date"] = pd.to_datetime(df["Index Date"], dayfirst=True)
+    frames = []
+    for f in files:
+        part = pd.read_csv(f, dtype=str)
+        # The trade date is taken from the file name (ind_close_all_DDMMYYYY.csv). The "Index Date"
+        # column inside is not reliable: some files from April 2023 write it month-first
+        # (6 April 2023 appears as 04-06-2023), which day-first parsing turns into 4 June.
+        part["date"] = pd.to_datetime(f.stem[-8:], format="%d%m%Y")
+        frames.append(part)
+    df = pd.concat(frames, ignore_index=True)
     names = {"Index Name": "index", "Open Index Value": "open", "High Index Value": "high",
              "Low Index Value": "low", "Closing Index Value": "close", "Volume": "volume",
              "Turnover (Rs. Cr.)": "turnover_cr"}
