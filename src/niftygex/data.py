@@ -145,6 +145,34 @@ def actual_expiries(bhav: dict, last_day: pd.Timestamp | None = None) -> pd.Date
     return pd.DatetimeIndex(sorted(out))
 
 
+def holiday_adjusted_expiries(bhav: dict) -> dict:
+    """Map listed expiry dates that turned out to be exchange holidays to the real expiry day.
+
+    When an expiry date becomes a holiday after the contract is listed, NSE
+    moves the expiry to the previous trading day, but the bhavcopies before the
+    change can still carry the old date (for example contracts listed for
+    Thursday 29 June 2023 that really expired on Wednesday 28 June). Counting
+    business days to the listed date then overstates the time to expiry.
+    A listed date inside the span of the files that is not itself a trade
+    date is mapped to the last trade date before it. Dates after the last
+    file are left alone (their holidays are unknown).
+    """
+    dates = pd.DatetimeIndex(sorted(pd.Timestamp(d).normalize() for d in bhav))
+    if len(dates) == 0:
+        return {}
+    have = set(dates)
+    out = {}
+    for df in bhav.values():
+        for e in pd.to_datetime(df["expiry"]).dt.normalize().unique():
+            e = pd.Timestamp(e)
+            if e in out or e in have or e > dates[-1] or e < dates[0]:
+                continue
+            before = dates[dates < e]
+            if len(before):
+                out[e] = before[-1]
+    return out
+
+
 def parity_forward(chain: pd.DataFrame, T: float, r: float) -> float:
     """Forward index level for the chain's expiry from put-call parity.
 
@@ -360,6 +388,7 @@ def build_market_from_nse(
                                   "fut_near_expiry": fu["expiry"].iloc[0]}
     expiries = actual_expiries(bhav) if use_file_expiries else None
     labels = label_days(days, expiries=expiries)
+    eff = holiday_adjusted_expiries(bhav)
     chains = []
     lot_used = []
     pos = {d: i for i, d in enumerate(days)}
@@ -371,6 +400,7 @@ def build_market_from_nse(
             chains[-1].attrs.update({"spot": spot, "T": 1 / 252, "date": d, "missing": True})
             lot_used.append(lot_used[-1] if lot_used else (lot_size or np.nan))
             continue
+        df = df.assign(expiry=df["expiry"].map(lambda e: eff.get(pd.Timestamp(e).normalize(), e)))
         nxt = df.loc[df["expiry"] > d, "expiry"].min()
         sel = df[df["expiry"] == nxt].copy()
         if oi_unit == "keep_units":

@@ -296,13 +296,35 @@ class McsGarch:
         return np.convolve(pad, np.ones(k) / k, mode="valid")
 
     def diurnal(self, expiry_mask=None) -> np.ndarray:
-        """(days x minutes) diurnal variance factors for each day."""
-        def rows(mask):
-            S = np.tile(self.s, (len(mask), 1))
-            if self.expiry_diurnal and self.s_expiry is not None:
-                S[np.asarray(mask, bool)] = self.s_expiry
-            return S
-        return rows(expiry_mask)
+        """(days x minutes) diurnal variance factors for each day.
+
+        With no mask, returns the ordinary-day pattern as a single row (1 x minutes).
+        """
+        if expiry_mask is None:
+            return np.atleast_2d(self.s).copy()
+        mask = np.asarray(expiry_mask, bool)
+        S = np.tile(self.s, (len(mask), 1))
+        if self.expiry_diurnal and self.s_expiry is not None:
+            S[mask] = self.s_expiry
+        return S
+
+    def _pattern(self, ratio: np.ndarray, valid: np.ndarray) -> np.ndarray:
+        """Average of ratio by minute over valid entries, then smoothed.
+
+        A minute with no valid observation at all (for example the first minute
+        when every day's first return is missing) would otherwise get a factor of
+        0, and 0 / 0 later turns the whole GARCH input into NaN, so the fit
+        silently returns its starting values. Such minutes get the average factor.
+        """
+        cnt = valid.sum(axis=0)
+        raw = np.where(valid, ratio, 0).sum(axis=0) / np.maximum(cnt, 1)
+        bad = (cnt == 0) | ~(raw > 0)
+        if bad.all():
+            raw = np.ones_like(raw)
+        elif bad.any():
+            raw = raw.copy()
+            raw[bad] = raw[~bad].mean()
+        return self._smooth(raw)
 
     # -- estimation -------------------------------------------------------
     def fit(self, R, h, expiry_mask=None, compute_tstats: bool = False):
@@ -322,15 +344,11 @@ class McsGarch:
         eps = np.where(valid, eps, 0.0)
 
         ratio = eps**2 / h[:, None]
-        cnt = valid.sum(axis=0)
-        self.s = self._smooth(np.where(valid, ratio, 0).sum(axis=0) / np.maximum(cnt, 1))
+        self.s = self._pattern(ratio, valid)
         if self.expiry_diurnal and expiry_mask.any():
-            ve = valid[expiry_mask]
-            self.s_expiry = self._smooth(
-                np.where(ve, ratio[expiry_mask], 0).sum(axis=0) / np.maximum(ve.sum(axis=0), 1)
-            )
+            self.s_expiry = self._pattern(ratio[expiry_mask], valid[expiry_mask])
         S = self.diurnal(expiry_mask)
-        x = (eps / np.sqrt(h[:, None] * S)).ravel()
+        x = np.where(valid, eps / np.sqrt(h[:, None] * S), 0.0).ravel()
         self.params = fit_garch11(x, weights=valid.ravel().astype(float), dist=self.dist)
         if compute_tstats:
             self.params["tstats"] = garch11_tstats(x, self.params, valid.ravel().astype(float), self.dist)

@@ -1,0 +1,13 @@
+symbol,era,proxy,n_days,median_abs_err_pts,p95_abs_err_pts,share_within_5pts
+NIFTY,before closing auction,mean of 15:00 to 15:29 bar closes,878,1.0266666666702804,4.418166666667639,0.9646924829157175
+NIFTY,before closing auction,15:29 bar close (last bar),873,9.400000000001455,37.699999999999996,0.2829324169530355
+NIFTY,before closing auction,15:14 bar close (last continuous price under the auction),878,4.799999999999272,18.91499999999814,0.5239179954441914
+NIFTY,before closing auction,price at 15:00 (14:59 bar close),878,16.07499999999891,62.275000000000716,0.17084282460136674
+NIFTY,closing auction (from 3 Aug 2026),mean of 15:00 to 15:29 bar closes,59,23.851666666661913,85.6276666666621,0.06779661016949153
+NIFTY,closing auction (from 3 Aug 2026),15:29 bar close (last bar),59,0.0,0.0,1.0
+NIFTY,closing auction (from 3 Aug 2026),15:14 bar close (last continuous price under the auction),59,23.900000000001455,83.5549999999999,0.03389830508474576
+NIFTY,closing auction (from 3 Aug 2026),price at 15:00 (14:59 bar close),59,34.14999999999782,106.01499999999892,0.03389830508474576
+BANKNIFTY,before closing auction,mean of 15:00 to 15:29 bar closes,809,3.3633333333418705,15.589333333331155,0.65389369592089
+BANKNIFTY,before closing auction,15:29 bar close (last bar),809,26.849999999998545,103.36000000000055,0.09270704573547589
+BANKNIFTY,before closing auction,15:14 bar close (last continuous price under the auction),809,14.549999999995634,53.729999999995876,0.16563658838071693
+BANKNIFTY,before closing auction,price at 15:00 (14:59 bar close),809,39.450000000004366,154.88000000000028,0.06427688504326329

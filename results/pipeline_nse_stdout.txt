@@ -2,4 +2,4 @@
 next15: 19800 test anchors
 next30: 19008 test anchors
 last_hour: 792 test anchors
-done in 503s -> results/pipeline_nse
+done in 500s -> results/pipeline_nse

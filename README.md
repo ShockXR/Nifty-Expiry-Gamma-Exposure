@@ -2,7 +2,14 @@
 
 **Does option positioning help forecast Nifty expiry-day volatility?** This project rebuilds the volatility model from Chhimwal, Pandey and Pandey (2025) as an out-of-sample forecasting baseline, adds dealer gamma exposure (GEX) built from NSE option data, and tests whether positioning carries information the baseline misses, especially in the last hour of expiry day.
 
-> **Status (November 2026): working prototype, validated on synthetic data only.** Every engine is tested against closed forms or simulated data with known answers, and the full pipeline runs from NSE-format files to a forecast scoreboard. It has not yet been run on real market data, because the machine it was built on cannot reach NSE. No result in this repository is a real-market result. See [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) to run it on real data.
+> **Status (3 November 2026): running on REAL NSE data.** 942 trading days (January 2023 to 2 November 2026) of NSE F&O bhavcopies, participant-wise open interest and official index values including India VIX, from NSE's archive server, plus free third-party 1-minute Nifty and Bank Nifty bars that we checked day by day against NSE's official values. Simulation results (used to validate every engine first) are kept separate and labelled. Start with [docs/REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md).
+
+**Real-data results so far** (details, caveats and the file behind every number are in the linked documents):
+
+* **Forecasting (out of sample, 792 test days).** A hybrid that corrects the paper's mcsGARCH with a LightGBM model of its errors forecasts the next 15 and 30 minutes about 7% and 9% better (QLIKE loss, Diebold-Mariano p < 0.001). For the last hour a simple HAR model is best. Adding dealer gamma (GEX) features does not improve forecasts under any of three sign rules.
+* **In-sample patterns.** Higher dealer gamma the evening before goes with calmer ordinary days but more volatile expiry days. Nifty tends to reverse in the last 30 minutes, more so after negative "Pro"-based GEX, which is the opposite of the US hedging-momentum story. These are associations on a proxied dealer sign, and a falsification suite is testing them.
+* **Replication of the 2025 paper** ([docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md)). The "after" sample reproduces the printed tables closely. The stated "before" window does not, while a 64-day window from 14 November 2022 to 10 February 2023 reproduces the printed "before" numbers, which we will ask the authors about.
+* **Pinning** ([docs/PINNING_STUDY.md](docs/PINNING_STUDY.md)). The expiry-day close sits closer to a strike only in some periods (Nifty from November 2024 to August 2025, Bank Nifty while it had weekly options), and our dealer-gamma proxies do not explain when.
 
 ## Why this question
 
@@ -25,7 +32,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
 | Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-31 tests, run with `pytest`.
+75 tests, run with `pytest` (also on every pull request through GitHub Actions).
 
 ## Documents
 
@@ -38,7 +45,12 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | [docs/math/](docs/math/) | Derivations: greeks and GEX, mcsGARCH, connectedness, inference, forecast evaluation |
 | [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md) | Every experiment, its question, its result and its limits |
 | [ITERATION_LOG.md](ITERATION_LOG.md) | What went wrong during the build and what changed |
-| [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) | How to get the real data, and checks for the first real files |
+| [docs/REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) | **Real data:** forecasting contest, expiry effects by regime, GEX regressions, end-of-day momentum (R0 to R5) |
+| [docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md) | **Real data:** the paper's Tables 1 to 6 rebuilt from NSE data, with robust versions of each test |
+| [docs/PINNING_STUDY.md](docs/PINNING_STUDY.md) | **Real data:** do Nifty and Bank Nifty close at option strikes on expiry day? |
+| [notebooks/01_real_data_tour.ipynb](notebooks/01_real_data_tour.ipynb) | **Real data:** a guided tour with charts (option chain, GEX profile, an expiry day, the scoreboard) |
+| [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) | How the real data are downloaded and checked |
+| [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) | Exact commands, versions and run times to regenerate every result |
 | [alternatives/ALTERNATIVES.md](alternatives/ALTERNATIVES.md) | Trading layer, sequence model and other directions kept out of the main package |
 
 ## Quick start
@@ -57,9 +69,15 @@ python experiments/paper_checks.py
 python experiments/inference_checks.py
 python experiments/power_study.py --reps 8 --days 500
 
-# Real data, once downloaded (see docs/DATA_ACQUISITION.md)
-python scripts/download_nse.py --start 2023-01-01 --end 2026-10-31 --out data/raw
-python scripts/run_pipeline.py --source nse --raw data/raw
+# Real data (see docs/DATA_ACQUISITION.md)
+python scripts/download_nse.py --start 2023-01-01 --end 2026-11-02 --out data/raw
+python scripts/fetch_minute_bars.py
+python scripts/validate_minute_bars.py
+python scripts/run_pipeline.py --source nse          # about 9 minutes on 4 cores
+python experiments/real_day_level.py
+python experiments/momentum_gex.py
+python experiments/replicate_paper.py
+python experiments/pinning_study.py
 ```
 
 ## Repository layout
@@ -67,9 +85,10 @@ python scripts/run_pipeline.py --source nse --raw data/raw
 ```
 .
 ├── src/niftygex/      package code (see table above)
-├── scripts/           run_pipeline.py (one command, all outputs), download_nse.py
-├── experiments/       paper_checks.py (E5, E6), inference_checks.py (E2, E3), power_study.py (E4)
-├── results/           outputs of the experiments and the synthetic pipeline run (all synthetic)
+├── scripts/           run_pipeline.py (one command, all outputs), download_nse.py, fetch_minute_bars.py, validation checks
+├── experiments/       simulation experiments (E1 to E7) and real-data studies (real_day_level, momentum_gex, replicate_paper, pinning_study)
+├── results/           outputs; real-data folders are pipeline_nse, real_day_level, momentum_gex, replication_nse, pinning, data_validation
+├── notebooks/         real-data demo notebook
 ├── docs/              deep dive, literature review, math notes, experiment report, data guide
 ├── alternatives/      directions deliberately kept out of the main package
 ├── tests/             pytest suite
