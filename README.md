@@ -1,86 +1,96 @@
 # Nifty Expiry Gamma Exposure
 
-**Who is short gamma on Nifty expiry day?** This project builds a dealer gamma exposure (GEX) measure for Nifty 50 index options and tests whether it explains intraday momentum and volatility on expiry day, under SEBI's single weekly expiry regime.
+**Does option positioning help forecast Nifty expiry-day volatility?** This project rebuilds the volatility model from Chhimwal, Pandey and Pandey (2025) as an out-of-sample forecasting baseline, adds dealer gamma exposure (GEX) built from NSE option data, and tests whether positioning carries information the baseline misses, especially in the last hour of expiry day.
 
-> Status: early prototype. The research design is set, and the code is being built.
+> **Status (November 2026): working prototype, validated on synthetic data only.** Every engine is tested against closed forms or simulated data with known answers, and the full pipeline runs from NSE-format files to a forecast scoreboard. It has not yet been run on real market data, because the machine it was built on cannot reach NSE. No result in this repository is a real-market result. See [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) to run it on real data.
 
-## Motivation
+## Why this question
 
-Since 20 November 2024, SEBI allows each exchange only one weekly expiry on a benchmark index (circular SEBI/HO/MRD/TPD-1/P/CIR/2024/132). NSE kept Nifty 50 and dropped the other weeklies. Expiry-day activity is therefore concentrated in a single contract.
+Chhimwal, Pandey and Pandey (2025) show that after NSE gave Nifty and Bank Nifty different expiry days, each index became more volatile and more heavily traded on its own expiry day, and the two became less connected. They suggest unwinding and retail flows as causes but do not test them.
 
-Earlier work on NSE expiry days finds that volume and volatility rise on an index's own expiry day, and that spillovers between indices peak in the last trading hour (Chhimwal, Pandey and Pandey, 2025). That work documents the effect, but it does not test the mechanism behind it.
+A well-studied mechanism is option dealers' hedging. When dealers are net short gamma, hedging pushes the index further in the direction it is moving; when net long gamma, it pushes back (Ni, Pearson, Poteshman and White 2021; Baltussen, Da, Lammers and Martens 2021). Gamma is largest for near-the-money options close to expiry, so if the mechanism matters anywhere on Nifty, it should matter on expiry day. We found no peer-reviewed test of it on NSE options.
 
-The US literature points to one candidate: dealers' delta hedging of option positions. When dealers are net short gamma, their hedging trades go with the market and amplify moves. When they are net long gamma, their hedging trades go against the market and dampen moves (Baltussen, Da, Lammers and Martens, 2021; Dim, Eraker and Vilkov; Bandi, Fusari and Renò). We are not aware of a peer-reviewed study of this mechanism on Nifty.
+## What is in the box
 
-## Research questions
-
-1. **Sign:** Can the sign of dealer gamma on Nifty be identified from public NSE data, such as participant-wise open interest (Client, DII, FII, Pro)?
-2. **Momentum:** Does GEX predict last-hour returns on expiry day, conditional on the return earlier in the day?
-3. **Volatility:** Does GEX explain intraday volatility beyond the usual time-of-day pattern?
-4. **Regime:** Did these relationships change after the single weekly expiry rule took effect?
-
-## Method
-
-| Step | What | Notes |
+| Part | Module | Validated by |
 | --- | --- | --- |
-| 1 | Build GEX from the option chain | Sum of gamma times open interest times contract multiplier, signed by assumed dealer side. Report by strike and in aggregate. |
-| 2 | Participant-signed GEX | Use NSE participant-wise OI to sign positions instead of assuming dealers are short customer demand. |
-| 3 | Volatility baseline | Fit a multiplicative component GARCH (mcsGARCH; Engle and Sokalska, 2012) to 1-minute returns. Use its de-seasonalised residual as the target. |
-| 4 | Momentum test | Regress last-hour return on earlier intraday return, interacted with GEX sign and size. |
-| 5 | Event study | Compare the periods before and after 20 November 2024. |
-| 6 | Robustness | HAC or block-bootstrap inference, placebo non-expiry days, alternative signing rules. |
+| Black-76 prices, greeks (delta, gamma, vega, vanna, charm) and IV solver | `niftygex.greeks` | parity, finite differences, IV round trip on 5,000 options including expiry-day ones |
+| GEX per strike and net, under five sign rules; gamma flip; OI walls; max pain | `niftygex.gex` | hand formula, finite-difference definition of GEX, bounds |
+| Rogers-Satchell, realized variance, bipower variation, bulk volume classification | `niftygex.realized` | Brownian simulation |
+| mcsGARCH (the paper's model) with an optional expiry-day diurnal curve | `niftygex.volatility` | parameter recovery on simulated data, causality of forecasts |
+| Diebold-Yilmaz connectedness, block-bootstrap intervals | `niftygex.connectedness` | closed form, independent series, VAR recovery |
+| Day-level, HAC and bootstrap before/after tests | `niftygex.inference` | experiment E2 |
+| Expiry calendar (Thursday, then Tuesday from 1 Sep 2025) and regimes | `niftygex.expiry_calendar` | known dates, holiday roll-back |
+| NSE loaders (bhavcopy legacy and UDiFF, participant OI, minute bars, VIX) | `niftygex.data` | round trip through files in NSE layouts |
+| Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
+| Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-## Data
+28 tests, run with `pytest`.
 
-| Source | Use | Access |
-| --- | --- | --- |
-| NSE F&O bhavcopy | End-of-day option OI, prices, strikes | Free, daily download |
-| NSE participant-wise OI | Client, DII, FII, Pro positions | Free, daily CSV |
-| Nifty 50 1-minute bars | Intraday returns and volatility | Free or low cost vendors |
-| Intraday Nifty option chain | Intraday GEX | Main data risk. Fallback: end-of-day GEX applied to the next session. |
+## Documents
 
-Raw data is not committed. See [`data/README.md`](data/README.md).
+| Document | What it is |
+| --- | --- |
+| [RESEARCH_STRATEGY_PANDEY.md](RESEARCH_STRATEGY_PANDEY.md) | Research questions, hypotheses, decision tree, risks |
+| [PITCH_PANDEY.md](PITCH_PANDEY.md) | One-page pitch for Prof. Pandey |
+| [docs/PAPER_DEEP_DIVE.md](docs/PAPER_DEEP_DIVE.md) | Close reading of the 2025 paper, with checks of its published numbers |
+| [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md) | 34 verified references and what each means for the design |
+| [docs/math/](docs/math/) | Derivations: greeks and GEX, mcsGARCH, connectedness, inference, forecast evaluation |
+| [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md) | Every experiment, its question, its result and its limits |
+| [ITERATION_LOG.md](ITERATION_LOG.md) | What went wrong during the build and what changed |
+| [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) | How to get the real data, and checks for the first real files |
+| [alternatives/ALTERNATIVES.md](alternatives/ALTERNATIVES.md) | Trading layer, sequence model and other directions kept out of the main package |
 
-## Repository layout
-
-```
-.
-├── data/          raw and processed data (git-ignored)
-├── docs/          notes and write-ups
-├── notebooks/     exploratory analysis
-├── src/niftygex/  package code
-│   ├── data.py         loaders for NSE files and intraday bars
-│   ├── greeks.py       Black-76 gamma and implied volatility
-│   ├── gex.py          gamma exposure by strike and in aggregate
-│   └── volatility.py   mcsGARCH baseline
-└── tests/
-```
-
-## Getting started
+## Quick start
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
+pytest
+
+# Full pipeline on a synthetic market (about 15 minutes on 4 cores)
+python scripts/run_pipeline.py --source synthetic --days 500 --kappa 0.5
+
+# Paper checks and simulation experiments
+python experiments/paper_checks.py
+python experiments/inference_checks.py
+python experiments/power_study.py --reps 8 --days 500
+
+# Real data, once downloaded (see docs/DATA_ACQUISITION.md)
+python scripts/download_nse.py --start 2023-01-01 --end 2026-10-31 --out data/raw
+python scripts/run_pipeline.py --source nse --raw data/raw
 ```
 
-## Roadmap
+## Repository layout
 
-- [ ] Data loaders for bhavcopy and participant-wise OI
-- [ ] Black-76 gamma and end-of-day GEX by strike
-- [ ] GEX time series across the 20 Nov 2024 regime change
-- [ ] mcsGARCH baseline on 1-minute Nifty returns
-- [ ] Last-hour momentum regression conditional on GEX
-- [ ] Short write-up of first results
+```
+.
+├── src/niftygex/      package code (see table above)
+├── scripts/           run_pipeline.py (one command, all outputs), download_nse.py
+├── experiments/       paper_checks.py (E5, E6), inference_checks.py (E2, E3), power_study.py (E4)
+├── results/           outputs of the experiments and the synthetic pipeline run (all synthetic)
+├── docs/              deep dive, literature review, math notes, experiment report, data guide
+├── alternatives/      directions deliberately kept out of the main package
+├── tests/             pytest suite
+└── data/              raw and processed data (git-ignored)
+```
 
-## References
+## Data policy
 
-- Baltussen, G., Da, Z., Lammers, S. and Martens, M. (2021). Hedging demand and market intraday momentum. *Journal of Financial Economics*, 142(1), 377 to 403.
-- Bandi, F. M., Fusari, N. and Renò, R. 0DTE option pricing. Working paper.
-- Chhimwal, B., Pandey, V. and Pandey, P. (2025). Effect of multiple index derivative expiry on volatility, volume, and connectedness: a tale of two stock indices in India. *Review of Derivatives Research*, 28, 14. doi:10.1007/s11147-025-09221-8
-- Dim, C., Eraker, B. and Vilkov, G. 0DTEs: Trading, gamma risk and volatility propagation. Working paper.
-- Engle, R. F. and Sokalska, M. E. (2012). Forecasting intraday volatility in the US equity market: multiplicative component GARCH. *Journal of Financial Econometrics*, 10(1), 54 to 83.
-- SEBI (2024). Measures to strengthen equity index derivatives framework for increased investor protection and market stability. Circular SEBI/HO/MRD/TPD-1/P/CIR/2024/132, 1 October 2024.
+Raw vendor and NSE files are not committed. The 2025 paper is paywalled and is not in this repository; it is cited by DOI. Derived outputs (GEX panels, forecasts, scores) can be shared.
+
+## Key references
+
+Full list with verification status in [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md).
+
+- Chhimwal, B., Pandey, V. and Pandey, P. (2025). Effect of multiple index derivative expiry on volatility, volume, and connectedness: a tale of two stock indices in India. *Review of Derivatives Research*, 28(3), 14. doi:10.1007/s11147-025-09221-8
+- Engle, R. F. and Sokalska, M. E. (2012). Forecasting intraday volatility in the US equity market: multiplicative component GARCH. *Journal of Financial Econometrics*, 10(1), 54 to 83. doi:10.1093/jjfinec/nbr005
+- Ni, S. X., Pearson, N. D., Poteshman, A. M. and White, J. (2021). Does option trading have a pervasive impact on underlying stock prices? *Review of Financial Studies*, 34(4), 1952 to 1986. doi:10.1093/rfs/hhaa082
+- Baltussen, G., Da, Z., Lammers, S. and Martens, M. (2021). Hedging demand and market intraday momentum. *Journal of Financial Economics*, 142(1), 377 to 403. doi:10.1016/j.jfineco.2021.04.029
+- Dim, C., Eraker, B. and Vilkov, G. (2024). 0DTEs: Trading, gamma risk and volatility propagation. Working paper, SSRN 4692190.
+- Diebold, F. X. and Yilmaz, K. (2012). Better to give than to receive. *International Journal of Forecasting*, 28(1), 57 to 66. doi:10.1016/j.ijforecast.2011.02.006
+- Patton, A. J. (2011). Volatility forecast comparison using imperfect volatility proxies. *Journal of Econometrics*, 160(1), 246 to 256. doi:10.1016/j.jeconom.2010.03.034
 
 ## Author
 

@@ -27,7 +27,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 M = 375
 
 
-def fast_days(rng, D, scale=1.0, rho2=None, k=8):
+def fast_days(rng, D, scale=1.0, rho2=None, k=8, phi=0.9, day_mult=None):
     """Vectorised minute bars for D days: returns RS variance and volume (D x M).
 
     Daily log-variance follows a stationary AR(1) (phi 0.9), the diurnal curve
@@ -35,11 +35,13 @@ def fast_days(rng, D, scale=1.0, rho2=None, k=8):
     the variance (used for the power runs). With ``rho2`` a second, correlated
     index is generated as well (for E3).
     """
-    phi, sd = 0.9, 0.35
+    sd = 0.35
     lv = np.empty(D)
     lv[0] = rng.normal(0, sd)
     for t in range(1, D):
         lv[t] = phi * lv[t - 1] + rng.normal(0, sd * np.sqrt(1 - phi**2))
+    if day_mult is not None:
+        lv = lv + np.log(day_mult)
     i = np.arange(M)
     s = 1 + 2.5 * np.exp(-i / 15) + 0.7 * np.exp(-(M - 1 - i) / 25)
     s = s / s.mean()
@@ -71,31 +73,70 @@ def fast_days(rng, D, scale=1.0, rho2=None, k=8):
 
 
 def e2(reps: int, seed: int = 0):
+    """Two scenarios.
+
+    A. Days independent (no persistence in the daily volatility level).
+       Isolates the within-day dependence problem: 64 vs 59 days, all minutes.
+    B. Daily volatility level persistent (AR(1), phi 0.9), every fifth day an
+       expiry day with 30% higher variance. Compares expiry days only
+       (13 vs 12 weeks), like the paper's Thursday comparison. Adds a
+       difference-in-differences test: per week, log(median RS on expiry day)
+       minus log(median RS on the other four days), then compare weeks across
+       periods. The alternative raises the expiry-day effect after the change.
+    """
     rng = np.random.default_rng(seed)
     rows = []
-    designs = {"all days (64 vs 59)": (64, 59), "one weekday (13 vs 12)": (13, 12)}
-    for dname, (d1, d2) in designs.items():
-        for effect in (1.0, 1.10, 1.25):
-            for r in range(reps):
-                b = fast_days(rng, d1)
-                a = fast_days(rng, d2, scale=effect)
-                for var in ("rs0", "volume"):
-                    x, y = b[var], a[var]
-                    if var == "volume" and effect != 1.0:
-                        y = y * effect ** 0.5
-                    res = {
-                        "minute_mwu": inference.minute_level_mwu(x, y)["p"],
-                        "day_mwu": inference.day_level_mwu(x, y)["p"],
-                        "hac_log": inference.hac_mean_difference(np.maximum(x, 1e-20), np.maximum(y, 1e-20))["p"],
-                    }
-                    if var == "rs0" and r < min(reps, 200):
-                        res["day_bootstrap"] = inference.day_cluster_bootstrap(x, y, n_boot=300, seed=r)["p"]
-                    for test, p in res.items():
-                        rows.append({"design": dname, "variance_ratio": effect, "variable": var, "rep": r, "test": test, "p": p})
+
+    def record(scn, design, effect, var, r, res):
+        for test, p in res.items():
+            rows.append({"scenario": scn, "design": design, "variance_ratio": effect, "variable": var,
+                         "rep": r, "test": test, "p": p})
+
+    # Scenario A
+    for effect in (1.0, 1.10, 1.25):
+        for r in range(reps):
+            b = fast_days(rng, 64, phi=0.0)
+            a = fast_days(rng, 59, scale=effect, phi=0.0)
+            for var in ("rs0", "volume"):
+                x, y = b[var], a[var]
+                res = {
+                    "minute_mwu": inference.minute_level_mwu(x, y)["p"],
+                    "day_mwu": inference.day_level_mwu(x, y)["p"],
+                    "hac_log": inference.hac_mean_difference(np.maximum(x, 1e-20), np.maximum(y, 1e-20))["p"],
+                }
+                if var == "rs0" and r < min(reps, 150):
+                    res["day_bootstrap"] = inference.day_cluster_bootstrap(x, y, n_boot=200, seed=r)["p"]
+                record("A: independent days", "all days 64 vs 59", effect, var, r, res)
+
+    # Scenario B
+    from scipy.stats import mannwhitneyu, ttest_ind
+
+    def weeks(n_weeks, exp_scale):
+        mult = np.ones(5 * n_weeks)
+        mult[4::5] = 1.3 * exp_scale
+        d = fast_days(rng, 5 * n_weeks, phi=0.9, day_mult=mult)
+        rs = d["rs0"].reshape(n_weeks, 5, M)
+        exp_days = rs[:, 4, :]
+        med = np.median(rs, axis=2)
+        did = np.log(med[:, 4]) - np.log(med[:, :4].mean(axis=1))
+        return exp_days, did
+
+    for effect in (1.0, 1.10, 1.25):
+        for r in range(reps):
+            xb, db = weeks(13, 1.0)
+            xa, da = weeks(12, effect)
+            res = {
+                "minute_mwu": inference.minute_level_mwu(xb, xa)["p"],
+                "day_mwu": inference.day_level_mwu(xb, xa)["p"],
+                "did_mwu_weeks": float(mannwhitneyu(db, da, alternative="two-sided").pvalue),
+                "did_welch_t_weeks": float(ttest_ind(db, da, equal_var=False).pvalue),
+            }
+            record("B: persistent days", "expiry days 13 vs 12", effect, "rs0", r, res)
+
     df = pd.DataFrame(rows)
     df.to_csv(OUT / "e2_tests_raw.csv", index=False)
     summ = (df.assign(reject=df["p"] < 0.05)
-              .groupby(["design", "variable", "variance_ratio", "test"])["reject"]
+              .groupby(["scenario", "design", "variable", "variance_ratio", "test"])["reject"]
               .agg(["mean", "count"]).rename(columns={"mean": "rejection_rate_5pct", "count": "reps"}))
     summ["mc_se"] = np.sqrt(summ["rejection_rate_5pct"] * (1 - summ["rejection_rate_5pct"]) / summ["reps"])
     summ.to_csv(OUT / "e2_size_power.csv")
@@ -149,16 +190,6 @@ def cross_share_example():
     return df
 
 
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--reps", type=int, default=400)
-    a = ap.parse_args()
-    pd.set_option("display.width", 200)
-    print(cross_share_example().to_string())
-    print(e3().to_string())
-    print(e2(a.reps).to_string())
-
-
 def e3b_sampling_distribution(reps: int = 500, seed: int = 2):
     """Monte Carlo sampling spread of the DY total when the true total is near the paper's level.
 
@@ -190,3 +221,14 @@ def e3b_sampling_distribution(reps: int = 500, seed: int = 2):
     df = pd.DataFrame(rows)
     df.to_csv(OUT / "e3b_sampling_distribution.csv", index=False)
     return df
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--reps", type=int, default=400)
+    a = ap.parse_args()
+    pd.set_option("display.width", 200)
+    print(cross_share_example().to_string())
+    print(e3().to_string())
+    print(e3b_sampling_distribution(reps=400).to_string())
+    print(e2(a.reps).to_string())

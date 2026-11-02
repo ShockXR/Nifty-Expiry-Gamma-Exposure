@@ -1,0 +1,2 @@
+[SYNTHETIC (simulated market, not real data)] 500 days loaded
+next15: 8750 test anchors

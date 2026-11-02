@@ -36,14 +36,19 @@ from scipy.special import gammaln
 # ---------------------------------------------------------------------------
 
 
-def _ewma_variance(y, lam=0.94):
-    """One-step-ahead EWMA variance (RiskMetrics), used as a fallback."""
+def _ewma_variance(y, lam=0.94, n_init=None):
+    """One-step-ahead EWMA variance (RiskMetrics), used as a fallback.
+
+    Started at the mean square of the first ``n_init`` observations and
+    floored at 1% of the overall mean square, so it is never zero.
+    """
     y = np.asarray(y, float)
+    ms = float(np.mean(y**2)) or 1e-20
     h = np.empty_like(y)
-    h[0] = np.var(y[: min(len(y), 20)])
+    h[0] = float(np.mean(y[: n_init or min(len(y), 20)] ** 2)) or ms
     for t in range(1, len(y)):
         h[t] = lam * h[t - 1] + (1 - lam) * y[t - 1] ** 2
-    return h
+    return np.maximum(h, 0.01 * ms)
 
 
 def _egarch_ok(params, h, y_train) -> bool:
@@ -94,7 +99,7 @@ def daily_egarch_variance(
                 return h / scale**2, {"method": f"egarch_{d}", "params": res.params}
         except Exception:  # noqa: BLE001 - any optimiser failure falls through to the next option
             pass
-    h = _ewma_variance(y)
+    h = _ewma_variance(y, n_init=n)
     return h / scale**2, {"method": "ewma", "params": None}
 
 
