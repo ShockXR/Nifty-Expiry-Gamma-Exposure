@@ -6,9 +6,10 @@ Research 28(3). Every number this script writes is computed from REAL DATA:
 third-party 1-minute Nifty 50 and Bank Nifty bars (data/raw/*_1min.csv),
 validated here against NSE's official daily index values, plus NSE's daily
 F&O bhavcopy. The paper's printed values appear only in columns named
-``paper_printed`` (comparison targets typed in from its tables).
+``paper_printed`` (comparison targets typed in by hand from its tables;
+not yet re-keyed by a second person, see the note above ``P_T1``).
 
-Usage (about 5 to 10 minutes on 4 cores):
+Usage (about 3 minutes on 4 cores):
 
     OMP_NUM_THREADS=1 python experiments/replicate_paper.py
     OMP_NUM_THREADS=1 python experiments/replicate_paper.py --trim 375_full   # other session rule as primary
@@ -75,6 +76,11 @@ PAPER_WEEKDAY_DAYS = {("before", "wed"): 13, ("before", "thu"): 13, ("after", "w
 # ---------------------------------------------------------------------------
 # Paper (printed) comparison targets
 # ---------------------------------------------------------------------------
+# These values were typed in BY HAND from the paper's tables and have not been
+# checked by a second person. Before anything is sent to the authors, someone
+# should re-key every value below against the PDF (with page and table
+# references) and compare. Until then, any "printed slip" this script flags
+# (paper_printed_checks.csv) could also be a transcription slip of ours.
 
 P_T1 = {
     ("before", "nifty"): dict(n=23039, mean=-0.000001, sd=0.000360947, min=-0.008584649, max=0.006221108, skew=-0.524960403, excess_kurtosis=64.74526352, anderson_darling=649.191, adf=-23.05),
@@ -377,6 +383,76 @@ def table1(G: dict, periods: dict, full: bool) -> pd.DataFrame:
         rows.append({"data": LABEL, "period": p, "index": "both", "statistic": "correlation",
                      "ours": np.corrcoef(a[ok], b[ok])[0, 1], "paper_printed": P_T1_CORR[side]})
     return pd.DataFrame(rows)
+
+
+def _decimals(x: float) -> int:
+    """Number of decimals a printed value carries (0.009408 -> 6)."""
+    txt = f"{x!r}"
+    return len(txt.split(".")[1]) if "." in txt else 0
+
+
+def overnight_variants(bars: dict, G: dict, off: pd.DataFrame, periods: dict):
+    """Table 1 extremes when the overnight gap in the first minute is measured from other reference prices.
+
+    Variants for the previous day's reference price: the close of the last bar of the
+    trimmed session (the main rule), NSE's official close, the close of the 15:29 bar,
+    and the open of the 15:15 bar (the price at 15:15:00). Also returns, for every
+    first-minute extreme, the reference price that would reproduce the printed value
+    exactly, next to the candidate prices in our data.
+    """
+    full = {k: rp.minute_grid(bars[k], "375_full", days=G["days"]) for k in INDICES}
+    i1515 = full["nifty"]["minutes"].index("15:15")
+
+    def last_valid(a):
+        return np.array([row[np.isfinite(row)][-1] if np.isfinite(row).any() else np.nan for row in a])
+
+    refs = {}
+    for k in INDICES:
+        offc = off[off["key"] == k].drop_duplicates("date").set_index("date")["close"].reindex(G["days"]).to_numpy(float)
+        refs[k] = {"last_bar_close (main)": last_valid(G[k]["close"]), "nse_official_close": offc,
+                   "bar_1529_close": last_valid(full[k]["close"]), "bar_1515_open": full[k]["open"][:, i1515]}
+    rows, implied = [], []
+    for k in INDICES:
+        lc = np.log(G[k]["close"])
+        for name, ref in refs[k].items():
+            r = rp.continuous_log_returns(G[k]["close"], prev_ref=ref) if name != "last_bar_close (main)" else G[k]["r"]
+            for p, days in periods.items():
+                side = "after" if p == "after" else "before"
+                t = P_T1[(side, k)]
+                rr = period_rows(G, days)
+                R = r[rr].copy()
+                R[0, 0] = np.nan
+                st = describe(R.ravel(), full=False)
+                flat = np.where(np.isfinite(R), R, np.nan)
+                loc = {}
+                for s_, fn in (("min", np.nanargmin), ("max", np.nanargmax)):
+                    i, j = divmod(int(fn(flat)), R.shape[1])
+                    loc[s_] = (G["days"][rr[i]], G["minutes"][j], rr[i], j)
+                rec = {"data": LABEL, "reference_for_overnight_gap": name, "period": p, "index": k, "n": st["n"],
+                       "sd": st["sd"], "min": st["min"], "min_at": f"{loc['min'][0]:%Y-%m-%d} {loc['min'][1]}",
+                       "max": st["max"], "max_at": f"{loc['max'][0]:%Y-%m-%d} {loc['max'][1]}",
+                       "excess_kurtosis": st["excess_kurtosis"], "fingerprint_score": fingerprint_score(st, t),
+                       "paper_printed_sd": t["sd"], "paper_printed_min": t["min"], "paper_printed_max": t["max"],
+                       "paper_printed_excess_kurtosis": t["excess_kurtosis"]}
+                for s_ in ("min", "max"):
+                    rec[f"{s_}_equals_printed_to_printed_digits"] = bool(round(st[s_], _decimals(t[s_])) == t[s_])
+                rows.append(rec)
+                if name != "last_bar_close (main)" or p == "before_stated":
+                    continue
+                for s_ in ("min", "max"):
+                    d, m, i, j = loc[s_]
+                    if j != 0 or i == 0:
+                        continue
+                    first_close = G[k]["close"][i, 0]
+                    rec2 = {"data": LABEL, "period": p, "index": k, "statistic": s_, "bar": f"{d:%Y-%m-%d} {m}",
+                            "our_first_bar_close": first_close, "paper_printed_value": t[s_], "printed_decimals": _decimals(t[s_]),
+                            "implied_previous_reference": first_close * np.exp(-t[s_]),
+                            "implied_reference_precision_points": first_close * 0.5 * 10.0 ** -_decimals(t[s_])}
+                    for nm, ref in refs[k].items():
+                        rec2[f"prev_day_{nm.split(' ')[0]}"] = ref[i - 1]
+                        rec2[f"implied_minus_{nm.split(' ')[0]}"] = rec2["implied_previous_reference"] - ref[i - 1]
+                    implied.append(rec2)
+    return pd.DataFrame(rows), pd.DataFrame(implied)
 
 
 # ---------------------------------------------------------------------------
@@ -951,7 +1027,9 @@ def printed_checks() -> pd.DataFrame:
                              "value": p, "compare_with": pv, "implied_prob_before_gt_after": auc, "statistic_in_possible_range": in_range,
                              "p_matches": p_ok, "direction_matches_medians": direction_ok,
                              "consistent": bool(in_range and p_ok)})
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows)
+    out["caveat"] = "printed values typed in by hand and not yet re-keyed by a second person; an inconsistency may be a transcription slip"
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -1043,7 +1121,7 @@ def main():
     pd.set_option("display.max_colwidth", 60)
 
     print(f"Replication of Chhimwal, Pandey and Pandey (2025) on {LABEL}.")
-    print("Numbers labelled paper_printed are the paper's printed values, typed in as comparison targets.")
+    print("Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets (not yet re-keyed by a second person).")
     print(f"Primary session rule: {a.trim} {rp.SESSION_RULES[a.trim]}; bootstrap draws: persistence {n_pboot}, connectedness {n_cboot}, medians {n_dboot}.")
 
     # ---------------- data
@@ -1139,6 +1217,18 @@ def main():
     print(t1.pivot_table(index="statistic", columns=["period", "index"], values="ours", sort=False).to_string(float_format=lambda v: f"{v:.6g}"))
     print("paper (printed):")
     print(t1[t1["period"] != "before_stated"].pivot_table(index="statistic", columns=["period", "index"], values="paper_printed", sort=False).to_string(float_format=lambda v: f"{v:.6g}"))
+
+    print("\nWhich price does the overnight gap start from? Table 1 extremes with four reference prices for the first minute:")
+    ov, imp = overnight_variants(bars, G, off, periods)
+    ov.to_csv(OUT / "table1_overnight_variants.csv", index=False, float_format="%.9g")
+    imp.to_csv(OUT / "table1_implied_reference_price.csv", index=False, float_format="%.9g")
+    print(fmt(ov[ov["period"] != "before_stated"], ["reference_for_overnight_gap", "period", "index", "min", "min_at", "paper_printed_min",
+                                                   "min_equals_printed_to_printed_digits", "max", "max_at", "paper_printed_max",
+                                                   "max_equals_printed_to_printed_digits", "fingerprint_score"]))
+    print("For each extreme that sits in a first minute: the previous-day reference price that reproduces the printed value exactly,")
+    print("and how far it is (in index points) from each candidate price in our data:")
+    print(fmt(imp, ["period", "index", "statistic", "bar", "implied_previous_reference", "implied_reference_precision_points",
+                    "implied_minus_last_bar_close", "implied_minus_nse_official_close", "implied_minus_bar_1529_close", "implied_minus_bar_1515_open"]))
     note(f"table 1 done {time.time() - t0:.0f}s")
 
     # ---------------- Table 2

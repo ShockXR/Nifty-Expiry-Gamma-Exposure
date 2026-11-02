@@ -42,6 +42,11 @@ def test_continuous_returns_put_overnight_gap_in_first_minute():
     assert np.isfinite(r).sum() == 4
     r2 = rp.continuous_log_returns(close, overnight=False)
     assert np.isnan(r2[:, 0]).all()
+    # another reference price for the overnight gap (for example NSE's official close) changes only minute 1
+    r3 = rp.continuous_log_returns(close, prev_ref=np.array([103.0, 999.0]))
+    assert np.isclose(r3[1, 0], np.log(105 / 103))
+    assert np.isnan(r3[0, 0])
+    assert np.allclose(r3[:, 1:], r[:, 1:], equal_nan=True)
 
 
 def test_minute_grid_marks_missing_bars():

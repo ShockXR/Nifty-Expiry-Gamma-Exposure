@@ -89,7 +89,7 @@ def minute_grid(bars: pd.DataFrame, rule: str, days=None) -> dict:
     return out
 
 
-def continuous_log_returns(close: np.ndarray, overnight: bool = True) -> np.ndarray:
+def continuous_log_returns(close: np.ndarray, overnight: bool = True, prev_ref=None) -> np.ndarray:
     """1-minute log returns on a (days x minutes) close grid, read row by row.
 
     The first minute of each day is measured from the previous day's last
@@ -97,6 +97,10 @@ def continuous_log_returns(close: np.ndarray, overnight: bool = True) -> np.ndar
     23,039 count implies). The very first return is NaN. A missing bar gives a
     NaN return and the next return spans the gap. With ``overnight=False`` the
     first minute of every day is set to NaN instead.
+
+    ``prev_ref`` (one price per row) replaces the previous row's last bar
+    close as the reference for each day's first minute, for example NSE's
+    official close: the first minute of row d is log(close[d, 0] / prev_ref[d - 1]).
     """
     lc = np.log(np.asarray(close, float))
     flat = lc.ravel()
@@ -105,6 +109,9 @@ def continuous_log_returns(close: np.ndarray, overnight: bool = True) -> np.ndar
     r[1:] = filled[1:] - filled[:-1]
     r[~np.isfinite(flat)] = np.nan
     r = r.reshape(lc.shape)
+    if prev_ref is not None:
+        ref = np.log(np.asarray(prev_ref, float))
+        r[1:, 0] = lc[1:, 0] - ref[:-1]
     if not overnight:
         r[:, 0] = np.nan
     return r

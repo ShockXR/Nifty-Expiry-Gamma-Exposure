@@ -1,5 +1,5 @@
 Replication of Chhimwal, Pandey and Pandey (2025) on REAL DATA (third-party 1-minute bars validated against NSE official daily values).
-Numbers labelled paper_printed are the paper's printed values, typed in as comparison targets.
+Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets (not yet re-keyed by a second person).
 Primary session rule: 360_drop_last15 ('09:15', '15:14'); bootstrap draws: persistence 400, connectedness 300, medians 2000.
 
 ====================================================================================================
@@ -92,6 +92,35 @@ excess_kurtosis          64.7453     125.112   NaN     75.88      57.3   NaN
 anderson_darling         649.191     790.061   NaN   492.399   466.153   NaN
 adf                       -23.05    -20.6926   NaN  -29.6261  -145.613   NaN
 correlation                  NaN         NaN 0.854       NaN       NaN 0.818
+
+Which price does the overnight gap start from? Table 1 extremes with four reference prices for the first minute:
+reference_for_overnight_gap          period     index         min           min_at  paper_printed_min  min_equals_printed_to_printed_digits        max           max_at  paper_printed_max  max_equals_printed_to_printed_digits  fingerprint_score
+      last_bar_close (main) before_inferred     nifty -0.00853355 2023-01-30 09:15        -0.00858465                                 False 0.00622111 2023-01-30 09:20         0.00622111                                  True          0.0281523
+      last_bar_close (main)           after     nifty -0.00708607 2024-04-19 09:15          -0.007086                                  True 0.00940825 2024-04-01 09:15           0.009408                                  True        0.000912646
+         nse_official_close before_inferred     nifty  -0.0081218 2023-01-30 09:15        -0.00858465                                 False 0.00706079 2023-02-01 09:15         0.00622111                                 False           0.268632
+         nse_official_close           after     nifty    -0.00846 2024-04-19 09:15          -0.007086                                 False 0.00758366 2024-03-21 09:15           0.009408                                 False           0.468661
+             bar_1529_close before_inferred     nifty -0.00832344 2023-01-30 09:15        -0.00858465                                 False 0.00651105 2023-02-03 09:15         0.00622111                                 False           0.229395
+             bar_1529_close           after     nifty   -0.010726 2024-04-19 09:15          -0.007086                                 False  0.0068513 2024-03-21 09:15           0.009408                                 False             0.9391
+              bar_1515_open before_inferred     nifty -0.00858465 2023-01-30 09:15        -0.00858465                                  True 0.00622111 2023-01-30 09:20         0.00622111                                  True          0.0136715
+              bar_1515_open           after     nifty -0.00710428 2024-04-19 09:15          -0.007086                                 False 0.00934987 2024-04-01 09:15           0.009408                                 False          0.0112408
+      last_bar_close (main) before_inferred banknifty  -0.0171353 2023-01-30 09:15         -0.0172567                                 False  0.0120234 2023-02-03 09:15          0.0120234                                  True          0.0165713
+      last_bar_close (main)           after banknifty -0.00869898 2024-04-16 09:15          -0.008699                                  True 0.00990472 2024-04-01 09:15           0.009905                                  True          0.0115477
+         nse_official_close before_inferred banknifty  -0.0167574 2023-01-30 09:15         -0.0172567                                 False  0.0116632 2023-02-01 14:52          0.0120234                                 False           0.110239
+         nse_official_close           after banknifty -0.00920208 2024-04-19 09:15          -0.008699                                 False 0.00911278 2024-03-21 09:15           0.009905                                 False           0.170679
+             bar_1529_close before_inferred banknifty   -0.017253 2023-01-30 09:15         -0.0172567                                 False  0.0116632 2023-02-01 14:52          0.0120234                                 False          0.0596381
+             bar_1529_close           after banknifty  -0.0105258 2024-04-19 09:15          -0.008699                                 False 0.00783313 2024-03-21 09:15           0.009905                                 False           0.561536
+              bar_1515_open before_inferred banknifty  -0.0172567 2023-01-30 09:15         -0.0172567                                  True  0.0120985 2023-02-03 09:15          0.0120234                                 False          0.0252889
+              bar_1515_open           after banknifty -0.00874608 2024-04-16 09:15          -0.008699                                 False  0.0098707 2024-04-01 09:15           0.009905                                 False          0.0227675
+For each extreme that sits in a first minute: the previous-day reference price that reproduces the printed value exactly,
+and how far it is (in index points) from each candidate price in our data:
+         period     index statistic              bar  implied_previous_reference  implied_reference_precision_points  implied_minus_last_bar_close  implied_minus_nse_official_close  implied_minus_bar_1529_close  implied_minus_bar_1515_open
+before_inferred     nifty       min 2023-01-30 09:15                     17612.5                         8.73098e-06                      0.899996                              8.15                           4.6                 -3.53521e-06
+          after     nifty       min 2024-04-19 09:15                     21965.6                           0.0109053                   -0.00157797                          -30.2016                      -80.1016                    -0.401578
+          after     nifty       max 2024-04-01 09:15                     22268.9                           0.0112397                     0.0055234                          -57.9945                      -74.1945                     -1.29448
+before_inferred banknifty       min 2023-01-30 09:15                     40365.4                         1.98374e-05                       4.89999                             20.15                      0.149985                 -1.49298e-05
+before_inferred banknifty       max 2023-02-03 09:15                     40645.6                         2.05686e-05                   7.26897e-07                             -23.7                         -76.8                         3.05
+          after banknifty       min 2024-04-16 09:15                     47770.2                           0.0236782                   0.000758344                          -3.04924                       12.8508                     -2.24924
+          after banknifty       max 2024-04-01 09:15                     47036.7                           0.0237525                    -0.0133797                          -87.9134                      -110.063                     -1.61338
 
 ====================================================================================================
 Table 2. ARMA(1,1)-mcsGARCH(1,1)-t on 1-minute returns (daily variance from AR(1)-EGARCH(1,1)-t)
@@ -398,4 +427,4 @@ Table 6 all banknifty      False    False                      True     True
         wed banknifty      False    False                     False    False
         wed nifty          False    False                      True     True
 
-Wrote 20 CSV files and 2 figures to results/replication_nse/.
+Wrote 22 CSV files and 2 figures to results/replication_nse/.

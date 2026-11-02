@@ -2,18 +2,18 @@
 
 Paper: B. Chhimwal, V. Pandey and P. Pandey (2025), "Effect of multiple index derivative expiry on volatility, volume, and connectedness: a tale of two stock indices in India", *Review of Derivatives Research* 28(3), article 14.
 
-**Every number in this note is REAL DATA** (third-party 1-minute Nifty 50 and Bank Nifty bars, validated against NSE's official daily index values, plus NSE's official F&O bhavcopy), unless it is marked **paper (printed)**. Printed values are typed in from the paper's tables only so that we can compare. Every one of our numbers comes from a file written by `experiments/replicate_paper.py` into `results/replication_nse/` (the file is named next to each table) or into `results/replication_nse_stdout.txt`.
+**Every number in this note is REAL DATA** (third-party 1-minute Nifty 50 and Bank Nifty bars, validated against NSE's official daily index values, plus NSE's official F&O bhavcopy), unless it is marked **paper (printed)**. Printed values are typed in by hand from the paper's tables, only so that we can compare. They have not yet been checked by a second person: before anything is sent to the authors, someone should re-key every printed value in `experiments/replicate_paper.py` (`P_T1` to `P_T6`) against the PDF, with page and table references. Every one of our numbers comes from a file written by `experiments/replicate_paper.py` into `results/replication_nse/` (the file is named next to each table) or into `results/replication_nse_stdout.txt`.
 
 ## Findings
 
 1. **The "after" sample (March to May 2024) replicates very closely.** With 360 minutes a day (09:15 to 15:14) and 1-minute log returns that carry the overnight gap in the first minute, we get exactly the paper's 21,239 Nifty returns. Our minimum, maximum and standard deviation match Table 1 to the printed digits. The mcsGARCH fit for Nifty gives alpha 0.0498, beta 0.9407 and log-likelihood 145,058 (paper (printed): 0.049363, 0.941048 and 145,063).
 2. **The "before" sample, as the paper describes it (November 2023 to February 2024), does not replicate.** It has 82 trading days, not 64, and its return extremes, kurtosis and mcsGARCH estimates are far from Tables 1 and 2.
-3. **A 64-day window from 14 November 2022 to 10 February 2023 matches the paper's "before" numbers.** We found it by scoring every 64-day window from July 2022 to February 2024 against Table 1. The paper's two "before" maxima equal returns in our data at 30 January 2023, 09:20 (Nifty) and 3 February 2023, 09:15 (Bank Nifty), to every printed decimal. Numbers not used in the search also agree: the ADF and Anderson-Darling statistics, the Table 2 volatility parameters (within ordinary sampling noise), and the volume changes in Table 5. **So our main question for Prof. Pandey is whether the "before" sample was November 2022 to February 2023.** If it was, both indices expired on Thursdays (weekly and monthly) in the "before" period. That fits Table 3's description of the two indices having "the same expiry structure".
+3. **A 64-day window from 14 November 2022 to 10 February 2023 matches the paper's "before" numbers.** We found it by scoring every 64-day window from July 2022 to February 2024 against Table 1. The paper's two "before" maxima equal returns in our data at 30 January 2023, 09:20 (Nifty) and 3 February 2023, 09:15 (Bank Nifty), to every printed decimal. The two "before" minima do not match exactly: ours are 0.5 and 1.2 basis points less negative, both in the 09:15 bar of 30 January 2023 (Section 4 traces this to one bar of data). The window's weekday counts also differ from the printed ones (Section 3). Numbers not used in the search agree: the ADF and Anderson-Darling statistics, the Table 2 volatility parameters (within ordinary sampling noise), and the volume changes in Table 5. **So our main question for Prof. Pandey is whether the "before" sample was November 2022 to February 2023.** If it was, both indices expired on Thursdays (weekly and monthly) in the "before" period. That fits Table 3's description of the two indices having "the same expiry structure".
 4. **Intraday volatility shocks die out much faster after the change, but the size of the change is uncertain.** On the inferred window, the half-life of a shock falls from 359 to 72 minutes for Nifty (paper (printed) parameters imply 339 to 72) and from 162 to 38 minutes for Bank Nifty (printed: 185 to 40). The "before" half-lives are imprecise (Nifty 95% interval 197 to 1,255 minutes). The fall in persistence is clear for Nifty in every test. For Bank Nifty it is clear in a likelihood-ratio test, but its bootstrap interval just includes zero.
 5. **Connectedness: the overall fall replicates, the hour-by-hour numbers do not.** On all expiry days, total connectedness falls from 87.9 (before) to 74.9 (Nifty expiry days) and 68.9 (Bank Nifty expiry days) on the paper's scale (paper (printed): 84.00 to 76.38 and 73.02). Both falls are clear in our bootstrap. The first-hour and last-hour totals of 99.42 and 105.22 in Table 3 are outside everything our 40-configuration grid produces. Each hour sub-sample has only three or four hours of data, and the results depend strongly on choices the paper does not report.
 6. **Volume (Table 5) cannot be replicated minute by minute**, because no free minute volume exists for this period. NSE's official daily constituent volume for each index gives changes close to the paper's: Nifty +41% overall and +68% on Thursdays (printed medians imply +33% and +65%), Bank Nifty -11% (printed: -13%). The Nifty results survive day-level tests. The Bank Nifty fall does not survive them.
 7. **Volatility (Table 6): the Nifty findings survive robust tests, most others do not.** Nifty volatility rose overall and on Thursdays, and both survive day-level tests. Thursday also stands out from the rest of its own week more than before. The paper's Bank Nifty finding (higher volatility on Wednesday, its new expiry day) is +16% in our data, but day-level tests do not find it significant and the week-relative test finds nothing special about Wednesday. The paper's minute-level test gives p-values as small as 10^-256 in our data, which shows why minute-level tests should not be trusted here.
-8. **A few printed numbers look like typesetting slips** (Section 8). One example: Table 4's first-hour Nifty rows sum to 101.
+8. **A few printed numbers look like typesetting slips** (Section 8). One example: Table 4's first-hour Nifty rows sum to 101. Because we typed the printed values in by hand, some of these could also be our own transcription slips, so they should be re-checked against the PDF first.
 9. **Two small bugs in `src/niftygex/volatility.py`** were found, worked around here, and then fixed in the package (Section 10).
 
 ## 1. What we did, in plain words
@@ -77,6 +77,8 @@ Other data notes: the Nifty minute file lacks the 24 October 2022 evening Muhura
 
 The paper's counts (23,039 and 21,239 returns; 4,680 and 4,320 Wednesday minutes) are 64 and 59 days of 360 minutes, less one return. The after sample gives exactly 59 days. The stated before sample gives 82.
 
+**The weekday counts do not match, even on the inferred window.** The inferred window has 13 Wednesdays and 12 Thursdays, where the paper's Tables 5 and 6 imply 13 and 13. The after window has 11 Wednesdays and 12 Thursdays, where the paper implies 12 and 13. Holidays explain our counts: Thursday 26 January 2023, Thursday 11 April 2024, and Wednesdays 17 April and 1 May 2024 had no trading. The printed Thursday counts (13 and 13) equal our Nifty expiry-day counts in both windows, which include the expiries moved to Wednesday 25 January 2023 and Wednesday 10 April 2024. So the paper's "Thursday" rows may be Nifty expiry days. We found no reading that gives 12 Wednesdays after the change (there are 11 Wednesdays and 13 Bank Nifty expiry days).
+
 **Which 360 minutes** (`session_rule_inference.csv`). We scored each rule on how closely the standard deviation, minimum, maximum and kurtosis match Table 1 (0 is a perfect match). For the after sample:
 
 | Session rule | Overnight gap in first minute | Nifty score | Bank Nifty score |
@@ -88,7 +90,17 @@ The paper's counts (23,039 and 21,239 returns; 4,680 and 4,320 Wednesday minutes
 
 So the paper most likely used the 360 bars from 09:15 to 15:14, with returns computed straight through from one day to the next. We use that as our main rule and report the other rules as a sensitivity check (`sensitivity_session_rule.csv`). The paper's kurtosis is excess kurtosis (normal = 0).
 
-**Which before window** (`fingerprint_search.csv`). The best of 348 windows of 64 trading days is 14 November 2022 to 10 February 2023 (score 0.045). Its neighbours a few days earlier or later score almost as well. The best window starting on or after 1 November 2023 ranks 217th (score 6.21). Because this window was chosen to fit Table 1, Table 1 is not an independent check of it. Tables 2 and 5 and the ADF and Anderson-Darling columns of Table 1 are.
+**Which before window** (`fingerprint_search.csv`). The best of 348 windows of 64 trading days is 14 November 2022 to 10 February 2023 (score 0.045). Its neighbours a few days earlier or later score almost as well. The best window starting on or after 1 November 2023 ranks 217th (score 6.21). Because this window was chosen to fit Table 1's standard deviation, minimum, maximum and kurtosis, those four numbers are not an independent check of it.
+
+**How well do the checks that were not used in the search match?** One line per table. Each line gives the inferred window, then the printed value, then the stated window for contrast.
+
+* **Table 1, other columns** (`table1_descriptive.csv`). ADF: -23.12 and -20.87 against printed -23.05 and -20.69, within 1% (stated window: -44.56 and -49.72). Anderson-Darling: 660.5 and 822.5 against 649.2 and 790.1, within 2% and 4% (stated: 1,004.8 and 1,133.2). Skewness: Nifty -0.57 against -0.52, but Bank Nifty -1.11 against -1.36 (stated: 3.19 and -2.68). Correlation: 0.853 against 0.854 (stated: 0.837).
+* **Table 2** (`table2_mcsgarch.csv`, `table2_persistence.csv`). Alpha, beta and shape are close: Nifty 0.0246, 0.9735 and 8.99 against 0.0265, 0.9715 and 8.86; Bank Nifty 0.0321, 0.9636 and 7.33 against 0.0323, 0.9639 and 6.71. Both printed half-lives (339 and 185 minutes) lie inside our 95% intervals. The stated window gives alpha 0.0481 and 0.0586, about twice the printed values.
+* **Table 5** (`table5_volume_daylevel.csv`, official constituent share volume). All six changes are within 2.4 to 8.7 percentage points of the changes implied by the printed medians, with the same sign (Nifty +41.3%, +23.5%, +67.7% against +32.6%, +19.3%, +65.0%; Bank Nifty -11.0%, +7.2%, -7.0% against -13.4%, +9.6%, -3.3%). The stated window gets three of the six signs wrong. One caveat: we picked share volume because its level fits the printed medians. Constituent turnover in rupees does not match (+64% and +76%).
+* **Tables 3 and 4** (`tables34_grid_summary.csv`). A weak check. The all-expiry total is 87.9 against 84.00 (stated: 73.1), but across our grid of settings it ranges from 70.3 to 91.8 on the inferred window and 55.0 to 83.5 on the stated one, so it barely separates the two windows.
+* **Table 6** (`table6_volatility.csv`). Not a useful check. Our medians are 25% to 30% below the printed ones in both windows, and the printed medians have only two significant digits.
+
+These checks are not fully independent of the search. Skewness, Anderson-Darling and the GARCH fit respond to the same few large returns that drive the kurtosis and the extremes. Table 5 uses a different data set (NSE's daily file), so it is the most independent of them.
 
 ## 4. Tables, ours next to the paper
 
@@ -108,6 +120,10 @@ In every table below, "inferred" is the 14 November 2022 to 10 February 2023 win
 | ADF | -23.12 | -23.05 | -29.62 | -29.63 | -20.87 | -20.69 | -145.90 | -145.61 |
 
 Correlation between the two indices: 0.853 before (inferred) and 0.818 after (paper (printed): 0.854 and 0.818). The stated window gives very different numbers: for Nifty, N 29,519, minimum -0.0115, maximum 0.0135 and excess kurtosis 195; correlation 0.837.
+
+**The maxima match exactly; the before minima do not.** On the inferred window both maxima equal the printed values to every printed decimal (Nifty 0.006221108, Bank Nifty 0.012023448). In the after window all four extremes match to the printed digits. The two before minima differ: ours are -0.008534 and -0.017135, the printed values are -0.008585 and -0.017257. Ours are 0.5 and 1.2 basis points less negative. Both are the 09:15 bar of Monday 30 January 2023, the bar that carries the overnight gap from Friday 27 January.
+
+**Is the overnight gap measured from NSE's official close?** We tested this (`table1_overnight_variants.csv`, `table1_implied_reference_price.csv`). The answer is no. Measuring the gap from the official close moves the minima the wrong way (-0.008122 and -0.016757) and breaks all four after-window extremes, which match with our main rule. The close of the 15:29 bar does no better. We also worked out, for each extreme that sits in a first minute, which previous-day price would reproduce the printed value exactly. In five of the seven cases it is our 15:14 close, to within the printed precision. In the other two, the 30 January minima, it is 17,612.50 (Nifty) and 40,365.45 (Bank Nifty). Those are exactly the opening prices of the 15:15 bar on 27 January in our data; our 15:14 closes are 17,611.60 and 40,360.55. Using the 15:15 open on every day reproduces both before minima but breaks the Bank Nifty before maximum and every after-window extreme. Our reading: the paper's minute data had a slightly different 15:14 close on 27 January 2023 (a one-bar difference between data feeds), not a different way of building returns.
 
 ### Table 2: ARMA(1,1)-mcsGARCH(1,1) with Student-t errors (`table2_mcsgarch.csv`)
 
@@ -206,7 +222,7 @@ On Bank Nifty's own expiry days (Wednesday or the holiday-shifted day) its volat
 ## 5. What replicated
 
 * The after sample, almost number for number: Table 1, the Table 2 volatility parameters and log-likelihood, and Table 1's ADF and Anderson-Darling statistics.
-* The before sample, **if** it is November 2022 to February 2023: Table 1 closely, Table 2 within ordinary sampling noise, and the size of Table 5's volume changes.
+* The before sample, **if** it is November 2022 to February 2023: Table 1 closely (both maxima exactly; the minima differ because of one bar of data), Table 2 within ordinary sampling noise, and the size of Table 5's volume changes. The weekday counts do not match (Section 3).
 * The big picture of the paper: Nifty volume and volatility rose, especially on Thursdays. Connectedness between the two indices fell, most clearly on expiry days. Intraday volatility shocks fade faster after the change.
 
 ## 6. What did not replicate, and the most likely reasons
@@ -214,6 +230,8 @@ On Bank Nifty's own expiry days (Wednesday or the holiday-shifted day) its volat
 | Result | What we see | Most likely reason |
 | --- | --- | --- |
 | The before sample as described | 82 days, different extremes and parameters | The sample may have been November 2022 to February 2023 (Section 3) |
+| Before minima on the inferred window | -0.008534 and -0.017135 against printed -0.008585 and -0.017257, both at 30 January 2023, 09:15 | A different 15:14 close on 27 January 2023 in the paper's data; NSE's official close does not explain it (Section 4) |
+| Weekday counts | inferred window 13 Wednesdays and 12 Thursdays (printed 13 and 13); after window 11 and 12 (printed 12 and 13) | Holidays on two Thursdays and two Wednesdays; the printed Thursday counts equal our Nifty expiry-day counts, so those rows may be expiry days; we cannot explain 12 Wednesdays |
 | First and last hour connectedness of 99.42 and 105.22 | 81.6 and 84.7; no setting in our grid exceeds 98.9 | Unreported VAR settings or input series, and only three or four hours of data per row |
 | One-hour changes after the policy | intervals include zero | Too little data per row (180 to 240 minutes) |
 | AR(1) and MA(1) values and their stars | different values and signs, none significant | The two terms nearly cancel and are weakly identified |
@@ -239,17 +257,19 @@ These are offered as careful questions. Each may have a simple answer that the p
 5. Which volume series is in Table 5? Constituent share volume fits the printed levels and changes. Knowing the source would let us match it exactly.
 6. Was the volatility in Table 6 the square root of the per-minute Rogers-Satchell variance, or a scaled or averaged version?
 7. Would the authors consider day-level tests (or HAC or a day-block bootstrap) alongside the minute-level Mann-Whitney test? In our data they change the conclusions for the Wednesday results.
-8. Small printed-number points (`paper_printed_checks.csv`), likely typesetting slips:
+8. Small printed-number points (`paper_printed_checks.csv`), possibly typesetting slips. We typed the printed values in by hand, so a second person should re-key them against the PDF before we raise any of these; some could be our own transcription slips:
    * For Bank Nifty before, the printed log-likelihood and AIC imply N = 22,680 (63 days of 360 minutes), not 23,039.
    * Table 4, Panel I, first hour: both rows sum to 101.00, not 100.
    * Table 4, Panel II, first hour: the cross shares sum to 71.97, but the total is printed as 70.97.
    * Table 5, Nifty on Thursday: the printed medians imply +65%, and the text says 61%.
    * Tables 5 and 6 statistics: read as rank sums, all six Table 5 statistics are possible and reproduce their printed p-values (including 0.0011 for Bank Nifty on Thursday). In Table 6, five of six cannot be reconciled with their p-values under either reading (three are larger than the largest possible value).
+9. Which days are in the Wednesday and Thursday rows of Tables 5 and 6? The printed minute counts imply 13 and 13 days before and 12 and 13 after. Our calendar has 13 and 12 before and 11 and 12 after; the Thursday counts would match if those rows were Nifty expiry days.
+10. Which minute-data source was used? It seems to agree with ours on every extreme except one bar, the 15:14 close of 27 January 2023.
 
 ## 9. How to reproduce
 
 ```
-OMP_NUM_THREADS=1 python experiments/replicate_paper.py            # about 2 to 3 minutes on 4 cores
+OMP_NUM_THREADS=1 python experiments/replicate_paper.py            # about 3 minutes on 4 cores
 OMP_NUM_THREADS=1 python experiments/replicate_paper.py --trim 375_full   # another session rule as the main one
 OMP_NUM_THREADS=1 python -m pytest -q tests/test_replication.py
 ```
