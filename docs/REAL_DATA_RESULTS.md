@@ -12,6 +12,7 @@ Sample: 942 trading days, 2 January 2023 to 2 November 2026, of which 200 are Ni
 | R3 | In-sample, is yesterday's GEX related to today's volatility? | same | same |
 | R4 | A first, crude look at pinning | same | same |
 | R5 | Does the market's move over the day carry on into the last 30 minutes, and does that depend on dealer gamma? | `python experiments/momentum_gex.py` | `results/momentum_gex/` |
+| R0b | Do the results survive NSE's closing auction (from 3 August 2026)? | `python experiments/closing_auction_check.py` | `results/closing_auction/` |
 
 Separate real-data studies, each with its own document:
 
@@ -25,7 +26,7 @@ Separate real-data studies, each with its own document:
 
 1. **The data hold up.** Minute-bar highs and lows match NSE's official values within 0.05% on 943 of 943 days (highs) and 942 of 943 (lows) for Nifty. Bhavcopy open interest is in shares and adds up exactly to NSE's participant totals once contracts expiring that day are left out.
 2. **The paper's model can be beaten out of sample.** A hybrid that keeps mcsGARCH (the paper's model) and corrects it with a LightGBM model of its errors forecasts the next 15 and 30 minutes about 7% and 9% better (QLIKE loss), on all days and on expiry days, with Diebold-Mariano p-values below 0.001. mcsGARCH is excluded from the Model Confidence Set for these horizons.
-3. **For the last hour of the day, nothing beats a simple HAR model.** HAR is about 11% better than mcsGARCH there (p = 0.015), and the machine-learning models add nothing.
+3. **For the last hour of the day, no model reliably beats mcsGARCH.** Over all test days HAR looks about 11% better (one-sided p = 0.015), but most of that edge comes from the last 63 days, after NSE introduced a closing auction on 3 August 2026 (see R0). Before that date HAR is about 4% better and the difference is not significant (p = 0.11). The machine-learning models add nothing for the last hour.
 4. **GEX features do not improve out-of-sample forecasts** under any of the three sign rules. This matches what our simulations (E4) said to expect when the sign of dealer positions is uncertain and the effect is small.
 5. **But GEX is related to volatility in-sample, with a sign that flips on expiry day.** On ordinary days, higher dealer gamma the evening before goes with lower volatility the next day, as hedging theory predicts. On expiry days the relation reverses. This holds under all three sign rules and after controlling for the expiry regime, but it is an in-sample association on a proxied sign, not a causal result (details in R3).
 6. **Expiry days are more volatile than the rest of their week, but not in every regime.** About 11% more realized variance before November 2024, no clear difference from November 2024 to August 2025 (Thursday expiry, one weekly per exchange), and about 21% more since Nifty moved to Tuesday, concentrated in the last hour (about 43% more).
@@ -49,6 +50,8 @@ Separate real-data studies, each with its own document:
 
 Closes are not expected to match exactly: NSE's official close is an average over the last 30 minutes, while the last bar's close is the last trade. One official trading day has no bars (the 1 November 2024 Muhurat session) and five bar days are not in NSE's weekday files (Saturday or Sunday special sessions, such as budget days); both are left out of the analysis.
 
+**NSE's closing auction** (`results/closing_auction/auction_evidence.csv`). From 3 August 2026 NSE sets the official close in a closing auction. In the minute bars the index stands still from 15:16 to 15:28 on 96% of those minutes and then jumps to the auction price in the 15:29 bar (average jump 8.3 basis points, against 2.1 from January to July 2026), and the 15:29 close equals NSE's official close on all 63 days (median difference 0, against about 5 basis points before). So for the last 63 days of the sample, "the last hour" and "the last 30 minutes" contain 13 dead minutes and one auction jump. Every result below was rerun without those days (`experiments/closing_auction_check.py`); where it matters, both versions are shown.
+
 **Open interest units** (`results/data_validation/oi_units_check.csv`). Sum over all index options of OI divided by each row's lot size, compared with the participant file's TOTAL, on 9 dates: equal to within one contract on every date once contracts expiring that day are excluded. So OI is in shares, and the bhavcopy keeps expiring contracts' OI on their last day while the participant file does not.
 
 ---
@@ -70,11 +73,12 @@ Setup: forecasts of realized variance (sum of squared 1-minute returns) over the
 
 Test anchors: 19,800 (next 15), 19,008 (next 30), 792 (last hour); expiry days are 169 of the 792 test days.
 
-**Is the improvement real?** Diebold-Mariano tests on daily average losses (`tests_*.csv`):
+**Is the improvement real?** Diebold-Mariano tests on daily average losses (`tests_*.csv`; one-sided, asking whether the named model has lower loss than mcsGARCH, with the Harvey, Leybourne and Newbold small-sample correction):
 
 * Hybrid (no GEX) vs mcsGARCH: p < 0.0001 at 15 and 30 minutes on all days, p = 0.0007 and 0.0002 on expiry days. Not significant for the last hour (p = 0.26).
 * LightGBM (no GEX) vs mcsGARCH on expiry days: p = 0.001 (15 min) and 0.0001 (30 min).
-* HAR vs mcsGARCH, last hour: p = 0.015 (all days), 0.07 (expiry days).
+* HAR vs mcsGARCH, last hour: p = 0.015 (all days), 0.07 (expiry days). Without the 63 closing-auction days: HAR is 4.2% better on all days (p = 0.11) and 7.1% on expiry days (p = 0.17), so the last-hour edge is not established (`results/closing_auction/r1_dm_tests.csv`).
+* Without the closing-auction days the hybrid's gain at 15 and 30 minutes is about the same: 6.0% and 7.8% on all days, 5.5% and 5.7% on expiry days, all with p of 0.0013 or smaller.
 * The Model Confidence Set (90%) excludes mcsGARCH, HAR, VIX and the naive models at 15 and 30 minutes; for the last hour it keeps almost every model, so the data cannot separate them there.
 
 **Does GEX help?** The clean test compares the same model with and without the GEX block. For the hybrid, the extra loss reduction from GEX is zero to within noise under every sign rule (one-sided Diebold-Mariano p between 0.11 and 0.87 across horizons and day types). For LightGBM, GEX is about half a point better at 15 and 30 minutes, which is not significant (p = 0.13 and 0.09) and reverses in the last hour. We read this as no reliable out-of-sample value from end-of-day GEX.
@@ -95,7 +99,7 @@ For each week we take the expiry day's log realized variance minus the average l
 | One weekly per exchange, Thursday (20 Nov 2024 to 31 Aug 2025) | 41 | -11% | -26% to +8% | 0.26 | +10% | 0.65 |
 | Nifty expiry on Tuesday (from 1 Sep 2025) | 61 | +21% | +8% to +38% | 0.005 | +43% | 0.00005 |
 
-(Percentages are $e^{\text{mean}} - 1$ of the log differences.) The Tuesday period differs from the Thursday single-weekly period (Mann-Whitney p = 0.012 for the whole day). Each period bundles several changes (SEBI's November 2024 package also raised contract sizes and added margin on expiry day), so these are descriptive, and three regimes times three measures is nine tests. A fuller event study with Bank Nifty as a comparison index is in progress.
+(Percentages are $e^{\text{mean}} - 1$ of the log differences.) The Tuesday result does not come from the closing auction: on the 48 Tuesday expiry weeks before 3 August 2026 the whole-day effect is +24% (p = 0.005) and the last-hour effect +42% (p = 0.00004) (`results/closing_auction/r2_tuesday_split.csv`). The Tuesday period differs from the Thursday single-weekly period (Mann-Whitney p = 0.012 for the whole day). Each period bundles several changes (SEBI's November 2024 package also raised contract sizes and added margin on expiry day), so these are descriptive, and three regimes times three measures is nine tests. A fuller event study with Bank Nifty as a comparison index is in progress.
 
 ---
 
@@ -140,5 +144,7 @@ On expiry days, does the official close move toward the strike with the largest 
 In plain words: under the Pro rule, after a negative-GEX evening, a 100 bp move over the day is followed by about a 5.8 bp move the other way in the last 30 minutes; after a positive-GEX evening there is essentially no follow-through either way (slope +0.011, p = 0.29). The Pro result has the same sign in all three expiry regimes and in both halves of the sample (`stability.csv`; p between 0.0005 and 0.17 in the regimes, 0.03 and 0.01 in the halves). The Client-mirror result disappears once VIX and the size of the day's move are controlled for: it rests on only 38 days, most of them volatile ones, so it is better read as "big, volatile days reverse more" than as a gamma effect.
 
 **Why this is puzzling.** Hedging theory says dealers who are long gamma trade against the market (which produces reversal) and dealers who are short gamma trade with it (momentum). If the Pro-based sign were right, negative GEX should mean momentum, but we see the strongest reversal there. If instead the Pro sign were backwards, R5 would fit the theory, but then R3's ordinary-day result (higher Pro GEX, calmer next day) would go against it. Both cannot hold under one simple story. Three readings we have not yet separated: (a) the Pro category's net option position is not a good proxy for who hedges Nifty options (it pools all index options and includes proprietary traders who may not delta-hedge at all); (b) negative Pro GEX picks out market conditions (for example, heavy retail call buying) in which the close reverses for reasons that have nothing to do with hedging; (c) chance, since we tried three rules and several specifications. The falsification tests planned next (placebo GEX dates, shuffled GEX, an out-of-sample check on later data) are designed to tell these apart.
+
+**Closing auction.** From 3 August 2026 the 15:29 bar is the auction price after 13 frozen minutes, which changes what the last-30-minute return means. Without those 63 days the results are the same: overall slope -0.030 (p = 0.017), Pro interaction -0.072 (p = 0.0001) and -0.053 (p = 0.001) with controls (`results/closing_auction/r5_without_auction.csv`).
 
 **Caveats.** Before costs, not a trading result: the average "follow the day's direction" payoff on negative-Pro-GEX days is -2.1 bp per day (t = -2.3), smaller than a typical round-trip cost in Nifty futures plus slippage. The 15:29 bar close is the last trade, not NSE's official close, which is a 30-minute average.

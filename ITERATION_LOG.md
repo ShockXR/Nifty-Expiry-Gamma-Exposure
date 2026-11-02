@@ -157,7 +157,7 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **HYPOTHESIS:** From the simulations, a hybrid (mcsGARCH corrected by LightGBM) should beat mcsGARCH, and GEX should add little.
 * **CHANGES IMPLEMENTED:** `--start`, `--end`, `--min-coverage 0.95`, `--rate 0.065`, official trading days from NSE's index file; `daily_market.csv` written for day-level work. CI on GitHub Actions and a clean-install check.
 * **EXPERIMENTS PERFORMED:** Walk-forward, expanding window, refit every 21 days, 792 test days; Diebold-Mariano tests and Model Confidence Set.
-* **RESULTS:** (REAL DATA, after the fix in iteration 14.) Hybrid beats mcsGARCH by about 7% (next 15 minutes) and 9% (next 30 minutes), p < 0.001. HAR is best for the last hour (about 11% better than mcsGARCH, p = 0.015). GEX adds nothing out of sample under any sign rule.
+* **RESULTS:** (REAL DATA, after the fix in iteration 14.) Hybrid beats mcsGARCH by about 7% (next 15 minutes) and 9% (next 30 minutes), p < 0.001. HAR looked best for the last hour (about 11% better than mcsGARCH, p = 0.015), but see iteration 19. GEX adds nothing out of sample under any sign rule.
 * **IMPROVEMENTS:** A real, honest headline that matches the simulation's warning.
 * **REMAINING ISSUES:** In-sample relations between GEX and volatility untested; the paper's own tables not yet replicated.
 * **NEXT ITERATION:** Day-level studies.
@@ -171,7 +171,7 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **EXPERIMENTS PERFORMED:** Compared old and new outputs.
 * **RESULTS:** ATM implied vol on the same day 16.3%. Net GEX changed noticeably on about 100 days where it is near zero; the largest change in any scoreboard cell was 1.4 points; no conclusion changed.
 * **IMPROVEMENTS:** A sanity number in a demo caught a bug that tests had not. (The pinning study later confirmed independently that 41 of 43 filled vols on one chain had been wrong before the fix.)
-* **REMAINING ISSUES:** Other silent ordering assumptions could exist; the independent review (iteration 19) looks for them.
+* **REMAINING ISSUES:** Other silent ordering assumptions could exist; the independent review looks for them.
 * **NEXT ITERATION:** Day-level questions.
 
 ## Iteration 15: day-level expiry effects and GEX (R2 to R4)
@@ -195,7 +195,7 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **EXPERIMENTS PERFORMED:** 932 days, Newey-West errors, three sign rules, all, non-expiry and expiry days.
 * **RESULTS:** Overall slope -0.029 (p = 0.015). Pro rule interaction -0.068 (p = 0.0002), -0.050 (p = 0.003) with VIX and size controls, same sign in all three regimes and both halves. The client-mirror result (38 days) disappears with the controls.
 * **IMPROVEMENTS:** One result discarded as a volatility artefact; one survives several checks but contradicts the hedging story under the same sign that supports R3.
-* **REMAINING ISSUES:** The R3 and R5 signs cannot both fit one simple hedging story; the falsification suite (iteration 20) is designed to separate the explanations.
+* **REMAINING ISSUES:** The R3 and R5 signs cannot both fit one simple hedging story; the falsification suite is designed to separate the explanations.
 * **NEXT ITERATION:** Replicate the paper itself.
 
 ## Iteration 17: replicating the paper's Tables 1 to 6 on NSE data
@@ -222,11 +222,24 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The half-year pattern was seen after looking at the data, so it is exploratory.
 * **NEXT ITERATION:** Independent review and falsification (in progress at the time of writing).
 
+## Iteration 19: NSE's closing auction changes the last minutes of the day
+
+* **OBJECTIVE:** Prepare a live forecast for the 3 November 2026 expiry from the latest data.
+* **PROBLEM IDENTIFIED:** The 2 November minute bars showed the index frozen from 15:15 to 15:28 and then jumping 47 basis points in the 15:29 bar. The pinning study had separately found that NSE moved to a closing auction on 3 August 2026.
+* **HYPOTHESIS:** For the last 63 days, "last hour" and "last 30 minutes" contain dead minutes and an auction jump, which could drive results that use the end of the day (R1 last hour, R2 last hour, R5).
+* **CHANGES IMPLEMENTED:** `experiments/closing_auction_check.py` documents the auction in the data and reruns R1, R2 and R5 without those days.
+* **EXPERIMENTS PERFORMED:** Frozen-minute share, jump size and match with the official close; scoreboards and Diebold-Mariano tests on test days before 3 August 2026; Tuesday regime split; R5 regressions without the auction days.
+* **RESULTS:** The auction is clear in the data (frozen on 96% of late minutes, 15:29 close equal to NSE's official close on all 63 days). The hybrid's 15- and 30-minute gains, the Tuesday expiry effect and the R5 interaction are unchanged without those days. **HAR's last-hour edge is not:** 10.8% (p = 0.015) on all test days, but 4.2% (p = 0.11) before the auction. The headline was corrected.
+* **IMPROVEMENTS:** One overstated claim removed before anyone relied on it.
+* **REMAINING ISSUES:** Forecast models for the end of the day should treat the auction period as a separate regime; the model study is told about it.
+* **NEXT ITERATION:** Live dry run for the 3 November expiry.
+
 ## Iterations in progress (3 November 2026, early morning UTC)
 
-* **Iteration 19, independent review:** a separate reviewer reads the code and the three real-data documents, checks numbers against result files, and looks for look-ahead bias.
-* **Iteration 20, falsification suite:** permutation and timing placebos, random sign rules, out-of-sample splits, Bank Nifty as a second market, and a quasi-causal test that uses the mechanical disappearance of expiring gamma.
-* **Iteration 21, event study:** the expiry rule changes with Bank Nifty as a comparison index.
-* **Iteration 22, stronger forecasting models:** option-implied features and new GEX measures in the forecasting contest.
+* **Intraday gamma at the current price:** expiry-day gamma re-priced minute by minute from the previous evening's open interest, with day and minute-of-day fixed effects and placebo strike grids.
+* **Independent review:** a separate reviewer reads the code and the three real-data documents, checks numbers against result files, and looks for look-ahead bias.
+* **Falsification suite:** permutation and timing placebos, random sign rules, out-of-sample splits, Bank Nifty as a second market, and a quasi-causal test that uses the mechanical disappearance of expiring gamma.
+* **Event study:** the expiry rule changes with Bank Nifty as a comparison index.
+* **Stronger forecasting models:** option-implied features and new GEX measures in the forecasting contest.
 
 Each will be written up in the same format when it finishes.
