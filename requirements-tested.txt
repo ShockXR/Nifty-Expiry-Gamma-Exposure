@@ -1,0 +1,11 @@
+# Exact versions used in the clean-install check of 2 November 2026 (Python 3.13.18).
+# The package itself only needs the ranges in pyproject.toml; pin to these to reproduce results exactly.
+arch==8.0.0
+lightgbm==4.7.0
+matplotlib==3.11.2
+numpy==2.5.4
+pandas==3.1.0
+requests==2.34.2
+scipy==1.18.1
+statsmodels==0.15.0
+pytest
