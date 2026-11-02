@@ -69,3 +69,23 @@ def test_expiry_diurnal_captures_late_session_bump(market):
     ratio = mod.s_expiry[-20:].mean() / mod.s[-20:].mean()
     true_ratio = m["s_true_expiry"][-20:].mean() / m["s_true"][-20:].mean()
     assert ratio > 1.15 and abs(ratio - true_ratio) < 0.5
+
+
+def test_all_missing_minute_does_not_break_fit(market):
+    """A minute with no data on any day (e.g. the first minute when overnight gaps are dropped)
+    used to give a zero diurnal factor, 0 / 0 in the GARCH input, and a silent non-fit."""
+    m = market
+    R = m["R"].copy()
+    R[:, 0] = np.nan
+    mod = McsGarch().fit(R, m["h_true"])
+    assert np.all(mod.s > 0) and np.all(np.isfinite(mod.s))
+    assert mod.params["converged"]
+    assert abs(mod.params["alpha"] - 0.03) < 0.01 and abs(mod.params["beta"] - 0.95) < 0.02
+    f = mod.filter(R, m["h_true"])
+    assert np.all(np.isfinite(f["q2"]))
+
+
+def test_diurnal_without_mask_returns_one_row(market):
+    mod = McsGarch().fit(market["R"], market["h_true"])
+    S = mod.diurnal()
+    assert S.shape == (1, market["R"].shape[1]) and np.allclose(S[0], mod.s)
