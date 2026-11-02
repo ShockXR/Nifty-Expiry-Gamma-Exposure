@@ -91,7 +91,10 @@ def expiry_summary(sub: pd.DataFrame, n_td: int, r: float, spot_hint: float | No
         # Untraded series carry NSE's theoretical settlement price (checked on real
         # files: a nearly flat vol of about 15 to 17%), which would corrupt every
         # implied quantity of an illiquid expiry. Only series that traded are used.
-        sub = sub[sub["volume"] > 0]
+        # (A file with no volume information at all, such as the simulator's
+        # export, keeps every series.)
+        if (sub["volume"] > 0).any():
+            sub = sub[sub["volume"] > 0]
     F = _forward(sub, T, r) if ("settle" in sub and len(sub)) else float("nan")
     if not np.isfinite(F) or (spot_hint is not None and abs(F / spot_hint - 1) > 0.05):
         F = float(spot_hint) if spot_hint is not None else float("nan")

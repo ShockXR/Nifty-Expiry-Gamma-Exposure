@@ -80,6 +80,9 @@ class WalkForwardConfig:
     lgbm_threads: int = 1
     seed: int = 0
     ridge_grid: tuple = (1e-4, 1e-3, 1e-2, 1e-1, 1.0)
+    # Train on every anchor in ``data`` but forecast only these anchor minutes (None = all).
+    # Used for the last-hour target: one test window per day, but 22 training windows per day.
+    eval_minutes: list | None = None
     models: list = field(default_factory=lambda: list(ALL_MODELS))
 
 
@@ -296,6 +299,8 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
             extra_v2 = extra_v2 + ["log_mcs_iv", "log_implied_window"]
         tr = d[d["t"] < start]
         te = d[d["t"] >= start].copy()
+        if cfg.eval_minutes is not None:  # pooled training, evaluation at chosen anchors only
+            te = te[te["minute"].isin(cfg.eval_minutes)].copy()
         if te.empty:
             continue
         ly_tr = np.log(np.maximum(tr["y"].to_numpy(), 1e-16))
