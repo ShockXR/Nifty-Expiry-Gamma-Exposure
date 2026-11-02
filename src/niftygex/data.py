@@ -87,6 +87,9 @@ def load_bhavcopy(path, symbol: str = "NIFTY") -> pd.DataFrame:
         )
     else:
         raise ValueError(f"{path}: unrecognised bhavcopy layout")
+    # UDiFF files are not ordered by strike. Sort, because later steps (filling missing implied
+    # vols from neighbouring strikes) assume strikes are in order within each expiry and side.
+    out = out.sort_values(["expiry", "is_call", "strike"], kind="stable")
     return out[OPTION_SCHEMA].reset_index(drop=True)
 
 
