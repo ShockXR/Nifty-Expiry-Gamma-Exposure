@@ -2,6 +2,8 @@
 
 Prepared for discussion with Prof. Piyush Pandey (IIT Bombay, SJMSOM). Author: Shreyan Thanki.
 
+*Sections 1 to 8 are the plan as written before any real data were used (2 November 2026), kept unchanged so the plan can be compared with what happened. Sections 9 to 11 were rewritten on 3 November 2026 after the real-data run: what each question and hypothesis turned out to be, a scored ranking of the directions to take next, and the next actions.*
+
 ## 1. One-paragraph summary
 
 Chhimwal, Pandey and Pandey (2025) show that after NSE separated the Nifty and Bank Nifty expiry days, each index became *more* volatile and more heavily traded on its own expiry day, while the two indices became less connected. The paper documents the effect but leaves its cause as a conjecture. A well-studied candidate cause is option dealers' hedging: when dealers are net short gamma, hedging pushes prices further in the direction they are already moving; when they are net long gamma, it pushes back. This project builds the tools to test that mechanism on Nifty, and frames the test as a forecasting contest: does knowing dealer positioning help forecast expiry-day volatility *out of sample*, beyond the paper's own mcsGARCH model? That question has an answer either way, and it uses the paper's own model as the benchmark.
@@ -80,14 +82,54 @@ Is the walk-forward hybrid better than mcsGARCH on expiry days?
 | Overfitting through repeated tuning | Walk-forward only; tuning inside training windows; Model Confidence Set over the whole ladder. |
 | Overlap with Prof. Pandey's other students | This project is about options positioning and volatility, not limit order books. |
 
-## 9. What has been established so far (synthetic data only)
+## 9. What happened: each question and hypothesis on real data
 
-See [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md). Everything there is from simulated markets or from arithmetic on published table values. No real-market result is claimed anywhere in this repository.
+All REAL DATA, 2 January 2023 to 2 November 2026 (942 trading days, 200 Nifty expiries). The documents named hold the numbers and the files behind them; [docs/TEST_LEDGER.md](docs/TEST_LEDGER.md) lists all 4,930 tests with p-values corrected across the whole project (Benjamini-Yekutieli).
 
-## 10. Next actions
+| Question or hypothesis | Answer | Where |
+| --- | --- | --- |
+| RQ1: does positioning forecast expiry-day volatility out of sample? | **No.** GEX features add nothing under any sign rule. Separately, a hybrid that corrects mcsGARCH beats it by about 7% and 9% at 15 and 30 minutes (survives the project-wide correction); for the last hour nothing reliably beats mcsGARCH. | [REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) R1 |
+| RQ2: can the dealer sign be measured from public data? | **Not identified.** Estimating the sign from the market's response gives nearly opposite answers for the volatility and end-of-day outcomes, and no estimated sign beats the fixed rules out of sample. The one robust GEX pattern (below) is carried by the daily Pro participant weights, not by the option chain. | [DEALER_SIGN.md](docs/DEALER_SIGN.md), [FALSIFICATION.md](docs/FALSIFICATION.md) |
+| RQ3: do the paper's findings hold with dependence-aware inference and in new regimes? | **Partly.** The "after" sample replicates almost exactly; the "before" window appears to be 14 Nov 2022 to 10 Feb 2023. Nifty findings survive day-level tests; the Bank Nifty Wednesday volatility result and hour-level connectedness do not. The expiry premium depends on the regime and sits at the end of the day. | [REPLICATION_NSE.md](docs/REPLICATION_NSE.md), [EVENT_STUDY.md](docs/EVENT_STUDY.md), R2 |
+| RQ4: is connectedness linked to gamma? | **Weakly at most.** The pre-stated test is borderline (p 0.044) and disappears with a VIX control; total gamma (no sign) goes with lower connectedness. | [CONNECTEDNESS_GAMMA.md](docs/CONNECTEDNESS_GAMMA.md) |
+| H1: GEX adds forecasting information | Not supported, and the power study shows the test could only have seen large gains. | R1, [POWER_REAL.md](docs/POWER_REAL.md) |
+| H2: the effect has the hedging sign | Not supported. The "higher GEX, calmer next day" link tracks gross gamma (the "gamma size" branch of the plan's own decision tree), and the end-of-day reversal is the opposite of the hedging prediction under the Pro sign. | [FALSIFICATION.md](docs/FALSIFICATION.md) |
+| H3: participant data identify the sign | Not supported (see RQ2). | [DEALER_SIGN.md](docs/DEALER_SIGN.md) |
+| H4: the paper's increases survive dependence-aware tests | Supported for Nifty, not for the Bank Nifty Wednesday result. | [REPLICATION_NSE.md](docs/REPLICATION_NSE.md) |
 
-1. Download real data on a machine that can reach NSE (script and steps in the data guide).
-2. Run `python scripts/run_pipeline.py --source nse` and check the loaders on the first real files (especially whether OI is in contracts or units).
-3. Run the replication grid on the paper's window and compare with Tables 2 to 6.
-4. Run the forecasting contest on November 2024 to the present and report RQ1 and RQ2.
-5. Meet Prof. Pandey with [PITCH_PANDEY.md](PITCH_PANDEY.md) and the first real scoreboard.
+**Path taken through the decision tree of Section 7:** the hybrid is better than mcsGARCH; adding GEX helps under no rule; the in-sample GEX effects that exist behave like gross gamma; so the result is "a credible null on positioning, consistent with Dim, Eraker and Vilkov (2024)", plus one unexpected, robust and untradable in-sample regularity (the end-of-day reversal after negative Pro GEX).
+
+**What did not go to plan.** NSE's closing auction from 3 August 2026 changed the last minutes of the day mid-sample and inflated one early headline; it was caught and corrected. Most in-sample GEX links failed the falsification tests. BSE's servers are not reachable from the cloud setup, so BSE Sensex expiries can only be controlled for with a reported calendar.
+
+## 10. Candidate directions, scored 1 to 10
+
+Each direction is scored on five criteria from 1 (poor) to 10 (excellent). The scores are our judgement from the evidence above, not a calculation, and the overall score is the plain average rounded to the nearest whole number.
+
+* **Evidence:** how strong and robust the real-data results behind it are.
+* **Novelty:** how new it is relative to the literature in [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md) and to the paper.
+* **Feasibility:** can it be finished with data we can get, in weeks rather than months.
+* **Fit:** how directly it builds on Prof. Pandey's paper and interests.
+* **Risk (inverted):** 10 means little risk that it collapses on new data or a referee's first question.
+
+| Direction | Evidence | Novelty | Feasibility | Fit | Risk (inv.) | Overall | Why |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| D1. Expiry rules as natural experiments (event study, regimes, Sensex control, pinning by regime) | 7 | 7 | 8 | 10 | 7 | **8** | Extends the paper's own design to five rule changes with comparison indices and placebo dates; end-of-day premium follows the expiry; needs verified Sensex dates |
+| D2. Pro positioning and the end-of-day reversal | 8 | 8 | 6 | 7 | 5 | **7** | Survived every falsification test and is not tradable after costs, which makes it a clean market-structure fact; what "Pro" measures is open, and the forward test will take a year or more |
+| D3. Forecasting expiry-day volatility (hybrid beats mcsGARCH) | 8 | 5 | 9 | 8 | 7 | **7** | Robust and survives the project-wide correction; methodologically incremental |
+| D4. Replication note for the authors (the "before" window, re-keyed printed values) | 9 | 3 | 10 | 10 | 8 | **8** | Short, checkable and directly useful to Prof. Pandey; not a paper on its own |
+| D5. Identifying the dealer sign with better data | 3 | 9 | 3 | 7 | 4 | **5** | The most important open question, but public NSE data cannot answer it; needs broker-level or strike-level positioning data |
+| D6. Intraday option-chain collection and intraday GEX | 2 | 6 | 5 | 6 | 5 | **5** | Minute-level gamma at spot showed nothing with end-of-day positions; real intraday positions would be new but must be collected going forward |
+| D7. Connectedness by gamma regime (Nifty and Sensex next) | 3 | 7 | 6 | 9 | 3 | **6** | A natural extension of the paper's connectedness tables; the Bank Nifty version is fragile |
+| D8. Pinning mechanism | 3 | 6 | 7 | 6 | 4 | **5** | Pinning is real in one regime, but none of six candidate mechanisms explains it |
+| D9. Trading layer on options | 1 | 4 | 2 | 3 | 2 | **2** | The one robust pattern does not survive futures costs; an options backtest needs intraday option prices |
+| D10. Sequence model for intraday volatility | 2 | 3 | 6 | 3 | 3 | **3** | Trees already capture the structure; about 100 weekly expiries since November 2024 is too few |
+
+**Recommendation.** Lead with D1 and D4 together (they are the most natural continuation of Prof. Pandey's paper and the most certain), keep D3 as the forecasting chapter, and carry D2 as the paper's most interesting open finding, with a forward test on data after 2 November 2026 (pre-registration in [docs/prereg/](docs/prereg/)) as its out-of-sample commitment. D5 depends on what data Prof. Pandey's group can access and is the first thing to ask him about.
+
+## 11. Next actions
+
+1. Send Prof. Pandey [PITCH_PANDEY.md](PITCH_PANDEY.md), with the replication question about the "before" window first.
+2. Ask him about the "Pro" category and any positioning or intraday option data his group can use (D5, D6).
+3. Download BSE circulars on a home machine to verify the Sensex expiry calendar (D1).
+4. Start the forward test when data after 2 November 2026 arrive (D2).
+5. Turn the working-paper draft into the paper for whichever of D1 or D2 he prefers.

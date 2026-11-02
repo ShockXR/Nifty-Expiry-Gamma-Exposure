@@ -1,6 +1,19 @@
 # Alternative and follow-on directions
 
-These are kept out of the main package on purpose. Each is either blocked on data we do not have yet, or would add claims that synthetic data cannot support. They are listed in the order we would pick them up.
+These were written before the real-data run (2 November 2026) as directions kept out of the main package. **Status on 3 November 2026:** four of the six have since been run on real data or overtaken by a real-data study, as marked under each heading. The scored ranking of all candidate directions (1 to 10 on evidence, novelty, feasibility, fit and risk) is in [RESEARCH_STRATEGY_PANDEY.md](../RESEARCH_STRATEGY_PANDEY.md), Section 10.
+
+| Item | Status | Where |
+| --- | --- | --- |
+| A1. Trading layer | Futures part done for the one robust pattern: not tradable after costs. Options part still blocked on intraday option prices. | [docs/F2_ECONOMICS.md](../docs/F2_ECONOMICS.md) |
+| A2. Sequence model | Still deferred: trees and mcsGARCH already capture the structure (R1). | [docs/REAL_DATA_RESULTS.md](../docs/REAL_DATA_RESULTS.md) |
+| A3. Intraday GEX snapshots | Partly answered: gamma at spot re-priced minute by minute from the previous evening's positions shows nothing. Real intraday positions still need forward collection. | [docs/INTRADAY_GAMMA.md](../docs/INTRADAY_GAMMA.md) |
+| A4. Connectedness by gamma regime | Done for Nifty and Bank Nifty: borderline and not robust. Nifty and Sensex open. | [docs/CONNECTEDNESS_GAMMA.md](../docs/CONNECTEDNESS_GAMMA.md) |
+| A5. Momentum regression | Done (R5): Nifty reverses into the close, more after negative Pro GEX; survived falsification. | R5, [docs/FALSIFICATION.md](../docs/FALSIFICATION.md) |
+| A6. September 2023 Bank Nifty change | Done as event a of the event study. | [docs/EVENT_STUDY.md](../docs/EVENT_STUDY.md) |
+| A7. Pinning mechanism (new) | Done, pre-registered: none of six candidates explains when pinning appears. | [docs/PINNING_MECHANISM.md](../docs/PINNING_MECHANISM.md) |
+| A8. Sensex expiry as a confounder (new) | Done with a reported calendar; verification needs BSE circulars downloaded off the cloud. | [docs/SENSEX_CONFOUND.md](../docs/SENSEX_CONFOUND.md) |
+| A9. Forward test of the main claims (new) | Pre-registration being written (3 November 2026); runs when data after 2 November 2026 arrive. | [docs/prereg/](../docs/prereg/) |
+| A10. Dealer sign from better data (new) | Open: needs broker-level or strike-level positioning data, the first thing to ask Prof. Pandey about. | [docs/DEALER_SIGN.md](../docs/DEALER_SIGN.md) |
 
 ## A1. Trading layer (blocked on real option prices)
 
