@@ -11,3 +11,4 @@ data/live/
 
 # local agent worktrees
 .claude/worktrees/
+results/intraday_gamma/anchor_panel.csv.gz
