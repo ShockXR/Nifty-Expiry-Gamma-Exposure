@@ -33,6 +33,8 @@ Check on 2 November 2026: rerunning `real_day_level`, `momentum_gex` and `closin
 
 Files for the live dry run (`experiments/live_dry_run.py score`) go to `data/live/`, not `data/raw/`, so scoring a live day never changes the hashed data.
 
+Forward test (data from 3 November 2026 on): pre-registered in `docs/prereg/FORWARD_TEST.md`, run with `python scripts/forward_test.py --start 2026-11-03 --end END --raw data/live/forward` at the commit that adds that file (it reports only counts of days until each stopping point); `results/forward_test/dryrun_2025-01-01_2026-07-31/` is a software check on past data, not the forward test.
+
 ## What can differ on a rerun
 
 * The Nifty minute-bar dataset is updated daily by its maintainer. Use the pinned commit and `--until 2026-11-02` (as `reproduce_all.py` does) to get the same file.

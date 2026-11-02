@@ -69,6 +69,8 @@ TUE_REGIME = "single_weekly_tue"
 BAR_TOL_BP = 5.0
 MAX_BAD_BAR_SHARE = 0.02
 
+COMMITTED_RUNS = ["results/pipeline_nse_v2", "results/pipeline_nse"]  # first one that exists is used for checks
+
 # Slots are minutes after 09:15 (bar start times), as in experiments/momentum_gex.py.
 SLOT_1415, SLOT_1429, SLOT_1459, SLOT_1515, SLOT_1529 = 300, 314, 344, 360, 374
 N_SLOTS = 375
@@ -105,6 +107,13 @@ def build_inputs(raw: Path, first: pd.Timestamp, end: pd.Timestamp) -> tuple[pd.
     panel = build_gex_panel(m)
     panel.index = pd.DatetimeIndex(panel.index)
     return dm, panel
+
+
+def committed_run(root: Path = ROOT) -> Path | None:
+    for r in COMMITTED_RUNS:
+        if (root / r / "daily_gex_panel.csv").exists():
+            return root / r
+    return None
 
 
 def load_inputs(run: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -334,7 +343,8 @@ def holm(pvals: dict) -> dict:
 def classify(results: dict, alpha: float = ALPHA) -> dict:
     """Pre-registered verdicts for the confirmatory family {H1, H2} (Holm, m = 2 always).
 
-    results[h] = {"status": "evaluated" | "not evaluable" | "not reached", "p_predicted", "p_opposite"}.
+    results[h] = {"status": "evaluated" | "not evaluable" | "not reached" | "data check failed", "p_predicted",
+    "p_opposite"}. A failed data check is treated like a stopping point not yet reached: the test is rerun later.
     A hypothesis that is not evaluable counts as p = 1 in Holm. When the other hypothesis has not reached
     its stopping point: p <= alpha/2 is confirmed at once (Holm cannot undo it), p in (alpha/2, alpha] is
     pending (confirmed only if the other ends with p <= alpha/2)."""
@@ -348,8 +358,12 @@ def classify(results: dict, alpha: float = ALPHA) -> dict:
         if r["status"] == "not evaluable":
             out[h] = {"verdict": "not evaluable", "holm_p": None}
             continue
+        if r["status"] == "data check failed":
+            out[h] = {"verdict": "not run: minute bars failed the check against NSE; rerun with a corrected source",
+                      "holm_p": None}
+            continue
         p, q = r["p_predicted"], r["p_opposite"]
-        if o["status"] == "not reached":
+        if o["status"] in ("not reached", "data check failed"):
             adj = None
         else:
             adj = holm({h: p, other: o["p_predicted"] if o["status"] == "evaluated" else 1.0})[h]
@@ -462,7 +476,7 @@ def bar_check(grid: dict, official: pd.DataFrame | None, days: pd.DatetimeIndex)
 
 
 def auction_check(grid: dict, official: pd.DataFrame | None, days: pd.DatetimeIndex) -> dict:
-    """Counts of days with the auction structure seen from 3 Aug 2026 (pre-registration, section 3)."""
+    """Counts of days with the auction structure seen from 3 Aug 2026 (pre-registration, section 2)."""
     d = days[days >= AUCTION_START]
     if len(d) == 0:
         return {"auction_days_in_window": 0}
@@ -477,6 +491,36 @@ def auction_check(grid: dict, official: pd.DataFrame | None, days: pd.DatetimeIn
     if official is not None:
         off = official["close"].reindex(d)
         out["days_15_29_close_within_0_5bp_of_official_close"] = int(((c[SLOT_1529] / off - 1).abs() < 5e-5).sum())
+    return out
+
+
+def reference_checks(res: dict, start: pd.Timestamp, end: pd.Timestamp, root: Path = ROOT) -> dict:
+    """For the documented dry-run window, compare with numbers already published from the same days:
+    FALSIFICATION T4 (Pro binary, 2025 onward, before the auction) and the closing-auction R2 split
+    (Tuesday regime before 3 Aug 2026, R2's original last hour)."""
+    if (start, end) != (pd.Timestamp("2025-01-01"), pd.Timestamp("2026-07-31")):
+        return {"applies": False}
+    out = {"applies": True}
+    t4p, r2p = root / "results/falsification/t4_preregistered_f2.csv", root / "results/closing_auction/r2_tuesday_split.csv"
+    if t4p.exists() and res["h1"].get("estimated"):
+        t4 = pd.read_csv(t4p)
+        r = t4[(t4["sample"] == "pre_auction") & (t4["rule"] == "participant_pro")].iloc[0]
+        out["h1_vs_falsification_t4_pre_auction"] = {
+            "published_coef": float(r["coef_2025_onward"]), "here": res["h1"]["coef_r_rod_x_neg"],
+            "published_p_one_sided": float(r["p_one_sided"]), "here_p": res["h1"]["p_predicted"],
+            "published_days": int(r["n_2025_onward"]), "here_days": res["h1"]["n"],
+            "published_negative_days": int(r["neg_days_2025_onward"]), "here_negative_days": res["h1"]["negative_gex_days"],
+            "match": bool(abs(float(r["coef_2025_onward"]) - res["h1"]["coef_r_rod_x_neg"]) < 1e-8
+                          and int(r["n_2025_onward"]) == res["h1"]["n"])}
+    d = res.get("h2_descriptive", {}).get("r2_original_last_hour_1430_1529", {})
+    if r2p.exists() and d.get("estimated"):
+        r2 = pd.read_csv(r2p)
+        r = r2[(r2["measure"] == "rv_last_hour") & (r2["sample"] == "Tuesday regime, before 3 Aug 2026")].iloc[0]
+        out["h2_original_last_hour_vs_closing_auction_r2_split"] = {
+            "published_pct": float(r["pct_expiry_vs_week"]), "here_pct": d["pct_premium"],
+            "published_p_two_sided": float(r["p_signed_rank"]), "here_p_two_sided": d["p_two_sided"],
+            "published_weeks": int(r["weeks"]), "here_weeks": d["weeks"],
+            "match": bool(abs(float(r["pct_expiry_vs_week"]) - d["pct_premium"]) < 1e-8 and int(r["weeks"]) == d["weeks"])}
     return out
 
 
@@ -547,7 +591,7 @@ def code_fingerprint() -> dict:
     return {f: sha256(ROOT / f) for f in files}
 
 
-# ---------------------------------------------------------------- power arithmetic (pre-registration, section 6)
+# ---------------------------------------------------------------- power arithmetic (pre-registration, section 5)
 
 
 def one_sided_power(effect: float, se: float, alpha: float) -> float:
@@ -572,8 +616,8 @@ def power_inputs(root: Path = ROOT) -> dict:
     g = gs[(gs["rule"] == "participant_pro") & (gs["subset"] == "all")].set_index("state")["days"]
     t4 = pd.read_csv(root / "results/falsification/t4_preregistered_f2.csv")
     t4 = t4[t4["rule"] == "participant_pro"].set_index("sample")
-    dm = pd.read_csv(root / "results/pipeline_nse/daily_market.csv", index_col=0, parse_dates=True)
-    panel = pd.read_csv(root / "results/pipeline_nse/daily_gex_panel.csv", index_col=0, parse_dates=True)
+    run = committed_run(root)
+    dm, panel = load_inputs(run)
     scale = panel["gross_gex"].rolling(20, min_periods=5).median()
     gp = (panel[mg.RULES["participant_pro"]] / scale).shift(1).reindex(dm.index)
     tue = gp[(dm.index >= pd.Timestamp("2025-09-01")) & gp.notna()]
@@ -596,6 +640,7 @@ def power_inputs(root: Path = ROOT) -> dict:
         "h2_ci": (float(r2["ci95_low"]), float(r2["ci95_high"])),
         "h2_mde80_wild": float(pr["mde80_wild"]), "h2_mde80_residual": float(pr["mde80_residual"]),
         "h2_analytic_2p8_se": float(pr["analytic_mde80_2p8_se"]),
+        "run_folder_for_rates": str(run.relative_to(root)),
     }
 
 
@@ -643,7 +688,7 @@ def power_report(root: Path = ROOT) -> tuple[str, dict]:
          f"{x['t4_pre_neg']} / {x['t4_pre_n'] - x['t4_pre_neg']} -> {se_h1(x['t4_pre_neg'], x['t4_pre_n'] - x['t4_pre_neg']):.4f}, "
          f"actual {x['t4_pre_se']:.4f}",
          f"  share of days with negative Pro GEX: 2025 onward {x['t4_full_neg']}/{x['t4_full_n']} = {rate_full:.3f}; "
-         f"Tuesday regime {x['tue_neg']}/{x['tue_n']} = {rate_tue:.3f}; auction days "
+         f"Tuesday regime {x['tue_neg']}/{x['tue_n']} = {rate_tue:.3f} ({x['run_folder_for_rates']}); auction days "
          f"{x['t4_full_neg'] - x['t4_pre_neg']}/{x['t4_full_n'] - x['t4_pre_n']} = {rate_auc:.3f}",
          f"  trading days: {x['days_2023']} (2023), {x['days_2024']} (2024), {x['days_2025']} (2025); {per_year} a year assumed; "
          f"{x['days_3nov_31dec_2025']} from 3 Nov to 31 Dec 2025 used for the rest of 2026; to 31 Dec 2027: {to_2027}, "
@@ -699,7 +744,8 @@ def write_markdown(path: Path, s: dict) -> None:
               "> **This is NOT the forward test.** Every day in this window was already used to find and study the "
               "effects (REAL_DATA_RESULTS R2 and R5, FALSIFICATION T4), so nothing here is evidence for or against H1 "
               "or H2. It only shows that `scripts/forward_test.py` runs end to end, reproduces published numbers and "
-              "applies the pre-registered decision rules. The stopping rules are not applied to past data.", ""]
+              "applies the pre-registered decision rules. The date caps do not apply to past data: each test uses the "
+              "whole window unless its count rule (130 negative-GEX days, 100 weeks) is reached inside it.", ""]
     else:
         L += [f"# Forward test, {s['window']['start']} to {s['window']['end']}", "",
               f"Pre-registered in `{PREREG}`. The analysis must be run with the code at the commit that adds that file.", ""]
@@ -822,14 +868,16 @@ def main(argv=None) -> int:
         "rv_last_hour_rebuilt_from_bars_vs_pipeline_max_rel_diff": res.pop("check_rv_last_hour_matches_pipeline_max_rel_diff"),
         "lead_in_trading_days_before_start": lead_in_check(dm, start),
     }
-    committed = ROOT / "results/pipeline_nse"
-    if (committed / "daily_gex_panel.csv").exists() and not a.run:
+    if not forward:
+        checks["dry_run_reproduces_published_numbers"] = reference_checks(res, start, end)
+    committed = committed_run()
+    if committed is not None and not a.run:
         cdm, cpanel = load_inputs(committed)
         j = panel.join(cpanel, rsuffix="_committed", how="inner")
         jd = dm.join(cdm[["is_expiry"]], rsuffix="_committed", how="inner")
         if len(j):
-            checks["rebuilt_panel_vs_results_pipeline_nse"] = {
-                "overlapping_days": int(len(j)),
+            checks["rebuilt_panel_vs_committed_run"] = {
+                "committed_run": str(committed.relative_to(ROOT)), "overlapping_days": int(len(j)),
                 "max_rel_diff_net_gex_participant": float((j["net_gex_participant"] / j["net_gex_participant_committed"] - 1).abs().max()),
                 "sign_mismatches_net_gex_participant": int((np.sign(j["net_gex_participant"]) != np.sign(j["net_gex_participant_committed"])).sum()),
                 "expiry_label_mismatches": int((jd["is_expiry"].astype(bool) != jd["is_expiry_committed"].astype(bool)).sum())}
@@ -837,7 +885,7 @@ def main(argv=None) -> int:
     if forward and not bars_ok:
         for h, key in (("H1", "h1"), ("H2", "h2")):
             if res[key]["status"] != "not reached":
-                res[key] = {"status": "not evaluable", "reason": "minute bars failed the check against NSE (more than 2% of days)"}
+                res[key] = {"status": "data check failed", "reason": "minute bars failed the check against NSE (more than 2% of days)"}
         res["decisions"] = classify({"H1": res["h1"], "H2": res["h2"]})
         res.pop("_h1_days", None), res.pop("_h2_weeks", None)
 
@@ -872,7 +920,7 @@ def main(argv=None) -> int:
         res["_h1_days"].to_csv(out / "h1_days.csv", index_label="date")
     if "_h2_weeks" in res:
         res["_h2_weeks"].to_csv(out / "h2_weeks.csv", index=False)
-    if not forward or (res["h1"]["status"] != "not reached" and res["h2"]["status"] != "not reached"):
+    if forward and res["h1"]["status"] != "not reached" and res["h2"]["status"] != "not reached":
         (out / "inputs").mkdir(exist_ok=True)
         dm.to_csv(out / "inputs" / "daily_market.csv")
         panel.to_csv(out / "inputs" / "daily_gex_panel.csv")
