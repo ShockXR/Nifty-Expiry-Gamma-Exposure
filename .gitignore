@@ -7,3 +7,6 @@ __pycache__/
 data/raw/
 data/processed/
 *.pdf
+
+# local agent worktrees
+.claude/worktrees/
