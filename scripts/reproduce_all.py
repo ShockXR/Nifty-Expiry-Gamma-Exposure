@@ -41,6 +41,7 @@ DOWNLOAD = [
     ("download_nse_2022", [PY, "scripts/download_nse.py", "--start", "2022-10-20", "--end", "2022-12-30", "--out", "data/raw/extra_2022"]),
     ("fetch_minute_bars", [PY, "scripts/fetch_minute_bars.py", "--out", "data/raw", "--until", END,
                            "--nifty-ref", SOURCES["nifty"]["commit"], "--bank-ref", SOURCES["banknifty"]["commit"]]),
+    ("fetch_sensex_bars", [PY, "experiments/sensex_confound.py", "--fetch-sensex", "--fetch-only", "--until", END]),
 ]
 
 # name, command, outputs (for the log only)
@@ -61,6 +62,11 @@ OPTIONAL = {  # studies added later; run if the script exists
     "intraday_gamma": ([PY, "experiments/intraday_gamma.py"], "results/intraday_gamma/"),
     "dealer_sign": ([PY, "experiments/dealer_sign.py"], "results/dealer_sign/"),
     "expiry_event_study": ([PY, "experiments/expiry_event_study.py"], "results/event_study/"),
+    "sensex_confound": ([PY, "experiments/sensex_confound.py"], "results/sensex_confound/"),
+    "connectedness_gamma": ([PY, "experiments/connectedness_gamma.py"], "results/connectedness_gamma/"),
+    "power_real": ([PY, "experiments/power_real.py"], "results/power_real/"),
+    "rekey_check": ([PY, "experiments/rekey_check.py"], "results/replication_nse/rekey_check.csv"),
+    "forecast_diagnostics": ([PY, "experiments/forecast_diagnostics.py"], "results/forecast_diagnostics/"),
 }
 
 

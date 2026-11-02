@@ -1,0 +1,218 @@
+REAL DATA. Sensex expiry as a confounder of the NSE expiry studies.
+
+Official NSE trading days in index_daily.csv: 944 (2023-01-02 to 2026-11-02).
+Bhavcopy files read: 994 trade dates, 2022-10-20 to 2026-11-02, 2,773,733 NIFTY/BANKNIFTY rows.
+Official days without a bhavcopy: []; bhavcopy days not official: []
+Rows with trades but no lot size after inference: 0
+Option lot size (daily median over traded contracts; runs):
+   symbol  lot       from         to  trade_dates                                 source
+BANKNIFTY   25 2022-10-20 2023-07-06          176 inferred from turnover (legacy layout)
+BANKNIFTY   15 2023-07-07 2024-07-05          244 inferred from turnover (legacy layout)
+BANKNIFTY   15 2024-07-08 2025-01-07          126                printed in file (UDiFF)
+BANKNIFTY   30 2025-01-08 2025-06-26          115                printed in file (UDiFF)
+BANKNIFTY   35 2025-06-27 2025-12-30          127                printed in file (UDiFF)
+BANKNIFTY   30 2025-12-31 2026-11-02          206                printed in file (UDiFF)
+    NIFTY   50 2022-10-20 2024-04-25          372 inferred from turnover (legacy layout)
+    NIFTY   25 2024-04-26 2024-07-05           48 inferred from turnover (legacy layout)
+    NIFTY   25 2024-07-08 2024-12-26          118                printed in file (UDiFF)
+    NIFTY   75 2024-12-27 2025-12-22          245                printed in file (UDiFF)
+    NIFTY   65 2025-12-23 2026-11-02          211                printed in file (UDiFF)
+Nifty 50 minute bars: 2368 days 2017-04-03 to 2026-11-02; dropped 10 (weekend sessions, <370 bars, >20% flat bars or not an official day): ['2017-07-10', '2020-02-01', '2021-02-24', '2021-11-04', '2024-01-20', '2024-03-02', '2024-05-18', '2025-02-01', '2025-10-21', '2026-02-01']
+Bank Nifty minute bars: 2297 days 2017-01-02 to 2026-04-22; dropped 14 (weekend sessions, <370 bars, >20% flat bars or not an official day): ['2017-02-21', '2017-07-10', '2019-09-23', '2020-02-01', '2021-02-24', '2022-03-07', '2023-06-14', '2024-01-20', '2024-03-02', '2024-04-23', '2024-05-18', '2025-02-01', '2025-10-21', '2026-02-01']
+Rule check NIFTY 2022-10-20 to 2025-08-31: rule 150 expiries, bhavcopy 150; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
+Rule check BANKNIFTY 2022-10-20 to 2023-08-31: rule 46 expiries, bhavcopy 46; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
+Closing auction detected in the Nifty bars from 2026-08-03 (63 days, every one with >= 8 flat bars in the last 20 minutes; 0 valid days before it had that many).
+Data assembled in 25.8s.
+
+== Sensex calendar (rule from reported regimes, checked against third-party option prices)
+Regimes: [('2023-05-15', '2025-01-03', 'Fri'), ('2025-01-01', '2025-08-31', 'Tue'), ('2025-09-01', '2100-01-01', 'Thu')]
+Rule expiries: 181 from 2023-05-19 to 2026-10-29, 10 moved by a holiday: ['2024-01-25', '2024-03-07', '2024-03-28', '2024-10-31', '2024-11-14', '2025-10-01', '2025-12-24', '2026-01-14', '2026-03-25', '2026-05-27']
+Official NSE days treated as no-expiry special sessions (no full Nifty session): ['2024-11-01', '2025-10-21']
+                                             check       from         to  n_rule  n_other  n_both                                      rule_only other_only
+            rule vs expiry dates in option symbols 2024-01-01 2025-05-30      74       72      72                          2024-12-13;2024-12-20           
+rule vs dates with option prices on the expiry day 2024-01-01 2025-05-30      71       71      71                                                          
+     individually reported dates found in the rule 2023-05-01 2026-12-31    <NA>        5       5 n/a (only a few dates are reported one by one)           
+Sensex minute bars: 942 valid days 2023-01-02 to 2026-11-02 (dropped 6).
+
+== MAIN PRE-STATED TEST (S1: Sensex Friday -> Tuesday, week of 6 Jan 2025)
+Nifty, Tuesday minus Friday, week-relative log rv_last30, clean weekly weeks, 26 weeks each side: pre mean -0.263 (15 weeks, from 2024-07-08), post mean +0.130 (16 weeks, to 2025-06-30)
+change +0.393, bootstrap 95% [-0.194, +1.031], HAC p 0.1572, Mann-Whitney p 0.1989, placebo p 0.0882 (203 placebo weeks, 5 non-overlapping), placebo p with every event blocked 0.0769, pre-trend p 0.919
+Minimum detectable change at 80% power (2.8 x HAC standard error): 0.779
+Implied Sensex-day effect on Nifty's last 30 minutes (change / 2.5, full weeks): +0.157 log points
+Decision (H1 needs change > 0, HAC p < 0.05 and placebo p < 0.05): NOT SUPPORTED
+
+== Calendar check: Sensex minus Nifty, week-relative log rv_last30 (means, clean weekly weeks)
+target                                          Mon    Tue    Wed    Thu    Fri  sxday
+sensex_regime                                                                         
+pre-relaunch (no Sensex weekly)              -0.078  0.067 -0.003  0.052 -0.039    NaN
+Fri                                           0.008 -0.174 -0.216 -0.156  0.545  0.542
+Fri, 2023 only (no option-price dates)       -0.052 -0.083 -0.129 -0.121  0.373    NaN
+Tue                                          -0.072  0.466 -0.147 -0.098 -0.177  0.466
+Tue, Jun to Aug 2025 (no option-price dates) -0.151  0.958 -0.161 -0.278 -0.409    NaN
+Thu                                          -0.138 -0.258  0.083  0.615 -0.254  0.590
+
+== (i) Levels on Sensex expiry days that are not NSE expiry days (baseline without NSE expiry days)
+index      measure sensex_regime  n_weeks  mean  boot_lo  boot_hi     hac_p  wilcoxon_p
+    N    rv_last30           Fri       52 0.414    0.225    0.601 5.169e-06   1.886e-04
+    N    rv_last30           Tue       23 0.266    0.014    0.558 5.595e-02   3.838e-02
+    N    rv_last30           Thu       34 0.625    0.366    0.836 1.535e-06   1.154e-06
+    N rv_last_hour           Fri       52 0.330    0.108    0.529 1.098e-03   7.529e-04
+    N rv_last_hour           Tue       23 0.197    0.011    0.386 5.024e-02   1.601e-01
+    N rv_last_hour           Thu       34 0.509    0.308    0.698 4.557e-07   4.062e-06
+   BN    rv_last30           Fri       52 0.262    0.099    0.426 7.365e-04   4.122e-03
+   BN    rv_last30           Tue       23 0.127   -0.160    0.416 4.205e-01   2.595e-01
+   BN    rv_last30           Thu       23 0.551    0.345    0.760 2.955e-07   4.029e-05
+   BN rv_last_hour           Fri       52 0.200    0.021    0.365 2.645e-02   2.071e-02
+   BN rv_last_hour           Tue       23 0.110   -0.105    0.295 3.364e-01   2.861e-01
+   BN rv_last_hour           Thu       23 0.434    0.268    0.600 2.979e-08   6.387e-04
+
+== (ii) Change tests
+event           series      measure  n_pre  n_post  diff  boot_lo  boot_hi  hac_p  mwu_p  ri_p  ri_n_independent  pretrend_p
+   S1  N Tue minus Fri    rv_last30     15      16 0.393   -0.194    1.031  0.157  0.199 0.088                 5       0.919
+   S1 BN Tue minus Fri    rv_last30     15      16 0.205   -0.362    0.792  0.478  0.649 0.529                 5       0.203
+   S1  N Tue minus Fri rv_last_hour     15      16 0.230   -0.372    0.910  0.386  0.649 0.559                 5       0.989
+   S1 BN Tue minus Fri rv_last_hour     15      16 0.073   -0.430    0.589  0.776  1.000 0.897                 5       0.062
+   S1  N Tue minus Fri          rv5     15      16 0.305   -0.314    0.960  0.173  0.567 0.588                 5       0.913
+   S1 BN Tue minus Fri          rv5     15      16 0.292   -0.337    0.999  0.339  0.621 0.422                 5       0.111
+   S0            N Fri    rv_last30     18      12 0.378   -0.023    0.744  0.066  0.049 0.018                 4       0.536
+   S0           BN Fri    rv_last30     18      12 0.020   -0.341    0.404  0.910  0.816 0.858                 4       0.653
+
+== (ii) Holiday-moved Sensex Wednesdays
+index                                      sensex_wednesdays  n_sensex  n_other  mean_sensex  mean_other  diff  perm_p
+    N 2025-10-01;2025-12-24;2026-01-14;2026-03-25;2026-05-27         5       40        0.452      -0.369 0.820   0.021
+   BN            2025-10-01;2025-12-24;2026-01-14;2026-03-25         4       26        0.662      -0.482 1.144   0.002
+
+== (ii)/(iii) Pooled regression (week and weekday fixed effects, SE clustered by week)
+index      measure                 spec                 term   coef    se         p  n_days  n_weeks
+    N          rv5 without Sensex dummy         own_thu_to_d -0.044 0.083 5.947e-01     670      139
+    N          rv5 without Sensex dummy       own_tue_from_d  0.119 0.113 2.950e-01     670      139
+    N          rv5 without Sensex dummy            other_nse  0.232 0.089 9.565e-03     670      139
+    N          rv5    with Sensex dummy         own_thu_to_d -0.082 0.130 5.267e-01     670      139
+    N          rv5    with Sensex dummy       own_tue_from_d  0.117 0.114 3.043e-01     670      139
+    N          rv5    with Sensex dummy            other_nse  0.225 0.092 1.451e-02     670      139
+    N          rv5    with Sensex dummy               sensex -0.032 0.086 7.134e-01     670      139
+    N rv_last_hour without Sensex dummy         own_thu_to_d -0.378 0.117 1.273e-03     670      139
+    N rv_last_hour without Sensex dummy       own_tue_from_d  0.449 0.114 7.860e-05     670      139
+    N rv_last_hour without Sensex dummy            other_nse  0.238 0.096 1.354e-02     670      139
+    N rv_last_hour    with Sensex dummy         own_thu_to_d -0.072 0.149 6.309e-01     670      139
+    N rv_last_hour    with Sensex dummy       own_tue_from_d  0.463 0.115 6.033e-05     670      139
+    N rv_last_hour    with Sensex dummy            other_nse  0.287 0.095 2.496e-03     670      139
+    N rv_last_hour    with Sensex dummy               sensex  0.256 0.076 7.898e-04     670      139
+    N    rv_last30 without Sensex dummy         own_thu_to_d -0.477 0.124 1.207e-04     670      139
+    N    rv_last30 without Sensex dummy       own_tue_from_d  0.505 0.141 3.360e-04     670      139
+    N    rv_last30 without Sensex dummy            other_nse  0.247 0.109 2.432e-02     670      139
+    N    rv_last30    with Sensex dummy         own_thu_to_d -0.078 0.168 6.411e-01     670      139
+    N    rv_last30    with Sensex dummy       own_tue_from_d  0.523 0.143 2.546e-04     670      139
+    N    rv_last30    with Sensex dummy            other_nse  0.310 0.108 3.909e-03     670      139
+    N    rv_last30    with Sensex dummy               sensex  0.334 0.085 8.810e-05     670      139
+   BN          rv5 without Sensex dummy         own_thu_to_a  0.154 0.112 1.681e-01     618      129
+   BN          rv5 without Sensex dummy       own_wed_a_to_c  0.143 0.115 2.134e-01     618      129
+   BN          rv5 without Sensex dummy   other_nse_thu_to_d  0.056 0.108 6.012e-01     618      129
+   BN          rv5 without Sensex dummy other_nse_tue_from_d  0.055 0.143 7.022e-01     618      129
+   BN          rv5    with Sensex dummy         own_thu_to_a  0.170 0.137 2.140e-01     618      129
+   BN          rv5    with Sensex dummy       own_wed_a_to_c  0.146 0.118 2.140e-01     618      129
+   BN          rv5    with Sensex dummy   other_nse_thu_to_d  0.074 0.151 6.232e-01     618      129
+   BN          rv5    with Sensex dummy other_nse_tue_from_d  0.056 0.144 6.991e-01     618      129
+   BN          rv5    with Sensex dummy               sensex  0.014 0.072 8.413e-01     618      129
+   BN rv_last_hour without Sensex dummy         own_thu_to_a -0.120 0.142 3.978e-01     618      129
+   BN rv_last_hour without Sensex dummy       own_wed_a_to_c  0.254 0.126 4.375e-02     618      129
+   BN rv_last_hour without Sensex dummy   other_nse_thu_to_d -0.455 0.138 9.859e-04     618      129
+   BN rv_last_hour without Sensex dummy other_nse_tue_from_d  0.378 0.113 8.634e-04     618      129
+   BN rv_last_hour    with Sensex dummy         own_thu_to_a  0.026 0.162 8.737e-01     618      129
+   BN rv_last_hour    with Sensex dummy       own_wed_a_to_c  0.281 0.125 2.497e-02     618      129
+   BN rv_last_hour    with Sensex dummy   other_nse_thu_to_d -0.287 0.170 9.097e-02     618      129
+   BN rv_last_hour    with Sensex dummy other_nse_tue_from_d  0.386 0.115 7.692e-04     618      129
+   BN rv_last_hour    with Sensex dummy               sensex  0.135 0.073 6.500e-02     618      129
+   BN    rv_last30 without Sensex dummy         own_thu_to_a -0.190 0.151 2.097e-01     618      129
+   BN    rv_last30 without Sensex dummy       own_wed_a_to_c  0.457 0.131 5.061e-04     618      129
+   BN    rv_last30 without Sensex dummy   other_nse_thu_to_d -0.581 0.140 3.446e-05     618      129
+   BN    rv_last30 without Sensex dummy other_nse_tue_from_d  0.458 0.147 1.904e-03     618      129
+   BN    rv_last30    with Sensex dummy         own_thu_to_a -0.017 0.172 9.200e-01     618      129
+   BN    rv_last30    with Sensex dummy       own_wed_a_to_c  0.488 0.133 2.289e-04     618      129
+   BN    rv_last30    with Sensex dummy   other_nse_thu_to_d -0.382 0.185 3.924e-02     618      129
+   BN    rv_last30    with Sensex dummy other_nse_tue_from_d  0.468 0.149 1.662e-03     618      129
+   BN    rv_last30    with Sensex dummy               sensex  0.159 0.086 6.353e-02     618      129
+
+== (iii) R2 rerun (reproduces the published R2 table: True)
+      measure                                    regime    weeks  mean_rel  wilcoxon_p_rel_eq_0  mannwhitney_p weeks_sensex_control  mean_rel_sensex_control  ci95_low_sensex_control  ci95_high_sensex_control  wilcoxon_p_rel_eq_0_sensex_control  mannwhitney_p_sensex_control
+       rv_day                              multi_weekly       98     0.108            4.546e-02            NaN                   98                    0.141                    0.025                     0.247                           2.057e-02                           NaN
+       rv_day                         single_weekly_thu       41    -0.119            2.626e-01            NaN                   40                   -0.104                   -0.310                     0.102                           3.611e-01                           NaN
+       rv_day                         single_weekly_tue       61     0.192            5.147e-03            NaN                   59                    0.231                    0.121                     0.358                           9.463e-04                           NaN
+       rv_day      single_weekly_thu minus multi_weekly 98 vs 41    -0.227                  NaN          0.048             98 vs 40                   -0.245                      NaN                       NaN                                 NaN                         0.048
+       rv_day single_weekly_tue minus single_weekly_thu 41 vs 61     0.310                  NaN          0.012             40 vs 59                    0.335                      NaN                       NaN                                 NaN                         0.008
+       rv_day      single_weekly_tue minus multi_weekly 98 vs 61     0.083                  NaN          0.351             98 vs 59                    0.089                      NaN                       NaN                                 NaN                         0.387
+rv_first_hour                              multi_weekly       98     0.002            9.224e-01            NaN                   98                    0.014                   -0.108                     0.131                           9.139e-01                           NaN
+rv_first_hour                         single_weekly_thu       41    -0.177            1.002e-01            NaN                   40                   -0.167                   -0.378                     0.025                           1.659e-01                           NaN
+rv_first_hour                         single_weekly_tue       61     0.123            3.598e-01            NaN                   59                    0.105                   -0.058                     0.300                           5.460e-01                           NaN
+rv_first_hour      single_weekly_thu minus multi_weekly 98 vs 41    -0.180                  NaN          0.183             98 vs 40                   -0.181                      NaN                       NaN                                 NaN                         0.251
+rv_first_hour single_weekly_tue minus single_weekly_thu 41 vs 61     0.300                  NaN          0.063             40 vs 59                    0.272                      NaN                       NaN                                 NaN                         0.155
+rv_first_hour      single_weekly_tue minus multi_weekly 98 vs 61     0.120                  NaN          0.386             98 vs 59                    0.092                      NaN                       NaN                                 NaN                         0.700
+ rv_last_hour                              multi_weekly       98     0.152            5.280e-02            NaN                   98                    0.219                    0.075                     0.363                           5.804e-03                           NaN
+ rv_last_hour                         single_weekly_thu       41     0.092            6.535e-01            NaN                   40                    0.153                   -0.166                     0.471                           3.611e-01                           NaN
+ rv_last_hour                         single_weekly_tue       61     0.356            5.020e-05            NaN                   59                    0.486                    0.314                     0.653                           4.450e-06                           NaN
+ rv_last_hour      single_weekly_thu minus multi_weekly 98 vs 41    -0.060                  NaN          0.690             98 vs 40                   -0.066                      NaN                       NaN                                 NaN                         0.755
+ rv_last_hour single_weekly_tue minus single_weekly_thu 41 vs 61     0.265                  NaN          0.103             40 vs 59                    0.333                      NaN                       NaN                                 NaN                         0.071
+ rv_last_hour      single_weekly_tue minus multi_weekly 98 vs 61     0.205                  NaN          0.026             98 vs 59                    0.267                      NaN                       NaN                                 NaN                         0.010
+
+== (iii) Event-study key tests, 6 months (largest difference from event_tests.csv as published: 1.11e-16)
+    spec_id      measure  n_pre  n_post   diff  boot_lo  boot_hi     hac_p  ri_p  pretrend_p  n_pre_sensex_control  n_post_sensex_control  diff_sensex_control  boot_lo_sensex_control  boot_hi_sensex_control  hac_p_sensex_control  ri_p_sensex_control  pretrend_p_sensex_control
+ c_DiD_main          rv5     16      17 -0.011   -0.605    0.554 9.710e-01 0.962   3.727e-01                    16                     16                0.084                  -0.575                   0.701             7.899e-01                0.757                  3.973e-01
+ c_DiD_main rv_last_hour     16      17 -0.297   -1.132    0.425 4.564e-01 0.416   2.354e-01                    16                     16               -0.245                  -1.131                   0.533             5.779e-01                0.605                  3.346e-01
+ c_DiD_main    rv_last30     16      17 -0.457   -1.397    0.348 2.804e-01 0.238   3.588e-03                    16                     16               -0.500                  -1.470                   0.398             2.875e-01                0.243                  1.278e-02
+a_BN_switch          rv5     19      20  0.120   -0.234    0.487 4.783e-01 0.459   3.110e-01                    19                     20                0.112                  -0.261                   0.495             5.289e-01                0.535                  3.441e-01
+a_BN_switch rv_last_hour     19      20  0.919    0.404    1.412 8.842e-05 0.005   5.761e-01                    19                     20                0.961                   0.412                   1.474             1.237e-04                0.016                  4.654e-01
+a_BN_switch    rv_last30     19      20  1.136    0.498    1.734 1.393e-04 0.005   5.273e-01                    19                     20                1.191                   0.503                   1.834             2.107e-04                0.005                  4.280e-01
+    d_N_Tue          rv5     18      19  0.263    0.002    0.523 5.075e-02 0.222   3.786e-01                    18                     19                0.267                   0.010                   0.522             3.827e-02                0.216                  3.786e-01
+    d_N_Tue rv_last_hour     18      19  0.494    0.266    0.715 5.343e-05 0.005   1.118e-05                    18                     19                0.671                   0.432                   0.905             4.600e-08                0.005                  1.118e-05
+    d_N_Tue    rv_last30     18      19  0.392    0.065    0.703 2.568e-02 0.005   9.273e-01                    18                     19                0.616                   0.279                   0.929             6.046e-04                0.005                  9.273e-01
+    d_N_Thu          rv5     18      17 -0.089   -0.362    0.183 5.117e-01 0.535   5.042e-01                    17                     17               -0.033                  -0.338                   0.268             8.282e-01                0.849                  2.144e-01
+    d_N_Thu rv_last_hour     18      17 -0.017   -0.446    0.416 9.393e-01 0.897   3.614e-01                    17                     17               -0.076                  -0.526                   0.381             7.410e-01                0.616                  1.915e-01
+    d_N_Thu    rv_last30     18      17  0.293   -0.046    0.637 1.035e-01 0.049   3.576e-01                    17                     17                0.188                  -0.217                   0.589             3.587e-01                0.200                  4.311e-01
+ d_N_switch          rv5     18      17  0.318   -0.096    0.727 1.266e-01 0.297   9.944e-01                    17                     17                0.245                  -0.165                   0.647             2.391e-01                0.341                  6.230e-01
+ d_N_switch rv_last_hour     18      17  0.444   -0.034    0.946 9.917e-02 0.103   8.887e-01                    17                     17                0.647                   0.179                   1.145             1.430e-02                0.054                  8.034e-01
+ d_N_switch    rv_last30     18      17  0.003   -0.337    0.387 9.878e-01 0.984   2.803e-01                    17                     17                0.296                  -0.067                   0.695             1.575e-01                0.097                  2.786e-01
+  d_DiD_Thu          rv5     18      17 -0.057   -0.277    0.147 5.943e-01 0.762   3.609e-01                    17                     17               -0.047                  -0.291                   0.167             6.763e-01                0.854                  3.912e-01
+  d_DiD_Thu rv_last_hour     18      17 -0.093   -0.310    0.118 4.079e-01 0.341   6.703e-01                    17                     17               -0.141                  -0.364                   0.063             2.003e-01                0.141                  8.684e-01
+  d_DiD_Thu    rv_last30     18      17  0.075   -0.159    0.296 5.100e-01 0.611   5.968e-01                    17                     17                0.010                  -0.238                   0.249             9.333e-01                0.978                  5.257e-01
+
+== (iii) Own-expiry premium by regime
+index      measure regime                     version  n_weeks   mean  boot_lo  boot_hi     hac_p
+    N          rv5    R0v                as published       34  0.055   -0.087    0.204 4.372e-01
+    N          rv5     R1                as published       42 -0.008   -0.219    0.210 9.421e-01
+    N          rv5     R2                as published       29 -0.153   -0.492    0.161 3.980e-01
+    N          rv5     R3                as published       34  0.062   -0.074    0.212 3.506e-01
+    N          rv5    R0v Sensex days out of baseline       34  0.089   -0.072    0.262 2.846e-01
+    N          rv5     R1 Sensex days out of baseline       42 -0.029   -0.245    0.187 7.875e-01
+    N          rv5     R2 Sensex days out of baseline       28 -0.157   -0.494    0.164 3.769e-01
+    N          rv5     R3 Sensex days out of baseline       34  0.062   -0.066    0.203 3.205e-01
+    N rv_last_hour    R0v                as published       34  0.084   -0.077    0.246 2.984e-01
+    N rv_last_hour     R1                as published       42  0.095   -0.136    0.339 4.455e-01
+    N rv_last_hour     R2                as published       29  0.110   -0.357    0.571 6.781e-01
+    N rv_last_hour     R3                as published       34  0.335    0.161    0.514 1.003e-03
+    N rv_last_hour    R0v Sensex days out of baseline       34  0.127   -0.050    0.302 1.600e-01
+    N rv_last_hour     R1 Sensex days out of baseline       42  0.160   -0.097    0.426 2.364e-01
+    N rv_last_hour     R2 Sensex days out of baseline       28  0.172   -0.326    0.649 5.273e-01
+    N rv_last_hour     R3 Sensex days out of baseline       34  0.473    0.263    0.682 6.314e-05
+    N    rv_last30    R0v                as published       34  0.018   -0.172    0.209 8.571e-01
+    N    rv_last30     R1                as published       42  0.108   -0.136    0.350 3.888e-01
+    N    rv_last30     R2                as published       29  0.037   -0.300    0.365 8.411e-01
+    N    rv_last30     R3                as published       34  0.420    0.208    0.646 4.514e-04
+    N    rv_last30    R0v Sensex days out of baseline       34  0.063   -0.126    0.246 5.045e-01
+    N    rv_last30     R1 Sensex days out of baseline       42  0.188   -0.078    0.451 1.656e-01
+    N    rv_last30     R2 Sensex days out of baseline       28  0.128   -0.239    0.495 5.370e-01
+    N    rv_last30     R3 Sensex days out of baseline       34  0.590    0.338    0.846 3.494e-05
+   BN          rv5    R0v                as published       34  0.085   -0.060    0.242 1.912e-01
+   BN          rv5     R1                as published       42  0.040   -0.126    0.212 6.358e-01
+   BN          rv5    R0v Sensex days out of baseline       34  0.114   -0.045    0.289 1.290e-01
+   BN          rv5     R1 Sensex days out of baseline       42  0.034   -0.143    0.213 6.924e-01
+   BN rv_last_hour    R0v                as published       34  0.305    0.093    0.511 4.336e-03
+   BN rv_last_hour     R1                as published       42  0.189   -0.020    0.400 8.235e-02
+   BN rv_last_hour    R0v Sensex days out of baseline       34  0.320    0.098    0.542 4.908e-03
+   BN rv_last_hour     R1 Sensex days out of baseline       42  0.255    0.030    0.486 2.565e-02
+   BN    rv_last30    R0v                as published       34  0.324    0.088    0.566 9.536e-03
+   BN    rv_last30     R1                as published       42  0.323    0.093    0.553 1.007e-02
+   BN    rv_last30    R0v Sensex days out of baseline       34  0.345    0.099    0.597 8.654e-03
+   BN    rv_last30     R1 Sensex days out of baseline       42  0.409    0.151    0.679 3.637e-03
+
+== Tests run: 83 p-values ({'(iii) re-estimate': 54, '(ii) change': 13, '(i) level': 12, 'calendar check': 3, 'main': 1}); one main test.
+Total run time 53s.

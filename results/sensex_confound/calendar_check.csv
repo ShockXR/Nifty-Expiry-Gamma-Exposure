@@ -1,0 +1,4 @@
+check,from,to,n_rule,n_other,n_both,rule_only,other_only
+rule vs expiry dates in option symbols,2024-01-01,2025-05-30,74,72,72,2024-12-13;2024-12-20,
+rule vs dates with option prices on the expiry day,2024-01-01,2025-05-30,71,71,71,,
+individually reported dates found in the rule,2023-05-01,2026-12-31,,5,5,n/a (only a few dates are reported one by one),

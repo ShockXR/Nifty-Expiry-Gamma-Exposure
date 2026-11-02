@@ -28,7 +28,7 @@ RAW = Path("data/raw")
 MANIFEST = Path("data/MANIFEST.csv")
 
 
-SKIP = {"download_misses.csv"}  # download logs, not data
+SKIP = {"download_misses.csv", "sensex_1min_source.json"}  # download logs and a provenance file with a fetch time stamp, not data
 
 
 def sha256(path: Path, chunk: int = 1 << 20) -> str:
