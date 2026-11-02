@@ -4,9 +4,9 @@ mcsgarch,0.0,False,all
 har,0.0,False,all
 naive_prevday,0.0,False,all
 vix,0.0,False,all
-lgbm_base,0.346,True,all
-lgbm_gex,0.93,True,all
-hybrid_gex,0.974,True,all
-hybrid_gex_participant,0.974,True,all
-hybrid_gex_us,0.974,True,all
-hybrid_base,1.0,True,all
+hybrid_gex,0.573,True,all
+lgbm_base,0.573,True,all
+lgbm_gex,0.831,True,all
+hybrid_gex_us,0.976,True,all
+hybrid_base,0.976,True,all
+hybrid_gex_participant,1.0,True,all

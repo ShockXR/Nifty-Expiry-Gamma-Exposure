@@ -1,0 +1,469 @@
+data,trim,overnight_in_first_minute,table,period,index,item,ours
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_stated,nifty,half_life_min,383.2504722718343
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_stated,nifty,alpha,0.04813307627443056
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_stated,nifty,beta,0.9500599572766221
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_stated,banknifty,half_life_min,68.89185060667602
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_stated,banknifty,alpha,0.05863144122840562
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_stated,banknifty,beta,0.9313576237947783
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_inferred,nifty,half_life_min,358.6391534635491
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_inferred,nifty,alpha,0.024618088614128956
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_inferred,nifty,beta,0.97345106312989
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_inferred,banknifty,half_life_min,161.96722743136837
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_inferred,banknifty,alpha,0.03214789126566381
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,before_inferred,banknifty,beta,0.9635817009158573
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,after,nifty,half_life_min,72.43737370272432
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,after,nifty,alpha,0.04982190170896999
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,after,nifty,beta,0.9406548181912517
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,after,banknifty,half_life_min,37.958852994726634
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,after,banknifty,alpha,0.053802195591933305
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,2,after,banknifty,beta,0.9281030288975249
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,all_days,total all_days,76.0810342102621
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,union,total all_expiry,73.14596284020439
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,union,total monthly,75.45471416548128
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,union,total monthly_first_hour,64.87335271447554
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,union,total monthly_mid_hour,73.55599442039897
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,union,total monthly_last_hour,81.7475993136139
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,nifty,total all_expiry,77.35157367392674
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,nifty,total monthly,75.45471416548128
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,nifty,total monthly_first_hour,64.87335271447554
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,nifty,total monthly_mid_hour,73.55599442039897
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,nifty,total monthly_last_hour,81.7475993136139
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,bn,total all_expiry,69.64357082959319
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,bn,total monthly,75.45471416548128
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,bn,total monthly_first_hour,64.87335271447554
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,bn,total monthly_mid_hour,73.55599442039897
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_stated,bn,total monthly_last_hour,81.7475993136139
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,all_days,total all_days,85.42397217677492
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,union,total all_expiry,87.94415374019613
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,union,total monthly,81.0866778415078
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,union,total monthly_first_hour,81.58812519739928
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,union,total monthly_mid_hour,78.81108192173991
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,union,total monthly_last_hour,84.72934566849844
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,nifty,total all_expiry,87.94415374019613
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,nifty,total monthly,81.0866778415078
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,nifty,total monthly_first_hour,81.58812519739928
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,nifty,total monthly_mid_hour,78.81108192173991
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,nifty,total monthly_last_hour,84.72934566849844
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,bn,total all_expiry,87.94415374019613
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,bn,total monthly,81.0866778415078
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,bn,total monthly_first_hour,81.58812519739928
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,bn,total monthly_mid_hour,78.81108192173991
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,before_inferred,bn,total monthly_last_hour,84.72934566849844
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,all_days,total all_days,74.08683606576261
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,union,total all_expiry,71.9565017870028
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,union,total monthly,72.0555062872904
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,union,total monthly_first_hour,73.42940428918499
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,union,total monthly_mid_hour,58.992397553667125
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,union,total monthly_last_hour,78.95575250213138
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,nifty,total all_expiry,74.89261929764595
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,nifty,total monthly,67.66452909623374
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,nifty,total monthly_first_hour,67.59069234175995
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,nifty,total monthly_mid_hour,50.20754061804779
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,nifty,total monthly_last_hour,77.44298723867891
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,bn,total all_expiry,68.92096039788747
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,bn,total monthly,74.13311537180573
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,bn,total monthly_first_hour,81.00758730738434
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,bn,total monthly_mid_hour,58.42506001465048
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,3/4,after,bn,total monthly_last_hour,80.32796459452203
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,nifty,all pct_change_median,12.212903110244921
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,nifty,all minute_mwu_p,6.625179136691145e-126
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,nifty,wed pct_change_median,7.79785349284845
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,nifty,wed minute_mwu_p,8.638358385618441e-14
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,nifty,thu pct_change_median,24.909494396026588
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,nifty,thu minute_mwu_p,2.7733181858027982e-86
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,banknifty,all pct_change_median,12.73288777856012
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,banknifty,all minute_mwu_p,5.063864545336893e-125
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,banknifty,wed pct_change_median,9.18944134645152
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,banknifty,wed minute_mwu_p,1.0778192735258322e-19
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,banknifty,thu pct_change_median,15.809456372178277
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_stated,banknifty,thu minute_mwu_p,8.225258008320553e-36
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,nifty,all pct_change_median,19.71935383933019
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,nifty,all minute_mwu_p,2.886964046165538e-256
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,nifty,wed pct_change_median,21.094453131795387
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,nifty,wed minute_mwu_p,7.022862452653563e-53
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,nifty,thu pct_change_median,49.25905278721554
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,nifty,thu minute_mwu_p,1.3777438150530835e-199
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,banknifty,all pct_change_median,14.810293318215662
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,banknifty,all minute_mwu_p,5.587816429225223e-149
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,banknifty,wed pct_change_median,16.36550580354834
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,banknifty,wed minute_mwu_p,4.2824152355087425e-45
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,banknifty,thu pct_change_median,25.49445208918457
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,True,6,before_inferred,banknifty,thu minute_mwu_p,3.916815875436059e-65
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_stated,nifty,half_life_min,409.62768719619845
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_stated,nifty,alpha,0.04760598081997708
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_stated,nifty,beta,0.9507033105633957
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_stated,banknifty,half_life_min,70.86112812773567
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_stated,banknifty,alpha,0.058031730066010034
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_stated,banknifty,beta,0.9322341869075509
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_inferred,nifty,half_life_min,361.3318241489029
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_inferred,nifty,alpha,0.024558484055008895
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_inferred,nifty,beta,0.9735250427120418
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_inferred,banknifty,half_life_min,162.97035353766896
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_inferred,banknifty,alpha,0.03210298086914307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,before_inferred,banknifty,beta,0.9636528409549566
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,after,nifty,half_life_min,73.21907416062474
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,after,nifty,alpha,0.049660785710369255
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,after,nifty,beta,0.9409171259976085
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,after,banknifty,half_life_min,39.00197271856148
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,after,banknifty,alpha,0.05295834477070966
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,2,after,banknifty,beta,0.9294265420229291
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,all_days,total all_days,69.5975942199446
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,union,total all_expiry,66.6252404664478
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,union,total monthly,70.9940751396256
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,union,total monthly_first_hour,61.947575576616046
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,union,total monthly_mid_hour,73.73678954271747
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,union,total monthly_last_hour,81.85033985937307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,nifty,total all_expiry,70.63069376099497
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,nifty,total monthly,70.9940751396256
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,nifty,total monthly_first_hour,61.947575576616046
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,nifty,total monthly_mid_hour,73.73678954271747
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,nifty,total monthly_last_hour,81.85033985937307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,bn,total all_expiry,63.578088005629475
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,bn,total monthly,70.9940751396256
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,bn,total monthly_first_hour,61.947575576616046
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,bn,total monthly_mid_hour,73.73678954271747
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_stated,bn,total monthly_last_hour,81.85033985937307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,all_days,total all_days,84.20451614720321
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,union,total all_expiry,86.11156041852792
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,union,total monthly,81.08241927005307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,union,total monthly_first_hour,79.03739161668446
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,union,total monthly_mid_hour,78.84476632372824
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,union,total monthly_last_hour,84.90320758907703
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,nifty,total all_expiry,86.11156041852792
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,nifty,total monthly,81.08241927005307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,nifty,total monthly_first_hour,79.03739161668446
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,nifty,total monthly_mid_hour,78.84476632372824
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,nifty,total monthly_last_hour,84.90320758907703
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,bn,total all_expiry,86.11156041852792
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,bn,total monthly,81.08241927005307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,bn,total monthly_first_hour,79.03739161668446
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,bn,total monthly_mid_hour,78.84476632372824
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,before_inferred,bn,total monthly_last_hour,84.90320758907703
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,all_days,total all_days,72.48922444895018
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,union,total all_expiry,70.38574226671017
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,union,total monthly,71.25406229213988
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,union,total monthly_first_hour,73.91272442764932
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,union,total monthly_mid_hour,59.02379517700801
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,union,total monthly_last_hour,79.0977916468794
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,nifty,total all_expiry,73.60838316831371
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,nifty,total monthly,66.56724686729797
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,nifty,total monthly_first_hour,67.47390433242253
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,nifty,total monthly_mid_hour,50.21287098537981
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,nifty,total monthly_last_hour,77.51000996248976
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,bn,total all_expiry,67.05969701412373
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,bn,total monthly,73.93262300994171
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,bn,total monthly_first_hour,82.02373465060245
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,bn,total monthly_mid_hour,58.64953502318745
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_last15,False,3/4,after,bn,total monthly_last_hour,80.21533757393777
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_stated,nifty,half_life_min,373.98780182265887
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_stated,nifty,alpha,0.04813336767975228
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_stated,nifty,beta,0.9500149536397593
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_stated,banknifty,half_life_min,73.92644640561204
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_stated,banknifty,alpha,0.05802720893743766
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_stated,banknifty,beta,0.9326404369142429
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_inferred,nifty,half_life_min,264.2134485449651
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_inferred,nifty,alpha,0.027963524937720988
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_inferred,nifty,beta,0.9694164768556619
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_inferred,banknifty,half_life_min,129.2555868412981
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_inferred,banknifty,alpha,0.03438667309914402
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,before_inferred,banknifty,beta,0.9602650709644133
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,after,nifty,half_life_min,67.80514869831146
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,after,nifty,alpha,0.052587282454246105
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,after,nifty,beta,0.9372421576280161
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,after,banknifty,half_life_min,34.01057567246261
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,after,banknifty,alpha,0.06171990245759272
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,2,after,banknifty,beta,0.9181060305319397
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,all_days,total all_days,76.26962659733223
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,union,total all_expiry,73.39389242020135
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,union,total monthly,76.44508364766395
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,union,total monthly_first_hour,75.09331464867262
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,union,total monthly_mid_hour,66.77491519106907
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,union,total monthly_last_hour,76.91315374433475
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,nifty,total all_expiry,78.11321140423539
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,nifty,total monthly,76.44508364766395
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,nifty,total monthly_first_hour,75.09331464867262
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,nifty,total monthly_mid_hour,66.77491519106907
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,nifty,total monthly_last_hour,76.91315374433475
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,bn,total all_expiry,69.54183420398161
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,bn,total monthly,76.44508364766395
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,bn,total monthly_first_hour,75.09331464867262
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,bn,total monthly_mid_hour,66.77491519106907
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_stated,bn,total monthly_last_hour,76.91315374433475
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,all_days,total all_days,86.39882369702173
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,union,total all_expiry,88.28872378026051
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,union,total monthly,82.15314512091541
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,union,total monthly_first_hour,84.01574862708352
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,union,total monthly_mid_hour,73.38458147639537
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,union,total monthly_last_hour,84.45708314680512
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,nifty,total all_expiry,88.28872378026051
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,nifty,total monthly,82.15314512091541
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,nifty,total monthly_first_hour,84.01574862708352
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,nifty,total monthly_mid_hour,73.38458147639537
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,nifty,total monthly_last_hour,84.45708314680512
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,bn,total all_expiry,88.28872378026051
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,bn,total monthly,82.15314512091541
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,bn,total monthly_first_hour,84.01574862708352
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,bn,total monthly_mid_hour,73.38458147639537
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,before_inferred,bn,total monthly_last_hour,84.45708314680512
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,all_days,total all_days,73.25551129059119
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,union,total all_expiry,71.18660933813874
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,union,total monthly,70.82346275780236
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,union,total monthly_first_hour,70.43745008388233
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,union,total monthly_mid_hour,69.74375451469123
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,union,total monthly_last_hour,74.74953445519216
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,nifty,total all_expiry,74.68217176928142
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,nifty,total monthly,67.7088400666644
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,nifty,total monthly_first_hour,58.85846486132071
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,nifty,total monthly_mid_hour,65.61132170808737
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,nifty,total monthly_last_hour,76.38095457511244
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,bn,total all_expiry,68.27287506085068
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,bn,total monthly,68.74820464603499
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,bn,total monthly_first_hour,82.68276163149477
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,bn,total monthly_mid_hour,68.56082728060306
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,3/4,after,bn,total monthly_last_hour,71.30095764482311
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,nifty,all pct_change_median,11.821072025326052
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,nifty,all minute_mwu_p,5.356489422246429e-130
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,nifty,wed pct_change_median,8.162939991428653
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,nifty,wed minute_mwu_p,4.527553393211536e-15
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,nifty,thu pct_change_median,24.711058934530605
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,nifty,thu minute_mwu_p,8.793284421708177e-87
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,banknifty,all pct_change_median,12.944806947992692
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,banknifty,all minute_mwu_p,2.078278302742032e-132
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,banknifty,wed pct_change_median,10.311053993697916
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,banknifty,wed minute_mwu_p,4.52730326920348e-23
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,banknifty,thu pct_change_median,16.161317495231685
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_stated,banknifty,thu minute_mwu_p,9.767494008945467e-39
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,nifty,all pct_change_median,19.84342662115992
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,nifty,all minute_mwu_p,1.0918258039471413e-281
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,nifty,wed pct_change_median,22.229627944892805
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,nifty,wed minute_mwu_p,1.2456194058877358e-58
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,nifty,thu pct_change_median,51.20581668199507
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,nifty,thu minute_mwu_p,1.562729912758733e-216
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,banknifty,all pct_change_median,15.291014820671322
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,banknifty,all minute_mwu_p,1.5861112328849821e-168
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,banknifty,wed pct_change_median,18.12438085114372
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,banknifty,wed minute_mwu_p,6.659561684101982e-53
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,banknifty,thu pct_change_median,25.03132980615488
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,True,6,before_inferred,banknifty,thu minute_mwu_p,9.307739398816379e-70
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_stated,nifty,half_life_min,401.7965567574516
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_stated,nifty,alpha,0.047486645796168146
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_stated,nifty,beta,0.9507897216051447
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_stated,banknifty,half_life_min,73.40690202574937
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_stated,banknifty,alpha,0.058437224492232154
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_stated,banknifty,beta,0.9321646820775988
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_inferred,nifty,half_life_min,269.17709167308647
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_inferred,nifty,alpha,0.027855644608965304
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_inferred,nifty,beta,0.9695726079440801
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_inferred,banknifty,half_life_min,132.89518386509528
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_inferred,banknifty,alpha,0.034062003987819806
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,before_inferred,banknifty,beta,0.9607358309662851
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,after,nifty,half_life_min,68.37547723124352
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,after,nifty,alpha,0.0525293894649641
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,after,nifty,beta,0.9373844552724457
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,after,banknifty,half_life_min,34.16720567818749
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,after,banknifty,alpha,0.061335300180803694
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,2,after,banknifty,beta,0.9185821802472516
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,all_days,total all_days,70.67239222137621
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,union,total all_expiry,67.62472632125733
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,union,total monthly,72.80741240150826
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,union,total monthly_first_hour,73.7319108377497
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,union,total monthly_mid_hour,66.63255798437888
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,union,total monthly_last_hour,76.76564596500637
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,nifty,total all_expiry,72.18639974205315
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,nifty,total monthly,72.80741240150826
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,nifty,total monthly_first_hour,73.7319108377497
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,nifty,total monthly_mid_hour,66.63255798437888
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,nifty,total monthly_last_hour,76.76564596500637
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,bn,total all_expiry,64.41795673171725
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,bn,total monthly,72.80741240150826
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,bn,total monthly_first_hour,73.7319108377497
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,bn,total monthly_mid_hour,66.63255798437888
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_stated,bn,total monthly_last_hour,76.76564596500637
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,all_days,total all_days,85.31737770406134
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,union,total all_expiry,86.52196140345234
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,union,total monthly,82.02223508515706
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,union,total monthly_first_hour,82.52499183742123
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,union,total monthly_mid_hour,72.99519699928558
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,union,total monthly_last_hour,84.69452045908494
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,nifty,total all_expiry,86.52196140345234
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,nifty,total monthly,82.02223508515706
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,nifty,total monthly_first_hour,82.52499183742123
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,nifty,total monthly_mid_hour,72.99519699928558
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,nifty,total monthly_last_hour,84.69452045908494
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,bn,total all_expiry,86.52196140345234
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,bn,total monthly,82.02223508515706
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,bn,total monthly_first_hour,82.52499183742123
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,bn,total monthly_mid_hour,72.99519699928558
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,before_inferred,bn,total monthly_last_hour,84.69452045908494
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,all_days,total all_days,72.16256693682948
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,union,total all_expiry,70.11698215669736
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,union,total monthly,70.09667197955922
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,union,total monthly_first_hour,69.81508844752274
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,union,total monthly_mid_hour,69.66973625976854
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,union,total monthly_last_hour,74.7354944731095
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,nifty,total all_expiry,73.83791407110283
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,nifty,total monthly,67.2970950676696
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,nifty,total monthly_first_hour,59.163844603562936
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,nifty,total monthly_mid_hour,65.56348555705137
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,nifty,total monthly_last_hour,76.33164778479181
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,bn,total all_expiry,67.00602949888068
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,bn,total monthly,68.38189647975767
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,bn,total monthly_first_hour,81.77792455455557
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,bn,total monthly_mid_hour,68.31550340429932
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),360_drop_first15,False,3/4,after,bn,total monthly_last_hour,71.47324427800248
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_stated,nifty,half_life_min,325.0012997233107
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_stated,nifty,alpha,0.04874699748045718
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_stated,nifty,beta,0.9491225231927805
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_stated,banknifty,half_life_min,70.28736840083735
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_stated,banknifty,alpha,0.059802218834922316
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_stated,banknifty,beta,0.9303846294256989
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_inferred,nifty,half_life_min,268.9191861513718
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_inferred,nifty,alpha,0.02772591462428292
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_inferred,nifty,beta,0.9696998746852589
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_inferred,banknifty,half_life_min,134.5987468451327
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_inferred,banknifty,alpha,0.033922173627125976
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,before_inferred,banknifty,beta,0.9609413336777386
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,after,nifty,half_life_min,70.644624742567
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,after,nifty,alpha,0.0514554507720448
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,after,nifty,beta,0.938780780433471
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,after,banknifty,half_life_min,36.698707427439764
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,after,banknifty,alpha,0.0585106795016196
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,2,after,banknifty,beta,0.9227790624298066
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,all_days,total all_days,75.76033496850184
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,union,total all_expiry,73.00979696133149
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,union,total monthly,74.51408980194847
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,union,total monthly_first_hour,61.54546673294452
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,union,total monthly_mid_hour,72.36732551578294
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,union,total monthly_last_hour,76.59394271760755
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,nifty,total all_expiry,77.26440991457295
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,nifty,total monthly,74.51408980194847
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,nifty,total monthly_first_hour,61.54546673294452
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,nifty,total monthly_mid_hour,72.36732551578294
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,nifty,total monthly_last_hour,76.59394271760755
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,bn,total all_expiry,69.38214746143343
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,bn,total monthly,74.51408980194847
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,bn,total monthly_first_hour,61.54546673294452
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,bn,total monthly_mid_hour,72.36732551578294
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_stated,bn,total monthly_last_hour,76.59394271760755
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,all_days,total all_days,84.79742493628531
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,union,total all_expiry,86.59195238101847
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,union,total monthly,80.79457739514535
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,union,total monthly_first_hour,77.45374040994281
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,union,total monthly_mid_hour,80.41789162892637
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,union,total monthly_last_hour,84.55088856941644
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,nifty,total all_expiry,86.59195238101847
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,nifty,total monthly,80.79457739514535
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,nifty,total monthly_first_hour,77.45374040994281
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,nifty,total monthly_mid_hour,80.41789162892637
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,nifty,total monthly_last_hour,84.55088856941644
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,bn,total all_expiry,86.59195238101847
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,bn,total monthly,80.79457739514535
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,bn,total monthly_first_hour,77.45374040994281
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,bn,total monthly_mid_hour,80.41789162892637
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,before_inferred,bn,total monthly_last_hour,84.55088856941644
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,all_days,total all_days,73.88287142344717
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,union,total all_expiry,71.83716526388528
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,union,total monthly,72.02348494421454
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,union,total monthly_first_hour,70.08092668435617
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,union,total monthly_mid_hour,63.204061679060224
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,union,total monthly_last_hour,74.90414302902792
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,nifty,total all_expiry,75.07171939034635
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,nifty,total monthly,68.77033052426229
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,nifty,total monthly_first_hour,66.7331230720956
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,nifty,total monthly_mid_hour,54.392883314042244
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,nifty,total monthly_last_hour,76.44374438708658
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,bn,total all_expiry,68.73851912147997
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,bn,total monthly,70.88275293396995
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,bn,total monthly_first_hour,78.6150833454947
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,bn,total monthly_mid_hour,64.23167769593665
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,3/4,after,bn,total monthly_last_hour,71.66119126639353
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,nifty,all pct_change_median,12.127547180828934
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,nifty,all minute_mwu_p,3.616807820863136e-133
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,nifty,wed pct_change_median,8.144878804732869
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,nifty,wed minute_mwu_p,3.60656897730721e-15
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,nifty,thu pct_change_median,24.47342795712826
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,nifty,thu minute_mwu_p,1.6178935666011796e-87
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,banknifty,all pct_change_median,12.857808964953787
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,banknifty,all minute_mwu_p,2.27765153546255e-132
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,banknifty,wed pct_change_median,9.918934230303744
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,banknifty,wed minute_mwu_p,2.819987939605623e-21
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,banknifty,thu pct_change_median,15.816617384338416
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_stated,banknifty,thu minute_mwu_p,2.6909781115425215e-37
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,nifty,all pct_change_median,19.63581988842953
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,nifty,all minute_mwu_p,7.578163386688299e-265
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,nifty,wed pct_change_median,21.157995410059826
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,nifty,wed minute_mwu_p,2.01842068497832e-55
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,nifty,thu pct_change_median,49.5438570419346
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,nifty,thu minute_mwu_p,3.593197164369408e-207
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,banknifty,all pct_change_median,15.107941521594315
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,banknifty,all minute_mwu_p,7.527179378563208e-161
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,banknifty,wed pct_change_median,17.393376043343302
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,banknifty,wed minute_mwu_p,3.1956957138355913e-50
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,banknifty,thu pct_change_median,25.228542884258374
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,True,6,before_inferred,banknifty,thu minute_mwu_p,1.1032438492504432e-66
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_stated,nifty,half_life_min,345.78016721443663
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_stated,nifty,alpha,0.04813927137703307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_stated,nifty,beta,0.9498581472937395
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_stated,banknifty,half_life_min,71.81782139523233
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_stated,banknifty,alpha,0.059603237481136134
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_stated,banknifty,beta,0.9307917235520755
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_inferred,nifty,half_life_min,272.34443694076947
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_inferred,nifty,alpha,0.02757687241377307
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_inferred,nifty,beta,0.9698812513229603
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_inferred,banknifty,half_life_min,137.22799855116395
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_inferred,banknifty,alpha,0.03358945192015712
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,before_inferred,banknifty,beta,0.9613722208673
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,after,nifty,half_life_min,71.09582056312273
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,after,nifty,alpha,0.051389077717284334
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,after,nifty,beta,0.9389088157810787
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,after,banknifty,half_life_min,36.97750929874251
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,after,banknifty,alpha,0.05835341172074418
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,2,after,banknifty,beta,0.9230760831352474
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,all_days,total all_days,69.49288259985398
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,union,total all_expiry,66.49727937362607
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,union,total monthly,70.50205624742674
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,union,total monthly_first_hour,60.02258358684046
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,union,total monthly_mid_hour,72.34049398160289
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,union,total monthly_last_hour,76.76189832729192
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,nifty,total all_expiry,70.67759941833371
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,nifty,total monthly,70.50205624742674
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,nifty,total monthly_first_hour,60.02258358684046
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,nifty,total monthly_mid_hour,72.34049398160289
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,nifty,total monthly_last_hour,76.76189832729192
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,bn,total all_expiry,63.502356161484514
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,bn,total monthly,70.50205624742674
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,bn,total monthly_first_hour,60.02258358684046
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,bn,total monthly_mid_hour,72.34049398160289
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_stated,bn,total monthly_last_hour,76.76189832729192
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,all_days,total all_days,83.95909417577104
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,union,total all_expiry,85.25331061476945
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,union,total monthly,80.98345235922562
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,union,total monthly_first_hour,74.98087080524277
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,union,total monthly_mid_hour,80.60102571055293
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,union,total monthly_last_hour,84.7523356521727
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,nifty,total all_expiry,85.25331061476945
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,nifty,total monthly,80.98345235922562
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,nifty,total monthly_first_hour,74.98087080524277
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,nifty,total monthly_mid_hour,80.60102571055293
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,nifty,total monthly_last_hour,84.7523356521727
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,bn,total all_expiry,85.25331061476945
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,bn,total monthly,80.98345235922562
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,bn,total monthly_first_hour,74.98087080524277
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,bn,total monthly_mid_hour,80.60102571055293
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,before_inferred,bn,total monthly_last_hour,84.7523356521727
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,all_days,total all_days,72.55071157493991
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,union,total all_expiry,70.46408427136859
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,union,total monthly,71.18035823352001
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,union,total monthly_first_hour,69.46944177894386
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,union,total monthly_mid_hour,63.39865525924163
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,union,total monthly_last_hour,74.96547990290418
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,nifty,total all_expiry,73.94541232011902
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,nifty,total monthly,67.92403401994315
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,nifty,total monthly_first_hour,66.82543773858036
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,nifty,total monthly_mid_hour,54.57041326444299
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,nifty,total monthly_last_hour,76.41578986418187
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,bn,total all_expiry,67.2116080211579
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,bn,total monthly,70.52518025182792
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,bn,total monthly_first_hour,78.94472623131028
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,bn,total monthly_mid_hour,64.67829180880275
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),375_full,False,3/4,after,bn,total monthly_last_hour,71.53402336590703

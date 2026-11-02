@@ -1,0 +1,4 @@
+data,period,start,end,trading_days,paper_days,wednesdays,paper_wednesdays,thursdays,paper_thursdays,nifty_expiry_days,bn_expiry_days,nifty_monthly_expiries,bn_monthly_expiries,n_returns_nifty,n_returns_banknifty,paper_n_returns
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),before_stated,2023-11-01,2024-02-29,82,64,18,13,18,13,18,18,4,4,29519,29519,23039
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),before_inferred,2022-11-14,2023-02-10,64,64,13,13,12,13,13,13,3,3,23039,23039,23039
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),after,2024-03-01,2024-05-31,59,59,11,12,12,13,13,13,3,3,21239,21233,21239
