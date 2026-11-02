@@ -1,57 +1,50 @@
 # Briefing: Prof. Pandey project (Nifty expiry and dealer gamma)
 
-*Written 2 November 2026 for Shreyan. Plain-language summary of the overnight build. Everything below is from simulated data or from arithmetic on the paper's printed numbers; nothing is from real market data yet.*
+*For Shreyan. Updated 3 November 2026 (early morning UTC). Plain-language summary of where the project stands. **Everything below is from real NSE data** (2 January 2023 to 2 November 2026: 942 trading days, 200 Nifty expiry days) unless it says "simulation". Each point names the document with the full detail.*
 
-## Findings
+## The one-paragraph version
 
-1. **The paper.** Chhimwal, Pandey and Pandey (2025, Review of Derivatives Research) show that after Bank Nifty's expiry moved to Wednesday, each index got more volatile and busier on its own expiry day, and the two indices moved together less. They fit their volatility model in-sample and do not test why it happened. That "why" is the opening for this project.
-2. **The gap is real.** A literature search (41 references checked, 36 of them fully, none fake) found no peer-reviewed study of option dealers' hedging effects on Nifty or any NSE options.
-3. **Careful-reader notes on the paper** (useful to show Prof. Pandey we read it closely, phrased as questions, not criticism):
-   * Its connectedness totals are on a scale twice the usual one (84 means 42 in the standard index).
-   * Its ARMA(1,1) terms nearly cancel; our simulations show that is what ARMA(1,1) does on data with no real autocorrelation.
-   * Three Mann-Whitney statistics are larger than mathematically possible (likely typos), and one pair of significance stars does not match its z statistics.
-   * Its numbers imply intraday volatility shocks fade much faster after the change, but our simulations show that estimate is fragile at its sample size.
-4. **The paper's Wilcoxon tests overstate significance.** In simulations at its sample sizes where nothing changed, the minute-by-minute test said "significant change" 69% of the time for volatility and 87% for volume, instead of 5%. Testing at the level of days, or comparing each expiry day with the rest of its own week, brings that back to about 2 to 6%.
-5. **The gamma test works, with conditions.** In 48 simulated markets, adding dealer-gamma features to a forecast was detected as useful in 62 to 88% of markets when the effect was real and positions were measured well, and almost never when there was no effect. Three conditions matter:
-   * The sign rule is decisive: the common US convention never detected the effect in our India-style simulated market.
-   * Noisy position data destroy most of the power.
-   * Gains are small (1 to 4%) and the last hour of expiry day cannot be tested reliably with end-of-day data alone.
-6. **The full pipeline runs end to end.** On one 500-day simulated market it took 3 minutes. A hybrid that corrects mcsGARCH with recent realised volatility beat mcsGARCH by about 7% (30-minute forecasts) and 14% (last hour), and that gain was highly significant; the extra gain from GEX was under 1.5 points and borderline, as the power study predicts.
+We downloaded four years of real NSE data, rebuilt the professor's paper on it, and then tested whether option dealers' hedging (measured as "GEX", dealer gamma exposure) explains expiry-day volatility. The paper's "after" period replicates almost exactly, and we think we found its "before" period (14 November 2022 to 10 February 2023, not the dates printed). A hybrid model beats the paper's model for short-horizon forecasts. Dealer gamma does not help forecasts, and most in-sample GEX links fall apart under hard testing, with one exception: Nifty reverses into the close, and only after evenings when the "Pro" traders' positions imply negative GEX. That result survived every attempt to break it. What we cannot pin down with public data is who the dealers are, which is exactly where the professor's knowledge helps.
+
+## Findings, in order of how much to trust them
+
+1. **The data are right.** Minute-bar highs and lows match NSE's official values within 0.05% on 943 of 943 days (highs) and 942 of 943 (lows). Option open interest adds up exactly to NSE's participant totals. ([REAL_DATA_RESULTS.md](REAL_DATA_RESULTS.md), R0)
+2. **The paper replicates, with one question for the authors.** Same 21,239 Nifty returns, same extremes, nearly the same model parameters for the "after" period. The printed "before" dates (November 2023 to February 2024) do not match; a search over every 64-day window found 14 November 2022 to 10 February 2023, which matches the printed maxima to every decimal. ([REPLICATION_NSE.md](REPLICATION_NSE.md))
+3. **The paper's model can be beaten for 15- and 30-minute forecasts** by about 7% and 9% (a hybrid that keeps the paper's model and corrects its errors with machine learning). For the last hour of the day, nothing reliably beats it. We first claimed HAR was 11% better for the last hour; that came mostly from NSE's new closing auction (from 3 August 2026) and was withdrawn. (R1)
+4. **Expiry days are more volatile than the rest of their week, but it depends on the rules.** About 11% more before November 2024, no clear difference from November 2024 to August 2025, about 21% more since Nifty moved to Tuesday, mostly in the last hour. When Bank Nifty's expiry moved to Wednesday, its end-of-day premium moved with it. (R2; [EVENT_STUDY.md](EVENT_STUDY.md))
+5. **Pinning (the index closing near a strike on expiry) happened under the Thursday weekly** (4.5 points closer than on other days, p = 0.0006) but not since the move to Tuesday, and it is unrelated to dealer gamma. ([PINNING_STUDY.md](PINNING_STUDY.md))
+6. **The robust GEX result: end-of-day reversal.** A 1% move over the day tends to be followed by about a 0.03% move back in the last 30 minutes (small, but systematic), and this happens only after evenings when GEX under the Pro rule was negative. It survived shuffles, placebo dates, random sign rules, an out-of-sample test fixed in advance and a correction for 78 tests. Caveat: it is driven by day-to-day changes in the Pro traders' positions, not by the option chain itself. ([FALSIFICATION.md](FALSIFICATION.md))
+7. **The GEX results that did not survive.** "Higher GEX, calmer next day" turned out to track the total amount of option gamma, not who holds it. The "sign flip on expiry day" holds only in sample, only under the Pro rule, makes forecasts worse and does not appear in Bank Nifty. Expiry-day gamma re-priced minute by minute shows no effect. ([FALSIFICATION.md](FALSIFICATION.md); [INTRADAY_GAMMA.md](INTRADAY_GAMMA.md))
+8. **We could not identify the dealer sign.** Letting the data choose the sign gives nearly opposite answers for the volatility outcome and the end-of-day outcome, and no estimated sign forecasts better than the fixed guesses. This is a real, documented negative result, and the best question to ask the professor. ([DEALER_SIGN.md](DEALER_SIGN.md))
+
+## What went wrong and got fixed (the honest part)
+
+* An independent reviewer found two overstated claims (GEX "holds under all three sign rules"; a misleading loss comparison). Both were corrected. ([INDEPENDENT_REVIEW.md](INDEPENDENT_REVIEW.md))
+* NSE's closing auction from 3 August 2026 freezes the index from 15:16 to 15:28. It inflated one headline result, which was corrected.
+* Bugs found and fixed with tests: unsorted strikes in NSE's new file format, a holiday-shifted expiry in June 2023, two edge cases in the volatility model, a stale VIX lag and a missing-value coding in the end-of-day study (numbers changed only in the fourth decimal).
+
+Full log of all 24 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 
 ## Decisions taken
 
-* **Headline:** a forecasting contest (does positioning improve out-of-sample forecasts of expiry-day volatility beyond the paper's mcsGARCH), as agreed earlier, rather than an in-sample regression.
-* **Build on simulation first,** because this cloud machine cannot reach NSE. The real-data path is built and tested on files in NSE's formats, and runs with one command once data are downloaded.
-* **Report every result under several sign rules** (US convention, NSE "Pro" positions, mirror of retail "Client" positions) because the sign cannot be observed directly.
-* **Kept out of the main package:** the trading backtest (it would only show profits we built into the simulator), a deep sequence model (not enough expiry days to justify it yet). Both are written up in `alternatives/ALTERNATIVES.md`.
+* **Every result is reported under three sign rules** (US convention, NSE "Pro" positions, mirror of retail "Client" positions), because nobody can see dealers' positions directly.
+* **Out-of-sample forecasting is the headline test,** in-sample regressions are secondary, and every in-sample result went through falsification before being called a finding.
+* **Negative results are reported as results.** Most GEX links failed; saying so is what makes the one that survived believable.
 
-## Validation
+## Still running or next (as of 3 November, early morning UTC)
 
-* 31 automated tests: greeks against finite differences and put-call parity, GEX against its definition, mcsGARCH parameter recovery, connectedness against a closed form, the expiry calendar against known dates (including the 2 September 2025 switch to Tuesday), and a round trip through NSE file formats.
-* mcsGARCH recovers the paper's own parameter values from simulated data; at the paper's sample size its persistence estimate is biased up slightly when the daily part is estimated.
-* The implied-vol solver is accurate to $10^{-12}$ for every option worth at least one tick, 50,000 options in under a second.
+* A stronger forecasting study (option-implied features, more frequent model refits), to be merged and the whole pipeline rerun with the bug fixes.
+* A final-half-hour gamma test, connectedness by gamma regime (a new question for the paper's connectedness design), a power study calibrated on the real data, a second-person check of every number typed from the paper, and a check of BSE's Sensex expiry as a hidden confounder.
+* A forecast for Tuesday 3 November's expiry was frozen in the repository before the market opened; it will be scored after the close.
+* A working-paper draft by Wednesday 4 November, 9:30 IST.
 
-## Iterations (what went wrong and got fixed)
+## What to send Prof. Pandey
 
-1. A range-based volatility test exposed a known bias of high-low estimators under coarse sampling; documented.
-2. The simulator first published option chains with the wrong timing; fixed so nothing from the future leaks.
-3. The daily EGARCH fit diverged on some training windows (forecasts off by 10^8). Added checks and a fallback.
-4. The simulator leaked next-day volatility through option implied vols, which made gamma features look useful when they were not. Fixed and the power study rerun.
-5. The first Wilcoxon experiment used a null that made every test fail; redesigned into two clean scenarios.
-6. A new test found the fallback volatility filter could return zero variance; fixed with a sensible starting value and a floor.
-
-Full log: `ITERATION_LOG.md`.
+[PITCH_PANDEY.md](../PITCH_PANDEY.md): six findings, five careful-reader questions about the paper (starting with the "before" window), what we would ask for (his view on the Pro category; intraday option-chain data), and two possible papers.
 
 ## Limitations
 
-* No real-market results yet. The simulator's assumptions (including how strong the gamma effect is) are ours.
-* NSE participant data cover all index options, not Nifty strikes, so the sign of dealer gamma is only proxied.
-* End-of-day GEX only; intraday option-chain history is the main data gap.
-* About 100 weekly expiries since November 2024: enough for the 30-minute forecasts, probably not for a last-hour-only test.
-
-## Next actions
-
-1. On your own machine: run `scripts/download_nse.py` for bhavcopy and participant files, and get 1-minute Nifty bars (broker API or vendor). Check OI units on the first file (steps in `docs/DATA_ACQUISITION.md`).
-2. Run `python scripts/run_pipeline.py --source nse` and look at the scoreboard.
-3. Replicate the paper's Tables 2 to 6 on its window, then redo its volume and volatility tests at day level.
-4. Send Prof. Pandey `PITCH_PANDEY.md` with the first real scoreboard, and ask about the "Pro" category and any data his group can share.
+* NSE's participant file covers all index options, not just Nifty, and "Pro" includes traders who may not hedge, so the dealer sign is only a proxy.
+* End-of-day positions only: we cannot see how positions change during expiry afternoon.
+* BSE's servers are not reachable from our cloud setup, so Sensex expiries cannot yet be checked as a confounder.
+* About 100 weekly expiries since November 2024 is enough for 15- and 30-minute forecasts, not for a last-hour-only test.

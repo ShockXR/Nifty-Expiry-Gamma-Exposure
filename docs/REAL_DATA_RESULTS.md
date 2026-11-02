@@ -21,7 +21,10 @@ Separate real-data studies, each with its own document:
 * `docs/PINNING_STUDY.md`: a full pinning study (replaces the crude R4 check below).
 * `docs/INDEPENDENT_REVIEW.md`: an independent referee-style review of this document and the two above. Its points are addressed here (R1 diagnostics, R3 scale-free versions, multiple-testing columns) or handed to the studies still running.
 * `docs/EVENT_STUDY.md`: five expiry rule changes (2019 to 2026) with Nifty and Bank Nifty as each other's comparison and placebo dates. The whole-day expiry premium barely moves with the rules; the end of the day does (Bank Nifty's move to Wednesday raised its last-30-minute premium by 1.14 log points, placebo p 0.005). The per-minute Rogers-Satchell measure the paper uses shows an expiry premium that 5-minute realized variance does not.
-* Still running: a stronger version of R1, a falsification suite for R3 and R5, minute-by-minute gamma on expiry days, and an estimate of the dealer sign from market behaviour.
+* `docs/FALSIFICATION.md`: seven families of tests that try to break R3 and R5 (shuffles, timing placebos, random sign rules, out of sample, Bank Nifty, a quasi-causal roll-off test, multiple testing). R5 survives all of them; R3's ordinary-day term does not.
+* `docs/DEALER_SIGN.md`: the dealer sign estimated from the market's response instead of assumed. A documented negative result: the two outcomes point to nearly opposite signs.
+* `docs/INTRADAY_GAMMA.md`: expiry-day gamma re-priced minute by minute at the current index level. A clean null on expiry days.
+* Still running: a stronger version of R1 (option-implied features, more frequent mcsGARCH refits), a final-half-hour gamma test, a connectedness-by-gamma-regime study, a real-data-calibrated power study and a check of BSE's Sensex expiry as a confounder.
 
 ---
 
