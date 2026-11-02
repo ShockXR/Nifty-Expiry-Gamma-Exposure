@@ -1,0 +1,13 @@
+window,group,measures,rows,share_hac_p_below_0.05,share_mwu_p_below_0.05,share_boot_ci_excludes_0,rows_with_placebo_p,share_placebo_p_below_0.05
+3 months,negative control (Friday),minute-bar measures,35,0.2,0.02857142857142857,0.14285714285714285,35,0.05714285714285714
+3 months,negative control (Friday),turnover measures,12,0.5833333333333334,0.5,0.5833333333333334,12,0.5
+3 months,treated or spillover weekday,minute-bar measures,267,0.30711610486891383,0.0898876404494382,0.21722846441947566,231,0.12987012987012986
+3 months,treated or spillover weekday,turnover measures,90,0.7111111111111111,0.4666666666666667,0.6555555555555556,78,0.5256410256410257
+6 months,negative control (Friday),minute-bar measures,35,0.34285714285714286,0.05714285714285714,0.2571428571428571,35,0.08571428571428572
+6 months,negative control (Friday),turnover measures,12,0.5833333333333334,0.5833333333333334,0.5833333333333334,0,
+6 months,treated or spillover weekday,minute-bar measures,267,0.24344569288389514,0.11610486891385768,0.20599250936329588,267,0.13857677902621723
+6 months,treated or spillover weekday,turnover measures,90,0.7444444444444445,0.6666666666666666,0.7333333333333333,0,
+12 months,negative control (Friday),minute-bar measures,35,0.45714285714285713,0.2571428571428571,0.4,0,
+12 months,negative control (Friday),turnover measures,12,0.6666666666666666,0.6666666666666666,0.75,0,
+12 months,treated or spillover weekday,minute-bar measures,267,0.20224719101123595,0.15355805243445692,0.18726591760299627,0,
+12 months,treated or spillover weekday,turnover measures,90,0.7,0.7333333333333333,0.7111111111111111,0,

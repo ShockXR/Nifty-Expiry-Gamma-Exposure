@@ -117,6 +117,26 @@ def actual_expiries(bhav: dict, last_day: pd.Timestamp | None = None) -> pd.Date
     return pd.DatetimeIndex(sorted(out))
 
 
+def futures_expiry_dates(path, symbol: str = "NIFTY") -> set:
+    """Expiry dates of the index futures listed in one bhavcopy (legacy or UDiFF layout).
+
+    Index futures are monthly, so a day on which a futures contract expires is
+    the monthly expiry. This is more reliable than "last expiry of the calendar
+    month", which mislabels a weekly expiry moved earlier by a holiday or a
+    weekly that falls after the monthly in the same month.
+    """
+    df = _clean_cols(pd.read_csv(path))
+    if "INSTRUMENT" in df.columns:
+        f = df[(df["INSTRUMENT"].str.strip() == "FUTIDX") & (df["SYMBOL"].str.strip() == symbol)]
+        e = pd.to_datetime(f["EXPIRY_DT"], format="mixed", dayfirst=True)
+    elif "FinInstrmTp" in df.columns:
+        f = df[(df["FinInstrmTp"].str.strip() == "IDF") & (df["TckrSymb"].str.strip() == symbol)]
+        e = pd.to_datetime(f["XpryDt"])
+    else:
+        return set()
+    return set(e.dt.normalize())
+
+
 def holiday_adjusted_expiries(bhav: dict) -> dict:
     """Map listed expiry dates that turned out to be exchange holidays to the real expiry day.
 
@@ -346,7 +366,22 @@ def build_market_from_nse(
         if len(df):
             bhav[pd.Timestamp(df["date"].iloc[0]).normalize()] = df
     expiries = actual_expiries(bhav) if use_file_expiries else None
-    labels = label_days(days, expiries=expiries)
+    monthly = None
+    if use_file_expiries:
+        # Monthly expiry = a day on which a NIFTY index future expires (read from the same files).
+        fut = set()
+        for f in bhavcopy_files(bhavcopy_dir):
+            stamp = "".join(ch for ch in Path(f).name if ch.isdigit())[-8:]
+            try:
+                fd = pd.to_datetime(stamp, format="%Y%m%d")
+                if not (lo <= fd <= hi):
+                    continue
+            except ValueError:
+                pass
+            fut |= futures_expiry_dates(f, symbol)
+        hol = holiday_adjusted_expiries(bhav)
+        monthly = sorted({hol.get(e, e) for e in fut} & set(expiries)) if fut else None  # no futures rows: calendar rule
+    labels = label_days(days, expiries=expiries, monthly_expiries=monthly)
     eff = holiday_adjusted_expiries(bhav)
     chains = []
     lot_used = []
