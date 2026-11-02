@@ -96,7 +96,7 @@ For a strike K we compute dealers' net gamma exposure as if the index were at K 
 * **Several tests at once.** With many tests some small p-values appear by chance. For the pre-specified gamma test we apply a Holm correction over the three sign rules. Everything not marked as pre-specified is exploratory.
 * **Power.** We simulate how large an effect our sample sizes could detect 80% of the time (Section 4.8).
 
-**Pre-specified tests** (fixed in the script's docstring before any result was seen): P1, Nifty expiry against non-expiry days, mean distance to the nearest strike; P2, on Nifty expiry days, positive against negative dealer gamma near that strike, under each of the three rules with a Holm correction. The three-regime split was part of the brief. Everything else, including the half-year table and the regime comparison test, is exploratory.
+**Pre-specified tests** (written into the script's docstring before any result was seen, according to the analysis log; the study was committed to git in one piece afterwards, so the repository history cannot independently prove the order): P1, Nifty expiry against non-expiry days, mean distance to the nearest strike; P2, on Nifty expiry days, positive against negative dealer gamma near that strike, under each of the three rules with a Holm correction. The three-regime split was part of the brief. Everything else, including the half-year table and the regime comparison test, is exploratory.
 
 ### 3.7 Design changes made while working, and why
 

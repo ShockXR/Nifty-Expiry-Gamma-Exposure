@@ -75,12 +75,15 @@ def weekly_expiries(trading_days, rules: ExpiryRules | None = None) -> pd.Dateti
     return pd.DatetimeIndex(sorted(set(out)))
 
 
-def label_days(trading_days, rules: ExpiryRules | None = None, expiries=None) -> pd.DataFrame:
+def label_days(trading_days, rules: ExpiryRules | None = None, expiries=None, monthly_expiries=None) -> pd.DataFrame:
     """One row per trading day with expiry flags, days to next expiry and regime.
 
     ``expiries``: optional list of actual expiry dates (for example read from
     the bhavcopies with data.actual_expiries). If given, it replaces the
     weekday rule; only dates that are trading days in ``trading_days`` count.
+    ``monthly_expiries``: optional list of monthly expiry dates (for example
+    index futures expiries). Without it, the last expiry of each calendar month
+    is taken as monthly, which can mislabel a weekly moved earlier by a holiday.
     """
     rules = rules or ExpiryRules()
     days = pd.DatetimeIndex(sorted(pd.to_datetime(trading_days))).normalize()
@@ -93,10 +96,13 @@ def label_days(trading_days, rules: ExpiryRules | None = None, expiries=None) ->
     next_exp = pd.DatetimeIndex([exp_arr[p] if p < len(exp_arr) else pd.NaT for p in pos])
     day_idx = {d: i for i, d in enumerate(days)}
     tdte = [day_idx[n] - day_idx[d] if pd.notna(n) else np.nan for d, n in zip(days, next_exp)]
-    monthly = set()
-    s = pd.Series(exp, index=exp)
-    for _, grp in s.groupby([exp.year, exp.month]):
-        monthly.add(grp.iloc[-1])
+    if monthly_expiries is not None:
+        monthly = set(pd.DatetimeIndex(monthly_expiries).normalize()) & set(exp)
+    else:
+        monthly = set()
+        s = pd.Series(exp, index=exp)
+        for _, grp in s.groupby([exp.year, exp.month]):
+            monthly.add(grp.iloc[-1])
     df = pd.DataFrame(
         {
             "date": days,

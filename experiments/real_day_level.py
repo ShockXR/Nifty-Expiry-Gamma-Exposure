@@ -123,6 +123,74 @@ def r3_regressions(dm: pd.DataFrame, panel: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(out)
 
 
+def r3_robustness(dm: pd.DataFrame, panel: pd.DataFrame) -> pd.DataFrame:
+    """R3 with scale-free GEX measures, gross-gamma controls and a pre-auction sample (review item M5).
+
+    The main R3 scales net GEX by a 20-day median of gross GEX. That ratio has a different spread under
+    each sign rule and is mechanically larger on expiry eves (gross gamma peaks one day before expiry),
+    which could feed the GEX x expiry term. The variants below remove those channels:
+
+    * per_sd: the main measure divided by its standard deviation within the rule (comparable across rules);
+    * sign: a dummy for GEX > 0 (scale-free);
+    * share: net GEX / gross GEX of the same chain, in [-1, 1] (no expiry-eve swing in the denominator);
+    * share + gross: the share plus log gross GEX and log gross GEX x expiry as controls;
+    * share, before auction: the share on days before NSE's closing auction (3 Aug 2026).
+
+    All with regime-specific levels and expiry effects and Newey-West (5 lags) errors. Holm and
+    Benjamini-Hochberg adjusted p-values are computed over the whole family of GEX terms in this table.
+    """
+    from statsmodels.stats.multitest import multipletests
+    d = dm.join(panel, how="left")
+    d["y"] = np.log(d["rv_day"])
+    d["y_l1"] = d["y"].shift(1)
+    d["y_w"] = d["y"].shift(1).rolling(5).mean()
+    d["lvix_l1"] = np.log(d["vix"]).shift(1)
+    d["exp"] = d["is_expiry"].astype(float)
+    for reg in REGIMES[1:]:
+        d[f"reg_{reg}"] = (d["regime"] == reg).astype(float)
+        d[f"exp_x_{reg}"] = d[f"reg_{reg}"] * d["exp"]
+    reg_cols = [c for c in d.columns if c.startswith("reg_") or c.startswith("exp_x_")]
+    scale = d["gross_gex"].rolling(20, min_periods=5).median()
+    d["lgross_l1"] = np.log(d["gross_gex"]).shift(1)
+    pre_auction = d.index < pd.Timestamp("2026-08-03")
+    rows = []
+    for rule, col in RULES.items():
+        if col not in d:
+            continue
+        ratio = (d[col] / scale).shift(1)
+        share = (d[col] / d["gross_gex"]).shift(1)
+        variants = {
+            "per_sd": (ratio / ratio.std(), [], np.ones(len(d), bool)),
+            "sign": ((d[col] > 0).astype(float).where(d[col].notna()).shift(1), [], np.ones(len(d), bool)),
+            "share": (share, [], np.ones(len(d), bool)),
+            "share + gross": (share, ["lgross_l1", "lgross_x_exp"], np.ones(len(d), bool)),
+            "share, before auction": (share, [], pre_auction),
+        }
+        d["lgross_x_exp"] = d["lgross_l1"] * d["exp"]
+        for vname, (g, extra, sample) in variants.items():
+            X = d[["y_l1", "y_w", "lvix_l1", "exp"] + reg_cols + extra].copy()
+            X["gex_l1"] = g
+            X["gex_l1_x_exp"] = g * d["exp"]
+            ok = X.notna().all(axis=1) & d["y"].notna() & sample
+            Xo = X[ok].loc[:, X[ok].std() > 0]
+            fit = sm.OLS(d.loc[ok, "y"], sm.add_constant(Xo)).fit(cov_type="HAC", cov_kwds={"maxlags": 5})
+            cov = fit.cov_params()
+            tot = fit.params["gex_l1"] + fit.params["gex_l1_x_exp"]
+            tot_se = float(np.sqrt(cov.loc["gex_l1", "gex_l1"] + cov.loc["gex_l1_x_exp", "gex_l1_x_exp"]
+                                   + 2 * cov.loc["gex_l1", "gex_l1_x_exp"]))
+            from scipy.stats import norm
+            for term, coef, se in (("gex_l1", fit.params["gex_l1"], fit.bse["gex_l1"]),
+                                   ("gex_l1_x_exp", fit.params["gex_l1_x_exp"], fit.bse["gex_l1_x_exp"]),
+                                   ("total on expiry days", tot, tot_se)):
+                rows.append({"rule": rule, "variant": vname, "term": term, "coef": float(coef), "se_hac": float(se),
+                             "p": float(2 * (1 - norm.cdf(abs(coef / se)))), "n_days": int(fit.nobs)})
+    out = pd.DataFrame(rows)
+    fam = out["term"] != "total on expiry days"
+    out.loc[fam, "p_holm"] = multipletests(out.loc[fam, "p"], method="holm")[1]
+    out.loc[fam, "p_bh"] = multipletests(out.loc[fam, "p"], method="fdr_bh")[1]
+    return out
+
+
 def r4_pinning(dm: pd.DataFrame, panel: pd.DataFrame, official_close: pd.Series) -> pd.DataFrame:
     d = dm.join(panel[["max_oi_strike", "max_pain", "net_gex_us_convention", "gross_gex"]].shift(1), how="left")
     d["close"] = official_close.reindex(d.index)
@@ -167,6 +235,7 @@ def main():
     lines.append("Expiry weekday counts (0=Mon): " + str(dm.loc[dm["is_expiry"], "weekday"].value_counts().sort_index().to_dict()))
     for name, df in (("r2_expiry_effect_by_regime", r2_regimes(dm)),
                      ("r3_gex_regressions", r3_regressions(dm, panel)),
+                     ("r3_robustness", r3_robustness(dm, panel)),
                      ("r4_pinning", r4_pinning(dm, panel, official))):
         df.to_csv(out / f"{name}.csv", index=False)
         with pd.option_context("display.width", 220, "display.max_columns", 20, "display.precision", 4):

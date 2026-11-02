@@ -147,6 +147,13 @@ def main():
     st = pd.DataFrame(stab)
     st.to_csv(out / "stability.csv", index=False)
     res, sm_ = pd.DataFrame(rows), pd.DataFrame(summ)
+    # Multiple testing: Holm and Benjamini-Hochberg over the whole family of GEX interaction tests
+    # (binary r_rod_x_neg and continuous r_rod_x_gex terms, every rule, specification and day subset).
+    from statsmodels.stats.multitest import multipletests
+    fam = res["term"].isin(["r_rod_x_neg", "r_rod_x_gex"])
+    res.loc[fam, "p_holm_family"] = multipletests(res.loc[fam, "p"], method="holm")[1]
+    res.loc[fam, "p_bh_family"] = multipletests(res.loc[fam, "p"], method="fdr_bh")[1]
+    res.loc[fam, "family_size"] = int(fam.sum())
     res.to_csv(out / "regressions.csv", index=False)
     sm_.to_csv(out / "gamma_states.csv", index=False)
     key = res[res["term"].isin(["r_rod", "r_rod_x_neg", "r_rod_x_gex", "r_rod_x_lvix", "r_rod_x_abs_r_rod"])]

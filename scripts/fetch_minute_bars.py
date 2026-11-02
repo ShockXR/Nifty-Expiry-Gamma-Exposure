@@ -63,8 +63,8 @@ def nifty_paths(first_year: int, last_year: int, last_month: int) -> list[str]:
     return paths
 
 
-def fetch_nifty(first_year: int, today: pd.Timestamp) -> tuple[pd.DataFrame, dict]:
-    ref = head_commit(NIFTY_REPO)
+def fetch_nifty(first_year: int, today: pd.Timestamp, ref: str | None = None) -> tuple[pd.DataFrame, dict]:
+    ref = ref or head_commit(NIFTY_REPO)
     frames = []
     for p in nifty_paths(first_year, today.year, today.month):
         df = get_csv(NIFTY_REPO, ref, p)
@@ -76,8 +76,8 @@ def fetch_nifty(first_year: int, today: pd.Timestamp) -> tuple[pd.DataFrame, dic
     return out, {"repo": NIFTY_REPO, "commit": ref, "files": len(frames)}
 
 
-def fetch_bank() -> tuple[pd.DataFrame, dict]:
-    ref = head_commit(BANK_REPO)
+def fetch_bank(ref: str | None = None) -> tuple[pd.DataFrame, dict]:
+    ref = ref or head_commit(BANK_REPO)
     df = get_csv(BANK_REPO, ref, "bank-nifty-1m-data.csv")
     ts = pd.to_datetime(df["Date"] + " " + df["Time"], format="%d-%m-%Y %H:%M:%S")
     out = pd.DataFrame({"timestamp": ts, "open": df["Open"], "high": df["High"], "low": df["Low"], "close": df["Close"]})
@@ -88,14 +88,20 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="data/raw")
     ap.add_argument("--first-year", type=int, default=2017)
+    ap.add_argument("--nifty-ref", default=None, help="git commit of the Nifty dataset to use (default: latest); "
+                    "pin it to reproduce a past run exactly (see data/MANIFEST.json)")
+    ap.add_argument("--bank-ref", default=None, help="git commit of the Bank Nifty dataset to use (default: latest)")
+    ap.add_argument("--until", default=None, help="drop bars after this date (for example 2026-11-02)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     prov = {}
-    for name, (df, info) in {"nifty": fetch_nifty(a.first_year, pd.Timestamp.today()),
-                             "banknifty": fetch_bank()}.items():
+    for name, (df, info) in {"nifty": fetch_nifty(a.first_year, pd.Timestamp.today(), a.nifty_ref),
+                             "banknifty": fetch_bank(a.bank_ref)}.items():
         df = df.drop_duplicates("timestamp").sort_values("timestamp")
         df = df[df["timestamp"].dt.year >= a.first_year]
+        if a.until:
+            df = df[df["timestamp"] < pd.Timestamp(a.until) + pd.Timedelta(days=1)]
         df.to_csv(out / f"{name}_1min.csv", index=False)
         info.update(rows=len(df), first=str(df["timestamp"].min()), last=str(df["timestamp"].max()),
                     days=int(df["timestamp"].dt.normalize().nunique()))
