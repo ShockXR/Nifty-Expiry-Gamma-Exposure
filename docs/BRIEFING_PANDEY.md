@@ -41,6 +41,7 @@ Full log of all 33 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 * Done: BSE's Sensex expiry as a hidden confounder. BSE's servers are blocked, so the Sensex dates are reported, not verified. The pre-stated test is not significant. Leaving Sensex expiry days out of the comparison makes the NSE expiry premia slightly larger, so our results were understated, not overstated ([SENSEX_CONFOUND.md](SENSEX_CONFOUND.md)).
 * Done since the first draft of this briefing: a second person re-typed all 223 numbers we took from the paper, blind; 222 matched and the one difference is a slip in the paper itself ([REKEY_CHECK.md](REKEY_CHECK.md)). The final-half-hour gamma test came out null.
 * A forecast for Tuesday 3 November's expiry was frozen in the repository before the market opened; it will be scored after the close.
+* Done: a forward test written down before the future data exist ([FORWARD_TEST.md](prereg/FORWARD_TEST.md)). The end-of-day reversal and the Tuesday last-hour premium will each be tested once, on new days only, when enough have piled up (about two to three years). That is the only fully honest out-of-sample test available, and the commit time proves the plan came first.
 * A working-paper draft by Wednesday 4 November, 9:30 IST.
 
 ## What to send Prof. Pandey

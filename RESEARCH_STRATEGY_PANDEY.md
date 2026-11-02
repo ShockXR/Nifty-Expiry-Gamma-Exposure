@@ -124,12 +124,12 @@ Each direction is scored on five criteria from 1 (poor) to 10 (excellent). The s
 | D9. Trading layer on options | 1 | 4 | 2 | 3 | 2 | **2** | The one robust pattern does not survive futures costs; an options backtest needs intraday option prices |
 | D10. Sequence model for intraday volatility | 2 | 3 | 6 | 3 | 3 | **3** | Trees already capture the structure; about 100 weekly expiries since November 2024 is too few |
 
-**Recommendation.** Lead with D1 and D4 together (they are the most natural continuation of Prof. Pandey's paper and the most certain), keep D3 as the forecasting chapter, and carry D2 as the paper's most interesting open finding, with a forward test on data after 2 November 2026 (pre-registration in [docs/prereg/](docs/prereg/)) as its out-of-sample commitment. D5 depends on what data Prof. Pandey's group can access and is the first thing to ask him about.
+**Recommendation.** Lead with D1 and D4 together (they are the most natural continuation of Prof. Pandey's paper and the most certain), keep D3 as the forecasting chapter, and carry D2 as the paper's most interesting open finding, with a forward test on data after 2 November 2026 ([docs/prereg/FORWARD_TEST.md](docs/prereg/FORWARD_TEST.md), committed before any of those data existed) as its out-of-sample commitment. D5 depends on what data Prof. Pandey's group can access and is the first thing to ask him about.
 
 ## 11. Next actions
 
 1. Send Prof. Pandey [PITCH_PANDEY.md](PITCH_PANDEY.md), with the replication question about the "before" window first.
 2. Ask him about the "Pro" category and any positioning or intraday option data his group can use (D5, D6).
 3. Download BSE circulars on a home machine to verify the Sensex expiry calendar (D1).
-4. Start the forward test when data after 2 November 2026 arrive (D2).
+4. Collect data for the forward test (D2): it is pre-registered ([docs/prereg/FORWARD_TEST.md](docs/prereg/FORWARD_TEST.md)) and runs once per hypothesis at its stopping point (the Tuesday last-hour premium after about 100 weeks, the end-of-day reversal after 130 negative-Pro-GEX days), never before.
 5. Turn the working-paper draft into the paper for whichever of D1 or D2 he prefers.

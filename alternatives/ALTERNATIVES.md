@@ -12,7 +12,7 @@ These were written before the real-data run (2 November 2026) as directions kept
 | A6. September 2023 Bank Nifty change | Done as event a of the event study. | [docs/EVENT_STUDY.md](../docs/EVENT_STUDY.md) |
 | A7. Pinning mechanism (new) | Done, pre-registered: none of six candidates explains when pinning appears. | [docs/PINNING_MECHANISM.md](../docs/PINNING_MECHANISM.md) |
 | A8. Sensex expiry as a confounder (new) | Done with a reported calendar; verification needs BSE circulars downloaded off the cloud. | [docs/SENSEX_CONFOUND.md](../docs/SENSEX_CONFOUND.md) |
-| A9. Forward test of the main claims (new) | Pre-registration being written (3 November 2026); runs when data after 2 November 2026 arrive. | [docs/prereg/](../docs/prereg/) |
+| A9. Forward test of the main claims (new) | Pre-registered on 2 November 2026 at 23:33 UTC, before any data for 3 November existed: the end-of-day reversal (H1) and the Tuesday last-hour premium (H2), each run once at a fixed stopping point (H2 about October 2028, H1 by the end of 2029). | [docs/prereg/FORWARD_TEST.md](../docs/prereg/FORWARD_TEST.md) |
 | A10. Dealer sign from better data (new) | Open: needs broker-level or strike-level positioning data, the first thing to ask Prof. Pandey about. | [docs/DEALER_SIGN.md](../docs/DEALER_SIGN.md) |
 
 ## A1. Trading layer (blocked on real option prices)

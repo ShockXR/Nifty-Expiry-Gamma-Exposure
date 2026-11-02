@@ -33,7 +33,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
 | Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-128 tests, run with `pytest` (also on every pull request through GitHub Actions).
+259 tests, run with `pytest` (also on every pull request through GitHub Actions).
 
 ## Documents
 
