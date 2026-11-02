@@ -75,11 +75,19 @@ def weekly_expiries(trading_days, rules: ExpiryRules | None = None) -> pd.Dateti
     return pd.DatetimeIndex(sorted(set(out)))
 
 
-def label_days(trading_days, rules: ExpiryRules | None = None) -> pd.DataFrame:
-    """One row per trading day with expiry flags, days to next expiry and regime."""
+def label_days(trading_days, rules: ExpiryRules | None = None, expiries=None) -> pd.DataFrame:
+    """One row per trading day with expiry flags, days to next expiry and regime.
+
+    ``expiries``: optional list of actual expiry dates (for example read from
+    the bhavcopies with data.actual_expiries). If given, it replaces the
+    weekday rule; only dates that are trading days in ``trading_days`` count.
+    """
     rules = rules or ExpiryRules()
     days = pd.DatetimeIndex(sorted(pd.to_datetime(trading_days))).normalize()
-    exp = weekly_expiries(days, rules)
+    if expiries is None:
+        exp = weekly_expiries(days, rules)
+    else:
+        exp = pd.DatetimeIndex(sorted(set(pd.DatetimeIndex(expiries).normalize()) & set(days)))
     exp_arr = exp.values
     pos = np.searchsorted(exp_arr, days.values)
     next_exp = pd.DatetimeIndex([exp_arr[p] if p < len(exp_arr) else pd.NaT for p in pos])

@@ -48,11 +48,17 @@ def load_market(a):
                                          participant_noise=a.participant_noise))
     from niftygex.data import build_market_from_nse
     raw = Path(a.raw)
+    official = None
+    if (raw / "index_daily.csv").exists():  # NSE's own list of trading days (from download_nse.py)
+        idx = pd.read_csv(raw / "index_daily.csv", parse_dates=["date"])
+        official = idx.loc[idx["index"].str.lower() == "nifty 50", "date"]
     return build_market_from_nse(raw / "nifty_1min.csv", raw / "bhavcopy",
                                  raw / "participant_oi" if (raw / "participant_oi").exists() else None,
                                  raw / "india_vix.csv" if (raw / "india_vix.csv").exists() else None,
                                  raw / "nifty_fut_1min.csv" if (raw / "nifty_fut_1min.csv").exists() else None,
-                                 oi_unit=a.oi_unit, lot_size=a.lot_size)
+                                 oi_unit=a.oi_unit, lot_size=a.lot_size, r=a.rate,
+                                 start=a.start, end=a.end, min_coverage=a.min_coverage,
+                                 official_days=official, use_file_expiries=True)
 
 
 def main():
@@ -63,7 +69,13 @@ def main():
     ap.add_argument("--kappa", type=float, default=0.5)
     ap.add_argument("--participant-noise", type=float, default=0.1)
     ap.add_argument("--seed", type=int, default=7)
-    ap.add_argument("--oi-unit", default="units")
+    ap.add_argument("--oi-unit", default="keep_units",
+                    help="NSE files report OI in shares; keep_units keeps shares and uses lot size 1 (exact)")
+    ap.add_argument("--start", default="2023-01-01", help="first day of real data to use")
+    ap.add_argument("--end", default=None, help="last day of real data to use")
+    ap.add_argument("--min-coverage", type=float, default=0.95,
+                    help="drop days whose minute bars cover less than this share of the session")
+    ap.add_argument("--rate", type=float, default=0.065, help="risk-free rate for Black-76")
     ap.add_argument("--lot-size", type=float, default=None)
     ap.add_argument("--targets", nargs="+", default=list(TARGETS))
     ap.add_argument("--tune", action="store_true")
@@ -74,7 +86,9 @@ def main():
     (out / "figures").mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     m = load_market(a)
-    label = "SYNTHETIC (simulated market, not real data)" if a.source == "synthetic" else "NSE data"
+    label = ("SYNTHETIC (simulated market, not real data)" if a.source == "synthetic" else
+             "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute Nifty bars "
+             "validated against NSE daily values")
     print(f"[{label}] {len(m['days'])} days loaded", flush=True)
 
     panel = build_gex_panel(m)

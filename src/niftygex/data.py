@@ -1,11 +1,18 @@
 """Loaders for NSE F&O bhavcopy, participant-wise open interest and 1-minute bars.
 
-These loaders were written against the published NSE file layouts. They have
-been tested on small fixture files in the same layouts (see tests/fixtures),
-not yet on live downloads, because the cloud environment used to build this
-prototype cannot reach nseindia.com. Check them on a real file first, and in
-particular confirm whether open interest is reported in contracts or in
-units (shares); see ``oi_in_units``.
+These loaders were first written against the published NSE file layouts and
+tested on synthetic files. On 2 November 2026 they were run on real files
+from the NSE archive server (January 2023 to October 2026). Checked facts:
+
+* Open interest (OPEN_INT, OpnIntrst) is reported in units (shares), in
+  both layouts. On 30 Oct 2025 the sum over all index options of OI divided
+  by each row's lot size equals the "Option Index Call Long" TOTAL of the
+  participant-wise OI file exactly (4,230,409 contracts); index futures
+  match exactly on 10 Jan 2024 too.
+* Lot sizes can differ between expiries on the same day (for example 75 and
+  65 for NIFTY in late 2025), so any conversion must be per row. The
+  simplest exact choice is to keep OI in shares and use a lot size of 1
+  (``oi_unit="keep_units"``); GEX is then in rupees per 1% move directly.
 
 Two bhavcopy layouts exist:
 
@@ -81,6 +88,47 @@ def load_bhavcopy(path, symbol: str = "NIFTY") -> pd.DataFrame:
     else:
         raise ValueError(f"{path}: unrecognised bhavcopy layout")
     return out[OPTION_SCHEMA].reset_index(drop=True)
+
+
+def bhavcopy_files(directory) -> list:
+    """All bhavcopy files in a folder (plain .csv or gzip .csv.gz), sorted by name."""
+    d = Path(directory)
+    return sorted(list(d.glob("*.csv")) + list(d.glob("*.csv.gz")))
+
+
+def actual_expiries(bhav: dict, last_day: pd.Timestamp | None = None) -> pd.DatetimeIndex:
+    """Expiry dates that really happened, read from the bhavcopies themselves.
+
+    ``bhav`` maps trade date to a tidy option table (load_bhavcopy). A contract
+    expiry E counts if E is itself a trade date in the files and contracts
+    with expiry E trade on E. This picks up holiday shifts (for example the
+    Wednesday 25 Jan 2023 expiry before Republic Day) without a holiday list.
+    """
+    dates = sorted(bhav)
+    have = set(dates)
+    out = set()
+    for d in dates:
+        exps = pd.to_datetime(bhav[d]["expiry"]).dt.normalize().unique()
+        if pd.Timestamp(d) in set(exps) and pd.Timestamp(d) in have:
+            out.add(pd.Timestamp(d))
+    return pd.DatetimeIndex(sorted(out))
+
+
+def parity_forward(chain: pd.DataFrame, T: float, r: float) -> float:
+    """Forward index level for the chain's expiry from put-call parity.
+
+    Uses the strike where call and put settlement prices are closest (the
+    same step as the VIX methodology): F = K + exp(rT) (C - P).
+    Returns NaN if no strike has both a call and a put price.
+    """
+    c = chain[chain["is_call"]].set_index("strike")["settle"]
+    p = chain[~chain["is_call"]].set_index("strike")["settle"]
+    both = pd.concat([c, p], axis=1, keys=["c", "p"]).dropna()
+    both = both[(both["c"] > 0) & (both["p"] > 0)]
+    if both.empty:
+        return float("nan")
+    k = (both["c"] - both["p"]).abs().idxmin()
+    return float(k + np.exp(r * T) * (both.loc[k, "c"] - both.loc[k, "p"]))
 
 
 def oi_in_units(chain: pd.DataFrame, lot_size: float) -> pd.DataFrame:
@@ -199,6 +247,11 @@ def build_market_from_nse(
     oi_unit: str = "units",
     r: float = 0.065,
     minutes: int = 375,
+    start=None,
+    end=None,
+    min_coverage: float = 0.0,
+    official_days=None,
+    use_file_expiries: bool = False,
 ) -> dict:
     """Assemble the market dict from raw NSE-layout files.
 
@@ -211,7 +264,16 @@ def build_market_from_nse(
       percent, as NSE publishes it), optional.
     * ``futures_bars_path``: 1-minute futures bars, used for volume.
     * ``oi_unit``: "units" if the bhavcopy reports OI in shares (divide by the
-      lot size), "contracts" if already in contracts. CHECK on a real file.
+      lot size), "contracts" if already in contracts, "keep_units" to keep OI
+      in shares and use a lot size of 1 (exact when lot sizes change; this is
+      the right choice for real NSE files, which report shares).
+    * ``start``/``end``: keep only days in this range.
+    * ``min_coverage``: drop days whose minute bars cover less than this
+      share of the session (removes Muhurat and other short special sessions).
+    * ``official_days``: if given, keep only these trading days (for example
+      the dates in NSE's daily index file).
+    * ``use_file_expiries``: label expiry days from the bhavcopies (dates on
+      which a contract really expired) instead of the weekday rule.
 
     For each day t the chain used is the nearest weekly expiry strictly after
     t, i.e. the contract that will be live on day t+1 (or expiring on it).
@@ -219,7 +281,18 @@ def build_market_from_nse(
     from .expiry_calendar import label_days
 
     bars = load_minute_bars(bars_path)
+    if start is not None:
+        bars = bars[bars.index >= pd.Timestamp(start)]
+    if end is not None:
+        bars = bars[bars.index < pd.Timestamp(end) + pd.Timedelta(days=1)]
     grid = to_session_grid(bars, minutes=minutes)
+    keep = np.isfinite(grid["close"]).mean(axis=1) >= min_coverage
+    if official_days is not None:
+        keep &= grid["days"].isin(pd.DatetimeIndex(official_days).normalize())
+    if not keep.all():
+        for k in ("open", "high", "low", "close", "volume", "returns"):
+            grid[k] = grid[k][keep]
+        grid["days"] = grid["days"][keep]
     days = grid["days"]
     if futures_bars_path is not None:
         fg = to_session_grid(load_minute_bars(futures_bars_path), minutes=minutes)
@@ -227,14 +300,22 @@ def build_market_from_nse(
         grid["volume"] = np.nan_to_num(vol, nan=0.0) + 1.0
     if not np.isfinite(grid["volume"]).any():
         grid["volume"] = np.ones_like(grid["close"])
-    labels = label_days(days)
-
     # bhavcopy, keyed by trade date
     bhav = {}
-    for f in sorted(Path(bhavcopy_dir).glob("*.csv")):
+    lo, hi = days.min() - pd.Timedelta(days=10), days.max() + pd.Timedelta(days=10)
+    for f in bhavcopy_files(bhavcopy_dir):
+        stamp = "".join(ch for ch in Path(f).name if ch.isdigit())[-8:]
+        try:
+            fd = pd.to_datetime(stamp, format="%Y%m%d")
+            if not (lo <= fd <= hi):
+                continue
+        except ValueError:
+            pass
         df = load_bhavcopy(f, symbol)
         if len(df):
             bhav[pd.Timestamp(df["date"].iloc[0]).normalize()] = df
+    expiries = actual_expiries(bhav) if use_file_expiries else None
+    labels = label_days(days, expiries=expiries)
     chains = []
     lot_used = []
     pos = {d: i for i, d in enumerate(days)}
@@ -248,17 +329,32 @@ def build_market_from_nse(
             continue
         nxt = df.loc[df["expiry"] > d, "expiry"].min()
         sel = df[df["expiry"] == nxt].copy()
-        ls = lot_size if lot_size is not None else float(sel["lot_size"].dropna().iloc[0])
-        if oi_unit == "units":
-            sel = oi_in_units(sel, ls)
+        if oi_unit == "keep_units":
+            ls = 1.0
+        elif oi_unit == "units":
+            if lot_size is None and sel["lot_size"].notna().all():
+                # per-row conversion: lot sizes can differ across expiries on one day
+                sel["oi"] = sel["oi"] / sel["lot_size"]
+                sel["chg_oi"] = sel["chg_oi"] / sel["lot_size"]
+                ls = float(sel["lot_size"].median())
+            else:
+                ls = lot_size if lot_size is not None else float(sel["lot_size"].dropna().iloc[0])
+                sel = oi_in_units(sel, ls)
+        else:
+            ls = lot_size if lot_size is not None else float(sel["lot_size"].dropna().iloc[0])
         if nxt in pos:
             n_td = pos[nxt] - t
         else:
             n_td = int(np.busday_count(d.date(), pd.Timestamp(nxt).date()))
         ch = sel[["strike", "is_call", "oi", "settle"]].reset_index(drop=True)
         under = sel["underlying"].dropna()
-        ch.attrs.update({"spot": float(under.iloc[0]) if len(under) else spot, "T": max(n_td, 1) / 252,
-                         "date": d, "expiry": nxt})
+        T_ch = max(n_td, 1) / 252
+        fwd = parity_forward(ch, T_ch, r) if oi_unit == "keep_units" else float("nan")
+        if np.isfinite(fwd) and abs(fwd / spot - 1) < 0.05:
+            ch_spot = fwd  # forward for this expiry (pass carry=0 to build_gex_panel)
+        else:
+            ch_spot = float(under.iloc[0]) if len(under) else spot
+        ch.attrs.update({"spot": ch_spot, "T": T_ch, "date": d, "expiry": nxt, "spot_index": spot})
         chains.append(ch)
         lot_used.append(ls)
 
@@ -278,7 +374,12 @@ def build_market_from_nse(
     if vix_path is not None:
         v = pd.read_csv(vix_path)
         v.columns = [c.strip().lower() for c in v.columns]
-        v = v.set_index(pd.to_datetime(v["date"], dayfirst=True))["close"].astype(float) / 100.0
+        # ISO dates (YYYY-MM-DD, as download_nse.py writes them) must not be read day-first:
+        # pandas would swap day and month (2023-01-02 would become 1 February).
+        ds = v["date"].astype(str)
+        iso = ds.str.match(r"^\d{4}-\d{2}-\d{2}")
+        dates = pd.to_datetime(ds.where(iso), format="ISO8601").fillna(pd.to_datetime(ds.where(~iso), dayfirst=True))
+        v = v.set_index(dates)["close"].astype(float) / 100.0
         vix = v.reindex(days).ffill().to_numpy()
     if not np.isfinite(vix).all():
         # Fallback: annualised realized volatility of the day (flagged in attrs).
@@ -296,6 +397,8 @@ def build_market_from_nse(
         "chains": chains,
         "participant": participant,
         "vix": vix,
-        "lot_size": float(np.nanmedian(lots)) if np.isfinite(lots).any() else 75.0,
+        "lot_size": 1.0 if oi_unit == "keep_units" else (float(np.nanmedian(lots)) if np.isfinite(lots).any() else 75.0),
         "r": r,
+        "missing_bhavcopy_days": [c.attrs["date"] for c in chains if c.attrs.get("missing")],
+        "expiry_source": "bhavcopy" if use_file_expiries else "weekday rule",
     }

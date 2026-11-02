@@ -134,12 +134,15 @@ def build_daily_tables(out: Path) -> None:
         return
     df = pd.concat([pd.read_csv(f, dtype=str) for f in files], ignore_index=True)
     df["date"] = pd.to_datetime(df["Index Date"], dayfirst=True)
-    num = ["Open Index Value", "High Index Value", "Low Index Value", "Closing Index Value"]
-    for c in num:
-        df[c] = pd.to_numeric(df[c], errors="coerce")
-    df = df.rename(columns={"Index Name": "index", "Open Index Value": "open", "High Index Value": "high",
-                            "Low Index Value": "low", "Closing Index Value": "close"})
-    tidy = df[["date", "index", "open", "high", "low", "close"]].sort_values(["index", "date"])
+    names = {"Index Name": "index", "Open Index Value": "open", "High Index Value": "high",
+             "Low Index Value": "low", "Closing Index Value": "close", "Volume": "volume",
+             "Turnover (Rs. Cr.)": "turnover_cr"}
+    df = df.rename(columns=names)
+    cols = [c for c in names.values() if c in df.columns and c != "index"]
+    for c in cols:
+        df[c] = pd.to_numeric(df[c].astype(str).str.replace(",", ""), errors="coerce")
+    df["index"] = df["index"].str.strip()
+    tidy = df[["date", "index"] + cols].drop_duplicates(["date", "index"]).sort_values(["index", "date"])
     tidy.to_csv(out / "index_daily.csv", index=False)
     vix = tidy[tidy["index"].str.upper() == "INDIA VIX"][["date", "close"]]
     vix.to_csv(out / "india_vix.csv", index=False)
