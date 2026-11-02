@@ -97,7 +97,6 @@ def r3_regressions(dm: pd.DataFrame, panel: pd.DataFrame) -> pd.DataFrame:
     d["lvix_l1"] = np.log(d["vix"]).shift(1)
     d["exp"] = d["is_expiry"].astype(float)
     scale = d["gross_gex"].rolling(20, min_periods=5).median()
-    d["gross_rel_l1"] = (d["gross_gex"] / scale).shift(1)
     # Regime controls: the participant-based GEX drifts upward over 2023 to 2026 (see the GEX figure),
     # and expiry-day volatility differs by expiry regime, so without these controls a GEX x expiry
     # term could just pick up the regime. Each regime gets its own level and its own expiry effect.

@@ -234,12 +234,69 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Forecast models for the end of the day should treat the auction period as a separate regime; the model study is told about it.
 * **NEXT ITERATION:** Live dry run for the 3 November expiry.
 
+## Iteration 20: an independent review of the real-data results
+
+* **OBJECTIVE:** Have a reviewer who did not write the code check every real-data number against the result files and look for look-ahead bias.
+* **PROBLEM IDENTIFIED:** Seven main points (M1 to M7, `docs/INDEPENDENT_REVIEW.md`). The biggest: (M1) under squared-error loss the R1 ranking reverses; (M2) the hybrid's gain might all come from the 09:15 anchor; (M3) the refit schedule was described wrongly; (M5) the R3 GEX ratio is about four times larger on expiry eves because gross gamma peaks then, which could create the expiry-day "flip" mechanically; (M6) many tests, no correction.
+* **HYPOTHESIS:** Some headline claims are artefacts of loss choice, anchor time or scaling.
+* **CHANGES IMPLEMENTED:** `experiments/forecast_diagnostics.py` (MSE, gains by anchor and regime, trimmed losses); `r3_robustness` in `experiments/real_day_level.py` (scale-free GEX, gross-gamma controls, Holm and Benjamini-Hochberg); Holm and BH columns in R5; corrected wording throughout `docs/REAL_DATA_RESULTS.md`.
+* **EXPERIMENTS PERFORMED:** All of the above on the committed forecast files and panels.
+* **RESULTS:** (M1) The MSE reversal comes from about 10 anchors right after the 4 June 2024 election-result crash, which make up 97% of mcsGARCH's squared error. (M2) The hybrid's gain is largest at 09:15 (16.4% and 26.9%) but still 5.8% and 7.1% at later anchors and in every regime. (M5) With scale-free GEX the R3 flip survives only under the Pro rule, so "holds under all three rules" was withdrawn.
+* **IMPROVEMENTS:** Two overstated claims corrected and every remaining claim now says which loss, anchor and sign rule it depends on.
+* **REMAINING ISSUES:** The Diebold-Mariano test should use a Student t reference and the hybrid's error model uses a full-sample constant (handed to the model study).
+* **NEXT ITERATION:** Try to break the two GEX findings that are left.
+
+## Iteration 21: the expiry rule changes as natural experiments
+
+* **OBJECTIVE:** Use NSE's changes to the expiry calendar (November 2024, September 2025) as events, with Bank Nifty as a comparison index.
+* **PROBLEM IDENTIFIED:** R2's regime comparison is a before/after comparison with no control group.
+* **HYPOTHESIS:** If expiry-day hedging adds volatility, the expiry premium should move with the rule changes in Nifty and not in the comparison index.
+* **CHANGES IMPLEMENTED:** `experiments/expiry_event_study.py`, `docs/EVENT_STUDY.md`.
+* **EXPERIMENTS PERFORMED:** Week-relative difference-in-differences, placebo event dates, a pre-specified main test, Rogers-Satchell range-based variance next to 5-minute realized variance.
+* **RESULTS:** The pre-specified main test (Bank Nifty weekly options stopping in November 2024, Nifty as the comparison) is null: -0.01 log points, p = 0.97, though it could only have detected large effects. The end-of-day premium does follow the expiry: when Bank Nifty's expiry moved from Thursday to Wednesday, the Wednesday-minus-Thursday gap in its last 30 minutes rose by +1.14 log points (placebo p = 0.005) while whole-day variance did not move. Rogers-Satchell variance shows an expiry premium that 5-minute realized variance does not.
+* **IMPROVEMENTS:** An honest null on the main question and a narrower, better-supported end-of-day result.
+* **REMAINING ISSUES:** BSE moved Sensex expiries at the same time and BSE data are blocked from our servers, so a Sensex confound cannot be ruled out.
+* **NEXT ITERATION:** Falsification of F1 and F2.
+
+## Iteration 22: trying hard to break the GEX findings
+
+* **OBJECTIVE:** Attack F1 (R3: GEX and next-day volatility, with an expiry-day flip) and F2 (R5: stronger end-of-day reversal after negative Pro GEX) with every test we could think of.
+* **PROBLEM IDENTIFIED:** Both findings came from in-sample regressions with a guessed dealer sign, three rules and several specifications.
+* **HYPOTHESIS:** If a finding is a dealer-hedging effect, it should survive shuffled GEX, fail when GEX comes from the future, not be reproduced by random sign rules or gross gamma, hold out of sample and replicate on Bank Nifty.
+* **CHANGES IMPLEMENTED:** `experiments/falsification.py` (seven test families, 742 tests in total, all seeds recorded), `tests/test_falsification.py`, `docs/FALSIFICATION.md`. While reviewing it, two small bugs in R5 were found and fixed: yesterday's VIX was lagged after dropping days (stale on 4 days) and days with no GEX were coded as "non-negative" (3 days). R5 changed only in the fourth decimal.
+* **EXPERIMENTS PERFORMED:** Five permutation schemes, timing placebos (GEX from t, t+1, t+2), a cloud of random sign rules, gross GEX and open interest as placebos, a 2023-24 / 2025-26 split with a pre-registered test, Bank Nifty, a quasi-causal test using the disappearance of expiring gamma, and Holm corrections.
+* **RESULTS:** **F2 survived every test** (permutations p = 0.0005 to 0.010; GEX from the next day does not predict it, p = 0.31; out-of-sample squared error 4.3% lower, p = 0.007; Holm p = 0.016 among 78 tests). **F1's ordinary-day term failed** (block shuffle p = 0.25; 91.9% of random sign rules also significant; gross gamma alone gives t = -5.3), so it is a gross-gamma level effect. **F1's expiry-day flip** survived in sample under the Pro rule only, makes forecasts about 5% worse and does not replicate on Bank Nifty. The quasi-causal roll-off test found nothing distinguishable from placebo days. 16 of 742 tests survive Holm.
+* **IMPROVEMENTS:** One finding promoted to "robust", one demoted to "proxy for gross gamma", one to "in-sample lead".
+* **REMAINING ISSUES:** The Pro GEX series is driven by the daily Pro positioning weights, not by the option chain, so what it measures is still unclear.
+* **NEXT ITERATION:** Estimate the dealer sign from the data instead of guessing it.
+
+## Iteration 23: estimating the dealer sign from the market's response
+
+* **OBJECTIVE:** Let the data choose the dealer sign: write dealer gamma as a weighted mix of the participant categories (and of calls and puts) and estimate the weights from two outcomes that hedging theory makes predictions about.
+* **PROBLEM IDENTIFIED:** R3 fits the Pro sign and R5 fits the reversed Pro sign. Both cannot be right under one simple story.
+* **HYPOTHESIS:** If there is one dealer sign, the variance outcome (a) and the end-of-day outcome (b) should point to the same weights.
+* **CHANGES IMPLEMENTED:** `experiments/dealer_sign.py` (direction estimates with likelihood-ratio and bootstrap sets, a slowly drifting state-space version, expanding-window out-of-sample test, shuffled-outcome placebos and a synthetic power check), `tests/test_dealer_sign.py` (18 tests), `docs/DEALER_SIGN.md`. GEX is scale-free throughout.
+* **EXPERIMENTS PERFORMED:** Full-sample and rolling estimates, 452 out-of-sample days refitted every 21 days with Diebold-Mariano tests, 200 placebos, synthetic data with known weights.
+* **RESULTS:** A clear negative result. Outcome (a) points to 21 degrees (mostly Pro) but weakly (p = 0.18); outcome (b) points to 190 degrees, the reverse of Pro, strongly (p = 4e-6, placebo p = 0.005). Out of sample, all 10 primary tests have Holm p = 1.0. The method finds known weights on synthetic data (95% detection, 9 degree median error at signal-to-noise 0.10); the real outcome (a) is below that range. The old R3 scaling produces a false call/put direction (52 degrees, p = 0.013) that disappears with the scale-free measure.
+* **IMPROVEMENTS:** The sign question is now stated as a measured, documented result rather than an assumption.
+* **REMAINING ISSUES:** Public NSE data do not identify who hedges Nifty options. A dealer-level or strike-level positioning dataset would be needed.
+* **NEXT ITERATION:** Scoring the live forecast for 3 November and a one-command reproduction.
+
+## Iteration 24: a frozen live forecast and a one-command reproduction
+
+* **OBJECTIVE:** Show the method works on a day nobody has seen yet, and make every real-data result reproducible with one command.
+* **PROBLEM IDENTIFIED:** Every result so far is on past data, and the raw data are not in the repository (licence and size).
+* **HYPOTHESIS:** A forecast committed before the market opens cannot be tuned after the fact; hashes of the raw files let anyone confirm they have the same data.
+* **CHANGES IMPLEMENTED:** `experiments/live_dry_run.py` (freeze and score modes); the forecast for Tuesday 3 November 2026 was committed at 21:01 UTC on 2 November, before the market opened (`results/live/2026-11-03/forecast.md`). `scripts/data_manifest.py` and `data/MANIFEST.csv` (SHA-256 of 2,989 raw files; gzip files hashed on their content because gzip headers carry a time stamp). `scripts/reproduce_all.py` downloads with pinned sources, checks the manifest and reruns every study, logging run times.
+* **EXPERIMENTS PERFORMED:** Manifest check on the current data (passes); partial reproduction run.
+* **RESULTS:** Frozen forecast: whole-day variance 5.55e-05 (about 11.8% annualised volatility), last hour 1.33e-05, ATM straddle 152 points at strike 23,350, all three GEX rules positive. Scoring after the close is scheduled.
+* **IMPROVEMENTS:** An out-of-sample test that is out of sample in calendar time, not just in the code.
+* **REMAINING ISSUES:** One day is an illustration, not evidence; the full reproduction run waits for the model study to finish.
+* **NEXT ITERATION:** Merge the model study, rerun the pipeline with the holiday and monthly-expiry fixes, and run the full reproduction.
+
 ## Iterations in progress (3 November 2026, early morning UTC)
 
-* **Intraday gamma at the current price:** expiry-day gamma re-priced minute by minute from the previous evening's open interest, with day and minute-of-day fixed effects and placebo strike grids.
-* **Independent review:** a separate reviewer reads the code and the three real-data documents, checks numbers against result files, and looks for look-ahead bias.
-* **Falsification suite:** permutation and timing placebos, random sign rules, out-of-sample splits, Bank Nifty as a second market, and a quasi-causal test that uses the mechanical disappearance of expiring gamma.
-* **Event study:** the expiry rule changes with Bank Nifty as a comparison index.
-* **Stronger forecasting models:** option-implied features and new GEX measures in the forecasting contest.
+* **Intraday gamma at the current price:** the first pass is written up in `docs/INTRADAY_GAMMA.md` (a clean null on expiry days); a follow-up on the final half hour before the auction and a pre-registered Bank Nifty test is running.
+* **Stronger forecasting models:** option-implied features, new GEX measures, a Student t Diebold-Mariano test and more frequent mcsGARCH refits in the forecasting contest.
 
 Each will be written up in the same format when it finishes.
