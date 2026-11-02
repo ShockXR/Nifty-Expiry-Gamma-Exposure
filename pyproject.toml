@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "niftygex"
+version = "0.1.0"
+description = "Dealer gamma exposure on Nifty 50 expiry days"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "statsmodels",
+    "arch",
+    "matplotlib",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "jupyter"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
