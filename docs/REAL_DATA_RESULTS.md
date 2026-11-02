@@ -24,7 +24,8 @@ Separate real-data studies, each with its own document:
 * `docs/FALSIFICATION.md`: seven families of tests that try to break R3 and R5 (shuffles, timing placebos, random sign rules, out of sample, Bank Nifty, a quasi-causal roll-off test, multiple testing). R5 survives all of them; R3's ordinary-day term does not.
 * `docs/DEALER_SIGN.md`: the dealer sign estimated from the market's response instead of assumed. A documented negative result: the two outcomes point to nearly opposite signs.
 * `docs/INTRADAY_GAMMA.md`: expiry-day gamma re-priced minute by minute at the current index level. A clean null on expiry days, also in the final half hour before the close (pre-registered follow-up: 0.26, p = 0.39); the one lead that passed its placebos (gamma concentrated near the index) did not replicate on Bank Nifty (p = 0.66).
-* Still running: a stronger version of R1 (option-implied features, more frequent mcsGARCH refits), a connectedness-by-gamma-regime study, a real-data-calibrated power study and a check of BSE's Sensex expiry as a confounder.
+* Still running: a stronger version of R1 (option-implied features, more frequent mcsGARCH refits), a real-data-calibrated power study and a check of BSE's Sensex expiry as a confounder.
+* `docs/CONNECTEDNESS_GAMMA.md`: does Nifty and Bank Nifty volatility spill over more on short-gamma days (a new question for the paper's connectedness design)? The pre-stated Pro-rule test is borderline (+4.29 points on the paper's scale, permutation p = 0.044) and does not survive a VIX control or most robustness checks; total gamma (no sign) goes with lower connectedness (Holm p = 0.010), like the level effect in FALSIFICATION.md.
 * `docs/REKEY_CHECK.md`: a second person re-typed all 223 printed numbers from the paper blind; 222 matched, and the one difference is a typesetting slip in the paper.
 
 ---

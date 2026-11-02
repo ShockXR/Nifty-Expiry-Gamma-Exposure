@@ -1,0 +1,13 @@
+data,regime,days,n_days,short_pro,short_us,short_client_mirror
+REAL DATA,multi_weekly,all days,461,360,33,30
+REAL DATA,multi_weekly,Nifty expiry days,98,80,6,6
+REAL DATA,multi_weekly,other days,363,280,27,24
+REAL DATA,single_weekly_thu,all days,192,65,18,9
+REAL DATA,single_weekly_thu,Nifty expiry days,41,19,5,5
+REAL DATA,single_weekly_thu,other days,151,46,13,4
+REAL DATA,single_weekly_tue,all days,156,40,28,0
+REAL DATA,single_weekly_tue,Nifty expiry days,34,8,5,0
+REAL DATA,single_weekly_tue,other days,122,32,23,0
+REAL DATA,all,all days,809,465,79,39
+REAL DATA,all,Nifty expiry days,173,107,16,11
+REAL DATA,all,other days,636,358,63,28

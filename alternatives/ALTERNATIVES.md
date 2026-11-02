@@ -28,6 +28,8 @@ End-of-day GEX lagged one day is what free data allow. Intraday option-chain sna
 
 Run Diebold-Yilmaz for Nifty and Bank Nifty (the paper's pair) and for Nifty and Sensex (which now expire on different weekdays), split by negative versus positive Nifty GEX days, with block-bootstrap intervals. This ties the paper's connectedness result to hedging. The engine exists (`niftygex.connectedness`); it needs Bank Nifty and Sensex 1-minute bars.
 
+**Done for Nifty and Bank Nifty (RQ4, P42): [docs/CONNECTEDNESS_GAMMA.md](../docs/CONNECTEDNESS_GAMMA.md), `experiments/connectedness_gamma.py`.** The pre-stated test finds +4.29 points of total connectedness after Pro-rule short-gamma evenings (p 0.044). It is not robust: it is zero in a day-level regression with VIX, and no Pro secondary test survives Holm. Only gross gamma (no sign) survives, with lower connectedness on high-gamma days. The Nifty and Sensex pair is still open (it needs Sensex minute bars).
+
 ## A5. Momentum regression
 
 $r_{\text{last 30}} = a + b\, r_{\text{open to 15:00}} + c\, r_{\text{open to 15:00}} \cdot \mathbb 1[\text{GEX} < 0] + e$, HAC standard errors, expiry and non-expiry days separately. A positive $c$ is the hedging prediction. Not run on synthetic data because the simulator has no momentum channel, so the answer would be zero by construction.

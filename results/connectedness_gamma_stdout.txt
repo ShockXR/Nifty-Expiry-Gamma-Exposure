@@ -1,0 +1,139 @@
+REAL DATA. RQ4 (P42): Nifty / Bank Nifty volatility connectedness by dealer gamma state.
+Seed 20261102; permutations 5000; bootstrap draws 2000; block 20 trading days; VAR(2), H=10; sensitivity VAR(AIC, max 10), H=30; min days per state per stratum 5.
+
+Sample: 2023-01-03 to 2026-04-22, 809 days (Bank Nifty bars end 2026-04-22); Nifty expiry days 173; closing-auction days (from 2026-08-03) in sample: 0.
+Days per regime: multi_weekly 461, single_weekly_thu 192, single_weekly_tue 156
+
+mcsGARCH per regime (mcsgarch_fits.csv):
+           regime     index  days_fitted   alpha   beta  half_life_min    nu daily_variance_method
+     multi_weekly     nifty          461 0.04577  0.951          213.2 6.366              egarch_t
+     multi_weekly banknifty          461 0.04822 0.9483          196.6 5.481              egarch_t
+single_weekly_thu     nifty          192 0.05767 0.9391          215.2  5.16              egarch_t
+single_weekly_thu banknifty          192 0.04552 0.9475          98.61 6.756              egarch_t
+single_weekly_tue     nifty          156 0.03644 0.9584            134 7.079              egarch_t
+single_weekly_tue banknifty          156  0.0315 0.9674          605.8 7.736              egarch_t
+
+VAR lag chosen by AIC (max 10) on all 809 days pooled: p = 10 (used with H = 30).
+Check: pooled short-gamma (Pro) days, fast cross-product VAR vs replication.connectedness_segments: largest absolute difference 2.02e-12 connectedness points.
+
+Gamma-state counts (state_counts.csv):
+     data            regime              days  n_days  short_pro  short_us  short_client_mirror
+REAL DATA      multi_weekly          all days     461        360        33                   30
+REAL DATA      multi_weekly Nifty expiry days      98         80         6                    6
+REAL DATA      multi_weekly        other days     363        280        27                   24
+REAL DATA single_weekly_thu          all days     192         65        18                    9
+REAL DATA single_weekly_thu Nifty expiry days      41         19         5                    5
+REAL DATA single_weekly_thu        other days     151         46        13                    4
+REAL DATA single_weekly_tue          all days     156         40        28                    0
+REAL DATA single_weekly_tue Nifty expiry days      34          8         5                    0
+REAL DATA single_weekly_tue        other days     122         32        23                    0
+REAL DATA               all          all days     809        465        79                   39
+REAL DATA               all Nifty expiry days     173        107        16                   11
+REAL DATA               all        other days     636        358        63                   28
+
+Connectedness per state and stratum, total (state_connectedness.csv, paper scale 0 to 200):
+              contrast            stratum  stratum_weight                state  n_days  value  boot_ci95_lo  boot_ci95_hi
+          P0_pro_total       multi_weekly          0.5698          short gamma     360  78.76          74.8         81.12
+          P0_pro_total       multi_weekly          0.5698           long gamma     101  72.04         70.23          74.6
+          P0_pro_total  single_weekly_thu          0.2373          short gamma      65  79.94         77.59         83.48
+          P0_pro_total  single_weekly_thu          0.2373           long gamma     127  80.34         79.02         82.01
+          P0_pro_total  single_weekly_tue          0.1928          short gamma      40  90.37         85.09         91.29
+          P0_pro_total  single_weekly_tue          0.1928           long gamma     116  87.48         84.42         89.65
+           S3_us_total       multi_weekly          0.5698          short gamma      33  74.13         71.15         77.72
+           S3_us_total       multi_weekly          0.5698           long gamma     428   77.6         73.86         80.17
+           S3_us_total  single_weekly_thu          0.2373          short gamma      18   84.3         79.36         85.11
+           S3_us_total  single_weekly_thu          0.2373           long gamma     174  79.91         78.43         82.49
+           S3_us_total  single_weekly_tue          0.1928          short gamma      28   90.8         82.94         92.36
+           S3_us_total  single_weekly_tue          0.1928           long gamma     128  88.67         84.53         90.81
+S4_client_mirror_total       multi_weekly           0.706          short gamma      30  82.81         73.68         85.18
+S4_client_mirror_total       multi_weekly           0.706           long gamma     431  75.67         73.26         78.56
+S4_client_mirror_total  single_weekly_thu           0.294          short gamma       9   77.1         73.76          80.6
+S4_client_mirror_total  single_weekly_thu           0.294           long gamma     183   80.4         78.67         82.86
+S5_gross_top_vs_bottom       multi_weekly          0.5704    top gross tercile     154  73.49         71.52         75.63
+S5_gross_top_vs_bottom       multi_weekly          0.5704 bottom gross tercile     154  80.14         75.66         83.02
+S5_gross_top_vs_bottom  single_weekly_thu           0.237    top gross tercile      64  77.26         73.25         79.79
+S5_gross_top_vs_bottom  single_weekly_thu           0.237 bottom gross tercile      64  80.13         78.09          82.9
+S5_gross_top_vs_bottom  single_weekly_tue          0.1926    top gross tercile      52  85.42         83.92         86.57
+S5_gross_top_vs_bottom  single_weekly_tue          0.1926 bottom gross tercile      52  90.21         84.98         91.64
+          R_pro_pooled all regimes pooled               1          short gamma     465  78.61         75.63         81.03
+          R_pro_pooled all regimes pooled               1           long gamma     344  77.25         75.05         79.25
+
+Directional shares, Pro rule (state_connectedness.csv):
+          stratum       state  n_days     measure  value  boot_ci95_lo  boot_ci95_hi
+     multi_weekly short gamma     360 bn_to_nifty  41.11         39.05         43.38
+     multi_weekly short gamma     360 nifty_to_bn  37.64         35.43         39.03
+     multi_weekly  long gamma     101 bn_to_nifty   38.7          37.2         40.72
+     multi_weekly  long gamma     101 nifty_to_bn  33.35         32.08         35.32
+single_weekly_thu short gamma      65 bn_to_nifty  38.26         36.93         40.08
+single_weekly_thu short gamma      65 nifty_to_bn  41.68         39.08         44.37
+single_weekly_thu  long gamma     127 bn_to_nifty  40.11         38.83         41.87
+single_weekly_thu  long gamma     127 nifty_to_bn  40.23         38.55         41.91
+single_weekly_tue short gamma      40 bn_to_nifty  47.44          43.5         48.17
+single_weekly_tue short gamma      40 nifty_to_bn  42.93         41.12         44.16
+single_weekly_tue  long gamma     116 bn_to_nifty  44.68         41.34         46.43
+single_weekly_tue  long gamma     116 nifty_to_bn   42.8         41.95         44.05
+
+Primary and secondary tests (tests.csv). estimate = state A minus state B; p two-sided:
+test     measure                                                                            contrast  estimate  boot_ci95_lo  boot_ci95_hi  boot_median    perm_p  perm_null_mean  holm_p_secondary  n_days_state_a  n_days_state_b
+  P0       total Pro rule, all days: total connectedness, short minus long gamma (regime-stratified)     4.287         1.636          5.96        4.101   0.04379          0.2987               NaN             465             344
+  S1 nifty_to_bn                     Pro rule, all days: Nifty to Bank Nifty share, short minus long     2.817        0.7464         3.959        2.526   0.06779          0.3565            0.7457             465             344
+  S2 bn_to_nifty                     Pro rule, all days: Bank Nifty to Nifty share, short minus long      1.47       -0.1801         3.284        1.538     0.181        -0.05787                 1             465             344
+  S3       total                                         US convention rule: total, short minus long   -0.5292        -3.672          2.02      -0.9385    0.9788          -0.478                 1              79             730
+  S4       total                                         Client-mirror rule: total, short minus long     4.068        -2.883         6.541        3.491     0.112         -0.5593            0.8958              39             614
+  S5       total                              Gross gamma (no sign): total, top minus bottom tercile    -5.394        -7.531        -2.495       -5.581 0.0007998        -0.07645            0.0104             270             270
+  S6       total                                 Pro rule: total, stratified by regime x VIX tercile     2.675        0.6636         3.813        2.271   0.03399          0.1131            0.4078             465             315
+  S7       total     Pro rule: per-day connectedness on short dummy + log VIX(t-1) + regime + expiry   -0.2539           NaN           NaN          NaN    0.7029        -0.02075                 1             465             344
+  S8       total                                Pro rule, Nifty expiry days: total, short minus long     2.359        -2.437         5.211        1.726    0.2525        -0.02415                 1             107              66
+  S9       total                                       Pro rule, other days: total, short minus long     4.237         1.537         6.225        4.246   0.07379          0.3535            0.7457             358             278
+ S10       total                              Pro rule, multi_weekly regime: total, short minus long     6.716         2.105         9.301        6.401   0.07159          0.5983            0.7457             360             101
+ S11       total                         Pro rule, single_weekly_thu regime: total, short minus long   -0.4076        -3.116         2.732      -0.4331    0.8072         0.09185                 1              65             127
+ S12       total                         Pro rule, single_weekly_tue regime: total, short minus long     2.887       0.05538         5.465        2.891     0.198         -0.3322                 1              40             116
+ S13       total                             Pro rule, VAR(10) by AIC, H=30: total, short minus long      2.86       -0.1883         4.864         2.62    0.2302           0.259                 1             465             344
+
+Day-level regression (day_level_regression.csv):
+                                  spec  n_days  coef_short_gamma_pro  hac_se  hac_p  perm_p  coef_log_vix_prev  hac_p_log_vix_prev     r2  mean_outcome
+               regime + expiry dummies     809              -0.08066  0.5364 0.8805  0.9256                NaN                 NaN 0.2713         79.01
+regime + expiry dummies + log VIX(t-1)     809               -0.2539  0.5268 0.6298  0.7029              4.542           9.158e-05 0.2855         79.01
+
+Robustness (robustness.csv):
+                                                                 check  estimate  boot_ci95_lo  boot_ci95_hi  boot_median  perm_p  perm_null_mean
+                              primary statistic, block length 1 day(s)     4.287         2.129         6.408        4.153 0.02639          0.2452
+                             primary statistic, block length 10 day(s)     4.287         1.594         6.256        4.044 0.03339          0.2429
+                             primary statistic, block length 40 day(s)     4.287         1.828         5.778        4.064 0.05439           0.406
+pooled difference (no stratification), within-regime block permutation     1.364        -1.461         4.341          1.6 0.04299          -2.314
+ pooled difference (no stratification), whole-sample block permutation     1.364        -1.461         4.341          1.6  0.6723         0.06058
+          primary statistic on the intraday mcsGARCH component sqrt(q)     1.209        -2.326         4.982        1.087  0.5997          0.1377
+                  closing-auction days (from 2026-08-03) in the sample         0           NaN           NaN          NaN     NaN             NaN
+
+POST-HOC checks, not pre-stated (posthoc_checks.csv):
+                                check  n_days_state_a  n_days_state_b  estimate  boot_ci95_lo  boot_ci95_hi  boot_median   perm_p  perm_null_mean
+    E1_gross_top_vs_bottom_other_days             124             262    -4.727        -7.346        -1.386       -4.663 0.009598        -0.03392
+              E2_expiry_vs_other_days             173             636    -2.748        -4.264       -0.8668       -2.557   0.1842         -0.2953
+E3_gross_top_vs_bottom_vix_stratified             252             235    -2.972         -4.82        -1.207       -3.167    0.015       -0.001148
+
+What the gross-gamma terciles pick out (gross_tercile_composition.csv):
+gross_tercile  n_days  share_nifty_expiry_day  mean_trading_days_to_expiry  share_short_gamma_pro  mean_day_total_conn
+       bottom     270                 0.02963                        3.044                 0.5667                80.55
+       middle     269                 0.07063                        1.978                 0.5762                78.31
+          top     270                  0.5407                       0.5778                 0.5815                78.17
+
+VIX-stratified cells, Pro rule (state_connectedness.csv, contrast S6):
+                          stratum  stratum_weight       state  n_days  value  boot_ci95_lo  boot_ci95_hi
+     multi_weekly | VIX tercile 1          0.1949 short gamma     132  74.36         73.04         75.93
+     multi_weekly | VIX tercile 1          0.1949  long gamma      20  69.65          66.5         74.91
+     multi_weekly | VIX tercile 2          0.2167 short gamma     124  73.04         71.66         74.94
+     multi_weekly | VIX tercile 2          0.2167  long gamma      45  72.39         68.75         76.55
+     multi_weekly | VIX tercile 3          0.1795 short gamma     104  80.02         74.31         83.18
+     multi_weekly | VIX tercile 3          0.1795  long gamma      36   70.2         66.55         74.45
+single_weekly_thu | VIX tercile 2          0.0859 short gamma      26  84.03         77.56         86.58
+single_weekly_thu | VIX tercile 2          0.0859  long gamma      41  77.88         76.27         81.13
+single_weekly_thu | VIX tercile 3          0.1231 short gamma      39  78.09         76.51         82.08
+single_weekly_thu | VIX tercile 3          0.1231  long gamma      57  80.53         79.43         83.33
+single_weekly_tue | VIX tercile 1          0.1154 short gamma      13  81.55         79.29         86.25
+single_weekly_tue | VIX tercile 1          0.1154  long gamma      77   84.9         83.47         85.64
+single_weekly_tue | VIX tercile 2         0.04103 short gamma       9  87.84         80.69         89.11
+single_weekly_tue | VIX tercile 2         0.04103  long gamma      23  85.72         83.49         88.05
+single_weekly_tue | VIX tercile 3         0.04359 short gamma      18  88.28         87.85          91.8
+single_weekly_tue | VIX tercile 3         0.04359  long gamma      16  90.03         82.09         91.25
+
+Timing (seconds): {"load_s": 9.5, "mcsgarch_s": 3.1, "cross_products_s": 1.5, "draws_s": 78.3, "total_s": 92.8}
