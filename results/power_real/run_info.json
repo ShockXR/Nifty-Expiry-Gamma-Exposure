@@ -1,0 +1,72 @@
+{
+  "label": "SIMULATIONS CALIBRATED ON REAL DATA",
+  "master_seed": 712026,
+  "cell_seeds": "numpy default_rng([master_seed, cell hash, chunk]); cell hash = first 8 hex digits of the SHA-256 of the cell key (seed_entropy column of power_curves.csv); chunks of 500 replications",
+  "r2_ci_bootstrap_seed": 0,
+  "replications_per_cell": 5000,
+  "cells": 278,
+  "workers": 4,
+  "lambdas": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0,
+    1.2,
+    1.4,
+    1.7,
+    2.0,
+    2.5,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    8.0
+  ],
+  "sample_multipliers": [
+    1.0,
+    1.5,
+    2.0,
+    3.0
+  ],
+  "alpha": 0.05,
+  "target_power": 0.8,
+  "newey_west_lags_daily": 5,
+  "newey_west_lags_weekly": 4,
+  "mean_block_days": 10,
+  "mean_block_weeks": 4,
+  "spell_days": 20,
+  "flip_shares": [
+    0.1,
+    0.149,
+    0.25,
+    0.304,
+    0.4,
+    0.47,
+    0.551,
+    0.841
+  ],
+  "rule": "participant_pro",
+  "forecast_split": "2024-12-31",
+  "seconds_total": 408.5,
+  "seconds_simulation": 405.1,
+  "inputs": {
+    "daily_market.csv": "959c5c633f855569",
+    "daily_gex_panel.csv": "92d479816ac95eea",
+    "nifty_1min.csv": "8ab19906a0a350b4"
+  },
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0",
+    "matplotlib": "3.11.2"
+  }
+}
