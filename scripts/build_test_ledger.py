@@ -28,6 +28,11 @@ Rules followed throughout:
 * Folders that appear later (``pinning_mechanism``, ``f2_economics``,
   ``pipeline_nse_v2``) are picked up automatically; ``power_real`` is
   excluded unless it contains p-values that are not already in the ledger.
+* The forecasting contest is three studies: R1 is the first run
+  (``results/pipeline_nse``, archived), R1V2 the current contest
+  (``results/pipeline_nse_v2``) and R1V2DEV its development runs
+  (``results/pipeline_nse_v2/development``). Different forecasts are different
+  tests, so they are not deduplicated against each other.
 
 No git command is run. Commit times are read from ``.git/logs/HEAD`` only.
 
@@ -130,7 +135,9 @@ STRATEGY_NOTE = ("RESEARCH_STRATEGY_PANDEY.md (RQ1, H1) was in the repository wh
 COMMITTED_WITH_RESULTS = "study committed to git together with its results"
 
 STUDIES = {
-    "R1": ("Forecasting contest on NSE data (RQ1)", "docs/REAL_DATA_RESULTS.md (R1)"),
+    "R1": ("Forecasting contest, first run (archived)", "docs/REAL_DATA_RESULTS.md (R1, what the first run said); results/pipeline_nse/"),
+    "R1V2": ("Forecasting contest, current run (model study, RQ1)", "docs/REAL_DATA_RESULTS.md (R1); docs/MODEL_ITERATIONS_REAL.md"),
+    "R1V2DEV": ("Forecasting contest, development runs (older protocol)", "docs/MODEL_ITERATIONS_REAL.md (Section 3)"),
     "R1b": ("Forecast diagnostics: tails and last hour", "docs/REAL_DATA_RESULTS.md (R1)"),
     "AUCTION": ("Closing-auction check (from 3 Aug 2026)", "docs/REAL_DATA_RESULTS.md (R0)"),
     "R2": ("Expiry-day volatility premium by regime", "docs/REAL_DATA_RESULTS.md (R2)"),
@@ -147,7 +154,6 @@ STUDIES = {
     "SENSEX": ("BSE Sensex expiry as a confounder", "docs/SENSEX_CONFOUND.md"),
     "F2ECON": ("Economic size of F2 after costs (P90)", "docs/F2_ECONOMICS.md"),
     "PINMECH": ("Pinning mechanism (P87)", "docs/PINNING_MECHANISM.md"),
-    "R1V2": ("Forecasting contest, improved models (pipeline v2)", "docs/REAL_DATA_RESULTS.md"),
 }
 
 PREREG = {
@@ -394,6 +400,423 @@ def adapt_r1(ctx: Ctx, study="R1", folder="pipeline_nse", pre_spec_ok=True):
     return len(ctx.rows) - rows_before
 
 
+# ----------------------------------------------------------------------------
+# R1V2: the current forecasting contest (results/pipeline_nse_v2) and its development runs
+# ----------------------------------------------------------------------------
+
+V2_LOSS = {"qlike": "QLIKE", "mse": "MSE (squared error)"}
+V2_RULE = {"gross": "gross (unsigned)", "us": "US convention", "participant": "NSE Pro participant",
+           "client": "mirror of NSE Client", "placebo": "placebo (random earlier day)"}
+V2_SET = {"gross": "unsigned gross gamma", "us": "US-convention signed GEX", "participant": "Pro-participant signed GEX",
+          "client": "client-mirror signed GEX", "placebo": "placebo GEX from a random earlier day"}
+V2_FAMILY = {"linear": "ridge log-HAR", "hybrid": "hybrid", "hybridiv": "hybrid on the implied-level mcsGARCH",
+             "lgbm": "LightGBM", "lgbmt": "tuned LightGBM"}
+V2_FAMILY_SHORT = {**V2_FAMILY, "hybridiv": "implied-level hybrid"}
+V2_RULE_SHORT = {"us": "US", "participant": "Pro", "client": "client mirror", "gross": "gross"}
+V2_MODEL = {
+    "mcsgarch": "mcsGARCH refitted every 21 days, the paper's model",
+    "naive_last": "naive, last value", "naive_prevday": "naive, previous day", "vix": "India VIX model",
+    "implied": "ATM straddle model", "har": "HAR", "mcsgarch_r63": "mcsGARCH refitted every 63 days",
+    "mcsgarch_iv": "mcsGARCH with the straddle-implied daily level",
+    "linear_v1": "ridge log-HAR, first-run base", "lgbm_v1": "LightGBM, first-run base",
+    "hybrid_v1": "hybrid, first-run base", "hybrid_v1gex": "hybrid, first-run base and first-run GEX features",
+    "linear_base": "ridge log-HAR, new base", "lgbm_base": "LightGBM, new base", "lgbmt_base": "tuned LightGBM, new base",
+    "hybrid_base": "hybrid of mcsGARCH and LightGBM, new base", "hybridiv_base": "hybrid on the implied-level mcsGARCH, new base",
+}
+V2_SUBSET = {
+    "all": "all test days", "expiry": "expiry days", "non_expiry": "non-expiry days",
+    "day_before_expiry": "days before an expiry", "open_0915": "09:15 forecast only",
+    "excl_0915": "all test days without the 09:15 forecast", "excl_0915_expiry": "expiry days without the 09:15 forecast",
+    "multi_weekly": "several-weeklies regime, to 19 Nov 2024",
+    "single_weekly_thu": "one Thursday weekly, 20 Nov 2024 to 31 Aug 2025",
+    "single_weekly_tue": "Tuesday weekly, from 1 Sep 2025",
+    "pre_auction": "test days before the closing auction began on 3 Aug 2026",
+    "auction_period": "closing-auction period, from 3 Aug 2026",
+    "pre_auction_excl_0915": "test days before 3 Aug 2026 without the 09:15 forecast",
+    "development": "development window, test days to 30 Jun 2025", "holdout": "hold-out, 1 Jul 2025 onwards",
+    "holdout_pre_auction": "hold-out days before 3 Aug 2026",
+}
+V2_PS_H1 = ("H1 in RESEARCH_STRATEGY_PANDEY.md (in git before the first real-data run) stated a one-sided Diebold-Mariano "
+            "test of the same model without and with GEX on expiry-day test days; the v2 models, GEX sets and losses "
+            "were set after the first contest")
+V2_PS_NO = "v2 models and comparisons set after the first contest (MODEL_ITERATIONS_REAL.md)"
+V2_PS_RQ1 = ("RQ1 asked in general terms whether models beat mcsGARCH on expiry days, but it stated no test, and the "
+             "hybrid was made the headline after it had won the first contest; " + V2_PS_NO)
+V2_PS_DEV = "development run, used to choose the final design (MODEL_ITERATIONS_REAL.md, Section 3)"
+V2_DM = "Diebold-Mariano on daily mean losses (Newey-West, HLN, Student t), one-sided as reported ({})"
+V2_DM_DEV = "Diebold-Mariano on daily mean losses, development protocol (normal p-values), one-sided as reported ({})"
+V2_TESTS_COLS = {"subset", "loss", "comparison", "mean_diff", "stat", "p", "n"}
+V2_ABL_COLS = {"family", "label", "group", "base", "alt", "days", "change_pct", "dm_stat", "p_one_sided"}
+V2_P_IS_ONE = ("one-sided p is exactly 1 in the file (1 to machine precision), so the doubled two-sided p is 0; the true "
+               "value is too small to represent: the second model is far worse")
+
+
+def v2_model(name) -> str:
+    """Plain-English name of a v2 forecasting model code."""
+    name = clean(name)
+    if name in V2_MODEL:
+        return V2_MODEL[name]
+    m = re.match(r"(linear|hybridiv|hybrid|lgbmt|lgbm)_gex_(\w+)$", name)
+    if m:
+        return f"{V2_FAMILY[m.group(1)]}, new base + {V2_SET.get(m.group(2), m.group(2))}"
+    return name
+
+
+def v2_rule(name) -> str:
+    m = re.search(r"_gex_(\w+)$", clean(name))
+    return V2_RULE.get(m.group(1), m.group(1)) if m else ""
+
+
+def v2_subset(s) -> str:
+    """Plain-English label of a v2 subset code (subset or group column)."""
+    s = clean(s)
+    if s in V2_SUBSET:
+        return V2_SUBSET[s]
+    for suf, lab in (("_non_expiry", "non-expiry days"), ("_expiry", "expiry days")):
+        if s.endswith(suf) and s[: -len(suf)] in V2_SUBSET:
+            return f"{V2_SUBSET[s[: -len(suf)]]}, {lab} only"
+    return s
+
+
+def _v2_obs(x: float, better_if_positive: bool, yes: str, no: str) -> str:
+    if not np.isfinite(x) or x == 0:
+        return "no difference"
+    return yes if (x > 0) == better_if_positive else no
+
+
+def _v2_add(ctx: Ctx, study, hyp, outcome, sample, p, side, note="", **kw):
+    if side == SIDE_CONVERTED and num(p) >= 1.0:
+        note = (note + "; " if note else "") + V2_P_IS_ONE
+    return ctx.add(study, hyp, outcome, sample, p, sidedness=side, note=note, **kw)
+
+
+def _v2_vs_mcsgarch(comp: str, gain: float, better_if_positive=True, desc_a=None, desc_b=None):
+    """Hypothesis text for 'a vs b' (b against the reference a), with the observed direction."""
+    a, b = [s.strip() for s in clean(comp).split(" vs ", 1)]
+    ref = "mcsGARCH" if a == "mcsgarch" else a
+    obs = _v2_obs(gain, better_if_positive, f"{b} better", f"{b} worse")
+    return a, b, (f"{b} and {ref} differ in forecast loss (observed: {obs}); "
+                  f"{b} = {desc_b or v2_model(b)}, {ref} = {desc_a or v2_model(a)}")
+
+
+def _v2_ablation(family, label, subset, base, alt_model, change, dev=False):
+    """Hypothesis, role, pre-specification and sidedness of one row of an ablation file (QLIKE or MSE).
+
+    H1 rows (the same model without and with a GEX set, on expiry-day test days, any model family and loss)
+    are 'partly' pre-specified and keep the one-sided p; every other row is doubled to two-sided."""
+    fam, lab, subset = clean(family), clean(label), clean(subset)
+    head = fam.split(":")[0].strip()
+    first_run = fam.startswith("v1")
+    famdesc = "first-run hybrid" if first_run else V2_FAMILY_SHORT.get(head, head)
+    if fam.endswith("base vs base+GEX"):
+        kind = "placebo" if lab == "placebo" else "gex"
+    elif fam.endswith("unsigned vs signed"):
+        kind = "sign"
+    elif "placebo vs real" in fam:
+        kind = "real"
+    else:
+        kind = "other"
+    h1 = kind == "gex" and subset == "expiry"
+    pair = f"{base} vs {alt_model}"
+    obs = _v2_obs(change, False, "lower", "higher")
+    if kind == "placebo":
+        hyp = f"Placebo GEX (from a random earlier day) changes the {famdesc}'s forecast loss (observed: {obs}; {pair})"
+    elif kind == "gex":
+        what = "the first run's GEX features" if first_run else V2_SET.get(lab, lab)
+        hyp = (f"Adding {what} lowers the {famdesc}'s forecast loss (H1; {pair})" if h1 else
+               f"Adding {what} changes the {famdesc}'s forecast loss (observed: {obs}; {pair})")
+    elif kind == "sign":
+        hyp = (f"{famdesc[0].upper() + famdesc[1:]}: signed GEX ({V2_RULE_SHORT.get(lab, lab)}) and unsigned gross gamma give "
+               f"different forecast loss (observed: signed {obs}; {pair})")
+    elif kind == "real":
+        hyp = (f"{famdesc[0].upper() + famdesc[1:]}: real GEX ({V2_RULE_SHORT.get(lab, lab)}) and the same columns from a random "
+               f"earlier day differ in loss (observed: real {obs}; {pair})")
+    elif lab.startswith("implied daily component"):
+        hyp = f"Building the hybrid on the implied-level mcsGARCH changes its forecast loss (observed: {obs}; {pair})"
+    elif lab.startswith("implied+calendar"):
+        hyp = f"Adding the option-implied and calendar block changes {base}'s forecast loss (observed: {obs}; {pair})"
+    else:
+        hyp = f"{fam}, {lab}: {alt_model} and {base} differ in forecast loss (observed: {alt_model} {obs})"
+    if kind == "placebo":
+        role = "placebo"
+    elif dev:
+        role = "exploratory"
+    elif subset not in ("all", "expiry"):
+        role = "robustness"
+    elif fam == "hybrid: base vs base+GEX" and subset == "expiry":
+        role = "headline"
+    else:
+        role = "secondary"
+    if h1:
+        return hyp, role, PS_PARTLY, V2_PS_H1 + ("; " + V2_PS_DEV if dev else ""), SIDE_ONE_PRE
+    return hyp, role, PS_NO, V2_PS_DEV if dev else V2_PS_NO, SIDE_CONVERTED
+
+
+def _v2_holm_check(ctx: Ctx, study, rel, d: pd.DataFrame):
+    """Recompute p_holm_in_family (Holm within one model family and one subset, placebo rows excluded) and
+    record one cross-check per file. Returns the recomputed values, aligned with d."""
+    if "p_holm_in_family" not in d.columns:
+        return None
+    rec = pd.Series(np.nan, index=d.index)
+    n_fam = 0
+    for _, g in d.groupby(["family", "group"], sort=False):
+        h = g["p_holm_in_family"].notna()
+        if h.any():
+            n_fam += 1
+            rec.loc[g.index[h]] = p_holm(g.loc[h, "p_one_sided"].values)
+    a, b = rec.to_numpy(float), pd.to_numeric(d["p_holm_in_family"], errors="coerce").to_numpy(float)
+    both = np.isfinite(a) & np.isfinite(b)
+    diff = np.abs(a[both] - b[both])
+    n_mis = int((diff > 1e-6).sum())
+    ctx.checks.append(dict(
+        study=study, family=f"Holm within each ablation family ({n_fam} families: one model family and one subset, placebo excluded)",
+        source_file=f"results/{rel}", method="holm", m_tests=int(np.isfinite(b).sum()), n_compared=int(both.sum()),
+        n_mismatch=n_mis, max_abs_diff=float(diff.max()) if diff.size else float("nan"),
+        result="match" if n_mis == 0 and both.sum() > 0 else ("MISMATCH" if n_mis else "nothing to compare"),
+        note="one-sided p-values, as the study uses them"))
+    return rec
+
+
+def v2_shape_ok(ctx: Ctx, folder="pipeline_nse_v2") -> bool:
+    tests = sorted(ctx.res(folder).glob("tests_*.csv"))
+    return bool(tests) and all(V2_TESTS_COLS.issubset(pd.read_csv(f, nrows=0).columns) for f in tests)
+
+
+def adapt_r1v2(ctx: Ctx, study="R1V2", folder="pipeline_nse_v2"):
+    """R1V2: the current forecasting contest (the model study; docs/MODEL_ITERATIONS_REAL.md).
+
+    tests_{next15,next30,last_hour}.csv: subset (28 day groups, 24 for the last hour), loss (qlike or mse),
+      comparison ("mcsgarch vs X"), mean_diff (mcsGARCH's mean daily loss minus X's: positive means X is
+      better; the estimate), stat (Diebold-Mariano t with the HLN correction), p (one-sided, "X has lower
+      loss"; Student t with n - 1 df), n (test days).
+    ablation_{target}.csv (QLIKE) and ablation_{target}_mse.csv (MSE): family, label, group, base, alt, days,
+      change_pct (percent change in loss from base to alt: negative means alt is better; the estimate),
+      dm_stat, p_one_sided ("alt has lower loss"), p_holm_in_family (QLIKE only: Holm within one model family
+      and one subset, placebo excluded; recomputed and cross-checked).
+    seed_noise_next30.csv: dm_p_two_sided between single-seed reruns of the identical model.
+    mcs_*.csv: Model Confidence Set p-values, not counted (as for R1).
+
+    Roles: headline = hybrid_base against mcsGARCH (QLIKE, all days and expiry days) and the hybrid's GEX
+    ablation on expiry days (QLIKE; RQ1/H1). Secondary = every other model against mcsGARCH and every
+    other ablation comparison, QLIKE, all days and expiry days. Robustness = every other subset and every
+    MSE test. Placebo = adding placebo GEX (a random earlier day), and two seeds of one model.
+    Pre-specification: the v2 models were built after the first contest, so 'no', except the H1 rows
+    (the same model without and with a GEX set, on expiry-day test days, any model family or loss): H1 in
+    RESEARCH_STRATEGY_PANDEY.md stated that one-sided test before any real data, so these rows are 'partly'
+    pre-specified (direction stated, specification later), the label the ledger uses for every study whose
+    question was in the strategy but whose specification came later, and they keep their one-sided p. Every
+    other one-sided p is doubled to two-sided, as for every study without a prior one-sided statement.
+    Duplicates: an ablation row that compares the same two models on the same days under the same loss as
+    a tests_*.csv row is counted once (under tests_*.csv); in the files of 2 Nov 2026 no ablation row does,
+    because every tests_*.csv row has mcsGARCH on one side. Rows with identical p and DM statistic are
+    counted once. R1 (the first run) is a different set of forecasts and is not deduplicated against.
+    """
+    rows = []
+    tested = set()
+    for f in sorted(ctx.res(folder).glob("tests_*.csv")):
+        rel = f"{folder}/{f.name}"
+        target = f.stem.replace("tests_", "")
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            comp, subset, loss = clean(r["comparison"]), clean(r["subset"]), clean(r["loss"]).lower()
+            md = num(r["mean_diff"])
+            a, b, hyp = _v2_vs_mcsgarch(comp, md)
+            tested.add((target, loss, subset, frozenset((a, b))))
+            if loss != "qlike" or subset not in ("all", "expiry"):
+                role = "robustness"
+            else:
+                role = "headline" if b == "hybrid_base" else "secondary"
+            psn = V2_PS_RQ1 if (role == "headline" and subset == "expiry") else V2_PS_NO
+            row = _v2_add(ctx, study, hyp, f"{V2_LOSS.get(loss, loss)} loss of forecasts of {TARGETS.get(target, target)}",
+                          f"{v2_subset(subset)} (n = {_int(r['n'])} days), horizon {target}", r["p"], SIDE_CONVERTED,
+                          role=role, pre_specified=PS_NO, pre_spec_note=psn, source_file=rel,
+                          source_key=key(f.name, loss, subset, comp), sign_rule=v2_rule(b), estimate=md,
+                          statistic_name="Diebold-Mariano (HLN) t", statistic=r["stat"],
+                          p_method=V2_DM.format("model better than mcsGARCH"))
+            if row is not None:
+                rows.append(ctx.rows.pop())
+    n_dup_tests = 0
+    for f in sorted(ctx.res(folder).glob("ablation_*.csv")):
+        rel = f"{folder}/{f.name}"
+        m = re.match(r"ablation_(.+?)(_mse)?$", f.stem)
+        target, loss = m.group(1), ("mse" if m.group(2) else "qlike")
+        d = ctx.read(rel)
+        if not V2_ABL_COLS.issubset(d.columns):
+            ctx.warn(f"{rel}: unexpected columns; not read")
+            continue
+        rec = _v2_holm_check(ctx, study, rel, d)
+        for idx, r in d.iterrows():
+            subset, base, alt_model = clean(r["group"]), clean(r["base"]), clean(r["alt"])
+            if (target, loss, subset, frozenset((base, alt_model))) in tested:
+                n_dup_tests += 1
+                continue
+            hyp, role, ps, psn, side = _v2_ablation(r["family"], r["label"], subset, base, alt_model, num(r["change_pct"]))
+            if loss != "qlike" and role in ("headline", "secondary"):
+                role = "robustness"
+            lab = clean(r["label"])
+            has_holm = rec is not None and np.isfinite(num(r.get("p_holm_in_family")))
+            row = _v2_add(ctx, study, hyp, f"{V2_LOSS[loss]} loss of forecasts of {TARGETS.get(target, target)}",
+                          f"{v2_subset(subset)} (n = {_int(r['days'])} days), horizon {target}", r["p_one_sided"], side,
+                          role=role, pre_specified=ps, pre_spec_note=psn, source_file=rel,
+                          source_key=key(f.name, r["family"], lab, subset, base, alt_model),
+                          sign_rule=V2_RULE.get(lab, ""), estimate=r["change_pct"],
+                          statistic_name="Diebold-Mariano (HLN) t", statistic=r["dm_stat"],
+                          p_method=V2_DM.format("second model better"),
+                          p_study_adjusted=r["p_holm_in_family"] if has_holm else float("nan"),
+                          study_adjust_method="Holm within the ablation family (model family and subset, one-sided p)" if has_holm else "")
+            if row is not None:
+                if has_holm:
+                    row["p_study_adjusted_recomputed"] = rec[idx]
+                rows.append(ctx.rows.pop())
+    rel = f"{folder}/seed_noise_next30.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d[d["dm_p_two_sided"].notna()].iterrows():
+            row = ctx.add(study, f"Two single-seed runs of the identical {r['model']} (seeds {r['seed']}) forecast equally well "
+                          "(a check of the DM test: no difference exists by design)",
+                          f"QLIKE loss of forecasts of {TARGETS['next30']}", "all test days, single-seed reruns", r["dm_p_two_sided"],
+                          role="placebo", pre_specified=PS_NO, pre_spec_note="single-seed reruns decided after the development seed study (Iteration 7)",
+                          source_file=rel, source_key=key("seed_noise_next30.csv", r["model"], r["seed"]),
+                          estimate=r["abs_change_pct"], statistic_name="absolute change in QLIKE (%)",
+                          p_method="Diebold-Mariano, two-sided")
+            if row is not None:
+                rows.append(ctx.rows.pop())
+        ctx.skip(study, rel, "single-seed scores", int(d["dm_p_two_sided"].isna().sum()), "a model's score for one seed, no p-value")
+    kept, dropped = dedup_exact(rows, cols=("p_reported", "statistic"))
+    ctx.rows.extend(kept)
+    ctx.skip(study, f"{folder}/ablation_*.csv", "ablation rows that repeat a tests_*.csv comparison", n_dup_tests,
+             "same two models, days and loss as a counted tests_*.csv row (counted once there)")
+    ctx.skip(study, f"{folder}/", "rows repeating another row (same p and DM statistic)", len(dropped), "same test (counted once)")
+    mcs = sorted(ctx.res(folder).glob("mcs_*.csv"))
+    for f in mcs:
+        ctx.consumed.add(f"{folder}/{f.name}")
+    ctx.skip(study, f"{folder}/mcs_*.csv", "Model Confidence Set p-values (QLIKE and MSE)", len(mcs),
+             "set-level p-values (already adjusted for the model set) that answer the same question as the DM tests")
+    desc = [f for pat in ("scoreboard_*.csv", "gain_by_anchor_*.csv") for f in sorted(ctx.res(folder).glob(pat))]
+    ctx.skip(study, f"{folder}/scoreboard_*.csv, gain_by_anchor_*.csv", "scoreboards and gains by anchor time", len(desc),
+             "losses relative to mcsGARCH, no p-value; the DM tests behind them are in tests_*.csv")
+    return len(kept)
+
+
+def adapt_r1v2_dev(ctx: Ctx, study="R1V2DEV", folder="pipeline_nse_v2/development"):
+    """R1V2DEV: the development runs of the model study (docs/MODEL_ITERATIONS_REAL.md, Section 3).
+
+    The data were cut at 30 June 2025 and the protocol was older (mcsGARCH refitted every 63 days, normal
+    DM p-values, single seeds). Counted, as exploratory, because their p-values were looked at and used to
+    choose the final design (model families, seeds, tuning, last-hour training), and leaving them out would
+    hide part of the search. They are a separate study so that R1V2's own Holm and BY stay about the final
+    contest; they count in the project-wide BY.
+    dev_scoreboards.csv: run (baseline_v1 = the first run's forecasts on the development days; dev2),
+      target (last_hour_pooled = last-hour models trained on every 60-minute window), group, model, days,
+      qlike_vs_mcsgarch_pct (estimate), dm_p_vs_mcsgarch (one-sided, model better than mcsGARCH).
+    dev_ablation_single_seed.csv: as the final ablation files, plus target; no Holm column.
+    dev_seed_noise_next30.csv: dm_p_two_sided between seeds of the identical model (placebo), p_one_sided
+      of the GEX ablation for each seed. dev_tuning_next30.csv: dm_p_two_sided (tuned against default
+      hyperparameters), ablation_p_one_sided (3-seed GEX ablation, default or tuned).
+    Sidedness and pre-specification as for R1V2 (H1 rows on expiry days keep their one-sided p). Rows with
+    the same p and estimate (the same forecasts tested twice) are counted once.
+    """
+    base_dir = ctx.res(folder)
+    if not base_dir.exists():
+        return 0
+    rows = []
+    run_desc = {"baseline_v1": "first run's forecasts", "dev2": "development run dev2, single seed"}
+
+    def _keep(row):
+        if row is not None:
+            rows.append(ctx.rows.pop())
+
+    rel = f"{folder}/dev_scoreboards.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d[d["dm_p_vs_mcsgarch"].notna()].iterrows():
+            tgt = clean(r["target"])
+            tbase = tgt.replace("_pooled", "")
+            hz = f"{tbase}, models trained on every 60-minute window" if tgt.endswith("_pooled") else tbase
+            pct = num(r["qlike_vs_mcsgarch_pct"])
+            v1 = clean(r["run"]) == "baseline_v1"
+            _, b, hyp = _v2_vs_mcsgarch(f"mcsgarch vs {clean(r['model'])}", pct, better_if_positive=False,
+                                        desc_a="mcsGARCH refitted every 63 days, the paper's model",
+                                        desc_b=f"the first run's {clean(r['model'])} (results/pipeline_nse)" if v1 else None)
+            _keep(_v2_add(ctx, study, hyp, f"QLIKE loss of forecasts of {TARGETS.get(tbase, tbase)}",
+                          f"development window, {v2_subset(r['group'])} (n = {_int(r['days'])} days), horizon {hz}; "
+                          f"{run_desc.get(clean(r['run']), clean(r['run']))}", r["dm_p_vs_mcsgarch"], SIDE_CONVERTED,
+                          role="exploratory", pre_specified=PS_NO, pre_spec_note=V2_PS_DEV, source_file=rel,
+                          source_key=key(r["run"], tgt, r["group"], b), sign_rule=v2_rule(b), estimate=pct,
+                          statistic_name="QLIKE relative to mcsGARCH (%)", p_method=V2_DM_DEV.format("model better than mcsGARCH")))
+        ctx.skip(study, rel, "mcsGARCH rows", int(d["dm_p_vs_mcsgarch"].isna().sum()), "the reference model itself, no test")
+    rel = f"{folder}/dev_ablation_single_seed.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            subset, base, alt_model, tgt = clean(r["group"]), clean(r["base"]), clean(r["alt"]), clean(r["target"])
+            tbase = tgt.replace("_pooled", "")
+            hyp, role, ps, psn, side = _v2_ablation(r["family"], r["label"], subset, base, alt_model, num(r["change_pct"]), dev=True)
+            _keep(_v2_add(ctx, study, hyp, f"QLIKE loss of forecasts of {TARGETS.get(tbase, tbase)}",
+                          f"development window, {v2_subset(subset)} (n = {_int(r['days'])} days), horizon {tgt}; single seed",
+                          r["p_one_sided"], side, role=role, pre_specified=ps, pre_spec_note=psn, source_file=rel,
+                          source_key=key(tgt, r["family"], r["label"], subset, base, alt_model),
+                          sign_rule=V2_RULE.get(clean(r["label"]), ""), estimate=r["change_pct"],
+                          statistic_name="Diebold-Mariano t", statistic=r["dm_stat"], p_method=V2_DM_DEV.format("second model better")))
+    rel = f"{folder}/dev_seed_noise_next30.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        outc = f"QLIKE loss of forecasts of {TARGETS['next30']}"
+        samp = "development window, all test days, horizon next30"
+        for _, r in d.iterrows():
+            comp = clean(r["comparison"])
+            if np.isfinite(num(r["dm_p_two_sided"])):
+                _keep(ctx.add(study, f"Two single-seed runs of the identical {r['model']} ({comp}) forecast equally well "
+                              "(a check of the DM test: no difference exists by design)", outc, samp, r["dm_p_two_sided"],
+                              role="placebo", pre_specified=PS_NO, pre_spec_note=V2_PS_DEV, source_file=rel,
+                              source_key=key(r["model"], comp), estimate=r["abs_qlike_change_pct"],
+                              statistic_name="absolute change in QLIKE (%)", p_method="Diebold-Mariano, two-sided"))
+            elif np.isfinite(num(r["p_one_sided"])):
+                alt_model, base = [s.strip() for s in clean(r["model"]).split(" vs ", 1)]
+                _keep(_v2_add(ctx, study, f"Adding GEX changes the forecast loss (observed: "
+                              f"{_v2_obs(num(r['change_pct']), False, 'lower', 'higher')}; {base} vs {alt_model}, {comp})", outc, samp, r["p_one_sided"],
+                              SIDE_CONVERTED, role="exploratory", pre_specified=PS_NO, pre_spec_note=V2_PS_DEV,
+                              source_file=rel, source_key=key(r["model"], comp), sign_rule=v2_rule(alt_model),
+                              estimate=r["change_pct"], statistic_name="percent change in QLIKE",
+                              p_method=V2_DM_DEV.format("model with GEX better")))
+        ctx.skip(study, rel, "single-seed scores", int((d["dm_p_two_sided"].isna() & d["p_one_sided"].isna()).sum()),
+                 "a model's score for one seed, no p-value")
+    rel = f"{folder}/dev_tuning_next30.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        outc = f"QLIKE loss of forecasts of {TARGETS['next30']}"
+        samp = "development window, all test days, horizon next30; 3 seeds"
+        for _, r in d.iterrows():
+            mdl = clean(r["model"])
+            if np.isfinite(num(r["dm_p_two_sided"])):
+                _keep(ctx.add(study, f"Tuning {mdl} inside the training window changes its forecast loss (observed: "
+                              f"{_v2_obs(num(r['tuned_vs_default_pct']), False, 'lower', 'higher')})", outc, samp,
+                              r["dm_p_two_sided"], role="exploratory", pre_specified=PS_NO, pre_spec_note=V2_PS_DEV,
+                              source_file=rel, source_key=key(mdl, "tuned vs default"), sign_rule=v2_rule(mdl),
+                              estimate=r["tuned_vs_default_pct"], statistic_name="percent change in QLIKE, tuned vs default",
+                              p_method="Diebold-Mariano, two-sided"))
+            elif np.isfinite(num(r["ablation_p_one_sided"])):
+                m = re.match(r"(\S+) vs (\S+) \((.+)\)", mdl)
+                alt_model, base, how = m.groups() if m else (mdl, "", "")
+                _keep(_v2_add(ctx, study, f"Adding GEX changes the forecast loss (observed: "
+                              f"{_v2_obs(num(r['ablation_change_pct']), False, 'lower', 'higher')}; {base} vs {alt_model}, {how})", outc, samp,
+                              r["ablation_p_one_sided"], SIDE_CONVERTED, role="exploratory", pre_specified=PS_NO,
+                              pre_spec_note=V2_PS_DEV, source_file=rel, source_key=key(mdl, "ablation"),
+                              sign_rule=v2_rule(alt_model), estimate=r["ablation_change_pct"],
+                              statistic_name="percent change in QLIKE", p_method=V2_DM_DEV.format("model with GEX better")))
+    kept, dropped = dedup_exact(rows, cols=("p_reported", "estimate"))
+    ctx.rows.extend(kept)
+    ctx.skip(study, f"{folder}/", "rows repeating another development row (same p and estimate)", len(dropped),
+             "the same forecasts tested twice (models that are not trained, under both last-hour training schemes; "
+             "the seed-0 GEX ablation, which is also the single-seed ablation): counted once")
+    for f in sorted(base_dir.glob("*.csv")):
+        rel = f"{folder}/{f.name}"
+        if rel not in ctx.consumed:
+            ctx.consumed.add(rel)
+            ctx.skip(study, rel, f.name, 1, "descriptive checks (correlations, ratios), no p-value")
+    return len(kept)
+
+
 def adapt_r1b(ctx: Ctx):
     """Forecast diagnostics. File: results/forecast_diagnostics/tails_and_last_hour_tests.csv.
     Columns: target, model ("A vs B (sample)"), dm_two_sided_p, mean_loss_diff, n_days.
@@ -421,34 +844,79 @@ def adapt_r1b(ctx: Ctx):
             ctx.skip("R1b", f"forecast_diagnostics/{other}", "descriptive table", 1, "no p-value")
 
 
-def adapt_auction(ctx: Ctx):
-    """Closing-auction check. Rows on all days duplicate R1, R2 and R5 and are dropped.
+def _same_num(a: float, b: float, rel=1e-9, tol=1e-12) -> bool:
+    """Equal up to floating-point noise (the same test computed by two scripts)."""
+    return bool(np.isfinite(a) and np.isfinite(b) and abs(a - b) <= rel * max(abs(a), abs(b)) + tol)
 
-    r1_dm_tests.csv: target, sample, group, comparison, mean_diff, stat, p (one-sided, as R1).
+
+def _contest_dm_tests(ctx: Ctx):
+    """(target, subset, comparison) -> [(study, folder, p, mean_diff, n)] for the QLIKE DM tests of the
+    first run (R1, results/pipeline_nse) and the current contest (R1V2, results/pipeline_nse_v2)."""
+    out = {}
+    for study, folder in (("R1", "pipeline_nse"), ("R1V2", "pipeline_nse_v2")):
+        if not ctx.res(folder).exists():
+            continue
+        for f in sorted(ctx.res(folder).glob("tests_*.csv")):
+            d = pd.read_csv(f)
+            if not {"subset", "comparison", "p", "mean_diff", "n"}.issubset(d.columns):
+                continue
+            if "loss" in d.columns:
+                d = d[d["loss"].astype(str).str.lower() == "qlike"]
+            t = f.stem.replace("tests_", "")
+            for _, r in d.iterrows():
+                out.setdefault((t, clean(r["subset"]), clean(r["comparison"])), []).append(
+                    (study, folder, num(r["p"]), num(r["mean_diff"]), num(r["n"])))
+    return out
+
+
+def adapt_auction(ctx: Ctx):
+    """Closing-auction check. Rows on all days duplicate R1 (or R1V2), R2 and R5 and are dropped.
+
+    r1_dm_tests.csv: target, sample, group, comparison, mean_diff, stat, p (one-sided, as R1). Each row is
+      matched against the QLIKE DM tests of the first run (results/pipeline_nse/tests_*.csv, R1) and of the
+      current contest (results/pipeline_nse_v2/tests_*.csv, R1V2, subsets all, expiry, pre_auction and
+      pre_auction_expiry): a row with the same target, days, comparison, n, p and mean_diff is the same test
+      and is counted once, under R1 or R1V2. The script reads the v2 forecasts since 2 Nov 2026, so after a
+      rerun its rows before 3 Aug 2026 repeat R1V2's pre_auction rows; the committed file still holds the
+      first run's numbers, whose all-days rows repeat R1.
     r2_tuesday_split.csv: measure, sample, pct_expiry_vs_week, p_signed_rank (two-sided Wilcoxon).
     r5_without_auction.csv: sample, spec, rule, term, coef, p (HAC, two-sided).
     """
     rel = "closing_auction/r1_dm_tests.csv"
     if ctx.has(rel):
         d = ctx.read(rel)
-        keep = d[d["sample"].str.startswith("before")]
-        for _, r in keep.iterrows():
-            comp = clean(r["comparison"])
+        look = _contest_dm_tests(ctx)
+        dups = {}
+        for _, r in d.iterrows():
+            comp, samp, grp = clean(r["comparison"]), clean(r["sample"]), clean(r["group"])
+            before = samp.startswith("before")
+            sub = ("pre_auction" if before else "all") if grp == "all" else ("pre_auction_expiry" if before else "expiry")
+            hit = next((h for h in look.get((clean(r["target"]), sub, comp), [])
+                        if _same_num(h[2], num(r["p"])) and _same_num(h[3], num(r["mean_diff"])) and h[4] == num(r["n"])), None)
+            if hit is not None:
+                k = (samp, hit[0], hit[1])
+                dups[k] = dups.get(k, 0) + 1
+                continue
+            if not before:
+                ctx.warn(f"{rel}: a row on all test days matches no contest test ({clean(r['target'])}, {grp}, {comp}); counted under AUCTION")
             if comp.startswith("GEX ablation"):
                 a, b = [s.strip() for s in comp.split(":", 1)[1].split(" vs ")]
-                hyp = f"Adding GEX features ({b}) lowers forecast loss against {a}, before the closing auction"
+                hyp = f"Adding GEX features ({b}) lowers forecast loss against {a}" + (", before the closing auction" if before else "")
             else:
                 b = comp.split(" vs ")[1].strip()
-                hyp = f"{b} forecasts better than mcsGARCH, before the closing auction"
+                hyp = f"{b} forecasts better than mcsGARCH" + (", before the closing auction" if before else "")
             ctx.add("AUCTION", hyp, f"QLIKE loss of forecasts of {TARGETS.get(clean(r['target']), r['target'])}",
-                    f"{r['group']} test days before 3 Aug 2026 (n = {int(num(r['n']))})", r["p"],
+                    f"{r['group']} test days{' before 3 Aug 2026' if before else ''} (n = {int(num(r['n']))})", r["p"],
                     role="robustness", pre_specified=PS_NO,
                     pre_spec_note="added after the closing auction was flagged; one-sided test as pre-stated for R1",
                     source_file=rel, source_key=key(r["target"], r["sample"], r["group"], comp),
                     sidedness=SIDE_ONE_PRE, estimate=r["mean_diff"], statistic_name="Diebold-Mariano (HLN) t",
                     statistic=r["stat"], p_method="Diebold-Mariano, one-sided (model better)")
-        ctx.skip("AUCTION", rel, "rows on all test days", int((~d["sample"].str.startswith("before")).sum()),
-                 "identical to results/pipeline_nse/tests_*.csv (counted under R1)")
+        for (samp, study, folder), n in dups.items():
+            where = "" if study == "R1" else (", subsets all and expiry" if not samp.startswith("before") else
+                                              ", subsets pre_auction and pre_auction_expiry")
+            ctx.skip("AUCTION", rel, f"rows on {samp}" if samp.startswith("all") else f"rows on test days {samp}", n,
+                     f"identical to results/{folder}/tests_*.csv{where} (counted under {study})")
     rel = "closing_auction/r2_tuesday_split.csv"
     if ctx.has(rel):
         d = ctx.read(rel)
@@ -1742,8 +2210,8 @@ def scan_uncovered(ctx: Ctx):
 ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, adapt_r5, adapt_repl,
             adapt_pin, adapt_event, adapt_fals, adapt_dsign, adapt_intra, adapt_conn, adapt_sensex]
 
-STUDY_ORDER = ["R1", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS", "DSIGN",
-               "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "R1V2"]
+STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
+               "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH"]
 
 
 def headline18_check(ctx: Ctx):
@@ -1785,15 +2253,9 @@ def build(root, write=True, write_doc=True, quiet=False):
     if ctx.res("pinning_mechanism").exists() and any(ctx.res("pinning_mechanism").iterdir()):
         adapt_pinmech(ctx)
     if ctx.res("pipeline_nse_v2").exists():
-        if list(ctx.res("pipeline_nse_v2").glob("tests_*.csv")):
-            n0 = len(ctx.rows)
-            adapt_r1(ctx, study="R1V2", folder="pipeline_nse_v2", pre_spec_ok=False)
-            new = ctx.rows[n0:]
-            del ctx.rows[n0:]
-            old = {(r["source_key"], round(r["p_reported"], 12)) for r in ctx.rows if r["study"] == "R1"}
-            keep = [r for r in new if (r["source_key"], round(r["p_reported"], 12)) not in old]
-            ctx.rows.extend(keep)
-            ctx.skip("R1V2", "pipeline_nse_v2/tests_*.csv", "rows identical to R1", len(new) - len(keep), "counted under R1")
+        if v2_shape_ok(ctx):
+            adapt_r1v2(ctx)
+            adapt_r1v2_dev(ctx)
         else:
             adapt_generic(ctx, "R1V2", "pipeline_nse_v2")
     adapt_power_real(ctx)
@@ -1888,16 +2350,37 @@ def _sel(df, study, pattern):
 RECON = [
     (1, "The data hold up.", [],
      "No p-values: this is data validation (results/data_validation), not a hypothesis test. Nothing to correct."),
-    (2, "A hybrid of mcsGARCH and LightGBM beats mcsGARCH at 15 and 30 minutes, on all days and on expiry days (DM p of 0.001 or below).",
-     [("hybrid against mcsGARCH, all days", "R1", r"^tests_next(15|30)\.csv\|all\|mcsgarch vs hybrid_base$"),
-      ("hybrid against mcsGARCH, expiry days", "R1", r"^tests_next(15|30)\.csv\|expiry\|mcsgarch vs hybrid_base$")], ""),
-    (3, "Last hour: HAR is about 11% better over all days (one-sided p = 0.015), but not before the closing auction (p = 0.11).",
-     [("HAR against mcsGARCH, last hour, all days", "R1", r"^tests_last_hour\.csv\|all\|mcsgarch vs har$"),
-      ("the same before 3 Aug 2026", "AUCTION", r"^last_hour\|before 3 Aug 2026\|all\|mcsgarch vs har$")],
-     "The finding itself says the last-hour edge is not reliable."),
-    (4, "GEX features do not improve out-of-sample forecasts.",
-     [("GEX ablations on expiry days (3 horizons, 4 model pairs)", "R1", r"\|expiry\|GEX ablation")],
-     "This is a null finding, so nothing needs to survive; the check is that no ablation is significant."),
+    (2, "The paper's model can be beaten out of sample at every horizon, mostly but not only at the open: the hybrid (mcsGARCH corrected by LightGBM) "
+        "is 5.8%, 7.6% and 6.4% better at 15 minutes, 30 minutes and the last hour on all days and 6.6%, 6.2% and 7.9% "
+        "better on expiry days (QLIKE; one-sided DM p at most 0.010 in all six cells), against an mcsGARCH refitted as "
+        "often as every other model; also before the closing auction and on a hold-out. Under MSE the ranking reverses, "
+        "but no MSE difference is significant.",
+     [("hybrid against mcsGARCH, QLIKE, all days (15 min, 30 min, last hour)", "R1V2",
+       r"^tests_(next15|next30|last_hour)\.csv\|qlike\|all\|mcsgarch vs hybrid_base$"),
+      ("hybrid against mcsGARCH, QLIKE, expiry days (15 min, 30 min, last hour)", "R1V2",
+       r"^tests_(next15|next30|last_hour)\.csv\|qlike\|expiry\|mcsgarch vs hybrid_base$")],
+     "The ledger doubles these one-sided p-values, because the v2 comparison was not stated before the data were seen."),
+    (3, "The last hour: the first run's HAR edge (about 11%) came mostly from the closing-auction days and "
+        "was withdrawn. In the model study the hybrid is 6.4% better than mcsGARCH (p below 0.001), 7.0% before the "
+        "auction (p = 0.002), and HAR is not better at all (+1.9%). The least secure of the three horizons.",
+     [("hybrid against mcsGARCH, last hour, QLIKE: all days, before the auction, expiry days", "R1V2",
+       r"^tests_last_hour\.csv\|qlike\|(all|pre_auction|expiry)\|mcsgarch vs hybrid_base$"),
+      ("HAR against mcsGARCH, last hour, QLIKE: all days and before the auction", "R1V2",
+       r"^tests_last_hour\.csv\|qlike\|(all|pre_auction)\|mcsgarch vs har$"),
+      ("the withdrawn first-run claim: HAR against mcsGARCH, last hour, all days", "R1",
+       r"^tests_last_hour\.csv\|all\|mcsgarch vs har$")],
+     "The HAR rows are what the finding says is not there (HAR is now worse than mcsGARCH, and the first-run "
+     "claim is withdrawn), so their not surviving is what it says. The HAR rows of the current contest are "
+     "two-sided, so a small p there would mean HAR is clearly worse."),
+    (4, "GEX features do not improve out-of-sample forecasts under any sign rule, and signed GEX is never better "
+        "than unsigned gross gamma: adding GEX to the hybrid moves its loss by -0.4% to +0.1% at 15 and 30 minutes "
+        "and makes the last hour 0.9% to 1.6% worse; no cell on all days, expiry days or before the auction survives Holm.",
+     [("hybrid with and without each GEX set (gross, US, Pro, client), QLIKE: all days, expiry days, before the auction", "R1V2",
+       r"^ablation_(next15|next30|last_hour)\.csv\|hybrid: base vs base\+GEX\|(gross|us|participant|client)\|(all|expiry|pre_auction)\|"),
+      ("hybrid, signed GEX against unsigned gross gamma, QLIKE: all days, expiry days, before the auction", "R1V2",
+       r"^ablation_(next15|next30|last_hour)\.csv\|hybrid: unsigned vs signed\|[^|]+\|(all|expiry|pre_auction)\|")],
+     "This is a null finding, so nothing needs to survive; the check is that no ablation is significant. "
+     "The expiry-day rows are H1 and keep their one-sided p; the others are doubled to two-sided."),
     (5, "Pro-based GEX: the expiry-day sign flip survives the falsification tests (Holm 0.020 among 18 headline tests) but not on Bank Nifty (p = 0.25).",
      [("R3, Pro rule, regime x expiry", "R3", r"^regime x expiry\|gex_participant_pro\|"),
       ("R3 robustness, Pro rule, share scaling (the Holm 0.020 row)", "R3", r"^participant_pro\|share\|gex_l1"),
@@ -2003,6 +2486,27 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
       f"The event study alone contributes {int((df['study'] == 'EVENT').sum())} tests "
       f"({100 * (df['study'] == 'EVENT').mean():.0f}% of the ledger).")
     w("")
+    con = df["study"].isin(["R1", "R1V2", "R1V2DEV"])
+    if con.any():
+        w("**The forecasting contest is three studies.** **R1** is the first run (`results/pipeline_nse/`), now "
+          "archived: REAL_DATA_RESULTS.md mentions it only as history (finding 3 and \"What the first run said\"), and "
+          "its last-hour HAR claim was withdrawn. **R1V2** is the current contest (`results/pipeline_nse_v2/`, the model study of "
+          "MODEL_ITERATIONS_REAL.md), the one REAL_DATA_RESULTS.md reports: every model against mcsGARCH in up to 28 "
+          "groups of days under two losses (QLIKE and MSE), every with-and-without comparison of the GEX ablation, "
+          "and the seed checks. **R1V2DEV** holds the development runs of the model study (test days to 30 June 2025, "
+          "with an older protocol: mcsGARCH refitted every 63 days, normal p-values, one random seed). All three are "
+          "counted because all their p-values were seen: the first run's were published before they were replaced, "
+          "and the development runs were used to choose the final design, so leaving either out would hide part of "
+          "the search. They are different forecasts, so they are not merged, and R1V2DEV is kept apart from R1V2 so "
+          "that the within-study corrections of R1V2 are about the final contest only. "
+          f"Together they contribute {int(con.sum())} tests ({100 * con.mean():.0f}% of the ledger): "
+          + ", ".join(f"{s_} {int((df['study'] == s_).sum())}" for s_ in ("R1", "R1V2", "R1V2DEV")) + ". "
+          "Their p-values are one-sided (\"this model has lower loss\"). The ledger keeps them one-sided for the first "
+          "run, as before, and for the rows that are H1 of RESEARCH_STRATEGY_PANDEY.md (the same model without and "
+          "with GEX, on expiry days), and doubles all others to two-sided. So in R1V2 and R1V2DEV a small p can also "
+          "mean that a model is clearly worse than the one it is compared with; the hypothesis text says which way "
+          "the difference went.")
+        w("")
     # survivors
     w("## 3. What survives project-wide BY at 5%")
     w("")
@@ -2016,7 +2520,11 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
         ev_plc = ev[ev["role"] == "placebo"]
         gex_studies = {"R3", "R5", "FALS", "DSIGN", "INTRA", "CONN"}
         gex_mask = (df["study"].isin(gex_studies) |
-                    (df["study"].isin({"AUCTION", "PIN"}) & df["hypothesis"].str.contains("GEX|gamma", case=False, regex=True)))
+                    (df["study"].isin({"AUCTION", "PIN"}) & df["hypothesis"].str.contains("GEX|gamma", case=False, regex=True)) |
+                    (df["study"].isin({"R1", "R1V2", "R1V2DEV"}) & df["hypothesis"].str.contains("GEX", regex=False)
+                     & ~df["hypothesis"].str.contains("mcsGARCH", regex=False)))
+        con_s = surv[surv["study"].isin(["R1", "R1V2", "R1V2DEV"])]
+        con_worse = con_s[con_s["hypothesis"].str.contains(r"observed: \S+ worse\)", regex=True)]
         gs = surv[gex_mask.loc[surv.index]]
         gs_claims = gs[~gs["role"].isin(["placebo"])]
         w(f"**{len(surv)} of {m} tests survive ({100 * len(surv) / m:.0f}%). That is more than \"very few\", but it "
@@ -2027,7 +2535,10 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
           f"{cut:.1e}: every test at or below that survives and none above it does. The project contains hundreds of "
           f"near-certain effects: option and futures turnover jumping on expiry days ({len(ev_turn)} of the "
           f"{len(ev)} event-study survivors are turnover measures), forecasting models beating mcsGARCH at 15 and "
-          "30 minutes, Sensex calendar checks, volume changes in the replication. Each one makes room for the next. "
+          f"30 minutes, simple forecasts (naive, VIX, the straddle alone) losing to it by a wide margin ({len(con_worse)} "
+          f"of the {len(con_s)} forecasting-contest survivors are a model clearly worse than the one it is compared "
+          "with, which counts as a rejection once a one-sided p is doubled to two-sided), Sensex calendar checks, "
+          "volume changes in the replication. Each one makes room for the next. "
           "BY's 5% promise is about the whole list of survivors, not about any subset such as the GEX results, "
           "where false positives could be more concentrated.")
         w(f"2. **The event study's HAC p-values reject too often.** Its own negative-control check (Fridays, no rule "
@@ -2114,14 +2625,19 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
         for x in parts:
             w(f"* {x}.")
         if "null finding" in extra:
+            n_surv = int(g["survives_by_project_5pct"].sum())
             verdict = ("**Consistent with the finding:** none of these rows is significant, even before correction."
                        if (g["p_raw"] >= 0.05).all() else
-                       "**Consistent with the finding after correction:** some raw p-values are below 0.05, but none survives.")
-            w(verdict)
+                       "**Consistent with the finding after correction:** some raw p-values are below 0.05, but none survives."
+                       if n_surv == 0 else
+                       f"**Not consistent with the finding:** {n_surv} of these rows survive project-wide BY.")
+            w("")
+            w(verdict + " " + extra)
             w("")
             continue
-        verdict = ("**Survives project-wide BY.**" if n_any == len(groups) else
-                   "**Partly survives project-wide BY** (see the lines above)." if n_any else
+        n_rows = int(g["survives_by_project_5pct"].sum())
+        verdict = ("**Survives project-wide BY** (every row)." if n_rows == len(g) else
+                   f"**Partly survives project-wide BY:** {n_rows} of {len(g)} rows (see the lines above)." if n_any else
                    "**Does not survive project-wide BY.**")
         w("")
         w(verdict + (" " + extra if extra else ""))
