@@ -157,3 +157,36 @@ if __name__ == "__main__":
     print(cross_share_example().to_string())
     print(e3().to_string())
     print(e2(a.reps).to_string())
+
+
+def e3b_sampling_distribution(reps: int = 500, seed: int = 2):
+    """Monte Carlo sampling spread of the DY total when the true total is near the paper's level.
+
+    A bivariate VAR(1) with symmetric lagged spillovers and correlated shocks is
+    calibrated so its true total connectedness is about 42 (DY scale), the level
+    in the paper's Table 3 (84 on the paper's scale). We then draw many samples
+    of the sizes the paper's sub-samples have and look at how much the
+    estimated total moves from sample to sample. Gaussian shocks; heavier
+    tails would only widen the spread.
+    """
+    rng = np.random.default_rng(seed)
+    A = np.array([[[0.45, 0.35], [0.35, 0.45]]])
+    Sigma = np.array([[1.0, 0.55], [0.55, 1.0]])
+    true = cn.connectedness_from_fit(cn.VarFit(A=A, c=np.zeros(2), Sigma=Sigma, resid=None, p=1), H=10).total
+    Lc = np.linalg.cholesky(Sigma)
+    rows = []
+    for n in (240, 1440, 4680, 23000):
+        est = []
+        for _ in range(reps):
+            u = rng.standard_normal((n + 200, 2)) @ Lc.T
+            y = np.zeros_like(u)
+            for t in range(1, len(u)):
+                y[t] = A[0] @ y[t - 1] + u[t]
+            est.append(cn.connectedness(y[200:], p=1, H=10).total)
+        est = np.array(est)
+        rows.append({"n_obs": n, "true_total_dy": true, "mean_est": est.mean(), "sd_est": est.std(),
+                     "p2_5": np.percentile(est, 2.5), "p97_5": np.percentile(est, 97.5),
+                     "sd_paper_scale": 2 * est.std()})
+    df = pd.DataFrame(rows)
+    df.to_csv(OUT / "e3b_sampling_distribution.csv", index=False)
+    return df

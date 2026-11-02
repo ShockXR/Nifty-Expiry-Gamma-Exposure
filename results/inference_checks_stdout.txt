@@ -1,0 +1,12 @@
+                                       case  cross_share_pct
+0                      no dynamics, rho=0.5        20.000000
+1                     no dynamics, rho=0.85        41.944848
+2                     no dynamics, rho=0.95        47.437582
+3  series 2 leads series 1 by 0.3, rho=0.85        44.622569
+4  series 2 leads series 1 by 0.6, rho=0.85        48.200118
+5  series 2 leads series 1 by 0.9, rho=0.85        50.949460
+                                      min        max     median   total_dy  boot_ci_low  boot_ci_high   boot_sd
+sample                                                                                                         
+full session on 13 expiry days  15.244347  15.353263  15.258349  15.256274    13.381855     17.768413  1.150704
+full session on 64 days         16.660180  16.670340  16.669737  16.670340    15.421656     17.448078  0.502035
+one hour on 4 expiry days       18.409251  20.970617  19.392841  18.621606     9.715877     21.498520  3.159135

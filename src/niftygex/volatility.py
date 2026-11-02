@@ -36,6 +36,28 @@ from scipy.special import gammaln
 # ---------------------------------------------------------------------------
 
 
+def _ewma_variance(y, lam=0.94):
+    """One-step-ahead EWMA variance (RiskMetrics), used as a fallback."""
+    y = np.asarray(y, float)
+    h = np.empty_like(y)
+    h[0] = np.var(y[: min(len(y), 20)])
+    for t in range(1, len(y)):
+        h[t] = lam * h[t - 1] + (1 - lam) * y[t - 1] ** 2
+    return h
+
+
+def _egarch_ok(params, h, y_train) -> bool:
+    """Sanity checks on a fitted AR(1)-EGARCH(1,1) and its filtered variance."""
+    p = params
+    if not np.all(np.isfinite(p.values)):
+        return False
+    if abs(p.get("y[1]", 0.0)) >= 1 or not (0 <= p.get("beta[1]", 0.5) < 1):
+        return False
+    v = np.var(y_train)
+    lh = np.log(h[np.isfinite(h)])
+    return bool(np.all(np.abs(lh - np.log(v)) < 5))
+
+
 def daily_egarch_variance(
     daily_returns,
     train_size: int | None = None,
@@ -48,22 +70,32 @@ def daily_egarch_variance(
     then the fitted parameters are held fixed and the filter is run over the
     whole series, so h_t for every day uses only information up to day t-1.
 
-    Returns (h, params) with h on the same scale as ``daily_returns``.
+    On short samples the EGARCH likelihood is flat and the optimiser can
+    diverge (seen in the power study, see ITERATION_LOG.md). The fit is
+    therefore checked; on failure it is retried with normal errors, and if
+    that also fails an EWMA variance (lambda 0.94) is used. The method used
+    is returned in ``info["method"]``.
+
+    Returns (h, info) with h on the same scale as ``daily_returns``.
     """
     from arch import arch_model
 
     y = np.asarray(daily_returns, float) * scale
     n = len(y) if train_size is None else int(train_size)
-    am = arch_model(y[:n], mean="AR", lags=1, vol="EGARCH", p=1, o=1, q=1, dist=dist, rescale=False)
-    res = am.fit(disp="off", show_warning=False)
-    full = arch_model(y, mean="AR", lags=1, vol="EGARCH", p=1, o=1, q=1, dist=dist, rescale=False)
-    fixed = full.fix(res.params.values)
-    h = np.asarray(fixed.conditional_volatility, float) ** 2 / scale**2
-    # The AR(1) mean loses the first observation; fill with the next value.
-    if np.isnan(h[0]):
-        h[0] = h[1]
-    # One-step-ahead forecast for the day after the sample is not needed here.
-    return h, res.params
+    for d in (dist, "normal"):
+        try:
+            am = arch_model(y[:n], mean="AR", lags=1, vol="EGARCH", p=1, o=1, q=1, dist=d, rescale=False)
+            res = am.fit(disp="off", show_warning=False)
+            full = arch_model(y, mean="AR", lags=1, vol="EGARCH", p=1, o=1, q=1, dist=d, rescale=False)
+            h = np.asarray(full.fix(res.params.values).conditional_volatility, float) ** 2
+            if np.isnan(h[0]):
+                h[0] = h[1]
+            if _egarch_ok(res.params, h, y[:n]):
+                return h / scale**2, {"method": f"egarch_{d}", "params": res.params}
+        except Exception:  # noqa: BLE001 - any optimiser failure falls through to the next option
+            pass
+    h = _ewma_variance(y)
+    return h / scale**2, {"method": "ewma", "params": None}
 
 
 # ---------------------------------------------------------------------------

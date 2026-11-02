@@ -11,6 +11,10 @@ to the checks. Usage: python experiments/paper_checks.py
 from __future__ import annotations
 
 import json
+import os
+
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 from pathlib import Path
 
 import numpy as np
@@ -95,7 +99,7 @@ def e6_table_arithmetic():
     return df
 
 
-def e5_arma_near_cancellation(n=23039, reps=200, seed=0):
+def e5_arma_near_cancellation(n=23039, reps=150, seed=0):
     """Fit ARMA(1,1) to series with tiny true autocorrelation and look at the estimates."""
     rng = np.random.default_rng(seed)
     rows = []

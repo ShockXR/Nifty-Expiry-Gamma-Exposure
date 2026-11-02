@@ -172,10 +172,10 @@ def simulate_market(cfg: SimConfig | None = None) -> dict:
     om_q = 1 - a - b
     t_scale = np.sqrt((cfg.nu - 2) / cfg.nu)
 
-    def make_chain(spot_ref, days_to_exp, h_next):
+    def make_chain(spot_ref, days_to_exp, atm_iv):
         strikes = np.round(spot_ref / cfg.strike_step) * cfg.strike_step + cfg.strike_step * np.arange(-cfg.n_strikes, cfg.n_strikes + 1)
         call_oi, put_oi = _oi_profile(rng, spot_ref, strikes, days_to_exp, cfg)
-        iv = _smile(np.sqrt(h_next * 252) * cfg.vrp, strikes, spot_ref)
+        iv = _smile(atm_iv, strikes, spot_ref)
         return pd.DataFrame({
             "strike": np.r_[strikes, strikes],
             "is_call": np.r_[np.ones(len(strikes), bool), np.zeros(len(strikes), bool)],
@@ -186,7 +186,7 @@ def simulate_market(cfg: SimConfig | None = None) -> dict:
     def next_lh(lh_prev, z):
         return omega + cfg.eg_alpha * (abs(z) - np.sqrt(2 / np.pi)) + cfg.eg_gamma * z + cfg.eg_beta * lh_prev
 
-    active = make_chain(spot, tdte[0], np.exp(lh[0]))
+    active = make_chain(spot, tdte[0], np.sqrt(np.exp(lh[0]) * 252) * cfg.vrp)
     for t in range(T):
         h = np.exp(lh[t])
         s_day = s_exp_n if is_exp[t] else s_norm_n
@@ -227,12 +227,15 @@ def simulate_market(cfg: SimConfig | None = None) -> dict:
         # Close of day t: publish the chain that will be live on day t+1 (bhavcopy),
         # India VIX for the next day, and the participant file.
         dte_next = tdte[t + 1] if t + 1 < T else 4
-        nxt = make_chain(spot, dte_next, np.exp(lh_next))
+        # The published ATM implied vol IS the published VIX value (same noise), so
+        # option-chain features carry no extra information about next-day variance
+        # beyond VIX (see ITERATION_LOG.md, iteration 8).
+        vix[t] = np.sqrt(np.exp(lh_next) * 252) * cfg.vrp * np.exp(rng.normal(0, 0.05))
+        nxt = make_chain(spot, dte_next, vix[t])
         tau_close = (dte_next + 1) / 252
         nxt["settle"] = greeks.price(spot, nxt["strike"].to_numpy(), tau_close, cfg.r, nxt["iv"].to_numpy(), nxt["is_call"].to_numpy())
         nxt.attrs.update({"spot": spot, "T": tau_close, "date": days[t]})
         chains.append(nxt)
-        vix[t] = np.sqrt(np.exp(lh_next) * 252) * cfg.vrp * np.exp(rng.normal(0, 0.05))
         active = nxt
 
     # participant file published at the close of day t describes positions held on day t+1
