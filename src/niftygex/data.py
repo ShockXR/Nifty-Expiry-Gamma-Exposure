@@ -116,8 +116,9 @@ def load_participant_oi(path) -> pd.DataFrame:
     The file starts with a one-line title, then a header row. Returns a table
     indexed by client type (Client, DII, FII, Pro, TOTAL).
     """
-    raw = pd.read_csv(path, header=None, dtype=str)
-    hdr_row = raw.index[raw.iloc[:, 0].astype(str).str.strip().eq("Client Type")][0]
+    with open(path, encoding="utf-8-sig") as fh:
+        lines = fh.readlines()
+    hdr_row = next(k for k, ln in enumerate(lines) if ln.strip().strip('"').startswith("Client Type"))
     df = _clean_cols(pd.read_csv(path, skiprows=hdr_row))
     df = df.rename(columns={k: v for k, v in _PARTICIPANT_MAP.items() if k in df.columns})
     df["client_type"] = df["client_type"].astype(str).str.strip()
@@ -169,3 +170,132 @@ def to_session_grid(bars: pd.DataFrame, start: str = "09:15", minutes: int = 375
     grid["returns"] = np.log(c / prev)
     grid["days"] = days
     return grid
+
+
+# ---------------------------------------------------------------------------
+# Build a "market" dict (see features.py) from NSE-layout files
+# ---------------------------------------------------------------------------
+
+
+def _participant_weights_row(tbl: pd.DataFrame) -> dict:
+    tot_c = float(tbl.loc["TOTAL", "option_index_call_long"])
+    tot_p = float(tbl.loc["TOTAL", "option_index_put_long"])
+    out = {}
+    for grp, key in (("Pro", "pro"), ("Client", "client")):
+        r = tbl.loc[grp]
+        out[f"{key}_call"] = (r["option_index_call_long"] - r["option_index_call_short"]) / tot_c
+        out[f"{key}_put"] = (r["option_index_put_long"] - r["option_index_put_short"]) / tot_p
+    return out
+
+
+def build_market_from_nse(
+    bars_path,
+    bhavcopy_dir,
+    participant_dir=None,
+    vix_path=None,
+    futures_bars_path=None,
+    symbol: str = "NIFTY",
+    lot_size: float | None = None,
+    oi_unit: str = "units",
+    r: float = 0.065,
+    minutes: int = 375,
+) -> dict:
+    """Assemble the market dict from raw NSE-layout files.
+
+    * ``bars_path``: 1-minute index bars (CSV, see load_minute_bars).
+    * ``bhavcopy_dir``: one bhavcopy CSV per trading day, any file name; the
+      trade date is read from inside the file.
+    * ``participant_dir``: participant-wise OI CSVs, file names ending in
+      DDMMYYYY.csv (the NSE naming), optional.
+    * ``vix_path``: CSV with columns date and close (India VIX level in
+      percent, as NSE publishes it), optional.
+    * ``futures_bars_path``: 1-minute futures bars, used for volume.
+    * ``oi_unit``: "units" if the bhavcopy reports OI in shares (divide by the
+      lot size), "contracts" if already in contracts. CHECK on a real file.
+
+    For each day t the chain used is the nearest weekly expiry strictly after
+    t, i.e. the contract that will be live on day t+1 (or expiring on it).
+    """
+    from .expiry_calendar import label_days
+
+    bars = load_minute_bars(bars_path)
+    grid = to_session_grid(bars, minutes=minutes)
+    days = grid["days"]
+    if futures_bars_path is not None:
+        fg = to_session_grid(load_minute_bars(futures_bars_path), minutes=minutes)
+        vol = pd.DataFrame(fg["volume"], index=fg["days"]).reindex(days).to_numpy()
+        grid["volume"] = np.nan_to_num(vol, nan=0.0) + 1.0
+    if not np.isfinite(grid["volume"]).any():
+        grid["volume"] = np.ones_like(grid["close"])
+    labels = label_days(days)
+
+    # bhavcopy, keyed by trade date
+    bhav = {}
+    for f in sorted(Path(bhavcopy_dir).glob("*.csv")):
+        df = load_bhavcopy(f, symbol)
+        if len(df):
+            bhav[pd.Timestamp(df["date"].iloc[0]).normalize()] = df
+    chains = []
+    lot_used = []
+    pos = {d: i for i, d in enumerate(days)}
+    for t, d in enumerate(days):
+        df = bhav.get(d)
+        spot = float(grid["close"][t, np.isfinite(grid["close"][t])][-1])
+        if df is None:
+            chains.append(chains[-1].copy() if chains else pd.DataFrame(columns=["strike", "is_call", "oi", "settle"]))
+            chains[-1].attrs.update({"spot": spot, "T": 1 / 252, "date": d, "missing": True})
+            lot_used.append(lot_used[-1] if lot_used else (lot_size or np.nan))
+            continue
+        nxt = df.loc[df["expiry"] > d, "expiry"].min()
+        sel = df[df["expiry"] == nxt].copy()
+        ls = lot_size if lot_size is not None else float(sel["lot_size"].dropna().iloc[0])
+        if oi_unit == "units":
+            sel = oi_in_units(sel, ls)
+        if nxt in pos:
+            n_td = pos[nxt] - t
+        else:
+            n_td = int(np.busday_count(d.date(), pd.Timestamp(nxt).date()))
+        ch = sel[["strike", "is_call", "oi", "settle"]].reset_index(drop=True)
+        under = sel["underlying"].dropna()
+        ch.attrs.update({"spot": float(under.iloc[0]) if len(under) else spot, "T": max(n_td, 1) / 252,
+                         "date": d, "expiry": nxt})
+        chains.append(ch)
+        lot_used.append(ls)
+
+    participant = None
+    if participant_dir is not None:
+        rows = {}
+        for f in sorted(Path(participant_dir).glob("*.csv")):
+            stamp = f.stem[-8:]
+            try:
+                d = pd.to_datetime(stamp, format="%d%m%Y")
+            except ValueError:
+                continue
+            rows[d] = _participant_weights_row(load_participant_oi(f))
+        participant = pd.DataFrame.from_dict(rows, orient="index").sort_index().reindex(days).ffill()
+
+    vix = np.full(len(days), np.nan)
+    if vix_path is not None:
+        v = pd.read_csv(vix_path)
+        v.columns = [c.strip().lower() for c in v.columns]
+        v = v.set_index(pd.to_datetime(v["date"], dayfirst=True))["close"].astype(float) / 100.0
+        vix = v.reindex(days).ffill().to_numpy()
+    if not np.isfinite(vix).all():
+        # Fallback: annualised realized volatility of the day (flagged in attrs).
+        rv = np.nansum(grid["returns"] ** 2, axis=1)
+        vix = np.where(np.isfinite(vix), vix, np.sqrt(rv * 252))
+
+    lots = np.asarray(lot_used, float)
+    return {
+        "source": "nse",
+        "days": days,
+        "labels": labels,
+        "R": np.nan_to_num(grid["returns"], nan=0.0),
+        "open": grid["open"], "high": grid["high"], "low": grid["low"], "close": grid["close"],
+        "volume": grid["volume"],
+        "chains": chains,
+        "participant": participant,
+        "vix": vix,
+        "lot_size": float(np.nanmedian(lots)) if np.isfinite(lots).any() else 75.0,
+        "r": r,
+    }

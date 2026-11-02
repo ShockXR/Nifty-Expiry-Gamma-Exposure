@@ -142,7 +142,7 @@ def implied_vol(
         hi_arr = np.where(diff > 0, sig, hi_arr)
         lo_arr = np.where(diff <= 0, sig, lo_arr)
         v = vega(F, K, T, r, sig)
-        with np.errstate(divide="ignore", invalid="ignore"):
+        with np.errstate(divide="ignore", invalid="ignore", over="ignore"):
             newton = sig - diff / v
         use_newton = (v > 1e-12) & (newton > lo_arr) & (newton < hi_arr)
         new_sig = np.where(use_newton, newton, 0.5 * (lo_arr + hi_arr))

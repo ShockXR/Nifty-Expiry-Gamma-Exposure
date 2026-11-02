@@ -1,0 +1,28 @@
+check,series,phi,theta,phi_plus_theta,implied_acf1,z_phi,z_theta,stars_reported,stars_consistent_with_z,alpha_plus_beta,omega,one_minus_alpha_minus_beta,implied_unconditional_q2,half_life_minutes,paper_scale_total,dy_standard_total,reported,n1,n2,max_U,max_rank_sum_W,within_possible_range,n,days_if_375_min,days_if_360_min
+"Table 2 ARMA(1,1)","Nifty 50, before",-0.054778,0.078178,0.023399999999999997,0.02335708758719825,-0.25788,0.3687,**,False,,,,,,,,,,,,,,,,
+"Table 2 ARMA(1,1)","Bank Nifty, before",0.619437,-0.642318,-0.02288099999999993,-0.02233581901227182,5.17573,-5.50709,***,True,,,,,,,,,,,,,,,,
+"Table 2 ARMA(1,1)","Nifty 50, after",-0.627945,0.638569,0.010624000000000078,0.010505024878019086,-2.7907,2.8719,***,True,,,,,,,,,,,,,,,,
+"Table 2 ARMA(1,1)","Bank Nifty, after",0.750097,-0.792505,-0.042408,-0.03916249853430485,13.3985,-15.4559,***,True,,,,,,,,,,,,,,,,
+Table 2 intraday GARCH,"Nifty 50, before",,,,,,,,,0.997958,0.002319,0.0020419999999999883,1.1356513222331113,339.0985485736302,,,,,,,,,,,
+Table 2 intraday GARCH,"Bank Nifty, before",,,,,,,,,0.996263,0.004263,0.0037369999999999903,1.1407546160021438,185.1354634419205,,,,,,,,,,,
+Table 2 intraday GARCH,"Nifty 50, after",,,,,,,,,0.990411,0.010345,0.009588999999999959,1.078840337887167,71.93852848103636,,,,,,,,,,,
+Table 2 intraday GARCH,"Bank Nifty, after",,,,,,,,,0.9828749999999999,0.018692,0.017125000000000057,1.091503649635033,40.12817643801636,,,,,,,,,,,
+DY total scale,"T3 weekly+monthly, before",,,,,,,,,,,,,,84.0,42.0,,,,,,,,,
+DY total scale,"T3 last hour monthly, before",,,,,,,,,,,,,,105.22,52.61,,,,,,,,,
+DY total scale,"T4 P1 weekly+monthly Nifty expiry, after",,,,,,,,,,,,,,76.38,38.19,,,,,,,,,
+MWW statistic bound,"T5 volume all, Nifty",,,,,,,,,,,,,,,,444392222.5,23039.0,21463.0,494486057.0,759895337.0,True,,,
+MWW statistic bound,"T5 volume all, Bank Nifty",,,,,,,,,,,,,,,,538810985.5,23039.0,21463.0,494486057.0,759895337.0,True,,,
+MWW statistic bound,"T5 volume Wed, Nifty",,,,,,,,,,,,,,,,19165172.0,4680.0,4320.0,20217600.0,31171140.0,True,,,
+MWW statistic bound,"T5 volume Wed, Bank Nifty",,,,,,,,,,,,,,,,21613964.5,4680.0,4320.0,20217600.0,31171140.0,True,,,
+MWW statistic bound,"T5 volume Thu, Nifty",,,,,,,,,,,,,,,,16357754.5,4680.0,4680.0,21902400.0,32855940.0,True,,,
+MWW statistic bound,"T5 volume Thu, Bank Nifty",,,,,,,,,,,,,,,,21478045.0,4680.0,4680.0,21902400.0,32855940.0,True,,,
+MWW statistic bound,"T6 vol all, Nifty",,,,,,,,,,,,,,,,483967708.5,23038.0,21462.0,494441556.0,759827797.0,True,,,
+MWW statistic bound,"T6 vol all, Bank Nifty",,,,,,,,,,,,,,,,500287483.5,23038.0,21462.0,494441556.0,759827797.0,True,,,
+MWW statistic bound,"T6 vol Wed, Nifty",,,,,,,,,,,,,,,,18633563.0,4679.0,4319.0,20208601.0,31157461.0,True,,,
+MWW statistic bound,"T6 vol Wed, Bank Nifty",,,,,,,,,,,,,,,,207455847.5,4680.0,4319.0,20212920.0,31166460.0,False,,,
+MWW statistic bound,"T6 vol Thu, Nifty",,,,,,,,,,,,,,,,156272524.5,4679.0,4679.0,21893041.0,32841901.0,False,,,
+MWW statistic bound,"T6 vol Thu, Bank Nifty",,,,,,,,,,,,,,,,2174645383.0,4679.0,4679.0,21893041.0,32841901.0,False,,,
+observations per day,"Before, all minutes",,,,,,,,,,,,,,,,,,,,,,23039.0,61.437333333333335,63.99722222222222
+observations per day,"After, all minutes",,,,,,,,,,,,,,,,,,,,,,21239.0,56.63733333333333,58.99722222222222
+observations per day,Wednesdays before,,,,,,,,,,,,,,,,,,,,,,4680.0,12.48,13.0
+observations per day,Wednesdays after,,,,,,,,,,,,,,,,,,,,,,4320.0,11.52,12.0

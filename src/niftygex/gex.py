@@ -156,16 +156,22 @@ def gamma_flip(
     Brent's method. Returns NaN when net GEX keeps one sign over the grid,
     which is common under the long_all and short_all bounds.
     """
+    K = chain["strike"].to_numpy(float)
+    iv = chain["iv"].to_numpy(float)
+    oi = chain["oi"].to_numpy(float)
+    w = sign_weights(chain["is_call"].to_numpy(bool), rule, participant)
+
+    def f(s):
+        s = np.atleast_1d(np.asarray(s, float))[:, None]
+        g = greeks.spot_gamma(s * np.exp(carry * T), K[None, :], T, r, iv[None, :], carry)
+        return (g * (w * oi)[None, :]).sum(axis=1) * lot_size * s[:, 0] ** 2 * 0.01
+
     grid = spot * np.linspace(1 - width, 1 + width, n_grid)
-    vals = np.array([net_gex_at(chain, s, lot_size, T, r, carry, rule, participant) for s in grid])
+    vals = f(grid)
     sign_change = np.where(np.sign(vals[:-1]) * np.sign(vals[1:]) < 0)[0]
     if sign_change.size == 0:
         return float("nan")
-    roots = []
-    f = lambda s: net_gex_at(chain, s, lot_size, T, r, carry, rule, participant)  # noqa: E731
-    for j in sign_change:
-        roots.append(brentq(f, grid[j], grid[j + 1], xtol=1e-6 * spot))
-    roots = np.array(roots)
+    roots = np.array([brentq(lambda x: f(x)[0], grid[j], grid[j + 1], xtol=1e-6 * spot) for j in sign_change])
     return float(roots[np.argmin(np.abs(roots - spot))])
 
 

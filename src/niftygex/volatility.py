@@ -321,7 +321,7 @@ class McsGarch:
         # Missing minutes: q2 still updates with x = 0, which slightly lowers q2.
         return {"eps": eps, "S": S, "x": x, "q2": q2.reshape(T, M)}
 
-    def forecast_variance(self, filt: dict, h, anchors_t, anchors_i, horizon: int):
+    def forecast_variance(self, filt: dict, h, anchors_t, anchors_i, horizon):
         """Forecast the variance of the sum of returns over minutes [i, i + horizon).
 
         ``anchors_t`` and ``anchors_i`` are arrays of day indices and minute
@@ -336,9 +336,10 @@ class McsGarch:
         q2 = filt["q2"]
         T, M = S.shape
         h = np.asarray(h, float)
+        hz = np.broadcast_to(np.asarray(horizon, int), np.shape(anchors_t))
         out = np.empty(len(anchors_t))
-        for n, (t, i) in enumerate(zip(np.asarray(anchors_t), np.asarray(anchors_i))):
-            j = np.arange(i, min(i + horizon, M))
+        for n, (t, i, hn) in enumerate(zip(np.asarray(anchors_t), np.asarray(anchors_i), hz)):
+            j = np.arange(i, min(i + hn, M))
             k = j - i
             # q2[t, i] is known at the end of minute i - 1.
             q_next = q2[t, i]

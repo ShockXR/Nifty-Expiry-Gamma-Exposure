@@ -243,6 +243,8 @@ def simulate_market(cfg: SimConfig | None = None) -> dict:
         "client_call": np.clip(-0.8 * dc[1:] + rng.normal(0, noise * 1.5, T), -1, 1),
         "client_put": np.clip(-0.8 * dp[1:] + rng.normal(0, noise * 1.5, T), -1, 1),
     }, index=days)
+    # true positions for the next day, known only to the simulator (oracle benchmark)
+    dealer_next = pd.DataFrame({"call": dc[1:], "put": dp[1:]}, index=days)
     dc, dp = dc[:T], dp[:T]
 
     return {
@@ -258,9 +260,83 @@ def simulate_market(cfg: SimConfig | None = None) -> dict:
         "dealer_call": dc,
         "dealer_put": dp,
         "participant": participant,
+        "dealer_next": dealer_next,
         "chains": chains,
         "vix": vix,
         "gex_ref": gex_ref,
         "lot_size": cfg.lot_size,
         "r": cfg.r,
     }
+
+
+def export_nse_layout(market: dict, out_dir) -> dict:
+    """Write a simulated market to files in the NSE layouts that data.py reads.
+
+    Used to test the real-data path end to end. The files are SYNTHETIC.
+    Bhavcopy uses the UDiFF layout with OI in units (contracts x lot size).
+    """
+    from pathlib import Path
+
+    out = Path(out_dir)
+    (out / "bhavcopy").mkdir(parents=True, exist_ok=True)
+    (out / "participant_oi").mkdir(parents=True, exist_ok=True)
+    days = market["days"]
+    M = market["R"].shape[1]
+    lot = market["lot_size"]
+    # 1-minute bars
+    ts = np.concatenate([d + pd.Timedelta(hours=9, minutes=15) + pd.to_timedelta(np.arange(M), unit="min") for d in days])
+    bars = pd.DataFrame({"timestamp": ts, "open": market["open"].ravel(), "high": market["high"].ravel(),
+                         "low": market["low"].ravel(), "close": market["close"].ravel(),
+                         "volume": market["volume"].ravel()})
+    bars.to_csv(out / "nifty_1min.csv", index=False)
+    labels = market["labels"]
+    exp_dates = labels.index[labels["is_expiry"]]
+    for t, (d, ch) in enumerate(zip(days, market["chains"])):
+        later = exp_dates[exp_dates > d]
+        expiry = later[0] if len(later) else d + pd.offsets.BDay(5)
+        n = len(ch)
+        udiff = pd.DataFrame({
+            "TradDt": [d.strftime("%Y-%m-%d")] * n, "BizDt": d.strftime("%Y-%m-%d"), "Sgmt": "FO", "Src": "NSE",
+            "FinInstrmTp": "IDO", "FinInstrmId": np.arange(n), "ISIN": "", "TckrSymb": "NIFTY", "SctySrs": "",
+            "XpryDt": expiry.strftime("%Y-%m-%d"), "FininstrmActlXpryDt": expiry.strftime("%Y-%m-%d"),
+            "StrkPric": ch["strike"].to_numpy(), "OptnTp": np.where(ch["is_call"], "CE", "PE"),
+            "FinInstrmNm": "", "OpnPric": ch["settle"].to_numpy(), "HghPric": ch["settle"].to_numpy(),
+            "LwPric": ch["settle"].to_numpy(), "ClsPric": ch["settle"].to_numpy(), "LastPric": ch["settle"].to_numpy(),
+            "PrvsClsgPric": ch["settle"].to_numpy(), "UndrlygPric": ch.attrs["spot"], "SttlmPric": ch["settle"].to_numpy(),
+            "OpnIntrst": ch["oi"].to_numpy() * lot, "ChngInOpnIntrst": 0, "TtlTradgVol": 0, "TtlTrfVal": 0,
+            "TtlNbOfTxsExctd": 0, "SsnId": "F1", "NewBrdLotQty": lot, "Rmks": "", "Rsvd1": "", "Rsvd2": "",
+            "Rsvd3": "", "Rsvd4": "",
+        })
+        # one extra row for a farther expiry and a futures row, which the loader must skip
+        udiff.to_csv(out / "bhavcopy" / f"BhavCopy_NSE_FO_0_0_0_{d:%Y%m%d}_F_0000.csv", index=False)
+        # participant OI file (title line, header, 5 rows)
+        tot = float(ch["oi"].sum()) / 2
+        pr = market["participant"].iloc[t]
+        def side(wc, wp, base):
+            return {"cl": max(wc, 0) * tot + base * tot, "cs": max(-wc, 0) * tot + base * tot,
+                    "pl": max(wp, 0) * tot + base * tot, "ps": max(-wp, 0) * tot + base * tot}
+        pro = side(pr["pro_call"], pr["pro_put"], 0.05)
+        cli = side(pr["client_call"], pr["client_put"], 0.05)
+        dii = side(0.0, 0.0, 0.02)
+        fii = {}
+        for leg_l, leg_s in (("cl", "cs"), ("pl", "ps")):
+            longs = pro[leg_l] + cli[leg_l] + dii[leg_l]
+            shorts = pro[leg_s] + cli[leg_s] + dii[leg_s]
+            fl = max(0.05 * tot, tot - longs, shorts - longs + 0.05 * tot)
+            fii[leg_l] = fl
+            fii[leg_s] = longs + fl - shorts
+        rows = []
+        for name, g in (("Client", cli), ("DII", dii), ("FII", fii), ("Pro", pro)):
+            rows.append([name, 0, 0, 0, 0, round(g["cl"]), round(g["pl"]), round(g["cs"]), round(g["ps"]), 0, 0, 0, 0, 0, 0])
+        tot_row = ["TOTAL"] + [sum(r[k] for r in rows) for k in range(1, 15)]
+        rows.append(tot_row)
+        hdr = ["Client Type", "Future Index Long", "Future Index Short", "Future Stock Long", "Future Stock Short",
+               "Option Index Call Long", "Option Index Put Long", "Option Index Call Short", "Option Index Put Short",
+               "Option Stock Call Long", "Option Stock Put Long", "Option Stock Call Short", "Option Stock Put Short",
+               "Total Long Contracts", "Total Short Contracts"]
+        with open(out / "participant_oi" / f"fao_participant_oi_{d:%d%m%Y}.csv", "w") as fh:
+            fh.write(f'"Participant wise Open Interest (no. of contracts) in Equity Derivatives as on {d:%b %d, %Y}"\n')
+            pd.DataFrame(rows, columns=hdr).to_csv(fh, index=False)
+    pd.DataFrame({"date": [d.strftime("%d-%m-%Y") for d in days], "close": market["vix"] * 100}).to_csv(out / "india_vix.csv", index=False)
+    return {"bars": out / "nifty_1min.csv", "bhavcopy": out / "bhavcopy", "participant": out / "participant_oi",
+            "vix": out / "india_vix.csv"}
