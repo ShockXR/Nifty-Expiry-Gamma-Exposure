@@ -92,5 +92,9 @@ def test_ablation_table_and_subgroups():
                          "tdte": 1, "regime": 1, "base": 1.0, "good": y * 0.9 + 0.1})
     g = subgroups(pred, holdout_start="2025-02-15")
     assert {"all", "expiry", "development", "holdout", "single_weekly_thu"} <= set(g)
+    g2 = subgroups(pred, holdout_start="2025-02-15", auction_start="2025-03-10")
+    assert g2["pre_auction"].sum() + g2["auction_period"].sum() == len(pred)
+    assert g2["holdout_pre_auction"].sum() < g2["holdout"].sum()
+    assert not np.any(g2["pre_auction"] & (pd.to_datetime(pred["date"]) >= "2025-03-10").to_numpy())
     t = ablation_table(pred, [("fam", "good", "base", "good")], {"all": g["all"]})
     assert t.loc[0, "change_pct"] < 0 and t.loc[0, "p_one_sided"] < 0.01

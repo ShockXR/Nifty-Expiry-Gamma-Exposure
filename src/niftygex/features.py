@@ -11,10 +11,16 @@ produce it):
     participant  DataFrame per publish day: pro_call, pro_put, client_call, client_put
     vix       India VIX (annualised, decimal) per publish day
     lot_size, r
+    option_tables  (real data) dict publish date -> every listed Nifty option series
+              (expiry, strike, is_call, settle, close, oi, volume), for implied.py
+    futures   (real data) per publish day: Nifty futures traded value, OI, near settle
+    other_index_expiries  (real data) Bank Nifty expiry dates
 
 Timing rule: anything published at the close of day t-1 (bhavcopy, the
-participant file, VIX) is used only for forecasts on day t or later.
-Intraday features at anchor (t, i) use minutes 0 to i-1 of day t only.
+participant file, VIX, and the option-implied panel built from the
+bhavcopy) is used only for forecasts on day t or later. Intraday features at
+anchor (t, i) use minutes 0 to i-1 of day t only. tests/test_implied.py
+checks this for the implied and GEX blocks by perturbing one day's files.
 """
 
 from __future__ import annotations
