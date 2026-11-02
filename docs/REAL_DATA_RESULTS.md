@@ -13,22 +13,24 @@ Sample: 942 trading days, 2 January 2023 to 2 November 2026, of which 200 are Ni
 | R4 | A first, crude look at pinning | same | same |
 | R5 | Does the market's move over the day carry on into the last 30 minutes, and does that depend on dealer gamma? | `python experiments/momentum_gex.py` | `results/momentum_gex/` |
 | R0b | Do the results survive NSE's closing auction (from 3 August 2026)? | `python experiments/closing_auction_check.py` | `results/closing_auction/` |
+| R1b | Where do the forecasting gains come from (time of day, regime, tails, MSE)? | `python experiments/forecast_diagnostics.py` | `results/forecast_diagnostics/` |
 
 Separate real-data studies, each with its own document:
 
 * `docs/REPLICATION_NSE.md`: the paper's Tables 1 to 6 rebuilt on NSE data. The "after" sample matches closely; the stated "before" window does not, and a 64-day window from 14 November 2022 to 10 February 2023 reproduces the printed "before" numbers (our main question for the authors).
 * `docs/PINNING_STUDY.md`: a full pinning study (replaces the crude R4 check below).
-* Still running: an event study of the expiry rule changes with Bank Nifty as a comparison, a stronger version of R1, and a falsification suite for R3 and R5.
+* `docs/INDEPENDENT_REVIEW.md`: an independent referee-style review of this document and the two above. Its points are addressed here (R1 diagnostics, R3 scale-free versions, multiple-testing columns) or handed to the studies still running.
+* Still running: an event study of the expiry rule changes with Bank Nifty as a comparison, a stronger version of R1, a falsification suite for R3 and R5, minute-by-minute gamma on expiry days, and an estimate of the dealer sign from market behaviour.
 
 ---
 
 ## Findings (short)
 
 1. **The data hold up.** Minute-bar highs and lows match NSE's official values within 0.05% on 943 of 943 days (highs) and 942 of 943 (lows) for Nifty. Bhavcopy open interest is in shares and adds up exactly to NSE's participant totals once contracts expiring that day are left out.
-2. **The paper's model can be beaten out of sample.** A hybrid that keeps mcsGARCH (the paper's model) and corrects it with a LightGBM model of its errors forecasts the next 15 and 30 minutes about 7% and 9% better (QLIKE loss), on all days and on expiry days, with Diebold-Mariano p-values below 0.001. mcsGARCH is excluded from the Model Confidence Set for these horizons.
+2. **The paper's model can be beaten out of sample, mostly but not only at the open.** A hybrid that keeps mcsGARCH (the paper's model) and corrects it with a LightGBM model of its errors forecasts the next 15 and 30 minutes about 7% and 9% better on all days and about 6% better on expiry days (QLIKE loss), with Diebold-Mariano p-values of 0.001 or below. The gain is largest at 09:15 (16% and 27%), where mcsGARCH leans on yesterday's daily variance, and is still about 6% and 7% at all later times of day, in each of the three expiry regimes, and with the worst 1% of forecasts removed. mcsGARCH is excluded from the Model Confidence Set for these horizons. Under squared-error loss (MSE) the ranking reverses, because mcsGARCH and the hybrid made a few very large errors right after the 4 June 2024 election-result crash (R1).
 3. **For the last hour of the day, no model reliably beats mcsGARCH.** Over all test days HAR looks about 11% better (one-sided p = 0.015), but most of that edge comes from the last 63 days, after NSE introduced a closing auction on 3 August 2026 (see R0). Before that date HAR is about 4% better and the difference is not significant (p = 0.11). The machine-learning models add nothing for the last hour.
 4. **GEX features do not improve out-of-sample forecasts** under any of the three sign rules. This matches what our simulations (E4) said to expect when the sign of dealer positions is uncertain and the effect is small.
-5. **But GEX is related to volatility in-sample, with a sign that flips on expiry day.** On ordinary days, higher dealer gamma the evening before goes with lower volatility the next day, as hedging theory predicts. On expiry days the relation reverses. This holds under all three sign rules and after controlling for the expiry regime, but it is an in-sample association on a proxied sign, not a causal result (details in R3).
+5. **In-sample, Pro-based GEX is related to volatility with a sign that flips on expiry day.** On ordinary days, higher dealer gamma the evening before goes with lower volatility the next day, as hedging theory predicts; on expiry days the relation reverses. Under the Pro rule this survives scale-free versions of GEX, controls for gross gamma, the pre-auction sample and a multiple-testing correction. Under the US and Client-mirror rules it does not survive the scale-free versions, so the earlier statement that it holds under all three rules was too strong. It is an in-sample association on a proxied sign, not a causal result (R3).
 6. **Expiry days are more volatile than the rest of their week, but not in every regime.** About 11% more realized variance before November 2024, no clear difference from November 2024 to August 2025 (Thursday expiry, one weekly per exchange), and about 21% more since Nifty moved to Tuesday, concentrated in the last hour (about 43% more).
 7. **Nifty reverses into the close rather than continuing, and the reversal is stronger on days when the Pro-based GEX is negative.** This is the opposite of what the US literature on hedging-driven momentum predicts, and it partly survives controls for VIX and the size of the day's move (R5). It does not fit neatly with finding 5 either, so the sign proxy itself is the open question.
 
@@ -58,16 +60,16 @@ Closes are not expected to match exactly: NSE's official close is an average ove
 
 ## R1. Out-of-sample forecasting contest
 
-Setup: forecasts of realized variance (sum of squared 1-minute returns) over the next 15 minutes and next 30 minutes from every 15-minute mark, and over the last hour from 14:30. Every model is refitted every 21 trading days on all data before the forecast period (expanding window), so no model ever sees the future. Loss: QLIKE (lower is better), shown as % difference from mcsGARCH. Files: `results/pipeline_nse/scoreboard_*.csv`, `tests_*.csv`, `mcs_*.csv`.
+Setup: forecasts of realized variance (sum of squared 1-minute returns) over the next 15 minutes and next 30 minutes from every 15-minute mark, and over the last hour from 14:30. HAR, LightGBM and the hybrid's correction are refitted every 21 trading days and mcsGARCH (with the daily EGARCH that feeds it) every 63 trading days, each time on all data before the forecast period (expanding window), so no model ever sees the future. (The slower mcsGARCH refit mildly handicaps the paper's model; a like-for-like rerun with 21-day refits is part of the model study in progress.) Loss: QLIKE (lower is better; it punishes forecasts that are too low more than forecasts that are too high, and is the standard loss for variance forecasts), shown as % difference from mcsGARCH. Files: `results/pipeline_nse/scoreboard_*.csv`, `tests_*.csv`, `mcs_*.csv`.
 
 | Model | Next 15 min, all days | Next 15 min, expiry days | Next 30 min, all days | Next 30 min, expiry days | Last hour, all days | Last hour, expiry days |
 | --- | --- | --- | --- | --- | --- | --- |
 | mcsGARCH (the paper's model) | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
-| HAR | +5.2 | +4.0 | +6.7 | +5.0 | **-10.8** | **-10.2** |
+| HAR | +5.2 | +4.0 | +6.7 | +5.0 | -10.8 | -10.2 |
 | India VIX only | +52.5 | +33.8 | +63.6 | +42.2 | +17.6 | +27.7 |
 | LightGBM, no GEX | -3.9 | -6.2 | -4.2 | -6.6 | -0.5 | -8.2 |
 | LightGBM, with GEX | -4.4 | -7.2 | -4.7 | -7.1 | +1.9 | -8.8 |
-| Hybrid, no GEX | -6.7 | -6.2 | -9.0 | -6.6 | -1.3 | +3.2 |
+| Hybrid, no GEX | **-6.7** | **-6.2** | **-9.0** | **-6.6** | -1.3 | +3.2 |
 | Hybrid, GEX (US sign) | -6.7 | -6.3 | -9.2 | -5.8 | -1.6 | +3.4 |
 | Hybrid, GEX (Pro participant sign) | -6.8 | -6.5 | -9.2 | -6.1 | -1.3 | +2.5 |
 
@@ -80,12 +82,29 @@ Test anchors: 19,800 (next 15), 19,008 (next 30), 792 (last hour); expiry days a
 * HAR vs mcsGARCH, last hour: p = 0.015 (all days), 0.07 (expiry days). Without the 63 closing-auction days: HAR is 4.2% better on all days (p = 0.11) and 7.1% on expiry days (p = 0.17), so the last-hour edge is not established (`results/closing_auction/r1_dm_tests.csv`).
 * Without the closing-auction days the hybrid's gain at 15 and 30 minutes is about the same: 6.0% and 7.8% on all days, 5.5% and 5.7% on expiry days, all with p of 0.0013 or smaller.
 * The Model Confidence Set (90%) excludes mcsGARCH, HAR, VIX and the naive models at 15 and 30 minutes; for the last hour it keeps almost every model, so the data cannot separate them there.
+* For the last hour, HAR against the hybrid (two-sided): p = 0.019 on all days, 0.062 before the auction, 0.065 on expiry days (`results/forecast_diagnostics/tails_and_last_hour_tests.csv`).
+
+**Where the gain comes from** (`python experiments/forecast_diagnostics.py`, files in `results/forecast_diagnostics/`). QLIKE, % against mcsGARCH (negative = better):
+
+| Subset | Hybrid, next 15 min | Hybrid, next 30 min | LightGBM, next 15 min | LightGBM, next 30 min |
+| --- | --- | --- | --- | --- |
+| All anchors (the headline) | -6.7 | -9.0 | -3.9 | -4.2 |
+| 09:15 anchor only | -16.4 | -26.9 | -18.4 | -25.7 |
+| All anchors after 09:15 | -5.8 | -7.1 | -2.5 | -1.9 |
+| Worst 1% of mcsGARCH's losses removed | -6.2 | -7.9 | -2.1 | -1.9 |
+| Several weeklies (to Nov 2024) | -5.4 | -6.9 | +2.8 | +4.8 |
+| One weekly, Thursday | -7.0 | -8.6 | -6.2 | -8.3 |
+| Tuesday expiry | -7.7 | -11.8 | -8.5 | -10.8 |
+
+So the hybrid's advantage is largest at the open, where mcsGARCH's forecast leans on yesterday's daily variance, but it holds at later times of day and in every regime. LightGBM on its own is not better than mcsGARCH in the first regime. The hybrid has the lower loss on 52.5% (15 minutes) and 53.2% (30 minutes) of individual anchors: a steady small edge, not a few big wins.
+
+**MSE tells a different story, for a specific reason.** Under mean squared error, mcsGARCH (2.3e-10 at 15 minutes) and the hybrid (1.5e-10) are far worse than HAR, LightGBM and VIX (all about 3.5e-11). Ten anchors account for 97% of mcsGARCH's squared error at 15 minutes, led by 5 June 2024 at 09:15, the morning after the election-result crash: mcsGARCH forecast a 15-minute variance of 0.00201 against a realized 0.000099, about 20 times too high, and the hybrid inherited most of it (0.00157), while LightGBM did not (0.000008) (`largest_mcsgarch_errors.csv`). Our reading, not yet checked component by component, is that after the crash both the daily component and the intraday GARCH component of mcsGARCH were high, and the model multiplies them. With the 09:15 anchor removed, the MSE gap shrinks (mcsGARCH 1.5e-11, hybrid 1.2e-11, HAR 9.4e-12). QLIKE is the better loss for comparing variance forecasts (Patton 2011), but a risk manager would care about that one morning, and a cap on the daily factor after extreme days is an obvious fix to test.
 
 **Does GEX help?** The clean test compares the same model with and without the GEX block. For the hybrid, the extra loss reduction from GEX is zero to within noise under every sign rule (one-sided Diebold-Mariano p between 0.11 and 0.87 across horizons and day types). For LightGBM, GEX is about half a point better at 15 and 30 minutes, which is not significant (p = 0.13 and 0.09) and reverses in the last hour. We read this as no reliable out-of-sample value from end-of-day GEX.
 
 **What the mcsGARCH fit looks like on the whole sample** (`mcsgarch_full_sample.csv`): intraday GARCH $\alpha = 0.049$, $\beta = 0.945$, so persistence 0.994 and an implied half-life of about 2 hours; Student-$t$ degrees of freedom 5.9. Across the 13 walk-forward refits $\alpha$ ranges from 0.025 to 0.051 (`mcsgarch_params.csv`).
 
-**Caveats.** Minute volume does not exist for the index before 2026, so the volume feature is constant and the "order-flow" feature `ofi15` reduces to a price-based measure (the signed size of recent returns), not true order flow. The GEX features are built from end-of-day chains only.
+**Caveats.** Minute volume does not exist for the index before 2026, so the volume feature is constant and the "order-flow" feature `ofi15` reduces to a price-based measure (the signed size of recent returns), not true order flow; its scale constant is the median squared return over the whole sample, a single number but technically look-ahead (being fixed in the model study). The GEX features are built from end-of-day chains only. The regime label is a LightGBM feature, so in the first block after each rule change the model has not seen that label. The risk-free rate is fixed at 6.5%; gamma barely depends on it and forwards come from put-call parity. The Diebold-Mariano p-values use the normal distribution after the small-sample correction (Student t would change them only in the third decimal for 169 expiry days). Over 84 Diebold-Mariano tests are behind the R1 tables; the Model Confidence Set is the multiple-testing-safe summary.
 
 ---
 
@@ -99,13 +118,13 @@ For each week we take the expiry day's log realized variance minus the average l
 | One weekly per exchange, Thursday (20 Nov 2024 to 31 Aug 2025) | 41 | -11% | -26% to +8% | 0.26 | +10% | 0.65 |
 | Nifty expiry on Tuesday (from 1 Sep 2025) | 61 | +21% | +8% to +38% | 0.005 | +43% | 0.00005 |
 
-(Percentages are $e^{\text{mean}} - 1$ of the log differences.) The Tuesday result does not come from the closing auction: on the 48 Tuesday expiry weeks before 3 August 2026 the whole-day effect is +24% (p = 0.005) and the last-hour effect +42% (p = 0.00004) (`results/closing_auction/r2_tuesday_split.csv`). The Tuesday period differs from the Thursday single-weekly period (Mann-Whitney p = 0.012 for the whole day). Each period bundles several changes (SEBI's November 2024 package also raised contract sizes and added margin on expiry day), so these are descriptive, and three regimes times three measures is nine tests. A fuller event study with Bank Nifty as a comparison index is in progress.
+(Percentages are $e^{\text{mean}} - 1$ of the log differences.) The Tuesday result does not come from the closing auction: on the 48 Tuesday expiry weeks before 3 August 2026 the whole-day effect is +24% (p = 0.005) and the last-hour effect +42% (p = 0.00004) (`results/closing_auction/r2_tuesday_split.csv`). The Tuesday period differs from the Thursday single-weekly period (Mann-Whitney p = 0.012 for the whole day). Each period bundles several changes (SEBI's November 2024 package also raised contract sizes and added margin on expiry day), so these are descriptive. The file holds 18 tests (three measures in three regimes, plus three pairwise regime comparisons per measure); the Thursday multi-weekly whole-day result (p = 0.045) would not survive a correction for that many, while the Tuesday last-hour result (p = 0.00005) would. A fuller event study with Bank Nifty as a comparison index is in progress.
 
 ---
 
 ## R3. Is yesterday's GEX related to today's volatility? (in-sample)
 
-Regression of the log of today's realized variance on yesterday's log realized variance, its 5-day average, the log of yesterday's VIX, an expiry-day dummy, yesterday's net GEX (divided by its 20-day median gross GEX, so it is a share between about -0.3 and +0.6) and GEX times the expiry dummy. Newey-West standard errors with 5 lags, 937 days. File: `results/real_day_level/r3_gex_regressions.csv`. Shown with controls for regime (each regime has its own level and its own expiry effect), because the participant-based GEX drifts upward over the sample (figure `results/pipeline_nse/figures/gex_by_sign_rule.png`).
+Regression of the log of today's realized variance on yesterday's log realized variance, its 5-day average, the log of yesterday's VIX, an expiry-day dummy, yesterday's net GEX (divided by its 20-day median gross GEX; this ratio runs from -0.31 to +0.62 under the US rule but only from -0.10 to +0.10 under the Pro rule and from -0.09 to +0.19 under the Client mirror, so coefficients are not comparable across rules) and GEX times the expiry dummy. Newey-West standard errors with 5 lags, 937 days. File: `results/real_day_level/r3_gex_regressions.csv`. Shown with controls for regime (each regime has its own level and its own expiry effect), because the participant-based GEX drifts upward over the sample (figure `results/pipeline_nse/figures/gex_by_sign_rule.png`).
 
 | Sign rule | GEX on ordinary days (coefficient, p) | Extra GEX effect on expiry days (coefficient, p) | Total effect on expiry days |
 | --- | --- | --- | --- |
@@ -115,7 +134,19 @@ Regression of the log of today's realized variance on yesterday's log realized v
 
 In plain words: on ordinary days, when dealers (by any of the three guesses) held more positive gamma the evening before, the next day was calmer, which is what hedging theory predicts (dealers who are long gamma sell into rallies and buy into dips). On expiry days the sign flips: more positive gamma before expiry goes with a more volatile expiry day. One possible reading is that the gamma of the expiring contract is concentrated near the money and disappears during the day, so hedges are unwound in size. We have not tested that mechanism.
 
-How much to trust this: (1) the sign of dealer positions is not observed, only guessed; the Pro and Client weights come from all index options, not Nifty strikes; (2) it is in-sample, and R1 shows the same information does not improve out-of-sample forecasts; (3) we tried 3 sign rules with and without controls; (4) positioning may respond to expected volatility (reverse causality). With the regime controls, adding GEX raises $R^2$ only from 0.467 to between 0.469 and 0.474.
+**Robustness to how GEX is scaled** (`results/real_day_level/r3_robustness.csv`). The ratio above has a problem: gross gamma peaks the evening before expiry (on average 1.1e12 rupees per 1% move with one trading day to expiry against 3.2e11 with five), and a 20-day median does not remove that weekly swing, so the regressor is mechanically about four times larger on expiry eves, which could feed the expiry interaction. Five variants remove that channel; all keep the regime controls. Holm-adjusted p-values are over all 30 GEX terms in the table.
+
+| Variant | US convention: ordinary / extra on expiry (p) | Pro participant: ordinary / extra on expiry (p, Holm p) | Client mirror: ordinary / extra on expiry (p) |
+| --- | --- | --- | --- |
+| Per standard deviation | -0.040 (0.03) / +0.041 (0.11) | -0.053 (0.03) / +0.126 (0.002, Holm 0.04) | -0.071 (0.01) / +0.110 (0.002) |
+| Sign only (GEX > 0) | +0.017 (0.73) / -0.024 (0.82) | -0.088 (0.04) / +0.332 (0.002, Holm 0.06) | -0.098 (0.50) / +0.131 (0.44) |
+| Net / gross of the same chain | +0.27 (0.35) / +0.23 (0.62) | -3.16 (0.004) / +8.21 (0.001, Holm 0.04) | -0.50 (0.71) / +3.11 (0.09) |
+| Same, plus gross gamma controls | +0.31 (0.27) / +0.23 (0.61) | -3.06 (0.004) / +8.14 (0.001, Holm 0.04) | -1.49 (0.25) / +3.86 (0.03) |
+| Same, before the closing auction | +0.37 (0.23) / +0.32 (0.52) | -3.51 (0.001) / +8.94 (0.0005, Holm 0.02) | -0.69 (0.61) / +3.27 (0.08) |
+
+So the sign flip is robust under the Pro rule: with a scale-free measure, with gross gamma controlled, and without the auction days, and its expiry term survives the Holm correction in four of five variants (the sign-only version gives Holm p = 0.06). Under the US rule it disappears once GEX is scale-free, and under the Client mirror it weakens to borderline. In the Pro sign-only version, an evening with positive Pro GEX goes with about 8% lower variance the next ordinary day and about 28% higher variance the next expiry day ($e^{-0.088} - 1$ and $e^{0.244} - 1$).
+
+How much to trust this: (1) the sign of dealer positions is not observed, only guessed; the Pro and Client weights come from all index options, not Nifty strikes; (2) it is in-sample, and R1 shows the same information does not improve out-of-sample forecasts; (3) we tried 3 sign rules, with and without controls, in six versions of the GEX measure (the Holm column above accounts for the robustness table, not for every version we looked at); (4) positioning may respond to expected volatility (reverse causality). With the regime controls, adding GEX raises $R^2$ only from 0.467 to between 0.469 and 0.474.
 
 ---
 
@@ -127,7 +158,7 @@ On expiry days, does the official close move toward the strike with the largest 
 
 ## R5. End-of-day momentum and dealer gamma
 
-**The question.** In US index futures, the return over most of the day tends to continue in the last 30 minutes ("intraday momentum", Gao, Han, Li and Zhou 2018), and Baltussen, Da, Lammers and Martens (2021) argue that part of the reason is option dealers who are short gamma: they have to buy after a rise and sell after a fall, and much of that trading happens near the close. If that holds in India, the effect should be stronger when dealers were short gamma the evening before.
+**The question.** In US markets the return earlier in the day tends to continue into the last 30 minutes ("intraday momentum": Gao, Han, Li and Zhou 2018 found it for the S&P 500 ETF using the first half hour; Baltussen, Da, Lammers and Martens 2021 used the rest-of-day return in futures markets, the design we copy), and Baltussen et al. argue that part of the reason is option dealers who are short gamma: they have to buy after a rise and sell after a fall, and much of that trading happens near the close. If that holds in India, the effect should be stronger when dealers were short gamma the evening before.
 
 **Setup.** For each day, the "rest of day" return runs from the previous day's last 1-minute close to the 14:59 bar close (so it includes the overnight gap), and the "last 30 minutes" return runs from 14:59 to 15:29. Both are from the validated Nifty 1-minute bars and are in basis points. We regress the last-30-minute return on the rest-of-day return, its product with an indicator for "GEX was negative at the previous close", and that indicator. Newey-West standard errors with 5 lags. 932 days, 198 of them expiry days. Files: `results/momentum_gex/regressions.csv`, `gamma_states.csv`, `stability.csv` and `results/momentum_gex_stdout.txt`.
 
@@ -141,10 +172,10 @@ On expiry days, does the official close move toward the strike with the largest 
 | Pro participant | 463 | -0.068 (0.0002) | -0.069 (0.0006) | -0.050 (0.003) |
 | Mirror of Client | 38 | -0.072 (0.00003) | -0.069 (0.001) | +0.003 (0.95) |
 
-In plain words: under the Pro rule, after a negative-GEX evening, a 100 bp move over the day is followed by about a 5.8 bp move the other way in the last 30 minutes; after a positive-GEX evening there is essentially no follow-through either way (slope +0.011, p = 0.29). The Pro result has the same sign in all three expiry regimes and in both halves of the sample (`stability.csv`; p between 0.0005 and 0.17 in the regimes, 0.03 and 0.01 in the halves). The Client-mirror result disappears once VIX and the size of the day's move are controlled for: it rests on only 38 days, most of them volatile ones, so it is better read as "big, volatile days reverse more" than as a gamma effect.
+In plain words: under the Pro rule, after a negative-GEX evening, a 100 bp move over the day is followed by about a 5.8 bp move the other way in the last 30 minutes; after a positive-GEX evening there is essentially no follow-through either way (slope +0.011, p = 0.29). The Pro result has the same sign in all three expiry regimes and in both halves of the sample (`stability.csv`; p between 0.0005 and 0.17 in the regimes, 0.03 and 0.01 in the halves). Across all 36 GEX interaction tests in `regressions.csv` (three rules, four specifications, three day subsets), the Pro result keeps a Holm-adjusted p of 0.007 (plain), 0.020 (regime slopes) and 0.078 (VIX and size controls); Benjamini-Hochberg adjusted 0.003, 0.004 and 0.010. The Client-mirror result disappears once VIX and the size of the day's move are controlled for: it rests on only 38 days, most of them volatile ones, so it is better read as "big, volatile days reverse more" than as a gamma effect.
 
 **Why this is puzzling.** Hedging theory says dealers who are long gamma trade against the market (which produces reversal) and dealers who are short gamma trade with it (momentum). If the Pro-based sign were right, negative GEX should mean momentum, but we see the strongest reversal there. If instead the Pro sign were backwards, R5 would fit the theory, but then R3's ordinary-day result (higher Pro GEX, calmer next day) would go against it. Both cannot hold under one simple story. Three readings we have not yet separated: (a) the Pro category's net option position is not a good proxy for who hedges Nifty options (it pools all index options and includes proprietary traders who may not delta-hedge at all); (b) negative Pro GEX picks out market conditions (for example, heavy retail call buying) in which the close reverses for reasons that have nothing to do with hedging; (c) chance, since we tried three rules and several specifications. The falsification tests planned next (placebo GEX dates, shuffled GEX, an out-of-sample check on later data) are designed to tell these apart.
 
 **Closing auction.** From 3 August 2026 the 15:29 bar is the auction price after 13 frozen minutes, which changes what the last-30-minute return means. Without those 63 days the results are the same: overall slope -0.030 (p = 0.017), Pro interaction -0.072 (p = 0.0001) and -0.053 (p = 0.001) with controls (`results/closing_auction/r5_without_auction.csv`).
 
-**Caveats.** Before costs, not a trading result: the average "follow the day's direction" payoff on negative-Pro-GEX days is -2.1 bp per day (t = -2.3), smaller than a typical round-trip cost in Nifty futures plus slippage. The 15:29 bar close is the last trade, not NSE's official close, which is a 30-minute average.
+**Caveats.** Before costs, not a trading result: the average "follow the day's direction" payoff on negative-Pro-GEX days is -2.1 bp per day (t = -2.3), smaller than a typical round-trip cost in Nifty futures plus slippage. Before 3 August 2026 the 15:29 bar close is the last trade, not NSE's official close (then a 30-minute average); from that date it is the auction price and equals the official close.
