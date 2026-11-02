@@ -103,7 +103,7 @@ def download_day(d: pd.Timestamp, out: Path, symbols: set[str], indices: set[str
         else:
             with zipfile.ZipFile(io.BytesIO(content)) as z:
                 raw = z.read(z.namelist()[0])
-            filter_bhavcopy(raw, symbols).to_csv(bfile, index=False, compression="gzip")
+            filter_bhavcopy(raw, symbols).to_csv(bfile, index=False, compression={"method": "gzip", "mtime": 0})
         time.sleep(pause)
     pfile = out / "participant_oi" / f"fao_participant_oi_{d:%d%m%Y}.csv"
     if not pfile.exists():

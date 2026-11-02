@@ -7,7 +7,9 @@ before the market opens (the commit time is the proof), using only files
 that existed at the previous close, and then scored mechanically.
 
     python experiments/live_dry_run.py freeze --day 2026-11-03     # before 09:15 IST
-    python experiments/live_dry_run.py score  --day 2026-11-03     # after NSE publishes the day's files
+    python scripts/download_nse.py --start 2026-11-03 --end 2026-11-03 --out data/live   # after the close
+    python scripts/fetch_minute_bars.py --out data/live
+    python experiments/live_dry_run.py score  --day 2026-11-03
 
 What is frozen (all from data up to the previous trading day's close):
 
@@ -73,8 +75,8 @@ def minute_rv(bars: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
-def official_closes() -> pd.Series:
-    idx = pd.read_csv(RAW / "index_daily.csv", parse_dates=["date"])
+def official_closes(raw: Path = RAW) -> pd.Series:
+    idx = pd.read_csv(raw / "index_daily.csv", parse_dates=["date"])
     return idx[idx["index"].str.upper() == "NIFTY 50"].set_index("date")["close"].sort_index()
 
 
@@ -280,18 +282,19 @@ def render_forecast(fc: dict) -> str:
     return "\n".join(L)
 
 
-def score(day: pd.Timestamp) -> None:
+def score(day: pd.Timestamp, raw: Path) -> None:
+    """Score with the day's files from `raw` (by default data/live, so data/raw stays as in data/MANIFEST.csv)."""
     out = OUT / f"{day:%Y-%m-%d}"
     fc = json.loads((out / "forecast.json").read_text())
-    bars = pd.read_csv(RAW / "nifty_1min.csv", parse_dates=["timestamp"])
+    bars = pd.read_csv(raw / "nifty_1min.csv", parse_dates=["timestamp"])
     bars = bars[(bars["timestamp"] >= day - pd.Timedelta(days=10)) & (bars["timestamp"] < day + pd.Timedelta(days=1))]
     rv = minute_rv(bars)
     if day not in rv.index:
-        raise SystemExit(f"No minute bars for {day.date()} yet; run scripts/fetch_minute_bars.py first.")
+        raise SystemExit(f"No minute bars for {day.date()} yet; run scripts/fetch_minute_bars.py --out {raw} first.")
     x = rv.loc[day]
-    off = official_closes()
+    off = official_closes(raw)
     if day not in off.index:
-        raise SystemExit(f"No official close for {day.date()} yet; run scripts/download_nse.py for that day first.")
+        raise SystemExit(f"No official close for {day.date()} yet; run scripts/download_nse.py --start {day.date()} --end {day.date()} --out {raw} first.")
     close, prev_close = float(off.loc[day]), fc["previous_official_close"]
     prev_bar = rv.loc[rv.index < day, "p_1529"].iloc[-1]
 
@@ -344,9 +347,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=["freeze", "score"])
     ap.add_argument("--day", required=True)
+    ap.add_argument("--live-raw", default="data/live", help="score mode: folder with the day's NSE files and fresh minute bars")
     a = ap.parse_args()
     day = pd.Timestamp(a.day).normalize()
-    freeze(day) if a.mode == "freeze" else score(day)
+    freeze(day) if a.mode == "freeze" else score(day, Path(a.live_raw))
 
 
 if __name__ == "__main__":
