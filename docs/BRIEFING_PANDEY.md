@@ -34,7 +34,7 @@ Full log of all 24 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 ## Still running or next (as of 3 November, early morning UTC)
 
 * A stronger forecasting study (option-implied features, more frequent model refits), to be merged and the whole pipeline rerun with the bug fixes.
-* A power study calibrated on the real data (how big an effect each test could have seen).
+* Done: a power study calibrated on the real data ([POWER_REAL.md](POWER_REAL.md)). Our tests could only see effects about as large as the ones we found; effects half that size would need 5 to 11 more years of data. It also showed that the "+11% before November 2024" test is too optimistic, so that result is weak.
 * Done: connectedness by gamma regime, a new question for the paper's connectedness design. The pre-stated test is borderline (p = 0.044) and disappears once market volatility (VIX) is controlled ([CONNECTEDNESS_GAMMA.md](CONNECTEDNESS_GAMMA.md)).
 * Done: BSE's Sensex expiry as a hidden confounder. BSE's servers are blocked, so the Sensex dates are reported, not verified. The pre-stated test is not significant. Leaving Sensex expiry days out of the comparison makes the NSE expiry premia slightly larger, so our results were understated, not overstated ([SENSEX_CONFOUND.md](SENSEX_CONFOUND.md)).
 * Done since the first draft of this briefing: a second person re-typed all 223 numbers we took from the paper, blind; 222 matched and the one difference is a slip in the paper itself ([REKEY_CHECK.md](REKEY_CHECK.md)). The final-half-hour gamma test came out null.
