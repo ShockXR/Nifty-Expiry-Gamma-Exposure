@@ -1,0 +1,55 @@
+model,comparison,qlike_vs_mcsgarch_pct,abs_qlike_change_pct,dm_p_two_sided,change_pct,p_one_sided
+lgbm_base,seed 0,-0.8253048162922272,,,,
+lgbm_base,seed 1,-0.4482448881607648,,,,
+lgbm_base,seed 2,-1.0042659083212557,,,,
+lgbm_base,seed 0 vs seed 1,,0.3801977182112948,0.6623165492249043,,
+lgbm_base,seed 0 vs seed 2,,0.1804503575206673,0.2855045607524227,,
+lgbm_base,seed 1 vs seed 2,,0.5585245780306392,0.48785411072081314,,
+hybrid_base,seed 0,-7.764395450682193,,,,
+hybrid_base,seed 1,-8.038951778388592,,,,
+hybrid_base,seed 2,-7.9991501087166235,,,,
+hybrid_base,seed 0 vs seed 1,,0.2976684860991896,0.1798205069813001,,
+hybrid_base,seed 0 vs seed 2,,0.2545163108991222,0.17933126290005738,,
+hybrid_base,seed 1 vs seed 2,,0.04328100912469601,0.8387627379923359,,
+hybrid_gex_participant,seed 0,-8.661345722652158,,,,
+hybrid_gex_participant,seed 1,-8.132314305863664,,,,
+hybrid_gex_participant,seed 2,-8.384506473099474,,,,
+hybrid_gex_participant,seed 0 vs seed 1,,0.5791977350378952,0.02765477724625931,,
+hybrid_gex_participant,seed 0 vs seed 2,,0.3030910097624906,0.3314333659617389,,
+hybrid_gex_participant,seed 1 vs seed 2,,0.27451673058953574,0.2722020104916299,,
+hybrid_gex_us,seed 0,-7.669589620733186,,,,
+hybrid_gex_us,seed 1,-7.7759626721328186,,,,
+hybrid_gex_us,seed 2,-7.345719439448439,,,,
+hybrid_gex_us,seed 0 vs seed 1,,0.11520911795224187,0.6638734686696255,,
+hybrid_gex_us,seed 0 vs seed 2,,0.35077303345061317,0.28716211246689344,,
+hybrid_gex_us,seed 1 vs seed 2,,0.46651962454735685,0.13904984878885343,,
+hybridiv_base,seed 0,-8.700006041574637,,,,
+hybridiv_base,seed 1,-8.377539348383834,,,,
+hybridiv_base,seed 2,-8.536036182790108,,,,
+hybridiv_base,seed 0 vs seed 1,,0.3531946489915949,0.19115529202458909,,
+hybridiv_base,seed 0 vs seed 2,,0.17959459981913284,0.42897943403322053,,
+hybridiv_base,seed 1 vs seed 2,,0.17298906106543166,0.42941578458707885,,
+hybridiv_gex_participant,seed 0,-8.6109493334528,,,,
+hybridiv_gex_participant,seed 1,-8.449888345409995,,,,
+hybridiv_gex_participant,seed 2,-8.21107660206234,,,,
+hybridiv_gex_participant,seed 0 vs seed 1,,0.17623663542634116,0.4163045480207377,,
+hybridiv_gex_participant,seed 0 vs seed 2,,0.4375499345643519,0.07892949171472899,,
+hybridiv_gex_participant,seed 1 vs seed 2,,0.2608535795659783,0.1835151707552905,,
+hybridiv_gex_us,seed 0,-8.01825743853193,,,,
+hybridiv_gex_us,seed 1,-8.276152492352917,,,,
+hybridiv_gex_us,seed 2,-8.368555287340529,,,,
+hybridiv_gex_us,seed 0 vs seed 1,,0.28037635147936113,0.27395500821671,,
+hybridiv_gex_us,seed 0 vs seed 2,,0.3808341080019373,0.33127926970378213,,
+hybridiv_gex_us,seed 1 vs seed 2,,0.10074020824291097,0.8531947664668024,,
+hybrid_gex_participant vs hybrid_base,"GEX ablation, seed 0",,,,-0.97245556783917,0.007375595669205076
+hybrid_gex_participant vs hybrid_base,"GEX ablation, seed 1",,,,-0.10152399225603626,0.36399166096372826
+hybrid_gex_participant vs hybrid_base,"GEX ablation, seed 2",,,,-0.41886174403630294,0.05924519201322468
+hybrid_gex_us vs hybrid_base,"GEX ablation, seed 0",,,,0.1027865870367961,0.6152104661971225
+hybrid_gex_us vs hybrid_base,"GEX ablation, seed 1",,,,0.2859788044412115,0.8272222673238436
+hybrid_gex_us vs hybrid_base,"GEX ablation, seed 2",,,,0.7102441662662162,0.9811121662164278
+hybridiv_gex_participant vs hybridiv_base,"GEX ablation, seed 0",,,,0.0975429507283243,0.630735457839452
+hybridiv_gex_participant vs hybridiv_base,"GEX ablation, seed 1",,,,-0.07896425888545,0.36593374105863785
+hybridiv_gex_participant vs hybridiv_base,"GEX ablation, seed 2",,,,0.35528700830984583,0.8912986198928102
+hybridiv_gex_us vs hybridiv_base,"GEX ablation, seed 0",,,,0.7467126485825926,0.9330803519517178
+hybridiv_gex_us vs hybridiv_base,"GEX ablation, seed 1",,,,0.11065720709730886,0.5966338485183891
+hybridiv_gex_us vs hybridiv_base,"GEX ablation, seed 2",,,,0.18311134621749048,0.7407362092303368

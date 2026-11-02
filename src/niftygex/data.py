@@ -46,18 +46,33 @@ def _clean_cols(df: pd.DataFrame) -> pd.DataFrame:
     return df.loc[:, [c for c in df.columns if c and not c.startswith("Unnamed")]]
 
 
-def load_bhavcopy(path, symbol: str = "NIFTY") -> pd.DataFrame:
-    """Read one F&O bhavcopy (legacy or UDiFF) and return Nifty index options."""
+ALL_SCHEMA = OPTION_SCHEMA + ["instrument", "value"]
+
+
+def load_bhavcopy_all(path, symbols=("NIFTY", "BANKNIFTY")) -> pd.DataFrame:
+    """Read one F&O bhavcopy (legacy or UDiFF): index options AND index futures.
+
+    Returns the tidy schema plus ``instrument`` ("OPT" or "FUT") and
+    ``value`` (traded value in rupees). Checked on real files around the
+    July 2024 layout switch: futures traded value and contract counts are on
+    the same scale in both layouts (legacy VAL_INLAKH is in lakh rupees,
+    UDiFF TtlTrfVal in rupees; CONTRACTS and TtlTradgVol are both contracts).
+    """
     df = _clean_cols(pd.read_csv(path))
+    syms = set(symbols)
     if "INSTRUMENT" in df.columns:
-        df = df[(df["INSTRUMENT"].str.strip() == "OPTIDX") & (df["SYMBOL"].str.strip() == symbol)]
+        inst = df["INSTRUMENT"].astype(str).str.strip()
+        sym = df["SYMBOL"].astype(str).str.strip()
+        df = df[inst.isin(["OPTIDX", "FUTIDX"]) & sym.isin(syms)]
+        inst = df["INSTRUMENT"].astype(str).str.strip()
+        opt_typ = df["OPTION_TYP"].astype(str).str.strip()
         out = pd.DataFrame(
             {
                 "date": pd.to_datetime(df["TIMESTAMP"], format="mixed", dayfirst=True),
-                "symbol": df["SYMBOL"].str.strip(),
+                "symbol": df["SYMBOL"].astype(str).str.strip(),
                 "expiry": pd.to_datetime(df["EXPIRY_DT"], format="mixed", dayfirst=True),
                 "strike": df["STRIKE_PR"].astype(float),
-                "is_call": df["OPTION_TYP"].str.strip().eq("CE"),
+                "is_call": opt_typ.eq("CE"),
                 "close": df["CLOSE"].astype(float),
                 "settle": df["SETTLE_PR"].astype(float),
                 "oi": df["OPEN_INT"].astype(float),
@@ -65,17 +80,22 @@ def load_bhavcopy(path, symbol: str = "NIFTY") -> pd.DataFrame:
                 "volume": df["CONTRACTS"].astype(float),
                 "underlying": np.nan,
                 "lot_size": np.nan,
+                "instrument": np.where(inst.eq("OPTIDX"), "OPT", "FUT"),
+                "value": df["VAL_INLAKH"].astype(float) * 1e5 if "VAL_INLAKH" in df else np.nan,
             }
         )
     elif "FinInstrmTp" in df.columns:
-        df = df[(df["FinInstrmTp"].str.strip() == "IDO") & (df["TckrSymb"].str.strip() == symbol)]
+        inst = df["FinInstrmTp"].astype(str).str.strip()
+        sym = df["TckrSymb"].astype(str).str.strip()
+        df = df[inst.isin(["IDO", "IDF"]) & sym.isin(syms)]
+        inst = df["FinInstrmTp"].astype(str).str.strip()
         out = pd.DataFrame(
             {
                 "date": pd.to_datetime(df["TradDt"]),
-                "symbol": df["TckrSymb"].str.strip(),
+                "symbol": df["TckrSymb"].astype(str).str.strip(),
                 "expiry": pd.to_datetime(df["XpryDt"]),
-                "strike": df["StrkPric"].astype(float),
-                "is_call": df["OptnTp"].str.strip().eq("CE"),
+                "strike": pd.to_numeric(df["StrkPric"], errors="coerce").astype(float),
+                "is_call": df["OptnTp"].astype(str).str.strip().eq("CE"),
                 "close": df["ClsPric"].astype(float),
                 "settle": df["SttlmPric"].astype(float),
                 "oi": df["OpnIntrst"].astype(float),
@@ -83,14 +103,22 @@ def load_bhavcopy(path, symbol: str = "NIFTY") -> pd.DataFrame:
                 "volume": df["TtlTradgVol"].astype(float),
                 "underlying": df["UndrlygPric"].astype(float) if "UndrlygPric" in df else np.nan,
                 "lot_size": df["NewBrdLotQty"].astype(float) if "NewBrdLotQty" in df else np.nan,
+                "instrument": np.where(inst.eq("IDO"), "OPT", "FUT"),
+                "value": df["TtlTrfVal"].astype(float) if "TtlTrfVal" in df else np.nan,
             }
         )
     else:
         raise ValueError(f"{path}: unrecognised bhavcopy layout")
-    # UDiFF files are not ordered by strike. Sort, because later steps (filling missing implied
-    # vols from neighbouring strikes) assume strikes are in order within each expiry and side.
-    out = out.sort_values(["expiry", "is_call", "strike"], kind="stable")
-    return out[OPTION_SCHEMA].reset_index(drop=True)
+    # UDiFF files are not ordered by strike (found on real files): sort so that any
+    # neighbour-based step (IV gap filling, interpolation) sees strikes in order.
+    out = out.sort_values(["symbol", "instrument", "expiry", "is_call", "strike"], kind="stable")
+    return out[ALL_SCHEMA].reset_index(drop=True)
+
+
+def load_bhavcopy(path, symbol: str = "NIFTY") -> pd.DataFrame:
+    """Read one F&O bhavcopy (legacy or UDiFF) and return Nifty index options."""
+    out = load_bhavcopy_all(path, symbols=(symbol,))
+    return out[out["instrument"] == "OPT"][OPTION_SCHEMA].reset_index(drop=True)
 
 
 def bhavcopy_files(directory) -> list:
@@ -353,6 +381,8 @@ def build_market_from_nse(
         grid["volume"] = np.ones_like(grid["close"])
     # bhavcopy, keyed by trade date
     bhav = {}
+    other_bhav = {}  # other index (BANKNIFTY) options: only their expiry dates are kept
+    fut_rows = {}
     lo, hi = days.min() - pd.Timedelta(days=10), days.max() + pd.Timedelta(days=10)
     for f in bhavcopy_files(bhavcopy_dir):
         stamp = "".join(ch for ch in Path(f).name if ch.isdigit())[-8:]
@@ -362,9 +392,20 @@ def build_market_from_nse(
                 continue
         except ValueError:
             pass
-        df = load_bhavcopy(f, symbol)
+        full = load_bhavcopy_all(f, symbols=(symbol, "BANKNIFTY"))
+        df = full[(full["instrument"] == "OPT") & (full["symbol"] == symbol)][OPTION_SCHEMA].reset_index(drop=True)
         if len(df):
-            bhav[pd.Timestamp(df["date"].iloc[0]).normalize()] = df
+            dkey = pd.Timestamp(df["date"].iloc[0]).normalize()
+            bhav[dkey] = df
+            other = full[(full["instrument"] == "OPT") & (full["symbol"] == "BANKNIFTY")]
+            if len(other):
+                other_bhav[dkey] = other[["date", "expiry"]]
+            fu = full[(full["instrument"] == "FUT") & (full["symbol"] == symbol)].sort_values("expiry")
+            if len(fu):
+                fut_rows[dkey] = {"fut_value": float(fu["value"].sum()), "fut_oi": float(fu["oi"].sum()),
+                                  "fut_contracts": float(fu["volume"].sum()),
+                                  "fut_near_settle": float(fu["settle"].iloc[0]),
+                                  "fut_near_expiry": fu["expiry"].iloc[0]}
     expiries = actual_expiries(bhav) if use_file_expiries else None
     monthly = None
     if use_file_expiries:
@@ -455,6 +496,21 @@ def build_market_from_nse(
         vix = np.where(np.isfinite(vix), vix, np.sqrt(rv * 252))
 
     lots = np.asarray(lot_used, float)
+    # Slim copy of every NIFTY option series published each day (all expiries), for
+    # option-implied features (term structure, skew, put/call ratios). Keyed by publish date.
+    option_tables = {}
+    for d in days:
+        df = bhav.get(d)
+        if df is None:
+            continue
+        keep_cols = ["expiry", "strike", "is_call", "settle", "close", "oi", "volume"]
+        sub = df[keep_cols].copy()
+        # same holiday mapping as the chains: a contract listed for a holiday expires the day before
+        sub["expiry"] = pd.to_datetime(sub["expiry"]).dt.normalize().map(lambda e: eff.get(e, e))
+        sub = sub[sub["expiry"] > d]
+        option_tables[d] = sub.reset_index(drop=True)
+    futures = pd.DataFrame.from_dict(fut_rows, orient="index").reindex(days) if fut_rows else None
+    other_expiries = actual_expiries(other_bhav) if other_bhav else pd.DatetimeIndex([])
     return {
         "source": "nse",
         "days": days,
@@ -468,5 +524,9 @@ def build_market_from_nse(
         "lot_size": 1.0 if oi_unit == "keep_units" else (float(np.nanmedian(lots)) if np.isfinite(lots).any() else 75.0),
         "r": r,
         "missing_bhavcopy_days": [c.attrs["date"] for c in chains if c.attrs.get("missing")],
+        "option_tables": option_tables,
+        "futures": futures,
+        "other_index_expiries": other_expiries,
+        "trading_days_all": pd.DatetimeIndex(sorted(bhav)),
         "expiry_source": "bhavcopy" if use_file_expiries else "weekday rule",
     }

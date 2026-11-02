@@ -391,13 +391,20 @@ class McsGarch:
         q2 = filt["q2"]
         T, M = S.shape
         h = np.asarray(h, float)
-        hz = np.broadcast_to(np.asarray(horizon, int), np.shape(anchors_t))
-        out = np.empty(len(anchors_t))
-        for n, (t, i, hn) in enumerate(zip(np.asarray(anchors_t), np.asarray(anchors_i), hz)):
+        at = np.asarray(anchors_t, int)
+        ai = np.asarray(anchors_i, int)
+        hz = np.broadcast_to(np.asarray(horizon, int), at.shape)
+        out = np.empty(len(at))
+        # Vectorised over days: anchors that share (minute, horizon) share the
+        # weights persist**k, so each group is two matrix-vector products.
+        keys = ai.astype(np.int64) * (M + 1) + hz
+        for key in np.unique(keys):
+            sel = np.flatnonzero(keys == key)
+            i, hn = int(ai[sel[0]]), int(hz[sel[0]])
             j = np.arange(i, min(i + hn, M))
             k = j - i
+            St = S[at[sel]][:, j]
             # q2[t, i] is known at the end of minute i - 1.
-            q_next = q2[t, i]
-            eq = qbar + persist**k * (q_next - qbar)
-            out[n] = h[t] * np.sum(S[t, j] * eq)
+            q_next = q2[at[sel], i]
+            out[sel] = h[at[sel]] * (qbar * St.sum(axis=1) + (St @ persist**k) * (q_next - qbar))
         return out
