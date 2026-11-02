@@ -1,0 +1,5 @@
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute Nifty bars validated against NSE daily values] 942 days loaded
+next15: 19800 test anchors
+next30: 19008 test anchors
+last_hour: 792 test anchors
+done in 503s -> results/pipeline_nse
