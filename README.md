@@ -94,7 +94,7 @@ python experiments/pinning_study.py
 ├── src/niftygex/      package code (see table above)
 ├── scripts/           run_pipeline.py (one command, all outputs), download_nse.py, fetch_minute_bars.py, validation checks
 ├── experiments/       simulation experiments (E1 to E7) and real-data studies (real_day_level, momentum_gex, replicate_paper, pinning_study)
-├── results/           outputs; real-data folders are pipeline_nse, real_day_level, momentum_gex, replication_nse, pinning, data_validation
+├── results/           outputs; real-data folders are pipeline_nse_v2 (pipeline_nse is the archived first run), real_day_level, momentum_gex, replication_nse, pinning, data_validation
 ├── notebooks/         real-data demo notebook
 ├── docs/              deep dive, literature review, math notes, experiment report, data guide
 ├── alternatives/      directions deliberately kept out of the main package

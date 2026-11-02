@@ -25,7 +25,7 @@ We downloaded four years of real NSE data, rebuilt the professor's paper on it, 
 * NSE's closing auction from 3 August 2026 freezes the index from 15:16 to 15:28. It inflated one headline result, which was corrected.
 * Bugs found and fixed with tests: unsorted strikes in NSE's new file format, a holiday-shifted expiry in June 2023, two edge cases in the volatility model, a stale VIX lag and a missing-value coding in the end-of-day study (numbers changed only in the fourth decimal).
 
-Full log of all 24 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
+Full log of all 33 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 
 ## Decisions taken
 
