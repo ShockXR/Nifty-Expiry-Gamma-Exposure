@@ -61,7 +61,8 @@ class TradingDayCounter:
         if e64 <= self.last:
             return int(np.searchsorted(self.days, e64, "right") - np.searchsorted(self.days, d64, "right"))
         inside = int(len(self.days) - np.searchsorted(self.days, d64, "right"))
-        return inside + int(np.busday_count(self.last + 1, e64 + 1))
+        one = np.timedelta64(1, "D")
+        return inside + int(np.busday_count(self.last + one, e64 + one))
 
 
 def _forward(sub: pd.DataFrame, T: float, r: float) -> float:

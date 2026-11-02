@@ -106,12 +106,14 @@ def scoreboard(pred: pd.DataFrame, models: list[str], groups: dict | None = None
 REGIMES = ["multi_weekly", "single_weekly_thu", "single_weekly_tue"]
 
 
-def subgroups(pred: pd.DataFrame, holdout_start=None) -> dict:
+def subgroups(pred: pd.DataFrame, holdout_start=None, auction_start=None) -> dict:
     """Boolean masks for the standard breakdowns.
 
     all, expiry, non_expiry, day_before_expiry; each regime (codes 0, 1, 2 as
     in features.build_dataset) and regime x expiry; and, if ``holdout_start``
-    is given, the development and hold-out periods (each also by expiry).
+    is given, the development and hold-out periods (each also by expiry); and,
+    if ``auction_start`` is given, the days before and after NSE's closing
+    auction began (each also by expiry).
     """
     e = pred["is_expiry"].to_numpy(bool)
     g = {"all": np.ones(len(pred), bool), "expiry": e, "non_expiry": ~e}
@@ -124,13 +126,26 @@ def subgroups(pred: pd.DataFrame, holdout_start=None) -> dict:
                 g[f"{name}"] = rc == k
                 g[f"{name}_expiry"] = (rc == k) & e
                 g[f"{name}_non_expiry"] = (rc == k) & ~e
+    dates = pd.to_datetime(pred["date"]).to_numpy()
+    if auction_start is not None:
+        pre = dates < np.datetime64(pd.Timestamp(auction_start))
+        if pre.any() and (~pre).any():
+            g["pre_auction"] = pre
+            g["pre_auction_expiry"] = pre & e
+            g["pre_auction_non_expiry"] = pre & ~e
+            g["auction_period"] = ~pre
+            g["auction_period_expiry"] = ~pre & e
     if holdout_start is not None:
-        dates = pd.to_datetime(pred["date"]).to_numpy()
         ho = dates >= np.datetime64(pd.Timestamp(holdout_start))
         for name, m in (("development", ~ho), ("holdout", ho)):
             if m.any():
                 g[name] = m
                 g[f"{name}_expiry"] = m & e
+        if auction_start is not None and ho.any():
+            hp = ho & (dates < np.datetime64(pd.Timestamp(auction_start)))
+            if hp.any() and hp.sum() < ho.sum():
+                g["holdout_pre_auction"] = hp
+                g["holdout_pre_auction_expiry"] = hp & e
     return g
 
 

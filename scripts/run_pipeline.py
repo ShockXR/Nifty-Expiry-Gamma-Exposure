@@ -39,13 +39,17 @@ import pandas as pd  # noqa: E402
 from niftygex import plots  # noqa: E402
 from niftygex.evaluation import (ablation_table, daily_losses, diebold_mariano, holm,  # noqa: E402
                                  model_confidence_set, scoreboard, subgroups)
+from niftygex.features import CLOSING_AUCTION_START as AUCTION_START  # noqa: E402
 from niftygex.features import GEX_SETS, build_dataset, build_gex_panel  # noqa: E402
 from niftygex.forecast import WalkForwardConfig, run_walkforward  # noqa: E402
 from niftygex.implied import build_implied_panel  # noqa: E402
 from niftygex.volatility import McsGarch, daily_egarch_variance  # noqa: E402
 
 TARGETS = {"next15": dict(horizon=15, step=15), "next30": dict(horizon=30, step=15),
-           "last_hour": dict(horizon=60, anchors=[315])}
+           # last hour: forecast only the 14:30 window, but train on every 60-minute window of the
+           # day (anchors every 15 minutes), which cuts estimator noise (see MODEL_ITERATIONS_REAL.md)
+           "last_hour": dict(horizon=60, step=15)}
+EVAL_MINUTES = {"last_hour": [315]}
 SIGN_SETS = ["gross", "us", "participant", "client", "placebo"]
 SIGNED = ["us", "participant", "client"]
 # Chosen on the development window only (see docs/MODEL_ITERATIONS_REAL.md): the paper-anchored
@@ -102,7 +106,8 @@ def build_models(has_oracle: bool, full: bool = True):
     models = ["naive_last", "naive_prevday", "vix", "implied", "har", "mcsgarch", "mcsgarch_iv",
               "linear_v1", "lgbm_v1", "hybrid_v1", "hybrid_v1gex"]
     sets = list(SIGN_SETS) + (["oracle"] if has_oracle else [])
-    kinds = ("linear", "lgbm", "hybrid", "hybridiv") if full else ("linear", "hybridiv")
+    models += ["lgbm_base", "lgbmt_base"]  # plain LightGBM, default and tuned in-window: base only
+    kinds = ("linear", "hybrid", "hybridiv") if full else ("linear", "hybrid")
     for kind in kinds:
         models.append(f"{kind}_base")
         models += [f"{kind}_gex_{s}" for s in sets]
@@ -144,7 +149,7 @@ def seed_study(m, ds, base_cfg: WalkForwardConfig, seeds, models):
     rows = []
     ref = preds[seeds[0]]
     for mdl in models:
-        L = {s: daily_losses(p.assign(**{mdl: p[mdl]}), [mdl])[mdl] for s, p in preds.items()}
+        L = {s: daily_losses(p, [mdl])[mdl] for s, p in preds.items()}
         q = {s: float(L[s].mean()) for s in seeds}
         for s in seeds:
             rows.append({"model": mdl, "seed": s, "qlike": q[s],
@@ -179,7 +184,9 @@ def main():
     ap.add_argument("--tune", action="store_true", help="tune LightGBM inside each training window")
     ap.add_argument("--tune-every", type=int, default=3)
     ap.add_argument("--n-seeds", type=int, default=1, help="LightGBM: average log forecasts over this many seeds")
-    ap.add_argument("--seed-study", type=int, default=0, help="also rerun LightGBM models with this many seeds")
+    ap.add_argument("--seed-study", type=int, default=0,
+                    help="also rerun some LightGBM models with this many single seeds (noise calibration)")
+    ap.add_argument("--seed-study-targets", nargs="+", default=["next30"])
     ap.add_argument("--lean", action="store_true", help="fewer model families (faster, for tests)")
     ap.add_argument("--min-train", type=int, default=150)
     ap.add_argument("--block", type=int, default=21)
@@ -224,11 +231,12 @@ def main():
     for name in a.targets:
         t1 = time.time()
         ds = build_dataset(m, panel, implied=implied, **TARGETS[name])
+        cfg.eval_minutes = EVAL_MINUTES.get(name)
         pred, info = run_walkforward(m, ds, cfg)
         timing[name] = round(time.time() - t1, 1)
         present = [x for x in models if x in pred]
         pred.to_csv(out / f"forecasts_{name}.csv", index=False)
-        groups = subgroups(pred, holdout_start=holdout)
+        groups = subgroups(pred, holdout_start=holdout, auction_start=AUCTION_START if a.source == "nse" else None)
         sb = scoreboard(pred, present, groups)
         sb.to_csv(out / f"scoreboard_{name}.csv", index=False)
         for g in ("all", "expiry"):
@@ -255,11 +263,13 @@ def main():
         if not abl.empty:
             abl["p_holm_in_family"] = np.nan
             for (fam, grp), idx in abl.groupby(["family", "group"]).groups.items():
-                if "placebo" in fam:
-                    continue
                 keep = [i for i in idx if abl.loc[i, "label"] != "placebo"]
                 abl.loc[keep, "p_holm_in_family"] = holm(abl.loc[keep, "p_one_sided"].to_numpy())
         abl.to_csv(out / f"ablation_{name}.csv", index=False)
+        for kind in ("hybrid", "hybridiv", "linear"):
+            plots.ablation_dots(abl, f"{kind}: base vs base+GEX", out / "figures" / f"ablation_{name}_{kind}.png",
+                                f"{name}: {kind} model, adding each GEX set (REAL DATA)" if a.source == "nse"
+                                else f"{name}: {kind} model, adding each GEX set (synthetic)")
         if info["importance"]:
             imp = pd.concat(info["importance"], axis=1)
             fi = {}
@@ -273,6 +283,8 @@ def main():
                 sub = lc[[c for c in lc.columns if c.split("@")[0] == mdl]]
                 for feat, vals in sub.iterrows():
                     v = vals.dropna()
+                    if v.empty:  # feature not in this model
+                        continue
                     rows.append({"model": mdl, "feature": feat, "mean_coef": v.mean(), "share_positive": (v > 0).mean(),
                                  "folds": len(v), "last_fold_coef": v.iloc[-1] if len(v) else np.nan})
             pd.DataFrame(rows).to_csv(out / f"linear_coefficients_{name}.csv", index=False)
@@ -280,8 +292,9 @@ def main():
         params_all.append(pd.DataFrame(info["mcs_params"]).assign(target=name, daily_component="egarch (paper)"))
         if info["mcs_iv_params"]:
             params_all.append(pd.DataFrame(info["mcs_iv_params"]).assign(target=name, daily_component="implied"))
-        if a.seed_study > 1:
-            lgbm_models = [x for x in ("lgbm_base", "hybrid_base", "hybridiv_base", f"{HEADLINE_KIND}_gex_us") if x in models]
+        if a.seed_study > 1 and name in a.seed_study_targets:
+            lgbm_models = [x for x in ("lgbm_base", "hybrid_base", f"{HEADLINE_KIND}_gex_participant", "hybridiv_base")
+                           if x in models]
             seeds = [a.seed + k for k in range(a.seed_study)]
             seed_study(m, ds, cfg, seeds, lgbm_models).to_csv(out / f"seed_noise_{name}.csv", index=False)
         print(f"{name}: {len(pred)} test anchors, {pred['date'].nunique()} test days ({timing[name]:.0f}s)", flush=True)

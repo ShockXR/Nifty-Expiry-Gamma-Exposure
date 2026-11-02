@@ -19,7 +19,9 @@ Models (simplest first; each must beat the ones above it to earn its place):
     linear_<set>    ridge regression of log variance on a feature set (a
                     well-specified log-HAR with the same information as the
                     tree models); ridge penalty chosen inside the training window
-    lgbm_<set>      LightGBM on log variance
+    lgbm_<set>      LightGBM on log variance (fixed default hyperparameters)
+    lgbmt_<set>     the same, tuned inside each training window (grid of leaves and leaf
+                    sizes, re-tuned every ``tune_every`` blocks)
     hybrid_<set>    mcsGARCH x exp(LightGBM on the log residual)
     hybridiv_<set>  mcsgarch_iv x exp(LightGBM on the log residual)
 
@@ -58,7 +60,7 @@ ALL_MODELS = ["naive_last", "naive_prevday", "vix", "implied", "har", "mcsgarch"
               "linear_base", "lgbm_base", "lgbm_gex", "hybrid_base", "hybrid_gex"]
 
 HAR_COLS = ["log_rv_back_h", "log_rv_back_60", "log_rv_today_pm", "log_rv_d1", "log_rv_w", "log_rv_m", "log_s_window"]
-LEARNED_KINDS = ("lgbm", "hybrid", "hybridiv", "linear")
+LEARNED_KINDS = ("lgbm", "lgbmt", "hybrid", "hybridiv", "linear")
 CATEGORICAL_LEVELS = {"regime": [1, 2], "weekday": [1, 2, 3, 4]}
 
 
@@ -148,6 +150,9 @@ def _ridge_fit_predict(tr: pd.DataFrame, ytr: np.ndarray, te: pd.DataFrame, cols
     Ztr = ((Xtr[keep] - mu) / sd).to_numpy()
     Zte = ((Xte[keep] - mu) / sd).to_numpy()
     Zte = np.nan_to_num(Zte)
+    # A linear model extrapolates without bound: keep every test feature inside the range it
+    # had in the training window (found on a synthetic run where two test days fell far outside).
+    Zte = np.clip(Zte, Ztr.min(axis=0), Ztr.max(axis=0))
 
     def fit(Z, y, lam):
         ym = y.mean()
@@ -324,7 +329,6 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
         te["har"] = np.exp(np.column_stack([np.ones(len(te)), te[HAR_COLS].to_numpy()]) @ b) * _smear_fit(res)
         te["mcsgarch"] = te["mcs"]
 
-        retune = cfg.tune and (b_idx % max(1, cfg.tune_every) == 0)
         for name in cfg.models:
             kind, rest = parse_model(name)
             if kind is None:
@@ -341,11 +345,14 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
                 info["linear_coef"].append(coef.rename(f"{name}@{start}"))
             else:
                 Xtr, Xte = tr[cols].to_numpy(float), te[cols].to_numpy(float)
-                if name not in tuned or retune or not cfg.tune:
-                    tuned[name] = _lgbm_tune(Xtr, ytr, cfg, min_leaf)
+                tune_this = cfg.tune or kind == "lgbmt"
+                retune_this = (b_idx % max(1, cfg.tune_every) == 0) if tune_this else True
+                if name not in tuned or retune_this:
+                    tcfg = WalkForwardConfig(**{**cfg.__dict__, "tune": True}) if tune_this else cfg
+                    tuned[name] = _lgbm_tune(Xtr, ytr, tcfg, min_leaf)
                 hp_t = tuned[name]
                 pred, sm, gain = _lgbm_fit_predict(Xtr, ytr, Xte, cfg, hp_t)
-                hp = {**hp_t["grid"], "iters": hp_t["iters"], "retuned": bool(retune or not cfg.tune)}
+                hp = {**hp_t["grid"], "iters": hp_t["iters"], "retuned": bool(retune_this)}
                 info["importance"].append(pd.Series(gain / max(gain.sum(), 1e-12), index=cols, name=f"{name}@{start}"))
             te[name] = np.exp(pred + base) * sm
             info["hyper"].append({"start": start, "model": name, **hp})

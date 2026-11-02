@@ -74,3 +74,33 @@ def diurnal_curves(s: np.ndarray, s_exp: np.ndarray | None, path, title: str):
     fig.tight_layout()
     fig.savefig(path, dpi=150)
     plt.close(fig)
+
+
+def ablation_dots(abl: pd.DataFrame, family: str, path, title: str, groups=("all", "expiry", "non_expiry")):
+    """Change in QLIKE from adding each GEX set (percent; negative = GEX helps), one row per set.
+
+    Filled markers are one-sided Diebold-Mariano p < 0.05, open markers are not.
+    """
+    d = abl[(abl["family"] == family) & abl["group"].isin(groups)]
+    if d.empty:
+        return
+    labels = list(dict.fromkeys(d["label"]))
+    colors = dict(zip(groups, (BLUE, ORANGE, AQUA)))
+    fig, ax = plt.subplots(figsize=(7, 0.5 * len(labels) + 1.4))
+    for k, g in enumerate(groups):
+        sub = d[d["group"] == g].set_index("label").reindex(labels)
+        y = np.arange(len(labels)) + (k - 1) * 0.22
+        sig = sub["p_one_sided"].to_numpy() < 0.05
+        ax.scatter(sub["change_pct"][sig], y[sig], color=colors[g], s=36, label=f"{g} (p<0.05)", zorder=3)
+        ax.scatter(sub["change_pct"][~sig], y[~sig], facecolors="none", edgecolors=colors[g], s=36, label=g, zorder=3)
+    ax.axvline(0, color=MUTED, linewidth=1)
+    ax.set_yticks(np.arange(len(labels)))
+    ax.set_yticklabels(labels, fontsize=9)
+    ax.invert_yaxis()
+    ax.set_xlabel("QLIKE change from adding the GEX set, % (negative = helps)", color=MUTED, fontsize=9)
+    ax.legend(frameon=False, fontsize=7, ncol=3, loc="lower center", bbox_to_anchor=(0.5, 1.0))
+    ax.set_title(title, loc="left", fontsize=11, color=INK, pad=28)
+    _style(ax)
+    fig.tight_layout()
+    fig.savefig(path, dpi=150)
+    plt.close(fig)

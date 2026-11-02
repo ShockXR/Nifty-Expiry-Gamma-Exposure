@@ -24,6 +24,11 @@ import pandas as pd
 
 from . import gex, greeks, realized
 
+# From 3 Aug 2026 NSE sets the official close in a closing auction: in the 1-minute data the
+# index is frozen from 15:16 to 15:28 and the 15:29 bar jumps to the auction price. This changes
+# the end-of-day windows, so the period is its own regime (a public, ex-ante calendar fact).
+CLOSING_AUCTION_START = pd.Timestamp("2026-08-03")
+
 # Feature sets for the ablation. "gex_oracle" exists only in simulations.
 GEX_LEVEL_FEATURES = ["gross_gex_rel", "atm_gamma_share", "dist_max_oi", "dist_max_pain",
                       "dist_call_wall", "dist_put_wall", "oi_change_rel"]
@@ -211,6 +216,7 @@ def build_dataset(market: dict, panel: pd.DataFrame, horizon: int, step: int = 1
         cal = {
             "weekday": weekday[t], "is_monthly_expiry": bool(is_mexp[t]), "day_before_expiry": bool(tdte[t] == 1),
             "bn_expiry_only": bool(bn_exp[t] and not is_exp[t]),
+            "closing_auction": bool(days[t] >= CLOSING_AUCTION_START),
         }
         sd_day = np.sqrt(impvar_day) if np.isfinite(impvar_day) and impvar_day > 0 else np.nan
         for i in anchors:
@@ -311,6 +317,7 @@ IMPLIED_FEATURES = [
     "skew_near", "smile_near", "skew_m21", "log_pcr_oi_near", "log_pcr_vol_near", "log_pcr_oi_all", "vrp_w",
     "abs_ret_today_sd",
 ]
-CALENDAR_FEATURES = ["weekday", "is_monthly_expiry", "day_before_expiry", "bn_expiry_only", "exp_x_minute"]
+CALENDAR_FEATURES = ["weekday", "is_monthly_expiry", "day_before_expiry", "bn_expiry_only", "exp_x_minute",
+                     "closing_auction"]
 # Version 2 base set: v1 plus option-implied information and calendar structure.
 BASE_FEATURES = BASE_FEATURES_V1 + IMPLIED_FEATURES + CALENDAR_FEATURES

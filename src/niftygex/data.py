@@ -469,8 +469,10 @@ def build_market_from_nse(
         if df is None:
             continue
         keep_cols = ["expiry", "strike", "is_call", "settle", "close", "oi", "volume"]
-        sub = df.loc[df["expiry"] > d, keep_cols].copy()
-        sub["expiry"] = pd.to_datetime(sub["expiry"]).dt.normalize()
+        sub = df[keep_cols].copy()
+        # same holiday mapping as the chains: a contract listed for a holiday expires the day before
+        sub["expiry"] = pd.to_datetime(sub["expiry"]).dt.normalize().map(lambda e: eff.get(e, e))
+        sub = sub[sub["expiry"] > d]
         option_tables[d] = sub.reset_index(drop=True)
     futures = pd.DataFrame.from_dict(fut_rows, orient="index").reindex(days) if fut_rows else None
     other_expiries = actual_expiries(other_bhav) if other_bhav else pd.DatetimeIndex([])
