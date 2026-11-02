@@ -98,18 +98,28 @@ def r3_regressions(dm: pd.DataFrame, panel: pd.DataFrame) -> pd.DataFrame:
     d["exp"] = d["is_expiry"].astype(float)
     scale = d["gross_gex"].rolling(20, min_periods=5).median()
     d["gross_rel_l1"] = (d["gross_gex"] / scale).shift(1)
+    # Regime controls: the participant-based GEX drifts upward over 2023 to 2026 (see the GEX figure),
+    # and expiry-day volatility differs by expiry regime, so without these controls a GEX x expiry
+    # term could just pick up the regime. Each regime gets its own level and its own expiry effect.
+    for reg in REGIMES[1:]:
+        d[f"reg_{reg}"] = (d["regime"] == reg).astype(float)
+        d[f"exp_x_{reg}"] = d[f"reg_{reg}"] * d["exp"]
+    reg_cols = [c for c in d.columns if c.startswith("reg_") or c.startswith("exp_x_")]
     out = []
     specs = {"baseline": []} | {f"gex_{k}": [v] for k, v in RULES.items() if v in d}
-    for name, cols in specs.items():
-        X = d[["y_l1", "y_w", "lvix_l1", "exp"]].copy()
-        for c in cols:
-            X["gex_l1"] = (d[c] / scale).shift(1)
-            X["gex_l1_x_exp"] = X["gex_l1"] * d["exp"]
-        ok = X.notna().all(axis=1) & d["y"].notna()
-        fit = sm.OLS(d.loc[ok, "y"], sm.add_constant(X[ok])).fit(cov_type="HAC", cov_kwds={"maxlags": 5})
-        for k in fit.params.index:
-            out.append({"spec": name, "term": k, "coef": fit.params[k], "se_hac": fit.bse[k], "t": fit.tvalues[k],
-                        "p": fit.pvalues[k], "n_days": int(fit.nobs), "r2": fit.rsquared})
+    for controls in ("none", "regime x expiry"):
+        for name, cols in specs.items():
+            X = d[["y_l1", "y_w", "lvix_l1", "exp"]].copy()
+            if controls != "none":
+                X = X.join(d[reg_cols])
+            for c in cols:
+                X["gex_l1"] = (d[c] / scale).shift(1)
+                X["gex_l1_x_exp"] = X["gex_l1"] * d["exp"]
+            ok = X.notna().all(axis=1) & d["y"].notna()
+            fit = sm.OLS(d.loc[ok, "y"], sm.add_constant(X[ok])).fit(cov_type="HAC", cov_kwds={"maxlags": 5})
+            for k in fit.params.index:
+                out.append({"controls": controls, "spec": name, "term": k, "coef": fit.params[k], "se_hac": fit.bse[k],
+                            "t": fit.tvalues[k], "p": fit.pvalues[k], "n_days": int(fit.nobs), "r2": fit.rsquared})
     return pd.DataFrame(out)
 
 

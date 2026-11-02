@@ -43,4 +43,22 @@ def test_vix_iso_dates_not_read_day_first(tmp_path):
     assert np.allclose(mk["vix"], m["vix"], rtol=1e-6)
     assert mk["lot_size"] == 1.0
     # keep_units leaves OI in shares: contracts times the simulator's lot size
-    assert np.allclose(mk["chains"][3]["oi"].to_numpy(), m["chains"][3]["oi"].to_numpy() * m["lot_size"])
+    key = ["is_call", "strike"]
+    got = mk["chains"][3].sort_values(key)["oi"].to_numpy()
+    want = m["chains"][3].sort_values(key)["oi"].to_numpy() * m["lot_size"]
+    assert np.allclose(got, want)
+
+
+def test_load_bhavcopy_sorts_strikes(tmp_path):
+    from niftygex.data import load_bhavcopy
+    rows = []
+    for k, typ in [(22500, "CE"), (21000, "CE"), (22000, "PE"), (23000, "CE"), (21500, "PE")]:
+        rows.append({"TradDt": "2026-10-26", "FinInstrmTp": "IDO", "TckrSymb": "NIFTY", "XpryDt": "2026-10-27",
+                     "StrkPric": k, "OptnTp": typ, "ClsPric": 1.0, "SttlmPric": 1.0, "UndrlygPric": 22750.0,
+                     "OpnIntrst": 650, "ChngInOpnIntrst": 0, "TtlTradgVol": 1, "NewBrdLotQty": 65})
+    f = tmp_path / "fo_20261026.csv"
+    pd.DataFrame(rows).to_csv(f, index=False)
+    b = load_bhavcopy(f)
+    for is_call in (True, False):
+        k = b.loc[b["is_call"] == is_call, "strike"].to_numpy()
+        assert np.all(np.diff(k) > 0)

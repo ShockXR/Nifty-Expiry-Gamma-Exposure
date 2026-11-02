@@ -1,0 +1,3 @@
+index,bar_file,first_day,last_day,official_days,days_compared,official_days_without_bars,bar_days_not_official,days_under_370_bars,median_bars_per_day,high_within_5bp,low_within_5bp,open_within_5bp,high_median_abs_bp,low_median_abs_bp,close_median_abs_bp,close_p95_abs_bp,worst_high_or_low_bp
+Nifty 50,nifty_1min.csv,2023-01-02,2026-11-02,944,943,1,5,1,375.0,1.0,0.9989395546129375,0.9978791092258749,0.0,0.0,3.831375921108382,15.169657314342722,6.82444373144353
+Nifty Bank,banknifty_1min.csv,2023-01-02,2026-04-22,812,811,1,5,3,375.0,0.9938347718865598,0.9926017262638718,0.998766954377312,0.0,0.0,5.338897437754397,20.75232513499725,23.347059058692608

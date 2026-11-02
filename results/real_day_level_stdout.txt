@@ -1,0 +1,108 @@
+REAL DATA. Nifty 50, days 2023-01-02 to 2026-11-02 (942 days, 200 expiry days).
+Days per regime: multi_weekly 462, single_weekly_tue 288, single_weekly_thu 192
+Expiry weekday counts (0=Mon): {0: 5, 1: 56, 2: 7, 3: 132}
+
+== r2_expiry_effect_by_regime
+      measure                                    regime    weeks  mean_rel  ratio_exp_vs_week  median_rel  ci95_low  ci95_high  share_weeks_expiry_higher  wilcoxon_p_rel_eq_0  mannwhitney_p
+       rv_day                              multi_weekly       98    0.1085             1.1146      0.1144    0.0099     0.2007                     0.5612           4.5463e-02            NaN
+       rv_day                         single_weekly_thu       41   -0.1188             0.8880     -0.1461   -0.3031     0.0735                     0.3902           2.6264e-01            NaN
+       rv_day                         single_weekly_tue       61    0.1917             1.2113      0.1192    0.0786     0.3190                     0.5902           5.1469e-03            NaN
+       rv_day      single_weekly_thu minus multi_weekly 98 vs 41   -0.2272             0.7967         NaN       NaN        NaN                        NaN                  NaN         0.0478
+       rv_day single_weekly_tue minus single_weekly_thu 41 vs 61    0.3105             1.3641         NaN       NaN        NaN                        NaN                  NaN         0.0116
+       rv_day      single_weekly_tue minus multi_weekly 98 vs 61    0.0832             1.0868         NaN       NaN        NaN                        NaN                  NaN         0.3507
+rv_first_hour                              multi_weekly       98    0.0024             1.0024      0.0243   -0.1042     0.1057                     0.5102           9.2237e-01            NaN
+rv_first_hour                         single_weekly_thu       41   -0.1775             0.8374     -0.1554   -0.3602    -0.0071                     0.4634           1.0020e-01            NaN
+rv_first_hour                         single_weekly_tue       61    0.1229             1.1308      0.0469   -0.0403     0.3075                     0.5410           3.5977e-01            NaN
+rv_first_hour      single_weekly_thu minus multi_weekly 98 vs 41   -0.1799             0.8354         NaN       NaN        NaN                        NaN                  NaN         0.1827
+rv_first_hour single_weekly_tue minus single_weekly_thu 41 vs 61    0.3004             1.3503         NaN       NaN        NaN                        NaN                  NaN         0.0634
+rv_first_hour      single_weekly_tue minus multi_weekly 98 vs 61    0.1205             1.1280         NaN       NaN        NaN                        NaN                  NaN         0.3865
+ rv_last_hour                              multi_weekly       98    0.1516             1.1637      0.0898    0.0218     0.2816                     0.6020           5.2799e-02            NaN
+ rv_last_hour                         single_weekly_thu       41    0.0915             1.0958      0.1737   -0.2071     0.3921                     0.5610           6.5348e-01            NaN
+ rv_last_hour                         single_weekly_tue       61    0.3564             1.4282      0.3886    0.1955     0.5112                     0.7213           5.0204e-05            NaN
+ rv_last_hour      single_weekly_thu minus multi_weekly 98 vs 41   -0.0601             0.9417         NaN       NaN        NaN                        NaN                  NaN         0.6895
+ rv_last_hour single_weekly_tue minus single_weekly_thu 41 vs 61    0.2649             1.3033         NaN       NaN        NaN                        NaN                  NaN         0.1028
+ rv_last_hour      single_weekly_tue minus multi_weekly 98 vs 61    0.2048             1.2272         NaN       NaN        NaN                        NaN                  NaN         0.0255
+
+== r3_gex_regressions
+       controls                spec                    term    coef  se_hac        t          p  n_days     r2
+           none            baseline                   const -3.3175  0.3254 -10.1948 2.0925e-24     937 0.4644
+           none            baseline                    y_l1  0.3728  0.0425   8.7779 1.6653e-18     937 0.4644
+           none            baseline                     y_w  0.1121  0.0606   1.8516 6.4086e-02     937 0.4644
+           none            baseline                 lvix_l1  1.0483  0.1595   6.5738 4.9034e-11     937 0.4644
+           none            baseline                     exp  0.1218  0.0432   2.8174 4.8418e-03     937 0.4644
+           none   gex_us_convention                   const -3.3104  0.3218 -10.2872 8.0480e-25     937 0.4660
+           none   gex_us_convention                    y_l1  0.3758  0.0420   8.9428 3.7948e-19     937 0.4660
+           none   gex_us_convention                     y_w  0.1080  0.0599   1.8014 7.1643e-02     937 0.4660
+           none   gex_us_convention                 lvix_l1  1.0430  0.1594   6.5424 6.0556e-11     937 0.4660
+           none   gex_us_convention                     exp  0.0985  0.0518   1.9025 5.7112e-02     937 0.4660
+           none   gex_us_convention                  gex_l1 -0.3662  0.1760  -2.0805 3.7475e-02     937 0.4660
+           none   gex_us_convention            gex_l1_x_exp  0.3189  0.2477   1.2872 1.9804e-01     937 0.4660
+           none gex_participant_pro                   const -3.3075  0.3253 -10.1661 2.8081e-24     937 0.4679
+           none gex_participant_pro                    y_l1  0.3732  0.0424   8.7980 1.3930e-18     937 0.4679
+           none gex_participant_pro                     y_w  0.1151  0.0607   1.8966 5.7876e-02     937 0.4679
+           none gex_participant_pro                 lvix_l1  1.0357  0.1608   6.4419 1.1800e-10     937 0.4679
+           none gex_participant_pro                     exp  0.1318  0.0432   3.0521 2.2726e-03     937 0.4679
+           none gex_participant_pro                  gex_l1 -0.9470  0.8085  -1.1712 2.4151e-01     937 0.4679
+           none gex_participant_pro            gex_l1_x_exp  3.1297  1.1664   2.6832 7.2913e-03     937 0.4679
+           none   gex_client_mirror                   const -3.3204  0.3307 -10.0396 1.0213e-23     937 0.4689
+           none   gex_client_mirror                    y_l1  0.3716  0.0409   9.0966 9.3212e-20     937 0.4689
+           none   gex_client_mirror                     y_w  0.1069  0.0615   1.7395 8.1945e-02     937 0.4689
+           none   gex_client_mirror                 lvix_l1  1.0473  0.1612   6.4980 8.1419e-11     937 0.4689
+           none   gex_client_mirror                     exp -0.0295  0.0727  -0.4052 6.8534e-01     937 0.4689
+           none   gex_client_mirror                  gex_l1 -1.7036  0.9020  -1.8888 5.8925e-02     937 0.4689
+           none   gex_client_mirror            gex_l1_x_exp  3.0875  1.1276   2.7381 6.1802e-03     937 0.4689
+regime x expiry            baseline                   const -3.3678  0.3249 -10.3661 3.5371e-25     937 0.4672
+regime x expiry            baseline                    y_l1  0.3692  0.0434   8.5135 1.6872e-17     937 0.4672
+regime x expiry            baseline                     y_w  0.1139  0.0596   1.9111 5.5989e-02     937 0.4672
+regime x expiry            baseline                 lvix_l1  1.0416  0.1577   6.6040 4.0034e-11     937 0.4672
+regime x expiry            baseline                     exp  0.1344  0.0577   2.3307 1.9767e-02     937 0.4672
+regime x expiry            baseline   reg_single_weekly_thu  0.0643  0.0599   1.0726 2.8346e-01     937 0.4672
+regime x expiry            baseline exp_x_single_weekly_thu -0.1614  0.1325  -1.2179 2.2326e-01     937 0.4672
+regime x expiry            baseline   reg_single_weekly_tue  0.0133  0.0432   0.3081 7.5804e-01     937 0.4672
+regime x expiry            baseline exp_x_single_weekly_tue  0.0662  0.0868   0.7629 4.4554e-01     937 0.4672
+regime x expiry   gex_us_convention                   const -3.3582  0.3228 -10.4028 2.4086e-25     937 0.4689
+regime x expiry   gex_us_convention                    y_l1  0.3718  0.0429   8.6654 4.5001e-18     937 0.4689
+regime x expiry   gex_us_convention                     y_w  0.1106  0.0592   1.8667 6.1942e-02     937 0.4689
+regime x expiry   gex_us_convention                 lvix_l1  1.0335  0.1575   6.5608 5.3505e-11     937 0.4689
+regime x expiry   gex_us_convention                     exp  0.0991  0.0669   1.4811 1.3858e-01     937 0.4689
+regime x expiry   gex_us_convention   reg_single_weekly_thu  0.0665  0.0598   1.1127 2.6582e-01     937 0.4689
+regime x expiry   gex_us_convention exp_x_single_weekly_thu -0.1626  0.1323  -1.2290 2.1908e-01     937 0.4689
+regime x expiry   gex_us_convention   reg_single_weekly_tue  0.0063  0.0433   0.1452 8.8457e-01     937 0.4689
+regime x expiry   gex_us_convention exp_x_single_weekly_tue  0.0739  0.0875   0.8441 3.9860e-01     937 0.4689
+regime x expiry   gex_us_convention                  gex_l1 -0.3807  0.1757  -2.1671 3.0231e-02     937 0.4689
+regime x expiry   gex_us_convention            gex_l1_x_exp  0.3900  0.2483   1.5706 1.1628e-01     937 0.4689
+regime x expiry gex_participant_pro                   const -3.4178  0.3212 -10.6393 1.9567e-26     937 0.4726
+regime x expiry gex_participant_pro                    y_l1  0.3678  0.0435   8.4545 2.8038e-17     937 0.4726
+regime x expiry gex_participant_pro                     y_w  0.1139  0.0587   1.9398 5.2398e-02     937 0.4726
+regime x expiry gex_participant_pro                 lvix_l1  1.0361  0.1561   6.6355 3.2340e-11     937 0.4726
+regime x expiry gex_participant_pro                     exp  0.2333  0.0712   3.2760 1.0528e-03     937 0.4726
+regime x expiry gex_participant_pro   reg_single_weekly_thu  0.1119  0.0632   1.7701 7.6715e-02     937 0.4726
+regime x expiry gex_participant_pro exp_x_single_weekly_thu -0.2981  0.1345  -2.2158 2.6704e-02     937 0.4726
+regime x expiry gex_participant_pro   reg_single_weekly_tue  0.0692  0.0507   1.3631 1.7287e-01     937 0.4726
+regime x expiry gex_participant_pro exp_x_single_weekly_tue -0.1276  0.1190  -1.0723 2.8357e-01     937 0.4726
+regime x expiry gex_participant_pro                  gex_l1 -2.0677  0.9699  -2.1319 3.3015e-02     937 0.4726
+regime x expiry gex_participant_pro            gex_l1_x_exp  4.9284  1.5658   3.1475 1.6470e-03     937 0.4726
+regime x expiry   gex_client_mirror                   const -3.4680  0.3252 -10.6636 1.5059e-26     937 0.4734
+regime x expiry   gex_client_mirror                    y_l1  0.3650  0.0415   8.7892 1.5062e-18     937 0.4734
+regime x expiry   gex_client_mirror                     y_w  0.1015  0.0597   1.6999 8.9143e-02     937 0.4734
+regime x expiry   gex_client_mirror                 lvix_l1  1.0429  0.1555   6.7075 1.9793e-11     937 0.4734
+regime x expiry   gex_client_mirror                     exp -0.0107  0.0725  -0.1476 8.8262e-01     937 0.4734
+regime x expiry   gex_client_mirror   reg_single_weekly_thu  0.1157  0.0595   1.9432 5.1987e-02     937 0.4734
+regime x expiry   gex_client_mirror exp_x_single_weekly_thu -0.2204  0.1243  -1.7730 7.6224e-02     937 0.4734
+regime x expiry   gex_client_mirror   reg_single_weekly_tue  0.0464  0.0432   1.0744 2.8264e-01     937 0.4734
+regime x expiry   gex_client_mirror exp_x_single_weekly_tue  0.0192  0.0916   0.2100 8.3365e-01     937 0.4734
+regime x expiry   gex_client_mirror                  gex_l1 -2.3524  0.9502  -2.4756 1.3301e-02     937 0.4734
+regime x expiry   gex_client_mirror            gex_l1_x_exp  3.6515  1.1976   3.0490 2.2962e-03     937 0.4734
+
+== r4_pinning
+       target                    group          n  mean_change_bp  median_change_bp  share_moved_toward  median_dist_after_bp  mannwhitney_p
+max_oi_strike              expiry days        200         16.7280           17.0651              0.3550               82.5761            NaN
+max_oi_strike               other days        741         22.7889           16.8112              0.3468               83.1395            NaN
+max_oi_strike  expiry, US-sign GEX > 0        175         19.3251           18.2750              0.3486               88.3922            NaN
+max_oi_strike expiry, US-sign GEX <= 0         25         -1.4517           11.2360              0.4000               53.8077            NaN
+max_oi_strike       expiry minus other 200 vs 741         -6.0609            0.2539                 NaN                   NaN         0.6732
+     max_pain              expiry days        200         40.8479           28.5962              0.2050               51.3665            NaN
+     max_pain               other days        741         35.0965           25.9649              0.2429               52.0930            NaN
+     max_pain  expiry, US-sign GEX > 0        175         43.2782           31.2911              0.1943               51.5500            NaN
+     max_pain expiry, US-sign GEX <= 0         25         23.8357           22.7500              0.2800               35.9583            NaN
+     max_pain       expiry minus other 200 vs 741          5.7513            2.6312                 NaN                   NaN         0.1158

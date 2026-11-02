@@ -105,7 +105,7 @@ def label_days(trading_days, rules: ExpiryRules | None = None, expiries=None) ->
             "next_expiry": next_exp,
             "trading_days_to_expiry": tdte,
             "regime": [rules.regime(d) for d in days],
-            "weekday": days.weekday,
+            "weekday": days.day_of_week,
         }
     )
     return df.set_index("date")

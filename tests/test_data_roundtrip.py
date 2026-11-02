@@ -22,8 +22,9 @@ def test_nse_layout_roundtrip(tmp_path):
     assert mk["R"].shape == m["R"].shape
     assert np.allclose(mk["R"], m["R"], atol=1e-9)
     assert np.allclose(mk["vix"], m["vix"], rtol=1e-6)
-    # OI converted back from units to contracts
-    assert np.allclose(mk["chains"][3]["oi"].to_numpy(), m["chains"][3]["oi"].to_numpy())
+    # OI converted back from units to contracts (the loader sorts by strike, so compare in that order)
+    key = ["is_call", "strike"]
+    assert np.allclose(mk["chains"][3].sort_values(key)["oi"].to_numpy(), m["chains"][3].sort_values(key)["oi"].to_numpy())
     # participant weights keep their sign
     assert np.all(np.sign(mk["participant"]["pro_call"]) == np.sign(m["participant"]["pro_call"]))
     panel = build_gex_panel(mk)
