@@ -1,0 +1,205 @@
+sample,finding,measure,rule,gex_published,spec,term,coef,t,p,n
+full,F1,share,us_convention,t-1 (real),single,gex_l1,0.265829236991269,0.9053740529201101,0.36526725703851404,937
+full,F1,share,us_convention,t-1 (real),single,gex_l1_x_exp,0.2394754984727039,0.5040053351991522,0.6142576278467964,937
+full,F1,ratio,us_convention,t-1 (real),single,gex_l1,-0.38280692544611983,-2.158734645808636,0.03087075929365755,937
+full,F1,ratio,us_convention,t-1 (real),single,gex_l1_x_exp,0.3934896290069769,1.5751933372263451,0.11521182465699105,937
+full,F2,sign of net GEX (scale irrelevant),us_convention,t-1 (real),binary,r_rod_x_neg,0.012948202343817097,0.5442545077543742,0.5862663473729262,932
+full,F2,sign of net GEX (scale irrelevant),us_convention,t-1 (real),controls,r_rod_x_neg,-0.0008430345293839805,-0.03615512191780292,0.971158670094685,931
+full,F1,share,us_convention,t (same evening),single,gex_l1,1.0131250057465155,5.160519730128197,2.4626520583034785e-07,937
+full,F1,share,us_convention,t (same evening),single,gex_l1_x_exp,0.037796580831033516,0.053791786846358755,0.9571010531941161,937
+full,F1,ratio,us_convention,t (same evening),single,gex_l1,0.3034922988877032,2.010898762280861,0.04433615112930523,937
+full,F1,ratio,us_convention,t (same evening),single,gex_l1_x_exp,1.2986764554034635,1.0028058343322923,0.31595455329233246,937
+full,F2,sign of net GEX (scale irrelevant),us_convention,t (same evening),binary,r_rod_x_neg,0.07475144767459466,2.1475102815544944,0.03175267954711973,929
+full,F2,sign of net GEX (scale irrelevant),us_convention,t (same evening),controls,r_rod_x_neg,0.05781939492928436,1.7658812468203113,0.07741577401706352,929
+full,F1,share,us_convention,t+1 (lead),single,gex_l1,0.1801936164333021,0.7700977694136817,0.4412418990777758,936
+full,F1,share,us_convention,t+1 (lead),single,gex_l1_x_exp,-0.3523724615580532,-0.7247292912747344,0.46861812173532724,936
+full,F1,ratio,us_convention,t+1 (lead),single,gex_l1,-0.16557734457244486,-1.0894950191300934,0.27593565013342536,936
+full,F1,ratio,us_convention,t+1 (lead),single,gex_l1_x_exp,-0.015568626014823356,-0.031914894761517126,0.9745399203887587,936
+full,F2,sign of net GEX (scale irrelevant),us_convention,t+1 (lead),binary,r_rod_x_neg,0.08011761453364055,2.199358228686438,0.027852460335157564,929
+full,F2,sign of net GEX (scale irrelevant),us_convention,t+1 (lead),controls,r_rod_x_neg,0.058603736983773205,1.6868354815792412,0.09163499079715241,929
+full,F1,share,us_convention,t+2 (lead),single,gex_l1,0.023373435495279087,0.09564993163973398,0.9237986072510812,935
+full,F1,share,us_convention,t+2 (lead),single,gex_l1_x_exp,0.13878016701370607,0.26045925009434,0.794509544510345,935
+full,F1,ratio,us_convention,t+2 (lead),single,gex_l1,-0.07539719675099563,-0.5047482489049102,0.6137356680584948,935
+full,F1,ratio,us_convention,t+2 (lead),single,gex_l1_x_exp,0.09190242477021054,0.22427582123329545,0.8225426888846316,935
+full,F2,sign of net GEX (scale irrelevant),us_convention,t+2 (lead),binary,r_rod_x_neg,-0.006536184333519026,-0.24986808031497684,0.8026893685885067,929
+full,F2,sign of net GEX (scale irrelevant),us_convention,t+2 (lead),controls,r_rod_x_neg,-0.013380670555527009,-0.5885811337740875,0.55614229283168,929
+full,F1,share,us_convention,t-1 and t+1 together,horse race,gex_l1,0.24859629099614722,0.8672822378114657,0.3857873863999117,936
+full,F1,share,us_convention,t-1 and t+1 together,horse race,gex_l1_x_exp,0.25403242522386904,0.5416585198069355,0.588053770015015,936
+full,F1,share,us_convention,t-1 and t+1 together,horse race,lead_gex,0.13199150598455844,0.5948904655615689,0.5519166909209705,936
+full,F1,share,us_convention,t-1 and t+1 together,horse race,lead_gex_x_exp,-0.29432221375275347,-0.6228763846245012,0.5333657577658887,936
+full,F1,ratio,us_convention,t-1 and t+1 together,horse race,gex_l1,-0.3607431820737901,-2.042199851789179,0.04113171118933515,936
+full,F1,ratio,us_convention,t-1 and t+1 together,horse race,gex_l1_x_exp,0.3668655172614592,1.4703140087292057,0.14147672870295538,936
+full,F1,ratio,us_convention,t-1 and t+1 together,horse race,lead_gex,-0.14174137295975697,-0.940612502145873,0.34690347268758304,936
+full,F1,ratio,us_convention,t-1 and t+1 together,horse race,lead_gex_x_exp,-0.04175490064170617,-0.0854644447579131,0.9318921609915104,936
+full,F2,sign of net GEX (scale irrelevant),us_convention,t-1 and t+1 together,horse race (binary),r_rod_x_neg,0.003608388321506592,0.16442038580261495,0.8694002164117256,929
+full,F2,sign of net GEX (scale irrelevant),us_convention,t-1 and t+1 together,horse race (binary),lead_r_rod_x_neg,0.0801214521646001,2.209358934961296,0.027149684938703924,929
+full,F1,share,participant_pro,t-1 (real),single,gex_l1,-3.123587318118253,-2.8574069073569164,0.004271179020541731,937
+full,F1,share,participant_pro,t-1 (real),single,gex_l1_x_exp,8.17701058568171,3.2068382148648547,0.001342024468002385,937
+full,F1,ratio,participant_pro,t-1 (real),single,gex_l1,-2.031349031865298,-2.0813725687150306,0.03739981749282487,937
+full,F1,ratio,participant_pro,t-1 (real),single,gex_l1_x_exp,4.890432147401992,3.1078329843049803,0.0018846454137434777,937
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 (real),binary,r_rod_x_neg,-0.06808827671835406,-3.702227618808394,0.00021371474924648787,932
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 (real),controls,r_rod_x_neg,-0.04962313772923902,-2.9810472040442417,0.002872645095084069,931
+full,F1,share,participant_pro,t (same evening),single,gex_l1,-4.511249719780149,-3.6217948032127762,0.0002925661506531169,937
+full,F1,share,participant_pro,t (same evening),single,gex_l1_x_exp,7.203901538850962,2.8741439057997593,0.004051243258348825,937
+full,F1,ratio,participant_pro,t (same evening),single,gex_l1,-2.119165605189278,-2.525361866137425,0.011557920891323053,937
+full,F1,ratio,participant_pro,t (same evening),single,gex_l1_x_exp,6.85742162494653,1.7426635559612011,0.08139240113892837,937
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t (same evening),binary,r_rod_x_neg,-0.03709821805612824,-1.7716280458551394,0.07645632098288896,929
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t (same evening),controls,r_rod_x_neg,-0.017577921003660547,-0.9480043762644508,0.34312722632139836,929
+full,F1,share,participant_pro,t+1 (lead),single,gex_l1,-5.152229281953596,-4.267918420362826,1.9730545215982526e-05,936
+full,F1,share,participant_pro,t+1 (lead),single,gex_l1_x_exp,6.827457763171202,2.4384111861776083,0.01475198320030007,936
+full,F1,ratio,participant_pro,t+1 (lead),single,gex_l1,-2.569604179715558,-3.068645033749452,0.0021503192357709214,936
+full,F1,ratio,participant_pro,t+1 (lead),single,gex_l1_x_exp,3.9685529199634804,1.486740961947025,0.13708323960474797,936
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t+1 (lead),binary,r_rod_x_neg,-0.022408667799108387,-1.0169556171638092,0.30917454347971474,929
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t+1 (lead),controls,r_rod_x_neg,-0.0014293011832180735,-0.07362143255333149,0.9413116167049609,929
+full,F1,share,participant_pro,t+2 (lead),single,gex_l1,-4.967037288144863,-4.244270367776658,2.193058114520711e-05,935
+full,F1,share,participant_pro,t+2 (lead),single,gex_l1_x_exp,6.0113458323380975,2.209176897836121,0.027162339110413897,935
+full,F1,ratio,participant_pro,t+2 (lead),single,gex_l1,-3.165978498065314,-3.7251062821306276,0.00019523294835340686,935
+full,F1,ratio,participant_pro,t+2 (lead),single,gex_l1_x_exp,3.6805321772424313,1.5630539257186074,0.1180399114798847,935
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t+2 (lead),binary,r_rod_x_neg,-0.043730057547163526,-2.2594218617395776,0.02385715578116801,929
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t+2 (lead),controls,r_rod_x_neg,-0.021636467998546793,-1.2261056525886647,0.2201589189773332,929
+full,F1,share,participant_pro,t-1 and t+1 together,horse race,gex_l1,-0.434211707410455,-0.35850753808119745,0.7199635277135135,936
+full,F1,share,participant_pro,t-1 and t+1 together,horse race,gex_l1_x_exp,6.4232156784269705,2.0368760913530672,0.04166246060071667,936
+full,F1,share,participant_pro,t-1 and t+1 together,horse race,lead_gex,-4.871273091198354,-3.551775260028708,0.0003826415319686752,936
+full,F1,share,participant_pro,t-1 and t+1 together,horse race,lead_gex_x_exp,3.2103211510413416,0.9545424744319874,0.33980911999617636,936
+full,F1,ratio,participant_pro,t-1 and t+1 together,horse race,gex_l1,-0.8341917467587336,-0.7748080204690346,0.4384531092554549,936
+full,F1,ratio,participant_pro,t-1 and t+1 together,horse race,gex_l1_x_exp,4.608040167869149,2.4267118211488223,0.015236353068334423,936
+full,F1,ratio,participant_pro,t-1 and t+1 together,horse race,lead_gex,-2.260563379520363,-2.4241255060092954,0.015345301163425005,936
+full,F1,ratio,participant_pro,t-1 and t+1 together,horse race,lead_gex_x_exp,-0.7950935071801268,-0.23824297883926296,0.8116926443226594,936
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 and t+1 together,horse race (binary),r_rod_x_neg,-0.08119161937881231,-4.393159911381811,1.1171489130201683e-05,929
+full,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 and t+1 together,horse race (binary),lead_r_rod_x_neg,0.026241492305875636,1.3211011269726614,0.18646764735142152,929
+full,F1,share,client_mirror,t-1 (real),single,gex_l1,-0.4857987261843883,-0.35936989896917637,0.7193183898956159,937
+full,F1,share,client_mirror,t-1 (real),single,gex_l1_x_exp,3.0974753531795027,1.6861927122647196,0.09175868713515002,937
+full,F1,ratio,client_mirror,t-1 (real),single,gex_l1,-2.332244685211749,-2.450261273833616,0.014275258824426242,937
+full,F1,ratio,client_mirror,t-1 (real),single,gex_l1_x_exp,3.6347795090974118,3.0324746356480854,0.0024255748106093186,937
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 (real),binary,r_rod_x_neg,-0.07202029537067432,-4.174172600172396,2.9907096355709747e-05,932
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 (real),controls,r_rod_x_neg,0.002598723225394728,0.06734962147279447,0.9463033743102862,931
+full,F1,share,client_mirror,t (same evening),single,gex_l1,-1.6090422281991514,-1.2613715912740198,0.2071749986743774,937
+full,F1,share,client_mirror,t (same evening),single,gex_l1_x_exp,2.874584962411559,1.2415766721964903,0.21439279315215976,937
+full,F1,ratio,client_mirror,t (same evening),single,gex_l1,-2.8970456225667696,-3.9124233955484446,9.137452791608178e-05,937
+full,F1,ratio,client_mirror,t (same evening),single,gex_l1_x_exp,2.8949477544581255,0.9895444208449803,0.3223968475371869,937
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t (same evening),binary,r_rod_x_neg,-0.05206396002311073,-2.0299773504084677,0.04235884161949087,929
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t (same evening),controls,r_rod_x_neg,0.025166625679237747,0.8496526026864022,0.39551825716592137,929
+full,F1,share,client_mirror,t+1 (lead),single,gex_l1,-1.9326099479613665,-2.0207556952272556,0.0433050612259523,936
+full,F1,share,client_mirror,t+1 (lead),single,gex_l1_x_exp,2.806584378767835,1.3521891246564064,0.17631482182987301,936
+full,F1,ratio,client_mirror,t+1 (lead),single,gex_l1,-2.1374339529155146,-3.2917445515498587,0.0009956800663162724,936
+full,F1,ratio,client_mirror,t+1 (lead),single,gex_l1_x_exp,1.7814654278416049,0.8881542070294776,0.37445780743248436,936
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t+1 (lead),binary,r_rod_x_neg,-0.04859435023443933,-2.004940344432395,0.044969424965304344,929
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t+1 (lead),controls,r_rod_x_neg,0.024390857199881127,0.9455768968805873,0.3443644325491638,929
+full,F1,share,client_mirror,t+2 (lead),single,gex_l1,-2.193731999794432,-2.343735676709756,0.019091696175310858,935
+full,F1,share,client_mirror,t+2 (lead),single,gex_l1_x_exp,2.964499624788654,1.6711735769613105,0.09468739773861336,935
+full,F1,ratio,client_mirror,t+2 (lead),single,gex_l1,-1.8204016925028097,-2.8691241041674886,0.004116102604673693,935
+full,F1,ratio,client_mirror,t+2 (lead),single,gex_l1_x_exp,2.1110125531026367,1.2963906298109078,0.19484093866286245,935
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t+2 (lead),binary,r_rod_x_neg,0.01626528941790594,0.41447023157289803,0.6785297637290502,929
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t+2 (lead),controls,r_rod_x_neg,-0.001247677420893871,-0.032658769212671045,0.9739467037395105,929
+full,F1,share,client_mirror,t-1 and t+1 together,horse race,gex_l1,0.14878678413907664,0.12017506712836871,0.9043444681656774,936
+full,F1,share,client_mirror,t-1 and t+1 together,horse race,gex_l1_x_exp,2.4931140672986203,1.4549276478660662,0.14568929275190243,936
+full,F1,share,client_mirror,t-1 and t+1 together,horse race,lead_gex,-1.9693599769914272,-2.3233503770896036,0.020160337575246014,936
+full,F1,share,client_mirror,t-1 and t+1 together,horse race,lead_gex_x_exp,1.7723642301447358,0.8405287944179917,0.4006119638885941,936
+full,F1,ratio,client_mirror,t-1 and t+1 together,horse race,gex_l1,-1.590443297480192,-1.686177494988646,0.09176161721569309,936
+full,F1,ratio,client_mirror,t-1 and t+1 together,horse race,gex_l1_x_exp,3.118421211517557,2.590805119205688,0.009575169763245696,936
+full,F1,ratio,client_mirror,t-1 and t+1 together,horse race,lead_gex,-1.749478135959066,-2.7081102048415926,0.00676675485379122,936
+full,F1,ratio,client_mirror,t-1 and t+1 together,horse race,lead_gex_x_exp,0.1567698576990324,0.07530206234591243,0.9399743806287678,936
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 and t+1 together,horse race (binary),r_rod_x_neg,-0.06385317303251899,-2.408354375184551,0.01602461786842686,929
+full,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 and t+1 together,horse race (binary),lead_r_rod_x_neg,-0.006451494983959083,-0.2635276230440278,0.7921439356409171,929
+pre_auction,F1,share,us_convention,t-1 (real),single,gex_l1,0.3679208222304453,1.1948606135630129,0.2321414935546855,874
+pre_auction,F1,share,us_convention,t-1 (real),single,gex_l1_x_exp,0.32152695175402,0.6400122516626195,0.522164634310571,874
+pre_auction,F1,ratio,us_convention,t-1 (real),single,gex_l1,-0.33068096293339977,-1.8383899587506614,0.06600496368355119,874
+pre_auction,F1,ratio,us_convention,t-1 (real),single,gex_l1_x_exp,0.39696913898432484,1.5273866100107953,0.12666490405745184,874
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t-1 (real),binary,r_rod_x_neg,0.005742097717087243,0.24609007015099071,0.8056125096312844,869
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t-1 (real),controls,r_rod_x_neg,-0.009726413664341673,-0.4220917363632978,0.6729580594101368,868
+pre_auction,F1,share,us_convention,t (same evening),single,gex_l1,1.1040043813466696,5.582569714633932,2.3699056349845737e-08,874
+pre_auction,F1,share,us_convention,t (same evening),single,gex_l1_x_exp,-0.030577293895476032,-0.04267773522020632,0.965958428115883,874
+pre_auction,F1,ratio,us_convention,t (same evening),single,gex_l1,0.3390166233876215,2.1928796339302883,0.028316052430178245,874
+pre_auction,F1,ratio,us_convention,t (same evening),single,gex_l1_x_exp,1.2691976969869074,0.9597934872648788,0.3371591607586579,874
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t (same evening),binary,r_rod_x_neg,0.07168862372220494,2.0014634107081988,0.0453424730610749,866
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t (same evening),controls,r_rod_x_neg,0.05226740762735029,1.574538245991384,0.11536306678645963,866
+pre_auction,F1,share,us_convention,t+1 (lead),single,gex_l1,0.2194144730645462,0.915436371332386,0.3599625916426783,874
+pre_auction,F1,share,us_convention,t+1 (lead),single,gex_l1_x_exp,-0.4297725126494807,-0.8504567392805814,0.39507120230607007,874
+pre_auction,F1,ratio,us_convention,t+1 (lead),single,gex_l1,-0.1160751251520935,-0.7429864217708683,0.4574899011438883,874
+pre_auction,F1,ratio,us_convention,t+1 (lead),single,gex_l1_x_exp,-0.12468461857625357,-0.24889706948869236,0.8034404021907022,874
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t+1 (lead),binary,r_rod_x_neg,0.08819926574903587,2.1689553352302062,0.03008607503190863,867
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t+1 (lead),controls,r_rod_x_neg,0.06272156916385606,1.5980844089709885,0.11002419295260199,867
+pre_auction,F1,share,us_convention,t+2 (lead),single,gex_l1,0.026223777385865787,0.10247990635410414,0.9183757612771206,874
+pre_auction,F1,share,us_convention,t+2 (lead),single,gex_l1_x_exp,0.0828196318719705,0.14569484628137447,0.8841622900276861,874
+pre_auction,F1,ratio,us_convention,t+2 (lead),single,gex_l1,-0.05036871493422268,-0.3308303473385263,0.7407726365703955,874
+pre_auction,F1,ratio,us_convention,t+2 (lead),single,gex_l1_x_exp,0.011707044325085292,0.027424561299280708,0.9781211085298591,874
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t+2 (lead),binary,r_rod_x_neg,-0.015380285156523895,-0.5786029299286304,0.5628571273134152,868
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t+2 (lead),controls,r_rod_x_neg,-0.023275623991627387,-1.0186708658716765,0.30835924838858986,868
+pre_auction,F1,share,us_convention,t-1 and t+1 together,horse race,gex_l1,0.33588716657592227,1.1376312063287375,0.2552745102431979,874
+pre_auction,F1,share,us_convention,t-1 and t+1 together,horse race,gex_l1_x_exp,0.3437210169553461,0.6955315691157096,0.4867222342455886,874
+pre_auction,F1,share,us_convention,t-1 and t+1 together,horse race,lead_gex,0.15630529463300752,0.6987503378986935,0.4847080694985869,874
+pre_auction,F1,share,us_convention,t-1 and t+1 together,horse race,lead_gex_x_exp,-0.31943144642298205,-0.6501380865782667,0.5156030293188143,874
+pre_auction,F1,ratio,us_convention,t-1 and t+1 together,horse race,gex_l1,-0.32048529358779815,-1.7990635298219197,0.07200863183923906,874
+pre_auction,F1,ratio,us_convention,t-1 and t+1 together,horse race,gex_l1_x_exp,0.37688635154506195,1.4482017512556327,0.14756063496998564,874
+pre_auction,F1,ratio,us_convention,t-1 and t+1 together,horse race,lead_gex,-0.09754964655724116,-0.6300880541125471,0.5286369750214013,874
+pre_auction,F1,ratio,us_convention,t-1 and t+1 together,horse race,lead_gex_x_exp,-0.13379280649390587,-0.2648225774703831,0.7911461433572278,874
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t-1 and t+1 together,horse race (binary),r_rod_x_neg,0.003208731806877846,0.1430544346706512,0.886247190591029,867
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,t-1 and t+1 together,horse race (binary),lead_r_rod_x_neg,0.08883601676090636,2.18153742312997,0.029143689610398798,867
+pre_auction,F1,share,participant_pro,t-1 (real),single,gex_l1,-3.5140671533063994,-3.1897855201291136,0.001423784178573362,874
+pre_auction,F1,share,participant_pro,t-1 (real),single,gex_l1_x_exp,8.942127696526654,3.467439771725183,0.0005254414765806573,874
+pre_auction,F1,ratio,participant_pro,t-1 (real),single,gex_l1,-2.380903749124144,-2.4943685889798193,0.012618143949004283,874
+pre_auction,F1,ratio,participant_pro,t-1 (real),single,gex_l1_x_exp,5.394935679193793,3.4093679695405212,0.0006511358747936649,874
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 (real),binary,r_rod_x_neg,-0.07194039294982364,-3.951244275883291,7.774591803303069e-05,869
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 (real),controls,r_rod_x_neg,-0.052575834705007984,-3.2232770568217437,0.0012673290914539908,868
+pre_auction,F1,share,participant_pro,t (same evening),single,gex_l1,-4.3823569132490405,-3.4280632677161313,0.0006079037702216259,874
+pre_auction,F1,share,participant_pro,t (same evening),single,gex_l1_x_exp,7.244076902659202,2.8529168583455258,0.004331995382434729,874
+pre_auction,F1,ratio,participant_pro,t (same evening),single,gex_l1,-2.0240920739717865,-2.3784249295542756,0.017386776807925212,874
+pre_auction,F1,ratio,participant_pro,t (same evening),single,gex_l1_x_exp,6.7514348122349475,1.7063557084912901,0.08794187175948504,874
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t (same evening),binary,r_rod_x_neg,-0.037304522614506654,-1.7569647550600727,0.07892381687148317,866
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t (same evening),controls,r_rod_x_neg,-0.01757855942788862,-0.9499868153662357,0.34211895201014775,866
+pre_auction,F1,share,participant_pro,t+1 (lead),single,gex_l1,-5.081948627065337,-4.154379900394566,3.261708778066028e-05,874
+pre_auction,F1,share,participant_pro,t+1 (lead),single,gex_l1_x_exp,7.023184500589309,2.501021734039017,0.012383557842580663,874
+pre_auction,F1,ratio,participant_pro,t+1 (lead),single,gex_l1,-2.3307410981656123,-2.7869560001961933,0.005320570261281967,874
+pre_auction,F1,ratio,participant_pro,t+1 (lead),single,gex_l1_x_exp,3.984963144334941,1.4924320069340173,0.13558592950802564,874
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t+1 (lead),binary,r_rod_x_neg,-0.030888105999500853,-1.4361800480120324,0.1509511148693185,867
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t+1 (lead),controls,r_rod_x_neg,-0.00972616488631823,-0.5198284939284367,0.6031831175875207,867
+pre_auction,F1,share,participant_pro,t+2 (lead),single,gex_l1,-5.151891222355232,-4.325577526280632,1.5213275046553516e-05,874
+pre_auction,F1,share,participant_pro,t+2 (lead),single,gex_l1_x_exp,6.2883800110583365,2.2783251475196176,0.022707212443930667,874
+pre_auction,F1,ratio,participant_pro,t+2 (lead),single,gex_l1,-3.1032216635192498,-3.563264073733114,0.0003662718857466025,874
+pre_auction,F1,ratio,participant_pro,t+2 (lead),single,gex_l1_x_exp,3.78859286761832,1.5905978274336086,0.11170011373906973,874
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t+2 (lead),binary,r_rod_x_neg,-0.04918245124460438,-2.4927099807951523,0.0126772346902414,868
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t+2 (lead),controls,r_rod_x_neg,-0.02661313119899688,-1.4729643357856292,0.14076065264267804,868
+pre_auction,F1,share,participant_pro,t-1 and t+1 together,horse race,gex_l1,-0.9667534574200246,-0.8054207285078271,0.42057693405381413,874
+pre_auction,F1,share,participant_pro,t-1 and t+1 together,horse race,gex_l1_x_exp,7.327653735706167,2.2692732085921783,0.0232517167187615,874
+pre_auction,F1,share,participant_pro,t-1 and t+1 together,horse race,lead_gex,-4.47937902568979,-3.273306678457872,0.0010629707665522421,874
+pre_auction,F1,share,participant_pro,t-1 and t+1 together,horse race,lead_gex_x_exp,2.842981150889425,0.8374876190276078,0.40231853341399537,874
+pre_auction,F1,ratio,participant_pro,t-1 and t+1 together,horse race,gex_l1,-1.3622259841788509,-1.3196661233890008,0.1869465152999492,874
+pre_auction,F1,ratio,participant_pro,t-1 and t+1 together,horse race,gex_l1_x_exp,5.277086612250962,2.749003108467202,0.005977681932817146,874
+pre_auction,F1,ratio,participant_pro,t-1 and t+1 together,horse race,lead_gex,-1.8198024645035178,-1.9943760138286155,0.046110977791837024,874
+pre_auction,F1,ratio,participant_pro,t-1 and t+1 together,horse race,lead_gex_x_exp,-1.137814380113465,-0.3390533965619416,0.7345695052933763,874
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 and t+1 together,horse race (binary),r_rod_x_neg,-0.08138554130817437,-4.730929954029977,2.2349363436827634e-06,867
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,t-1 and t+1 together,horse race (binary),lead_r_rod_x_neg,0.0168732657315864,0.9465225627846545,0.3438821197147798,867
+pre_auction,F1,share,client_mirror,t-1 (real),single,gex_l1,-0.6934140439350358,-0.5051469586085272,0.6134556214093493,874
+pre_auction,F1,share,client_mirror,t-1 (real),single,gex_l1_x_exp,3.272932859991812,1.7627398698639034,0.07794437303635612,874
+pre_auction,F1,ratio,client_mirror,t-1 (real),single,gex_l1,-2.667400199312965,-2.764064385364507,0.005708627382276954,874
+pre_auction,F1,ratio,client_mirror,t-1 (real),single,gex_l1_x_exp,3.9254842885305266,3.2178403426485693,0.0012915969107898458,874
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 (real),binary,r_rod_x_neg,-0.07168745761063412,-4.056438285002481,4.982672036587143e-05,869
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 (real),controls,r_rod_x_neg,0.004189521300080656,0.10851470244913898,0.9135874185139967,868
+pre_auction,F1,share,client_mirror,t (same evening),single,gex_l1,-1.5822670429394066,-1.209028843788598,0.2266517642287672,874
+pre_auction,F1,share,client_mirror,t (same evening),single,gex_l1_x_exp,2.6544581457582126,1.134626755538138,0.2565317378845742,874
+pre_auction,F1,ratio,client_mirror,t (same evening),single,gex_l1,-2.968876676136688,-3.929145574931899,8.524822268627455e-05,874
+pre_auction,F1,ratio,client_mirror,t (same evening),single,gex_l1_x_exp,2.619351407588283,0.8839847752941132,0.3767044314935434,874
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t (same evening),binary,r_rod_x_neg,-0.05163971955319588,-1.9909826891291895,0.04648279041671713,866
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t (same evening),controls,r_rod_x_neg,0.026416759039414844,0.8827182442083855,0.37738852232375664,866
+pre_auction,F1,share,client_mirror,t+1 (lead),single,gex_l1,-1.887802287119257,-1.9399691179786136,0.052383443095827695,874
+pre_auction,F1,share,client_mirror,t+1 (lead),single,gex_l1_x_exp,2.7907748584229637,1.3418703058790329,0.1796380512528507,874
+pre_auction,F1,ratio,client_mirror,t+1 (lead),single,gex_l1,-1.921551585885311,-2.932070086572286,0.0033671074983134416,874
+pre_auction,F1,ratio,client_mirror,t+1 (lead),single,gex_l1_x_exp,1.592287218417482,0.7852848624446106,0.43228656910813157,874
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t+1 (lead),binary,r_rod_x_neg,-0.04937766067819516,-2.011155203798304,0.04430906573765947,867
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t+1 (lead),controls,r_rod_x_neg,0.02540978448472589,0.9748026795413338,0.32965814771286706,867
+pre_auction,F1,share,client_mirror,t+2 (lead),single,gex_l1,-2.046584244358087,-2.1760671982357374,0.029550236216073885,874
+pre_auction,F1,share,client_mirror,t+2 (lead),single,gex_l1_x_exp,2.780125242618851,1.5559269184788826,0.11972547154951621,874
+pre_auction,F1,ratio,client_mirror,t+2 (lead),single,gex_l1,-1.654015315160109,-2.52621286011819,0.011529959827540397,874
+pre_auction,F1,ratio,client_mirror,t+2 (lead),single,gex_l1_x_exp,2.0157846713116037,1.2235587123860991,0.221118742888757,874
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t+2 (lead),binary,r_rod_x_neg,0.016150233859013076,0.4076240876736814,0.6835496772168229,868
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t+2 (lead),controls,r_rod_x_neg,-0.003927069531356062,-0.10263184382561791,0.9182551685644036,868
+pre_auction,F1,share,client_mirror,t-1 and t+1 together,horse race,gex_l1,-0.08542869738952955,-0.0679260228486386,0.9458445233522521,874
+pre_auction,F1,share,client_mirror,t-1 and t+1 together,horse race,gex_l1_x_exp,2.688708259240478,1.5482733253735748,0.1215565038687208,874
+pre_auction,F1,share,client_mirror,t-1 and t+1 together,horse race,lead_gex,-1.8551394270015906,-2.1763646461049535,0.029528005170276664,874
+pre_auction,F1,share,client_mirror,t-1 and t+1 together,horse race,lead_gex_x_exp,1.6917215517556534,0.8038340967475444,0.4214927950774948,874
+pre_auction,F1,ratio,client_mirror,t-1 and t+1 together,horse race,gex_l1,-2.0209854972844092,-2.1564165351947824,0.031051154672957514,874
+pre_auction,F1,ratio,client_mirror,t-1 and t+1 together,horse race,gex_l1_x_exp,3.508350411828808,2.8897433978153493,0.003855564027210228,874
+pre_auction,F1,ratio,client_mirror,t-1 and t+1 together,horse race,lead_gex,-1.408420398325437,-2.229027747091665,0.025812058660987514,874
+pre_auction,F1,ratio,client_mirror,t-1 and t+1 together,horse race,lead_gex_x_exp,-0.1474042588988384,-0.07039638492401225,0.9438781685248208,874
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 and t+1 together,horse race (binary),r_rod_x_neg,-0.06417459040766285,-2.4095056587991492,0.01597414833858475,867
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,t-1 and t+1 together,horse race (binary),lead_r_rod_x_neg,-0.007054123687743857,-0.2873426979057458,0.7738499322485195,867

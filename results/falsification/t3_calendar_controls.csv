@@ -1,0 +1,69 @@
+sample,finding,regressor,spec,term,coef,t,p,n
+full,F1,us_convention (share),regime x expiry controls,gex_l1,0.265829236991269,0.9053740529201101,0.36526725703851404,937
+full,F1,us_convention (share),regime x expiry controls,gex_l1_x_exp,0.2394754984727039,0.5040053351991522,0.6142576278467964,937
+full,F1,us_convention (share),regime x expiry + calendar controls,gex_l1,0.3325386986018657,1.139092560714979,0.25466455002970756,937
+full,F1,us_convention (share),regime x expiry + calendar controls,gex_l1_x_exp,0.203723087654339,0.4392944759382535,0.660448176346697,937
+full,F1,participant_pro (share),regime x expiry controls,gex_l1,-3.123587318118253,-2.8574069073569164,0.004271179020541731,937
+full,F1,participant_pro (share),regime x expiry controls,gex_l1_x_exp,8.17701058568171,3.2068382148648547,0.001342024468002385,937
+full,F1,participant_pro (share),regime x expiry + calendar controls,gex_l1,-4.076358480803719,-3.5480425795269444,0.0003881054744808765,937
+full,F1,participant_pro (share),regime x expiry + calendar controls,gex_l1_x_exp,8.79905564012688,3.4579555445819055,0.0005442911897798079,937
+full,F1,client_mirror (share),regime x expiry controls,gex_l1,-0.4857987261843883,-0.35936989896917637,0.7193183898956159,937
+full,F1,client_mirror (share),regime x expiry controls,gex_l1_x_exp,3.0974753531795027,1.6861927122647196,0.09175868713515002,937
+full,F1,client_mirror (share),regime x expiry + calendar controls,gex_l1,-1.533075511914376,-1.1155017896300197,0.2646354519721942,937
+full,F1,client_mirror (share),regime x expiry + calendar controls,gex_l1_x_exp,4.23382131946812,2.303543736736024,0.021248269299811284,937
+full,F1,us_convention (ratio),regime x expiry controls,gex_l1,-0.38280692544611983,-2.158734645808636,0.03087075929365755,937
+full,F1,us_convention (ratio),regime x expiry controls,gex_l1_x_exp,0.3934896290069769,1.5751933372263451,0.11521182465699105,937
+full,F1,us_convention (ratio),regime x expiry + calendar controls,gex_l1,-0.2306081394269306,-1.2255339588694074,0.22037410329412477,937
+full,F1,us_convention (ratio),regime x expiry + calendar controls,gex_l1_x_exp,0.27169260138913387,1.0232228298885482,0.3062025010118059,937
+full,F1,participant_pro (ratio),regime x expiry controls,gex_l1,-2.031349031865298,-2.0813725687150306,0.03739981749282487,937
+full,F1,participant_pro (ratio),regime x expiry controls,gex_l1_x_exp,4.890432147401992,3.1078329843049803,0.0018846454137434777,937
+full,F1,participant_pro (ratio),regime x expiry + calendar controls,gex_l1,-3.1661626200229875,-3.1374213152981287,0.0017044101525783562,937
+full,F1,participant_pro (ratio),regime x expiry + calendar controls,gex_l1_x_exp,5.9060212289291485,3.7336763479320627,0.00018870495859313075,937
+full,F1,client_mirror (ratio),regime x expiry controls,gex_l1,-2.332244685211749,-2.450261273833616,0.014275258824426242,937
+full,F1,client_mirror (ratio),regime x expiry controls,gex_l1_x_exp,3.6347795090974118,3.0324746356480854,0.0024255748106093186,937
+full,F1,client_mirror (ratio),regime x expiry + calendar controls,gex_l1,-2.678135813346671,-2.602540358427297,0.009253592306839989,937
+full,F1,client_mirror (ratio),regime x expiry + calendar controls,gex_l1_x_exp,3.9779283466496054,3.2985010830082944,0.0009720250512269757,937
+full,F1,gross GEX / 20-day median,regime x expiry controls,gex_l1,-0.2713023070693126,-5.307634744465208,1.1105690362410782e-07,937
+full,F1,gross GEX / 20-day median,regime x expiry controls,gex_l1_x_exp,0.004002434716665898,0.034690648950021455,0.9723264174977153,937
+full,F1,gross GEX / 20-day median,regime x expiry + calendar controls,gex_l1,-0.4646148054836772,-4.874990409714397,1.0881374129387658e-06,937
+full,F1,gross GEX / 20-day median,regime x expiry + calendar controls,gex_l1_x_exp,0.19807424059217738,1.4868823265432654,0.1370458928299318,937
+full,F2,us_convention,binary + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.004310142170158314,-0.16977271039261357,0.8651888892926989,932
+full,F2,us_convention,controls + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.008629769144565053,-0.3461003045717524,0.7292673345430194,931
+full,F2,participant_pro,binary + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.06038501304755069,-3.5308725635492824,0.00041419125032912094,932
+full,F2,participant_pro,controls + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.04518156042976905,-2.6872934983927594,0.007203362730930649,931
+full,F2,client_mirror,binary + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.0619436976374583,-2.6904654140875555,0.007135243068625008,932
+full,F2,client_mirror,controls + calendar dummies and their r_rod slopes,r_rod_x_neg,0.003960662914099051,0.10811512174245154,0.9139043730502192,931
+pre_auction,F1,us_convention (share),regime x expiry controls,gex_l1,0.3679208222304453,1.1948606135630129,0.2321414935546855,874
+pre_auction,F1,us_convention (share),regime x expiry controls,gex_l1_x_exp,0.32152695175402,0.6400122516626195,0.522164634310571,874
+pre_auction,F1,us_convention (share),regime x expiry + calendar controls,gex_l1,0.45327640654346624,1.4924409981646107,0.13558357395621606,874
+pre_auction,F1,us_convention (share),regime x expiry + calendar controls,gex_l1_x_exp,0.27037538793299376,0.5527577808844322,0.5804292817464158,874
+pre_auction,F1,participant_pro (share),regime x expiry controls,gex_l1,-3.5140671533063994,-3.1897855201291136,0.001423784178573362,874
+pre_auction,F1,participant_pro (share),regime x expiry controls,gex_l1_x_exp,8.942127696526654,3.467439771725183,0.0005254414765806573,874
+pre_auction,F1,participant_pro (share),regime x expiry + calendar controls,gex_l1,-4.376630929110039,-3.7754824535467635,0.00015969826641164988,874
+pre_auction,F1,participant_pro (share),regime x expiry + calendar controls,gex_l1_x_exp,9.431343007152009,3.664373584079357,0.0002479446642301017,874
+pre_auction,F1,client_mirror (share),regime x expiry controls,gex_l1,-0.6934140439350358,-0.5051469586085272,0.6134556214093493,874
+pre_auction,F1,client_mirror (share),regime x expiry controls,gex_l1_x_exp,3.272932859991812,1.7627398698639034,0.07794437303635612,874
+pre_auction,F1,client_mirror (share),regime x expiry + calendar controls,gex_l1,-1.800928021517393,-1.2942477581421958,0.19557985520395194,874
+pre_auction,F1,client_mirror (share),regime x expiry + calendar controls,gex_l1_x_exp,4.4687605278841716,2.40378894949162,0.01622613802813571,874
+pre_auction,F1,us_convention (ratio),regime x expiry controls,gex_l1,-0.33068096293339977,-1.8383899587506614,0.06600496368355119,874
+pre_auction,F1,us_convention (ratio),regime x expiry controls,gex_l1_x_exp,0.39696913898432484,1.5273866100107953,0.12666490405745184,874
+pre_auction,F1,us_convention (ratio),regime x expiry + calendar controls,gex_l1,-0.1324730875793989,-0.7130456914838308,0.4758174837828003,874
+pre_auction,F1,us_convention (ratio),regime x expiry + calendar controls,gex_l1_x_exp,0.23226106419743076,0.8455105868413422,0.39782582423944135,874
+pre_auction,F1,participant_pro (ratio),regime x expiry controls,gex_l1,-2.380903749124144,-2.4943685889798193,0.012618143949004283,874
+pre_auction,F1,participant_pro (ratio),regime x expiry controls,gex_l1_x_exp,5.394935679193793,3.4093679695405212,0.0006511358747936649,874
+pre_auction,F1,participant_pro (ratio),regime x expiry + calendar controls,gex_l1,-3.45497561254102,-3.4852005245608897,0.0004917683579330011,874
+pre_auction,F1,participant_pro (ratio),regime x expiry + calendar controls,gex_l1_x_exp,6.326379857899099,3.9805406041397458,6.875871821256668e-05,874
+pre_auction,F1,client_mirror (ratio),regime x expiry controls,gex_l1,-2.667400199312965,-2.764064385364507,0.005708627382276954,874
+pre_auction,F1,client_mirror (ratio),regime x expiry controls,gex_l1_x_exp,3.9254842885305266,3.2178403426485693,0.0012915969107898458,874
+pre_auction,F1,client_mirror (ratio),regime x expiry + calendar controls,gex_l1,-2.8908102534650197,-2.757025359566373,0.005832982755236615,874
+pre_auction,F1,client_mirror (ratio),regime x expiry + calendar controls,gex_l1_x_exp,4.133967574935639,3.3631021446628058,0.0007707184073347018,874
+pre_auction,F1,gross GEX / 20-day median,regime x expiry controls,gex_l1,-0.28678262850091585,-5.581865464208811,2.379524171639181e-08,874
+pre_auction,F1,gross GEX / 20-day median,regime x expiry controls,gex_l1_x_exp,-0.0012203130220100888,-0.010255226802704577,0.9918176562892489,874
+pre_auction,F1,gross GEX / 20-day median,regime x expiry + calendar controls,gex_l1,-0.48084053593299814,-4.797082040712688,1.6099367447000828e-06,874
+pre_auction,F1,gross GEX / 20-day median,regime x expiry + calendar controls,gex_l1_x_exp,0.19236145694658546,1.400917752196536,0.16123866956469857,874
+pre_auction,F2,us_convention,binary + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.015293019310850108,-0.5835431055575016,0.5595277478782783,869
+pre_auction,F2,us_convention,controls + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.020530274337894432,-0.8372388618362357,0.40245831726861936,868
+pre_auction,F2,participant_pro,binary + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.06257567175645705,-3.6128326827450943,0.0003028701475759577,869
+pre_auction,F2,participant_pro,controls + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.046336698640812655,-2.76239097696525,0.005737972130548018,868
+pre_auction,F2,client_mirror,binary + calendar dummies and their r_rod slopes,r_rod_x_neg,-0.06219260506393594,-2.665335495966752,0.007691155045655368,869
+pre_auction,F2,client_mirror,controls + calendar dummies and their r_rod slopes,r_rod_x_neg,0.006820861485773855,0.18925277727482914,0.8498947046936461,868

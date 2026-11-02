@@ -107,16 +107,16 @@ rv_last_hour   Tuesday regime, from 3 Aug 2026     13             45.1688      -
 == r5_without_auction
            sample                           spec            rule        term    coef          p   n
          all days                  momentum only            none       r_rod -0.0294 1.5323e-02 932
-         all days                         binary   us_convention r_rod_x_neg  0.0129 5.8627e-01 932
-         all days binary + VIX and size controls   us_convention r_rod_x_neg -0.0008 9.7116e-01 931
-         all days                         binary participant_pro r_rod_x_neg -0.0681 2.1371e-04 932
-         all days binary + VIX and size controls participant_pro r_rod_x_neg -0.0496 2.8726e-03 931
-         all days                         binary   client_mirror r_rod_x_neg -0.0720 2.9907e-05 932
-         all days binary + VIX and size controls   client_mirror r_rod_x_neg  0.0026 9.4630e-01 931
+         all days                         binary   us_convention r_rod_x_neg  0.0130 5.8411e-01 929
+         all days binary + VIX and size controls   us_convention r_rod_x_neg -0.0008 9.7151e-01 929
+         all days                         binary participant_pro r_rod_x_neg -0.0682 2.1580e-04 929
+         all days binary + VIX and size controls participant_pro r_rod_x_neg -0.0498 2.8604e-03 929
+         all days                         binary   client_mirror r_rod_x_neg -0.0720 3.0963e-05 929
+         all days binary + VIX and size controls   client_mirror r_rod_x_neg  0.0028 9.4137e-01 929
 before 3 Aug 2026                  momentum only            none       r_rod -0.0303 1.6525e-02 869
-before 3 Aug 2026                         binary   us_convention r_rod_x_neg  0.0057 8.0561e-01 869
-before 3 Aug 2026 binary + VIX and size controls   us_convention r_rod_x_neg -0.0097 6.7296e-01 868
-before 3 Aug 2026                         binary participant_pro r_rod_x_neg -0.0719 7.7746e-05 869
-before 3 Aug 2026 binary + VIX and size controls participant_pro r_rod_x_neg -0.0526 1.2673e-03 868
-before 3 Aug 2026                         binary   client_mirror r_rod_x_neg -0.0717 4.9827e-05 869
-before 3 Aug 2026 binary + VIX and size controls   client_mirror r_rod_x_neg  0.0042 9.1359e-01 868
+before 3 Aug 2026                         binary   us_convention r_rod_x_neg  0.0058 8.0326e-01 866
+before 3 Aug 2026 binary + VIX and size controls   us_convention r_rod_x_neg -0.0097 6.7279e-01 866
+before 3 Aug 2026                         binary participant_pro r_rod_x_neg -0.0722 7.6659e-05 866
+before 3 Aug 2026 binary + VIX and size controls participant_pro r_rod_x_neg -0.0528 1.2316e-03 866
+before 3 Aug 2026                         binary   client_mirror r_rod_x_neg -0.0717 5.1481e-05 866
+before 3 Aug 2026 binary + VIX and size controls   client_mirror r_rod_x_neg  0.0044 9.0839e-01 866

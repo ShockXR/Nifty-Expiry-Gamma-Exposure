@@ -1,0 +1,121 @@
+sample,finding,measure,rule,period,spec,term,coef,se_hac,p,n,neg_days
+full,F1,share,us_convention,2023 to 2024,regime x expiry controls,gex_l1,0.6486248508900029,0.553332374325817,0.24111049971914533,485,
+full,F1,share,us_convention,2023 to 2024,regime x expiry controls,gex_l1_x_exp,-0.9666215711500665,0.8004928773368247,0.22722694158144208,485,
+full,F1,share,us_convention,2023 to 2024,no regime controls,gex_l1,0.6179604054312904,0.5535388903642529,0.2642590013705707,485,
+full,F1,share,us_convention,2023 to 2024,no regime controls,gex_l1_x_exp,-0.8906724852137131,0.7968525344666986,0.26367884002419506,485,
+full,F1,ratio,us_convention,2023 to 2024,regime x expiry controls,gex_l1,-0.30436389509671974,0.28769932935611264,0.2900902988478816,485,
+full,F1,ratio,us_convention,2023 to 2024,regime x expiry controls,gex_l1_x_exp,-0.1291703777005624,0.46184655299854743,0.7797211403605568,485,
+full,F1,ratio,us_convention,2023 to 2024,no regime controls,gex_l1,-0.3024912824113244,0.2864438414910498,0.2909577108575858,485,
+full,F1,ratio,us_convention,2023 to 2024,no regime controls,gex_l1_x_exp,-0.057797535497030594,0.4484866163211423,0.897458635746187,485,
+full,F2,sign of net GEX (scale irrelevant),us_convention,2023 to 2024,binary,r_rod_x_neg,-0.01500119266398008,0.047195965317257525,0.7505994432227926,480,36.0
+full,F2,sign of net GEX (scale irrelevant),us_convention,2023 to 2024,controls,r_rod_x_neg,-0.02886669816347482,0.04436238747267878,0.5152388149861722,479,36.0
+full,F1,share,us_convention,2025 onward,regime x expiry controls,gex_l1,-0.038787396749228265,0.2665054108281714,0.8842839462388596,452,
+full,F1,share,us_convention,2025 onward,regime x expiry controls,gex_l1_x_exp,0.8551719819304111,0.5416306256688038,0.11436264408086068,452,
+full,F1,share,us_convention,2025 onward,no regime controls,gex_l1,-0.004152877905397645,0.26424247542355783,0.9874608321083789,452,
+full,F1,share,us_convention,2025 onward,no regime controls,gex_l1_x_exp,0.6508708121707798,0.5391715132084214,0.22736729790235455,452,
+full,F1,ratio,us_convention,2025 onward,regime x expiry controls,gex_l1,-0.42154873942067184,0.22415875587239356,0.060028912737257044,452,
+full,F1,ratio,us_convention,2025 onward,regime x expiry controls,gex_l1_x_exp,0.5577174997714707,0.29693936100294127,0.06035105077040404,452,
+full,F1,ratio,us_convention,2025 onward,no regime controls,gex_l1,-0.38531732427074417,0.22393269746005473,0.08530825049458492,452,
+full,F1,ratio,us_convention,2025 onward,no regime controls,gex_l1_x_exp,0.4369477212191839,0.29420495868950813,0.13749578785971095,452,
+full,F2,sign of net GEX (scale irrelevant),us_convention,2025 onward,binary,r_rod_x_neg,0.014525313810947182,0.026115356983335898,0.5780753888576889,452,71.0
+full,F2,sign of net GEX (scale irrelevant),us_convention,2025 onward,controls,r_rod_x_neg,0.009039436348478227,0.03029593737498922,0.7654198384256525,452,71.0
+full,F1,share,participant_pro,2023 to 2024,regime x expiry controls,gex_l1,-2.672053513729466,1.772439827325786,0.13166802525189988,485,
+full,F1,share,participant_pro,2023 to 2024,regime x expiry controls,gex_l1_x_exp,10.45714893648544,3.514887777169558,0.0029289133723922212,485,
+full,F1,share,participant_pro,2023 to 2024,no regime controls,gex_l1,-2.4856252353919217,1.7667075108684565,0.15944958406588416,485,
+full,F1,share,participant_pro,2023 to 2024,no regime controls,gex_l1_x_exp,10.586490357084358,3.4857914620132657,0.0023891323672924954,485,
+full,F1,ratio,participant_pro,2023 to 2024,regime x expiry controls,gex_l1,0.2353311379684807,1.4493323199117925,0.8710128372066327,485,
+full,F1,ratio,participant_pro,2023 to 2024,regime x expiry controls,gex_l1_x_exp,4.5253601333602065,2.2511076770595784,0.0444014030254459,485,
+full,F1,ratio,participant_pro,2023 to 2024,no regime controls,gex_l1,0.3439860598264204,1.4502038604857224,0.8125028644400646,485,
+full,F1,ratio,participant_pro,2023 to 2024,no regime controls,gex_l1_x_exp,4.457725743994274,2.2347322408569266,0.04607046530451572,485,
+full,F2,sign of net GEX (scale irrelevant),participant_pro,2023 to 2024,binary,r_rod_x_neg,-0.06437802589991815,0.027344131794244705,0.018554456764894797,480,365.0
+full,F2,sign of net GEX (scale irrelevant),participant_pro,2023 to 2024,controls,r_rod_x_neg,-0.04051397132420437,0.02657306292052349,0.12735251473911469,479,365.0
+full,F1,share,participant_pro,2025 onward,regime x expiry controls,gex_l1,-3.6236753002575597,1.4622899875940445,0.013209058058355917,452,
+full,F1,share,participant_pro,2025 onward,regime x expiry controls,gex_l1_x_exp,6.940251239817329,3.9781814019392914,0.08105820046242804,452,
+full,F1,share,participant_pro,2025 onward,no regime controls,gex_l1,-3.7062863401274626,1.4323074445694106,0.009663781605410164,452,
+full,F1,share,participant_pro,2025 onward,no regime controls,gex_l1_x_exp,8.464002351172894,3.968779718585512,0.0329537734864176,452,
+full,F1,ratio,participant_pro,2025 onward,regime x expiry controls,gex_l1,-3.9611131066985195,1.3206339451127143,0.0027050945169606955,452,
+full,F1,ratio,participant_pro,2025 onward,regime x expiry controls,gex_l1_x_exp,5.650630238050127,2.3014266716234246,0.014077772256962688,452,
+full,F1,ratio,participant_pro,2025 onward,no regime controls,gex_l1,-4.048297747774882,1.2876014677131205,0.0016662061945715689,452,
+full,F1,ratio,participant_pro,2025 onward,no regime controls,gex_l1_x_exp,6.452281075174028,2.2765490651525098,0.004593515738986184,452,
+full,F2,sign of net GEX (scale irrelevant),participant_pro,2025 onward,binary,r_rod_x_neg,-0.07389919320257463,0.029313023805551543,0.01170098245515281,452,98.0
+full,F2,sign of net GEX (scale irrelevant),participant_pro,2025 onward,controls,r_rod_x_neg,-0.07024351225562245,0.019288570518753784,0.0002708258597636049,452,98.0
+full,F1,share,client_mirror,2023 to 2024,regime x expiry controls,gex_l1,-0.8627849994171847,1.8093308949371656,0.6334667492173174,485,
+full,F1,share,client_mirror,2023 to 2024,regime x expiry controls,gex_l1_x_exp,2.6654466363205698,2.4395545181418123,0.27457137675170773,485,
+full,F1,share,client_mirror,2023 to 2024,no regime controls,gex_l1,-0.7494005458389665,1.7920267082709092,0.6758111044434879,485,
+full,F1,share,client_mirror,2023 to 2024,no regime controls,gex_l1_x_exp,2.7474073029826513,2.43637446020946,0.25946262126318387,485,
+full,F1,ratio,client_mirror,2023 to 2024,regime x expiry controls,gex_l1,-2.493269677294469,1.589702694442965,0.11679074961578916,485,
+full,F1,ratio,client_mirror,2023 to 2024,regime x expiry controls,gex_l1_x_exp,3.796546046221723,1.8348688786048215,0.038535739947785155,485,
+full,F1,ratio,client_mirror,2023 to 2024,no regime controls,gex_l1,-2.2456861849376537,1.545314603400645,0.14616194500747837,485,
+full,F1,ratio,client_mirror,2023 to 2024,no regime controls,gex_l1_x_exp,3.5866667611122693,1.765932284402239,0.04225164623755483,485,
+full,F2,sign of net GEX (scale irrelevant),client_mirror,2023 to 2024,binary,r_rod_x_neg,-0.0655285049523686,0.02099357958081316,0.0018001824541914004,480,32.0
+full,F2,sign of net GEX (scale irrelevant),client_mirror,2023 to 2024,controls,r_rod_x_neg,0.01344339863410493,0.06521628037663338,0.8366849725459702,479,32.0
+full,F1,share,client_mirror,2025 onward,regime x expiry controls,gex_l1,0.45478341949319656,1.3535875820648897,0.7368831273627982,452,
+full,F1,share,client_mirror,2025 onward,regime x expiry controls,gex_l1_x_exp,3.9955062833669786,2.6167795125512523,0.12679104556166385,452,
+full,F1,share,client_mirror,2025 onward,no regime controls,gex_l1,0.6609836691122837,1.34973859245051,0.6243374556048554,452,
+full,F1,share,client_mirror,2025 onward,no regime controls,gex_l1_x_exp,3.4777189329201974,2.858067276293871,0.2236773012710811,452,
+full,F1,ratio,client_mirror,2025 onward,regime x expiry controls,gex_l1,-2.1572535187340236,1.0238817737096173,0.03512311485868553,452,
+full,F1,ratio,client_mirror,2025 onward,regime x expiry controls,gex_l1_x_exp,3.6051112723910137,1.6023512698348419,0.024456040885264086,452,
+full,F1,ratio,client_mirror,2025 onward,no regime controls,gex_l1,-1.96678433024681,1.0063698558894891,0.0506615537713979,452,
+full,F1,ratio,client_mirror,2025 onward,no regime controls,gex_l1_x_exp,3.493776809806832,1.59221058223086,0.028214339972527588,452,
+full,F2,sign of net GEX (scale irrelevant),client_mirror,2025 onward,binary,r_rod_x_neg,-0.1042174377523083,0.04261503734361694,0.014462919811760348,452,6.0
+full,F2,sign of net GEX (scale irrelevant),client_mirror,2025 onward,controls,r_rod_x_neg,-0.10980858711757394,0.04392778557475502,0.012428013592135082,452,6.0
+pre_auction,F1,share,us_convention,2023 to 2024,regime x expiry controls,gex_l1,0.6486248508900029,0.553332374325817,0.24111049971914533,485,
+pre_auction,F1,share,us_convention,2023 to 2024,regime x expiry controls,gex_l1_x_exp,-0.9666215711500665,0.8004928773368247,0.22722694158144208,485,
+pre_auction,F1,share,us_convention,2023 to 2024,no regime controls,gex_l1,0.6179604054312904,0.5535388903642529,0.2642590013705707,485,
+pre_auction,F1,share,us_convention,2023 to 2024,no regime controls,gex_l1_x_exp,-0.8906724852137131,0.7968525344666986,0.26367884002419506,485,
+pre_auction,F1,ratio,us_convention,2023 to 2024,regime x expiry controls,gex_l1,-0.30436389509671974,0.28769932935611264,0.2900902988478816,485,
+pre_auction,F1,ratio,us_convention,2023 to 2024,regime x expiry controls,gex_l1_x_exp,-0.1291703777005624,0.46184655299854743,0.7797211403605568,485,
+pre_auction,F1,ratio,us_convention,2023 to 2024,no regime controls,gex_l1,-0.3024912824113244,0.2864438414910498,0.2909577108575858,485,
+pre_auction,F1,ratio,us_convention,2023 to 2024,no regime controls,gex_l1_x_exp,-0.057797535497030594,0.4484866163211423,0.897458635746187,485,
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,2023 to 2024,binary,r_rod_x_neg,-0.01500119266398008,0.047195965317257525,0.7505994432227926,480,36.0
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,2023 to 2024,controls,r_rod_x_neg,-0.02886669816347482,0.04436238747267878,0.5152388149861722,479,36.0
+pre_auction,F1,share,us_convention,2025 onward,regime x expiry controls,gex_l1,0.08543703409883166,0.2621508643065638,0.7444940487277198,389,
+pre_auction,F1,share,us_convention,2025 onward,regime x expiry controls,gex_l1_x_exp,1.0897140462627843,0.576588846082565,0.0587669773706712,389,
+pre_auction,F1,share,us_convention,2025 onward,no regime controls,gex_l1,0.13422155992731177,0.26729294884266985,0.6155609436356788,389,
+pre_auction,F1,share,us_convention,2025 onward,no regime controls,gex_l1_x_exp,0.8657891214687652,0.568691506558753,0.1279030849344356,389,
+pre_auction,F1,ratio,us_convention,2025 onward,regime x expiry controls,gex_l1,-0.3267300958770463,0.22506443513924995,0.14658002703283426,389,
+pre_auction,F1,ratio,us_convention,2025 onward,regime x expiry controls,gex_l1_x_exp,0.5763387102985217,0.31579601417687275,0.06799578052833984,389,
+pre_auction,F1,ratio,us_convention,2025 onward,no regime controls,gex_l1,-0.2754573469736812,0.22921649545208392,0.22946644978787356,389,
+pre_auction,F1,ratio,us_convention,2025 onward,no regime controls,gex_l1_x_exp,0.4383442086089957,0.309793500946942,0.1570813634161883,389,
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,2025 onward,binary,r_rod_x_neg,0.005839185343264807,0.02491676184304261,0.8147150726287518,389,59.0
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,2025 onward,controls,r_rod_x_neg,-0.002222249728584342,0.031698810277750775,0.9441099707151239,389,59.0
+pre_auction,F1,share,participant_pro,2023 to 2024,regime x expiry controls,gex_l1,-2.672053513729466,1.772439827325786,0.13166802525189988,485,
+pre_auction,F1,share,participant_pro,2023 to 2024,regime x expiry controls,gex_l1_x_exp,10.45714893648544,3.514887777169558,0.0029289133723922212,485,
+pre_auction,F1,share,participant_pro,2023 to 2024,no regime controls,gex_l1,-2.4856252353919217,1.7667075108684565,0.15944958406588416,485,
+pre_auction,F1,share,participant_pro,2023 to 2024,no regime controls,gex_l1_x_exp,10.586490357084358,3.4857914620132657,0.0023891323672924954,485,
+pre_auction,F1,ratio,participant_pro,2023 to 2024,regime x expiry controls,gex_l1,0.2353311379684807,1.4493323199117925,0.8710128372066327,485,
+pre_auction,F1,ratio,participant_pro,2023 to 2024,regime x expiry controls,gex_l1_x_exp,4.5253601333602065,2.2511076770595784,0.0444014030254459,485,
+pre_auction,F1,ratio,participant_pro,2023 to 2024,no regime controls,gex_l1,0.3439860598264204,1.4502038604857224,0.8125028644400646,485,
+pre_auction,F1,ratio,participant_pro,2023 to 2024,no regime controls,gex_l1_x_exp,4.457725743994274,2.2347322408569266,0.04607046530451572,485,
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,2023 to 2024,binary,r_rod_x_neg,-0.06437802589991815,0.027344131794244705,0.018554456764894797,480,365.0
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,2023 to 2024,controls,r_rod_x_neg,-0.04051397132420437,0.02657306292052349,0.12735251473911469,479,365.0
+pre_auction,F1,share,participant_pro,2025 onward,regime x expiry controls,gex_l1,-4.357314374266824,1.5075253002659263,0.0038478176326647373,389,
+pre_auction,F1,share,participant_pro,2025 onward,regime x expiry controls,gex_l1_x_exp,8.16381365182679,4.079903559413253,0.04539432792816155,389,
+pre_auction,F1,share,participant_pro,2025 onward,no regime controls,gex_l1,-4.409487119680421,1.4942642584422383,0.0031680642824120377,389,
+pre_auction,F1,share,participant_pro,2025 onward,no regime controls,gex_l1_x_exp,9.605370663738086,4.032725993833467,0.017225654383845664,389,
+pre_auction,F1,ratio,participant_pro,2025 onward,regime x expiry controls,gex_l1,-4.692563492693633,1.3036587568369558,0.0003187884470145392,389,
+pre_auction,F1,ratio,participant_pro,2025 onward,regime x expiry controls,gex_l1_x_exp,6.499882873293903,2.3400039766751415,0.005474126216799718,389,
+pre_auction,F1,ratio,participant_pro,2025 onward,no regime controls,gex_l1,-4.762407037663024,1.2797042756464765,0.00019805048155561812,389,
+pre_auction,F1,ratio,participant_pro,2025 onward,no regime controls,gex_l1_x_exp,7.2754846119377135,2.312154140329811,0.0016516601221715245,389,
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,2025 onward,binary,r_rod_x_neg,-0.07964687231817953,0.029486002331757567,0.006909483149195421,389,90.0
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,2025 onward,controls,r_rod_x_neg,-0.07419973239291258,0.0181919836772417,4.528728412908736e-05,389,90.0
+pre_auction,F1,share,client_mirror,2023 to 2024,regime x expiry controls,gex_l1,-0.8627849994171847,1.8093308949371656,0.6334667492173174,485,
+pre_auction,F1,share,client_mirror,2023 to 2024,regime x expiry controls,gex_l1_x_exp,2.6654466363205698,2.4395545181418123,0.27457137675170773,485,
+pre_auction,F1,share,client_mirror,2023 to 2024,no regime controls,gex_l1,-0.7494005458389665,1.7920267082709092,0.6758111044434879,485,
+pre_auction,F1,share,client_mirror,2023 to 2024,no regime controls,gex_l1_x_exp,2.7474073029826513,2.43637446020946,0.25946262126318387,485,
+pre_auction,F1,ratio,client_mirror,2023 to 2024,regime x expiry controls,gex_l1,-2.493269677294469,1.589702694442965,0.11679074961578916,485,
+pre_auction,F1,ratio,client_mirror,2023 to 2024,regime x expiry controls,gex_l1_x_exp,3.796546046221723,1.8348688786048215,0.038535739947785155,485,
+pre_auction,F1,ratio,client_mirror,2023 to 2024,no regime controls,gex_l1,-2.2456861849376537,1.545314603400645,0.14616194500747837,485,
+pre_auction,F1,ratio,client_mirror,2023 to 2024,no regime controls,gex_l1_x_exp,3.5866667611122693,1.765932284402239,0.04225164623755483,485,
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,2023 to 2024,binary,r_rod_x_neg,-0.0655285049523686,0.02099357958081316,0.0018001824541914004,480,32.0
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,2023 to 2024,controls,r_rod_x_neg,0.01344339863410493,0.06521628037663338,0.8366849725459702,479,32.0
+pre_auction,F1,share,client_mirror,2025 onward,regime x expiry controls,gex_l1,0.044750488841608295,1.4164140566680452,0.9747956576344216,389,
+pre_auction,F1,share,client_mirror,2025 onward,regime x expiry controls,gex_l1_x_exp,4.397058048385903,2.6366326017228228,0.09537937385851156,389,
+pre_auction,F1,share,client_mirror,2025 onward,no regime controls,gex_l1,0.39201979628455774,1.4159007866675253,0.7818802839079398,389,
+pre_auction,F1,share,client_mirror,2025 onward,no regime controls,gex_l1_x_exp,3.6817962217667173,2.8713150440068143,0.1997485488207692,389,
+pre_auction,F1,ratio,client_mirror,2025 onward,regime x expiry controls,gex_l1,-2.6991558599516963,1.031243697778843,0.00886078313057889,389,
+pre_auction,F1,ratio,client_mirror,2025 onward,regime x expiry controls,gex_l1_x_exp,3.9577090019637815,1.6523006556546587,0.016608053292520998,389,
+pre_auction,F1,ratio,client_mirror,2025 onward,no regime controls,gex_l1,-2.4202244318628345,1.018832920972167,0.01752580634703059,389,
+pre_auction,F1,ratio,client_mirror,2025 onward,no regime controls,gex_l1_x_exp,3.762285048419244,1.6550717481293256,0.023015005572775065,389,
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,2025 onward,binary,r_rod_x_neg,-0.10410356194019531,0.04298385402544322,0.015438643931577215,389,6.0
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,2025 onward,controls,r_rod_x_neg,-0.1101200535358691,0.043827401843627614,0.011985037579800567,389,6.0

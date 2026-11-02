@@ -1,0 +1,37 @@
+sample,finding,measure,rule,spec,term,coef,se_hac,p,n
+full,F1,share,us_convention,regime x expiry controls (auction = own regime),gex_l1,0.265829236991269,0.2936126081080939,0.36526725703851404,937
+full,F1,share,us_convention,regime x expiry controls (auction = own regime),gex_l1_x_exp,0.2394754984727039,0.47514476881098444,0.6142576278467964,937
+full,F1,ratio,us_convention,regime x expiry controls (auction = own regime),gex_l1,-0.38280692544611983,0.17732931010736847,0.03087075929365755,937
+full,F1,ratio,us_convention,regime x expiry controls (auction = own regime),gex_l1_x_exp,0.3934896290069769,0.24980402069237231,0.11521182465699105,937
+full,F2,sign of net GEX (scale irrelevant),us_convention,binary,r_rod_x_neg,0.012948202343817097,0.02379071217479141,0.5862663473729262,932
+full,F2,sign of net GEX (scale irrelevant),us_convention,controls,r_rod_x_neg,-0.0008430345293839805,0.023317153550210187,0.971158670094685,931
+full,F1,share,participant_pro,regime x expiry controls (auction = own regime),gex_l1,-3.123587318118253,1.0931545346502827,0.004271179020541731,937
+full,F1,share,participant_pro,regime x expiry controls (auction = own regime),gex_l1_x_exp,8.17701058568171,2.549866890003465,0.001342024468002385,937
+full,F1,ratio,participant_pro,regime x expiry controls (auction = own regime),gex_l1,-2.031349031865298,0.9759660823815817,0.03739981749282487,937
+full,F1,ratio,participant_pro,regime x expiry controls (auction = own regime),gex_l1_x_exp,4.890432147401992,1.5735826770934611,0.0018846454137434777,937
+full,F2,sign of net GEX (scale irrelevant),participant_pro,binary,r_rod_x_neg,-0.06808827671835406,0.018391164382342617,0.00021371474924648787,932
+full,F2,sign of net GEX (scale irrelevant),participant_pro,controls,r_rod_x_neg,-0.04962313772923902,0.016646209983497653,0.002872645095084069,931
+full,F1,share,client_mirror,regime x expiry controls (auction = own regime),gex_l1,-0.4857987261843883,1.3518069475987355,0.7193183898956159,937
+full,F1,share,client_mirror,regime x expiry controls (auction = own regime),gex_l1_x_exp,3.0974753531795027,1.8369640259085773,0.09175868713515002,937
+full,F1,ratio,client_mirror,regime x expiry controls (auction = own regime),gex_l1,-2.332244685211749,0.9518351002474029,0.014275258824426242,937
+full,F1,ratio,client_mirror,regime x expiry controls (auction = own regime),gex_l1_x_exp,3.6347795090974118,1.1986182724725758,0.0024255748106093186,937
+full,F2,sign of net GEX (scale irrelevant),client_mirror,binary,r_rod_x_neg,-0.07202029537067432,0.017253789497755755,2.9907096355709747e-05,932
+full,F2,sign of net GEX (scale irrelevant),client_mirror,controls,r_rod_x_neg,0.002598723225394728,0.038585565420653015,0.9463033743102862,931
+pre_auction,F1,share,us_convention,regime x expiry controls (auction = own regime),gex_l1,0.3679208222304453,0.30791944939361954,0.2321414935546855,874
+pre_auction,F1,share,us_convention,regime x expiry controls (auction = own regime),gex_l1_x_exp,0.32152695175402,0.5023762450152469,0.522164634310571,874
+pre_auction,F1,ratio,us_convention,regime x expiry controls (auction = own regime),gex_l1,-0.33068096293339977,0.17987530956605363,0.06600496368355119,874
+pre_auction,F1,ratio,us_convention,regime x expiry controls (auction = own regime),gex_l1_x_exp,0.39696913898432484,0.25990088978292086,0.12666490405745184,874
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,binary,r_rod_x_neg,0.005742097717087243,0.023333317405144095,0.8056125096312844,869
+pre_auction,F2,sign of net GEX (scale irrelevant),us_convention,controls,r_rod_x_neg,-0.009726413664341673,0.023043364336254313,0.6729580594101368,868
+pre_auction,F1,share,participant_pro,regime x expiry controls (auction = own regime),gex_l1,-3.5140671533063994,1.1016625196681435,0.001423784178573362,874
+pre_auction,F1,share,participant_pro,regime x expiry controls (auction = own regime),gex_l1_x_exp,8.942127696526654,2.5788847925908187,0.0005254414765806573,874
+pre_auction,F1,ratio,participant_pro,regime x expiry controls (auction = own regime),gex_l1,-2.380903749124144,0.954511598503539,0.012618143949004283,874
+pre_auction,F1,ratio,participant_pro,regime x expiry controls (auction = own regime),gex_l1_x_exp,5.394935679193793,1.5823858637121138,0.0006511358747936649,874
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,binary,r_rod_x_neg,-0.07194039294982364,0.018207022377461475,7.774591803303069e-05,869
+pre_auction,F2,sign of net GEX (scale irrelevant),participant_pro,controls,r_rod_x_neg,-0.052575834705007984,0.016311298649843483,0.0012673290914539908,868
+pre_auction,F1,share,client_mirror,regime x expiry controls (auction = own regime),gex_l1,-0.6934140439350358,1.3726976518775986,0.6134556214093493,874
+pre_auction,F1,share,client_mirror,regime x expiry controls (auction = own regime),gex_l1_x_exp,3.272932859991812,1.8567304886820917,0.07794437303635612,874
+pre_auction,F1,ratio,client_mirror,regime x expiry controls (auction = own regime),gex_l1,-2.667400199312965,0.9650282437111918,0.005708627382276954,874
+pre_auction,F1,ratio,client_mirror,regime x expiry controls (auction = own regime),gex_l1_x_exp,3.9254842885305266,1.2199126962587283,0.0012915969107898458,874
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,binary,r_rod_x_neg,-0.07168745761063412,0.01767251282379371,4.982672036587143e-05,869
+pre_auction,F2,sign of net GEX (scale irrelevant),client_mirror,controls,r_rod_x_neg,0.004189521300080656,0.0386078679250334,0.9135874185139967,868

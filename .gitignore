@@ -12,3 +12,4 @@ data/live/
 # local agent worktrees
 .claude/worktrees/
 results/intraday_gamma/anchor_panel.csv.gz
+results/falsification/t1_permutation_draws.csv.gz

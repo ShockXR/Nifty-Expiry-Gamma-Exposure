@@ -120,9 +120,9 @@ def r5_without_auction(dm: pd.DataFrame) -> pd.DataFrame:
     scale = panel["gross_gex"].rolling(20, min_periods=5).median()
     for k, col in mg.RULES.items():
         d[f"gex_{k}"] = (panel[col] / scale).shift(1).reindex(d.index)
+    d["lvix"] = np.log(d["vix"]).shift(1)  # shift on the full trading calendar, before dropping days
     d = d.dropna(subset=["r_rod", "r_last"])
     d["rr"], d["rl"] = d["r_rod"] * 1e4, d["r_last"] * 1e4
-    d["lvix"] = np.log(d["vix"]).shift(1)
     d["lvix"] -= d["lvix"].mean()
     rows = []
     for sample, m in (("all days", np.ones(len(d), bool)), ("before 3 Aug 2026", (d.index < AUCTION_START))):
@@ -131,7 +131,7 @@ def r5_without_auction(dm: pd.DataFrame) -> pd.DataFrame:
         rows.append({"sample": sample, "spec": "momentum only", "rule": "none", "term": "r_rod", "coef": f.params["rr"],
                      "p": f.pvalues["rr"], "n": int(f.nobs)})
         for k in mg.RULES:
-            neg = (dd[f"gex_{k}"] < 0).astype(float)
+            neg = (dd[f"gex_{k}"] < 0).astype(float).where(dd[f"gex_{k}"].notna())
             X = pd.DataFrame({"r_rod": dd["rr"], "neg": neg, "r_rod_x_neg": dd["rr"] * neg})
             f = mg.fit(dd["rl"], X)
             rows.append({"sample": sample, "spec": "binary", "rule": k, "term": "r_rod_x_neg", "coef": f.params["r_rod_x_neg"],

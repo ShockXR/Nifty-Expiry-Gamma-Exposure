@@ -83,10 +83,12 @@ def main():
     scale = panel["gross_gex"].rolling(20, min_periods=5).median()
     for k, col in RULES.items():
         d[f"gex_{k}"] = (panel[col] / scale).shift(1).reindex(d.index)  # known at the previous close
+    # Controls for the "busy market" explanation: yesterday's log VIX (demeaned) and the size of today's move.
+    # The shift is taken on the full trading calendar, before any day is dropped, so "yesterday" is always
+    # the previous trading day even when that day has no usable minute bars.
+    d["lvix_prev"] = np.log(d["vix"]).shift(1)
     d = d.dropna(subset=["r_rod", "r_last"])
     d["r_rod_bp"], d["r_last_bp"] = d["r_rod"] * 1e4, d["r_last"] * 1e4
-    # Controls for the "busy market" explanation: yesterday's log VIX (demeaned) and the size of today's move.
-    d["lvix_prev"] = np.log(d["vix"]).shift(1)
     d["lvix_prev"] -= d["lvix_prev"].mean()
 
     rows, summ = [], []
@@ -99,7 +101,7 @@ def main():
                      "se_hac": f.bse["r_rod_bp"], "p": f.pvalues["r_rod_bp"], "n": int(f.nobs), "r2": f.rsquared})
     for k in RULES:
         g = d[f"gex_{k}"]
-        neg = (g < 0).astype(float)
+        neg = (g < 0).astype(float).where(g.notna())  # a day with no GEX is missing, not "non-negative"
         for sname, m in subsets.items():
             dd = d[m]
             X = pd.DataFrame({"r_rod": dd["r_rod_bp"], "neg": neg[m], "r_rod_x_neg": dd["r_rod_bp"] * neg[m]})
@@ -132,7 +134,7 @@ def main():
                              "corr_rod_last": x[["r_rod_bp", "r_last_bp"]].corr().iloc[0, 1] if len(x) > 2 else np.nan})
     stab = []
     for k in RULES:
-        neg = (d[f"gex_{k}"] < 0).astype(float)
+        neg = (d[f"gex_{k}"] < 0).astype(float).where(d[f"gex_{k}"].notna())
         half = d.index < d.index[len(d) // 2]
         parts = [(f"regime {r}", (d["regime"] == r).to_numpy()) for r in d["regime"].unique()]
         parts += [("first half", half), ("second half", ~half)]
