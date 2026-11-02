@@ -306,11 +306,107 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Positions during the day are not public. Intraday option-chain snapshots would be needed for a sharper test.
 * **NEXT ITERATION:** Merge the model study and rerun the pipeline.
 
-## Iterations in progress (3 November 2026, early morning UTC)
+## Iteration 26: a second person re-typed every number taken from the paper
 
-* **Stronger forecasting models:** option-implied features, new GEX measures, a Student t Diebold-Mariano test and more frequent mcsGARCH refits in the forecasting contest.
-* **Connectedness by gamma regime:** does Nifty and Bank Nifty volatility spill over more when dealers are short gamma (a new question for the paper's connectedness design)?
-* **Power calibrated on the real data:** how large an effect each test could have detected, and how many more expiries would be needed.
-* **Second-person check of the paper's printed numbers,** and **BSE's Sensex expiry as a confounder.**
+* **OBJECTIVE:** Make sure the replication compares our numbers with what the paper actually printed.
+* **PROBLEM IDENTIFIED:** The 223 printed values in `experiments/replicate_paper.py` were typed by hand once. A typing slip could make the replication look worse, or make the paper look inconsistent when it is not, just before we raise inconsistencies with the authors.
+* **HYPOTHESIS:** A blind second typing, compared cell by cell, finds any slip.
+* **CHANGES IMPLEMENTED:** `results/replication_nse/rekey_blind.csv` (typed from the PDF before the script's values were opened), `experiments/rekey_check.py`, `results/replication_nse/rekey_check.csv`, `docs/REKEY_CHECK.md`. The paper itself stays out of the repository.
+* **EXPERIMENTS PERFORMED:** Cell-by-cell comparison of all 223 values; every typed table value also found in the PDF's own text layer (217 of 217).
+* **RESULTS:** 222 of 223 matched. The one difference is a typesetting slip in the paper, which the first typing had already read correctly. Nothing in the replication changed.
+* **IMPROVEMENTS:** The questions for the authors now rest on a checked transcription.
+* **REMAINING ISSUES:** None for the transcription.
+* **NEXT ITERATION:** Connectedness by gamma regime.
+
+## Iteration 27: does volatility spill over more when dealers are short gamma?
+
+* **OBJECTIVE:** Link the paper's connectedness result (Nifty and Bank Nifty became less connected after the expiry split) to dealer hedging.
+* **PROBLEM IDENTIFIED:** The paper measures connectedness but does not ask what drives it day to day.
+* **HYPOTHESIS:** After short-gamma evenings (negative GEX), hedging amplifies moves in both indices, so total connectedness is higher.
+* **CHANGES IMPLEMENTED:** `experiments/connectedness_gamma.py`, `docs/CONNECTEDNESS_GAMMA.md`, results in `results/connectedness_gamma/`. The test was stated before it was run, but that statement was not time-stamped in git; the document says so.
+* **EXPERIMENTS PERFORMED:** Diebold-Yilmaz connectedness on 1-minute Nifty and Bank Nifty volatility, split by the evening's GEX sign under each rule, with permutation p-values, a day-level regression with VIX and robustness checks.
+* **RESULTS:** The pre-stated Pro-rule test is borderline: +4.29 points of connectedness after short-gamma evenings, permutation p = 0.044. It vanishes once VIX is controlled for, and no Pro secondary test survives Holm. Gross gamma (no sign) does survive (Holm p = 0.010), with lower connectedness on high-gamma days: the same level effect as in iteration 22.
+* **IMPROVEMENTS:** A new question for the paper's own design, answered with its limits stated.
+* **REMAINING ISSUES:** The Nifty and Sensex pair is still open.
+* **NEXT ITERATION:** BSE's Sensex expiry as a confounder.
+
+## Iteration 28: BSE's Sensex expiry as a hidden confounder
+
+* **OBJECTIVE:** Check whether Sensex expiry days, which BSE moved around during the sample, contaminate the "rest of the week" baseline in R2.
+* **PROBLEM IDENTIFIED:** If Sensex expiry days are volatile for Nifty too, they inflate the baseline and bias the Nifty expiry premium.
+* **HYPOTHESIS:** Nifty volatility is higher on Sensex expiry days; leaving them out changes R2.
+* **CHANGES IMPLEMENTED:** `experiments/sensex_confound.py` (with `--sensex-ref` pinning the Sensex minute-bar commit, `--until` and `--fetch-only`), `data/external/sensex_expiry_calendar.csv`, `docs/SENSEX_CONFOUND.md`. BSE's servers are blocked from the cloud, so the calendar is built from reported dates and checked against the 71 option-price expiry dates available (all match).
+* **EXPERIMENTS PERFORMED:** The pre-stated test of Nifty volatility on Sensex expiry days; R2 rerun with Sensex days out of the baseline.
+* **RESULTS:** The pre-stated test is not significant (p = 0.16), but Nifty's last 30 minutes are more volatile on Sensex expiry days. With Sensex days out of the baseline every NSE premium gets a little larger (Tuesday last hour +43% becomes +63%), so R2 was understated, not overstated.
+* **IMPROVEMENTS:** One more alternative explanation checked and reported.
+* **REMAINING ISSUES:** The calendar needs verification against BSE circulars, downloaded off the cloud.
+* **NEXT ITERATION:** Power calibrated on the real data.
+
+## Iteration 29: how large an effect could our tests see?
+
+* **OBJECTIVE:** Turn "not significant" into "we could only have seen effects larger than X", and check that the main tests hold their 5% level.
+* **PROBLEM IDENTIFIED:** Several central results are nulls, and the significant ones come from a sample of about 200 expiries.
+* **HYPOTHESIS:** Resampling the real residuals shows the minimum detectable effects and the size of each test.
+* **CHANGES IMPLEMENTED:** `experiments/power_real.py`, `docs/POWER_REAL.md`, results in `results/power_real/`.
+* **EXPERIMENTS PERFORMED:** Block resampling of real residuals with effects of known size planted, for R2, R3, R5 and the out-of-sample GEX test; sign-error scenarios; size checks with no effect.
+* **RESULTS:** The significant results sit just above what the sample can detect (R5: detectable 0.042 to 0.052 against an estimate of -0.068). Effects half as large would need 2.4 to 3.9 times the sample (5.5 to 10.9 more years). A GEX sign wrong on a quarter of days cuts power at the estimate from 83% to 99% down to 23% to 59%. R3, R5 and the Tuesday R2 tests hold their level, but the R2 tests for the earlier periods over-reject (several weeklies 8.2% to 9.1%, one Thursday weekly 12.8% to 17.8% at a nominal 5%), so the "+11% before November 2024" result (p = 0.045) is weak.
+* **IMPROVEMENTS:** Every null now has a stated detectable size; one result was downgraded.
+* **REMAINING ISSUES:** Power is for the designs as they are; a larger sample needs time, not code.
+* **NEXT ITERATION:** The two pre-registered studies.
+
+## Iteration 30: what explains when pinning appears (pre-registered, P87)
+
+* **OBJECTIVE:** Explain why pinning appeared under the single Thursday weekly and not since the move to Tuesday.
+* **PROBLEM IDENTIFIED:** The pinning study (iteration 18) found the pattern but no cause, and dealer gamma did not explain it.
+* **HYPOTHESIS:** Six market-structure candidates written down in advance; the primary one is open interest near the money.
+* **CHANGES IMPLEMENTED:** The design was committed to git (`docs/prereg/P87_PINNING_MECHANISM.md`, commit e50a775) before any outcome data were used; a second agent then ran it. `experiments/pinning_mechanism.py`, `docs/PINNING_MECHANISM.md`, `data/external/other_weekly_expiries.csv`, results in `results/pinning_mechanism/`.
+* **EXPERIMENTS PERFORMED:** The pre-registered regressions with week-clustered and permutation p-values, Holm across candidates, the planned placebos and a settlement-price check (322 of 322 match).
+* **RESULTS:** The primary candidate has the wrong sign (+0.0224 strike spacings per SD, p = 0.010), so it is ruled out. Open interest held into expiry rather than rolled matters day to day (Holm p = 0.0099) but explains none of the change between regimes. No candidate explains when pinning comes and goes. No deviations from the plan.
+* **IMPROVEMENTS:** The first result in the project whose order (design, then data) anyone can check from git.
+* **REMAINING ISSUES:** Pinning's cause is still unknown; strike-level positioning data would help.
+* **NEXT ITERATION:** Is the end-of-day reversal worth anything after costs?
+
+## Iteration 31: the end-of-day reversal after trading costs (pre-registered, P90)
+
+* **OBJECTIVE:** Measure whether the one robust GEX result (R5) is economically meaningful.
+* **PROBLEM IDENTIFIED:** A statistically robust effect can still be too small to matter.
+* **HYPOTHESIS:** A walk-forward trading rule fixed in advance earns more than realistic costs.
+* **CHANGES IMPLEMENTED:** The design was committed to git (`docs/prereg/P90_F2_ECONOMICS.md`, commit 236e3db) before any return data were loaded. `experiments/f2_economics.py`, `docs/F2_ECONOMICS.md`, results in `results/f2_economics/`.
+* **EXPERIMENTS PERFORMED:** The pre-registered rule on 90 test trades from 2025 to July 2026, with gross and net returns, cost scenarios, the Deflated Sharpe Ratio and the planned robustness checks.
+* **RESULTS:** +4.15 bp per trade before costs, -0.89 bp after a base-case 5 bp round trip; the Deflated Sharpe Ratio is far below the 0.95 bar. By the pre-stated rule, not economically meaningful.
+* **IMPROVEMENTS:** R5 is now described as a statistical regularity, not a trading opportunity, everywhere it appears.
+* **REMAINING ISSUES:** The option side of a trading layer still needs intraday option prices.
+* **NEXT ITERATION:** Count every test in the project.
+
+## Iteration 32: a ledger of every hypothesis test
+
+* **OBJECTIVE:** Show how much of the evidence survives once every test the project ran is counted.
+* **PROBLEM IDENTIFIED:** Each study corrected for its own tests, but the project as a whole ran thousands.
+* **HYPOTHESIS:** A Benjamini-Yekutieli correction across the whole project (valid under any dependence) separates the robust findings from the lucky ones.
+* **CHANGES IMPLEMENTED:** `scripts/build_test_ledger.py`, `results/test_ledger*.csv`, `docs/TEST_LEDGER.md`, with a pre-specification flag judged from git commit times.
+* **EXPERIMENTS PERFORMED:** 4,930 tests from 17 studies; BY across the project, BY and Holm within each study; a reconciliation of the eight headline findings.
+* **RESULTS:** 747 tests survive project-wide BY (540 survive Holm within their study). The forecasting result survives in full; the end-of-day reversal survives in part; the expiry-day sign flip does not. The ledger also found that "pre-stated" tests in two studies were not time-stamped in git, which the documents now say.
+* **IMPROVEMENTS:** A reader can check any claim against its corrected p-value in one place.
+* **REMAINING ISSUES:** The ledger is being rebuilt to count the second forecasting contest (iteration 33) test by test.
+* **NEXT ITERATION:** Merge the stronger forecasting study.
+
+## Iteration 33: a stronger forecasting contest (the model study)
+
+* **OBJECTIVE:** Give the paper's model and GEX a fair chance: refit mcsGARCH as often as the challengers, add option-implied information, and test GEX against a strong base.
+* **PROBLEM IDENTIFIED:** In the first contest mcsGARCH was refitted every 63 days and the challengers every 21; the base features had no option-implied information, so GEX might have looked useless (or useful) for the wrong reason; the last-hour models had one training row per day; two small look-ahead problems (a whole-sample scale, a placebo drawn from later days).
+* **HYPOTHESIS:** With a fairer benchmark and a stronger base, the hybrid's edge shrinks but survives, and GEX still adds nothing.
+* **CHANGES IMPLEMENTED:** `src/niftygex/implied.py` and changes to the feature, forecast, evaluation and pipeline code (tests `tests/test_forecast_v2.py`, `tests/test_implied.py`, including one that deletes the last days of a market and checks no earlier feature changes). Design chosen on test days up to 30 June 2025 only; the hold-out evaluated once. Output `results/pipeline_nse_v2/`, write-up `docs/MODEL_ITERATIONS_REAL.md`. Every study now reads its daily panels from the v2 run; the first run is kept in `results/pipeline_nse/` as an archive.
+* **EXPERIMENTS PERFORMED:** 32 models, three horizons, 28 subsets (expiry days, before the auction, hold-out, regimes, the 09:15 anchor), QLIKE and MSE, a clean GEX ablation with a placebo, 5-seed averaging and a seed-noise study.
+* **RESULTS:** (REAL DATA.) The 21-day refit makes mcsGARCH 1.6% to 2.1% better. Against it, the hybrid is 5.8%, 7.6% and 6.4% better at 15 minutes, 30 minutes and the last hour (all p < 0.001), 5.5%, 6.9% and 7.0% before the auction, and 6.4%, 9.2% and 7.1% on the hold-out. The last-hour result replaces "nothing reliably beats mcsGARCH"; it is the least secure horizon (54% of days, nothing in the Thursday regime). GEX changes the hybrid's loss by -0.4% to +0.1% at 15 and 30 minutes and makes the last hour worse; nothing survives Holm. A single LightGBM seed moves a model by up to 0.4 points, so sub-1-point differences are noise.
+* **IMPROVEMENTS:** The headline forecasting claim now holds against a stronger benchmark and on data the design never saw.
+* **REMAINING ISSUES:** The live forecast of 3 November was frozen from the first run, so it is scored with that model.
+* **NEXT ITERATION:** Regenerate every result from the raw downloads with one command and compare with the committed outputs.
+
+## Iterations in progress (3 November 2026, about 05:30 IST)
+
+* **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
+* **Forward test:** a pre-registered test of the main claims on data after 2 November 2026, committed before those data exist.
+* **The test ledger** rebuilt to count the second forecasting contest test by test.
+* **Scoring the frozen forecast** for 3 November after the close.
 
 Each will be written up in the same format when it finishes.
