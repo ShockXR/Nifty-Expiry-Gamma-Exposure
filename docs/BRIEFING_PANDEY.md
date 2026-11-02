@@ -34,7 +34,8 @@ Full log of all 24 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 ## Still running or next (as of 3 November, early morning UTC)
 
 * A stronger forecasting study (option-implied features, more frequent model refits), to be merged and the whole pipeline rerun with the bug fixes.
-* A final-half-hour gamma test, connectedness by gamma regime (a new question for the paper's connectedness design), a power study calibrated on the real data, a second-person check of every number typed from the paper, and a check of BSE's Sensex expiry as a hidden confounder.
+* Connectedness by gamma regime (a new question for the paper's connectedness design), a power study calibrated on the real data, and a check of BSE's Sensex expiry as a hidden confounder.
+* Done since the first draft of this briefing: a second person re-typed all 223 numbers we took from the paper, blind; 222 matched and the one difference is a slip in the paper itself ([REKEY_CHECK.md](REKEY_CHECK.md)). The final-half-hour gamma test came out null.
 * A forecast for Tuesday 3 November's expiry was frozen in the repository before the market opened; it will be scored after the close.
 * A working-paper draft by Wednesday 4 November, 9:30 IST.
 

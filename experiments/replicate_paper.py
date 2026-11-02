@@ -7,7 +7,7 @@ third-party 1-minute Nifty 50 and Bank Nifty bars (data/raw/*_1min.csv),
 validated here against NSE's official daily index values, plus NSE's daily
 F&O bhavcopy. The paper's printed values appear only in columns named
 ``paper_printed`` (comparison targets typed in by hand from its tables;
-not yet re-keyed by a second person, see the note above ``P_T1``).
+re-keyed blind by a second person on 3 Nov 2026, see docs/REKEY_CHECK.md).
 
 Usage (about 3 minutes on 4 cores):
 
@@ -76,11 +76,12 @@ PAPER_WEEKDAY_DAYS = {("before", "wed"): 13, ("before", "thu"): 13, ("after", "w
 # ---------------------------------------------------------------------------
 # Paper (printed) comparison targets
 # ---------------------------------------------------------------------------
-# These values were typed in BY HAND from the paper's tables and have not been
-# checked by a second person. Before anything is sent to the authors, someone
-# should re-key every value below against the PDF (with page and table
-# references) and compare. Until then, any "printed slip" this script flags
-# (paper_printed_checks.csv) could also be a transcription slip of ours.
+# These values were typed in BY HAND from the paper's tables. A second person
+# re-keyed all 223 cells blind from the PDF on 3 November 2026
+# (experiments/rekey_check.py, docs/REKEY_CHECK.md): 222 matched first time and
+# the one difference is a typesetting slip in the paper (a comma for a decimal
+# point in Table 1), so the "printed slips" this script flags
+# (paper_printed_checks.csv) are in the paper, not transcription slips of ours.
 
 P_T1 = {
     ("before", "nifty"): dict(n=23039, mean=-0.000001, sd=0.000360947, min=-0.008584649, max=0.006221108, skew=-0.524960403, excess_kurtosis=64.74526352, anderson_darling=649.191, adf=-23.05),
@@ -1028,7 +1029,7 @@ def printed_checks() -> pd.DataFrame:
                              "p_matches": p_ok, "direction_matches_medians": direction_ok,
                              "consistent": bool(in_range and p_ok)})
     out = pd.DataFrame(rows)
-    out["caveat"] = "printed values typed in by hand and not yet re-keyed by a second person; an inconsistency may be a transcription slip"
+    out["caveat"] = "printed values typed in by hand and re-keyed blind by a second person (docs/REKEY_CHECK.md); the inconsistency is in the printed paper"
     return out
 
 
@@ -1121,7 +1122,7 @@ def main():
     pd.set_option("display.max_colwidth", 60)
 
     print(f"Replication of Chhimwal, Pandey and Pandey (2025) on {LABEL}.")
-    print("Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets (not yet re-keyed by a second person).")
+    print("Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets and re-keyed blind by a second person (docs/REKEY_CHECK.md).")
     print(f"Primary session rule: {a.trim} {rp.SESSION_RULES[a.trim]}; bootstrap draws: persistence {n_pboot}, connectedness {n_cboot}, medians {n_dboot}.")
 
     # ---------------- data

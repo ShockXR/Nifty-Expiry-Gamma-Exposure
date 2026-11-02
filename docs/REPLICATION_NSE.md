@@ -2,7 +2,7 @@
 
 Paper: B. Chhimwal, V. Pandey and P. Pandey (2025), "Effect of multiple index derivative expiry on volatility, volume, and connectedness: a tale of two stock indices in India", *Review of Derivatives Research* 28(3), article 14.
 
-**Every number in this note is REAL DATA** (third-party 1-minute Nifty 50 and Bank Nifty bars, validated against NSE's official daily index values, plus NSE's official F&O bhavcopy), unless it is marked **paper (printed)**. Printed values are typed in by hand from the paper's tables, only so that we can compare. They have not yet been checked by a second person: before anything is sent to the authors, someone should re-key every printed value in `experiments/replicate_paper.py` (`P_T1` to `P_T6`) against the PDF, with page and table references. Every one of our numbers comes from a file written by `experiments/replicate_paper.py` into `results/replication_nse/` (the file is named next to each table) or into `results/replication_nse_stdout.txt`.
+**Every number in this note is REAL DATA** (third-party 1-minute Nifty 50 and Bank Nifty bars, validated against NSE's official daily index values, plus NSE's official F&O bhavcopy), unless it is marked **paper (printed)**. Printed values are typed in by hand from the paper's tables, only so that we can compare. A second person re-keyed all 223 of them blind against the PDF: 222 matched first time and the one difference is the paper's own typesetting slip, so no value changed (`docs/REKEY_CHECK.md`). Every one of our numbers comes from a file written by `experiments/replicate_paper.py` into `results/replication_nse/` (the file is named next to each table) or into `results/replication_nse_stdout.txt`.
 
 ## Findings
 
@@ -13,7 +13,7 @@ Paper: B. Chhimwal, V. Pandey and P. Pandey (2025), "Effect of multiple index de
 5. **Connectedness: the overall fall replicates, the hour-by-hour numbers do not.** On all expiry days, total connectedness falls from 87.9 (before) to 74.9 (Nifty expiry days) and 68.9 (Bank Nifty expiry days) on the paper's scale (paper (printed): 84.00 to 76.38 and 73.02). Both falls are clear in our bootstrap. The first-hour and last-hour totals of 99.42 and 105.22 in Table 3 are outside everything our 40-configuration grid produces. Each hour sub-sample has only three or four hours of data, and the results depend strongly on choices the paper does not report.
 6. **Volume (Table 5) cannot be replicated minute by minute**, because no free minute volume exists for this period. NSE's official daily constituent volume for each index gives changes close to the paper's: Nifty +41% overall and +68% on Thursdays (printed medians imply +33% and +65%), Bank Nifty -11% (printed: -13%). The Nifty results survive day-level tests. The Bank Nifty fall does not survive them.
 7. **Volatility (Table 6): the Nifty findings survive robust tests, most others do not.** Nifty volatility rose overall and on Thursdays, and both survive day-level tests. Thursday also stands out from the rest of its own week more than before. The paper's Bank Nifty finding (higher volatility on Wednesday, its new expiry day) is +16% in our data, but day-level tests do not find it significant and the week-relative test finds nothing special about Wednesday. The paper's minute-level test gives p-values as small as 10^-256 in our data, which shows why minute-level tests should not be trusted here.
-8. **A few printed numbers look like typesetting slips** (Section 8). One example: Table 4's first-hour Nifty rows sum to 101. Because we typed the printed values in by hand, some of these could also be our own transcription slips, so they should be re-checked against the PDF first.
+8. **A few printed numbers look like typesetting slips** (Section 8). One example: Table 4's first-hour Nifty rows sum to 101. A blind second re-key confirmed each of them as printed in the PDF, so they are in the paper, not slips of ours (`docs/REKEY_CHECK.md`).
 9. **Two small bugs in `src/niftygex/volatility.py`** were found, worked around here, and then fixed in the package (Section 10).
 
 ## 1. What we did, in plain words
@@ -257,7 +257,8 @@ These are offered as careful questions. Each may have a simple answer that the p
 5. Which volume series is in Table 5? Constituent share volume fits the printed levels and changes. Knowing the source would let us match it exactly.
 6. Was the volatility in Table 6 the square root of the per-minute Rogers-Satchell variance, or a scaled or averaged version?
 7. Would the authors consider day-level tests (or HAC or a day-block bootstrap) alongside the minute-level Mann-Whitney test? In our data they change the conclusions for the Wednesday results.
-8. Small printed-number points (`paper_printed_checks.csv`), possibly typesetting slips. We typed the printed values in by hand, so a second person should re-key them against the PDF before we raise any of these; some could be our own transcription slips:
+8. Small printed-number points (`paper_printed_checks.csv`), possibly typesetting slips. A blind second re-key confirmed every value below as printed in the PDF (`docs/REKEY_CHECK.md`, with page references), so none of them is a transcription slip of ours:
+   * Table 1, Bank Nifty after: the Anderson-Darling statistic is printed as 466,153, with a comma where the rest of the row has a decimal point. We read it as 466.153 (ours: 469.5).
    * For Bank Nifty before, the printed log-likelihood and AIC imply N = 22,680 (63 days of 360 minutes), not 23,039.
    * Table 4, Panel I, first hour: both rows sum to 101.00, not 100.
    * Table 4, Panel II, first hour: the cross shares sum to 71.97, but the total is printed as 70.97.
@@ -272,6 +273,7 @@ These are offered as careful questions. Each may have a simple answer that the p
 OMP_NUM_THREADS=1 python experiments/replicate_paper.py            # about 3 minutes on 4 cores
 OMP_NUM_THREADS=1 python experiments/replicate_paper.py --trim 375_full   # another session rule as the main one
 OMP_NUM_THREADS=1 python -m pytest -q tests/test_replication.py
+python experiments/rekey_check.py                                  # second-person check of the printed values (docs/REKEY_CHECK.md)
 ```
 
 The script reads only `data/raw/` and writes `results/replication_nse/*.csv`, two figures (`fig_diurnal.png`, `fig_rolling_connectedness.png`) and `results/replication_nse_stdout.txt`. All random draws are seeded. New helper code is in `src/niftygex/replication.py`.
