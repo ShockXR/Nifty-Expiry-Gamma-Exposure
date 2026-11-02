@@ -61,6 +61,29 @@ def load_market(a):
                                  official_days=official, use_file_expiries=True)
 
 
+def write_daily_market(m, path):
+    """One row per day: expiry labels, realized variance pieces, VIX and the chain's spot and forward."""
+    R = np.asarray(m["R"], float)
+    lab = m["labels"]
+    C = np.asarray(m["close"], float)
+    last_close = np.array([row[np.isfinite(row)][-1] if np.isfinite(row).any() else np.nan for row in C])
+    first_open = np.asarray(m["open"], float)[:, 0]
+    df = pd.DataFrame({
+        "is_expiry": lab["is_expiry"].to_numpy(), "is_monthly_expiry": lab["is_monthly_expiry"].to_numpy(),
+        "regime": lab["regime"].to_numpy(), "weekday": lab["weekday"].to_numpy(),
+        "trading_days_to_expiry": lab["trading_days_to_expiry"].to_numpy(),
+        "open": first_open, "close_last_bar": last_close,
+        "rv_day": (R ** 2).sum(axis=1), "rv_first_hour": (R[:, :60] ** 2).sum(axis=1),
+        "rv_last_hour": (R[:, -60:] ** 2).sum(axis=1),
+        "minutes_with_bars": np.isfinite(C).sum(axis=1),
+        "vix": np.asarray(m["vix"], float),
+        "chain_spot": [c.attrs.get("spot") for c in m["chains"]],
+        "chain_expiry": [c.attrs.get("expiry") for c in m["chains"]],
+        "bhavcopy_missing": [bool(c.attrs.get("missing", False)) for c in m["chains"]],
+    }, index=pd.DatetimeIndex(m["days"], name="date"))
+    df.to_csv(path)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", choices=["synthetic", "nse"], default="synthetic")
@@ -91,6 +114,7 @@ def main():
              "validated against NSE daily values")
     print(f"[{label}] {len(m['days'])} days loaded", flush=True)
 
+    write_daily_market(m, out / "daily_market.csv")
     panel = build_gex_panel(m)
     panel.to_csv(out / "daily_gex_panel.csv")
     plots.gex_timeseries(panel, out / "figures" / "gex_by_sign_rule.png",
