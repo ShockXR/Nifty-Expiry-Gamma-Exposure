@@ -1181,7 +1181,7 @@ def _sha(path: Path) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--out", default="results/falsification")
     ap.add_argument("--perms", type=int, default=2000)

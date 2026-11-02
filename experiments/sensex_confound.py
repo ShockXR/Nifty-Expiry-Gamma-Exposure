@@ -579,7 +579,7 @@ def main():
     # ------------------------------------------------------------------ (iii) NSE results with a Sensex control
     # R2 (docs/REAL_DATA_RESULTS.md)
     rdl = _load("real_day_level", ROOT / "experiments" / "real_day_level.py")
-    dm = pd.read_csv(ROOT / "results" / "pipeline_nse" / "daily_market.csv", index_col=0, parse_dates=True)
+    dm = pd.read_csv(ROOT / "results" / "pipeline_nse_v2" / "daily_market.csv", index_col=0, parse_dates=True)
     r2_orig = rdl.r2_regimes(dm)
     r2_ctrl = r2_with_exclusion(rdl, dm, sx_dates)
     pub = pd.read_csv(ROOT / "results" / "real_day_level" / "r2_expiry_effect_by_regime.csv")

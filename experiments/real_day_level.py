@@ -26,7 +26,7 @@ R4  Pinning: on expiry day, does the index close move toward the strike
     same chain) on expiry days and other days, and split expiry days by
     the sign of net GEX under the US convention.
 
-    python experiments/real_day_level.py --run results/pipeline_nse --raw data/raw
+    python experiments/real_day_level.py --run results/pipeline_nse_v2 --raw data/raw
 
 Writes results/real_day_level/*.csv and real_day_level_stdout.txt.
 Everything here is REAL DATA (NSE files plus validated third-party minute bars).
@@ -217,7 +217,7 @@ def r4_pinning(dm: pd.DataFrame, panel: pd.DataFrame, official_close: pd.Series)
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--out", default="results/real_day_level")
     a = ap.parse_args()

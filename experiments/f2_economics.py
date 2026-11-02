@@ -472,7 +472,7 @@ def fig_grid(grid: pd.DataFrame, out: Path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--out", default="results/f2_economics")
     a = ap.parse_args()

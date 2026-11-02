@@ -28,7 +28,7 @@ in a busy, volatile market, whatever dealers hold).
 A by-regime and first-half / second-half split of the binary interaction is
 written to results/momentum_gex/stability.csv.
 
-    python experiments/momentum_gex.py --run results/pipeline_nse --raw data/raw
+    python experiments/momentum_gex.py --run results/pipeline_nse_v2 --raw data/raw
 
 Writes results/momentum_gex/*.csv and results/momentum_gex_stdout.txt.
 """
@@ -70,7 +70,7 @@ def fit(y, X, lags=5):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--out", default="results/momentum_gex")
     a = ap.parse_args()

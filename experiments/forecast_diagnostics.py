@@ -10,7 +10,7 @@ Answers review items M1, M2, m9 and the last-hour comparison in M6
 * the share of anchors on which each model is closer than mcsGARCH (in QLIKE);
 * the hybrid against HAR for the last hour (Diebold-Mariano, two-sided).
 
-    python experiments/forecast_diagnostics.py --run results/pipeline_nse
+    python experiments/forecast_diagnostics.py --run results/pipeline_nse_v2
 
 Writes results/forecast_diagnostics/*.csv and results/forecast_diagnostics_stdout.txt.
 """
@@ -25,7 +25,7 @@ import pandas as pd
 
 from niftygex.evaluation import daily_losses, diebold_mariano, mse, qlike
 
-MODELS = ["har", "vix", "lgbm_base", "lgbm_gex", "hybrid_base", "hybrid_gex"]
+MODELS = ["har", "vix", "implied", "linear_base", "lgbm_base", "hybrid_base", "hybrid_gex_participant", "hybrid_gex_gross"]
 REGIME_NAMES = {0: "multi_weekly", 1: "single_weekly_thu", 2: "single_weekly_tue"}
 
 
@@ -35,7 +35,7 @@ def pct(a, b):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--out", default="results/forecast_diagnostics")
     a = ap.parse_args()
     out = Path(a.out)
@@ -90,7 +90,7 @@ def main():
     wst.to_csv(out / "largest_mcsgarch_errors.csv", index=False)
     ext.to_csv(out / "tails_and_last_hour_tests.csv", index=False)
     with pd.option_context("display.width", 220, "display.max_rows", 400, "display.precision", 4):
-        text = "\n".join(["REAL DATA. Diagnostics of the R1 forecasting contest (from results/pipeline_nse/forecasts_*.csv).", "",
+        text = "\n".join(["REAL DATA. Diagnostics of the R1 forecasting contest (from results/pipeline_nse_v2/forecasts_*.csv).", "",
                           "== QLIKE gain vs mcsGARCH by subset (negative = better than mcsGARCH)",
                           res[res["model"].isin(["har", "lgbm_base", "hybrid_base"])].to_string(index=False), "",
                           "== the 10 largest mcsGARCH squared errors per target", wst.to_string(index=False), "",

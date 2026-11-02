@@ -12,7 +12,7 @@ for the last 63 trading days of the sample, so this script reruns three
 results without those days:
 
 * R1: the forecast scoreboards (QLIKE vs mcsGARCH) on test days before
-  3 August 2026 only, from results/pipeline_nse/forecasts_*.csv;
+  3 August 2026 only, from results/pipeline_nse_v2/forecasts_*.csv;
 * R2: the week-relative expiry-day effect in the Tuesday regime, split
   into before and after the auction start;
 * R5: the end-of-day momentum regressions without the auction days.
@@ -40,8 +40,8 @@ import real_day_level as rdl  # noqa: E402
 from niftygex.evaluation import daily_losses, diebold_mariano, qlike  # noqa: E402
 
 AUCTION_START = pd.Timestamp("2026-08-03")
-RUN, RAW, OUT = Path("results/pipeline_nse"), Path("data/raw"), Path("results/closing_auction")
-MODELS = ["har", "vix", "lgbm_base", "lgbm_gex", "hybrid_base", "hybrid_gex", "hybrid_gex_us", "hybrid_gex_participant"]
+RUN, RAW, OUT = Path("results/pipeline_nse_v2"), Path("data/raw"), Path("results/closing_auction")
+MODELS = ["har", "vix", "implied", "linear_base", "lgbm_base", "hybrid_base", "hybrid_gex_us", "hybrid_gex_participant", "hybrid_gex_gross"]
 
 
 def auction_evidence(dm: pd.DataFrame) -> pd.DataFrame:

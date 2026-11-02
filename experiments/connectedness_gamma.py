@@ -1,7 +1,7 @@
 """RQ4 (tracker item P42): does Nifty / Bank Nifty volatility connectedness depend on the dealer gamma regime?
 
 REAL DATA: validated third-party 1-minute Nifty 50 and Bank Nifty bars (data/raw/*_1min.csv), the NSE-based
-daily GEX panel and day file written by the pipeline (results/pipeline_nse/daily_gex_panel.csv and
+daily GEX panel and day file written by the pipeline (results/pipeline_nse_v2/daily_gex_panel.csv and
 daily_market.csv). Nothing here is simulated; the synthetic checks live in tests/test_connectedness_gamma.py.
 
 Idea. Option dealers who are short gamma hedge by trading with the market (buy after rises, sell after falls).
@@ -107,7 +107,7 @@ from niftygex.connectedness import VarFit, connectedness_from_fit
 from niftygex.volatility import McsGarch, daily_egarch_variance
 
 RAW = Path("data/raw")
-RUN = Path("results/pipeline_nse")
+RUN = Path("results/pipeline_nse_v2")
 OUT = Path("results/connectedness_gamma")
 LOG = Path("results/connectedness_gamma_stdout.txt")
 LABEL = "REAL DATA"

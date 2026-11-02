@@ -1,7 +1,7 @@
 """P71: how large must an effect be for our tests to see it? Power calibrated on the REAL sample.
 
 SIMULATIONS CALIBRATED ON REAL DATA. The regressors, the fitted values and the residuals come from the real
-Nifty data (results/pipeline_nse/daily_market.csv, daily_gex_panel.csv and the validated 1-minute bars); only
+Nifty data (results/pipeline_nse_v2/daily_market.csv, daily_gex_panel.csv and the validated 1-minute bars); only
 the outcome is simulated, with an effect of known size added. The synthetic power study (experiments/power_study.py,
 E4) is not used here.
 
@@ -1021,7 +1021,7 @@ def _sha(path: Path) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--out", default="results/power_real")
     ap.add_argument("--reps", type=int, default=5000)

@@ -14,7 +14,7 @@ GEX measure
 -----------
 Net GEX is linear in the dealer weights. With G_call and G_put the gamma sums
 over calls and puts of the end-of-day chain (rupees per 1% move, from
-results/pipeline_nse/daily_gex_panel.csv: gross = G_call + G_put, US-convention
+results/pipeline_nse_v2/daily_gex_panel.csv: gross = G_call + G_put, US-convention
 net = G_call - G_put), every candidate is SCALE-FREE: net GEX divided by gross
 GEX of the same chain, a number in [-1, 1]. Log gross GEX (relative to its
 20-day median) is a control in every model. (The earlier R3 and R5 measure,
@@ -1150,7 +1150,7 @@ def _load_momentum_returns(bars: Path, days: pd.DatetimeIndex) -> pd.DataFrame:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--run", default="results/pipeline_nse")
+    ap.add_argument("--run", default="results/pipeline_nse_v2")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--out", default="results/dealer_sign")
     ap.add_argument("--n-boot", type=int, default=200)
@@ -1487,7 +1487,7 @@ def main():
     plot_weights(run["path"], roll, out / "figures" / "dealer_weights_over_time.png")
     plot_kalman(ks, out / "figures" / "dealer_weights_kalman.png")
     plot_profiles(prof, out / "figures" / "lr_profiles.png")
-    info = {"source": "REAL DATA: results/pipeline_nse (NSE bhavcopy chains), NSE participant-wise OI, validated 1-minute bars",
+    info = {"source": "REAL DATA: results/pipeline_nse_v2 (NSE bhavcopy chains), NSE participant-wise OI, validated 1-minute bars",
             "seconds": round(time.time() - t0, 1), "args": vars(a), "test_start": str(TEST_START.date()),
             "auction_start": str(AUCTION_START.date()), "refit_every": REFIT_EVERY, "rolling_window": ROLL_WINDOW,
             "bootstrap_block": BLOCK, "angles": "0 to 359 degrees, step 1",

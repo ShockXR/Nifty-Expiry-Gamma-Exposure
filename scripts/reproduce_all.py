@@ -48,7 +48,11 @@ DOWNLOAD = [
 STEPS = [
     ("validate_minute_bars", [PY, "scripts/validate_minute_bars.py"], "results/data_validation/"),
     ("check_oi_units", [PY, "scripts/check_oi_units.py"], "results/data_validation/"),
-    ("run_pipeline", [PY, "scripts/run_pipeline.py", "--source", "nse", "--end", END], "results/pipeline_nse/"),
+    # The forecasting contest (v2: mcsGARCH refit every 21 days, option-implied features, 5 LightGBM seeds).
+    # About 100 minutes on one core. Every later study reads its daily panels from this folder.
+    ("run_pipeline", [PY, "scripts/run_pipeline.py", "--source", "nse", "--end", END, "--n-seeds", "5", "--seed-study", "3",
+                      "--out", "results/pipeline_nse_v2"], "results/pipeline_nse_v2/"),
+    ("forecast_diagnostics", [PY, "experiments/forecast_diagnostics.py"], "results/forecast_diagnostics/"),
     ("real_day_level", [PY, "experiments/real_day_level.py"], "results/real_day_level/"),
     ("momentum_gex", [PY, "experiments/momentum_gex.py"], "results/momentum_gex/"),
     ("closing_auction_check", [PY, "experiments/closing_auction_check.py"], "results/closing_auction/"),
@@ -66,7 +70,6 @@ OPTIONAL = {  # studies added later; run if the script exists
     "connectedness_gamma": ([PY, "experiments/connectedness_gamma.py"], "results/connectedness_gamma/"),
     "power_real": ([PY, "experiments/power_real.py"], "results/power_real/"),
     "rekey_check": ([PY, "experiments/rekey_check.py"], "results/replication_nse/rekey_check.csv"),
-    "forecast_diagnostics": ([PY, "experiments/forecast_diagnostics.py"], "results/forecast_diagnostics/"),
 }
 
 
