@@ -294,9 +294,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** One day is an illustration, not evidence; the full reproduction run waits for the model study to finish.
 * **NEXT ITERATION:** Merge the model study, rerun the pipeline with the holiday and monthly-expiry fixes, and run the full reproduction.
 
+## Iteration 25: gamma at the current index level, minute by minute
+
+* **OBJECTIVE:** Test the hedging story where it should be strongest: on expiry day, when the gamma of options near the current index level changes minute by minute as the index moves and the clock runs down.
+* **PROBLEM IDENTIFIED:** Every earlier GEX measure was one number per day, computed at the previous close. Hedging pressure on expiry day depends on where the index is now.
+* **HYPOTHESIS:** If dealers are net long (short) gamma near spot, the next minutes should be calmer (more volatile) when gamma at spot is high, after removing each day's level and the normal intraday pattern.
+* **CHANGES IMPLEMENTED:** `experiments/intraday_gamma.py`, `tests/test_intraday_gamma.py`, `docs/INTRADAY_GAMMA.md`. Gamma at spot is rebuilt at every anchor from the previous evening's open interest and the current index level and time to expiry, with day and minute-of-day fixed effects and three placebos (strikes shifted by half a spacing, another day's open-interest profile, permuted open interest). Two follow-ups were pre-registered in `results/intraday_gamma/design_log.csv` before their code was written.
+* **EXPERIMENTS PERFORMED:** 15-minute anchors from 09:30 to 15:00 on all day types; an out-of-sample last-hour test; then the final half hour of expiry days (one anchor per minute, 15:00 to 15:24, before the closing auction) and a Bank Nifty replication of the one lead.
+* **RESULTS:** A clean null on expiry days (0.142, interval -0.128 to 0.413). The significant coefficients on other days are the leverage effect (falling markets are more volatile), not hedging: placebos give the same numbers. Gamma concentration near spot passed all three placebos on Nifty (-0.386, p = 0.027) but failed both pre-registered follow-ups: the final half hour (0.257, p = 0.39) and Bank Nifty (-0.122, p = 0.66). Holm over the follow-ups gives 1.0. Out of sample, gamma at 14:30 changes last-hour QLIKE by -1.8% (p = 0.53).
+* **IMPROVEMENTS:** The most direct test of the mechanism that public data allow, with its limits measured: before 15:00 the reach of each option's gamma is wider than one strike spacing, so gamma at spot is a smooth profile and cannot separate real strikes from placebos.
+* **REMAINING ISSUES:** Positions during the day are not public. Intraday option-chain snapshots would be needed for a sharper test.
+* **NEXT ITERATION:** Merge the model study and rerun the pipeline.
+
 ## Iterations in progress (3 November 2026, early morning UTC)
 
-* **Intraday gamma at the current price:** the first pass is written up in `docs/INTRADAY_GAMMA.md` (a clean null on expiry days); a follow-up on the final half hour before the auction and a pre-registered Bank Nifty test is running.
 * **Stronger forecasting models:** option-implied features, new GEX measures, a Student t Diebold-Mariano test and more frequent mcsGARCH refits in the forecasting contest.
+* **Connectedness by gamma regime:** does Nifty and Bank Nifty volatility spill over more when dealers are short gamma (a new question for the paper's connectedness design)?
+* **Power calibrated on the real data:** how large an effect each test could have detected, and how many more expiries would be needed.
+* **Second-person check of the paper's printed numbers,** and **BSE's Sensex expiry as a confounder.**
 
 Each will be written up in the same format when it finishes.

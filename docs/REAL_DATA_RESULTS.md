@@ -23,8 +23,8 @@ Separate real-data studies, each with its own document:
 * `docs/EVENT_STUDY.md`: five expiry rule changes (2019 to 2026) with Nifty and Bank Nifty as each other's comparison and placebo dates. The whole-day expiry premium barely moves with the rules; the end of the day does (Bank Nifty's move to Wednesday raised its last-30-minute premium by 1.14 log points, placebo p 0.005). The per-minute Rogers-Satchell measure the paper uses shows an expiry premium that 5-minute realized variance does not.
 * `docs/FALSIFICATION.md`: seven families of tests that try to break R3 and R5 (shuffles, timing placebos, random sign rules, out of sample, Bank Nifty, a quasi-causal roll-off test, multiple testing). R5 survives all of them; R3's ordinary-day term does not.
 * `docs/DEALER_SIGN.md`: the dealer sign estimated from the market's response instead of assumed. A documented negative result: the two outcomes point to nearly opposite signs.
-* `docs/INTRADAY_GAMMA.md`: expiry-day gamma re-priced minute by minute at the current index level. A clean null on expiry days.
-* Still running: a stronger version of R1 (option-implied features, more frequent mcsGARCH refits), a final-half-hour gamma test, a connectedness-by-gamma-regime study, a real-data-calibrated power study and a check of BSE's Sensex expiry as a confounder.
+* `docs/INTRADAY_GAMMA.md`: expiry-day gamma re-priced minute by minute at the current index level. A clean null on expiry days, also in the final half hour before the close (pre-registered follow-up: 0.26, p = 0.39); the one lead that passed its placebos (gamma concentrated near the index) did not replicate on Bank Nifty (p = 0.66).
+* Still running: a stronger version of R1 (option-implied features, more frequent mcsGARCH refits), a connectedness-by-gamma-regime study, a real-data-calibrated power study and a check of BSE's Sensex expiry as a confounder.
 
 ---
 

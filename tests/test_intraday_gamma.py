@@ -259,3 +259,116 @@ def test_demean_two_way_unbalanced():
 def test_holm():
     p = ig.holm([0.01, 0.04, 0.03, 0.5])
     assert np.allclose(p, [0.04, 0.09, 0.09, 0.5])
+
+
+# ---------------------------------------------------------------- follow-up 1: final half hour
+
+
+def test_discrete_average_variance_formula():
+    # A = mean of the next n values of a unit random walk: Var(A) = sum_ij min(i, j) / n^2 = (n + 1)(2n + 1) / (6n)
+    for n in (1, 6, 13, 30):
+        i = np.arange(1, n + 1)
+        exact = np.minimum.outer(i, i).sum() / n**2
+        assert exact == pytest.approx((n + 1) * (2 * n + 1) / (6 * n), rel=1e-12)
+
+
+def test_settlement_gamma_matches_hand_calculation():
+    S, n, pm = 22013.0, 12, 22040.0
+    K = np.array([21950.0, 22000.0, 22050.0, 22100.0])
+    oc = np.array([1.0e6, 4.0e6, 2.5e6, 0.7e6])
+    op = np.array([3.0e6, 2.0e6, 0.5e6, 0.1e6])
+    ivc, ivp = np.full(4, 0.12), np.full(4, 0.13)
+    w = n / 30
+    t_min = (n + 1) * (2 * n + 1) / (6 * n)          # 4.51 minutes
+    for floor, t_used in ((1, t_min), (5, 5.0)):
+        g = ig.settlement_gamma_at_spot([S], n, pm, K, oc, op, ivc, ivp, floor=floor)
+        T = t_used / YEAR_MIN
+        Ks = (K - (1 - w) * pm) / w
+        call = sum(oc[i] * w * _hand_spot_gamma(S, Ks[i], T, ivc[i]) * S**2 * 0.01 for i in range(4))
+        put = sum(op[i] * w * _hand_spot_gamma(S, Ks[i], T, ivp[i]) * S**2 * 0.01 for i in range(4))
+        assert g["T_eff_minutes"][0] == pytest.approx(t_used)
+        assert g["w"][0] == pytest.approx(w)
+        assert g["call"][0] == pytest.approx(call, rel=1e-10)
+        assert g["put"][0] == pytest.approx(put, rel=1e-10)
+
+
+def test_settlement_gamma_full_window_and_certain_strikes():
+    K = np.arange(21500.0, 22550.0, 50.0)
+    oi = np.full(K.size, 1e6)
+    iv = np.full(K.size, 0.12)
+    # at 15:00 nothing is printed yet (w = 1): an option on the average of 30 closes = an option with 10.5 minutes left
+    g = ig.settlement_gamma_at_spot([22010.0], 30, np.nan, K, oi, oi, iv, iv)
+    t30 = 31 * 61 / 180
+    ref = ig.gamma_at_spot([22010.0], [t30 / YEAR_MIN], K, oi, oi, iv, iv)
+    assert g["T_eff_minutes"][0] == pytest.approx(t30)
+    assert g["gross"][0] == pytest.approx(ref["gross"][0], rel=1e-12)
+    # a strike so low that the printed part of the average already exceeds it carries no gamma (K* <= 0)
+    g2 = ig.settlement_gamma_at_spot([22010.0], 3, 22000.0, np.array([100.0]), [1e6], [1e6], [0.12], [0.12])
+    assert g2["gross"][0] == 0.0
+
+
+def _fh_record(seed=1, day=0, grid=50.0):
+    rec = _synthetic_record(seed)
+    rec["date"] = pd.Timestamp("2025-01-02") + pd.Timedelta(days=7 * day)
+    rec["grid"] = grid
+    return rec
+
+
+def test_fh_rows_timing_and_no_look_ahead():
+    rec = _fh_record()
+    base = ig.fh_rows(rec)
+    assert len(base) == 25 and base["clock"].iloc[0] == "15:00" and base["clock"].iloc[-1] == "15:24"
+    assert list(base["minutes_to_1530"]) == list(range(30, 5, -1))
+    # on the clock to 15:30 at least 6 minutes are left, so the 1, 2 and 5 minute floors give the same gamma
+    assert np.allclose(base["gross"], base["gross_floor2"]) and np.allclose(base["gross"], base["gross_floor5"])
+    # the printed part of the settlement average: nothing at 15:00, the 15:00 bar's close at 15:01
+    cl = rec["_closes"]
+    assert base["settle_past_mean"].iloc[0] == base["spot"].iloc[0]
+    assert base["settle_past_mean"].iloc[1] == pytest.approx(cl[345])
+    assert base["settle_past_mean"].iloc[10] == pytest.approx(cl[345:355].mean())
+    # change every bar from the anchor minute 15:10 on: nothing known at 15:10 or before may move
+    m_idx = 10
+    m = int(ig.FH_ANCHORS[m_idx])
+    alt_rec = dict(rec)
+    closes = cl.copy()
+    closes[m:] *= 1.003
+    alt_rec["_closes"] = closes
+    alt_rec["_ret"] = ig.minute_returns([cl[0] / np.exp(rec["_ret"][0])], closes[None, :])[0]
+    alt = ig.fh_rows(alt_rec)
+    known = ["spot", "gross", "conc", "conc025", "gross_floor2", "gross_floor5", "settle_past_mean",
+             "gross_settle_floor1", "gross_settle_floor2", "gross_settle_floor5", "rv_back5", "rv_back15", "rv_back60",
+             "dist_near", "dist_maxoi_pct", "ret_prev_pct", "gross_shift_plus", "gross_shift_minus"]
+    for c in known:
+        assert np.allclose(base.loc[:m_idx, c], alt.loc[:m_idx, c], rtol=0, atol=0), c
+    assert not np.allclose(base.loc[m_idx + 1:, "spot"], alt.loc[m_idx + 1:, "spot"])
+    assert base.loc[m_idx, "rv5"] != alt.loc[m_idx, "rv5"]
+    assert np.allclose(base.loc[:m_idx - 5, "rv5"], alt.loc[:m_idx - 5, "rv5"])
+
+
+def test_grid_aware_half_strike_shift_for_bank_nifty():
+    rec = _fh_record(grid=100.0)
+    rows = ig.anchor_rows(rec)
+    K = rec["_prof"]["strike"].to_numpy()
+    assert np.allclose(rows["gross_shift_plus"], ig.day_gamma(rec, K=K + 50.0)["gross"])
+    assert np.allclose(rows["gross_shift_minus"], ig.day_gamma(rec, K=K - 50.0)["gross"])
+    assert rows["dist_near"].max() <= 50.0
+    assert ig.recentre_shift(45120.0, 45390.0, 100.0) == 300.0
+
+
+def test_followup_placebo_draws_on_synthetic_days():
+    recs = [_fh_record(seed=s, day=s) for s in range(1, 9)]
+    fh = ig.build_fh_panel(recs)
+    ig._PLACEBO_CTX["synthetic"] = ig.prepare_placebo_ctx(recs, fh, y="y5", controls=ig.FH_CONTROLS,
+                                                          anchors=ig.FH_ANCHORS, floor=ig.FH_FLOOR, grid=50.0)
+    for kind in ("other_day", "permuted"):
+        out = ig._placebo_draw((kind, "synthetic", 11))
+        assert [o[2] for o in out] == ["log_gross", "conc"]
+        assert all(np.isfinite(o[4]) and np.isfinite(o[5]) for o in out)
+    # the same seed gives the same draw
+    assert ig._placebo_draw(("permuted", "synthetic", 11)) == ig._placebo_draw(("permuted", "synthetic", 11))
+    del ig._PLACEBO_CTX["synthetic"]
+
+
+def test_one_sided_p():
+    assert ig.one_sided_negative(-0.4, 0.04) == pytest.approx(0.02)
+    assert ig.one_sided_negative(0.4, 0.04) == pytest.approx(0.98)

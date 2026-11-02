@@ -1,6 +1,6 @@
 # Does dealer gamma at the current index level move Nifty volatility, minute by minute?
 
-**REAL DATA.** NSE F&O bhavcopies, NSE participant-wise open interest and NSE official index values (India VIX included), 2 January 2023 to 2 November 2026, plus third-party 1-minute Nifty 50 bars that the project checked day by day against NSE (`results/data_validation/`). Every number in this document comes from a file written by `experiments/intraday_gamma.py` (folder `results/intraday_gamma/`, printed log `results/intraday_gamma_stdout.txt`). The file behind each table is named under it.
+**REAL DATA.** NSE F&O bhavcopies, NSE participant-wise open interest and NSE official index values (India VIX included), 2 January 2023 to 2 November 2026, plus third-party 1-minute Nifty 50 and Nifty Bank bars that the project checked day by day against NSE (`results/data_validation/`). Every number in this document comes from a file written by `experiments/intraday_gamma.py` (folder `results/intraday_gamma/`, printed log `results/intraday_gamma_stdout.txt`). The file behind each table is named under it.
 
 Written for Shreyan Thanki, to discuss with Prof. Piyush Pandey. No finance or statistics background is assumed: Section 1 explains each idea once.
 
@@ -12,11 +12,13 @@ All results are REAL DATA. "Coefficient" means the elasticity of the next 15 min
 2. **On the day before expiry and on ordinary days the pre-specified regression is significant, but it is not hedging.** Coefficients -0.723 (interval -1.124 to -0.322, p = 0.0005, Holm 0.003) and -0.579 (-1.044 to -0.113, p = 0.015, Holm 0.09). Two checks say the cause is something else. First, the half-strike placebo and another day's OI profile give the same coefficients (for example -0.80 for the median "another day" draw on the day before expiry, with 98% of 200 draws significant). Second, the coefficients vanish (0.266, p = 0.50 and -0.296, p = 0.46) once the regression also controls for how far and in which direction the index has moved since the previous close. Gross gamma at spot rises within the day when the index rises (correlation 0.63 and 0.72), partly because GEX is defined with the index level squared, and volatility falls after the index rises (the "leverage effect"). The regression was picking that up.
 3. **The signed versions reveal no sign either.** On expiry days: US convention -0.130 (p = 0.11), NSE "Pro" -3.70 (p = 0.36), mirror of NSE "Client" +3.33 (p = 0.044, Holm 0.22). The large signed coefficients on other days (for example US convention -0.845, p < 0.001 on the day before expiry) are again the leverage effect: with the move since the previous close controlled, no signed coefficient on any day type has p below 0.06.
 4. **Expiry afternoons (13:00 to 15:00) show a positive coefficient that does not survive checks.** 0.534 (0.046 to 1.022, p = 0.032), the direction expected if dealers were net short gamma. But the half-strike placebos give 0.392 and 0.601, another day's profile gives 0.336 (median of 200 draws), and with the leverage control the coefficient is 0.361 (p = 0.26). It is one of 117 tests.
-5. **One lead worth a fresh test: how concentrated gamma is around spot.** On expiry days, when a larger share of gamma at spot comes from strikes within 0.5% of the index, the next 15 minutes are calmer: coefficient -0.386 (-0.727 to -0.044, p = 0.027; -0.450, p = 0.010 with the leverage control). Unlike the gamma level, this passes all three placebos (half-strike shift: -0.021, p = 0.91; another day's profile: randomization p = 0.010; permuted OI: randomization p = 0.025). The direction is the one expected if dealers are net long gamma near the money. It was a secondary measure, it does not survive a Holm correction within its family (adjusted p = 0.38 over the 19 secondary tests), the effect is small (about 2% of variance per within-day standard deviation), it is absent on other day types and not significant on expiry afternoons alone (p = 0.15). Treat it as a hypothesis to pre-register, not a finding.
+5. **One lead worth a fresh test: how concentrated gamma is around spot.** On expiry days, when a larger share of gamma at spot comes from strikes within 0.5% of the index, the next 15 minutes are calmer: coefficient -0.386 (-0.727 to -0.044, p = 0.027; -0.450, p = 0.010 with the leverage control). Unlike the gamma level, this passes all three placebos (half-strike shift: -0.021, p = 0.91; another day's profile: randomization p = 0.010; permuted OI: randomization p = 0.025). The direction is the one expected if dealers are net long gamma near the money. It was a secondary measure, it does not survive a Holm correction within its family (adjusted p = 0.38 over the 19 secondary tests), the effect is small (about 2% of variance per within-day standard deviation), it is absent on other day types and not significant on expiry afternoons alone (p = 0.15). It was therefore pre-registered and tested again on fresh data (findings 8 and 9): it did not hold up.
 6. **Out of sample, gamma at 14:30 does not improve last-hour forecasts on expiry days.** Over 155 test expiry days (17 August 2023 to 28 July 2026, closing-auction days excluded) adding it to a HAR-style model changes QLIKE loss by -1.8% (a small improvement), Diebold-Mariano p = 0.53. The test could only have detected an improvement of about 7.7% or more, so the sample is too small to rule out a small gain.
-7. **A design fact that limits what this study can see.** Between 09:30 and 15:00, with at least 30 minutes left, the "reach" of each option's gamma (one standard deviation of the index move left before expiry) is on the median expiry day 166 index points at 09:30 and still 48 points at 15:00, about one 50-point strike spacing (`gamma_width_expiry_day.csv`). Gamma at spot is therefore a smooth function of the OI profile: it is almost uncorrelated with the distance to the nearest strike (within-day correlation between -0.008 and 0.005) and 0.97 correlated with its half-strike-shifted placebo on expiry days. The 5-minute time floor never binds on this grid. The reach falls clearly below the strike spacing only in the last minutes (34 points with 15 minutes left, 20 with 5), so the strike-by-strike gamma spikes that pinning theory is about exist only after 15:00, which this design leaves out (and which the closing auction changed from 3 August 2026).
+7. **A design fact that limits what this study can see.** Between 09:30 and 15:00, with at least 30 minutes left, the "reach" of each option's gamma (one standard deviation of the index move left before expiry) is on the median expiry day 166 index points at 09:30 and still 48 points at 15:00, about one 50-point strike spacing (`gamma_width_expiry_day.csv`). Gamma at spot is therefore a smooth function of the OI profile: it is almost uncorrelated with the distance to the nearest strike (within-day correlation between -0.008 and 0.005) and 0.97 correlated with its half-strike-shifted placebo on expiry days. The 5-minute time floor never binds on this grid. The reach falls clearly below the strike spacing only in the last minutes (34 points with 15 minutes left, 20 with 5), so the strike-by-strike gamma spikes that pinning theory is about exist only after 15:00, which this design leaves out (and which the closing auction changed from 3 August 2026). Finding 8 tests exactly that window.
+8. **The sharpest test the data allow, the final half hour of expiry days, also finds nothing (pre-registered follow-up, Section 8).** On 187 expiry days before the closing auction, at every minute from 15:00 to 15:24, the variance of the next 5 minutes does not respond to gamma at spot: coefficient 0.257, 95% interval -0.327 to 0.841, p = 0.39, with the move since the previous close and the distances to the nearest and to the max-OI strike controlled. Here gamma at spot finally depends on the exact strikes (its within-day correlation with the half-strike-shifted placebo is 0.09, against 0.97 before 15:00), so the test can tell real strikes from a smooth profile; the placebos are null too. Gamma recomputed for NSE's averaged settlement (far sharper) gives 0.005 (p = 0.28). Concentration gives -0.424 (-1.910 to 1.062, p = 0.57), but in these minutes almost all gamma at spot already comes from within 0.5% of the index (median share 0.98 at 15:00, 1.00 at 15:24), so that measure barely varies and its test is weak.
+9. **The concentration lead does not replicate on Bank Nifty (pre-registered follow-up, Section 9).** On all 98 Bank Nifty expiry days with weekly options (5 January 2023 to 13 November 2024), the identical specification gives -0.122, 95% interval -0.661 to 0.417, two-sided p = 0.66 (one-sided p = 0.33 for the predicted negative sign). The sign matches Nifty's, but the estimate is a third of the size, most fake profiles of placebos (b) and (c) give a |t| at least as large (randomization p = 0.87 and 0.74), and Holm over the three pre-registered tests gives adjusted p = 1.0 for each. The replication is weak: with 98 days it had about 29% power to detect an effect as large as Nifty's -0.386, and its interval contains both zero and the Nifty value. So this is not proof that the Nifty lead was false, but nothing now supports it.
 
-**In one sentence:** minute-by-minute gamma at spot, built only from information available at that minute, does not move Nifty's next-15-minute volatility on expiry days in any way we can detect; the apparent effects on other days are the leverage effect in disguise; and the one measure that passes the placebos (how concentrated gamma is near spot) points weakly toward dealers being net long gamma and needs an independent test.
+**In one sentence:** minute-by-minute gamma at spot, built only from information available at that minute, does not move Nifty's volatility on expiry days in any way we can detect, not even in the final half hour where strike-level gamma is sharpest; the apparent effects on other days are the leverage effect in disguise; and the one measure that passed the placebos (how concentrated gamma is near spot) failed its pre-registered tests in the final half hour and on Bank Nifty.
 
 ## 1. The ideas in plain words
 
@@ -100,7 +102,7 @@ This is why the level does not explode: for a smooth OI profile, summing a narro
 
 **Regression.** Log RV(next 15 minutes) on log gross GEX at spot (or one signed version, or concentration) plus the controls, with day and minute-of-day fixed effects, run separately for expiry days, days before expiry and ordinary days. Standard errors clustered by day; two-way and Driscoll-Kraay p-values alongside.
 
-**Pre-specified headline set** (fixed before any result was seen, from the study brief): the gross coefficient for each of the three day types, the three signed coefficients on expiry days, and the out-of-sample test (7 tests, Holm-adjusted together). Two things were **added after the first run** and are labelled so in `design_log.csv`: the leverage control (signed and absolute move since the previous close) and the placebos on the expiry-afternoon subsample. Concentration was computed from the start but was not a headline test.
+**Pre-specified headline set** (fixed before any result was seen, from the study brief): the gross coefficient for each of the three day types, the three signed coefficients on expiry days, and the out-of-sample test (7 tests, Holm-adjusted together). Two things were **added after the first run** and are labelled so in `design_log.csv`: the leverage control (signed and absolute move since the previous close) and the placebos on the expiry-afternoon subsample. Concentration was computed from the start but was not a headline test. The two follow-ups of Sections 8 and 9 were written down in `design_log.csv` (rows starting "PRE-REGISTERED 2026-11-02 21:36 UTC") before any of their code was written or run.
 
 ## 4. Results
 
@@ -243,7 +245,7 @@ The sample is too small to detect improvements of a few percent; it can only say
 
 ## 7. Multiple testing
 
-`all_tests.csv` lists every test run (117: 7 headline, 19 secondary, 3 exploratory, 48 robustness, 40 placebo) with its coefficient, interval, raw p, Holm-adjusted p over the headline set and Holm-adjusted p within its own family.
+`all_tests.csv` lists every test run with its coefficient, interval, raw p, Holm-adjusted p over the headline set and Holm-adjusted p within its own family: 117 in the main study (7 headline, 19 secondary, 3 exploratory, 48 robustness, 40 placebo) and 34 in the follow-ups (3 pre-registered primary, 10 secondary, 1 robustness, 20 placebo; families starting `followup_`). The Holm adjustment over the three follow-up primary tests is in Sections 8 and 9. Three things in the follow-ups were not pre-registered and are labelled as such: the Bank Nifty log gross regression with the move controls, the horse-race regressions of real and shifted gamma (4 of the 20 follow-up placebo tests, as in the main study), and the power figures of Section 9, computed after the results were seen.
 
 | Headline test | Raw p | Holm p |
 | --- | --- | --- |
@@ -257,22 +259,121 @@ The sample is too small to detect improvements of a few percent; it can only say
 
 The one headline test that survives Holm (day before expiry) is the one that Sections 4.2 and 5 show to be the leverage effect rather than hedging.
 
-## 8. Limitations
+## 8. Follow-up 1: the final half hour of expiry days (pre-registered, REAL DATA)
+
+**Why.** Finding 7 showed that before 15:00 each option's gamma is wider than the strike spacing, so gamma at spot is a smooth function of the OI profile and cannot show strike-by-strike hedging. Only in the last minutes does the gamma of single strikes stand out, which is where pinning theory says hedging should matter most. Before the closing auction (to 31 July 2026) the index trades normally from 15:00 to 15:29: the share of 1-minute returns that are exactly zero is 0.37% in that half hour against 0.39% from 14:15 to 14:59, and one bar in 15:00 to 15:29 is missing over all sample days (`followup_data_checks.csv`).
+
+**What was pre-registered** (`design_log.csv`, written at 21:36 UTC on 2 November 2026, before any follow-up code; the main study's results, including the concentration lead and the gamma widths, had been seen; the final half hour's volatility had entered the main study only through the outcome windows of the last anchors, which reach into 15:00 to 15:29, and the out-of-sample last-hour target; no final-half-hour gamma had been computed):
+
+| Item | Choice |
+| --- | --- |
+| Sample | Nifty expiry days before 3 August 2026: 187 days, 5 January 2023 to 28 July 2026 |
+| Anchors | every minute 15:00 to 15:24 (25 per day, 4,675 rows); index level = close of the last completed bar |
+| Outcome | log realized variance of the next 5 minutes (no zero windows) |
+| Primary test FH1 | log gross GEX at spot, clock to 15:30, 1-minute floor; no predicted sign |
+| Primary test FH2 | concentration (share within 0.5% of spot), same clock; predicted negative |
+| Controls | log RV of the previous 5, 15 and 60 minutes, distance to the nearest 50-point strike, distance to the max-OI strike, signed and absolute move since the previous close |
+| Fixed effects and errors | day and minute of day; clustered by day (two-way and Driscoll-Kraay alongside); two-sided p |
+| Secondary | floors of 2 and 5 minutes; gamma for the averaged settlement with floors 1, 2 and 5; concentration within 0.25%; main-study controls only |
+| Placebos | (a) profile shifted +25 and -25 points, (b) another final-half-hour day's profile re-centred, (c) OI permuted within 5%; 200 draws each |
+| Multiple testing | Holm over FH1, FH2 and BN1 (Section 9) |
+
+**Two versions of the clock.** (i) Minutes to 15:30, as in the main study. At 15:24 six minutes remain, so floors of 1, 2 and 5 minutes never bind and the three versions are identical (`followup_data_checks.csv`); the pre-registration said so in advance. (ii) **Averaged settlement.** Before the closing auction NSE settles the options on the official close, which averages prices over 15:00 to 15:30; we model it as the mean of the 30 one-minute closes of the 15:00 to 15:29 bars. At an anchor with n of those closes still to come, a share w = n/30 of the average is still open and the rest is the mean of the closes already printed (known at the anchor). Each option is then w times an option on the average of the remaining closes, with strike (K - (1 - w) x printed mean) / w, and that average has the variance of one price (n + 1)(2n + 1)/(6n) minutes ahead: 10.5 minutes at 15:00 and 2.5 at 15:24. Seen from the open part of the average, the strikes are 1/w times further apart, so this gamma is far sharper: its median across days falls from 88,988 crore rupees per 1% at 15:00 to 22 crore at 15:24, while the median of the clock-to-15:30 version stays between about 84,000 and 88,000 (`followup_descriptives.csv`). The 5-minute floor binds for this version from 15:17 (8 anchors a day); the 2-minute floor never does.
+
+**What the variables look like** (`followup_descriptives.csv`, medians over the 187 days):
+
+| Time | Gross GEX at spot, clock to 15:30 (crore per 1%) | Gross GEX at spot, averaged settlement | Concentration within 0.5% | RV of the next 5 minutes (x 1e6) | Distance to nearest strike (points) |
+| --- | --- | --- | --- | --- | --- |
+| 15:00 | 86,950 | 88,988 | 0.982 | 0.589 | 10.8 |
+| 15:06 | 86,154 | 57,674 | 0.993 | 0.399 | 10.05 |
+| 15:12 | 87,930 | 32,357 | 0.998 | 0.241 | 11.1 |
+| 15:18 | 84,210 | 10,333 | 1.000 | 0.202 | 11.3 |
+| 15:24 | 84,419 | 22 | 1.000 | 0.157 | 11.1 |
+
+**Results** (`followup_regressions.csv`; primary rows also in `followup_summary.csv`):
+
+| Specification | Coefficient | 95% interval | p | p two-way | p Driscoll-Kraay |
+| --- | --- | --- | --- | --- | --- |
+| **FH1**: log gross GEX at spot (primary) | 0.257 | -0.327 to 0.841 | 0.386 | 0.355 | 0.371 |
+| **FH2**: concentration within 0.5% (primary) | -0.424 | -1.910 to 1.062 | 0.574 | 0.600 | 0.468 |
+| log gross, floor 2 or 5 minutes (identical to FH1) | 0.257 | -0.327 to 0.841 | 0.386 | 0.355 | 0.371 |
+| log gross, averaged settlement, floor 1 (floor 2 identical) | 0.0049 | -0.0041 to 0.0140 | 0.282 | 0.273 | 0.291 |
+| log gross, averaged settlement, floor 5 | 0.0105 | -0.0077 to 0.0288 | 0.256 | 0.254 | 0.253 |
+| concentration within 0.25% | -0.118 | -0.585 to 0.350 | 0.621 | 0.598 | 0.587 |
+| log gross, main-study controls only | 0.256 | -0.360 to 0.872 | 0.414 | 0.390 | 0.383 |
+| concentration, main-study controls only | -0.549 | -2.064 to 0.967 | 0.476 | 0.487 | 0.381 |
+
+How large could an effect be? For FH1, one within-day standard deviation of log gross GEX at spot is 0.091 (`within_sd_x`), so the interval allows anything from about 3% less to about 8% more next-5-minute variance per such swing; the smallest coefficient the test could detect with 80% power is 0.83 (`mde_80pct_power`). The averaged-settlement version varies enormously within a day (within-day SD of its log 4.5), so its small coefficient corresponds to an effect per standard deviation of 0.022 (interval about -0.02 to 0.06). For FH2, concentration within 0.5% hardly moves in these minutes (within-day SD 0.029, against 0.053 in the main study), so the test is weak (smallest detectable coefficient 2.1); the narrower 0.25% band varies more (SD 0.074) and gives nothing either.
+
+**Placebos** (`followup_placebo_summary.csv`, draws in `followup_placebo_draws.csv`):
+
+| Regressor | Real coefficient (p) | (a) +25 shift (p) | (a') -25 shift (p) | (b) median [range], randomization p | (c) median [range], randomization p |
+| --- | --- | --- | --- | --- | --- |
+| log gross GEX (FH1) | 0.257 (0.386) | -0.099 (0.767) | -0.342 (0.271) | 0.019 [-0.414, 0.438], 0.363 | 0.017 [-0.220, 0.288], 0.388 |
+| concentration (FH2) | -0.424 (0.574) | -0.641 (0.387) | -0.415 (0.606) | -0.630 [-1.065, -0.216], 0.801 | -0.597 [-1.142, 0.166], 0.751 |
+
+In this window the half-strike placebo is finally a sharp test for the level of gamma: the shifted profile's gamma at spot has a within-day correlation of only 0.09 (+25) and -0.005 (-25) with the real one, against 0.97 before 15:00. So the design can now tell real strikes from a smooth profile, and the real strikes still show nothing. For concentration the fake profiles of (b) and (c) give coefficients as negative as the real one (within-day correlation with the real concentration 0.85 and 0.73): in the final half hour, concentration is set mostly by the clock and by where the index sits between strikes, not by the shape of the OI profile.
+
+**Verdict.** No sign of hedging in the final half hour. Neither primary test is significant (Holm-adjusted p = 1.0 for both, `followup_summary.csv`), the sharp averaged-settlement gamma shows nothing, and the placebos behave like the real profile.
+
+**Figure 3** (`fig3_followups.png`): the primary coefficients of both follow-ups with their placebos, and the Nifty main-study concentration estimate for comparison.
+
+## 9. Follow-up 2: does the concentration lead replicate on Bank Nifty? (pre-registered, REAL DATA)
+
+**Why Bank Nifty.** It has its own option book, its own dealers' positions and, until November 2024, its own weekly expiry, so it is an independent check of finding 5. The specification is the Nifty secondary test, unchanged except for the 100-point strike spacing; it was written down before the Bank Nifty code was written (`design_log.csv`).
+
+| Item | Value | Source |
+| --- | --- | --- |
+| Sample | every BANKNIFTY expiry date in the bhavcopies from 3 January 2023 to 19 November 2024 (weekly options stopped on 20 November 2024): 98, none left out | `followup_data_checks.csv` |
+| First and last day | 5 January 2023 to 13 November 2024 | `followup_data_checks.csv` |
+| Weekday of expiry | Wednesday 56, Thursday 38, Tuesday 4 | `followup_data_checks.csv` |
+| Chain | expiring BANKNIFTY contract from the previous trading day's bhavcopy (98 of 98; 1 holiday re-dated contract); median 77 strikes within 10%; median spacing near the money 100 points | `followup_data_checks.csv`, `followup_banknifty_day_inputs.csv` |
+| Bars | `data/raw/banknifty_1min.csv`; official closes "Nifty Bank" in `index_daily.csv` | |
+| Anchors | every 5 minutes, 09:30 to 15:00: 6,566 rows, no zero RV windows | `followup_data_checks.csv` |
+| BN1 (primary) | log RV of the next 15 minutes on concentration (share within 0.5% of spot), controls log RV of the previous 15 and 60 minutes and distance to the nearest 100-point strike, day and minute fixed effects, 5-minute floor, clustered by day; predicted negative; two-sided p primary, one-sided reported | `design_log.csv` |
+
+Concentration follows the same daily path as on Nifty (median 0.44 at 09:30, 0.55 at 12:00, 0.83 at 14:30, 0.95 at 15:00; Nifty 0.515, 0.605, 0.904, 0.982), and its within-day standard deviation is the same (0.054 against 0.053), so the two tests measure the same thing (`followup_descriptives.csv`, `followup_regressions.csv`, `regressions.csv`).
+
+**Results** (`followup_regressions.csv`, `followup_summary.csv`):
+
+| Specification | Coefficient | 95% interval | p | p two-way | p Driscoll-Kraay |
+| --- | --- | --- | --- | --- | --- |
+| **BN1**: concentration (primary) | -0.122 | -0.661 to 0.417 | 0.655 (one-sided 0.328) | 0.655 | 0.643 |
+| concentration, plus signed and absolute move since previous close | -0.105 | -0.644 to 0.434 | 0.700 | 0.701 | 0.682 |
+| log gross GEX at spot | -0.109 | -0.408 to 0.190 | 0.471 | 0.446 | 0.337 |
+| log gross, plus the move controls (added, not pre-registered) | -0.176 | -0.621 to 0.269 | 0.434 | 0.422 | 0.315 |
+| For comparison, Nifty main study, concentration (same specification) | -0.386 | -0.727 to -0.044 | 0.027 | | |
+
+**Placebos** (`followup_placebo_summary.csv`):
+
+| Regressor | Real coefficient (p) | (a) +50 shift (p) | (a') -50 shift (p) | (b) median [range], randomization p | (c) median [range], randomization p |
+| --- | --- | --- | --- | --- | --- |
+| concentration (BN1) | -0.122 (0.655) | -0.291 (0.183) | -0.129 (0.628) | 0.290 [0.000, 0.620], 0.871 | 0.153 [-0.123, 0.505], 0.736 |
+| log gross GEX | -0.109 (0.471) | -0.098 (0.501) | -0.114 (0.469) | -0.129 [-0.354, 0.099], 0.637 | -0.123 [-0.378, 0.172], 0.617 |
+
+**Holm over the three pre-registered tests** (`followup_summary.csv`): FH1 raw p 0.386, FH2 0.574, BN1 0.655; Holm-adjusted p 1.0 for each.
+
+**Verdict.** The lead did not replicate. The Bank Nifty coefficient has the predicted sign but is a third of Nifty's (-0.122 against -0.386; per within-day standard deviation -0.007 against -0.020), it is far from significant, the +50-point shifted profile gives a more negative coefficient than the real one (-0.291), and the fake profiles of (b) and (c) mostly give a larger |t|. The test is not strong: with 98 days its standard error is 0.27, so it had about 29% power (two-sided; 41% one-sided) to detect an effect as large as Nifty's (`power_vs_nifty_coef_two_sided`, normal approximation), and its interval contains both zero and -0.386. Together with the final-half-hour result, the honest reading is that the Nifty concentration result was most likely one of the false positives to be expected among 117 tests, or a real effect too small for these samples; nothing in the follow-ups supports it.
+
+## 10. Limitations
 
 * **Sticky-strike implied vols.** Each strike keeps yesterday's implied vol all day. Real implied vols move with the index and change shape through expiry day; gamma near the money is inversely proportional to implied vol, so this matters most late on expiry day.
 * **End-of-day OI only.** OI changes during the day (especially on expiry day, when positions are closed or rolled), and NSE publishes it only after the close. Gamma at spot is built from yesterday's positions.
 * **Third-party minute bars.** The 1-minute index bars come from a public GitHub dataset (`data/raw/minute_bars_source.json`) that the project checked against NSE's daily highs and lows, not from NSE itself. From 3 August 2026 the bars are frozen from 15:15 because of the closing auction.
 * **The dealer sign is proxied.** NSE does not publish who holds which strike. The three signed rules are guesses, and the participant weights are market-wide for all index options, the same at every strike.
-* **What the grid can see.** With anchors from 09:30 to 15:00, at least 30 minutes remain, so gamma at spot is smooth across strikes and the half-strike placebo is weak for the level of gamma (correlation 0.95 to 1.00 with the real one). The last 30 minutes, where strike-level gamma is sharpest, are outside the design.
+* **What the grid can see.** With anchors from 09:30 to 15:00, at least 30 minutes remain, so gamma at spot is smooth across strikes and the half-strike placebo is weak for the level of gamma (correlation 0.95 to 1.00 with the real one). The last 30 minutes, where strike-level gamma is sharpest, are covered by the follow-up of Section 8, but only before the closing auction (187 days).
 * **Forward and rate.** The forward inside the day is the index times exp(6.5% x T), not a market forward; on expiry day the difference is under 6 index points.
 * **Choices made after the first run.** The leverage control and the expiry-afternoon placebos were added after seeing the first results (`design_log.csv`); the headline specification was not changed.
-* **Power.** About 200 expiry days and an out-of-sample test with 155 days cannot detect small effects. The expiry-day interval rules out elasticities outside -0.13 to 0.41, not small ones.
+* **Power.** About 200 expiry days and an out-of-sample test with 155 days cannot detect small effects. The expiry-day interval rules out elasticities outside -0.13 to 0.41, not small ones. The Bank Nifty replication has 98 days and about 29% power against an effect of the Nifty size.
+* **The averaged settlement is modelled, not observed.** NSE's official close is built from each constituent's prices over 15:00 to 15:30, not from the index's one-minute closes; we use the mean of the 30 one-minute index closes and a driftless random-walk formula for the time left. In the final minutes implied vols are also least reliable, and they are held at yesterday's level.
+* **Concentration saturates in the final half hour.** With so little time left almost all gamma at spot comes from within 0.5% of the index, so FH2 is a weak test; the 0.25% band is the better measure there and is null too.
+* **Bank Nifty specifics.** The same sticky-strike vols and end-of-day OI; participant weights are market-wide and were not used; and Bank Nifty changed its expiry weekday during the sample (Thursday, then Wednesday, with a few Tuesdays), which the day fixed effects absorb but which may change who trades the last day.
 
-## 9. Reproduce
+## 11. Reproduce
 
 ```bash
-OMP_NUM_THREADS=1 python experiments/intraday_gamma.py      # about 4 minutes on 4 cores
+OMP_NUM_THREADS=1 python experiments/intraday_gamma.py      # about 2.5 to 4 minutes on 4 cores, follow-ups included
 OMP_NUM_THREADS=1 python -m pytest -q tests/test_intraday_gamma.py
 ```
 
-Outputs in `results/intraday_gamma/`: `anchor_panel.csv.gz` (every anchor with all variables in levels; the regressions use their natural logs), `day_inputs.csv` (one row per day: chain date, forward, weights, scale), `data_checks.csv`, `descriptives_by_time.csv`, `gamma_width_expiry_day.csv`, `within_day_correlations.csv`, `regressions.csv`, `placebo_summary.csv`, `placebo_draws.csv`, `oos_summary.csv`, `oos_forecasts.csv`, `oos_expiry_day_features.csv`, `all_tests.csv`, `design_log.csv`, `fig_deciles_expiry_afternoon.csv` and the two figures. The script reuses the chain helpers of `experiments/pinning_study.py` and the package's Black-76 greeks, GEX sign weights and Diebold-Mariano test.
+Outputs in `results/intraday_gamma/`: `anchor_panel.csv.gz` (every anchor with all variables in levels; the regressions use their natural logs), `day_inputs.csv` (one row per day: chain date, forward, weights, scale), `data_checks.csv`, `descriptives_by_time.csv`, `gamma_width_expiry_day.csv`, `within_day_correlations.csv`, `regressions.csv`, `placebo_summary.csv`, `placebo_draws.csv`, `oos_summary.csv`, `oos_forecasts.csv`, `oos_expiry_day_features.csv`, `all_tests.csv`, `design_log.csv`, `fig_deciles_expiry_afternoon.csv` and the first two figures. Follow-ups: `followup_summary.csv` (the three pre-registered tests with Holm, placebos and power), `followup_regressions.csv`, `followup_placebo_summary.csv`, `followup_placebo_draws.csv`, `followup_data_checks.csv`, `followup_descriptives.csv`, `followup_banknifty_day_inputs.csv`, `followup_final_half_hour_panel.csv.gz`, `followup_banknifty_panel.csv.gz` and `fig3_followups.png`. The script reuses the chain helpers of `experiments/pinning_study.py` and the package's Black-76 greeks, GEX sign weights and Diebold-Mariano test.

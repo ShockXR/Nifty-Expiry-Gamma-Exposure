@@ -7,7 +7,8 @@
 **Real-data results so far** (details, caveats and the file behind every number are in the linked documents):
 
 * **Forecasting (out of sample, 792 test days).** A hybrid that corrects the paper's mcsGARCH with a LightGBM model of its errors forecasts the next 15 and 30 minutes about 7% and 9% better (QLIKE loss, Diebold-Mariano p < 0.001). For the last hour no model reliably beats mcsGARCH (an apparent edge for HAR comes mostly from the days after NSE's closing auction began on 3 August 2026). Adding dealer gamma (GEX) features does not improve forecasts under any of three sign rules.
-* **In-sample patterns.** Higher dealer gamma the evening before goes with calmer ordinary days but more volatile expiry days. Nifty tends to reverse in the last 30 minutes, more so after negative "Pro"-based GEX, which is the opposite of the US hedging-momentum story. These are associations on a proxied dealer sign, and a falsification suite is testing them.
+* **Dealer gamma, after falsification** ([docs/FALSIFICATION.md](docs/FALSIFICATION.md), [docs/DEALER_SIGN.md](docs/DEALER_SIGN.md)). One in-sample pattern survived every attempt to break it: Nifty tends to reverse in the last 30 minutes, and only after evenings when GEX built from NSE's "Pro" participant positions was negative (the opposite of the US hedging-momentum story). The "higher GEX, calmer next day" link turned out to track the total amount of option gamma, not its sign, and the expiry-day sign flip is in-sample only. Estimating the dealer sign from the data gives nearly opposite answers for the two outcomes hedging theory speaks to, so who the dealers are remains the open question.
+* **Expiry rules as natural experiments** ([docs/EVENT_STUDY.md](docs/EVENT_STUDY.md)). The whole-day expiry premium barely moves with NSE's rule changes; the end-of-day premium follows the expiry.
 * **Replication of the 2025 paper** ([docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md)). The "after" sample reproduces the printed tables closely. The stated "before" window does not, while a 64-day window from 14 November 2022 to 10 February 2023 reproduces the printed "before" numbers, which we will ask the authors about.
 * **Pinning** ([docs/PINNING_STUDY.md](docs/PINNING_STUDY.md)). The expiry-day close sits closer to a strike only in some periods (Nifty from November 2024 to August 2025, Bank Nifty while it had weekly options), and our dealer-gamma proxies do not explain when.
 
@@ -32,7 +33,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
 | Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-75 tests, run with `pytest` (also on every pull request through GitHub Actions).
+128 tests, run with `pytest` (also on every pull request through GitHub Actions).
 
 ## Documents
 
@@ -48,6 +49,12 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | [docs/REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) | **Real data:** forecasting contest, expiry effects by regime, GEX regressions, end-of-day momentum (R0 to R5) |
 | [docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md) | **Real data:** the paper's Tables 1 to 6 rebuilt from NSE data, with robust versions of each test |
 | [docs/PINNING_STUDY.md](docs/PINNING_STUDY.md) | **Real data:** do Nifty and Bank Nifty close at option strikes on expiry day? |
+| [docs/EVENT_STUDY.md](docs/EVENT_STUDY.md) | **Real data:** expiry rule changes as natural experiments, with comparison indices and placebo dates |
+| [docs/FALSIFICATION.md](docs/FALSIFICATION.md) | **Real data:** seven families of tests that try to break the GEX findings |
+| [docs/DEALER_SIGN.md](docs/DEALER_SIGN.md) | **Real data:** estimating the dealer sign from the market's response (a negative result) |
+| [docs/INTRADAY_GAMMA.md](docs/INTRADAY_GAMMA.md) | **Real data:** expiry-day gamma re-priced minute by minute |
+| [docs/INDEPENDENT_REVIEW.md](docs/INDEPENDENT_REVIEW.md) | A referee-style review of the real-data results, and what changed because of it |
+| [results/live/](results/live/) | **Real data:** a forecast frozen before the 3 November 2026 expiry, scored after the close |
 | [notebooks/01_real_data_tour.ipynb](notebooks/01_real_data_tour.ipynb) | **Real data:** a guided tour with charts (option chain, GEX profile, an expiry day, the scoreboard) |
 | [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) | How the real data are downloaded and checked |
 | [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) | Exact commands, versions and run times to regenerate every result |
