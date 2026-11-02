@@ -5,7 +5,7 @@
 ## Findings
 
 1. **The paper.** Chhimwal, Pandey and Pandey (2025, Review of Derivatives Research) show that after Bank Nifty's expiry moved to Wednesday, each index got more volatile and busier on its own expiry day, and the two indices moved together less. They fit their volatility model in-sample and do not test why it happened. That "why" is the opening for this project.
-2. **The gap is real.** A literature search (35 references checked, none fake) found no peer-reviewed study of option dealers' hedging effects on Nifty or any NSE options.
+2. **The gap is real.** A literature search (41 references checked, 36 of them fully, none fake) found no peer-reviewed study of option dealers' hedging effects on Nifty or any NSE options.
 3. **Careful-reader notes on the paper** (useful to show Prof. Pandey we read it closely, phrased as questions, not criticism):
    * Its connectedness totals are on a scale twice the usual one (84 means 42 in the standard index).
    * Its ARMA(1,1) terms nearly cancel; our simulations show that is what ARMA(1,1) does on data with no real autocorrelation.
@@ -16,6 +16,7 @@
    * The sign rule is decisive: the common US convention never detected the effect in our India-style simulated market.
    * Noisy position data destroy most of the power.
    * Gains are small (1 to 4%) and the last hour of expiry day cannot be tested reliably with end-of-day data alone.
+6. **The full pipeline runs end to end.** On one 500-day simulated market it took 3 minutes. A hybrid that corrects mcsGARCH with recent realised volatility beat mcsGARCH by about 7% (30-minute forecasts) and 14% (last hour), and that gain was highly significant; the extra gain from GEX was under 1.5 points and borderline, as the power study predicts.
 
 ## Decisions taken
 
@@ -26,7 +27,7 @@
 
 ## Validation
 
-* 28 automated tests: greeks against finite differences and put-call parity, GEX against its definition, mcsGARCH parameter recovery, connectedness against a closed form, the expiry calendar against known dates (including the 2 September 2025 switch to Tuesday), and a round trip through NSE file formats.
+* 31 automated tests: greeks against finite differences and put-call parity, GEX against its definition, mcsGARCH parameter recovery, connectedness against a closed form, the expiry calendar against known dates (including the 2 September 2025 switch to Tuesday), and a round trip through NSE file formats.
 * mcsGARCH recovers the paper's own parameter values from simulated data; at the paper's sample size its persistence estimate is biased up slightly when the daily part is estimated.
 * The implied-vol solver is accurate to $10^{-12}$ for every option worth at least one tick, 50,000 options in under a second.
 
@@ -37,6 +38,7 @@
 3. The daily EGARCH fit diverged on some training windows (forecasts off by 10^8). Added checks and a fallback.
 4. The simulator leaked next-day volatility through option implied vols, which made gamma features look useful when they were not. Fixed and the power study rerun.
 5. The first Wilcoxon experiment used a null that made every test fail; redesigned into two clean scenarios.
+6. A new test found the fallback volatility filter could return zero variance; fixed with a sensible starting value and a floor.
 
 Full log: `ITERATION_LOG.md`.
 

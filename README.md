@@ -25,7 +25,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
 | Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-28 tests, run with `pytest`.
+31 tests, run with `pytest`.
 
 ## Documents
 
@@ -34,7 +34,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | [RESEARCH_STRATEGY_PANDEY.md](RESEARCH_STRATEGY_PANDEY.md) | Research questions, hypotheses, decision tree, risks |
 | [PITCH_PANDEY.md](PITCH_PANDEY.md) | One-page pitch for Prof. Pandey |
 | [docs/PAPER_DEEP_DIVE.md](docs/PAPER_DEEP_DIVE.md) | Close reading of the 2025 paper, with checks of its published numbers |
-| [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md) | 34 verified references and what each means for the design |
+| [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md) | 41 checked references (36 fully verified) and what each means for the design |
 | [docs/math/](docs/math/) | Derivations: greeks and GEX, mcsGARCH, connectedness, inference, forecast evaluation |
 | [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md) | Every experiment, its question, its result and its limits |
 | [ITERATION_LOG.md](ITERATION_LOG.md) | What went wrong during the build and what changed |

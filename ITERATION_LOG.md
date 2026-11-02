@@ -64,3 +64,7 @@ The first power-study pass was stopped after 13 markets because the results look
 
 * Writing a test for the EWMA fallback (feeding the daily model a degenerate series) showed the fallback could return a daily variance of exactly zero, which would make every later normalisation divide by zero.
 * Fix: the EWMA now starts from the training window's mean square and is floored at 1% of the overall mean square. The fallback has not been triggered in any experiment run so far (E1a: 0 of 180 fits), but it is now safe if it is.
+
+## Iteration 11: full pipeline run on one synthetic market
+
+Ran `scripts/run_pipeline.py --source synthetic --days 500 --kappa 0.5 --seed 7` after the fixes above (183 seconds). Results are in the experiment report, section E7. The run agreed with the power study: a correctly signed GEX added a small, borderline gain at 30 minutes, the US sign added nothing, and the last-hour target could not separate the models. The clearest gain came from the hybrid correction of mcsGARCH, which is a useful reminder that the GEX test must be judged against a strong baseline, not against mcsGARCH alone.

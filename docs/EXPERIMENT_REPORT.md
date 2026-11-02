@@ -133,4 +133,33 @@ File: `results/paper_checks/e6_table_arithmetic.csv`. Inputs are numbers printed
 
 ## E7. Full pipeline on one synthetic market
 
-See the section appended below by the pipeline run (results in `results/pipeline_synthetic/`).
+**SYNTHETIC.** One simulated market of 500 trading days (seed 7, true gamma effect $\kappa = 0.5$, participant noise 0.1), run through exactly the code path that real data will use: GEX panel, walk-forward training (first 150 days for training, then refits every 21 days), three forecast targets, Diebold-Mariano tests on daily average QLIKE losses, and the Model Confidence Set. Runtime 183 seconds. Files: `results/pipeline_synthetic/`; figures in `results/pipeline_synthetic/figures/`. The test window has 350 days, of which 71 are expiry days.
+
+**QLIKE relative to mcsGARCH** (negative means better than the paper's model):
+
+| Model | next 15 min, all days | next 30 min, all days | next 30 min, expiry days | last hour, all days | last hour, expiry days |
+| --- | --- | --- | --- | --- | --- |
+| VIX (implied vol) | +23.3% | +22.3% | +34.3% | +3.0% | +14.4% |
+| HAR | -0.8% | -3.4% | -4.1% | -14.1% | -4.3% |
+| LightGBM, no GEX | -3.0% | -5.7% | -4.6% | -3.9% | -0.4% |
+| Hybrid, no GEX | -3.8% | -6.8% | -6.9% | -14.2% | -13.5% |
+| Hybrid + GEX, US sign | -3.7% | -6.5% | -6.6% | -13.6% | -13.1% |
+| Hybrid + GEX, participant sign | -3.7% | -7.4% | -8.2% | -12.8% | -15.1% |
+| Hybrid + GEX, true dealer positions (oracle) | -3.9% | -7.6% | -7.4% | -13.6% | -13.7% |
+
+**GEX ablation** (one-sided Diebold-Mariano p-value that adding GEX features to the hybrid improves it):
+
+| Sign rule | next 30, all days | next 30, expiry days | next 15, all days | last hour, all days |
+| --- | --- | --- | --- | --- |
+| US convention | 0.75 | 0.62 | 0.80 | 0.70 |
+| Participant ("Pro") | 0.12 | 0.098 | 0.65 | 0.92 |
+| Oracle | 0.0499 | 0.31 | 0.37 | 0.75 |
+
+**Other outputs.**
+
+* The hybrid models beat mcsGARCH for every target with p below 0.003, including on expiry days only.
+* Model Confidence Set (10% level), next 30 minutes on expiry days: mcsGARCH, VIX and both naive forecasts are excluded; HAR, LightGBM and all hybrids remain.
+* Largest LightGBM feature importances (next 30, GEX model): mcsGARCH forecast (26% of gain), oracle GEX (14%), VIX (11%).
+* Full-sample mcsGARCH estimates: $\alpha = 0.0315$, $\beta = 0.9526$, $\nu = 7.08$ (truth 0.03, 0.95, 7).
+
+**Reading.** This single market agrees with the E4 power study. A correctly signed GEX gives a small gain at the 30-minute horizon (about 0.6 to 1.3 percentage points of QLIKE on top of the hybrid) that is borderline significant in one market; the US sign gives nothing; and the last-hour target cannot separate the GEX models from the base hybrid with 71 expiry days. The bigger and much more robust gain in this simulation comes from correcting mcsGARCH with recent realised volatility (HAR and the hybrid). Whether that also holds on real Nifty data is the first thing the real-data run will show.
