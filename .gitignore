@@ -13,3 +13,6 @@ data/live/
 .claude/worktrees/
 results/intraday_gamma/anchor_panel.csv.gz
 results/falsification/t1_permutation_draws.csv.gz
+
+# Working-paper draft: kept in the private project files, not in this public repository, until Shreyan decides
+docs/WORKING_PAPER.*

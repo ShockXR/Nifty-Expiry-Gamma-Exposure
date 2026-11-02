@@ -1,5 +1,7 @@
 # Independent review of the real-data studies
 
+*Note added 3 November 2026: numbers quoted in this review are from the result files as they stood when it was written. Where a later fix or rerun changed a number, `docs/REAL_DATA_RESULTS.md` and the study documents have the current value; how each point was addressed is listed there and in `ITERATION_LOG.md` (iteration 20).*
+
 Reviewer: an outside, skeptical reader acting as a referee. Date: 2 November 2026.
 Scope: `docs/REAL_DATA_RESULTS.md` (R0 to R5, the version corrected for the closing auction in commit b2bfcc9), `docs/REPLICATION_NSE.md`, `docs/PINNING_STUDY.md`, the code in `src/niftygex/` and `experiments/`, the result files under `results/`, and the raw data under `data/raw/` (read only). The paper itself was not opened, as instructed, so every "printed" value from the paper is taken as typed in `experiments/replicate_paper.py`.
 

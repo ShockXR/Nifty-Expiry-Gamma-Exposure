@@ -12,7 +12,7 @@ pip install ".[download]" pytest
 OMP_NUM_THREADS=1 python -m pytest -q
 ```
 
-Result: installation took about 27 seconds and all 34 tests passed in about 9 seconds (Python 3.13.18, Linux). The exact package versions are in `requirements-tested.txt`. The tests need no market data: they run on small synthetic files written in NSE's layouts.
+Result: installation took about 27 seconds and all 34 tests passed in about 9 seconds (Python 3.13.18, Linux). The exact package versions are in `requirements-tested.txt`. The committed real-data results were produced in an environment with slightly different patch versions (numpy 2.5.3, pandas 3.0.5); those are listed in `requirements-results.txt`. The tests need no market data: they run on small synthetic files written in NSE's layouts.
 
 The same tests run automatically on GitHub for Python 3.11, 3.12 and 3.13 on every push (`.github/workflows/tests.yml`).
 

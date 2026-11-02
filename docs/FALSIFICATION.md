@@ -152,7 +152,7 @@ regime), so the ratio numbers differ slightly from the original script, which ha
 | pre-auction | US | 0.37 (p 0.23) | 0.32 (p 0.52) | -0.33 (p 0.066) | 0.40 (p 0.13) | 0.0057 (p 0.81) | -0.0097 (p 0.67) |
 | pre-auction | Client mirror | -0.69 (p 0.61) | 3.27 (p 0.078) | -2.67 (p 0.0057) | 3.93 (p 0.0013) | -0.0717 (p 0.00005) | 0.0042 (p 0.91) |
 
-F1 has 937 days in the full sample and 874 before the auction; F2 has 932 and 869. Source:
+F1 has 937 days in the full sample and 874 before the auction; F2 has 932 and 869. (F2 here codes the 3 days with no GEX in January 2023 as non-negative, as `momentum_gex.py` did when this study ran. `momentum_gex.py` now treats them as missing, which leaves 929 days and moves the Pro binary coefficient from -0.0681 to -0.0682 with the same p-value; no conclusion here depends on it.) Source:
 `results/falsification/headline_in_sample.csv`.
 
 ## T1. Permutation placebos (REAL DATA)
@@ -524,7 +524,7 @@ same-evening US GEX, gross GEX with and without calendar controls); 4 support a 
 controls in 2025 onward before the auction, and F1b ratio Pro with calendar controls before the auction). The
 pre-registered F2 test has BH 0.035 (pre-auction 0.025) in this family.
 
-**Reading.** Only F2 (Pro, binary) survives Holm in the full family of the original tests. F1b survives Holm
+**Reading.** Among the Pro-rule headline tests, only F2 (binary) survives Holm in the full family of the original tests. The Client-mirror version of F2 also survives (Holm 0.0023), but it rests on 38 negative-GEX days and disappears once VIX and the size of the day's move are controlled (R5), so it is not counted as support for a dealer effect. F1b survives Holm
 only within the narrow headline set. With 742 tests in this study alone, isolated p-values near 0.02 should be
 read as weak evidence.
 
