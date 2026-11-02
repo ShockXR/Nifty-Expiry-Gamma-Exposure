@@ -8,11 +8,13 @@ Outputs go to results/pipeline_<source>/ (or --out):
     daily_gex_panel.csv          GEX under each sign rule (all strikes and near the money), flip, walls, max pain
     daily_implied_panel.csv      option-implied quantities from each day's published chain (all expiries)
     forecasts_<target>.csv       every test anchor: realized value and every model's forecast
-    scoreboard_<target>.csv      QLIKE and MSE by model and subgroup (expiry, regime, development/hold-out)
-    tests_<target>.csv           Diebold-Mariano: each model vs mcsGARCH, by subgroup
+    scoreboard_<target>.csv      QLIKE, MSE and trimmed QLIKE by model and subgroup (expiry, regime,
+                                 09:15 anchor, before/after the closing auction, development/hold-out)
+    tests_<target>.csv           Diebold-Mariano: each model vs mcsGARCH, by subgroup, for QLIKE and MSE
+    gain_by_anchor_<target>.csv  QLIKE and MSE of each model relative to mcsGARCH at each anchor minute
     ablation_<target>.csv        the GEX ablation: same model with and without each GEX set, by subgroup,
                                  one-sided DM p-values and Holm-adjusted p-values within each family
-    mcs_<target>_<subset>.csv    Model Confidence Set p-values (daily QLIKE)
+    mcs_<target>_<subset>.csv    Model Confidence Set p-values (daily QLIKE; *_mse files: daily MSE)
     mcsgarch_params.csv          parameters from every walk-forward refit (paper's daily component and implied one)
     feature_importance_<target>.csv, linear_coefficients_<target>.csv, hyperparameters_<target>.csv
     seed_noise_<target>.csv      (with --seed-study) LightGBM forecast noise across random seeds
@@ -37,8 +39,8 @@ import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from niftygex import plots  # noqa: E402
-from niftygex.evaluation import (ablation_table, daily_losses, diebold_mariano, holm,  # noqa: E402
-                                 model_confidence_set, scoreboard, subgroups)
+from niftygex.evaluation import (ablation_table, daily_losses, diebold_mariano, gain_by_anchor,  # noqa: E402
+                                 holm, model_confidence_set, scoreboard, subgroups)
 from niftygex.features import CLOSING_AUCTION_START as AUCTION_START  # noqa: E402
 from niftygex.features import GEX_SETS, build_dataset, build_gex_panel  # noqa: E402
 from niftygex.forecast import WalkForwardConfig, run_walkforward  # noqa: E402
@@ -103,7 +105,7 @@ def write_daily_market(m, path):
 
 
 def build_models(has_oracle: bool, full: bool = True):
-    models = ["naive_last", "naive_prevday", "vix", "implied", "har", "mcsgarch", "mcsgarch_iv",
+    models = ["naive_last", "naive_prevday", "vix", "implied", "har", "mcsgarch", "mcsgarch_r63", "mcsgarch_iv",
               "linear_v1", "lgbm_v1", "hybrid_v1", "hybrid_v1gex"]
     sets = list(SIGN_SETS) + (["oracle"] if has_oracle else [])
     models += ["lgbm_base", "lgbmt_base"]  # plain LightGBM, default and tuned in-window: base only
@@ -190,6 +192,9 @@ def main():
     ap.add_argument("--lean", action="store_true", help="fewer model families (faster, for tests)")
     ap.add_argument("--min-train", type=int, default=150)
     ap.add_argument("--block", type=int, default=21)
+    ap.add_argument("--mcs-refit-every", type=int, default=21,
+                    help="refit mcsGARCH every this many days (21 = every block, like the learned models)")
+    ap.add_argument("--verbose", action="store_true", help="print one line per walk-forward block")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
@@ -225,14 +230,15 @@ def main():
     models = build_models(has_oracle, full=not a.lean)
     sets = {k: v for k, v in GEX_SETS.items() if k != "oracle" or has_oracle}
     cfg = WalkForwardConfig(models=models, gex_sets=sets, tune=a.tune, tune_every=a.tune_every,
-                            n_seeds=a.n_seeds, seed=a.seed, min_train=a.min_train, block=a.block)
+                            n_seeds=a.n_seeds, seed=a.seed, min_train=a.min_train, block=a.block,
+                            mcs_refit_every=a.mcs_refit_every)
     pairs = ablation_pairs(models)
     params_all, timing = [], {}
     for name in a.targets:
         t1 = time.time()
         ds = build_dataset(m, panel, implied=implied, **TARGETS[name])
         cfg.eval_minutes = EVAL_MINUTES.get(name)
-        pred, info = run_walkforward(m, ds, cfg)
+        pred, info = run_walkforward(m, ds, cfg, verbose=a.verbose)
         timing[name] = round(time.time() - t1, 1)
         present = [x for x in models if x in pred]
         pred.to_csv(out / f"forecasts_{name}.csv", index=False)
@@ -247,18 +253,25 @@ def main():
             sub = pred[mask]
             if sub["date"].nunique() < 10:
                 continue
-            L = daily_losses(sub, present)
-            for mdl in present:
-                if mdl != "mcsgarch":
-                    tests.append({"subset": subset, "comparison": f"mcsgarch vs {mdl}",
-                                  **diebold_mariano(L["mcsgarch"], L[mdl], alternative="greater")})
-            if subset in ("all", "expiry"):
-                try:
-                    mcs = model_confidence_set(L[present], reps=1000)
-                    mcs.assign(subset=subset).to_csv(out / f"mcs_{name}_{subset}.csv")
-                except Exception as exc:  # small samples can make the MCS bootstrap fail
-                    print(f"MCS skipped for {name}/{subset}: {exc}")
+            for loss in ("qlike", "mse"):
+                L = daily_losses(sub, present, loss)
+                for mdl in present:
+                    if mdl != "mcsgarch":
+                        tests.append({"subset": subset, "loss": loss, "comparison": f"mcsgarch vs {mdl}",
+                                      **diebold_mariano(L["mcsgarch"], L[mdl], alternative="greater")})
+                if subset in ("all", "expiry", "pre_auction"):
+                    try:
+                        mcs = model_confidence_set(L[present], reps=1000)
+                        suffix = "" if loss == "qlike" else "_mse"
+                        mcs.assign(subset=subset, loss=loss).to_csv(out / f"mcs_{name}_{subset}{suffix}.csv")
+                    except Exception as exc:  # small samples can make the MCS bootstrap fail
+                        print(f"MCS skipped for {name}/{subset}/{loss}: {exc}")
         pd.DataFrame(tests).to_csv(out / f"tests_{name}.csv", index=False)
+        anchor_masks = {"all": groups["all"]}
+        for k in ("pre_auction", "expiry", "multi_weekly", "single_weekly_thu", "single_weekly_tue"):
+            if k in groups:
+                anchor_masks[k] = groups[k]
+        gain_by_anchor(pred, present, masks=anchor_masks).to_csv(out / f"gain_by_anchor_{name}.csv", index=False)
         abl = ablation_table(pred, pairs, groups)
         if not abl.empty:
             abl["p_holm_in_family"] = np.nan
@@ -266,6 +279,8 @@ def main():
                 keep = [i for i in idx if abl.loc[i, "label"] != "placebo"]
                 abl.loc[keep, "p_holm_in_family"] = holm(abl.loc[keep, "p_one_sided"].to_numpy())
         abl.to_csv(out / f"ablation_{name}.csv", index=False)
+        abl_groups = {k: v for k, v in groups.items() if k in ("all", "expiry", "pre_auction", "excl_0915")}
+        ablation_table(pred, pairs, abl_groups, loss="mse").to_csv(out / f"ablation_{name}_mse.csv", index=False)
         for kind in ("hybrid", "hybridiv", "linear"):
             plots.ablation_dots(abl, f"{kind}: base vs base+GEX", out / "figures" / f"ablation_{name}_{kind}.png",
                                 f"{name}: {kind} model, adding each GEX set (REAL DATA)" if a.source == "nse"
@@ -289,7 +304,11 @@ def main():
                                  "folds": len(v), "last_fold_coef": v.iloc[-1] if len(v) else np.nan})
             pd.DataFrame(rows).to_csv(out / f"linear_coefficients_{name}.csv", index=False)
         pd.DataFrame(info["hyper"]).to_csv(out / f"hyperparameters_{name}.csv", index=False)
-        params_all.append(pd.DataFrame(info["mcs_params"]).assign(target=name, daily_component="egarch (paper)"))
+        params_all.append(pd.DataFrame(info["mcs_params"]).assign(target=name, daily_component="egarch (paper)",
+                                                                   refit_every=cfg.mcs_refit_every))
+        if info["mcs_slow_params"]:
+            params_all.append(pd.DataFrame(info["mcs_slow_params"]).assign(
+                target=name, daily_component="egarch (paper)", refit_every=cfg.mcs_slow_refit_every))
         if info["mcs_iv_params"]:
             params_all.append(pd.DataFrame(info["mcs_iv_params"]).assign(target=name, daily_component="implied"))
         if a.seed_study > 1 and name in a.seed_study_targets:
@@ -303,7 +322,9 @@ def main():
     import lightgbm, arch, scipy  # noqa: E401
     json.dump({"source": label, "args": vars(a), "seconds": round(time.time() - t0, 1), "target_seconds": timing,
                "models": models, "gex_sets": sets, "headline_kind": HEADLINE_KIND,
-               "holdout_start": holdout,
+               "holdout_start": holdout, "mcs_refit_every": cfg.mcs_refit_every,
+               "dm_test": "HAC (Newey-West) on daily average losses, Harvey-Leybourne-Newbold correction, Student t(n-1)",
+               "trimmed_qlike": "mean QLIKE after removing each model's own largest 1% of anchor losses",
                "protocol": ("Design choices were made on walk-forward test days before the hold-out start only; "
                             "the hold-out period was evaluated once with the final configuration.") if holdout else None,
                "days": [str(pd.Timestamp(m["days"][0]).date()), str(pd.Timestamp(m["days"][-1]).date()), len(m["days"])],

@@ -175,7 +175,14 @@ def build_dataset(market: dict, panel: pd.DataFrame, horizon: int, step: int = 1
     cum = np.concatenate([np.zeros((T, 1)), np.cumsum(r2, axis=1)], axis=1)
     vol_cum = np.concatenate([np.zeros((T, 1)), np.cumsum(V, axis=1)], axis=1)
     dC = np.concatenate([np.zeros((T, 1)), np.diff(np.log(C), axis=1)], axis=1)
-    sig_dc = np.sqrt(np.median(r2))
+    # Scale for bulk volume classification: square root of the median, over the
+    # PREVIOUS days only, of each day's median squared one-minute return (an
+    # expanding median, so day t uses days 0..t-1). Day 0, which is only ever a
+    # training day, uses its own median.
+    day_med = np.median(r2, axis=1)
+    sig2 = pd.Series(day_med).expanding().median().shift(1).to_numpy(copy=True)
+    sig2[0] = day_med[0]
+    sig_dc = np.sqrt(np.maximum(sig2, 1e-14))[:, None]
     bvc = realized.bulk_volume_imbalance(dC, V, sig_dc)
     bvc_cum = np.concatenate([np.zeros((T, 1)), np.cumsum(bvc, axis=1)], axis=1)
     avg_day_vol = pd.Series(V.sum(axis=1)).shift(1).rolling(20, min_periods=1).mean().to_numpy()
@@ -284,24 +291,22 @@ def build_dataset(market: dict, panel: pd.DataFrame, horizon: int, step: int = 1
 
 
 def add_placebo(ds: pd.DataFrame, cols: list, seed: int = 12345) -> pd.DataFrame:
-    """Add ``pl_<col>`` columns: each day's values replaced by those of another day.
+    """Add ``pl_<col>`` columns: each day's values replaced by those of a random EARLIER day.
 
-    Days are permuted as whole blocks (no day keeps its own values) and
-    matched on the anchor minute, so the placebo keeps the within-day shape
-    and the marginal distribution of the real features but carries no
-    information about the day being forecast.
+    The source day is drawn uniformly from the days before the day itself
+    (never the day itself, never a later day, so the placebo uses no future
+    information), and values are matched on the anchor minute, so the placebo
+    keeps the within-day shape and roughly the marginal distribution of the
+    real features but carries no information specific to the day being
+    forecast. The first day has no earlier day and gets NaN. Draws are made
+    day by day in time order, so a day's placebo source does not depend on how
+    many days follow it.
     """
     rng = np.random.default_rng(seed)
     ts = np.sort(ds["t"].unique())
-    if len(ts) < 2:
-        for c in cols:
-            ds[f"pl_{c}"] = np.nan
-        return ds
-    perm = rng.permutation(ts)
-    for k in np.flatnonzero(perm == ts):  # remove fixed points by swapping with a neighbour
-        j = (k + 1) % len(ts)
-        perm[[k, j]] = perm[[j, k]]
-    src = dict(zip(ts, perm))
+    src = {ts[0]: -1} if len(ts) else {}
+    for k in range(1, len(ts)):
+        src[ts[k]] = ts[rng.integers(0, k)]
     keyed = ds.set_index(["t", "minute"])[cols]
     idx = pd.MultiIndex.from_arrays([ds["t"].map(src).to_numpy(), ds["minute"].to_numpy()])
     vals = keyed.reindex(idx).to_numpy()

@@ -125,11 +125,17 @@ def test_features_at_day_t_use_only_the_chain_published_at_t_minus_1(tmp_path):
         assert np.allclose(base.loc[nn, c].to_numpy(), after.loc[nn, c].to_numpy(), equal_nan=True), c
 
 
-def test_placebo_columns_come_from_other_days():
-    ds = pd.DataFrame({"t": np.repeat(np.arange(1, 21), 3), "minute": np.tile([0, 60, 120], 20)})
+def test_placebo_columns_come_from_earlier_days():
+    ds = pd.DataFrame({"t": np.repeat(np.arange(1, 41), 3), "minute": np.tile([0, 60, 120], 40)})
     ds["x"] = ds["t"] * 1000 + ds["minute"]
     out = add_placebo(ds.copy(), ["x"], seed=3)
-    src_day = out["pl_x"] // 1000
-    assert np.all(src_day != out["t"])                 # never the day's own values
-    assert np.all(out["pl_x"] % 1000 == out["minute"])  # same anchor minute
-    assert sorted(out.groupby("t")["pl_x"].first() // 1000) == list(range(1, 21))  # a permutation of days
+    first = out["t"] == 1
+    assert out.loc[first, "pl_x"].isna().all()           # no earlier day to draw from
+    o = out[~first]
+    src_day = o["pl_x"] // 1000
+    assert np.all(src_day < o["t"])                       # always an earlier day, never the day itself
+    assert np.all(o["pl_x"] % 1000 == o["minute"])        # same anchor minute
+    assert o.groupby("t")["pl_x"].apply(lambda v: (v // 1000).nunique()).eq(1).all()  # one source day per day
+    # the source of a day does not depend on how many days follow it
+    out2 = add_placebo(ds[ds["t"] <= 25].copy(), ["x"], seed=3)
+    assert np.allclose(out2["pl_x"].to_numpy(), out.loc[out["t"] <= 25, "pl_x"].to_numpy(), equal_nan=True)

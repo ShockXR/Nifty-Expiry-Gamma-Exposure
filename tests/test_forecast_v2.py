@@ -40,6 +40,39 @@ def test_new_models_run_causally_on_synthetic_market():
         assert np.allclose(a[c].to_numpy(), b[c].to_numpy(), rtol=1e-8), c
 
 
+def test_feature_rows_do_not_change_when_later_days_are_removed():
+    """Every feature of day t (GEX, implied, calendar, order flow, placebo) uses only days up to t."""
+    m = simulate_market(SimConfig(n_days=70, kappa=0.0, seed=8))
+    panel, imp = build_gex_panel(m), build_implied_panel(m)
+    full = build_dataset(m, panel, horizon=30, step=45, implied=imp)
+    cut = 50
+    m2 = dict(m)
+    for k, v in m.items():
+        if isinstance(v, np.ndarray) and v.ndim >= 1 and v.shape[0] == len(m["days"]):
+            m2[k] = v[:cut]
+        elif isinstance(v, (pd.DataFrame, pd.Series)) and len(v) == len(m["days"]):
+            m2[k] = v.iloc[:cut]
+        elif isinstance(v, list) and len(v) == len(m["days"]):
+            m2[k] = v[:cut]
+    m2["days"] = m["days"][:cut]
+    short = build_dataset(m2, build_gex_panel(m2), horizon=30, step=45, implied=build_implied_panel(m2))
+    a = full[full["t"] < cut - 1].reset_index(drop=True)   # the target of day cut-1 still needs its own bars
+    b = short[short["t"] < cut - 1].reset_index(drop=True)
+    assert len(a) == len(b) > 0
+    num = [c for c in a.columns if pd.api.types.is_numeric_dtype(a[c])]
+    for c in num:
+        assert np.allclose(a[c].to_numpy(float), b[c].to_numpy(float), rtol=1e-10, atol=1e-14, equal_nan=True), c
+
+
+def test_dm_uses_student_t():
+    from niftygex.evaluation import diebold_mariano
+    from scipy.stats import t as student_t
+    rng = np.random.default_rng(5)
+    l1, l2 = rng.normal(1.0, 1, 40), rng.normal(0.7, 1, 40)
+    r = diebold_mariano(l1, l2, alternative="greater", lag=0)
+    assert np.isclose(r["p"], student_t.sf(r["stat"], 39))
+
+
 def test_parse_model_names():
     assert parse_model("hybridiv_gex_us") == ("hybridiv", "gex_us")
     assert parse_model("hybrid_base") == ("hybrid", "base")
@@ -98,3 +131,23 @@ def test_ablation_table_and_subgroups():
     assert not np.any(g2["pre_auction"] & (pd.to_datetime(pred["date"]) >= "2025-03-10").to_numpy())
     t = ablation_table(pred, [("fam", "good", "base", "good")], {"all": g["all"]})
     assert t.loc[0, "change_pct"] < 0 and t.loc[0, "p_one_sided"] < 0.01
+
+
+def test_scoreboard_trimmed_mse_and_anchor_groups():
+    from niftygex.evaluation import gain_by_anchor, scoreboard, trimmed_mean
+    assert np.isclose(trimmed_mean(np.r_[np.ones(99), 1000.0], 0.01), 1.0)
+    rng = np.random.default_rng(3)
+    dates = np.repeat(pd.bdate_range("2025-01-01", periods=30), 4)
+    y = rng.exponential(1.0, len(dates))
+    pred = pd.DataFrame({"date": dates, "y": y, "minute": np.tile([0, 15, 30, 45], 30),
+                         "is_expiry": False, "mcsgarch": 1.0, "other": y * 0.5 + 0.5})
+    g = subgroups(pred, auction_start="2025-01-20")
+    assert g["open_0915"].sum() == 30 and g["excl_0915"].sum() == 90
+    assert (g["pre_auction_excl_0915"] <= g["pre_auction"]).all()
+    sb = scoreboard(pred, ["mcsgarch", "other"], g)
+    row = sb[(sb.model == "other") & (sb.group == "all")].iloc[0]
+    assert {"qlike_vs_mcsgarch_pct", "mse_vs_mcsgarch_pct", "qlike_trim_vs_mcsgarch_pct"} <= set(sb.columns)
+    assert row["qlike_trim"] <= row["qlike"]
+    ga = gain_by_anchor(pred, ["mcsgarch", "other"])
+    assert set(ga["minute"]) == {0, 15, 30, 45}
+    assert np.allclose(ga[ga.model == "mcsgarch"]["qlike_vs_ref_pct"], 0)

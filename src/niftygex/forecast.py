@@ -68,7 +68,10 @@ CATEGORICAL_LEVELS = {"regime": [1, 2], "weekday": [1, 2, 3, 4]}
 class WalkForwardConfig:
     min_train: int = 150
     block: int = 21
-    mcs_refit_every: int = 63
+    # mcsGARCH (and its daily EGARCH) is refitted every block, like the learned models.
+    # The model "mcsgarch_r63" keeps the slower 63-day schedule of the first real-data run.
+    mcs_refit_every: int = 21
+    mcs_slow_refit_every: int = 63
     expiry_diurnal: bool = True
     diurnal_smooth: int = 5
     gex_features: list = field(default_factory=lambda: list(GEX_FEATURES))
@@ -267,10 +270,12 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
 
     data = data.sort_values(["t", "minute"]).reset_index(drop=True)
     out = []
-    info = {"mcs_params": [], "mcs_iv_params": [], "hyper": [], "importance": [], "linear_coef": [], "timing": []}
-    mcs = mcs_iv = None
-    h = None
-    last_refit = -10**9
+    info = {"mcs_params": [], "mcs_iv_params": [], "mcs_slow_params": [], "hyper": [], "importance": [],
+            "linear_coef": [], "timing": []}
+    mcs = mcs_iv = mcs_slow = None
+    h = h_slow = None
+    last_refit = last_slow = -10**9
+    want_slow = "mcsgarch_r63" in cfg.models
     tuned: dict = {}
     for b_idx, start in enumerate(range(cfg.min_train, T, cfg.block)):
         t_block = time.time()
@@ -286,6 +291,12 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
                 mcs_iv.fit(R[:start], h_iv[:start], is_exp[:start])
                 info["mcs_iv_params"].append({"start": start, **{k: v for k, v in mcs_iv.params.items() if k != "tstats"}})
             last_refit = start
+        if want_slow and (start - last_slow >= cfg.mcs_slow_refit_every or mcs_slow is None):
+            h_slow, _ = daily_egarch_variance(daily, train_size=start)
+            mcs_slow = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth)
+            mcs_slow.fit(R[:start], h_slow[:start], is_exp[:start])
+            info["mcs_slow_params"].append({"start": start, **{k: v for k, v in mcs_slow.params.items() if k != "tstats"}})
+            last_slow = start
         filt = mcs.filter(R, h, is_exp)
         d = data[data["t"] < end].copy()
         tt, ii, hh = d["t"].to_numpy(), d["minute"].to_numpy(), d["horizon"].to_numpy()
@@ -328,6 +339,10 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
         b, res = _ols(tr[HAR_COLS].to_numpy(), ly_tr)
         te["har"] = np.exp(np.column_stack([np.ones(len(te)), te[HAR_COLS].to_numpy()]) @ b) * _smear_fit(res)
         te["mcsgarch"] = te["mcs"]
+        if want_slow:
+            filt_s = mcs_slow.filter(R, h_slow, is_exp)
+            te["mcsgarch_r63"] = mcs_slow.forecast_variance(filt_s, h_slow, te["t"].to_numpy(), te["minute"].to_numpy(),
+                                                             te["horizon"].to_numpy())
 
         for name in cfg.models:
             kind, rest = parse_model(name)
