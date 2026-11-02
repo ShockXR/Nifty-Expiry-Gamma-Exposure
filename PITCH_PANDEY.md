@@ -39,7 +39,7 @@ Offered as a careful reader's questions, each now checked on real data:
 | --- | --- | --- |
 | Question | Why does Nifty reverse into the close, and why more after negative Pro GEX? | How do expiry calendars change end-of-day volatility, pinning and connectedness? |
 | What exists | The robust reversal result, falsification suite, sign estimation | Your paper's design extended to five rule changes, with comparison indices and placebo dates |
-| What is missing | A cleaner dealer proxy (your group's data or a broker category) | BSE Sensex expiry dates as a control (BSE's servers are not reachable from my setup) |
+| What is missing | A cleaner dealer proxy (your group's data or a broker category) | Verified BSE Sensex expiry dates (BSE's servers are not reachable from my setup; with reported dates as a control the NSE premia get slightly larger, see [SENSEX_CONFOUND.md](docs/SENSEX_CONFOUND.md)) |
 | First deliverable | 2 weeks | 2 weeks |
 
 ## How to check any of this

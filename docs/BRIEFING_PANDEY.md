@@ -34,7 +34,9 @@ Full log of all 24 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 ## Still running or next (as of 3 November, early morning UTC)
 
 * A stronger forecasting study (option-implied features, more frequent model refits), to be merged and the whole pipeline rerun with the bug fixes.
-* Connectedness by gamma regime (a new question for the paper's connectedness design), a power study calibrated on the real data, and a check of BSE's Sensex expiry as a hidden confounder.
+* A power study calibrated on the real data (how big an effect each test could have seen).
+* Done: connectedness by gamma regime, a new question for the paper's connectedness design. The pre-stated test is borderline (p = 0.044) and disappears once market volatility (VIX) is controlled ([CONNECTEDNESS_GAMMA.md](CONNECTEDNESS_GAMMA.md)).
+* Done: BSE's Sensex expiry as a hidden confounder. BSE's servers are blocked, so the Sensex dates are reported, not verified. The pre-stated test is not significant. Leaving Sensex expiry days out of the comparison makes the NSE expiry premia slightly larger, so our results were understated, not overstated ([SENSEX_CONFOUND.md](SENSEX_CONFOUND.md)).
 * Done since the first draft of this briefing: a second person re-typed all 223 numbers we took from the paper, blind; 222 matched and the one difference is a slip in the paper itself ([REKEY_CHECK.md](REKEY_CHECK.md)). The final-half-hour gamma test came out null.
 * A forecast for Tuesday 3 November's expiry was frozen in the repository before the market opened; it will be scored after the close.
 * A working-paper draft by Wednesday 4 November, 9:30 IST.
@@ -47,5 +49,5 @@ Full log of all 24 iterations: [ITERATION_LOG.md](../ITERATION_LOG.md).
 
 * NSE's participant file covers all index options, not just Nifty, and "Pro" includes traders who may not hedge, so the dealer sign is only a proxy.
 * End-of-day positions only: we cannot see how positions change during expiry afternoon.
-* BSE's servers are not reachable from our cloud setup, so Sensex expiries cannot yet be checked as a confounder.
+* BSE's servers are not reachable from our cloud setup, so the Sensex expiry dates used as a control are reported, not verified.
 * About 100 weekly expiries since November 2024 is enough for 15- and 30-minute forecasts, not for a last-hour-only test.
