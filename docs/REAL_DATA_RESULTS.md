@@ -20,7 +20,8 @@ Separate real-data studies, each with its own document:
 * `docs/REPLICATION_NSE.md`: the paper's Tables 1 to 6 rebuilt on NSE data. The "after" sample matches closely; the stated "before" window does not, and a 64-day window from 14 November 2022 to 10 February 2023 reproduces the printed "before" numbers (our main question for the authors).
 * `docs/PINNING_STUDY.md`: a full pinning study (replaces the crude R4 check below).
 * `docs/INDEPENDENT_REVIEW.md`: an independent referee-style review of this document and the two above. Its points are addressed here (R1 diagnostics, R3 scale-free versions, multiple-testing columns) or handed to the studies still running.
-* Still running: an event study of the expiry rule changes with Bank Nifty as a comparison, a stronger version of R1, a falsification suite for R3 and R5, minute-by-minute gamma on expiry days, and an estimate of the dealer sign from market behaviour.
+* `docs/EVENT_STUDY.md`: five expiry rule changes (2019 to 2026) with Nifty and Bank Nifty as each other's comparison and placebo dates. The whole-day expiry premium barely moves with the rules; the end of the day does (Bank Nifty's move to Wednesday raised its last-30-minute premium by 1.14 log points, placebo p 0.005). The per-minute Rogers-Satchell measure the paper uses shows an expiry premium that 5-minute realized variance does not.
+* Still running: a stronger version of R1, a falsification suite for R3 and R5, minute-by-minute gamma on expiry days, and an estimate of the dealer sign from market behaviour.
 
 ---
 
@@ -118,7 +119,7 @@ For each week we take the expiry day's log realized variance minus the average l
 | One weekly per exchange, Thursday (20 Nov 2024 to 31 Aug 2025) | 41 | -11% | -26% to +8% | 0.26 | +10% | 0.65 |
 | Nifty expiry on Tuesday (from 1 Sep 2025) | 61 | +21% | +8% to +38% | 0.005 | +43% | 0.00005 |
 
-(Percentages are $e^{\text{mean}} - 1$ of the log differences.) The Tuesday result does not come from the closing auction: on the 48 Tuesday expiry weeks before 3 August 2026 the whole-day effect is +24% (p = 0.005) and the last-hour effect +42% (p = 0.00004) (`results/closing_auction/r2_tuesday_split.csv`). The Tuesday period differs from the Thursday single-weekly period (Mann-Whitney p = 0.012 for the whole day). Each period bundles several changes (SEBI's November 2024 package also raised contract sizes and added margin on expiry day), so these are descriptive. The file holds 18 tests (three measures in three regimes, plus three pairwise regime comparisons per measure); the Thursday multi-weekly whole-day result (p = 0.045) would not survive a correction for that many, while the Tuesday last-hour result (p = 0.00005) would. A fuller event study with Bank Nifty as a comparison index is in progress.
+(Percentages are $e^{\text{mean}} - 1$ of the log differences.) The Tuesday result does not come from the closing auction: on the 48 Tuesday expiry weeks before 3 August 2026 the whole-day effect is +24% (p = 0.005) and the last-hour effect +42% (p = 0.00004) (`results/closing_auction/r2_tuesday_split.csv`). The Tuesday period differs from the Thursday single-weekly period (Mann-Whitney p = 0.012 for the whole day). Each period bundles several changes (SEBI's November 2024 package also raised contract sizes and added margin on expiry day), so these are descriptive. The file holds 18 tests (three measures in three regimes, plus three pairwise regime comparisons per measure); the Thursday multi-weekly whole-day result (p = 0.045) would not survive a correction for that many, while the Tuesday last-hour result (p = 0.00005) would. The event study (`docs/EVENT_STUDY.md`) looks at each rule change with placebo dates and Bank Nifty as a comparison.
 
 ---
 
