@@ -1,0 +1,5 @@
+    index       date  bars_0915_1529  bars_open  official_open  diff_open_bp  bars_high  official_high  diff_high_bp  bars_low  official_low  diff_low_bp  bars_close  official_close  diff_close_bp  high_low_within_5bp
+    nifty 2017-07-10             375    9701.86        9719.30         -17.9    9782.15        9782.15           0.0   9646.60       9646.45          0.2     9763.10         9771.05           -8.1                 True
+    nifty 2021-02-24             375   14691.30       14729.15         -25.7   14836.40       15008.80        -114.9  14681.20      14723.05        -28.4    14781.30        14982.00         -134.0                False
+banknifty 2017-07-10             375   23449.15       23583.25         -56.9   23960.30       23964.80          -1.9  23449.15      23289.90         68.4    23644.45        23675.05          -12.9                False
+banknifty 2021-02-24              54   35205.40       35205.40           0.0   35637.20       36567.65        -254.4  35106.90      35060.65         13.2    35626.60        36452.30         -226.5                False

@@ -22,6 +22,7 @@ We downloaded four years of real NSE data, rebuilt the professor's paper on it, 
 
 * Three AI referee reports (forecasting, the reversal, the expiry effect) led to weaker but safer claims: the forecasting edge over a fairly informed benchmark is recent, the reversal is a Pro-positioning pattern, and the expiry premium needs a clean baseline and a noise caution. ([REFEREE_RESPONSE_FORECAST.md](REFEREE_RESPONSE_FORECAST.md), [REFEREE_RESPONSE_F2.md](REFEREE_RESPONSE_F2.md), [REFEREE_RESPONSE_EXPIRY.md](REFEREE_RESPONSE_EXPIRY.md))
 * An earlier claim that a simpler model was much better for the last hour came from NSE's new closing auction (from 3 August 2026) and was withdrawn.
+* A screen of the minute files found two NSE outage days (2017 and 2021) on which the price file stops moving; one of them, 24 February 2021, does not match NSE's official values at all. Neither day is in any forecasting or replication sample, but the 2021 day sits inside some of P117's comparison windows, which is part of why P117 is weak for Nifty. A rule for future studies (DQ1) now drops such days ([DATA_QUALITY_FLAT_BARS.md](DATA_QUALITY_FLAT_BARS.md)).
 * Bugs found and fixed with tests: unsorted strikes in NSE's new file format, a holiday-shifted expiry in June 2023, two edge cases in the volatility model, a stale VIX lag and a missing-value coding.
 
 Full log of every iteration: [ITERATION_LOG.md](../ITERATION_LOG.md).

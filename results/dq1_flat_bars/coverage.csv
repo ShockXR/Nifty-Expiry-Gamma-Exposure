@@ -1,0 +1,5 @@
+index,first_day,last_day,days,median_flat_share,days_over_5pct,days_over_20pct,official_from
+nifty,2017-04-03,2026-11-02,2368,0.008,8,3,2022-10-20
+banknifty,2017-01-02,2026-04-22,2297,0.0,4,1,2022-10-20
+finnifty,2021-08-04,2026-01-27,988,0.0026666666666666666,6,6,2023-01-02
+sensex,2023-01-02,2026-11-02,948,0.0,0,0,none

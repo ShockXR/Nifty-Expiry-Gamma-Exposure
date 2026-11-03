@@ -1,0 +1,45 @@
+/home/user/nifty-expiry-gamma-exposure/.claude/worktrees/lead-docs/src/niftygex/volatility.py:122: RuntimeWarning: invalid value encountered in log
+  return c - 0.5 * np.log(q2) - (nu + 1) / 2 * np.log1p(x * x / ((nu - 2) * q2))
+/home/user/nifty-expiry-gamma-exposure/.claude/worktrees/lead-docs/src/niftygex/volatility.py:122: RuntimeWarning: invalid value encountered in log1p
+  return c - 0.5 * np.log(q2) - (nu + 1) / 2 * np.log1p(x * x / ((nu - 2) * q2))
+before 2021-01-11 registered (with 24 Feb 2021) done
+before 2021-01-11 without 24 Feb 2021, same dates done
+before 2021-01-11 without 24 Feb 2021, extended by one day done
+before 2020-12-17 registered (with 24 Feb 2021) done
+before 2020-12-17 without 24 Feb 2021, same dates done
+before 2020-12-17 without 24 Feb 2021, extended by one day done
+after 2021-01-11 registered (with 24 Feb 2021) done
+after 2021-01-11 without 24 Feb 2021, same dates done
+after 2021-01-11 without 24 Feb 2021, extended by one day done
+/home/user/nifty-expiry-gamma-exposure/.claude/worktrees/lead-docs/src/niftygex/volatility.py:122: RuntimeWarning: invalid value encountered in log
+  return c - 0.5 * np.log(q2) - (nu + 1) / 2 * np.log1p(x * x / ((nu - 2) * q2))
+/home/user/nifty-expiry-gamma-exposure/.claude/worktrees/lead-docs/src/niftygex/volatility.py:122: RuntimeWarning: invalid value encountered in log1p
+  return c - 0.5 * np.log(q2) - (nu + 1) / 2 * np.log1p(x * x / ((nu - 2) * q2))
+after 2021-02-03 registered (with 24 Feb 2021) done
+after 2021-02-03 without 24 Feb 2021, same dates done
+after 2021-02-03 without 24 Feb 2021, extended by one day done
+  kind                                  variant  first_day   last_day  n_days model    alpha     beta       hl_irf  at_bound_gt_50000  committed_hl_irf
+before            registered (with 24 Feb 2021) 2021-01-11 2021-04-15      64   ref 0.091256 0.908734 69306.793413               True       69306.79341
+before            registered (with 24 Feb 2021) 2021-01-11 2021-04-15      64     F 0.091881 0.908109 69313.058351               True       69313.05835
+before          without 24 Feb 2021, same dates 2021-01-11 2021-04-15      63   ref 0.044727 0.951987   210.624239              False       69306.79341
+before          without 24 Feb 2021, same dates 2021-01-11 2021-04-15      63     F 0.050036 0.928095    40.076323              False       69313.05835
+before without 24 Feb 2021, extended by one day 2021-01-11 2021-04-16      64   ref 0.043972 0.953738   302.362004              False       69306.79341
+before without 24 Feb 2021, extended by one day 2021-01-11 2021-04-16      64     F 0.051197 0.922612    32.931799              False       69313.05835
+before            registered (with 24 Feb 2021) 2020-12-17 2021-03-19      64   ref 0.075553 0.924436 67156.334480               True       67156.33448
+before            registered (with 24 Feb 2021) 2020-12-17 2021-03-19      64     F 0.076923 0.923067   178.358720              False         178.35872
+before          without 24 Feb 2021, same dates 2020-12-17 2021-03-19      63   ref 0.057776 0.940271   354.567654              False       67156.33448
+before          without 24 Feb 2021, same dates 2020-12-17 2021-03-19      63     F 0.054641 0.932547    77.879708              False         178.35872
+before without 24 Feb 2021, extended by one day 2020-12-17 2021-03-22      64   ref 0.057080 0.941309   429.755152              False       67156.33448
+before without 24 Feb 2021, extended by one day 2020-12-17 2021-03-22      64     F 0.055467 0.929594    64.210147              False         178.35872
+ after            registered (with 24 Feb 2021) 2021-01-11 2021-04-07      59   ref 0.083156 0.916834 69224.281908               True       69224.28191
+ after            registered (with 24 Feb 2021) 2021-01-11 2021-04-07      59     F 0.083914 0.916076 68468.279260               True       68468.27926
+ after          without 24 Feb 2021, same dates 2021-01-11 2021-04-07      58   ref 0.044932 0.951967   223.195314              False       69224.28191
+ after          without 24 Feb 2021, same dates 2021-01-11 2021-04-07      58     F 0.050508 0.928718    42.985194              False       68468.27926
+ after without 24 Feb 2021, extended by one day 2021-01-11 2021-04-08      59   ref 0.044697 0.953071   310.188785              False       69224.28191
+ after without 24 Feb 2021, extended by one day 2021-01-11 2021-04-08      59     F 0.052105 0.923049    34.974069              False       68468.27926
+ after            registered (with 24 Feb 2021) 2021-02-03 2021-05-03      59   ref 0.104005 0.895985 69312.729476               True       69312.72948
+ after            registered (with 24 Feb 2021) 2021-02-03 2021-05-03      59     F 0.104232 0.895758 69310.106292               True       69310.10629
+ after          without 24 Feb 2021, same dates 2021-02-03 2021-05-03      58   ref 0.040996 0.955301   186.864141              False       69312.72948
+ after          without 24 Feb 2021, same dates 2021-02-03 2021-05-03      58     F 0.046477 0.927152    32.776036              False       69310.10629
+ after without 24 Feb 2021, extended by one day 2021-02-03 2021-05-04      59   ref 0.041163 0.956377   281.504912              False       69312.72948
+ after without 24 Feb 2021, extended by one day 2021-02-03 2021-05-04      59     F 0.048922 0.919113    26.770496              False       69310.10629

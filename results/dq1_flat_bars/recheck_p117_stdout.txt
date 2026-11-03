@@ -1,0 +1,25 @@
+                     screen     index model     set                                              flagged_days_on_grid  p_registered  n_pairs  pairs_with_flagged_day  n_without  k_without  p_without
+>20% flat (360-minute grid)     nifty   ref primary                                             2017-07-10;2021-02-24        0.1912     1223                     123       1100        169     0.1544
+>20% flat (360-minute grid)     nifty   ref   clean                                             2017-07-10;2021-02-24        0.0952      724                     123        601          4     0.0083
+>20% flat (360-minute grid)     nifty   ref literal                                             2017-07-10;2021-02-24        0.1732     1350                     123       1227        169     0.1384
+>20% flat (360-minute grid)     nifty     F primary                                             2017-07-10;2021-02-24        0.1054     1223                     123       1100         88     0.0808
+>20% flat (360-minute grid)     nifty     F   clean                                             2017-07-10;2021-02-24        0.0566      724                     123        601          0     0.0017
+>20% flat (360-minute grid)     nifty     F literal                                             2017-07-10;2021-02-24        0.1007     1350                     123       1227         95     0.0782
+>20% flat (360-minute grid) banknifty   ref primary                                                        2017-07-10        0.1127     1152                       0       1152        129     0.1127
+>20% flat (360-minute grid) banknifty   ref   clean                                                        2017-07-10        0.0912      723                       0        723         65     0.0912
+>20% flat (360-minute grid) banknifty   ref literal                                                        2017-07-10        0.1281     1279                       0       1279        163     0.1281
+>20% flat (360-minute grid) banknifty     F primary                                                        2017-07-10        0.0963     1152                       0       1152        110     0.0963
+>20% flat (360-minute grid) banknifty     F   clean                                                        2017-07-10        0.1202      723                       0        723         86     0.1202
+>20% flat (360-minute grid) banknifty     F literal                                                        2017-07-10        0.1461     1279                       0       1279        186     0.1461
+ >5% flat (360-minute grid)     nifty   ref primary 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2022-03-07        0.1912     1223                     364        859        169     0.1977
+ >5% flat (360-minute grid)     nifty   ref   clean 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2022-03-07        0.0952      724                     299        425          4     0.0117
+ >5% flat (360-minute grid)     nifty   ref literal 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2022-03-07        0.1732     1350                     381        969        169     0.1753
+ >5% flat (360-minute grid)     nifty     F primary 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2022-03-07        0.1054     1223                     364        859         88     0.1035
+ >5% flat (360-minute grid)     nifty     F   clean 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2022-03-07        0.0566      724                     299        425          0     0.0023
+ >5% flat (360-minute grid)     nifty     F literal 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2022-03-07        0.1007     1350                     381        969         95     0.0990
+ >5% flat (360-minute grid) banknifty   ref primary                       2017-07-10;2020-03-13;2020-03-23;2022-03-07        0.1127     1152                     241        911        129     0.1425
+ >5% flat (360-minute grid) banknifty   ref   clean                       2017-07-10;2020-03-13;2020-03-23;2022-03-07        0.0912      723                     176        547         65     0.1204
+ >5% flat (360-minute grid) banknifty   ref literal                       2017-07-10;2020-03-13;2020-03-23;2022-03-07        0.1281     1279                     258       1021        163     0.1605
+ >5% flat (360-minute grid) banknifty     F primary                       2017-07-10;2020-03-13;2020-03-23;2022-03-07        0.0963     1152                     241        911         95     0.1053
+ >5% flat (360-minute grid) banknifty     F   clean                       2017-07-10;2020-03-13;2020-03-23;2022-03-07        0.1202      723                     176        547         71     0.1314
+ >5% flat (360-minute grid) banknifty     F literal                       2017-07-10;2020-03-13;2020-03-23;2022-03-07        0.1461     1279                     258       1021        171     0.1683
