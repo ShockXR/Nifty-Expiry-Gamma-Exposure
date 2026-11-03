@@ -244,6 +244,12 @@ P103ECON,results/p103_economic_value/,"checks.csv, run_info.json, stdout.txt, ve
 P103ECON,results/p103_economic_value/,"daily_utility.csv, trading_daily.csv",2,daily series behind the tests; no p-value
 P103ECON,results/p103_economic_value/,"fee_grid.csv, qlike_same_windows.csv, utility_models.csv",3,"fees, utilities and QLIKE margins; no p-value"
 P103ECON,results/p103_economic_value/,"index_drift.csv, window_contributions.csv",2,"descriptive, added in phase 2; no p-value"
+P99SEED,results/seed_bootstrap/,"analyze_stdout.txt, context_stdout.txt, run_info.json, run_stdout.txt",4,run information or log; no p-value
+P99SEED,results/seed_bootstrap/,"bootstrap.csv, summary.csv",2,spread of margins and the seed bootstrap; the bootstrap p is the verdict rows' alt_p
+P99SEED,results/seed_bootstrap/,"daily_losses_last_hour.csv, daily_losses_next15.csv, daily_losses_next30.csv, timing.csv",4,daily losses behind the tests and run timing; no p-value
+P99SEED,results/seed_bootstrap/ensembles.csv,ensembles.csv,1,each ensemble's own DM test: the same hypothesis under other seeds; carried by the verdict rows
+P99SEED,results/seed_bootstrap/m43_comparison.csv,m43_comparison.csv,1,"comparison with the referee response, added after the results; no p-value"
+P99SEED,results/seed_bootstrap/reproduction_check.csv,reproduction_check.csv,1,check that the headline seed reproduces the committed forecasts; no p-value
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods

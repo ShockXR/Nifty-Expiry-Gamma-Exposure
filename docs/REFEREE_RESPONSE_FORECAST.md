@@ -9,7 +9,7 @@ Code: `experiments/referee_forecast.py`. Tests on synthetic data only: `tests/te
 | Referee point | What we did | Short answer | Claim changes? |
 |---|---|---|---|
 | M4.1 best of 32 | Hansen SPA, White Reality Check, step-down adjusted p-values | Some challenger beats mcsGARCH in every horizon and subset (SPA p at most 0.040). The hybrid survives the adjustment in 8 of 9 cells; not in the last hour on expiry days (adjusted p 0.062) | Yes: drop "only model with p at most 0.010 in all six columns" and "also on expiry days" for the last hour |
-| M4.3 estimation noise | Seed noise added to the DM variance; spread of 6 hybrid variants; cost of a full rerun | Seed noise is 0.19 points against margins of 5.5 to 9.2 points; p-values barely move. A full seed bootstrap needs a rerun (at most 6.3 hours on one core); not done | Small: quote noise-adjusted p-values, not 1.8e-9 |
+| M4.3 estimation noise | Seed noise added to the DM variance; spread of 6 hybrid variants; cost of a full rerun | Seed noise is 0.19 points against margins of 5.5 to 9.2 points; p-values barely move. The full seed bootstrap was later run as registered study P99: the headline holds at every horizon on all days; the last hour on expiry days has p 0.015 to 0.052 across 20 new ensembles | Small: quote noise-adjusted p-values, not 1.8e-9 |
 | M5 fair benchmark | mcsGARCH given VIX or the straddle (4 variants, 3 of them new), ridge on the same features | At 15 and 30 minutes the hybrid still wins by 4.8% (p 0.005) and 5.9% (p below 0.001). In the last hour it does not: mcsGARCH with VIX as its daily level is within 1.7% (p 0.227) | Yes: the last-hour gain is information, not method |
 | M4.2 and minor 15 MCS | Recomputed the MCS (10,000 replications, two block lengths) and listed what it keeps | Last hour: keeps VIX and HAR on all days, mcsGARCH on expiry days. Top-ranked: `hybrid_gex_us`, `hybrid_v1gex`, `linear_v1`; never `hybrid_base` | Yes: say this plainly |
 | M4.4 hold-out | Hold-out table and DM tests of LightGBM against the hybrid | LightGBM is ahead in the hold-out, behind in development, and never significantly different over all days | Yes: drop "needs the hybrid structure" |
@@ -101,6 +101,8 @@ On Giacomini and White (2006): their unconditional test uses the same statistic 
 
 * Refit spread. Across the six hybrid variants the margin moves by at most 0.88 points (SD; last hour, hold-out) and the largest DM p in any cell is 0.037 (last hour, expiry days).
 * A real bootstrap over seeds and refits would rerun the walk-forward with new seeds. From the final run's own timing (`run_info.json`, `hyperparameters_*.csv`) and the measured mcsGARCH fit time, 20 seed configurations for the hybrid, plain and tuned LightGBM at all three horizons take at most 6.3 hours on one core (the hybrid alone at most 2.2 hours). **We did not run it.**
+
+**Follow-up, 3 November 2026: run as the registered study P99** (`docs/prereg/P99_SEED_BOOTSTRAP.md`, results in `docs/SEED_BOOTSTRAP.md`). The hybrid was retrained with 20 new five-seed ensembles (100 new LightGBM seeds) at all three horizons, in 71 minutes on two cores. Every ensemble beats mcsGARCH with DM p below 0.05 on all days at every horizon; the headline's -7.65% at 30 minutes is the smallest gain of the 21 seed sets. The measured seed standard deviation of the margin (0.075, 0.112 and 0.244 points on all days) is below the pessimistic values used above in every cell, though at 30 minutes and in the last hour it is above the 0.073 assumed for a five-seed average. The fragile cell is confirmed: in the last hour on expiry days the 20 new p-values run from 0.015 to 0.052, so the headline's 0.0097 there was the most favourable draw.
 
 **What it changes.** The conclusions do not change. The paper should quote the noise-adjusted p-values (or say "below 0.001"), not 1.8e-9, and should say that a full bootstrap over seeds was not run. The last hour on expiry days is again the fragile cell.
 
@@ -288,7 +290,7 @@ The hybrid's margin within each group (% of the benchmark's QLIKE in that group;
 4. **"The only one with p at most 0.010 in all six columns".** Replace by the SPA and step-down results.
 5. **"A tree model beats CPP's model only with the hybrid structure".** Drop: plain LightGBM and the hybrid are not distinguishable over all days.
 6. **Section 6.2 (MCS).** Add the top-ranked models, the MCS p of `hybrid_base`, and the last-hour set (VIX and HAR on all days, mcsGARCH on expiry days).
-7. **DM p-values.** Quote noise-adjusted p-values or "below 0.001", and say that a full bootstrap over seeds was not run (cost at most 6.3 hours).
+7. **DM p-values.** Quote noise-adjusted p-values or "below 0.001", and report the seed bootstrap (P99, run on 3 November): all-days cells hold under 20 new seed ensembles; the last-hour expiry-day p ranges from 0.015 to 0.052.
 8. **Appendix D.5.** Disclose that the EWMA fallback rule looked at later days, and give the real-time check.
 9. **Giacomini and White (priority 5).** Say that the hybrid's advantage does not concentrate on expiry days, and that its 15 and 30 minute edge over the information-matched mcsGARCH comes from the weekly-expiry periods since November 2024 (descriptive; the regime test is not significant after adjustment).
 10. Unchanged: GEX features add nothing; the 15 and 30 minute gains over mcsGARCH survive every check here.

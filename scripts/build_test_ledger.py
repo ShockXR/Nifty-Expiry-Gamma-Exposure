@@ -171,6 +171,7 @@ STUDIES = {
     "REFEXP": ("Referee response: expiry premia and event study (post hoc)", "docs/REFEREE_RESPONSE_EXPIRY.md"),
     "REFF2": ("Referee response: F2 inference and positions (post hoc)", "docs/REFEREE_RESPONSE_F2.md"),
     "P103ECON": ("Economic value of the forecasting hybrid (P103)", "docs/P103_ECONOMIC_VALUE.md; docs/prereg/P103_ECONOMIC_VALUE.md"),
+    "P99SEED": ("Seed bootstrap of the forecasting hybrid (P99)", "docs/SEED_BOOTSTRAP.md; docs/prereg/P99_SEED_BOOTSTRAP.md"),
 }
 
 PREREG = {
@@ -180,6 +181,7 @@ PREREG = {
     "sensex_swap": ("docs/prereg/P92_SENSEX_SWAP.md", "Pre-registration P92"),
     "synthetic_control": ("docs/prereg/P96_SYNTHETIC_CONTROL.md", "P96 pre-registration"),
     "p103_economic_value": ("docs/prereg/P103_ECONOMIC_VALUE.md", "P103 registered plan"),
+    "seed_bootstrap": ("docs/prereg/P99_SEED_BOOTSTRAP.md", "P99 registered plan"),
 }
 
 COLUMNS = [
@@ -2295,6 +2297,56 @@ def adapt_p103econ(ctx: Ctx):
     }, "verdict, checks, run information or log; no p-value")
 
 
+P99_OUTCOME = ["verdict.csv", "summary.csv", "bootstrap.csv", "ensembles.csv"]
+
+
+def adapt_p99seed(ctx: Ctx):
+    """P99: does the forecasting headline survive retraining LightGBM with new seeds? (docs/prereg/P99_SEED_BOOTSTRAP.md)
+
+    verdict.csv: one row per target and subset (next15 and next30 on all days are primary; the other four are
+      secondary). The registered rule is that every one of the 20 new 5-seed ensembles beats mcsGARCH with a
+      one-sided DM p below 0.05, an intersection-union test whose p-value is the largest DM p (max_dm_p); the
+      seed bootstrap p (seed_bootstrap_p, registered secondary S1) goes in alt_p.
+    Not counted: the 20 ensembles' own DM p-values (ensembles.csv, the same hypothesis under other seeds; the
+      verdict row carries them), the bootstrap and summary tables, the reproduction check of the headline seed,
+      the comparison with the referee response (m43_comparison.csv, added after the results) and logs.
+    """
+    folder = "seed_bootstrap"
+    rel = f"{folder}/verdict.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "P99SEED", folder)
+        return
+    v = ctx.read(rel)
+    need = {"check", "kind", "K", "worst_margin", "max_dm_p", "seed_bootstrap_p"}
+    if not need.issubset(v.columns):
+        adapt_generic(ctx, "P99SEED", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P99_OUTCOME)
+    side = SIDE_ONE_PRE if ps == PS_YES else SIDE_ONE_STATED
+    for _, r in v.iterrows():
+        if not np.isfinite(num(r["max_dm_p"])):
+            continue  # the overall verdict line
+        chk = clean(r["check"])
+        tgt, _, sub = chk.partition(", ")
+        role = "primary" if clean(r["kind"]) == "primary" else "secondary"
+        ctx.add("P99SEED", f"P99: every one of {int(num(r['K']))} new 5-seed ensembles of the hybrid beats mcsGARCH "
+                f"({chk}; intersection-union test, p = the largest one-sided DM p)",
+                "QLIKE loss of forecasts of realized variance", f"{sub} (n = 792 test days or the expiry subset)",
+                r["max_dm_p"], role=role, pre_specified=ps, pre_spec_note=psn, source_file=rel,
+                source_key=key("verdict.csv", tgt, sub), sidedness=side, estimate=r["worst_margin"],
+                statistic_name="worst margin of the 20 ensembles (QLIKE change, percent)",
+                p_method="largest one-sided Diebold-Mariano (HLN) p over 20 ensembles",
+                alt_p=alt(seed_bootstrap_p=r["seed_bootstrap_p"]))
+    _consume_rest(ctx, "P99SEED", folder, {
+        r"ensembles\.csv": "each ensemble's own DM test: the same hypothesis under other seeds; carried by the verdict rows",
+        r"summary\.csv|bootstrap\.csv": "spread of margins and the seed bootstrap; the bootstrap p is the verdict rows' alt_p",
+        r"reproduction_check\.csv": "check that the headline seed reproduces the committed forecasts; no p-value",
+        r"m43_comparison\.csv": "comparison with the referee response, added after the results; no p-value",
+        r"daily_losses_.*\.csv|timing\.csv": "daily losses behind the tests and run timing; no p-value",
+    }, "run information or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -3467,10 +3519,11 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON"]
+               "P103ECON", "P99SEED"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
-LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ]
+LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
+                 adapt_p99seed]
 
 
 def headline18_check(ctx: Ctx):
@@ -3715,6 +3768,13 @@ RECON = [
       ("T1 and T2, the registered trading tests", "P103ECON", r"^trading_tests\.csv\|T[12]\|")],
      "The verdict of P103 rests on the size of the fee and on T1, not only on whether a p-value survives; see "
      "docs/P103_ECONOMIC_VALUE.md."),
+    ("P99", "Seed bootstrap of the forecasting hybrid (registered plan): every one of 20 new 5-seed ensembles beats "
+            "mcsGARCH at 15 and 30 minutes on all days (primary). Holds; in the last hour of expiry days one ensemble "
+            "has p 0.052 (weakened).",
+     [("primary: 15 and 30 minutes, all days", "P99SEED", r"^verdict\.csv\|next(15|30)\|all"),
+      ("secondary: last hour on all days, and expiry days", "P99SEED", r"^verdict\.csv\|(last_hour\|all|.*\|expiry)")],
+     "The p of each row is the largest DM p over the 20 ensembles (an intersection-union test), so a row that "
+     "survives means every ensemble's gain survives."),
 ]
 
 
