@@ -1,0 +1,48 @@
+P117 phase-1 checks. REAL DATA dates and committed P114 numbers only; no new statistic is computed.
+
+1-2. Grids, the actual pair, and the placebo pairs (dates only)
+  nifty: 2360 grid days, 2017-04-03 to 2026-11-02
+  banknifty: 2289 grid days, 2017-01-02 to 2026-04-22
+  finnifty: 966 grid days, 2021-08-04 to 2026-01-27
+  nifty: actual before rows 1383..1446, after rows 1705..1763, gap 258 grid days, span 381; the actual pair straddles: a, b
+    primary: 1223 pairs, before windows from 2018-04-09 to 2025-04-17, last after window ends 2026-11-02; day-disjoint pairs per phase min 10, mean 12.40, max 15; wholly separate spans 3 to 4; meets the minimum: True
+    clean: 724 pairs, before windows from 2019-03-05 to 2022-02-09, last after window ends 2023-08-24; day-disjoint pairs per phase min 5, mean 5.29, max 7; wholly separate spans 1 to 2; meets the minimum: False
+    literal: 1350 pairs, before windows from 2018-04-09 to 2025-04-17, last after window ends 2026-11-02; day-disjoint pairs per phase min 11, mean 13.92, max 15; wholly separate spans 3 to 4; meets the minimum: True
+    primary-set pairs that straddle another change: nifty_weekly 224; c 172; c2 199; d 275; e 63; none of them 724; pairs after event b 275
+    windows to fit: 1351 before and 1351 after
+  banknifty: actual before rows 1444..1507, after rows 1766..1824, gap 258 grid days, span 381; the actual pair straddles: a, b
+    primary: 1152 pairs, before windows from 2018-01-04 to 2024-10-01, last after window ends 2026-04-22; day-disjoint pairs per phase min 8, mean 11.20, max 13; wholly separate spans 3 to 4; meets the minimum: True
+    clean: 723 pairs, before windows from 2019-03-05 to 2022-02-09, last after window ends 2023-08-24; day-disjoint pairs per phase min 5, mean 5.28, max 7; wholly separate spans 1 to 2; meets the minimum: False
+    literal: 1279 pairs, before windows from 2018-01-04 to 2024-10-01, last after window ends 2026-04-22; day-disjoint pairs per phase min 10, mean 12.42, max 13; wholly separate spans 3 to 4; meets the minimum: True
+    primary-set pairs that straddle another change: nifty_weekly 286; c 143; c2 143; d 143; e 0; none of them 723; pairs after event b 143
+    windows to fit: 1280 before and 1280 after
+
+3. P114's committed rolling windows through this study's window code (REAL DATA, committed numbers)
+  nifty window 0 (2022-11-14) ref: half-life 359.0378 (committed 359.0378); six values identical
+  nifty window 0 (2022-11-14) F: half-life 141.0331 (committed 141.0331); six values identical
+  nifty window 22 (2024-09-27) ref: half-life 163.4499 (committed 163.4499); six values identical
+  nifty window 22 (2024-09-27) F: half-life 42.1712 (committed 42.1712); six values identical
+  nifty window 43 (2026-07-17) ref: half-life 29.6548 (committed 29.6548); six values identical
+  nifty window 43 (2026-07-17) F: half-life 8.6248 (committed 8.6248); six values identical
+  banknifty window 0 (2022-11-14) ref: half-life 164.8840 (committed 164.8840); six values identical
+  banknifty window 0 (2022-11-14) F: half-life 62.1794 (committed 62.1794); six values identical
+  banknifty window 37 (2026-01-08) ref: half-life 549.3385 (committed 549.3385); six values identical
+  banknifty window 37 (2026-01-08) F: half-life 19.8889 (committed 19.8889); six values identical
+
+4. P114's committed bootstrap draws through this study's bootstrap (REAL DATA, committed numbers)
+  before_inferred nifty: 64 days; first 2 draws, ref and F: 20 of 20 values identical to the 12 significant digits of the committed file
+  after nifty: 59 days; first 2 draws, ref and F: 20 of 20 values identical to the 12 significant digits of the committed file
+  before_inferred banknifty: 64 days; first 2 draws, ref and F: 20 of 20 values identical to the 12 significant digits of the committed file
+  after banknifty: 59 days; first 2 draws, ref and F: 20 of 20 values identical to the 12 significant digits of the committed file
+
+5. Fin Nifty: minute bars on the actual windows, data holes, expiry calendar (dates only)
+  before window: Nifty 64 days, Fin Nifty 64 days, identical dates: True
+  after window: Nifty 59 days, Fin Nifty 59 days, identical dates: True
+  data hole: 2022-01-28 to 2022-08-01 (185 calendar days)
+  Fin Nifty grid days before the actual before window: 177
+  bhavcopies 2023-01-02 to 2026-02-06: 114 Fin Nifty expiries
+    to 19 Nov 2024, weekly: 77 expiries; weekdays {'Tuesday': 71, 'Monday': 6}
+    to 19 Nov 2024, monthly: 22 expiries; weekdays {'Tuesday': 22}
+    20 Nov to 31 Dec 2024, monthly: 2 expiries; weekdays {'Tuesday': 2}
+    Jan to Aug 2025, monthly: 8 expiries; weekdays {'Thursday': 8}
+    from Sep 2025, monthly: 5 expiries; weekdays {'Tuesday': 5}
