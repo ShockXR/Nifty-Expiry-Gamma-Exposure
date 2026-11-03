@@ -260,8 +260,8 @@ REGISTERED_RESULTS = {
 }
 # Forward tests use data after 2 November 2026 and run with scripts/forward_test.py, not here.
 FORWARD_TESTS = ("FORWARD_TEST", "P112_FORWARD_MCSGARCH_FIXES")
-# Registered studies still running: their steps are added (above test_ledger) when they finish. None now.
-PENDING: tuple[str, ...] = ()
+# Registered studies still running: their steps are added (above test_ledger) when they finish.
+PENDING: tuple[str, ...] = ("P120_JOINT_OPTION_MARKET",)
 
 
 def study_steps() -> list[tuple[str, list[str], str, str | None]]:
