@@ -1,0 +1,18 @@
+check,value,committed,status
+rows,886923,"886,923 (minute_bars_source.json)",VERIFIED
+duplicate timestamps,0,,
+timestamps strictly increasing in file order,True,,
+weekend bars,1774,,
+bars outside 09:15 to 15:29,121,,
+trading days / median bars per day / days with 375 bars,2370 / 375 / 2352,dq1 coverage: 2368 days,
+days with fewer than 370 bars,6,1 since 2023 (data_validation summary),
+days with more than 375 bars,0,,
+days with 1 to 369 bars (dates),"2021-11-04:43,2023-11-12:61,2024-03-02:107,2024-05-18:106,2024-11-01:60,2025-10-21:60",,
+within-session gaps (diff > 1 minute) count / days affected,4 / 4,,
+NaN or non-positive price,0,,
+OHLC inconsistent bars,0,,
+"days with more than 5% / 20% bars with high == low (stricter definition, not the committed one)",6 / 3,,
+median share of zero close-to-close returns per day,0.008,dq1 coverage median_flat_share: 0.008,
+days with more than 5% / 20% zero close-to-close returns,8 / 3,dq1 coverage: 8 / 3,VERIFIED
+returns beyond 20 robust sd (count) / largest |r| in sd,188 / 253.3,,
+rows since 2023-01-02 / days,354764 / 950,943 compared days in data_validation summary,

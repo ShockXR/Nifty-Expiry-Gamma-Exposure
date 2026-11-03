@@ -16,6 +16,7 @@
 | Claim "508 passed + 4 skipped" | stale; README said 684 tests, real count 715 | OUR CHECK |
 | ruff 0.17.3 on src and scripts | no undefined names, bare excepts, mutable defaults; real findings listed below | OUR CHECK |
 | New file `tests/test_audit_agent1.py` | 38 tests: 35 pass and 3 are strict xfails that pin known defects; about 11 s | OUR CHECK |
+| Full suite after all changes (incl. run_pipeline.py and docstring edits) | 743 passed, 7 skipped, 3 xfailed, 0 failed, 297 s (708 + 35 new passing tests) | OUR CHECK |
 | Python 3.11 | every .py file parses under 3.11 (CI also runs 3.11, 3.12, 3.13) | OUR CHECK |
 
 ## Files read closely

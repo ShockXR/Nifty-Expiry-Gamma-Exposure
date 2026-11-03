@@ -13,7 +13,7 @@
 | Check | Result | Status |
 |---|---|---|
 | Baseline pytest (`OMP_NUM_THREADS=1`) | 715 tests: 708 passed, 7 skipped (real Bank Nifty and Fin Nifty tests need `data/raw`), 0 failed, 271 s. The brief's "508 passed + 4 skipped" is out of date | VERIFIED |
-| Pytest after audit changes | see CODE_AUDIT.md (3 strict xfails pin known defects) | VERIFIED |
+| Pytest after audit changes | 743 passed, 7 skipped, 3 xfailed (strict xfails pin known defects), 0 failed, 297 s | VERIFIED |
 | `python scripts/reproduce_all.py --list` | 94 steps; steps 1 to 6 download data, step 7 checks hashes, the rest run studies; every step runs with `OMP_NUM_THREADS=1`, `PYTHONHASHSEED=0` and `src` first on the path | VERIFIED |
 | `python scripts/data_manifest.py check` | `data/raw` absent | BLOCKED |
 | Real-data studies (`reproduce_all.py` steps 8 onward) | not run | BLOCKED |
