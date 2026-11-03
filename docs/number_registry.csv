@@ -45,7 +45,7 @@ PI63,PITCH_PANDEY.md,"(197 to 1,255 minutes)","1,255",,results/replication_nse/t
 PI64,PITCH_PANDEY.md,first-hour Nifty rows sum to 101,101,,results/replication_nse/paper_printed_checks.csv,csv:item=after nifty monthly_first_hour Nifty 50 row@value,
 PI65,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,223,,results/replication_nse/rekey_check.csv,csv:status=compared@#count,
 PI66,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,222,,results/replication_nse/rekey_check.csv,csv:match=yes@#count,
-PI67,PITCH_PANDEY.md,"Every one of the project's 22,592 hypothesis tests","22,592",,results/test_ledger.csv,csv:@#count,
+PI67,PITCH_PANDEY.md,"Every one of the project's 27,682 hypothesis tests","27,682",,results/test_ledger.csv,csv:@#count,
 PI68,PITCH_PANDEY.md,2 weeks |,2,,,UNTRACED,"a time estimate in the plan, not a result (the snippet covers both cells)"
 PI69,PITCH_PANDEY.md,Scoring every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
 PI70,PITCH_PANDEY.md,a correction for having tried 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
@@ -63,7 +63,7 @@ RM04,README.md,"the last hour 5.8%, 7.6% and 6.4% better (QLIKE loss, Diebold-Ma
 RM05,README.md,"the last hour 5.8%, 7.6% and 6.4% better (QLIKE loss, Diebold-Mariano p < 0.001)",0.001,max;lt,results/pipeline_nse_v2/tests_next15.csv || results/pipeline_nse_v2/tests_next30.csv || results/pipeline_nse_v2/tests_last_hour.csv,csv:subset=all&loss=qlike&comparison=mcsgarch vs hybrid_base@p || csv:subset=all&loss=qlike&comparison=mcsgarch vs hybrid_base@p || csv:subset=all&loss=qlike&comparison=mcsgarch vs hybrid_base@p,
 RM07,README.md,not a correction over all 742 tests of that study,742,,results/falsification/t7_family_B_all_tests_this_study.csv,csv:@#count,
 RM08,README.md,about 8 minutes on 4 cores,8,divby=60,results/pipeline_nse/run_info.json,json:seconds,"run time, not a result: the first run's run_info.json records 500.2 s (8.3 minutes)"
-RM09,README.md,"488 tests, run with `pytest`",488,,,UNTRACED,"test-suite size, not a results file; on 3 November 2026 (eb2127d plus this change) `pytest --collect-only` collects 488 tests and the full run passes with 4 skipped (raw Bank Nifty data absent in that worktree)"
+RM09,README.md,"542 tests, run with `pytest`",542,,,UNTRACED,"test-suite size, not a results file; on 3 November 2026 (after P104) `pytest --collect-only` collects 542 tests and the full run gives 535 passed and 7 skipped (raw Bank Nifty and Fin Nifty data absent in that worktree)"
 RM10,README.md,a correction for trying 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
 RM11,README.md,"the same information (4.8% and 5.9%,",4.8,neg,results/referee_forecast/fair_benchmarks.csv,csv:target=next15&subset=all&benchmark=best_matched_mcsgarch@hybrid_pct_vs_benchmark,
 RM12,README.md,"the same information (4.8% and 5.9%,",5.9,neg,results/referee_forecast/fair_benchmarks.csv,csv:target=next30&subset=all&benchmark=best_matched_mcsgarch@hybrid_pct_vs_benchmark,
@@ -285,11 +285,11 @@ PI92,PITCH_PANDEY.md,With 360 minutes a day,360,,,UNTRACED,"a setting of the rep
 PI93,PITCH_PANDEY.md,about 3 bp per 100 bp move,100,,,UNTRACED,"the size of the move the slope is scaled to, not a result"
 PI94,PITCH_PANDEY.md,closer to a 50-point strike,50,,,UNTRACED,"Nifty strike spacing, a contract term"
 PI95,PITCH_PANDEY.md,none of those results reaches 5% under,5,,,UNTRACED,"the significance level, not a result"
-PI96,PITCH_PANDEY.md,"hypothesis tests (27 studies)",27,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
-RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 22,592 hypothesis tests","22,592",,results/test_ledger.csv,csv:@#count,
-RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 27 studies",27,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
-RD87,docs/REAL_DATA_RESULTS.md,"2,713 survive","2,713",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
-BR25,docs/BRIEFING_PANDEY.md,"lists all 22,592 statistical tests","22,592",,results/test_ledger.csv,csv:@#count,
+PI96,PITCH_PANDEY.md,"hypothesis tests (28 studies)",28,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 27,682 hypothesis tests","27,682",,results/test_ledger.csv,csv:@#count,
+RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 28 studies",28,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD87,docs/REAL_DATA_RESULTS.md,"3,201 survive","3,201",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
+BR25,docs/BRIEFING_PANDEY.md,"lists all 27,682 statistical tests","27,682",,results/test_ledger.csv,csv:@#count,
 PI97,PITCH_PANDEY.md,"pay only about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 BR26,docs/BRIEFING_PANDEY.md,"it is worth about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 RD88,docs/REAL_DATA_RESULTS.md,"the hybrid beats mcsGARCH (one-sided p 8.1e-7)",8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
@@ -314,3 +314,31 @@ PA48,PAPER,"the headline's -7.65% at 30 minutes is the smallest gain",-7.65,,res
 PA49,PAPER,"the 20 new p-values run from 0.015 to 0.052 (median 0.026)",0.015,,results/seed_bootstrap/ensembles.csv,csv:target=last_hour&subset=expiry&role=new@#min:dm_p,
 PA50,PAPER,"the 20 new p-values run from 0.015 to 0.052 (median 0.026)",0.052,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=expiry@dm_p_max,
 PA51,PAPER,"the 20 new p-values run from 0.015 to 0.052 (median 0.026)",0.026,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=expiry@dm_p_median,
+PI99,PITCH_PANDEY.md,gives 4.9% and 6.1% on 604 test days,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,"P104 registered H1, Fin Nifty, next 15 minutes"
+PI100,PITCH_PANDEY.md,gives 4.9% and 6.1% on 604 test days,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,"P104 registered H1, Fin Nifty, next 30 minutes"
+PI101,PITCH_PANDEY.md,gives 4.9% and 6.1% on 604 test days,604,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@days,Fin Nifty test days
+PI102,PITCH_PANDEY.md,"the last-hour gain (1.0%, p 0.30)",1.0,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H2@change_pct,P104 H2
+PI103,PITCH_PANDEY.md,"the last-hour gain (1.0%, p 0.30)",0.30,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H2@p_one_sided,P104 H2
+PI104,PITCH_PANDEY.md,the expiry-day gain (Holm p 0.093),0.093,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next15@p_holm,"P104 H3, Holm over the two horizons"
+BR28,docs/BRIEFING_PANDEY.md,at 4.9% and 6.1% under its own advance plan,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,P104 H1
+BR29,docs/BRIEFING_PANDEY.md,at 4.9% and 6.1% under its own advance plan,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,P104 H1
+RM14,README.md,4.9% and 6.1% better,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,P104 H1
+RM15,README.md,4.9% and 6.1% better,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,P104 H1
+RD91,docs/REAL_DATA_RESULTS.md,the hybrid is 4.9% and 6.1% better at 15 and 30 minutes on 604 test days,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,P104 H1
+RD92,docs/REAL_DATA_RESULTS.md,the hybrid is 4.9% and 6.1% better at 15 and 30 minutes on 604 test days,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,P104 H1
+RD93,docs/REAL_DATA_RESULTS.md,the hybrid is 4.9% and 6.1% better at 15 and 30 minutes on 604 test days,604,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@days,P104 H1
+RD94,docs/REAL_DATA_RESULTS.md,(Holm p 4.4e-12 for both),4.4e-12,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@p_holm,P104 H1
+RD95,docs/REAL_DATA_RESULTS.md,close to Nifty's 5.1% and 6.6% on the same dates,5.1,neg,results/pipeline_nse_finnifty/p104/other_indices_same_dates.csv,"csv:index=Nifty (v2 forecasts, same dates)&target=next15&subset=all@change_pct",Nifty v2 forecasts on Fin Nifty's test dates
+RD96,docs/REAL_DATA_RESULTS.md,close to Nifty's 5.1% and 6.6% on the same dates,6.6,neg,results/pipeline_nse_finnifty/p104/other_indices_same_dates.csv,"csv:index=Nifty (v2 forecasts, same dates)&target=next30&subset=all@change_pct",Nifty v2 forecasts on Fin Nifty's test dates
+RD97,docs/REAL_DATA_RESULTS.md,"the last-hour gain is not supported (1.0%, p 0.30;",1.0,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H2@change_pct,P104 H2
+RD98,docs/REAL_DATA_RESULTS.md,"the last-hour gain is not supported (1.0%, p 0.30;",0.30,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H2@p_one_sided,P104 H2
+RD99,docs/REAL_DATA_RESULTS.md,"(3.9% and 5.3% on 82 days, Holm p 0.093)",3.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next15@change_pct,P104 H3
+RD100,docs/REAL_DATA_RESULTS.md,"(3.9% and 5.3% on 82 days, Holm p 0.093)",5.3,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next30@change_pct,P104 H3
+RD101,docs/REAL_DATA_RESULTS.md,"(3.9% and 5.3% on 82 days, Holm p 0.093)",82,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next30@days,P104 H3
+RD102,docs/REAL_DATA_RESULTS.md,"(3.9% and 5.3% on 82 days, Holm p 0.093)",0.093,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next30@p_holm,P104 H3
+RD103,docs/REAL_DATA_RESULTS.md,(smallest Holm p 0.40),0.40,,results/pipeline_nse_finnifty/p104/h4_ablation_hybrid.csv,csv:family=hybrid: base vs base+GEX&group=all@#min:p_holm_in_family,"P104 H4, 12 rows on all days"
+RD104,docs/REAL_DATA_RESULTS.md,was 135 times the realized variance on Fin Nifty (20 times on Nifty),135,,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@mcsgarch_over_realized,post hoc
+RD105,docs/REAL_DATA_RESULTS.md,was 135 times the realized variance on Fin Nifty (20 times on Nifty),20,,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@mcsgarch_over_realized,post hoc
+RD106,docs/REAL_DATA_RESULTS.md,"98% of mcsGARCH's 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty)",98,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@share_of_mcsgarch_squared_error,post hoc
+RD107,docs/REAL_DATA_RESULTS.md,"98% of mcsGARCH's 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty)",79,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
+RD108,docs/REAL_DATA_RESULTS.md,"98% of mcsGARCH's 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty)",42,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Bank Nifty (P91 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc

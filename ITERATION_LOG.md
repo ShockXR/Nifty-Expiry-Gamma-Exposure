@@ -510,11 +510,33 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Refit dates, hyperparameters and the model choice are held fixed, so this is a lower bound on estimation noise.
 * **NEXT ITERATION:** Fold the seed range into the referee response (M4.3) and the working paper.
 
-## Iterations in progress (3 November 2026, about 09:00 IST)
+## Iteration 43: is the forecasting gain worth anything in money? (registered plan, P103)
 
-* **P103, the economic value of the forecasting gain** (registered plan): realized utility of a volatility-targeting investor (Bollerslev, Hood, Huss and Pedersen 2018) and a vol-targeted Nifty position after costs, with a Deflated Sharpe Ratio. A straddle rule was ruled out: NSE publishes no intraday option prices.
-* **P104, a third index** for the hybrid: first a check whether free one-minute bars for Fin Nifty or Midcap Select pass the same validation as Nifty's; Sensex is ruled out because BSE option chains cannot be downloaded here. Run under a registered plan only if the data pass.
-* **A clean-clone audit**: a fresh clone of a3a84c7 has no PDF, private draft or credential in the tree or the history, and its 512 tests give 508 passed and 4 skipped (raw Bank Nifty data absent).
+* **OBJECTIVE:** Answer the AI referee's remark (M5) that "no economic evaluation ... is offered" for the forecasting result.
+* **PROBLEM IDENTIFIED:** A lower QLIKE loss says the hybrid forecasts better, not that anyone would pay for it; the project had no money-terms yardstick.
+* **HYPOTHESIS:** For an investor who sizes a Nifty position by forecast volatility (the realized-utility yardstick of Bollerslev, Hood, Huss and Pedersen 2018), the hybrid beats mcsGARCH (H1); the size label, the information-matched comparison and a volatility-targeted trading rule after costs (with a Deflated Sharpe Ratio) are secondary, with a decision table fixed in advance.
+* **CHANGES IMPLEMENTED:** `experiments/p103_economic_value.py`, `tests/test_p103_economic_value.py` (19 tests, synthetic only). Plan committed and pushed first (`docs/prereg/P103_ECONOMIC_VALUE.md`, commit 77b435a); results 13 minutes later (2e40028). Write-up `docs/P103_ECONOMIC_VALUE.md`.
+* **EXPERIMENTS PERFORMED:** One run on the committed v2 forecasts (792 test days, about 5 seconds).
+* **RESULTS:** (REAL DATA.) Registered verdict "detectable but not economically meaningful". H1 holds (one-sided p 8.1e-7, better on 69% of days), but the fee for switching from mcsGARCH to the hybrid is 0.041% of wealth a year (label "tiny"); against the mcsGARCH given the implied variance it is not significant after Holm (p 0.096). The volatility-targeted intraday rule loses money whatever forecast it uses (net Sharpe ratio -3.52, Deflated Sharpe Ratio 6e-15). No deviation from the registered analysis.
+* **IMPROVEMENTS:** The pitch, briefing and paper now state the economic size of the forecasting gain and stop short of any trading claim.
+* **REMAINING ISSUES:** One yardstick (a mean-variance investor at 30-minute rebalancing); option-based uses of the forecasts (straddle pricing, hedging) are not tested.
+* **NEXT ITERATION:** Fold the result into the referee response and the working paper (done the same morning).
+
+## Iteration 44: does the forecasting hybrid replicate on a third index? (registered plan, P104)
+
+* **OBJECTIVE:** Test the forecasting headline on a third NSE index, with nothing changed, as the strongest available guard against the hybrid having been tuned to Nifty.
+* **PROBLEM IDENTIFIED:** Two indices (Nifty, Bank Nifty P91) is a thin base for a general claim; Sensex is ruled out (BSE files cannot be reached from the cloud machine) and Midcap Select has no free index minute bars for 2023 to 2026.
+* **HYPOTHESIS:** H1 (primary): the hybrid beats mcsGARCH at 15 and 30 minutes on all Fin Nifty test days (Holm over the two). H2 last hour, H3 Fin Nifty expiry days, H4 GEX features do not help (secondary).
+* **CHANGES IMPLEMENTED:** Fin Nifty support in `src/niftygex/data.py` and `features.py` and in `scripts/run_pipeline.py`, `scripts/fetch_finnifty_data.py` for the pinned Fin Nifty bars (ayush-roy-21/EigenTrade, commit 21fc3e7; the repository states no licence or origin), the minute-bar check in `scripts/validate_minute_bars.py`, `experiments/p104_finnifty_summary.py`, `tests/test_symbol_finnifty.py`, and the new raw files in `data/MANIFEST.csv`. Data check first: the bars' daily high is within 5 bp of NSE's official value on 98.9% of days, the low on 99.2%. Plan committed and pushed first (`docs/prereg/P104_THIRD_INDEX_FORECAST.md`, commit a1e84a5); results e4aba76. Write-up `docs/THIRD_INDEX_FORECAST.md`.
+* **EXPERIMENTS PERFORMED:** The full v2 pipeline on Fin Nifty (604 test days, 61 minutes), plus two labelled exploratory looks.
+* **RESULTS:** (REAL DATA.) H1 replicated: 4.9% and 6.1% better (Holm p 4.4e-12 for both; project-wide BY 8.3e-10 and 1.2e-9), close to Nifty's 5.1% and 6.6% on the same dates. H2 not supported (1.0%, p 0.30). H3 not supported (3.9% and 5.3% on 82 expiry days, Holm p 0.093). H4 held (smallest Holm p 0.40): the Bank Nifty 09:15 GEX gain did not reappear. Post hoc: mcsGARCH's 09:15 forecast on 5 June 2024 was 135 times the realized variance and is 98% of its 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty), so MSE comparisons against mcsGARCH mostly measure that morning; QLIKE results hardly move without it. No deviation from the registered analysis.
+* **IMPROVEMENTS:** The 15- and 30-minute claim now rests on three indices under registered plans; the last-hour claim is narrowed to "depends on the index", the expiry-day claim softened, and GEX helped on one index of three.
+* **REMAINING ISSUES:** Fin Nifty moves with Bank Nifty and Nifty and borrows Nifty's VIX, so this is not three independent tests; the minute bars' source is of unknown origin; the project had used Fin Nifty daily data before (P96).
+* **NEXT ITERATION:** Fold into the pitch, briefing, results summary, working paper and referee response; caveat every MSE comparison against mcsGARCH.
+
+## Iterations in progress (3 November 2026, about 11:00 IST)
+
 * **Scoring the frozen forecast** for 3 November after the close.
+* **A meeting deck** for Prof. Pandey, built last from the final numbers.
 
-Each will be written up in the same format when it finishes.
+Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.
