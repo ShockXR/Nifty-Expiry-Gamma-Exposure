@@ -1,0 +1,53 @@
+                                 test_id  estimate     p_raw  p_adjusted
+0                    P_nifty_primary_ref -1.601822  0.191176    0.210784
+1                      P_nifty_primary_F -2.063566  0.105392    0.210784
+2               S1_banknifty_primary_ref -1.469911  0.112749    0.192541
+3                 S1_banknifty_primary_F -1.781267  0.096271    0.192541
+4                     S2_nifty_clean_ref -1.601822  0.095172    0.273481
+5                       S2_nifty_clean_F -2.063566  0.056552    0.226207
+6                 S2_banknifty_clean_ref -1.469911  0.091160    0.273481
+7                   S2_banknifty_clean_F -1.781267  0.120166    0.273481
+8                   S3_nifty_literal_ref -1.601822  0.173205    0.402665
+9                     S3_nifty_literal_F -2.063566  0.100666    0.402665
+10              S3_banknifty_literal_ref -1.469911  0.128125    0.402665
+11                S3_banknifty_literal_F -1.781267  0.146094    0.402665
+12         S4_nifty_primary_ref_disjoint -1.601822  0.394643    0.583036
+13      S5_nifty_primary_ref_conditional -0.949172  0.142157    0.426471
+14           S4_nifty_primary_F_disjoint -2.063566  0.160268    0.583036
+15        S5_nifty_primary_F_conditional -0.712124  0.204248    0.426471
+16     S4_banknifty_primary_ref_disjoint -1.469911  0.233080    0.583036
+17  S5_banknifty_primary_ref_conditional -1.356286  0.012142    0.048569
+18       S4_banknifty_primary_F_disjoint -1.781267  0.145759    0.583036
+19    S5_banknifty_primary_F_conditional -0.212100  0.311362    0.426471
+20                       D_nifty_ref_did -0.208489  0.436409    1.000000
+21                         D_nifty_F_did -0.010455  0.591022    1.000000
+22                   D_banknifty_ref_did -0.059786  0.394015    1.000000
+23                     D_banknifty_F_did  0.264433  0.678304    1.000000
+24                E1_finnifty_ref_change -1.391105  0.072319    0.072319
+25                  E1_finnifty_F_change -2.053307  0.047382    0.047382
+                                 test_id                                              label
+0                    P_nifty_primary_ref                the fall is within the normal range
+1                      P_nifty_primary_F                the fall is within the normal range
+2               S1_banknifty_primary_ref                the fall is within the normal range
+3                 S1_banknifty_primary_F                the fall is within the normal range
+4                     S2_nifty_clean_ref       no verdict: too few separate placebo periods
+5                       S2_nifty_clean_F       no verdict: too few separate placebo periods
+6                 S2_banknifty_clean_ref       no verdict: too few separate placebo periods
+7                   S2_banknifty_clean_F       no verdict: too few separate placebo periods
+8                   S3_nifty_literal_ref                the fall is within the normal range
+9                     S3_nifty_literal_F                the fall is within the normal range
+10              S3_banknifty_literal_ref                the fall is within the normal range
+11                S3_banknifty_literal_F                the fall is within the normal range
+12         S4_nifty_primary_ref_disjoint                the fall is within the normal range
+13      S5_nifty_primary_ref_conditional                the fall is within the normal range
+14           S4_nifty_primary_F_disjoint                the fall is within the normal range
+15        S5_nifty_primary_F_conditional                the fall is within the normal range
+16     S4_banknifty_primary_ref_disjoint                the fall is within the normal range
+17  S5_banknifty_primary_ref_conditional                                the fall is unusual
+18       S4_banknifty_primary_F_disjoint                the fall is within the normal range
+19    S5_banknifty_primary_F_conditional                the fall is within the normal range
+20                       D_nifty_ref_did  the fall is not clearly larger than the control's
+21                         D_nifty_F_did  the fall is not clearly larger than the control's
+22                   D_banknifty_ref_did  the fall is not clearly larger than the control's
+23                     D_banknifty_F_did  the fall is not clearly larger than the control's
+analyze done in 32.0s

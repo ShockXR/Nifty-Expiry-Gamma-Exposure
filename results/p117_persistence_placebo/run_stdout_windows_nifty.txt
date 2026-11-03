@@ -1,0 +1,16 @@
+[REAL DATA (third-party 1-minute bars validated against NSE official daily values)] P117 windows nifty: 2360 grid days, gap 258, 1730 pairs enumerated (primary 1223, clean 724, literal 1350); 2702 windows needed, 2702 to fit
+  200 of 2702 windows (1.9 min, about 23 min left)
+  400 of 2702 windows (3.7 min, about 22 min left)
+  600 of 2702 windows (5.4 min, about 19 min left)
+  800 of 2702 windows (7.0 min, about 17 min left)
+  1000 of 2702 windows (8.9 min, about 15 min left)
+  1200 of 2702 windows (10.8 min, about 14 min left)
+  1400 of 2702 windows (12.5 min, about 12 min left)
+  1600 of 2702 windows (14.2 min, about 10 min left)
+  1800 of 2702 windows (15.8 min, about 8 min left)
+  2000 of 2702 windows (17.5 min, about 6 min left)
+  2200 of 2702 windows (19.3 min, about 4 min left)
+  2400 of 2702 windows (21.7 min, about 3 min left)
+  2600 of 2702 windows (23.8 min, about 1 min left)
+  P114 rolling windows reproduced: 168 of 168 values identical (14 windows)
+windows stage nifty done in 24.8 min

@@ -1,0 +1,8 @@
+start inputs 2026-11-03T11:38:19Z
+end inputs 2026-11-03T11:38:21Z exit 0
+start windows_nifty 2026-11-03T11:38:21Z
+end windows_nifty 2026-11-03T12:03:11Z exit 0
+start windows_banknifty 2026-11-03T12:03:11Z
+end windows_banknifty 2026-11-03T12:27:11Z exit 0
+start control 2026-11-03T12:27:11Z
+end control 2026-11-03T12:37:53Z exit 0

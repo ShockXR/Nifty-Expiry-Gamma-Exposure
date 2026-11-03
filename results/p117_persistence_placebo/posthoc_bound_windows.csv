@@ -1,0 +1,9 @@
+data,index,model,kind,windows,not_computed,not_converged,contain_flat_day,at_bound,at_bound_containing_flat_day,at_bound_other_first_start,at_bound_other_last_start
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,before,1351,0,0,64,187,64,2024-03-11,2025-04-02
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,after,1351,0,0,59,59,59,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,before,1351,0,0,64,40,40,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,after,1351,0,0,59,40,40,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,before,1280,0,0,0,56,0,2024-03-11,2024-06-04
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,after,1280,0,0,0,0,0,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,before,1280,0,0,0,0,0,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,after,1280,0,0,0,0,0,,

@@ -1,0 +1,7 @@
+[REAL DATA (third-party 1-minute bars validated against NSE official daily values)] P117 control: Fin Nifty grid 966 days (2021-08-04 to 2026-01-27), data holes [('2022-01-28', '2022-08-01')]; fits done (17s)
+  P114 reproduced: 168 of 168 values identical
+  bootstrap finnifty before_inferred with nifty's seeds: 800 rows (170s)
+  bootstrap finnifty after with nifty's seeds: 800 rows (150s)
+  bootstrap finnifty before_inferred with banknifty's seeds: 800 rows (151s)
+  bootstrap finnifty after with banknifty's seeds: 800 rows (146s)
+control stage done in 10.7 min
