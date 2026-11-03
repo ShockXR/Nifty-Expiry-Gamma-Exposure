@@ -582,9 +582,22 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** One day's last-hour row rests on a single forecast and can look extreme; `docs/DEMO.md` says so.
 * **NEXT ITERATION:** None planned.
 
-## Iterations in progress (3 November 2026, about 14:00 IST)
+## Iteration 49: what the hybrid's correction fixes in mcsGARCH (registered plan, P109) and its forward test (P112)
+
+* **OBJECTIVE:** Say in plain words what the LightGBM correction repairs in mcsGARCH, now that P106 showed it learns from mcsGARCH's own kind of information.
+* **PROBLEM IDENTIFIED:** The summaries described the hybrid's 5.8% and 7.6% gain as something machine learning finds. If a few plain fixes to mcsGARCH did as well, the gain would be over the paper's mcsGARCH as specified, not over the best econometric model, and the professor should hear that from us.
+* **HYPOTHESIS:** Registered before any extended model was run on real data (`docs/prereg/P109_MCSGARCH_EXTENSIONS.md`, commit ceec2ec): five fixes, each aimed at one suspected mistake (X1 HAR daily level, X2 overnight fade, X3 today's running level, X4 leverage, X5 one calibration factor per forecast time), and their combination, beat mcsGARCH at 15 and 30 minutes; the plan expected the combination to recover part of the hybrid's gain, not all of it.
+* **CHANGES IMPLEMENTED:** `McsGarchExt` and helpers appended to `src/niftygex/volatility.py`, `experiments/p109_mcsgarch_extensions.py`, `tests/test_p109_mcsgarch_extensions.py` (synthetic). Results 7f0b5c7, 27 minutes after the plan, run by an AI agent. Ledger adapter MCSX (100 tests). Forward-test plan `docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md` committed (f081138) before any 4 November data existed.
+* **EXPERIMENTS PERFORMED:** The committed walk-forward on Nifty (792 test days), Bank Nifty (660) and Fin Nifty (604), about 16 minutes on 2 cores. The lead recomputed the two primary gains from the daily-loss files and reran the Nifty combination from scratch in a clean folder: every forecast matched the agent's to the last digit (gains 6.8305 and 8.2516 points).
+* **RESULTS:** (REAL DATA.) The combination is 6.83 and 8.25 points better than mcsGARCH (one-sided DM t 5.61 and 5.01), 118% and 108% of the hybrid's gain (intervals 85% to 167% and 80% to 132%); the hybrid does not beat it (p 0.823 and 0.729). Alone, today's level recovers 46% and 48%, the time-of-day factor 49% and 39%, the overnight fade 12% and 16%, the HAR level 19% and 3% and leverage nothing. At 09:15 the combination gains 28.7 and 34.4 points against the hybrid's 13.3 and 23.9; at other times it recovers 93%. Last hour: 13% only. Bank Nifty 127% and 136%, Fin Nifty 97% and 103%, nothing retuned.
+* **IMPROVEMENTS:** The pitch, briefing, README, results summary, paper (abstract, contribution 2, Section 6.2, 5.8, conclusion, Tables B1 and C), referee response and deck (new slide "Five fixes to your model") now say that the hybrid's gain is over mcsGARCH as specified, and what the correction does. Ledger: 27,988 tests, 31 studies, 3,271 survive; trace 507 entries, 501 MATCH, no mismatch.
+* **REMAINING ISSUES:** The fixes were chosen after P106 on the same days, so this explains the gain rather than proving a better model; the time-of-day factor is fitted, not structural; the intervals are wide; the last hour is not explained.
+* **NEXT ITERATION:** P112 runs once, at the 250th valid Nifty day from 4 November 2026 or 31 December 2027. P110 (P106's claims stress-tested on Bank Nifty and Fin Nifty) is running.
+
+## Iterations in progress (3 November 2026, about 15:30 IST)
 
 * **Scoring the frozen forecast** for 3 November after the close.
-* **A meeting deck** for Prof. Pandey, built last from the final numbers.
+* **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
+* **P110**, a stress test of P106's three claims on Bank Nifty and Fin Nifty (plan 5128e53).
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.
