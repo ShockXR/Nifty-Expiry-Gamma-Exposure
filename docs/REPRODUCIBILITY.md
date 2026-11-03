@@ -25,8 +25,9 @@ Raw data are not in the repository. `docs/DATA_ACQUISITION.md` lists the four co
 ## One command, with data hashes
 
 ```bash
-python scripts/reproduce_all.py --download   # downloads, checks hashes, reruns every study
+python scripts/reproduce_all.py --download   # downloads, checks hashes, reruns every step it lists
 python scripts/reproduce_all.py              # if data/raw is already there
+python scripts/reproduce_all.py --list       # prints every step and its command; runs nothing
 ```
 
 `data/MANIFEST.csv` (committed) lists every raw file with its SHA-256 hash (of the decompressed content for `.gz` files, because gzip headers carry a time stamp). `scripts/data_manifest.py check` compares data/raw with it, and `reproduce_all.py` stops if anything is missing or different. The minute-bar datasets are fetched at the exact git commits recorded in `data/raw/minute_bars_source.json` and cut at 2 November 2026 (`--nifty-ref`, `--bank-ref`, `--until`), so a later download gives the same files. Each step's run time and exit status go to `results/reproduce_log.csv`.
@@ -37,7 +38,30 @@ Check on 2 November 2026: rerunning `real_day_level`, `momentum_gex` and `closin
 * The other studies moved only in late decimal places, because they now read the GEX panels written by the second forecasting run rather than the first. The cells quoted in the documents that moved were updated (for example the R5 table in REAL_DATA_RESULTS.md and the F2_ECONOMICS deviation note); the pinning-mechanism study (P87) was identical.
 * A few committed diagnostic files had come from the first forecasting run and were overwritten by second-run versions. The first-run files, which some documents cite as history, are kept in `results/archive_v1_first_run/`.
 
-The steps added to `reproduce_all.py` afterwards (the synthetic control P96, the Bank Nifty replication P91, the referee-response analyses, the DSR check, the test ledger and the number trace) were each run separately on the same hashed data when they were written; they were not part of this timed run. The Bank Nifty pipeline adds about 80 minutes.
+### Which steps have been timed end to end (updated 3 November 2026)
+
+Since this update `reproduce_all.py` lists a step for every registered study in `docs/prereg/` except the two forward tests (`FORWARD_TEST.md` and P112, which need data after 2 November 2026 and run with `scripts/forward_test.py`) and P117, which was still running (P117 and P118 go above the test ledger once their documents give their commands). `python scripts/reproduce_all.py --list` prints all 74 study steps with their commands. Only the first group below has been run end to end in one go. Every step outside it was run on its own, on the same hashed data, when its study was done; the run times below are the ones stated in each step's document, not a new measurement.
+
+1. **Timed together on 3 November 2026 (about 2 hours 20 minutes on one core; `results/reproduce_log.csv`, 8,529 seconds in all):** the hash check, `validate_minute_bars`, `check_oi_units`, `run_pipeline` (6,909 seconds), `forecast_diagnostics`, `real_day_level`, `momentum_gex`, `closing_auction_check`, `replicate_paper`, `pinning_study`, `notebook`, `falsification`, `intraday_gamma`, `dealer_sign`, `expiry_event_study`, `sensex_confound`, `connectedness_gamma`, `power_real`, `rekey_check`, `pinning_mechanism`, `f2_economics` and `sensex_swap` (22 steps).
+2. **Added earlier on 3 November 2026, after the timed run; not yet timed end to end.** Stated run times: `synthetic_control` (P96) about 1 minute (`docs/SYNTHETIC_CONTROL.md`); `banknifty_pipeline` (P91) 78 minutes (`docs/BANKNIFTY_FORECAST.md`); `finnifty_pipeline` (P104) 61 minutes on one thread (`docs/THIRD_INDEX_FORECAST.md`); `referee_forecast` 193 seconds (`docs/REFEREE_RESPONSE_FORECAST.md`); `referee_f2` about 3 minutes and `referee_f2_positions` about 75 seconds (`docs/REFEREE_RESPONSE_F2.md`); `referee_expiry` about 4 minutes (`docs/REFEREE_RESPONSE_EXPIRY.md`); `p103_economic_value` (P103) about 5 seconds (`docs/P103_ECONOMIC_VALUE.md`). No time is stated for `p91_banknifty_summary`, `validate_finnifty_bars`, `p104_finnifty_summary`, `p104_finnifty_exploratory`, `referee_forecast_gw`, `f2_dsr_power`, `test_ledger` or `number_trace`. Stated total: about 2 hours 32 minutes.
+3. **Added by this update; not yet timed end to end.** Each study's commands are copied from its document (for P106 and P110, from the plan that the document points to), in dependency order, after `p103_economic_value` and before the test ledger and the number trace:
+
+   | Study | Steps | Stated run time (document) |
+   |---|---|---|
+   | P99 seed bootstrap | `run`, `analyze`, `context` | 71 minutes with 2 worker processes (`docs/SEED_BOOTSTRAP.md`) |
+   | P106 gain decomposition | `run` for Nifty, Bank Nifty and Fin Nifty, `analyze` | about 1 hour 45 minutes on 2 cores (`docs/P106_GAIN_DECOMPOSITION.md`, Section 10) |
+   | P107 pooled test | `count`, `run`, post hoc | about 15 seconds on one core (`docs/P107_POOLED_THREE_INDEX.md`, Section 12) |
+   | P108 blind window | `search`, `posthoc`, `phase3_compare` | about three minutes (`docs/P108_BLIND_WINDOW.md`, Section 9) |
+   | P109 mcsGARCH extensions | `run` for three indices, `analyze` | about 16 minutes on 2 cores (`docs/P109_MCSGARCH_EXTENSIONS.md`, Section 17) |
+   | P110 stress test | `run` for Bank Nifty and Fin Nifty, `analyze` | about 2.5 hours on one core (`docs/P110_GAIN_STRESS_TEST.md`, Section 11) |
+   | P113 connectedness settings | one command | about 2.5 minutes, one process (`docs/P113_CONNECTEDNESS_SETTINGS.md`, Section 8) |
+   | P114 persistence, fixed model | `inputs`, `fit`, `lr`, `rolling`, `boot`, `analyze`, post hoc | about 36 minutes on one core (`docs/P114_PERSISTENCE_FIXED_MODEL.md`, Section 15) |
+   | P116 benchmark as printed | `run` for three indices, `analyze`, post hoc | about 8 minutes on 2 cores (`docs/P116_BENCHMARK_AS_PRINTED.md`, Section 16) |
+   | P111 demo | `--pick` and the three demo days | a few seconds per command (`docs/DEMO.md`, Section 2) |
+
+   Stated total: about 6 hours 32 minutes. P99, P106, P109 and P116 run with 2 worker processes, as their documents' commands do; their jobs' own computing times add up to 8,026, 11,703.5, 1,229.3 and 552.4 seconds (from the studies' `timing.csv` files as quoted in their documents; for P109 and P116 the sum of the three per-index times).
+
+So the stated run time of the whole list is about 11.4 hours (2 hours 20 minutes timed, plus about 2 hours 32 minutes and about 6 hours 32 minutes stated), plus the eight steps of group 2 whose documents state no time. Each script and option the new steps name was checked without running any study (`--help` of every script and subcommand that takes options, a compile check of the two post hoc scripts that take none, and the eight plan commits looked up in git); `tests/test_reproduce_all.py` checks that every registered study has a step, that every script and option a step names exists, and that `--list` runs nothing. Since this update `reproduce_all.py` also puts the repository's `src/` first on `PYTHONPATH`, as the study documents' commands do.
 
 Files for the live dry run (`experiments/live_dry_run.py score`) go to `data/live/`, not `data/raw/`, so scoring a live day never changes the hashed data.
 
