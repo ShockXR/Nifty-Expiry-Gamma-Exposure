@@ -450,6 +450,18 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** A full bootstrap over LightGBM seeds (about 6 hours on one core) was not run; the pipeline still uses the fallback rule as committed (disclosed, with the real-time check).
 * **NEXT ITERATION:** The expiry-identification part of the referee report.
 
+## Iteration 38: answering an AI referee on how expiry premia are identified
+
+* **OBJECTIVE:** Check the expiry-day evidence (R2 and the event study) against three referee objections.
+* **PROBLEM IDENTIFIED:** The week-relative baseline contains other indices' expiry days (M9); the event-study placebo p-values rest on few independent windows and the Friday control contains Sensex expiry Fridays (M8); and one-minute variance at the end of expiry days may be inflated by microstructure noise (M10).
+* **HYPOTHESIS:** If the end-of-day expiry premium is real, it survives a clean baseline, honest small-sample inference and a noise-robust variance estimator.
+* **CHANGES IMPLEMENTED:** `experiments/referee_expiry.py`, `tests/test_referee_expiry.py`, `docs/REFEREE_RESPONSE_EXPIRY.md`, results in `results/referee_expiry/`, and a verified NSE all-index expiry calendar from 1,933 full bhavcopies (`data/external/nse_all_index_contracts_by_expiry.csv.gz`, hashes in the matching source file). All post hoc.
+* **EXPERIMENTS PERFORMED:** R2 and the event study on a baseline free of every NSE and BSE index expiry; baseline-free checks (raw two-day difference, a pooled regression with a dummy for every index's expiry); placebo inference with non-overlapping windows and a prediction-interval test; the Friday control without Sensex Fridays; realized kernel and pre-averaging estimators; pre-trends in 6- and 12-month windows.
+* **RESULTS:** (REAL DATA.) The pre-November 2024 premium cannot be identified (0.10 expiry-free days per week from September 2023 to November 2024). The Tuesday premium grows on the clean baseline (+26% whole day, +63% last hour). Bank Nifty's 2023 switch survives without a baseline (+0.90) and with all-expiry dummies (+0.61). Six-month placebo p-values rest on at most 4 independent windows (prediction p 0.056 to 0.080). Expiry-day last-30-minute returns are negatively autocorrelated, and a realized kernel keeps a half to three quarters of each premium. The switch comparison is null at event d.
+* **IMPROVEMENTS:** The expiry claim is now "expiry days show more, and more quickly reversing, price movement in the last hour", with the clean-baseline and noise caveats in the pitch, briefing, results summary and event study.
+* **REMAINING ISSUES:** BSE expiry dates are still reported, not verified; tick data would be needed to separate noise from efficient-price variance.
+* **NEXT ITERATION:** Fold all referee responses into the working paper and the replication note.
+
 ## Iterations in progress (3 November 2026, about 07:00 IST)
 
 * **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
