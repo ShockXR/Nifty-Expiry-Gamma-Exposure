@@ -42,6 +42,8 @@ Offered as a careful reader's questions, each now checked on real data:
 | What is missing | A cleaner dealer proxy (your group's data or a broker category) | Verified BSE Sensex expiry dates (BSE's servers are not reachable from my setup; with reported dates as a control the NSE premia get slightly larger, see [SENSEX_CONFOUND.md](docs/SENSEX_CONFOUND.md)) |
 | First deliverable | 2 weeks | 2 weeks |
 
+A shorter third option comes from the forecasting work: a note on five fixes to mcsGARCH that match machine learning at 15 and 30 minutes, which could be written once its registered forward test (from 4 November 2026) reports.
+
 ## How to check any of this
 
 Every one of the project's 27,988 hypothesis tests (31 studies) is listed in [TEST_LEDGER.md](docs/TEST_LEDGER.md) with its raw p-value and a p-value corrected for all of them at once (Benjamini-Yekutieli). The hybrid's gain over mcsGARCH on all days survives that correction at every horizon, and so do the Bank Nifty and Fin Nifty replications, the fixed mcsGARCH's gain over mcsGARCH and the Tuesday last-hour premium; the edge over an mcsGARCH given the implied variance does not, and the end-of-day reversal survives only in its in-sample form.
