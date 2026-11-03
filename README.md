@@ -72,6 +72,9 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 pytest
 
+# One trading day of the real-data forecasts, as a self-contained web page (about a second; committed files only; see docs/DEMO.md)
+python scripts/demo_forecast_day.py --date 2025-12-23
+
 # Full pipeline on a synthetic market (about 15 minutes on 4 cores)
 python scripts/run_pipeline.py --source synthetic --days 500 --kappa 0.5
 

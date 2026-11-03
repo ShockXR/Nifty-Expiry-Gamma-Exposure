@@ -15,7 +15,7 @@ Your 2025 paper with Chhimwal and V. Pandey shows that each index became more vo
 5. **The sign of dealer positions is the real open problem.** The reversal fits hedging theory only if Pro positions are the opposite of dealers', while the next-day volatility link fits only if they are the same. Estimating the sign from the market's response, the end-of-day outcome points to the reverse of Pro, the volatility outcome points nowhere clearly, and no estimated sign beats the fixed rules out of sample. ([DEALER_SIGN.md](docs/DEALER_SIGN.md))
 6. **Pinning is real but regime-specific.** Under the single Thursday weekly, Nifty's official expiry close was 4.5 points closer to a 50-point strike than on other days (p = 0.0006); since the move to Tuesday there is none, and it is unrelated to dealer gamma. A test of six market-structure explanations, with its analysis plan committed before its results were computed, found that none explains when pinning comes and goes. ([PINNING_STUDY.md](docs/PINNING_STUDY.md), [PINNING_MECHANISM.md](docs/PINNING_MECHANISM.md))
 
-I also froze a forecast for Tuesday 3 November's expiry in the repository before the market opened, so it can be scored against what actually happened ([results/live/2026-11-03/forecast.md](results/live/2026-11-03/forecast.md)).
+For a quick look at the forecasts, one command draws any test day as a web page from committed files ([docs/DEMO.md](docs/DEMO.md)). I also froze a forecast for Tuesday 3 November's expiry in the repository before the market opened, so it can be scored against what actually happened ([results/live/2026-11-03/forecast.md](results/live/2026-11-03/forecast.md)).
 
 ## Points from your paper I would like to check with you
 

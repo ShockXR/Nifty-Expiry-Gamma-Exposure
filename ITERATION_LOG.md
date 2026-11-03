@@ -570,6 +570,18 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Leave-one-out misses what groups share (the five shares sum to about half). Part 2 uses the data that motivated it. Dropping the calendar inputs would be a new model chosen after seeing these data.
 * **NEXT ITERATION:** Fold into the pitch, briefing, paper and deck.
 
+## Iteration 48: a one-day demo of the forecasts for the meeting (P111)
+
+* **OBJECTIVE:** Make the forecasting result concrete for one trading day, in a form that can be shown in a meeting.
+* **PROBLEM IDENTIFIED:** The headline (5.8% and 7.6% lower QLIKE over 792 days) and P106's attribution are averages; a professor will want to see what the two forecasts look like on a real day.
+* **HYPOTHESIS:** None tested; this is a presentation tool. Days are chosen by stated rules, not by hand.
+* **CHANGES IMPLEMENTED:** `scripts/demo_forecast_day.py` (reads committed forecasts only, writes one self-contained HTML page, about a second per day), `docs/DEMO.md` (walk-through), `tests/test_demo_forecast_day.py` (synthetic), three pages and a deck chart in `results/demo/`. Built by an AI agent (Claude); commit 59dc9c4.
+* **EXPERIMENTS PERFORMED:** Three days by rule: the median-gain Tuesday expiry since October 2025 (23 December 2025), the 4 June 2024 election-result crash (named in advance), and the median 09:15 win among non-expiry days (8 April 2025).
+* **RESULTS:** (REAL DATA, 15-minute forecasts.) 23 December 2025: QLIKE 0.166 for mcsGARCH and 0.155 for the hybrid, nearly all of the difference in the 09:15 window (0.850 against 0.395); the hybrid is closer in only 8 of 25 windows (checked again by the lead from the committed forecasts). 4 June 2024: the hybrid is 2.5% worse at 15 minutes. 8 April 2025: 13.7% better.
+* **IMPROVEMENTS:** A slide with the 23 December chart is in the meeting deck.
+* **REMAINING ISSUES:** One day's last-hour row rests on a single forecast and can look extreme; `docs/DEMO.md` says so.
+* **NEXT ITERATION:** None planned.
+
 ## Iterations in progress (3 November 2026, about 14:00 IST)
 
 * **Scoring the frozen forecast** for 3 November after the close.
