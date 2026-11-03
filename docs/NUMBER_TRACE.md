@@ -99,13 +99,13 @@ at most about ten words.
 
 ## Results (run of 3 November 2026, after the pitch was shortened)
 
-**278 registry entries: 267 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 6 UNTRACED.**
+**281 registry entries: 270 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 6 UNTRACED.**
 
 | Document | Entries | MATCH | MISMATCH | UNTRACED |
 | --- | --- | --- | --- | --- |
 | PITCH_PANDEY.md | 69 | 64 | 0 | 5 |
 | README.md | 12 | 11 | 0 | 1 |
-| docs/BRIEFING_PANDEY.md | 19 | 19 | 0 | 0 |
+| docs/BRIEFING_PANDEY.md | 22 | 22 | 0 | 0 |
 | docs/REAL_DATA_RESULTS.md | 84 | 79 | 5 | 0 |
 | docs/MODEL_ITERATIONS_REAL.md | 9 | 9 | 0 | 0 |
 | docs/FALSIFICATION.md | 10 | 10 | 0 | 0 |
@@ -141,7 +141,8 @@ clean-baseline Tuesday premia (63% in the last hour, 26% over the day, from
 `results/referee_expiry/r2_clean_baseline.csv`), the raw Bank Nifty Wednesday change (+0.90, from
 `results/referee_expiry/two_day_raw_differences.csv`), the two printed after-change hour totals that lie
 below our intervals (66.44 and 70.97, from `results/replication_nse/tables34_connectedness.csv`) and four
-settings recorded as UNTRACED.
+settings recorded as UNTRACED. The briefing was shortened the same way: BR05 and BR09 were removed, BR07,
+BR08 and BR15 re-quoted, and BR20 to BR24 added (63%, 3.9%, 5.0%, 4.5 points, p = 0.0006).
 
 Every pitch number that is a result has a registry entry, and the pitch scan now leaves nothing uncovered.
 The four numbers that are not results are registered as UNTRACED: "360 minutes a day" (the sample design),
@@ -208,7 +209,7 @@ MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not register
 * The registry was written by hand by reading each results file. A wrong selector would show up as a
   MISMATCH or SOURCE_MISSING, not as a false MATCH, unless it happens to point at a different cell with the
   same rounded value; the notes say which row and column each entry uses so a reader can verify it.
-* 278 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
+* 281 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
   most of the working paper) are not registered; the pitch scan shows that every remaining pitch number is
   a design setting.
 * The check reads the worktree's committed results. If a full reproduction rewrites `results/`, rerun it.
@@ -216,7 +217,7 @@ MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not register
 ## Files
 
 * `scripts/trace_numbers.py`: the check.
-* `docs/number_registry.csv`: the registry (278 rows).
+* `docs/number_registry.csv`: the registry (281 rows).
 * `tests/test_trace_numbers.py`: 102 tests on small synthetic files (selectors, rounding, transforms,
   quantities in words, every status, the coverage scan and the rule that the paper's uncovered list never
   lands in the repository).
