@@ -2,6 +2,8 @@
 
 **REAL DATA.** Everything in this document comes from real Indian market data: NSE's F&O bhavcopies (every listed Nifty option and future, settlement prices, open interest, volume), NSE participant-wise open interest, India VIX and NSE's daily index values, plus third-party 1-minute Nifty 50 bars that were checked day by day against NSE's official values. Sample: 942 trading days, 2 January 2023 to 2 November 2026. No number here comes from simulated data, except where a sentence says "synthetic" explicitly.
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the paper's model" mean our implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not the paper's own specification; `mcsgarch_iv` and the hybrids are built on it. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see `docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Nifty gain is 4.43% and 6.64% at 15 and 30 minutes and 6.16% in the last hour.
+
 Written for a reader who is new to volatility forecasting. Section 1 gives the findings. Section 2 explains how to read the numbers. Section 3 walks through each iteration: what changed, why, and what happened, including what did not work. Section 4 is the final scoreboard and the GEX ablation. Section 5 lists the limitations.
 
 ## 1. Findings

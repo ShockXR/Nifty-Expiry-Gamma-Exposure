@@ -4,6 +4,12 @@ Prepared by an AI agent (Claude) for Shreyan Thanki's meeting with Prof. Piyush 
 **Everything shown is REAL DATA** (Nifty, NSE data as in the headline run). Every number below is printed by
 `scripts/demo_forecast_day.py` from committed files, or read from the committed file named next to it.
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" (labelled "the paper's model" on the demo pages and
+chart) means our implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a
+zero mean), not the paper's own specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1)
+mean) see `docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Nifty gain is 4.43% and 6.64% at 15 and 30
+minutes, against 5.8% and 7.6% here.
+
 ## 1. What the demo shows, in one paragraph
 
 The anchor paper fits mcsGARCH, an intraday volatility model, but never forecasts with it. Our hybrid takes

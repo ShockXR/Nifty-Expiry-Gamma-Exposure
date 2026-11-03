@@ -5,6 +5,13 @@ test days (10 August 2023 to 2 November 2026) and NSE Nifty 50 1-minute index ba
 unit tests. **This is a research evaluation of the economic size of a statistical finding, not trading advice.**
 The plan, the code and this write-up were produced by an AI assistant (Claude) working on the project.
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the paper's mcsGARCH" mean our implementation (a
+separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not the paper's own
+specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see
+`docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Nifty QLIKE gain is 4.43% and 6.64% at 15 and 30 minutes
+(5.80% and 7.65% against our implementation). P116 did not recompute the economic value against the paper's
+specification.
+
 * Registered analysis plan: `docs/prereg/P103_ECONOMIC_VALUE.md`, committed as
   **77b435aec493b7e0acf1eab90e51490bb9377f17** (3 November 2026, 03:38 UTC) and pushed before any outcome was
   computed. Every departure is listed under "Deviations" below.

@@ -2,6 +2,8 @@
 
 **Every number in this report comes either from simulated (synthetic) markets or from arithmetic on values printed in the 2025 paper. None comes from real market data.** Results on real NSE data (from 2 November 2026) are kept in a separate document, `docs/REAL_DATA_RESULTS.md`, so the two can never be confused. The simulator is described in `src/niftygex/simulate.py`; its assumptions (in particular the size and form of the dealer-gamma effect) are ours, so the synthetic results show what the methods can and cannot do, not what the Nifty market does.
 
+*Note added 3 November 2026 after study P116:* in E7, "mcsGARCH" and "the paper's model" mean our implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not the paper's own specification (one curve, no smoothing, ARMA(1,1) mean). `docs/P116_BENCHMARK_AS_PRINTED.md` compares the two on real data.
+
 Raw outputs are in `results/`. Each experiment can be rerun with the command shown.
 
 | ID | Question | Data | Command |

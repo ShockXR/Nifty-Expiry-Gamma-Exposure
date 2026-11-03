@@ -46,9 +46,10 @@ to about 20 February 2023.**
 
 What this means for a beginner: the paper's before and after samples are not next to each other.
 The before data seem to be from the winter of 2022 to 2023, roughly fifteen months before the
-after data, not the four months just before the expiry change. Possibly the before data were taken
-for the wrong year. Any "before versus after" difference in the paper therefore also contains
-everything else that changed between early 2023 and mid 2024.
+after data, not the four months just before the expiry change. The authors may have used a
+different data window or date convention than the one stated; only they can say which. If the
+printed numbers do come from the earlier window, any "before versus after" difference in the paper
+also contains everything else that changed between early 2023 and mid 2024.
 
 ## 2. How the search worked (registered plan, short version)
 

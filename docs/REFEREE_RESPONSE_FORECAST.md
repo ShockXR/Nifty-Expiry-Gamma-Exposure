@@ -6,6 +6,8 @@ Code: `experiments/referee_forecast.py`. Tests on synthetic data only: `tests/te
 
 *Update (3 November 2026, P106):* a later registered ablation ([P106_GAIN_DECOMPOSITION.md](P106_GAIN_DECOMPOSITION.md)) measures what the hybrid itself uses. Realized-volatility history and the time of day carry its gain; the option-implied, VIX and calendar inputs add nothing, and the edge over the information-matched mcsGARCH appears after November 2024 mainly because that benchmark got worse. Where this note reads the information-matched comparison as "the gain is mostly information", read instead: a fairer benchmark closes much of the gap by another route (in the last hour, to within 1.7%).
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH", "the paper's model" and "CPP's model" mean our implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not the paper's own specification; the benchmarks given VIX or the implied variance (`mcsgarch_iv`, `mcsgarch_vix`, `mcsgarchx_vix` and the others) are built on it. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see `docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Nifty gain is 4.43% and 6.64% at 15 and 30 minutes. P116 did not rebuild the VIX and implied-variance benchmarks on the paper's specification.
+
 ## Summary
 
 | Referee point | What we did | Short answer | Claim changes? |

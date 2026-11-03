@@ -8,6 +8,12 @@ independent pieces of evidence: together they are worth about 1.8 independent in
 1.6 to 2.1), and about 1.8 to 2.4 at 30 minutes depending on how a few extreme days are treated. Bank Nifty adds a
 good part of an independent index beyond Nifty; **Fin Nifty adds almost nothing once Nifty and Bank Nifty are in.**
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" means our implementation (a separate time-of-day
+curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not the paper's own specification. Against
+the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see `docs/P116_BENCHMARK_AS_PRINTED.md`, which
+did not pool the indices; there the hybrid's gain at 15 and 30 minutes is 4.43% and 6.64% on Nifty, 4.73% and 6.20%
+on Bank Nifty and 4.03% and 5.18% on Fin Nifty, each on its own test days rather than the 604 common days used here.
+
 **This is a summary of evidence already seen, not new evidence.** Each index's own result was known before this study
 was planned, and the plan showed in advance that the primary test could not fail (Section 3). What the registration
 fixed was only how to pool. The new information is the dependence between the indices, the effective number of

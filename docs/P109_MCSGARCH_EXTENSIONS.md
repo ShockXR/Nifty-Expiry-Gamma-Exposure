@@ -14,6 +14,14 @@ headline runs) unless marked SYNTHETIC. Every number comes from a file in `resul
 * Every p-value of the study: `results/p109_mcsgarch_extensions/tests.csv` (100 rows: 2 primary, 26 secondary,
   6 robustness, 66 exploratory).
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH", "the anchor paper's model" and "the committed
+mcsGARCH" mean our implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves,
+a zero mean), not the paper's own specification; the five extensions were added to it. Against the paper's
+specification (one curve, no smoothing, ARMA(1,1) mean) see `docs/P116_BENCHMARK_AS_PRINTED.md`; there P109's
+combination is 5.48% and 7.25% better on Nifty at 15 and 30 minutes (6.83% and 8.25% against our implementation),
+and the hybrid 4.43% and 6.64%. The gains and shares below are measured against our implementation and were not
+recomputed in P116.
+
 Units. A **gain** is in points of mcsGARCH's mean daily QLIKE: 100 x (L_mcsGARCH - L_model) / L_mcsGARCH, so
 positive means better than mcsGARCH. The hybrid's gain on Nifty is 5.80 points at 15 minutes and 7.65 points at
 30 minutes. A **share** is a model's gain divided by the hybrid's gain on the same days: 100% means the model
@@ -79,8 +87,9 @@ level (X3) a smaller one.
 
 **What it means.** On these days, most or all of what the LightGBM correction adds to mcsGARCH can be written as
 three or four plain fixes to mcsGARCH itself. That is a clear, describable answer for the paper. It also means
-that the hybrid's 5.80 and 7.65 points are a gain over the paper's mcsGARCH, not over a carefully fixed
-mcsGARCH. The combination was designed after P106 on the same days, so it needs new data before it can be a
+that the hybrid's 5.80 and 7.65 points are a gain over our implementation of mcsGARCH, not over a carefully fixed
+mcsGARCH (wording corrected after P116: against the paper's own specification the combination is 5.48% and 7.25%
+better at 15 and 30 minutes, and the hybrid 4.43% and 6.64%). The combination was designed after P106 on the same days, so it needs new data before it can be a
 headline (Section 15).
 
 ## 2. What was registered (in short)
@@ -423,8 +432,9 @@ meaningless (they are in `shares.csv` but should not be read).
   day's realized level so far, (b) corrects mcsGARCH's average level at some times of day, and (c) at the open,
   removes yesterday's closing volatility from today's first forecast and uses a better daily level instead.
   Leverage plays no part. The same pieces work on Bank Nifty and Fin Nifty, with more weight on the open.
-* **The hybrid's gain should be described as a gain over the paper's mcsGARCH, not over the best econometric
-  model.** A parametric mcsGARCH with five pre-specified fixes reaches the same loss on these days (Nifty, Bank
+* **The hybrid's gain should be described as a gain over our implementation of mcsGARCH, not over the best
+  econometric model.** (Wording corrected after P116, which measures the gain against the paper's own
+  specification: 4.43% and 6.64% on Nifty at 15 and 30 minutes.) A parametric mcsGARCH with five pre-specified fixes reaches the same loss on these days (Nifty, Bank
   Nifty and Fin Nifty), and the hybrid does not beat it at any registered horizon. Any sentence that presents
   the 5.80 and 7.65 points as something only machine learning could find should be softened.
 * **The hybrid may keep an edge in the last hour** (5.56 points over the combination, not significant), and at

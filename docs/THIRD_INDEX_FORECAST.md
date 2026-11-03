@@ -7,6 +7,13 @@ p-values far below 0.05 (both 4.4e-12). On the same dates the gains are close to
 larger than Bank Nifty's (4.2% and 5.3%). The three secondary results are mixed: the last hour (H2) and Fin Nifty's
 expiry days (H3) are **not supported**, and the prediction that dealer-gamma (GEX) features do not help (H4) **held**.
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the anchor paper's mcsGARCH" (or model) mean our
+implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not
+the paper's own specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see
+`docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Fin Nifty gain is 4.03% and 5.18% at 15 and 30 minutes,
+against 4.9% and 6.1% in this document; on Fin Nifty the two versions of mcsGARCH do not differ significantly after
+Holm (P116 Section 7).
+
 **REAL DATA.** Every number below comes from real Indian market data: third-party 1-minute Fin Nifty bars (checked
 day by day against NSE's official daily values), NSE's F&O bhavcopies (Fin Nifty options and futures), NSE's
 participant-wise open interest file and India VIX. Nothing is simulated. Plan: `docs/prereg/P104_THIRD_INDEX_FORECAST.md`,

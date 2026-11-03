@@ -7,6 +7,13 @@ on all 792 test days, every one with a Diebold-Mariano p far below 0.05 (largest
 7.76% to 8.11% at 30 minutes (headline 7.65%). The one weak spot is the last hour on expiry days: 19 of the 20
 refits pass, one has p 0.052, and the headline's p of 0.010 there was the smallest of all 21 seed sets.
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the anchor paper's mcsGARCH" mean our
+implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not
+the paper's own specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see
+`docs/P116_BENCHMARK_AS_PRINTED.md`; there the headline hybrid's Nifty gain is 4.43% and 6.64% at 15 and 30 minutes.
+P116 notes that this study's seed-to-seed range (0.28 and 0.35 points) is well below the change from switching the
+benchmark (1.37 and 1.00 points).
+
 **REAL DATA.** Every number below comes from real Indian market data: third-party 1-minute Nifty bars (checked
 day by day against NSE's official values), NSE's F&O bhavcopies, NSE's participant-wise open interest file and
 India VIX, the same inputs as the headline run (`results/pipeline_nse_v2/`). Nothing is simulated. Every

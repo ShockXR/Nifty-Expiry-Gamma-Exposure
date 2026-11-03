@@ -12,6 +12,13 @@ P106's committed daily losses) unless marked SYNTHETIC. Every number comes from 
   the contributions. Tests (SYNTHETIC only): `tests/test_p110_gain_stress_test.py`.
 * Every p-value of the study: `results/p110_gain_stress_test/tests.csv` (316 rows).
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the anchor paper's model" mean our
+implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not
+the paper's own specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see
+`docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's gain at 15 and 30 minutes is 4.43% and 6.64% on Nifty, 4.73%
+and 6.20% on Bank Nifty and 4.03% and 5.18% on Fin Nifty. The contributions and shares below are measured in points
+of our implementation's QLIKE and against its gain, and were not recomputed in P116.
+
 ## 1. The answer in plain words
 
 Our hybrid forecasts how much an index will move over the next 15 or 30 minutes. It starts from the anchor paper's

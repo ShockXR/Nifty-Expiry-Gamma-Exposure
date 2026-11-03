@@ -5,6 +5,13 @@ lower forecast loss than the anchor paper's mcsGARCH at both registered horizons
 minutes and 5.0% lower for the next 30 minutes, on all 660 test days, with Holm-adjusted p-values far below
 0.05 (5e-12 and 2e-11). The gains are smaller than on Nifty over the same dates (5.5% and 6.9%).
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the anchor paper's mcsGARCH" (or model) mean our
+implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not
+the paper's own specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see
+`docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Bank Nifty gain is 4.73% and 6.20% at 15 and 30 minutes,
+larger than the 3.9% and 5.0% in this document, because on Bank Nifty our implementation forecasts better than the
+paper's specification (P116 Section 7).
+
 **REAL DATA.** Every number below comes from real Indian market data: third-party 1-minute Bank Nifty bars
 (checked day by day against NSE's official values), NSE's F&O bhavcopies (Bank Nifty options and futures), NSE's
 participant-wise open interest file and India VIX. Nothing is simulated. Plan: `docs/prereg/P91_BANKNIFTY_FORECAST.md`,

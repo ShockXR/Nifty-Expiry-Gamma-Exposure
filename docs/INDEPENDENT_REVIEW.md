@@ -2,6 +2,8 @@
 
 *Note added 3 November 2026: numbers quoted in this review are from the result files as they stood when it was written. Where a later fix or rerun changed a number, `docs/REAL_DATA_RESULTS.md` and the study documents have the current value; how each point was addressed is listed there and in `ITERATION_LOG.md` (iteration 20). The first-run files this review cites from `results/closing_auction/` (`r1_dm_tests.csv`, `r1_scoreboards.csv`) and `results/forecast_diagnostics/` were rewritten from the second run by the reproduction of 3 November 2026; the versions it checked are kept in `results/archive_v1_first_run/`.*
 
+*Note added 3 November 2026 after study P116:* here "mcsGARCH" and "the paper's model" mean our implementation (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero mean), not the paper's own specification. Against the paper's specification (one curve, no smoothing, ARMA(1,1) mean) see `docs/P116_BENCHMARK_AS_PRINTED.md`; there the hybrid's Nifty gain is 4.43% and 6.64% at 15 and 30 minutes.
+
 Reviewer: a separate AI agent (Claude), instructed to act as an outside, skeptical referee; not a human reviewer. Date: 2 November 2026.
 Scope: `docs/REAL_DATA_RESULTS.md` (R0 to R5, the version corrected for the closing auction in commit b2bfcc9), `docs/REPLICATION_NSE.md`, `docs/PINNING_STUDY.md`, the code in `src/niftygex/` and `experiments/`, the result files under `results/`, and the raw data under `data/raw/` (read only). The paper itself was not opened, as instructed, so every "printed" value from the paper is taken as typed in `experiments/replicate_paper.py`.
 
