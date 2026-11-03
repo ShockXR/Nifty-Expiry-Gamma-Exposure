@@ -4,6 +4,8 @@
 
 Code: `experiments/referee_forecast.py`. Tests on synthetic data only: `tests/test_referee_forecast.py`.
 
+*Update (3 November 2026, P106):* a later registered ablation ([P106_GAIN_DECOMPOSITION.md](P106_GAIN_DECOMPOSITION.md)) measures what the hybrid itself uses. Realized-volatility history and the time of day carry its gain; the option-implied, VIX and calendar inputs add nothing, and the edge over the information-matched mcsGARCH appears after November 2024 mainly because that benchmark got worse. Where this note reads the information-matched comparison as "the gain is mostly information", read instead: a fairer benchmark closes much of the gap by another route (in the last hour, to within 1.7%).
+
 ## Summary
 
 | Referee point | What we did | Short answer | Claim changes? |
