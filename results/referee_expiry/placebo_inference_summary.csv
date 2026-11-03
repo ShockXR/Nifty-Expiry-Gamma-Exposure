@@ -1,0 +1,5 @@
+window,rows,rows_estimable,ri_n_independent_min,ri_n_independent_median,ri_n_independent_max,rows_with_placebo_p,share_placebo_p_below_0.05,nonoverlap_q_min,nonoverlap_q_median,nonoverlap_q_max,nonoverlap_floor_median,rows_with_nonoverlap_p,share_nonoverlap_p_below_0.05,share_nonoverlap_p_below_0.10,rows_with_prediction_t_p,share_prediction_t_p_below_0.05,rows_with_wild_cluster_p,share_wild_cluster_p_below_0.05,median_wild_cluster_G,share_hac_p_below_0.05
+3 months,404,404,0,13.0,13,356,0.22191011235955055,0,13.0,13,0.07142857142857142,356,0.0,0.08146067415730338,356,0.16853932584269662,356,0.23876404494382023,6.0,0.39603960396039606
+6 months,404,404,0,4.0,4,302,0.13245033112582782,0,4.0,4,0.2,392,0.0,0.0,302,0.10264900662251655,404,0.23267326732673269,10.0,0.37376237623762376
+12 months,404,404,0,2.0,2,0,,0,2.0,2,0.3333333333333333,302,0.0,0.0,0,,404,0.2623762376237624,16.0,0.349009900990099
+paper window,96,96,0,1.5,8,48,0.0625,0,1.5,8,0.1111111111111111,48,0.0,0.0,48,0.125,48,0.041666666666666664,5.0,0.3333333333333333

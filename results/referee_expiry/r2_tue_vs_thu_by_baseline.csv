@@ -1,0 +1,11 @@
+baseline,measure,weeks_thu,weeks_tue,tue_minus_thu,mannwhitney_p,bonferroni_p_18_tests
+published: all days that are not Nifty expiry days,rv_day,41,61,0.3104901245823646,0.011559208018851517,0.2080657443393273
+published: all days that are not Nifty expiry days,rv_last_hour,41,61,0.2648835683929601,0.10284348821795088,1.0
+Sensex days removed (as in SENSEX_CONFOUND.md),rv_day,40,59,0.33473301191577837,0.007902654935962379,0.1422477888473228
+Sensex days removed (as in SENSEX_CONFOUND.md),rv_last_hour,40,59,0.3327257539916968,0.07066213213150077,1.0
+"no NSE expiry of any index (verified), at least 2 days",rv_day,38,61,0.3393701593142299,0.006749917743612488,0.12149851938502478
+"no NSE expiry of any index (verified), at least 2 days",rv_last_hour,38,61,0.20467267769674646,0.20668567537550908,1.0
+"no expiry of any index, NSE or BSE, at least 2 days",rv_day,36,59,0.37162652929543855,0.00447929578223988,0.08062732408031784
+"no expiry of any index, NSE or BSE, at least 2 days",rv_last_hour,36,59,0.26791415113221273,0.1831898439411178,1.0
+"no expiry of any index, NSE or BSE, at least 1 day",rv_day,39,61,0.3555783916452704,0.005601348056704626,0.10082426502068327
+"no expiry of any index, NSE or BSE, at least 1 day",rv_last_hour,39,61,0.29162593395956304,0.12170308565795543,1.0

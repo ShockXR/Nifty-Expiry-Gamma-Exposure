@@ -1,0 +1,13 @@
+event,window,weekdays_free_in_every_week_before,weeks_free_by_weekday_before,weekdays_free_in_every_week_after,weeks_free_by_weekday_after
+a,3 months,none,"Mon 10/13, Tue 0/12, Wed 2/13, Thu 0/12, Fri 0/13",none,"Mon 0/11, Tue 0/10, Wed 3/13, Thu 0/13, Fri 0/13"
+a,6 months,none,"Mon 20/25, Tue 0/23, Wed 9/26, Thu 0/24, Fri 8/24",none,"Mon 0/22, Tue 0/23, Wed 6/26, Thu 0/26, Fri 0/25"
+a,12 months,none,"Mon 44/50, Tue 0/48, Wed 32/50, Thu 0/49, Fri 34/50",none,"Mon 0/45, Tue 0/49, Wed 6/49, Thu 0/50, Fri 0/49"
+b,3 months,none,"Mon 0/11, Tue 0/13, Wed 3/13, Thu 0/13, Fri 0/12",none,"Mon 0/11, Tue 0/13, Wed 0/11, Thu 0/12, Fri 0/11"
+b,6 months,none,"Mon 0/22, Tue 0/23, Wed 6/26, Thu 0/26, Fri 0/25",none,"Mon 0/23, Tue 0/26, Wed 0/23, Thu 0/24, Fri 0/24"
+b,12 months,none,"Mon 0/22, Tue 0/23, Wed 6/26, Thu 0/26, Fri 0/25",none,"Mon 0/34, Tue 0/37, Wed 0/33, Thu 0/35, Fri 0/33"
+c,3 months,none,"Mon 0/13, Tue 0/13, Wed 0/12, Thu 0/13, Fri 0/11",none,"Mon 10/13, Tue 3/13, Wed 10/11, Thu 0/13, Fri 6/13"
+c,6 months,none,"Mon 0/24, Tue 0/26, Wed 0/24, Thu 0/25, Fri 0/24",none,"Mon 21/24, Tue 3/26, Wed 20/23, Thu 0/24, Fri 17/24"
+c,12 months,none,"Mon 0/46, Tue 0/52, Wed 4/48, Thu 0/50, Fri 0/47",none,"Mon 36/39, Tue 3/41, Wed 34/37, Thu 0/39, Fri 31/38"
+d,3 months,"Mon,Wed,Fri","Mon 13/13, Tue 0/13, Wed 12/12, Thu 0/13, Fri 12/12",Fri,"Mon 12/13, Tue 0/12, Wed 10/11, Thu 0/12, Fri 13/13"
+d,6 months,"Mon,Fri","Mon 24/24, Tue 0/26, Wed 23/25, Thu 0/24, Fri 23/23",Fri,"Mon 24/25, Tue 0/25, Wed 21/24, Thu 0/23, Fri 26/26"
+d,12 months,none,"Mon 36/39, Tue 3/41, Wed 34/37, Thu 0/39, Fri 31/38",Fri,"Mon 43/47, Tue 0/44, Wed 41/46, Thu 0/43, Fri 45/45"

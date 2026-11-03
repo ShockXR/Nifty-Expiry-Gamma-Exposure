@@ -1,0 +1,424 @@
+REAL DATA (BSE calendar reported, not verified). Referee response on the expiry evidence: M8, M9, M10. POST HOC.
+
+Event-study data rebuilt: 65192 weekly values; matched to the committed weekly_relative.csv.gz on 65192 of 65192 rows, largest difference 2.84e-14.
+
+== 1. Calendar of every index-option expiry
+Full NSE bhavcopies: 1933 trade dates found of 1934 weekdays requested (2019-01-01 to 2026-11-02), fetched 2026-11-03T01:17Z from https://nsearchives.nseindia.com (legacy fo{DD}{MON}{YYYY}bhav.csv.zip and UDiFF BhavCopy_NSE_FO_0_0_0_{YYYYMMDD}_F_0000.csv.zip).
+Index option symbols in the files: BANKNIFTY (2019-01-01 to 2026-11-02), FINNIFTY (2021-01-11 to 2026-11-02), MIDCPNIFTY (2022-01-24 to 2026-11-02), NIFTY (2019-01-01 to 2026-11-02), NIFTYFPI (2026-08-12 to 2026-11-02), NIFTYIT (2019-01-01 to 2020-06-25), NIFTYNXT50 (2024-04-24 to 2026-11-02)
+Expiry days with traded contracts: 1175; with listed contracts (traded or not): 1233 (differences: [('NIFTYIT', '2019-01-31'), ('NIFTYIT', '2019-02-28'), ('NIFTYIT', '2019-04-18'), ('NIFTYIT', '2019-05-02'), ('NIFTYIT', '2019-05-16'), ('NIFTYIT', '2019-05-23'), ('NIFTYIT', '2019-05-30'), ('NIFTYIT', '2019-06-13'), ('NIFTYIT', '2019-06-20'), ('NIFTYIT', '2019-06-27'), ('NIFTYIT', '2019-07-04'), ('NIFTYIT', '2019-07-11'), ('NIFTYIT', '2019-07-25'), ('NIFTYIT', '2019-08-08'), ('NIFTYIT', '2019-08-14'), ('NIFTYIT', '2019-08-22'), ('NIFTYIT', '2019-08-29'), ('NIFTYIT', '2019-09-05'), ('NIFTYIT', '2019-09-12'), ('NIFTYIT', '2019-09-19'), ('NIFTYIT', '2019-09-26'), ('NIFTYIT', '2019-10-03'), ('NIFTYIT', '2019-10-10'), ('NIFTYIT', '2019-10-17'), ('NIFTYIT', '2019-10-24'), ('NIFTYIT', '2019-10-31'), ('NIFTYIT', '2019-11-07'), ('NIFTYIT', '2019-11-14'), ('NIFTYIT', '2019-11-21'), ('NIFTYIT', '2019-11-28'), ('NIFTYIT', '2019-12-05'), ('NIFTYIT', '2019-12-12'), ('NIFTYIT', '2019-12-19'), ('NIFTYIT', '2019-12-26'), ('NIFTYIT', '2020-01-02'), ('NIFTYIT', '2020-01-09'), ('NIFTYIT', '2020-01-16'), ('NIFTYIT', '2020-01-23'), ('NIFTYIT', '2020-01-30'), ('NIFTYIT', '2020-02-06'), ('NIFTYIT', '2020-02-13'), ('NIFTYIT', '2020-02-20'), ('NIFTYIT', '2020-02-27'), ('NIFTYIT', '2020-03-05'), ('NIFTYIT', '2020-03-12'), ('NIFTYIT', '2020-03-19'), ('NIFTYIT', '2020-03-26'), ('NIFTYIT', '2020-04-01'), ('NIFTYIT', '2020-04-09'), ('NIFTYIT', '2020-04-16'), ('NIFTYIT', '2020-04-23'), ('NIFTYIT', '2020-04-30'), ('NIFTYIT', '2020-05-07'), ('NIFTYIT', '2020-05-14'), ('NIFTYIT', '2020-05-21'), ('NIFTYIT', '2020-05-28'), ('NIFTYIT', '2020-06-04'), ('NIFTYIT', '2020-06-25')])
+Check NIFTY against the event study's calendar from 2022-10-20: 211 vs 211 dates, identical: True; monthly labels identical: True
+  before 2022-10-20 the event study used a Thursday rule: 190 rule dates vs 189 bhavcopy dates, identical: False; rule-only ['2022-10-19']; bhavcopy-only []
+Check BANKNIFTY against the event study's calendar from 2022-10-20: 133 vs 133 dates, identical: True; monthly labels identical: True
+  before 2022-10-20 the event study used a Thursday rule: 190 rule dates vs 189 bhavcopy dates, identical: False; rule-only ['2022-10-19']; bhavcopy-only []
+NSE schedule changes detected from the full bhavcopies (three expiries on a new weekday confirm a change):
+    symbol    kind  change last_old_expiry old_weekday first_new_expiry new_weekday
+ BANKNIFTY monthly weekday      2024-02-29         Thu       2024-03-27         Wed
+ BANKNIFTY monthly weekday      2024-12-24         Wed       2025-01-30         Thu
+ BANKNIFTY monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+ BANKNIFTY  weekly weekday      2023-08-24         Thu       2023-09-06         Wed
+ BANKNIFTY  weekly stopped      2024-11-13         Wed              NaT        none
+  FINNIFTY monthly weekday      2021-09-30         Thu       2021-10-26         Tue
+  FINNIFTY monthly weekday      2024-12-31         Tue       2025-01-30         Thu
+  FINNIFTY monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+  FINNIFTY  weekly weekday      2021-10-14         Thu       2021-10-19         Tue
+  FINNIFTY  weekly stopped      2024-11-19         Tue              NaT        none
+MIDCPNIFTY monthly weekday      2023-07-26         Tue       2023-08-28         Mon
+MIDCPNIFTY monthly weekday      2024-12-30         Mon       2025-01-30         Thu
+MIDCPNIFTY monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+MIDCPNIFTY  weekly weekday      2023-04-18         Tue       2023-05-03         Wed
+MIDCPNIFTY  weekly weekday      2023-08-16         Wed       2023-08-21         Mon
+MIDCPNIFTY  weekly stopped      2024-11-18         Mon              NaT        none
+     NIFTY monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+     NIFTY  weekly weekday      2025-08-21         Thu       2025-09-02         Tue
+   NIFTYIT  weekly     gap      2019-04-11         Thu       2019-05-09         Thu
+   NIFTYIT  weekly     gap      2019-05-09         Thu       2019-06-06         Thu
+   NIFTYIT  weekly     gap      2019-06-06         Thu       2019-07-18         Thu
+   NIFTYIT  weekly stopped      2019-08-01         Thu              NaT        none
+NIFTYNXT50 monthly weekday      2024-12-27         Fri       2025-01-30         Thu
+NIFTYNXT50 monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+Expiry-day notional turnover of the expiring options, NSE indices (median per half-year, Rs crore):
+    symbol half_year  expiries           weekdays  median_expiring_turnover_rs_cr  median_expiring_contracts  relative_to_nifty_expiry_median
+ BANKNIFTY    2022H2        11             Thu 11                    1.916763e+07                179866517.0                           2.0398
+ BANKNIFTY    2023H1        26       Thu 23;Wed 3                    2.626832e+07                249319326.5                           2.2037
+ BANKNIFTY    2023H2        26      Thu 13;Wed 13                    3.340965e+07                491693646.5                           1.2551
+ BANKNIFTY    2024H1        26 Wed 22;Thu 2;Tue 2                    4.510846e+07                621357214.5                           1.1669
+ BANKNIFTY    2024H2        22       Wed 19;Tue 3                    4.712759e+07                593196106.5                           1.3075
+ BANKNIFTY    2025H1         6              Thu 6                    1.445137e+07                 97772893.0                           0.3746
+ BANKNIFTY    2025H2         6        Tue 4;Thu 2                    1.420299e+07                 69027675.0                           0.2738
+ BANKNIFTY    2026H1         6        Tue 5;Mon 1                    1.408040e+07                 80266292.5                           0.2250
+ BANKNIFTY    2026H2         4              Tue 4                    1.110654e+07                 66092051.0                           0.2437
+  FINNIFTY    2022H2        11       Tue 10;Mon 1                    3.986806e+06                 52381517.0                           0.4243
+  FINNIFTY    2023H1        26       Tue 24;Mon 2                    1.144459e+07                153161658.0                           0.9601
+  FINNIFTY    2023H2        26       Tue 22;Mon 4                    1.988415e+07                245920359.0                           0.7470
+  FINNIFTY    2024H1        26             Tue 26                    2.448529e+07                285895076.5                           0.6334
+  FINNIFTY    2024H2        23             Tue 23                    2.927048e+07                489303515.0                           0.8121
+  FINNIFTY    2025H1         6              Thu 6                    1.213518e+06                  7606360.0                           0.0315
+  FINNIFTY    2025H2         6        Tue 4;Thu 2                    8.818498e+05                  5060935.5                           0.0170
+  FINNIFTY    2026H1         6        Tue 5;Mon 1                    4.294315e+05                  2747414.5                           0.0069
+  FINNIFTY    2026H2         4              Tue 4                    3.355207e+05                  2280891.0                           0.0074
+MIDCPNIFTY    2022H2        11       Tue 10;Mon 1                    2.181456e+02                     3461.0                           0.0000
+MIDCPNIFTY    2023H1        26 Tue 16;Wed 8;Mon 2                    2.487080e+02                     3930.5                           0.0000
+MIDCPNIFTY    2023H2        26 Mon 16;Wed 7;Fri 3                    4.240536e+06                 62558615.5                           0.1593
+MIDCPNIFTY    2024H1        25       Mon 22;Fri 3                    9.491975e+06                117049505.0                           0.2456
+MIDCPNIFTY    2024H2        23             Mon 23                    1.202196e+07                184121359.0                           0.3335
+MIDCPNIFTY    2025H1         6              Thu 6                    1.494489e+06                 10454869.5                           0.0387
+MIDCPNIFTY    2025H2         6        Tue 4;Thu 2                    1.447509e+06                  7979243.5                           0.0279
+MIDCPNIFTY    2026H1         6        Tue 5;Mon 1                    1.046747e+06                  6000292.0                           0.0167
+MIDCPNIFTY    2026H2         4              Tue 4                    7.699638e+05                  4621101.5                           0.0169
+     NIFTY    2022H2        11             Thu 11                    9.396917e+06                101794779.0                           1.0000
+     NIFTY    2023H1        26       Thu 23;Wed 3                    1.192020e+07                134191127.0                           1.0000
+     NIFTY    2023H2        26             Thu 26                    2.661911e+07                267044836.5                           1.0000
+     NIFTY    2024H1        26       Thu 25;Wed 1                    3.865513e+07                414576337.5                           1.0000
+     NIFTY    2024H2        26       Thu 25;Wed 1                    3.604489e+07                576239279.0                           1.0000
+     NIFTY    2025H1        26       Thu 24;Wed 2                    3.858090e+07                224503163.0                           1.0000
+     NIFTY    2025H2        27 Tue 17;Thu 9;Mon 1                    5.187477e+07                268817188.0                           1.0000
+     NIFTY    2026H1        26       Tue 23;Mon 3                    6.257556e+07                394810176.0                           1.0000
+     NIFTY    2026H2        17       Tue 16;Mon 1                    4.557766e+07                305090220.0                           1.0000
+  NIFTYFPI    2026H2         3              Tue 3                    3.207640e+01                      200.0                           0.0000
+NIFTYNXT50    2024H1         2              Fri 2                    1.634217e+05                  2339030.0                           0.0042
+NIFTYNXT50    2024H2         6              Fri 6                    1.054570e+05                  1452309.5                           0.0029
+NIFTYNXT50    2025H1         6              Thu 6                    1.376831e+04                    89801.5                           0.0004
+NIFTYNXT50    2025H2         6        Tue 4;Thu 2                    3.195846e+03                    18716.5                           0.0001
+NIFTYNXT50    2026H1         6        Tue 5;Mon 1                    2.771606e+03                    16054.5                           0.0000
+NIFTYNXT50    2026H2         4              Tue 4                    6.446486e+02                     3659.0                           0.0000
+Trading days with minute bars but no bhavcopy in NSE's archive: ['2021-03-30']; assumed expiries added: []
+Sensex dates identical to results/sensex_confound/sensex_expiry_days_used.csv: True
+Reported FINNIFTY Tue 2023-01-01 to 2024-11-19 vs bhavcopy: rule 99, bhavcopy 99, both 99; rule-only none; bhavcopy-only none
+Reported MIDCPNIFTY Wed 2023-01-01 to 2023-08-20 vs bhavcopy: rule 33, bhavcopy 33, both 15; rule-only 2023-01-04;2023-01-11;2023-01-18;2023-01-25;2023-02-01;2023-02-08;2023-02-15;2023-02-22;2023-03-01;2023-03-08;2023-03-15;2023-03-22;2023-03-29;2023-04-05;2023-04-12;2023-04-19;2023-04-26;2023-06-28; bhavcopy-only 2023-01-03;2023-01-10;2023-01-17;2023-01-24;2023-01-31;2023-02-07;2023-02-14;2023-02-21;2023-02-28;2023-03-06;2023-03-14;2023-03-21;2023-03-28;2023-04-03;2023-04-11;2023-04-18;2023-04-25;2023-06-27
+Reported MIDCPNIFTY Mon 2023-08-21 to 2024-11-18 vs bhavcopy: rule 66, bhavcopy 65, both 65; rule-only 2024-01-19; bhavcopy-only none
+Expiring options' notional turnover by calendar segment and weekday (median, Rs crore; relative to Nifty's median expiry in the same segment):
+                                           calendar_segment     symbol weekday  expiries      first       last  median_expiring_turnover_rs_cr  relative_to_nifty_expiry_median_in_segment
+                                 17 Oct 2022 to 14 May 2023  BANKNIFTY     Thu        28 2022-10-20 2023-05-11                    2.286737e+07                                     2.08218
+                                 17 Oct 2022 to 14 May 2023  BANKNIFTY     Wed         2 2023-01-25 2023-03-29                    2.519776e+07                                     2.29437
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)  BANKNIFTY     Thu        13 2023-05-18 2023-08-17                    3.084274e+07                                     1.96956
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)  BANKNIFTY     Wed         1 2023-06-28 2023-06-28                    3.160519e+07                                     2.01825
+              21 Aug to 3 Sep 2023 (Midcap moved to Monday)  BANKNIFTY     Thu         2 2023-08-24 2023-08-31                    3.399025e+07                                     2.01900
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)  BANKNIFTY     Wed        53 2023-09-06 2024-11-13                    4.570291e+07                                     1.28787
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)  BANKNIFTY     Thu         6 2023-09-28 2024-02-29                    3.371443e+07                                     0.95005
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)  BANKNIFTY     Tue         4 2024-04-16 2024-10-01                    3.666086e+07                                     1.03308
+               18 Nov 2024 to 5 Jan 2025 (Sensex on Friday)  BANKNIFTY     Wed         1 2024-11-27 2024-11-27                    3.964691e+07                                     1.08404
+               18 Nov 2024 to 5 Jan 2025 (Sensex on Friday)  BANKNIFTY     Tue         1 2024-12-24 2024-12-24                    2.854015e+07                                     0.78036
+                   6 Jan to 31 Aug 2025 (Sensex on Tuesday)  BANKNIFTY     Thu         8 2025-01-30 2025-08-28                    1.445137e+07                                     0.34081
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)  BANKNIFTY     Tue        10 2025-09-30 2026-07-28                    1.415698e+07                                     0.23821
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)  BANKNIFTY     Mon         1 2026-03-30 2026-03-30                    1.020341e+07                                     0.17169
+                            3 Aug 2026 on (closing auction)  BANKNIFTY     Tue         3 2026-08-25 2026-10-27                    1.022260e+07                                     0.22517
+                                 17 Oct 2022 to 14 May 2023   FINNIFTY     Tue        27 2022-10-18 2023-05-09                    8.581317e+06                                     0.78137
+                                 17 Oct 2022 to 14 May 2023   FINNIFTY     Mon         3 2022-11-07 2023-04-03                    8.899386e+06                                     0.81033
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)   FINNIFTY     Tue        13 2023-05-16 2023-08-08                    1.743060e+07                                     1.11308
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)   FINNIFTY     Mon         1 2023-08-14 2023-08-14                    1.653635e+07                                     1.05598
+              21 Aug to 3 Sep 2023 (Midcap moved to Monday)   FINNIFTY     Tue         2 2023-08-22 2023-08-29                    1.714303e+07                                     1.01828
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)   FINNIFTY     Tue        60 2023-09-05 2024-11-12                    2.571314e+07                                     0.72458
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)   FINNIFTY     Mon         3 2023-09-18 2023-11-13                    1.544596e+07                                     0.43526
+               18 Nov 2024 to 5 Jan 2025 (Sensex on Friday)   FINNIFTY     Tue         3 2024-11-19 2024-12-31                    1.882804e+07                                     0.51481
+                   6 Jan to 31 Aug 2025 (Sensex on Tuesday)   FINNIFTY     Thu         8 2025-01-30 2025-08-28                    1.098732e+06                                     0.02591
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)   FINNIFTY     Tue        10 2025-09-30 2026-07-28                    6.646525e+05                                     0.01118
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)   FINNIFTY     Mon         1 2026-03-30 2026-03-30                    2.740366e+05                                     0.00461
+                            3 Aug 2026 on (closing auction)   FINNIFTY     Tue         3 2026-08-25 2026-10-27                    3.067329e+05                                     0.00676
+                                 17 Oct 2022 to 14 May 2023 MIDCPNIFTY     Tue        25 2022-10-18 2023-04-25                    2.321239e+02                                     0.00002
+                                 17 Oct 2022 to 14 May 2023 MIDCPNIFTY     Mon         3 2022-11-07 2023-04-03                    9.098740e+01                                     0.00001
+                                 17 Oct 2022 to 14 May 2023 MIDCPNIFTY     Wed         2 2023-05-03 2023-05-10                    2.912386e+02                                     0.00003
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday) MIDCPNIFTY     Wed        13 2023-05-17 2023-08-16                    1.178514e+06                                     0.07526
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday) MIDCPNIFTY     Tue         1 2023-06-27 2023-06-27                    2.559369e+05                                     0.01634
+              21 Aug to 3 Sep 2023 (Midcap moved to Monday) MIDCPNIFTY     Mon         2 2023-08-21 2023-08-28                    3.556653e+06                                     0.21126
+                   4 Sep 2023 to 17 Nov 2024 (event a to c) MIDCPNIFTY     Mon        56 2023-09-04 2024-11-11                    9.541141e+06                                     0.26886
+                   4 Sep 2023 to 17 Nov 2024 (event a to c) MIDCPNIFTY     Fri         6 2023-09-29 2024-06-14                    5.589751e+06                                     0.15752
+               18 Nov 2024 to 5 Jan 2025 (Sensex on Friday) MIDCPNIFTY     Mon         3 2024-11-18 2024-12-30                    8.056259e+06                                     0.22028
+                   6 Jan to 31 Aug 2025 (Sensex on Tuesday) MIDCPNIFTY     Thu         8 2025-01-30 2025-08-28                    1.554324e+06                                     0.03666
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu) MIDCPNIFTY     Tue        10 2025-09-30 2026-07-28                    1.162452e+06                                     0.01956
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu) MIDCPNIFTY     Mon         1 2026-03-30 2026-03-30                    8.695889e+05                                     0.01463
+                            3 Aug 2026 on (closing auction) MIDCPNIFTY     Tue         3 2026-08-25 2026-10-27                    7.744687e+05                                     0.01706
+                                 17 Oct 2022 to 14 May 2023      NIFTY     Thu        28 2022-10-20 2023-05-11                    1.066817e+07                                     0.97139
+                                 17 Oct 2022 to 14 May 2023      NIFTY     Wed         2 2023-01-25 2023-03-29                    1.132637e+07                                     1.03132
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)      NIFTY     Thu        13 2023-05-18 2023-08-17                    1.577211e+07                                     1.00718
+15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)      NIFTY     Wed         1 2023-06-28 2023-06-28                    1.554736e+07                                     0.99282
+              21 Aug to 3 Sep 2023 (Midcap moved to Monday)      NIFTY     Thu         2 2023-08-24 2023-08-31                    1.683523e+07                                     1.00000
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)      NIFTY     Thu        61 2023-09-07 2024-11-14                    3.551749e+07                                     1.00086
+                   4 Sep 2023 to 17 Nov 2024 (event a to c)      NIFTY     Wed         2 2024-04-10 2024-08-14                    1.950528e+07                                     0.54964
+               18 Nov 2024 to 5 Jan 2025 (Sensex on Friday)      NIFTY     Thu         7 2024-11-21 2025-01-02                    3.657313e+07                                     1.00000
+                   6 Jan to 31 Aug 2025 (Sensex on Tuesday)      NIFTY     Thu        32 2025-01-09 2025-08-28                    4.366362e+07                                     1.02974
+                   6 Jan to 31 Aug 2025 (Sensex on Tuesday)      NIFTY     Wed         2 2025-04-09 2025-04-30                    3.672770e+07                                     0.86617
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)      NIFTY     Tue        44 2025-09-02 2026-07-28                    5.943097e+07                                     1.00000
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)      NIFTY     Mon         4 2025-10-20 2026-04-13                    5.845102e+07                                     0.98351
+                            3 Aug 2026 on (closing auction)      NIFTY     Tue        12 2026-08-04 2026-10-27                    4.520534e+07                                     0.99572
+                            3 Aug 2026 on (closing auction)      NIFTY     Mon         1 2026-10-19 2026-10-19                    5.997644e+07                                     1.32108
+                            3 Aug 2026 on (closing auction)   NIFTYFPI     Tue         3 2026-08-25 2026-10-27                    3.207637e+01                                     0.00000
+                   4 Sep 2023 to 17 Nov 2024 (event a to c) NIFTYNXT50     Fri         6 2024-05-31 2024-10-25                    1.634217e+05                                     0.00461
+               18 Nov 2024 to 5 Jan 2025 (Sensex on Friday) NIFTYNXT50     Fri         2 2024-11-29 2024-12-27                    7.406870e+04                                     0.00203
+                   6 Jan to 31 Aug 2025 (Sensex on Tuesday) NIFTYNXT50     Thu         8 2025-01-30 2025-08-28                    9.186387e+03                                     0.00022
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu) NIFTYNXT50     Tue        10 2025-09-30 2026-07-28                    3.157316e+03                                     0.00005
+           1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu) NIFTYNXT50     Mon         1 2026-03-30 2026-03-30                    1.665102e+03                                     0.00003
+                            3 Aug 2026 on (closing auction) NIFTYNXT50     Tue         3 2026-08-25 2026-10-27                    5.984449e+02                                     0.00001
+Days with no expiry of any index (NSE verified, BSE reported), per week:
+          grouping                                                                regime  weeks  mean_no_expiry_days  weeks_with_0_no_expiry_days  weeks_with_1  weeks_with_2_or_more  mean_no_nse_expiry_days most_common_no_expiry_weekdays
+event_study_regime R0 (Mar 2019 to Oct 2022, rule-based NSE calendar in the event study)    189                 3.44                            0             2                   187                     3.44                Mon;Tue;Wed;Fri
+event_study_regime                                                   R0v (Oct 2022 to a)     46                 2.02                            1            18                    27                     2.37                    Mon;Wed;Fri
+event_study_regime                                                           R1 (a to c)     63                 0.10                           57             6                     0                     0.83                           none
+event_study_regime                                                           R2 (c to d)     41                 2.54                            2             3                    36                     3.49                    Mon;Wed;Fri
+event_study_regime                                                           R3 (d to e)     48                 2.69                            0             2                    46                     3.69                    Mon;Wed;Fri
+event_study_regime                                          R4 (closing auction, from e)     14                 2.64                            0             1                    13                     3.57                    Mon;Wed;Fri
+         r2_regime                                multi_weekly (Jan 2023 to 19 Nov 2024)     98                 0.70                           58            23                    17                     1.34                           none
+         r2_regime                        single_weekly_thu (20 Nov 2024 to 31 Aug 2025)     41                 2.54                            2             3                    36                     3.49                    Mon;Wed;Fri
+         r2_regime                                   single_weekly_tue (from 1 Sep 2025)     62                 2.68                            0             3                    59                     3.66                    Mon;Wed;Fri
+  calendar_segment                  2019-03 to 2020-12 (Nifty, Bank Nifty Thursday only)     96                 3.70                            0             0                    96                     3.70                Mon;Tue;Wed;Fri
+  calendar_segment                          2021-01 to 2022-10 (FinNifty weeklies start)     93                 3.17                            0             2                    91                     3.17                    Mon;Wed;Fri
+  calendar_segment                                            17 Oct 2022 to 14 May 2023     30                 2.60                            0             3                    27                     2.60                    Mon;Wed;Fri
+  calendar_segment           15 May to 20 Aug 2023 (Sensex, Bankex relaunched on Friday)     14                 0.93                            1            13                     0                     1.93                            Mon
+  calendar_segment                         21 Aug to 3 Sep 2023 (Midcap moved to Monday)      2                 1.00                            0             2                     0                     2.00                            Wed
+  calendar_segment                              4 Sep 2023 to 17 Nov 2024 (event a to c)     63                 0.10                           57             6                     0                     0.83                           none
+  calendar_segment                          18 Nov 2024 to 5 Jan 2025 (Sensex on Friday)      7                 1.57                            2             2                     3                     2.29                    Mon;Tue;Wed
+  calendar_segment                              6 Jan to 31 Aug 2025 (Sensex on Tuesday)     34                 2.74                            0             1                    33                     3.74                    Mon;Wed;Fri
+  calendar_segment                      1 Sep 2025 to 2 Aug 2026 (Nifty Tue, Sensex Thu)     48                 2.69                            0             2                    46                     3.69                    Mon;Wed;Fri
+  calendar_segment                                       3 Aug 2026 on (closing auction)     14                 2.64                            0             1                    13                     3.57                    Mon;Wed;Fri
+
+== 2. M9: R2 and the event study with the baseline restricted to days with no expiry of any index
+R2 rebuilt from results/pipeline_nse_v2/daily_market.csv reproduces the published means: True
+                                              baseline      measure                                   period  weeks  mean_rel      pct  ci95_low  ci95_high  wilcoxon_p  mean_baseline_days
+    published: all days that are not Nifty expiry days       rv_day                             multi_weekly     98    0.1085  11.4567    0.0099     0.2007      0.0455              3.6939
+    published: all days that are not Nifty expiry days       rv_day       multi_weekly, 2 Jan to 14 May 2023     19   -0.0759  -7.3081   -0.1951     0.0459      0.2579              3.6316
+    published: all days that are not Nifty expiry days       rv_day      multi_weekly, 15 May to 20 Aug 2023     14    0.2754  31.7078    0.1125     0.4285      0.0107              3.8571
+    published: all days that are not Nifty expiry days       rv_day multi_weekly, 21 Aug 2023 to 19 Nov 2024     65    0.1264  13.4731   -0.0007     0.2605      0.0989              3.6769
+    published: all days that are not Nifty expiry days       rv_day                        single_weekly_thu     41   -0.1188 -11.1997   -0.3031     0.0735      0.2626              3.7317
+    published: all days that are not Nifty expiry days       rv_day                        single_weekly_tue     61    0.1917  21.1319    0.0786     0.3190      0.0051              3.7049
+    published: all days that are not Nifty expiry days       rv_day     single_weekly_tue, before 3 Aug 2026     48    0.2114  23.5414    0.0865     0.3583      0.0047              3.6875
+    published: all days that are not Nifty expiry days       rv_day  single_weekly_tue, closing-auction days     13    0.1190  12.6353   -0.1218     0.3666      0.5417              3.7692
+    published: all days that are not Nifty expiry days rv_last_hour                             multi_weekly     98    0.1516  16.3738    0.0218     0.2816      0.0528              3.6939
+    published: all days that are not Nifty expiry days rv_last_hour       multi_weekly, 2 Jan to 14 May 2023     19   -0.0541  -5.2624   -0.2415     0.1319      0.8288              3.6316
+    published: all days that are not Nifty expiry days rv_last_hour      multi_weekly, 15 May to 20 Aug 2023     14    0.2362  26.6477    0.0245     0.4472      0.1040              3.8571
+    published: all days that are not Nifty expiry days rv_last_hour multi_weekly, 21 Aug 2023 to 19 Nov 2024     65    0.1935  21.3540    0.0173     0.3739      0.0899              3.6769
+    published: all days that are not Nifty expiry days rv_last_hour                        single_weekly_thu     41    0.0915   9.5841   -0.2071     0.3921      0.6535              3.7317
+    published: all days that are not Nifty expiry days rv_last_hour                        single_weekly_tue     61    0.3564  42.8186    0.1955     0.5112      0.0001              3.7049
+    published: all days that are not Nifty expiry days rv_last_hour     single_weekly_tue, before 3 Aug 2026     48    0.3520  42.1887    0.2045     0.4954      0.0000              3.6875
+    published: all days that are not Nifty expiry days rv_last_hour  single_weekly_tue, closing-auction days     13    0.3727  45.1688   -0.1250     0.8600      0.1909              3.7692
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day                             multi_weekly     98    0.1414  15.1861    0.0254     0.2473      0.0206              2.9388
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day       multi_weekly, 2 Jan to 14 May 2023     19   -0.0759  -7.3081   -0.1951     0.0459      0.2579              3.6316
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day      multi_weekly, 15 May to 20 Aug 2023     14    0.3244  38.3150    0.1486     0.4870      0.0067              2.8571
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day multi_weekly, 21 Aug 2023 to 19 Nov 2024     65    0.1655  17.9954    0.0145     0.3203      0.0527              2.7538
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day                        single_weekly_thu     40   -0.1039  -9.8706   -0.3098     0.1020      0.3611              2.7750
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day                        single_weekly_tue     59    0.2308  25.9618    0.1209     0.3579      0.0009              2.7627
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day     single_weekly_tue, before 3 Aug 2026     46    0.2533  28.8267    0.1230     0.4061      0.0009              2.7609
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day  single_weekly_tue, closing-auction days     13    0.1512  16.3267   -0.0659     0.3751      0.3757              2.7692
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour                             multi_weekly     98    0.2191  24.4925    0.0748     0.3633      0.0058              2.9388
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour       multi_weekly, 2 Jan to 14 May 2023     19   -0.0541  -5.2624   -0.2415     0.1319      0.8288              3.6316
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour      multi_weekly, 15 May to 20 Aug 2023     14    0.3072  35.9669    0.1077     0.5119      0.0203              2.8571
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour multi_weekly, 21 Aug 2023 to 19 Nov 2024     65    0.2799  32.3031    0.0778     0.4817      0.0120              2.7538
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour                        single_weekly_thu     40    0.1534  16.5765   -0.1660     0.4713      0.3611              2.7750
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour                        single_weekly_tue     59    0.4861  62.5968    0.3136     0.6528      0.0000              2.7627
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour     single_weekly_tue, before 3 Aug 2026     46    0.5057  65.8141    0.3273     0.6861      0.0000              2.7609
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour  single_weekly_tue, closing-auction days     13    0.4168  51.7055   -0.0663     0.8745      0.1099              2.7692
+no NSE expiry of any index (verified), at least 2 days       rv_day                             multi_weekly     36    0.0890   9.3047   -0.0238     0.2058      0.2204              2.3333
+no NSE expiry of any index (verified), at least 2 days       rv_day       multi_weekly, 2 Jan to 14 May 2023     17   -0.1143 -10.8029   -0.2426     0.0169      0.1743              2.7059
+no NSE expiry of any index (verified), at least 2 days       rv_day      multi_weekly, 15 May to 20 Aug 2023     13    0.2238  25.0789    0.0856     0.3580      0.0215              2.0000
+no NSE expiry of any index (verified), at least 2 days       rv_day multi_weekly, 21 Aug 2023 to 19 Nov 2024      6    0.3729  45.1913    0.0069     0.7357      0.1562              2.0000
+no NSE expiry of any index (verified), at least 2 days       rv_day                        single_weekly_thu     38   -0.1477 -13.7276   -0.3454     0.0481      0.1795              3.7105
+no NSE expiry of any index (verified), at least 2 days       rv_day                        single_weekly_tue     61    0.1917  21.1319    0.0786     0.3190      0.0051              3.7049
+no NSE expiry of any index (verified), at least 2 days       rv_day     single_weekly_tue, before 3 Aug 2026     48    0.2114  23.5414    0.0865     0.3583      0.0047              3.6875
+no NSE expiry of any index (verified), at least 2 days       rv_day  single_weekly_tue, closing-auction days     13    0.1190  12.6353   -0.1218     0.3666      0.5417              3.7692
+no NSE expiry of any index (verified), at least 2 days rv_last_hour                             multi_weekly     36    0.1266  13.4949   -0.0401     0.2917      0.2204              2.3333
+no NSE expiry of any index (verified), at least 2 days rv_last_hour       multi_weekly, 2 Jan to 14 May 2023     17   -0.0646  -6.2572   -0.2435     0.1225      0.5477              2.7059
+no NSE expiry of any index (verified), at least 2 days rv_last_hour      multi_weekly, 15 May to 20 Aug 2023     13    0.2410  27.2493    0.0049     0.4842      0.0942              2.0000
+no NSE expiry of any index (verified), at least 2 days rv_last_hour multi_weekly, 21 Aug 2023 to 19 Nov 2024      6    0.4205  52.2701   -0.1955     0.9444      0.3125              2.0000
+no NSE expiry of any index (verified), at least 2 days rv_last_hour                        single_weekly_thu     38    0.1517  16.3849   -0.1658     0.4665      0.3650              3.7105
+no NSE expiry of any index (verified), at least 2 days rv_last_hour                        single_weekly_tue     61    0.3564  42.8186    0.1955     0.5112      0.0001              3.7049
+no NSE expiry of any index (verified), at least 2 days rv_last_hour     single_weekly_tue, before 3 Aug 2026     48    0.3520  42.1887    0.2045     0.4954      0.0000              3.6875
+no NSE expiry of any index (verified), at least 2 days rv_last_hour  single_weekly_tue, closing-auction days     13    0.3727  45.1688   -0.1250     0.8600      0.1909              3.7692
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day                             multi_weekly     17   -0.1143 -10.8029   -0.2426     0.0169      0.1743              2.7059
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day       multi_weekly, 2 Jan to 14 May 2023     17   -0.1143 -10.8029   -0.2426     0.0169      0.1743              2.7059
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day      multi_weekly, 15 May to 20 Aug 2023      0       NaN      NaN       NaN        NaN         NaN                 NaN
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day multi_weekly, 21 Aug 2023 to 19 Nov 2024      0       NaN      NaN       NaN        NaN         NaN                 NaN
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day                        single_weekly_thu     36   -0.1408 -13.1352   -0.3624     0.0816      0.2716              2.8056
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day                        single_weekly_tue     59    0.2308  25.9618    0.1209     0.3579      0.0009              2.7627
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day     single_weekly_tue, before 3 Aug 2026     46    0.2533  28.8267    0.1230     0.4061      0.0009              2.7609
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day  single_weekly_tue, closing-auction days     13    0.1512  16.3267   -0.0659     0.3751      0.3757              2.7692
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour                             multi_weekly     17   -0.0646  -6.2572   -0.2435     0.1225      0.5477              2.7059
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour       multi_weekly, 2 Jan to 14 May 2023     17   -0.0646  -6.2572   -0.2435     0.1225      0.5477              2.7059
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour      multi_weekly, 15 May to 20 Aug 2023      0       NaN      NaN       NaN        NaN         NaN                 NaN
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour multi_weekly, 21 Aug 2023 to 19 Nov 2024      0       NaN      NaN       NaN        NaN         NaN                 NaN
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour                        single_weekly_thu     36    0.2182  24.3822   -0.1265     0.5616      0.2030              2.8056
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour                        single_weekly_tue     59    0.4861  62.5968    0.3136     0.6528      0.0000              2.7627
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour     single_weekly_tue, before 3 Aug 2026     46    0.5057  65.8141    0.3273     0.6861      0.0000              2.7609
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour  single_weekly_tue, closing-auction days     13    0.4168  51.7055   -0.0663     0.8745      0.1099              2.7692
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day                             multi_weekly     40    0.1046  11.0306   -0.0429     0.2550      0.1876              1.7250
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day       multi_weekly, 2 Jan to 14 May 2023     19   -0.1319 -12.3575   -0.2950     0.0240      0.2253              2.5263
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day      multi_weekly, 15 May to 20 Aug 2023     13    0.2976  34.6611    0.1356     0.4574      0.0081              1.0000
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day multi_weekly, 21 Aug 2023 to 19 Nov 2024      8    0.3529  42.3138   -0.1293     0.8229      0.3125              1.0000
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day                        single_weekly_thu     39   -0.1257 -11.8124   -0.3325     0.0823      0.2956              2.6667
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day                        single_weekly_tue     61    0.2299  25.8442    0.1177     0.3543      0.0006              2.7049
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day     single_weekly_tue, before 3 Aug 2026     48    0.2512  28.5533    0.1279     0.3946      0.0005              2.6875
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day  single_weekly_tue, closing-auction days     13    0.1512  16.3267   -0.0659     0.3751      0.3757              2.7692
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour                             multi_weekly     40    0.1774  19.4122   -0.0003     0.3578      0.0531              1.7250
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour       multi_weekly, 2 Jan to 14 May 2023     19   -0.1074 -10.1803   -0.3107     0.0841      0.4413              2.5263
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour      multi_weekly, 15 May to 20 Aug 2023     13    0.3899  47.6791    0.1804     0.6145      0.0017              1.0000
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour multi_weekly, 21 Aug 2023 to 19 Nov 2024      8    0.5085  66.2810   -0.0388     1.0330      0.1484              1.0000
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour                        single_weekly_thu     39    0.1847  20.2872   -0.1460     0.5135      0.2767              2.6667
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour                        single_weekly_tue     61    0.4763  61.0167    0.3025     0.6434      0.0000              2.7049
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour     single_weekly_tue, before 3 Aug 2026     48    0.4925  63.6355    0.3218     0.6623      0.0000              2.6875
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour  single_weekly_tue, closing-auction days     13    0.4168  51.7055   -0.0663     0.8745      0.1099              2.7692
+Tuesday minus Thursday single-weekly regime (minor comment 16):
+                                              baseline      measure  weeks_thu  weeks_tue  tue_minus_thu  mannwhitney_p  bonferroni_p_18_tests
+    published: all days that are not Nifty expiry days       rv_day         41         61         0.3105         0.0116                 0.2081
+    published: all days that are not Nifty expiry days rv_last_hour         41         61         0.2649         0.1028                 1.0000
+        Sensex days removed (as in SENSEX_CONFOUND.md)       rv_day         40         59         0.3347         0.0079                 0.1422
+        Sensex days removed (as in SENSEX_CONFOUND.md) rv_last_hour         40         59         0.3327         0.0707                 1.0000
+no NSE expiry of any index (verified), at least 2 days       rv_day         38         61         0.3394         0.0067                 0.1215
+no NSE expiry of any index (verified), at least 2 days rv_last_hour         38         61         0.2047         0.2067                 1.0000
+   no expiry of any index, NSE or BSE, at least 2 days       rv_day         36         59         0.3716         0.0045                 0.0806
+   no expiry of any index, NSE or BSE, at least 2 days rv_last_hour         36         59         0.2679         0.1832                 1.0000
+    no expiry of any index, NSE or BSE, at least 1 day       rv_day         39         61         0.3556         0.0056                 0.1008
+    no expiry of any index, NSE or BSE, at least 1 day rv_last_hour         39         61         0.2916         0.1217                 1.0000
+Event-study rows (rv5, RS, last hour, last 30 minutes) estimable with at least 3 weeks per side:
+event    window  rows  estimable_published  estimable_clean
+    a 12 months    36                   36                0
+    a  3 months    36                   36                0
+    a  6 months    36                   36                0
+    b 12 months    32                   32                0
+    b  3 months    32                   32                0
+    b  6 months    32                   32                0
+    c 12 months    28                   28                0
+    c  3 months    28                   28                0
+    c  6 months    28                   28                0
+    d 12 months    40                   40               40
+    d  3 months    40                   40               40
+    d  6 months    40                   40               40
+
+== 3. M8: placebo inference
+Every row of results/event_study/event_tests.csv recomputed: 1308 rows; largest difference in the change 3.6e-15; placebo p identical: True; number of non-overlapping windows identical: True.
+              count      mean       std  min  25%   50%   75%   max
+window                                                             
+12 months     404.0  1.495050  0.869942  0.0  0.0   2.0   2.0   2.0
+3 months      404.0  9.643564  4.799885  0.0  5.0  13.0  13.0  13.0
+6 months      404.0  3.168317  1.355583  0.0  1.0   4.0   4.0   4.0
+paper window   96.0  3.375000  3.725446  0.0  0.0   1.5   8.0   8.0
+Placebo inference, summary over every row (shares among rows where the p-value exists):
+      window  rows  rows_estimable  ri_n_independent_min  ri_n_independent_median  ri_n_independent_max  rows_with_placebo_p  share_placebo_p_below_0.05  nonoverlap_q_min  nonoverlap_q_median  nonoverlap_q_max  nonoverlap_floor_median  rows_with_nonoverlap_p  share_nonoverlap_p_below_0.05  share_nonoverlap_p_below_0.10  rows_with_prediction_t_p  share_prediction_t_p_below_0.05  rows_with_wild_cluster_p  share_wild_cluster_p_below_0.05  median_wild_cluster_G  share_hac_p_below_0.05
+    3 months   404             404                     0                     13.0                    13                  356                       0.222                 0                 13.0                13                    0.071                     356                            0.0                          0.081                       356                            0.169                       356                            0.239                    6.0                   0.396
+    6 months   404             404                     0                      4.0                     4                  302                       0.132                 0                  4.0                 4                    0.200                     392                            0.0                          0.000                       302                            0.103                       404                            0.233                   10.0                   0.374
+   12 months   404             404                     0                      2.0                     2                    0                         NaN                 0                  2.0                 2                    0.333                     302                            0.0                          0.000                         0                              NaN                       404                            0.262                   16.0                   0.349
+paper window    96              96                     0                      1.5                     8                   48                       0.062                 0                  1.5                 8                    0.111                      48                            0.0                          0.000                        48                            0.125                        48                            0.042                    5.0                   0.333
+Headline rows:
+    spec_id      measure    window    diff  hac_p   ri_p  ri_n_independent  nonoverlap_q  nonoverlap_floor  nonoverlap_p  prediction_t_p  wild_cluster_p  wild_cluster_G  pretrend_p
+a_BN_switch    rv_last30  3 months  1.4404 0.0043 0.0456                13            13            0.0714        0.1429          0.1119           0.024               6      0.0194
+a_BN_switch    rv_last30  6 months  1.1358 0.0001 0.0054                 4             4            0.2000        0.2000          0.0798           0.005              10      0.5273
+a_BN_switch    rv_last30 12 months  0.9916 0.0030    NaN                 2             2            0.3333        0.3333             NaN           0.004              19      0.0007
+a_BN_switch rv_last_hour  3 months  1.1293 0.0015 0.0332                13            13            0.0714        0.0714          0.0501           0.015               6      0.1112
+a_BN_switch rv_last_hour  6 months  0.9194 0.0001 0.0054                 4             4            0.2000        0.2000          0.0658           0.006              10      0.5761
+a_BN_switch rv_last_hour 12 months  0.6944 0.0108    NaN                 2             2            0.3333        0.3333             NaN           0.014              19      0.0011
+a_BN_switch          rv5  3 months -0.0327 0.8894 0.8838                13            13            0.0714        0.8571          0.9945           0.818               6      0.4845
+a_BN_switch          rv5  6 months  0.1202 0.4783 0.4595                 4             4            0.2000        0.2000          0.0742           0.557              10      0.3110
+a_BN_switch          rv5 12 months  0.1365 0.4156    NaN                 2             2            0.3333        1.0000             NaN           0.397              19      0.1791
+   a_BN_Wed    rv_last30  3 months  1.0746 0.0001 0.0245                13            13            0.0714        0.0714          0.0623           0.022               6      0.0082
+   a_BN_Wed    rv_last30  6 months  0.5976 0.0062 0.0378                 4             4            0.2000        0.2000          0.1800           0.004              10      0.0632
+   a_BN_Wed    rv_last30 12 months  0.5102 0.0163    NaN                 2             2            0.3333        0.3333             NaN           0.016              19      0.0001
+    a_N_Fri          rv5  3 months -0.4462 0.0062 0.0830                13            13            0.0714        0.2143          0.1280           0.010               6      0.4575
+    a_N_Fri          rv5  6 months -0.4141 0.0002 0.0054                 4             4            0.2000        0.2000          0.0077           0.014              10      0.0156
+    a_N_Fri          rv5 12 months -0.3434 0.0042    NaN                 2             2            0.3333        0.3333             NaN           0.007              19      0.2138
+ c_DiD_main          rv5  3 months  0.1198 0.7904 0.8223                13            13            0.0714        0.8571          0.8264           0.824               6      0.5884
+ c_DiD_main          rv5  6 months -0.0109 0.9710 0.9622                 4             4            0.2000        1.0000          0.9184           0.974               9      0.3727
+ c_DiD_main          rv5 12 months -0.1288 0.6441    NaN                 2             2            0.3333        1.0000             NaN           0.677              16      0.8446
+    d_N_Tue    rv_last30  3 months  0.4498 0.0710 0.0474                13            13            0.0714        0.1429          0.1303           0.079               6      0.1521
+    d_N_Tue    rv_last30  6 months  0.3916 0.0257 0.0054                 4             4            0.2000        0.2000          0.0657           0.009              10      0.9273
+    d_N_Tue    rv_last30 12 months  0.1720 0.2472    NaN                 2             2            0.3333        0.3333             NaN           0.274              17      0.9103
+    d_N_Tue rv_last_hour  3 months  0.4585 0.0020 0.0040                13            13            0.0714        0.0714          0.0088           0.044               6      0.0448
+    d_N_Tue rv_last_hour  6 months  0.4941 0.0001 0.0054                 4             4            0.2000        0.2000          0.0556           0.005              10      0.0000
+    d_N_Tue rv_last_hour 12 months  0.1969 0.1313    NaN                 2             2            0.3333        0.3333             NaN           0.140              17      0.8259
+    d_N_Thu    rv_last30  3 months  0.2170 0.3359 0.4190                13            13            0.0714        0.4286          0.3976           0.341               6      0.0048
+    d_N_Thu    rv_last30  6 months  0.2934 0.1035 0.0486                 4             4            0.2000        0.2000          0.0108           0.172              10      0.3576
+    d_N_Thu    rv_last30 12 months  0.3954 0.0684    NaN                 2             2            0.3333        0.3333             NaN           0.162              16      0.1249
+ d_N_switch    rv_last30  3 months  0.2327 0.4080 0.3399                13            13            0.0714        0.7143          0.5054           0.498               6      0.8944
+ d_N_switch    rv_last30  6 months  0.0032 0.9878 0.9838                 4             4            0.2000        1.0000          0.9760           0.981              10      0.2803
+ d_N_switch    rv_last30 12 months -0.2874 0.1849    NaN                 2             2            0.3333        0.6667             NaN           0.258              16      0.1019
+Published Friday rows, 3 months, recomputed with the event study's own share definition: 35 rows, HAC 0.200 (published 0.200), bootstrap 0.143 (published 0.143), placebo 0.057 (published 0.0571428571428571)
+Published Friday rows, 6 months, recomputed with the event study's own share definition: 35 rows, HAC 0.343 (published 0.343), bootstrap 0.257 (published 0.257), placebo 0.086 (published 0.0857142857142857)
+Published Friday rows, 12 months, recomputed with the event study's own share definition: 35 rows, HAC 0.457 (published 0.457), bootstrap 0.400 (published 0.400), placebo 0.000 (published nan)
+Negative-control calibration (shares of rows with p < 0.05):
+   window                                                             variant                     group  rows  rows_estimable  share_hac_p_below_0.05  share_mwu_p_below_0.05  share_boot_ci_excludes_0  rows_with_placebo_p  share_placebo_p_below_0.05  share_nonoverlap_p_below_0.05  share_prediction_t_p_below_0.05  share_wild_cluster_p_below_0.05  median_wild_cluster_G
+ 3 months                                               published Friday rows negative control (Friday)    35              35                   0.200                   0.029                     0.143                   35                       0.057                            0.0                            0.000                            0.143                    6.0
+ 3 months                                       Sensex expiry Fridays dropped negative control (Friday)    35               9                   0.000                   0.000                     0.000                    9                       0.000                            0.0                            0.000                            0.000                    0.0
+ 3 months                               Fridays with any index expiry dropped negative control (Friday)    35               9                   0.000                   0.000                     0.000                    9                       0.000                            0.0                            0.000                            0.000                    0.0
+ 3 months Fridays with any index expiry dropped, baseline without expiry days negative control (Friday)    35               9                   0.000                   0.000                     0.000                    9                       0.111                            0.0                            0.111                            0.000                    0.0
+ 3 months                      treated or spillover weekdays (published rows)                   treated   267             267                   0.307                   0.090                     0.217                  231                       0.130                            0.0                            0.087                            0.147                    6.0
+ 6 months                                               published Friday rows negative control (Friday)    35              35                   0.343                   0.057                     0.257                   35                       0.086                            0.0                            0.143                            0.171                   10.0
+ 6 months                                       Sensex expiry Fridays dropped negative control (Friday)    35               9                   0.333                   0.000                     0.222                    9                       0.000                            0.0                            0.111                            0.000                    0.0
+ 6 months                               Fridays with any index expiry dropped negative control (Friday)    35               9                   0.333                   0.000                     0.222                    9                       0.000                            0.0                            0.111                            0.000                    0.0
+ 6 months Fridays with any index expiry dropped, baseline without expiry days negative control (Friday)    35               9                   0.111                   0.000                     0.111                    9                       0.000                            0.0                            0.000                            0.000                    0.0
+ 6 months                      treated or spillover weekdays (published rows)                   treated   267             267                   0.243                   0.116                     0.206                  267                       0.139                            0.0                            0.097                            0.116                   10.0
+12 months                                               published Friday rows negative control (Friday)    35              35                   0.457                   0.257                     0.400                    0                         NaN                            0.0                              NaN                            0.257                   19.0
+12 months                                       Sensex expiry Fridays dropped negative control (Friday)    35               9                   0.556                   0.556                     0.444                    0                         NaN                            0.0                              NaN                            0.444                    0.0
+12 months                               Fridays with any index expiry dropped negative control (Friday)    35               9                   0.556                   0.556                     0.444                    0                         NaN                            0.0                              NaN                            0.444                    0.0
+12 months Fridays with any index expiry dropped, baseline without expiry days negative control (Friday)    35               9                   0.444                   0.222                     0.444                    0                         NaN                            0.0                              NaN                            0.111                    0.0
+12 months                      treated or spillover weekdays (published rows)                   treated   267             267                   0.202                   0.154                     0.187                    0                         NaN                            0.0                              NaN                            0.127                   16.0
+Weekdays free of every index expiry in every week of the window (all weeks):
+event    window weekdays_free_in_every_week_before                        weeks_free_by_weekday_before weekdays_free_in_every_week_after                         weeks_free_by_weekday_after
+    a  3 months                               none   Mon 10/13, Tue 0/12, Wed 2/13, Thu 0/12, Fri 0/13                              none    Mon 0/11, Tue 0/10, Wed 3/13, Thu 0/13, Fri 0/13
+    a  6 months                               none   Mon 20/25, Tue 0/23, Wed 9/26, Thu 0/24, Fri 8/24                              none    Mon 0/22, Tue 0/23, Wed 6/26, Thu 0/26, Fri 0/25
+    a 12 months                               none Mon 44/50, Tue 0/48, Wed 32/50, Thu 0/49, Fri 34/50                              none    Mon 0/45, Tue 0/49, Wed 6/49, Thu 0/50, Fri 0/49
+    b  3 months                               none    Mon 0/11, Tue 0/13, Wed 3/13, Thu 0/13, Fri 0/12                              none    Mon 0/11, Tue 0/13, Wed 0/11, Thu 0/12, Fri 0/11
+    b  6 months                               none    Mon 0/22, Tue 0/23, Wed 6/26, Thu 0/26, Fri 0/25                              none    Mon 0/23, Tue 0/26, Wed 0/23, Thu 0/24, Fri 0/24
+    b 12 months                               none    Mon 0/22, Tue 0/23, Wed 6/26, Thu 0/26, Fri 0/25                              none    Mon 0/34, Tue 0/37, Wed 0/33, Thu 0/35, Fri 0/33
+    c  3 months                               none    Mon 0/13, Tue 0/13, Wed 0/12, Thu 0/13, Fri 0/11                              none  Mon 10/13, Tue 3/13, Wed 10/11, Thu 0/13, Fri 6/13
+    c  6 months                               none    Mon 0/24, Tue 0/26, Wed 0/24, Thu 0/25, Fri 0/24                              none Mon 21/24, Tue 3/26, Wed 20/23, Thu 0/24, Fri 17/24
+    c 12 months                               none    Mon 0/46, Tue 0/52, Wed 4/48, Thu 0/50, Fri 0/47                              none Mon 36/39, Tue 3/41, Wed 34/37, Thu 0/39, Fri 31/38
+    d  3 months                        Mon,Wed,Fri Mon 13/13, Tue 0/13, Wed 12/12, Thu 0/13, Fri 12/12                               Fri Mon 12/13, Tue 0/12, Wed 10/11, Thu 0/12, Fri 13/13
+    d  6 months                            Mon,Fri Mon 24/24, Tue 0/26, Wed 23/25, Thu 0/24, Fri 23/23                               Fri Mon 24/25, Tue 0/25, Wed 21/24, Thu 0/23, Fri 26/26
+    d 12 months                               none Mon 36/39, Tue 3/41, Wed 34/37, Thu 0/39, Fri 31/38                               Fri Mon 43/47, Tue 0/44, Wed 41/46, Thu 0/43, Fri 45/45
+
+== 4. M10: noise-robust end-of-day variance
+SYNTHETIC check of the estimators (mean estimate / true integrated variance, 400 simulated 30-minute windows):
+scenario   iid noise, large (1-min RV bias about +50%)  iid noise, small (1-min RV bias about +10%)  no noise  stale index (20 stocks, updates every 30 s on average)
+estimator                                                                                                                                                            
+pav                                              1.005                                        1.019     1.015                                                   0.971
+rk                                               1.142                                        1.052     1.021                                                   0.839
+rk_H1                                            1.363                                        1.094     1.014                                                   0.672
+rk_H5                                            1.081                                        1.034     1.018                                                   0.909
+rv1                                              1.482                                        1.114     1.009                                                   0.593
+rvss2                                            1.242                                        1.072     1.018                                                   0.757
+rvss5                                            1.102                                        1.038     1.010                                                   0.906
+Nifty 50: last-30 rv1 equals the event study's rv_last30 (largest relative difference 7.4e-12); last hour 4.8e-12; days with a non-positive pre-averaging value (last 30 min): 26 of 2358
+Bank Nifty: last-30 rv1 equals the event study's rv_last30 (largest relative difference 3.8e-12); last hour 2.8e-12; days with a non-positive pre-averaging value (last 30 min): 12 of 2283
+R2 last hour rebuilt from the minute bars vs the pipeline's rv_last_hour: largest relative difference 4.8e-12
+First-order autocorrelation of 1-minute returns, last 30 minutes, Nifty:
+                      regime                          group  days  mean_rho1  ci95_low  ci95_high  pooled_rho1  own_minus_this_group  welch_p_own_minus_this_group
+         R0v (Oct 2022 to a)                 own expiry day    46      0.039    -0.031      0.109        0.013                   NaN                           NaN
+         R0v (Oct 2022 to a)        other index expiry only    79     -0.011    -0.057      0.035       -0.007                 0.050                         0.245
+         R0v (Oct 2022 to a)         no expiry of any index    93      0.033    -0.011      0.077        0.110                 0.007                         0.878
+         R0v (Oct 2022 to a) all days other than own expiry   172      0.013    -0.019      0.045        0.067                 0.027                         0.502
+                 R1 (a to c)                 own expiry day    63     -0.092    -0.152     -0.033       -0.086                   NaN                           NaN
+                 R1 (a to c)        other index expiry only   225     -0.039    -0.065     -0.013       -0.041                -0.053                         0.112
+                 R1 (a to c)         no expiry of any index     6      0.095    -0.074      0.265        0.153                -0.187                         0.085
+                 R1 (a to c) all days other than own expiry   231     -0.035    -0.061     -0.010       -0.037                -0.057                         0.090
+                 R2 (c to d)                 own expiry day    41     -0.066    -0.130     -0.003       -0.039                   NaN                           NaN
+                 R2 (c to d)        other index expiry only    49     -0.046    -0.101      0.009       -0.036                -0.020                         0.641
+                 R2 (c to d)         no expiry of any index   104      0.031    -0.001      0.063        0.034                -0.097                         0.009
+                 R2 (c to d) all days other than own expiry   153      0.007    -0.022      0.035        0.006                -0.073                         0.046
+                 R3 (d to e)                 own expiry day    48     -0.082    -0.142     -0.021       -0.058                   NaN                           NaN
+                 R3 (d to e)        other index expiry only    48     -0.076    -0.131     -0.020       -0.043                -0.006                         0.886
+                 R3 (d to e)         no expiry of any index   129      0.040     0.011      0.070        0.084                -0.122                         0.001
+                 R3 (d to e) all days other than own expiry   177      0.009    -0.018      0.036        0.041                -0.091                         0.009
+R4 (closing auction, from e)                 own expiry day    13     -0.015    -0.090      0.059       -0.013                   NaN                           NaN
+R4 (closing auction, from e)        other index expiry only    13     -0.034    -0.106      0.037       -0.017                 0.019                         0.723
+R4 (closing auction, from e)         no expiry of any index    37      0.012    -0.018      0.042        0.010                -0.027                         0.516
+R4 (closing auction, from e) all days other than own expiry    50     -0.000    -0.029      0.029        0.005                -0.015                         0.714
+
+== 5. M8: pre-trends and the event-d analogue of event a's headline (switch, 6 months)
+    spec_id      measure                                               version weeks    diff      lo     hi  hac_p  placebo_p  pretrend_p  prediction_t_p  wild_cluster_p
+a_BN_switch    rv_last30                                  published (6 months) 19/20  1.1358  0.4982 1.7340 0.0001     0.0054      0.5273          0.0798          0.0050
+a_BN_switch    rv_last30 Sensex days out of the baselines (SENSEX_CONFOUND.md) 19/20  1.1909  0.5029 1.8343 0.0002     0.0054      0.4280             NaN             NaN
+a_BN_switch    rv_last30              baseline without any index's expiry days   4/0     NaN     NaN    NaN    NaN        NaN         NaN             NaN             NaN
+a_BN_switch    rv_last30                   raw two-day difference, no baseline 19/20  0.8979  0.4230 1.3612 0.0001     0.0054      0.4474          0.0819          0.0010
+a_BN_switch    rv_last30                realized kernel instead of 1-minute RV 19/20  0.7773  0.0246 1.4947 0.0368     0.0865      0.6951             NaN             NaN
+a_BN_switch rv_last_hour                                  published (6 months) 19/20  0.9194  0.4036 1.4123 0.0001     0.0054      0.5761          0.0658          0.0060
+a_BN_switch rv_last_hour Sensex days out of the baselines (SENSEX_CONFOUND.md) 19/20  0.9611  0.4119 1.4742 0.0001     0.0162      0.4654             NaN             NaN
+a_BN_switch rv_last_hour              baseline without any index's expiry days   4/0     NaN     NaN    NaN    NaN        NaN         NaN             NaN             NaN
+a_BN_switch rv_last_hour                   raw two-day difference, no baseline 19/20  0.7223  0.3387 1.0773 0.0001     0.0054      0.4777          0.0671          0.0035
+a_BN_switch rv_last_hour                realized kernel instead of 1-minute RV 19/20  0.6183  0.1531 1.0737 0.0080     0.1081      0.7345             NaN             NaN
+ d_N_switch    rv_last30                                  published (6 months) 18/17  0.0032 -0.3374 0.3867 0.9878     0.9838      0.2803          0.9760          0.9810
+ d_N_switch    rv_last30 Sensex days out of the baselines (SENSEX_CONFOUND.md) 17/17  0.2963 -0.0666 0.6949 0.1575     0.0973      0.2786             NaN             NaN
+ d_N_switch    rv_last30              baseline without any index's expiry days 17/17  0.0196 -0.2585 0.3372 0.9067     0.8865      0.2590             NaN             NaN
+ d_N_switch    rv_last30                   raw two-day difference, no baseline 18/17  0.0107 -0.2582 0.3015 0.9496     0.9730      0.2473          0.9975          0.9460
+ d_N_switch    rv_last30                realized kernel instead of 1-minute RV 18/17 -0.2651 -0.6125 0.0868 0.0734     0.2108      0.3057             NaN             NaN
+ d_N_switch rv_last_hour                                  published (6 months) 18/17  0.4436 -0.0343 0.9455 0.0992     0.1027      0.8887          0.3272          0.1810
+ d_N_switch rv_last_hour Sensex days out of the baselines (SENSEX_CONFOUND.md) 17/17  0.6465  0.1790 1.1453 0.0143     0.0541      0.8034             NaN             NaN
+ d_N_switch rv_last_hour              baseline without any index's expiry days 17/17  0.3487 -0.0316 0.7555 0.1021     0.1081      0.9347             NaN             NaN
+ d_N_switch rv_last_hour                   raw two-day difference, no baseline 18/17  0.3533 -0.0341 0.7655 0.0995     0.1027      0.9163          0.3320          0.1995
+ d_N_switch rv_last_hour                realized kernel instead of 1-minute RV 18/17  0.2244 -0.3369 0.8159 0.4572     0.4486      0.8839             NaN             NaN
+
+Total run time 213s.
