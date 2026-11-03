@@ -12,7 +12,10 @@ Models (simplest first; each must beat the ones above it to earn its place):
                     factor for expiry days and one for other days, fitted on
                     the training window
     har             log-HAR regression with a diurnal regressor, fitted by OLS
-    mcsgarch        the paper's model, refitted on each training window
+    mcsgarch        our implementation of the paper's model (adds a separate
+                    expiry-day intraday curve and smooths the curves; the
+                    paper's own specification is study P116's mcs_cpp),
+                    refitted on each training window
     mcsgarch_iv     the same model with its daily component h_t replaced by
                     the straddle-implied variance per day (no extra parameter:
                     the diurnal curve absorbs the scale)
