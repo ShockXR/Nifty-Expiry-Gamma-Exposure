@@ -1,0 +1,36 @@
+{
+ "donors": [
+  "Nifty Auto",
+  "Nifty Commodities",
+  "Nifty Consumer Durables",
+  "Nifty CPSE",
+  "Nifty Energy",
+  "Nifty FMCG",
+  "Nifty Healthcare Index",
+  "Nifty India Consumption",
+  "Nifty India Digital",
+  "Nifty India Manufacturing",
+  "Nifty Infrastructure",
+  "Nifty IT",
+  "Nifty Media",
+  "Nifty Metal",
+  "Nifty MNC",
+  "Nifty Oil & Gas",
+  "Nifty Pharma",
+  "Nifty PSE",
+  "Nifty Realty"
+ ],
+ "J": 19,
+ "n_index_files": 944,
+ "data_fingerprint": {
+  "sha256": "49e64d24c9ddeddfc74351e4ee9eb00edf8877a3af61f911d8bdea69c791d223",
+  "n_index_files": 944,
+  "n_fo_files": 512
+ },
+ "prereg_fingerprint": "49e64d24c9ddeddfc74351e4ee9eb00edf8877a3af61f911d8bdea69c791d223",
+ "study_days": 488,
+ "numpy": "2.5.3",
+ "pandas": "3.0.5",
+ "scipy": "1.18.1",
+ "seconds": 53.4
+}

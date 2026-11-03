@@ -1,0 +1,73 @@
+                                                     analysis treated  n_pre  n_post  J    min_p    effect  level_gap_pre  level_gap_post  rmspe_pre  rmspe_post    ratio  p_ratio    p_neg  ci_low  ci_high  ci_contiguous  ci_at_grid_edge       did  did_hac_p  did_rank_p_neg  n_donors_with_weight  mde80_ratio_test_log_points
+                                                      primary      BN     37      17 19 0.050000  0.117498      -0.070094        0.047403   0.748546    0.576964 0.770779 0.950000 0.600000   -0.87     1.11           True            False  0.241233   0.157080            1.00                     4                     1.444694
+                                          S1 long post window      BN     37      28 19 0.050000 -0.029835      -0.070094       -0.099929   0.748546    0.622776 0.831981 1.000000 0.400000     NaN      NaN          False            False  0.077712   0.639753            0.65                     4                          NaN
+                                              S2 Garman-Klass      BN     37      17 19 0.050000  0.161977      -0.161108        0.000868   0.768794    0.554385 0.721109 0.950000 0.700000     NaN      NaN          False            False  0.242629   0.183650            1.00                     4                          NaN
+                  S3 classic synthetic control (no demeaning)      BN     37      17 19 0.050000  0.047985      -0.066170        0.047985   0.751640    0.568475 0.756312 0.900000 0.600000     NaN      NaN          False            False  0.241233   0.157080            1.00                     5                          NaN
+                               S4 pre-period ends 26 Jul 2024      BN     32      17 19 0.050000  0.091331      -0.030531        0.060799   0.765968    0.600844 0.784424 0.950000 0.650000     NaN      NaN          False            False  0.221283   0.236537            1.00                     5                          NaN
+             S5 baseline without Nifty and Sensex expiry days      BN     32      14 19 0.050000  0.090033       0.012142        0.102175   0.865976    0.740276 0.854846 0.800000 0.650000     NaN      NaN          False            False  0.281296   0.193242            0.95                     4                          NaN
+                                     S7 at least 3 other days      BN     37      16 19 0.050000  0.144255      -0.070094        0.074161   0.748546    0.589629 0.787699 0.950000 0.650000     NaN      NaN          False            False  0.248361   0.152071            1.00                     4                          NaN
+                         S8 baseline Thursday and Friday only      BN     36      15 19 0.050000  0.234035      -0.123084        0.110951   0.825929    0.649007 0.785790 0.950000 0.900000     NaN      NaN          False            False  0.383616   0.013143            1.00                     7                          NaN
+                       placebo in time (fake date 1 Apr 2024)      BN     23      14 19 0.050000 -0.007362      -0.061536       -0.068898   0.811110    0.655359 0.807979 0.950000 0.600000     NaN      NaN          False            False  0.126916   0.608417            0.70                     5                          NaN
+S6 without the largest-weight donor (nifty consumer durables)      BN     37      17 18 0.052632  0.250482      -0.119190        0.131292   0.836398    0.640842 0.766193 0.947368 0.894737     NaN      NaN          False            False  0.252381   0.147360            1.00                     9                          NaN
+       descriptive: Nifty 50 Wednesday as a fake treated unit   NIFTY     37      17 19 0.050000 -0.186161      -0.004333       -0.190494   0.398661    0.461599 1.157873 0.600000 0.100000     NaN      NaN          False            False -0.192056   0.103930            0.10                     8                          NaN
+                                                    secondary     FIN     35      17 19 0.050000  0.280756      -0.099361        0.181395   1.037976    0.748838 0.721441 0.950000 0.750000   -1.66     2.23           True            False  0.383629   0.120857            1.00                     4                     2.034433
+                                          S1 long post window     FIN     35      27 19 0.050000  0.230362      -0.099361        0.131001   1.037976    0.710360 0.684370 0.950000 0.750000     NaN      NaN          False            False  0.331947   0.155780            1.00                     4                          NaN
+                                              S2 Garman-Klass     FIN     35      17 19 0.050000  0.270885      -0.158604        0.112281   0.919779    0.757485 0.823551 0.900000 0.800000     NaN      NaN          False            False  0.334814   0.103632            1.00                     5                          NaN
+                  S3 classic synthetic control (no demeaning)     FIN     35      17 19 0.050000  0.180003      -0.094976        0.180003   1.042512    0.703088 0.674418 0.950000 0.850000     NaN      NaN          False            False  0.383629   0.120857            1.00                     4                          NaN
+                               S4 pre-period ends 26 Jul 2024     FIN     30      17 19 0.050000  0.567858      -0.375783        0.192075   0.882519    0.998239 1.131125 0.550000 0.950000     NaN      NaN          False            False  0.554026   0.009092            1.00                     3                          NaN
+             S5 baseline without Nifty and Sensex expiry days     FIN     30      16 19 0.050000  0.330473      -0.054666        0.275807   1.099166    0.822956 0.748709 0.800000 0.850000     NaN      NaN          False            False  0.314806   0.238326            0.95                     3                          NaN
+                                     S7 at least 3 other days     FIN     35      16 19 0.050000  0.355763      -0.099361        0.256402   1.037976    0.736872 0.709912 0.950000 0.800000     NaN      NaN          False            False  0.415182   0.096924            1.00                     4                          NaN
+                         S8 baseline Thursday and Friday only     FIN     34      15 19 0.050000  0.419988      -0.171112        0.248876   1.070731    0.823110 0.768736 1.000000 0.900000     NaN      NaN          False            False  0.507032   0.068739            1.00                     3                          NaN
+                       placebo in time (fake date 1 Apr 2024)     FIN     19      16 19 0.050000  0.283258      -0.317918       -0.034659   1.029716    1.141253 1.108318 0.750000 0.800000     NaN      NaN          False            False  0.279705   0.506531            0.90                     4                          NaN
+           S6 without the largest-weight donor (nifty realty)     FIN     35      17 18 0.052632  0.236237      -0.074712        0.161524   1.086130    0.639197 0.588509 0.947368 0.736842     NaN      NaN          False            False  0.381769   0.124861            1.00                     5                          NaN
+                                                    secondary     MID     29      15 19 0.050000  0.367645      -0.463338       -0.095694   0.654016    0.692959 1.059544 0.600000 0.950000   -0.51     1.24           True            False  0.411503   0.017036            1.00                     7                     1.458456
+                                          S1 long post window     MID     29      25 19 0.050000  0.416750      -0.463338       -0.046588   0.654016    0.642541 0.982455 0.850000 1.000000     NaN      NaN          False            False  0.419080   0.007048            1.00                     7                          NaN
+                                              S2 Garman-Klass     MID     29      15 19 0.050000  0.301595      -0.406891       -0.105297   0.667627    0.583787 0.874422 0.850000 0.950000     NaN      NaN          False            False  0.336771   0.030007            1.00                     5                          NaN
+                  S3 classic synthetic control (no demeaning)     MID     29      15 19 0.050000 -0.069477      -0.403739       -0.069477   0.783138    0.561155 0.716546 0.900000 0.450000     NaN      NaN          False            False  0.411503   0.017036            1.00                     6                          NaN
+                               S4 pre-period ends 26 Jul 2024     MID     24      15 19 0.050000  0.443823      -0.503188       -0.059365   0.641556    0.777469 1.211849 0.400000 1.000000     NaN      NaN          False            False  0.460771   0.016507            1.00                     5                          NaN
+             S5 baseline without Nifty and Sensex expiry days     MID     25      14 19 0.050000  0.359505      -0.495435       -0.135930   0.711112    0.643992 0.905612 0.850000 0.950000     NaN      NaN          False            False  0.471329   0.006352            1.00                     7                          NaN
+                                     S7 at least 3 other days     MID     29      15 19 0.050000  0.367645      -0.463338       -0.095694   0.654016    0.692959 1.059544 0.600000 0.950000     NaN      NaN          False            False  0.411503   0.017036            1.00                     7                          NaN
+                         S8 baseline Thursday and Friday only     MID     28      14 19 0.050000  0.413965      -0.372532        0.041433   0.682720    0.920678 1.348543 0.200000 1.000000     NaN      NaN          False            False  0.408531   0.044157            1.00                     7                          NaN
+                       placebo in time (fake date 1 Apr 2024)     MID     17      12 19 0.050000  0.398083      -0.648822       -0.250738   0.416928    0.991356 2.377762 0.100000 0.950000     NaN      NaN          False            False  0.381761   0.129197            0.85                     6                          NaN
+           S6 without the largest-weight donor (nifty pharma)     MID     29      15 18 0.052632  0.340547      -0.455060       -0.114513   0.687856    0.670979 0.975464 0.631579 0.947368     NaN      NaN          False            False  0.413759   0.019495            1.00                     7                          NaN
+{
+ "primary": {
+  "treated": "BN",
+  "effect": 0.11749792500534743,
+  "p_ratio": 0.95,
+  "min_p": 0.05,
+  "p_signed_one_sided": 0.6,
+  "ci_95": [
+   -0.87,
+   1.11
+  ],
+  "pre_period_premium_over_synthetic": -0.07009447608341043,
+  "did_equal_weights": 0.24123335370542937,
+  "did_hac_p": 0.15707996205814848,
+  "placebo_in_time_p_ratio": 0.95,
+  "placebo_in_time_effect": -0.007361559381021716,
+  "verdict": "no support (no pre-period premium over the synthetic control to remove)"
+ },
+ "secondaries": {
+  "FIN": {
+   "effect": 0.28075613652170844,
+   "p_ratio": 0.95,
+   "holm_p": 1.0,
+   "smallest_possible_holm_p": 0.1,
+   "verdict": "no support (too imprecise to tell)"
+  },
+  "MID": {
+   "effect": 0.3676446698971426,
+   "p_ratio": 0.6,
+   "holm_p": 1.0,
+   "smallest_possible_holm_p": 0.1,
+   "verdict": "no support (too imprecise to tell)"
+  }
+ },
+ "joint_test_all_three": {
+  "mean_std_effect": 0.3298621316898583,
+  "p_neg": 0.9658892128279883,
+  "n_combinations": 6859
+ }
+}
+done in 54s

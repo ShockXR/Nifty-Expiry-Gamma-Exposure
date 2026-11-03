@@ -1,0 +1,40 @@
+{
+ "primary": {
+  "treated": "BN",
+  "effect": 0.11749792500534743,
+  "p_ratio": 0.95,
+  "min_p": 0.05,
+  "p_signed_one_sided": 0.6,
+  "ci_95": [
+   -0.87,
+   1.11
+  ],
+  "pre_period_premium_over_synthetic": -0.07009447608341043,
+  "did_equal_weights": 0.24123335370542937,
+  "did_hac_p": 0.15707996205814848,
+  "placebo_in_time_p_ratio": 0.95,
+  "placebo_in_time_effect": -0.007361559381021716,
+  "verdict": "no support (no pre-period premium over the synthetic control to remove)"
+ },
+ "secondaries": {
+  "FIN": {
+   "effect": 0.28075613652170844,
+   "p_ratio": 0.95,
+   "holm_p": 1.0,
+   "smallest_possible_holm_p": 0.1,
+   "verdict": "no support (too imprecise to tell)"
+  },
+  "MID": {
+   "effect": 0.3676446698971426,
+   "p_ratio": 0.6,
+   "holm_p": 1.0,
+   "smallest_possible_holm_p": 0.1,
+   "verdict": "no support (too imprecise to tell)"
+  }
+ },
+ "joint_test_all_three": {
+  "mean_std_effect": 0.3298621316898583,
+  "p_neg": 0.9658892128279883,
+  "n_combinations": 6859
+ }
+}
