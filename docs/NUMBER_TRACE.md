@@ -97,13 +97,13 @@ the repository. It takes about a second and writes:
 To add a number, add a row to `docs/number_registry.csv` and rerun. The registry rows for the paper quote
 at most about ten words.
 
-## Results (run of 3 November 2026, committed results at 3915e59)
+## Results (run of 3 November 2026, after the pitch was shortened)
 
-**283 registry entries: 276 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 2 UNTRACED.**
+**278 registry entries: 267 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 6 UNTRACED.**
 
 | Document | Entries | MATCH | MISMATCH | UNTRACED |
 | --- | --- | --- | --- | --- |
-| PITCH_PANDEY.md | 74 | 73 | 0 | 1 |
+| PITCH_PANDEY.md | 69 | 64 | 0 | 5 |
 | README.md | 12 | 11 | 0 | 1 |
 | docs/BRIEFING_PANDEY.md | 19 | 19 | 0 | 0 |
 | docs/REAL_DATA_RESULTS.md | 84 | 79 | 5 | 0 |
@@ -133,9 +133,20 @@ donors, +0.28 against +0.19) and from `results/sensex_swap/` for the P92 summary
 The pitch fixes for PI36 ("all of them with controls") and PI42 ("about 0.55 bp") now match. RM08 (about 8
 minutes) and RD43 (p 0.18) are now traced, see below.
 
-Every pitch number that is a result has a registry entry. The pitch scan leaves three numbers uncovered,
-and none of them is a result: "360 minutes a day" (the sample design), "a 100 bp move" (the scale of an
-illustration) and "a 50-point strike" (NSE's strike spacing). The working paper's main text has many more
+**Pitch shortened (later on 3 November).** The pitch was cut from about 2,150 to about 1,750 words. 17
+entries whose numbers are no longer printed were removed (PI26 to PI30, PI32 to PI37, PI72, PI74, PI76 and
+PI79 to PI81), ten were re-quoted to the new wording, and twelve were added: the Bank Nifty replication of
+the forecasting hybrid (3.9%, 5.0%, 660 days, from `results/pipeline_nse_banknifty/p91/hypotheses.csv`), the
+clean-baseline Tuesday premia (63% in the last hour, 26% over the day, from
+`results/referee_expiry/r2_clean_baseline.csv`), the raw Bank Nifty Wednesday change (+0.90, from
+`results/referee_expiry/two_day_raw_differences.csv`), the two printed after-change hour totals that lie
+below our intervals (66.44 and 70.97, from `results/replication_nse/tables34_connectedness.csv`) and four
+settings recorded as UNTRACED.
+
+Every pitch number that is a result has a registry entry, and the pitch scan now leaves nothing uncovered.
+The four numbers that are not results are registered as UNTRACED: "360 minutes a day" (the sample design),
+"a 100 bp move" (the scale of an illustration), "a 50-point strike" (NSE's strike spacing) and "5%" (the
+significance level). The working paper's main text has many more
 numbers than the 28 registered here; its uncovered list was printed for the author and not saved.
 
 ### Every mismatch
@@ -197,7 +208,7 @@ MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not register
 * The registry was written by hand by reading each results file. A wrong selector would show up as a
   MISMATCH or SOURCE_MISSING, not as a false MATCH, unless it happens to point at a different cell with the
   same rounded value; the notes say which row and column each entry uses so a reader can verify it.
-* 283 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
+* 278 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
   most of the working paper) are not registered; the pitch scan shows that every remaining pitch number is
   a design setting.
 * The check reads the worktree's committed results. If a full reproduction rewrites `results/`, rerun it.
@@ -205,7 +216,7 @@ MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not register
 ## Files
 
 * `scripts/trace_numbers.py`: the check.
-* `docs/number_registry.csv`: the registry (283 rows).
+* `docs/number_registry.csv`: the registry (278 rows).
 * `tests/test_trace_numbers.py`: 102 tests on small synthetic files (selectors, rounding, transforms,
   quantities in words, every status, the coverage scan and the rule that the paper's uncovered list never
   lands in the repository).
