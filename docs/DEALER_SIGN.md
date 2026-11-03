@@ -13,10 +13,15 @@ This is a clear negative result. In plain terms: the data do not reveal one deal
 predictions of hedging theory, and a sign estimated from the data does not forecast better than the three
 fixed guesses.
 
-1. **The two outcomes point in nearly opposite directions.** When dealers are described as a mix of the
+1. **The end-of-day outcome points to the reverse of Pro; the variance outcome points nowhere clearly.**
+   (Corrected after an AI referee report: this item used to say the two outcomes point in nearly opposite
+   directions, 169 degrees apart. Because outcome (a) is weak, a test that allows it to have no gamma effect
+   at all cannot reject a common direction (p 0.07 to 0.28; the bootstrap test that ignores this gives
+   p 0.002 to 0.004). So the difference is not established. `docs/REFEREE_RESPONSE_F2.md`, section 6.)
+   When dealers are described as a mix of the
    Pro rule and the Client-mirror rule (angle 0 degrees = Pro, 90 = Client mirror, 180 = reverse Pro,
    270 = Client), the variance outcome (a) points to **21 degrees** (mostly Pro), and the end-of-day
-   momentum outcome (b) points to **190 degrees** (reverse Pro). The two are 169 degrees apart. Outcome (b)
+   momentum outcome (b) points to **190 degrees** (reverse Pro). The point estimates are 169 degrees apart. Outcome (b)
    is strong (Wald p = 4.3e-6; 98.5% of bootstrap draws within 90 degrees of 190; shuffled-outcome placebo
    p = 0.005). Outcome (a) is weak (Wald p = 0.18; placebo p = 0.144). The joint estimate, 190 degrees
    (w = -0.985 Pro - 0.174 Client mirror), is therefore driven by (b) alone. This repeats the earlier

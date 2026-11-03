@@ -362,12 +362,19 @@ DM p-value for "GEX helps".
 
 **Reading.** F1's expiry flip has the same sign in both halves and is significant in at least one version in
 each, but adding GEX makes F1's forecasts worse in both directions and in both samples: F1 has no
-out-of-sample value. F1a is not even significant in 2023 to 2024. F2 holds in both halves, improves the
+out-of-sample value. F1a is not even significant in 2023 to 2024. F2 has the same sign and a similar size in both halves (but see the note below on 2023 to 2024), improves the
 forecast of 2025 onward from a model fitted on 2023 to 2024, and passes the pre-registered style test. The
 reverse direction does not reach significance (p 0.23). Note that the Pro negative-GEX state is concentrated
 in 2023 to 2024 (365 of 480 days) and much rarer later (98 of 452), so "negative GEX" is partly a period
 marker; the result inside each period is what makes F2 credible. The split date was chosen by me after the
 full-sample result was known, so this is "pre-registered style", not a true pre-registration.
+
+**Later check (post hoc, after an AI referee report).** The negative-Pro state is slow (it was on for 95% of
+2023 evenings and about one evening in five from 2025, in 86 runs), so Newey-West p-values overstate the
+evidence. With inference built for a persistent state (episode and quarter clusters with a wild bootstrap,
+and block permutations that keep the runs), F2 holds in the full sample (largest p 0.012) and in 2025 onward
+(0.038), but **not inside 2023 to 2024** (p 0.095 to 0.18, and gone with controls). Details:
+`docs/REFEREE_RESPONSE_F2.md`, section 3.
 
 Source: `results/falsification/t4_split_estimates.csv`, `t4_oos_forecasts.csv`, `t4_preregistered_f2.csv`.
 

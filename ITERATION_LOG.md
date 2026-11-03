@@ -414,11 +414,25 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The last-hour sign needs new data; the Sensex calendar and bars are not verified against BSE.
 * **NEXT ITERATION:** Regenerate everything from the raw files and rebuild the test ledger.
 
-## Iterations in progress (3 November 2026, about 06:00 IST)
+## Iteration 35: answering an AI referee on the end-of-day reversal (F2)
+
+* **OBJECTIVE:** Take the hardest questions a separate AI agent asked, acting as a journal referee, about the one GEX result that survived falsification (F2).
+* **PROBLEM IDENTIFIED:** The referee pointed out that the negative-Pro state lasts for weeks at a time, so ordinary standard errors overstate the evidence; that the cleanest test of hedging theory (dealers short all options) had not been put first; that only one participant category had been tried as the dealer proxy; and that the claim "the two dealer-sign outcomes are 169 degrees apart" was never tested.
+* **HYPOTHESIS:** If F2 is a dealer-hedging effect, it should appear without a proxy, under other proxies, and under inference that respects the slow state.
+* **CHANGES IMPLEMENTED:** `experiments/referee_f2.py`, `tests/test_referee_f2.py`, `docs/REFEREE_RESPONSE_F2.md`, results in `results/referee_f2/`, SEBI dates with sources in `data/external/sebi_phases.csv`. All post hoc.
+* **EXPERIMENTS PERFORMED:** Seven items: the unconditional end-of-day slope with five kinds of standard error; the runs and effective sample size of the Pro sign; F2 with episode and quarter clusters, wild bootstraps and block permutations; FII, DII and Client rules; controls for the 15:15 split, stale prints, seasonality, SEBI phases and Sensex days; a test of the two dealer-sign angles; minute-level autocorrelation near the close.
+* **RESULTS:** (REAL DATA, 598 unadjusted p-values.) The proxy-free test fails: the end-of-day slope is -0.029 (block-bootstrap interval -0.048 to -0.005), a reversal rather than the momentum hedging predicts, and it does not grow with gamma. F2 is robust in the full sample (largest robust p 0.012) and from 2025 (0.038), but not inside 2023 to 2024 (0.095 to 0.18). Only the Pro rule shows it. Controls leave it at -0.053 to -0.079. The two dealer-sign outcomes are not shown to differ (p 0.07 to 0.28 once the weak outcome may have no effect), so that claim was withdrawn in the pitch, README, briefing and `docs/DEALER_SIGN.md`.
+* **IMPROVEMENTS:** F2 is now described as what it is: a slow Pro-positioning regime with a few dozen independent episodes.
+* **REMAINING ISSUES:** Pro's raw call, put and futures positions are not yet tested separately; SEBI and Sensex dates are not verified against primary documents (hosts blocked).
+* **NEXT ITERATION:** The forecasting and expiry-identification parts of the referee report.
+
+## Iterations in progress (3 November 2026, about 07:00 IST)
 
 * **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
-* **Bank Nifty replication of the forecasting result** and a **synthetic-control estimate of the November 2024 weekly-expiry cut**, both pre-registered in two phases.
-* **The test ledger** rebuilt to count the second forecasting contest test by test.
+* **Bank Nifty replication of the forecasting result** (P91) and a **synthetic-control estimate of the November 2024 weekly-expiry cut** (P96): both analysis plans are committed (`docs/prereg/P91_BANKNIFTY_FORECAST.md`, `docs/prereg/P96_SYNTHETIC_CONTROL.md`) and the registered analyses are running.
+* **Referee responses** on forecasting inference and on how expiry premia are identified.
+* **A number-tracing check** that compares every headline number in the write-ups with its results file.
+* **The test ledger** rebuilt to count every study test by test.
 * **Scoring the frozen forecast** for 3 November after the close.
 
 Each will be written up in the same format when it finishes.
