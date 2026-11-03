@@ -1,5 +1,5 @@
 REAL DATA. Expiry-day pinning study. NSE bhavcopy, participant OI and official index closes; third-party 1-minute bars validated against NSE.
-Loaded 944 NIFTY and 944 BANKNIFTY bhavcopy days, 944 participant files (37s)
+Loaded 944 NIFTY and 944 BANKNIFTY bhavcopy days, 944 participant files (42s)
 NIFTY: 939 days, 200 expiry days; settlement = official close on 200/200
 BANKNIFTY: 939 days, 122 expiry days; settlement = official close on 122/122
 
@@ -507,4 +507,4 @@ P2 Nifty expiry days, client_mirror: positive 11.50 (n=181) vs negative 11.69 (n
 Bank Nifty weekly-options era: 20.26 vs 24.52 pts (no clustering: 25), diff -4.26 [-7.36, -0.99], -0.86 bp, p = 0.0076 (n = 98)
 Power (P1, pinned share): 80% power at effect 0.155, i.e. a mean shift of -1.74 pts
 Power (P1, pull): 80% power at effect 0.124, i.e. a mean shift of -1.56 pts
-Figures written to results/pinning. Total run time 123s.
+Figures written to results/pinning. Total run time 124s.

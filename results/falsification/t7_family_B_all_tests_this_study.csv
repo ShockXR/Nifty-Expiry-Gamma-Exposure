@@ -1,352 +1,352 @@
 test,sample,finding,rule,detail,statistic,p,p_holm,p_bh
-T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime, share",0.9053740529201101,0.3933033483258371,1.0,0.6218312123805887
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, share",0.5040053351991522,0.6141929035482259,1.0,0.8346724073860506
-T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime, ratio",-2.158734645808636,0.03498250874562719,1.0,0.1081383868263264
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, ratio",1.5751933372263451,0.12293853073463268,1.0,0.27148925537231383
+T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime, share",0.9054607027337095,0.3933033483258371,1.0,0.6218312123805887
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, share",0.5039421263166549,0.6151924037981009,1.0,0.8358581221272361
+T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime, ratio",-2.158646255930852,0.03498250874562719,1.0,0.1081383868263264
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, ratio",1.575126563735903,0.12293853073463268,1.0,0.27148925537231383
 T1 permutation,full,F2,us_convention,"x_neg_binary, shuffle_within_regime, sign of net GEX (scale irrelevant)",0.5442545077543726,0.6691654172913544,1.0,0.8779002724786018
 T1 permutation,full,F2,us_convention,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",-0.03615512191780398,0.975512243878061,1.0,0.9888389138763952
-T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, share",0.9053740529201101,0.3183408295852074,1.0,0.5344092659552577
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, share",0.5040053351991522,0.6291854072963519,1.0,0.8457528482135744
-T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, ratio",-2.158734645808636,0.035982008995502246,1.0,0.10987099043071057
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",1.5751933372263451,0.11694152923538231,1.0,0.26214687218324373
-T1 permutation,full,F2,us_convention,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",0.5442545077543726,0.7236381809095452,1.0,0.9022888422867557
+T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, share",0.9054607027337095,0.3183408295852074,1.0,0.5344092659552577
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, share",0.5039421263166549,0.6291854072963519,1.0,0.8457528482135744
+T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, ratio",-2.158646255930852,0.035982008995502246,1.0,0.10987099043071057
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",1.575126563735903,0.11694152923538231,1.0,0.26214687218324373
+T1 permutation,full,F2,us_convention,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",0.5442545077543726,0.7236381809095452,1.0,0.9012547748842279
 T1 permutation,full,F2,us_convention,"x_neg_controls, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-0.03615512191780398,0.975512243878061,1.0,0.9888389138763952
-T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, share",0.9053740529201101,0.36681659170414793,1.0,0.5929801983539821
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",0.5040053351991522,0.6211894052973513,1.0,0.8410995232310852
-T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.158734645808636,0.03698150924537731,1.0,0.11246016336094247
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",1.5751933372263451,0.12693653173413294,1.0,0.27549727678257463
+T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, share",0.9054607027337095,0.36681659170414793,1.0,0.5929801983539821
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",0.5039421263166549,0.6211894052973513,1.0,0.8410995232310852
+T1 permutation,full,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.158646255930852,0.03698150924537731,1.0,0.11246016336094247
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",1.575126563735903,0.12693653173413294,1.0,0.27549727678257463
 T1 permutation,full,F2,us_convention,"x_neg_binary, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",0.5442545077543726,0.6606696651674163,1.0,0.871071848105183
 T1 permutation,full,F2,us_convention,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-0.03615512191780398,0.9715142428785607,1.0,0.9888389138763952
-T1 permutation,full,F1,us_convention,"gex_l1, circular_shift_within_regime, share",0.9053740529201101,0.39730134932533734,1.0,0.6218312123805887
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, share",0.5040053351991522,0.6431784107946027,1.0,0.855265915429382
-T1 permutation,full,F1,us_convention,"gex_l1, circular_shift_within_regime, ratio",-2.158734645808636,0.04897551224387806,1.0,0.1307188132552429
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, ratio",1.5751933372263451,0.1424287856071964,1.0,0.2952015612305579
+T1 permutation,full,F1,us_convention,"gex_l1, circular_shift_within_regime, share",0.9054607027337095,0.39730134932533734,1.0,0.6218312123805887
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, share",0.5039421263166549,0.6431784107946027,1.0,0.855265915429382
+T1 permutation,full,F1,us_convention,"gex_l1, circular_shift_within_regime, ratio",-2.158646255930852,0.04897551224387806,1.0,0.1307188132552429
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, ratio",1.575126563735903,0.1424287856071964,1.0,0.2952015612305579
 T1 permutation,full,F2,us_convention,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",0.5442545077543726,0.6731634182908546,1.0,0.8809299054176615
 T1 permutation,full,F2,us_convention,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-0.03615512191780398,0.9795102448775612,1.0,0.9901861058571532
-T1 permutation,full,F1,us_convention,"gex_l1, random_resign, share",0.9053740529201101,0.3918040979510245,1.0,0.6211936766659405
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, random_resign, share",0.5040053351991522,0.607696151924038,1.0,0.8304061597194037
-T1 permutation,full,F1,us_convention,"gex_l1, random_resign, ratio",-2.158734645808636,0.03798100949525238,1.0,0.11437407616502634
-T1 permutation,full,F1,us_convention,"gex_l1_x_exp, random_resign, ratio",1.5751933372263451,0.13493253373313344,1.0,0.2866232469941739
+T1 permutation,full,F1,us_convention,"gex_l1, random_resign, share",0.9054607027337095,0.3918040979510245,1.0,0.6211936766659405
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, random_resign, share",0.5039421263166549,0.607696151924038,1.0,0.8304061597194037
+T1 permutation,full,F1,us_convention,"gex_l1, random_resign, ratio",-2.158646255930852,0.03798100949525238,1.0,0.11436158749064011
+T1 permutation,full,F1,us_convention,"gex_l1_x_exp, random_resign, ratio",1.575126563735903,0.13493253373313344,1.0,0.28662446366781585
 T1 permutation,full,F2,us_convention,"x_neg_binary, random_resign, sign of net GEX (scale irrelevant)",0.5442545077543726,0.623688155922039,1.0,0.8414120212620961
 T1 permutation,full,F2,us_convention,"x_neg_controls, random_resign, sign of net GEX (scale irrelevant)",-0.03615512191780398,0.9715142428785607,1.0,0.9888389138763952
-T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime, share",-2.8574069073569164,0.006496751624187906,1.0,0.03795739925312933
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, share",3.2068382148648547,0.0029985007496251873,1.0,0.02366901655555201
-T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime, ratio",-2.0813725687150306,0.049475262368815595,1.0,0.13157937160452032
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, ratio",3.1078329843049803,0.0029985007496251873,1.0,0.02366901655555201
+T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime, share",-2.857415638119628,0.006496751624187906,1.0,0.03795739925312933
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, share",3.2068404541818603,0.0029985007496251873,1.0,0.02366901655555201
+T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime, ratio",-2.0813571857293964,0.049475262368815595,1.0,0.13157937160452032
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, ratio",3.107820724191999,0.0029985007496251873,1.0,0.02366901655555201
 T1 permutation,full,F2,participant_pro,"x_neg_binary, shuffle_within_regime, sign of net GEX (scale irrelevant)",-3.702227618808391,0.0009995002498750624,0.688655672163918,0.012569986193344006
 T1 permutation,full,F2,participant_pro,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",-2.981047204044239,0.001999000499750125,1.0,0.018311831738451762
-T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, share",-2.8574069073569164,0.2463768115942029,1.0,0.44371746165752074
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, share",3.2068382148648547,0.020989505247376312,1.0,0.07634418085075109
-T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, ratio",-2.0813725687150306,0.616191904047976,1.0,0.8358581221272361
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.1078329843049803,0.025487256371814093,1.0,0.08635408323235642
+T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, share",-2.857415638119628,0.2463768115942029,1.0,0.44371746165752074
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, share",3.2068404541818603,0.020989505247376312,1.0,0.07634418085075109
+T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, ratio",-2.0813571857293964,0.616191904047976,1.0,0.8358581221272361
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.107820724191999,0.025487256371814093,1.0,0.08635408323235642
 T1 permutation,full,F2,participant_pro,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-3.702227618808391,0.004997501249375313,1.0,0.03169355493193574
 T1 permutation,full,F2,participant_pro,"x_neg_controls, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-2.981047204044239,0.009995002498750625,1.0,0.05011008009508759
-T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, share",-2.8574069073569164,0.0069965017491254375,1.0,0.03903311502143665
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",3.2068382148648547,0.0009995002498750624,0.688655672163918,0.012569986193344006
-T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.0813725687150306,0.04547726136931534,1.0,0.12544285478078804
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.1078329843049803,0.0014992503748125937,1.0,0.015892053973013492
+T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, share",-2.857415638119628,0.0069965017491254375,1.0,0.03903311502143665
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",3.2068404541818603,0.0009995002498750624,0.688655672163918,0.012569986193344006
+T1 permutation,full,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.0813571857293964,0.04547726136931534,1.0,0.12544285478078804
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.107820724191999,0.0014992503748125937,1.0,0.015892053973013492
 T1 permutation,full,F2,participant_pro,"x_neg_binary, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-3.702227618808391,0.001999000499750125,1.0,0.018311831738451762
 T1 permutation,full,F2,participant_pro,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-2.981047204044239,0.0014992503748125937,1.0,0.015892053973013492
-T1 permutation,full,F1,participant_pro,"gex_l1, circular_shift_within_regime, share",-2.8574069073569164,0.04147926036981509,1.0,0.12132592691475759
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, share",3.2068382148648547,0.033483258370814596,1.0,0.10438898197959845
-T1 permutation,full,F1,participant_pro,"gex_l1, circular_shift_within_regime, ratio",-2.0813725687150306,0.14292853573213393,1.0,0.2954121824881431
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.1078329843049803,0.047476261869065464,1.0,0.12827253928441604
+T1 permutation,full,F1,participant_pro,"gex_l1, circular_shift_within_regime, share",-2.857415638119628,0.04147926036981509,1.0,0.12132592691475759
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, share",3.2068404541818603,0.033483258370814596,1.0,0.1048294418191748
+T1 permutation,full,F1,participant_pro,"gex_l1, circular_shift_within_regime, ratio",-2.0813571857293964,0.14292853573213393,1.0,0.2954121824881431
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.107820724191999,0.047476261869065464,1.0,0.12827253928441604
 T1 permutation,full,F2,participant_pro,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-3.702227618808391,0.0004997501249375312,0.35482258870564715,0.008061186797905396
 T1 permutation,full,F2,participant_pro,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-2.981047204044239,0.0014992503748125937,1.0,0.015892053973013492
-T1 permutation,full,F1,participant_pro,"gex_l1, random_resign, share",-2.8574069073569164,0.005497251374312844,1.0,0.03399133766450108
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, random_resign, share",3.2068382148648547,0.001999000499750125,1.0,0.018311831738451762
-T1 permutation,full,F1,participant_pro,"gex_l1, random_resign, ratio",-2.0813725687150306,0.04297851074462768,1.0,0.12360486423454937
-T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, random_resign, ratio",3.1078329843049803,0.001999000499750125,1.0,0.018311831738451762
+T1 permutation,full,F1,participant_pro,"gex_l1, random_resign, share",-2.857415638119628,0.005497251374312844,1.0,0.03399133766450108
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, random_resign, share",3.2068404541818603,0.001999000499750125,1.0,0.018311831738451762
+T1 permutation,full,F1,participant_pro,"gex_l1, random_resign, ratio",-2.0813571857293964,0.04297851074462768,1.0,0.12360486423454937
+T1 permutation,full,F1,participant_pro,"gex_l1_x_exp, random_resign, ratio",3.107820724191999,0.001999000499750125,1.0,0.018311831738451762
 T1 permutation,full,F2,participant_pro,"x_neg_binary, random_resign, sign of net GEX (scale irrelevant)",-3.702227618808391,0.0024987506246876563,1.0,0.021558987947886524
 T1 permutation,full,F2,participant_pro,"x_neg_controls, random_resign, sign of net GEX (scale irrelevant)",-2.981047204044239,0.0069965017491254375,1.0,0.03903311502143665
-T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime, share",-0.35936989896917637,0.7271364317841079,1.0,0.9022888422867557
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, share",1.6861927122647196,0.095952023988006,1.0,0.22516548226246808
-T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime, ratio",-2.450261273833616,0.013493253373313344,1.0,0.06104874392072257
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, ratio",3.0324746356480854,0.00399800099950025,1.0,0.026968334014810774
+T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime, share",-0.3593762093829988,0.7271364317841079,1.0,0.9012547748842279
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, share",1.6861969369749226,0.095952023988006,1.0,0.22516548226246808
+T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime, ratio",-2.4502921418874997,0.013493253373313344,1.0,0.06104874392072257
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, ratio",3.0325041275807676,0.00399800099950025,1.0,0.026968334014810774
 T1 permutation,full,F2,client_mirror,"x_neg_binary, shuffle_within_regime, sign of net GEX (scale irrelevant)",-4.174172600172398,0.014992503748125937,1.0,0.06505519170239442
 T1 permutation,full,F2,client_mirror,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",0.06734962147279737,0.9590204897551224,1.0,0.9888389138763952
-T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, share",-0.35936989896917637,0.9110444777611194,1.0,0.9886587318585606
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, share",1.6861927122647196,0.12493753123438281,1.0,0.2734620890144898
-T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, ratio",-2.450261273833616,0.27786106946526734,1.0,0.48171241482062704
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.0324746356480854,0.008995502248875561,1.0,0.04667596271794172
-T1 permutation,full,F2,client_mirror,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-4.174172600172398,0.01899050474762619,1.0,0.07189262511601342
+T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, share",-0.3593762093829988,0.9110444777611194,1.0,0.9886587318585606
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, share",1.6861969369749226,0.12493753123438281,1.0,0.2734620890144898
+T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, ratio",-2.4502921418874997,0.27786106946526734,1.0,0.48171241482062704
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.0325041275807676,0.008995502248875561,1.0,0.04667596271794172
+T1 permutation,full,F2,client_mirror,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-4.174172600172398,0.01899050474762619,1.0,0.07152768793268341
 T1 permutation,full,F2,client_mirror,"x_neg_controls, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",0.06734962147279737,0.9550224887556222,1.0,0.9888389138763952
-T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, share",-0.35936989896917637,0.7286356821589205,1.0,0.9022888422867557
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",1.6861927122647196,0.10344827586206896,1.0,0.2398706896551724
-T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.450261273833616,0.018490754622688656,1.0,0.0709660150492368
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.0324746356480854,0.0024987506246876563,1.0,0.021558987947886524
+T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, share",-0.3593762093829988,0.7286356821589205,1.0,0.9012547748842279
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",1.6861969369749226,0.10344827586206896,1.0,0.2398706896551724
+T1 permutation,full,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.4502921418874997,0.018490754622688656,1.0,0.07081280416190032
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.0325041275807676,0.0024987506246876563,1.0,0.021558987947886524
 T1 permutation,full,F2,client_mirror,"x_neg_binary, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-4.174172600172398,0.01649175412293853,1.0,0.06733707542014783
 T1 permutation,full,F2,client_mirror,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",0.06734962147279737,0.9435282358820589,1.0,0.9888389138763952
-T1 permutation,full,F1,client_mirror,"gex_l1, circular_shift_within_regime, share",-0.35936989896917637,0.7766116941529235,1.0,0.9271684072877134
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, share",1.6861927122647196,0.21689155422288856,1.0,0.41244169938422864
-T1 permutation,full,F1,client_mirror,"gex_l1, circular_shift_within_regime, ratio",-2.450261273833616,0.047976011994003,1.0,0.12851336064819574
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.0324746356480854,0.022988505747126436,1.0,0.08161469504482208
-T1 permutation,full,F2,client_mirror,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-4.174172600172398,0.011494252873563218,1.0,0.0560521392245863
+T1 permutation,full,F1,client_mirror,"gex_l1, circular_shift_within_regime, share",-0.3593762093829988,0.7766116941529235,1.0,0.925602518152153
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, share",1.6861969369749226,0.21689155422288856,1.0,0.41244169938422864
+T1 permutation,full,F1,client_mirror,"gex_l1, circular_shift_within_regime, ratio",-2.4502921418874997,0.047976011994003,1.0,0.12851336064819574
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.0325041275807676,0.022988505747126436,1.0,0.08161469504482208
+T1 permutation,full,F2,client_mirror,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-4.174172600172398,0.011494252873563218,1.0,0.0560546355853158
 T1 permutation,full,F2,client_mirror,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",0.06734962147279737,0.9545227386306847,1.0,0.9888389138763952
-T1 permutation,full,F1,client_mirror,"gex_l1, random_resign, share",-0.35936989896917637,0.7256371814092953,1.0,0.9022888422867557
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, random_resign, share",1.6861927122647196,0.10294852573713144,1.0,0.239460207200475
-T1 permutation,full,F1,client_mirror,"gex_l1, random_resign, ratio",-2.450261273833616,0.018490754622688656,1.0,0.0709660150492368
-T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, random_resign, ratio",3.0324746356480854,0.005997001499250375,1.0,0.03559820089955022
+T1 permutation,full,F1,client_mirror,"gex_l1, random_resign, share",-0.3593762093829988,0.7256371814092953,1.0,0.9012547748842279
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, random_resign, share",1.6861969369749226,0.10294852573713144,1.0,0.239460207200475
+T1 permutation,full,F1,client_mirror,"gex_l1, random_resign, ratio",-2.4502921418874997,0.018490754622688656,1.0,0.07081280416190032
+T1 permutation,full,F1,client_mirror,"gex_l1_x_exp, random_resign, ratio",3.0325041275807676,0.005997001499250375,1.0,0.03559820089955022
 T1 permutation,full,F2,client_mirror,"x_neg_binary, random_resign, sign of net GEX (scale irrelevant)",-4.174172600172398,0.0009995002498750624,0.688655672163918,0.012569986193344006
 T1 permutation,full,F2,client_mirror,"x_neg_controls, random_resign, sign of net GEX (scale irrelevant)",0.06734962147279737,0.9540229885057471,1.0,0.9888389138763952
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime, share",1.1948606135630129,0.24887556221889057,1.0,0.4460523361507652
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, share",0.6400122516626195,0.5402298850574713,1.0,0.773842808325567
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime, ratio",-1.8383899587506614,0.0864567716141929,1.0,0.21033090012370864
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, ratio",1.5273866100107953,0.14992503748125938,1.0,0.3056164225579518
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime, share",1.1949514092817095,0.24887556221889057,1.0,0.4460523361507652
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, share",0.6399453029157656,0.5402298850574713,1.0,0.773842808325567
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime, ratio",-1.8382956068259169,0.0864567716141929,1.0,0.21033090012370864
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime, ratio",1.5273167803346142,0.14992503748125938,1.0,0.3056164225579518
 T1 permutation,pre_auction,F2,us_convention,"x_neg_binary, shuffle_within_regime, sign of net GEX (scale irrelevant)",0.24609007015098916,0.8570714642678661,1.0,0.9723960649644596
-T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.7156421789105447,1.0,0.9022888422867557
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, share",1.1948606135630129,0.22138930534732634,1.0,0.4144535326813713
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, share",0.6400122516626195,0.5427286356821589,1.0,0.7740638249656898
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, ratio",-1.8383899587506614,0.057971014492753624,1.0,0.15199467404107134
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",1.5273866100107953,0.13893053473263367,1.0,0.2903843852721526
+T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.7156421789105447,1.0,0.9012547748842279
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, share",1.1949514092817095,0.22138930534732634,1.0,0.4144535326813713
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, share",0.6399453029157656,0.5427286356821589,1.0,0.7740638249656898
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_20day_blocks, ratio",-1.8382956068259169,0.057971014492753624,1.0,0.15199467404107134
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",1.5273167803346142,0.13893053473263367,1.0,0.2903843852721526
 T1 permutation,pre_auction,F2,us_convention,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",0.24609007015098916,0.8775612193903048,1.0,0.9832157842618545
 T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.688655672163918,1.0,0.8886652326010906
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, share",1.1948606135630129,0.24037981009495252,1.0,0.43683767872161483
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",0.6400122516626195,0.5307346326836582,1.0,0.7646700921383968
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, ratio",-1.8383899587506614,0.06996501749125437,1.0,0.17839877312203006
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",1.5273866100107953,0.13693153423288357,1.0,0.2873326660641893
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, share",1.1949514092817095,0.24037981009495252,1.0,0.43683767872161483
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",0.6399453029157656,0.5307346326836582,1.0,0.7646700921383968
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, shuffle_within_regime_x_expiry, ratio",-1.8382956068259169,0.06996501749125437,1.0,0.17839877312203006
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",1.5273167803346142,0.13693153423288357,1.0,0.2873339545505354
 T1 permutation,pre_auction,F2,us_convention,"x_neg_binary, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",0.24609007015098916,0.8430784607696152,1.0,0.96388939582597
-T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.7126436781609196,1.0,0.9022888422867557
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, circular_shift_within_regime, share",1.1948606135630129,0.2898550724637681,1.0,0.49482069366696135
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, share",0.6400122516626195,0.5427286356821589,1.0,0.7740638249656898
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, circular_shift_within_regime, ratio",-1.8383899587506614,0.09345327336331834,1.0,0.22225105396019937
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, ratio",1.5273866100107953,0.14942528735632185,1.0,0.3054368132738039
+T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.7126436781609196,1.0,0.9012547748842279
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, circular_shift_within_regime, share",1.1949514092817095,0.2898550724637681,1.0,0.4949254061160152
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, share",0.6399453029157656,0.5427286356821589,1.0,0.7740638249656898
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, circular_shift_within_regime, ratio",-1.8382956068259169,0.09345327336331834,1.0,0.22225105396019937
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, circular_shift_within_regime, ratio",1.5273167803346142,0.14942528735632185,1.0,0.3054368132738039
 T1 permutation,pre_auction,F2,us_convention,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",0.24609007015098916,0.8620689655172413,1.0,0.9765727823111344
-T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.729135432283858,1.0,0.9022888422867557
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, random_resign, share",1.1948606135630129,0.2413793103448276,1.0,0.43683767872161483
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, random_resign, share",0.6400122516626195,0.5342328835582209,1.0,0.7667326878146999
-T1 permutation,pre_auction,F1,us_convention,"gex_l1, random_resign, ratio",-1.8383899587506614,0.07546226886556721,1.0,0.19110240101792106
-T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, random_resign, ratio",1.5273866100107953,0.13243378310844578,1.0,0.2840053961458577
+T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.729135432283858,1.0,0.9012547748842279
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, random_resign, share",1.1949514092817095,0.2413793103448276,1.0,0.43683767872161483
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, random_resign, share",0.6399453029157656,0.5342328835582209,1.0,0.7667326878146999
+T1 permutation,pre_auction,F1,us_convention,"gex_l1, random_resign, ratio",-1.8382956068259169,0.07546226886556721,1.0,0.19110240101792106
+T1 permutation,pre_auction,F1,us_convention,"gex_l1_x_exp, random_resign, ratio",1.5273167803346142,0.13243378310844578,1.0,0.2840053961458577
 T1 permutation,pre_auction,F2,us_convention,"x_neg_binary, random_resign, sign of net GEX (scale irrelevant)",0.24609007015098916,0.8480759620189905,1.0,0.9666242147743332
 T1 permutation,pre_auction,F2,us_convention,"x_neg_controls, random_resign, sign of net GEX (scale irrelevant)",-0.42209173636329766,0.6696651674162919,1.0,0.8779002724786018
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime, share",-3.1897855201291136,0.0034982508745627187,1.0,0.025328554360812425
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, share",3.467439771725183,0.0004997501249375312,0.35482258870564715,0.008061186797905396
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime, ratio",-2.4943685889798193,0.02048975512243878,1.0,0.07489358768891416
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, ratio",3.4093679695405212,0.0014992503748125937,1.0,0.015892053973013492
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime, share",-3.1897946501550005,0.0034982508745627187,1.0,0.025328554360812425
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, share",3.4674421761142815,0.0004997501249375312,0.35482258870564715,0.008061186797905396
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime, ratio",-2.4943517583266273,0.02048975512243878,1.0,0.07489358768891416
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime, ratio",3.409355208375393,0.0014992503748125937,1.0,0.015892053973013492
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_binary, shuffle_within_regime, sign of net GEX (scale irrelevant)",-3.9512442758832917,0.0014992503748125937,1.0,0.015892053973013492
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",-3.223277056821742,0.001999000499750125,1.0,0.018311831738451762
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, share",-3.1897855201291136,0.11944027986006997,1.0,0.26597694577766773
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, share",3.467439771725183,0.00849575212393803,1.0,0.04470814238270935
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, ratio",-2.4943685889798193,0.33883058470764615,1.0,0.561188155922039
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.4093679695405212,0.004997501249375313,1.0,0.03169355493193574
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, share",-3.1897946501550005,0.11944027986006997,1.0,0.26597534504938875
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, share",3.4674421761142815,0.00849575212393803,1.0,0.04470814238270935
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_20day_blocks, ratio",-2.4943517583266273,0.33883058470764615,1.0,0.561188155922039
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.409355208375393,0.004997501249375313,1.0,0.03169355493193574
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-3.9512442758832917,0.0024987506246876563,1.0,0.021558987947886524
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_controls, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-3.223277056821742,0.006496751624187906,1.0,0.03795739925312933
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, share",-3.1897855201291136,0.0034982508745627187,1.0,0.025328554360812425
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",3.467439771725183,0.0014992503748125937,1.0,0.015892053973013492
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.4943685889798193,0.010494752623688156,1.0,0.052262459374339675
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.4093679695405212,0.001999000499750125,1.0,0.018311831738451762
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, share",-3.1897946501550005,0.0034982508745627187,1.0,0.025328554360812425
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",3.4674421761142815,0.0014992503748125937,1.0,0.015892053973013492
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.4943517583266273,0.010494752623688156,1.0,0.052262459374339675
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.409355208375393,0.001999000499750125,1.0,0.018311831738451762
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_binary, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-3.9512442758832917,0.0014992503748125937,1.0,0.015892053973013492
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-3.223277056821742,0.0009995002498750624,0.688655672163918,0.012569986193344006
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, circular_shift_within_regime, share",-3.1897855201291136,0.02448775612193903,1.0,0.08382582314878934
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, share",3.467439771725183,0.022488755622188907,1.0,0.08061186797905397
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, circular_shift_within_regime, ratio",-2.4943685889798193,0.07846076961519241,1.0,0.19588973281172498
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.4093679695405212,0.027486256871564217,1.0,0.09145651389551859
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, circular_shift_within_regime, share",-3.1897946501550005,0.02448775612193903,1.0,0.08382582314878934
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, share",3.4674421761142815,0.022488755622188907,1.0,0.08061186797905397
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, circular_shift_within_regime, ratio",-2.4943517583266273,0.07846076961519241,1.0,0.19588973281172498
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.409355208375393,0.027486256871564217,1.0,0.09145651389551859
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-3.9512442758832917,0.0014992503748125937,1.0,0.015892053973013492
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-3.223277056821742,0.0024987506246876563,1.0,0.021558987947886524
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, random_resign, share",-3.1897855201291136,0.00399800099950025,1.0,0.026968334014810774
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, random_resign, share",3.467439771725183,0.0004997501249375312,0.35482258870564715,0.008061186797905396
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1, random_resign, ratio",-2.4943685889798193,0.013493253373313344,1.0,0.06104874392072257
-T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, random_resign, ratio",3.4093679695405212,0.0014992503748125937,1.0,0.015892053973013492
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, random_resign, share",-3.1897946501550005,0.00399800099950025,1.0,0.026968334014810774
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, random_resign, share",3.4674421761142815,0.0004997501249375312,0.35482258870564715,0.008061186797905396
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1, random_resign, ratio",-2.4943517583266273,0.013493253373313344,1.0,0.06104874392072257
+T1 permutation,pre_auction,F1,participant_pro,"gex_l1_x_exp, random_resign, ratio",3.409355208375393,0.0014992503748125937,1.0,0.015892053973013492
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_binary, random_resign, sign of net GEX (scale irrelevant)",-3.9512442758832917,0.0004997501249375312,0.35482258870564715,0.008061186797905396
 T1 permutation,pre_auction,F2,participant_pro,"x_neg_controls, random_resign, sign of net GEX (scale irrelevant)",-3.223277056821742,0.0014992503748125937,1.0,0.015892053973013492
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime, share",-0.5051469586085272,0.632183908045977,1.0,0.8469050953499991
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, share",1.7627398698639034,0.08245877061469266,1.0,0.20259737680828463
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime, ratio",-2.764064385364507,0.0074962518740629685,1.0,0.04060013788726075
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, ratio",3.2178403426485693,0.0034982508745627187,1.0,0.025328554360812425
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime, share",-0.505153344119994,0.632183908045977,1.0,0.8468970702079668
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, share",1.7627441590541792,0.08245877061469266,1.0,0.20259737680828463
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime, ratio",-2.7640957123571215,0.0074962518740629685,1.0,0.04060013788726075
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime, ratio",3.217870125773545,0.0034982508745627187,1.0,0.025328554360812425
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_binary, shuffle_within_regime, sign of net GEX (scale irrelevant)",-4.056438285002485,0.021989005497251374,1.0,0.07920311688815786
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_controls, shuffle_within_regime, sign of net GEX (scale irrelevant)",0.1085147024491376,0.9305347326336831,1.0,0.9888389138763952
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, share",-0.5051469586085272,0.8685657171414293,1.0,0.9792295836474568
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, share",1.7627398698639034,0.09645177411294353,1.0,0.22516548226246808
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, ratio",-2.764064385364507,0.17091454272863568,1.0,0.3409101900662572
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.2178403426485693,0.0034982508745627187,1.0,0.025328554360812425
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, share",-0.505153344119994,0.8685657171414293,1.0,0.9792089791545766
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, share",1.7627441590541792,0.09645177411294353,1.0,0.22516548226246808
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_20day_blocks, ratio",-2.7640957123571215,0.17091454272863568,1.0,0.3409101900662572
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_20day_blocks, ratio",3.217870125773545,0.0034982508745627187,1.0,0.025328554360812425
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_binary, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",-4.056438285002485,0.029985007496251874,1.0,0.09635815117263548
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_controls, shuffle_within_20day_blocks, sign of net GEX (scale irrelevant)",0.1085147024491376,0.9390304847576212,1.0,0.9888389138763952
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, share",-0.5051469586085272,0.6231884057971014,1.0,0.8414120212620961
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",1.7627398698639034,0.08445777111444278,1.0,0.2061436387069623
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.764064385364507,0.009995002498750625,1.0,0.05011008009508759
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.2178403426485693,0.0009995002498750624,0.688655672163918,0.012569986193344006
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, share",-0.505153344119994,0.6231884057971014,1.0,0.8414120212620961
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, share",1.7627441590541792,0.08445777111444278,1.0,0.2061436387069623
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, shuffle_within_regime_x_expiry, ratio",-2.7640957123571215,0.009995002498750625,1.0,0.05011008009508759
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, shuffle_within_regime_x_expiry, ratio",3.217870125773545,0.0009995002498750624,0.688655672163918,0.012569986193344006
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_binary, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",-4.056438285002485,0.015492253873063468,1.0,0.06531393394211985
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_controls, shuffle_within_regime_x_expiry, sign of net GEX (scale irrelevant)",0.1085147024491376,0.9410294852573713,1.0,0.9888389138763952
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, circular_shift_within_regime, share",-0.5051469586085272,0.6866566716641679,1.0,0.8886051423984036
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, share",1.7627398698639034,0.20339830084957522,1.0,0.3930248417457938
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, circular_shift_within_regime, ratio",-2.764064385364507,0.01999000499750125,1.0,0.0737939487967459
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.2178403426485693,0.018490754622688656,1.0,0.0709660150492368
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, circular_shift_within_regime, share",-0.505153344119994,0.6866566716641679,1.0,0.8876293560536804
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, share",1.7627441590541792,0.20339830084957522,1.0,0.3930248417457938
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, circular_shift_within_regime, ratio",-2.7640957123571215,0.01999000499750125,1.0,0.0737939487967459
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, circular_shift_within_regime, ratio",3.217870125773545,0.018490754622688656,1.0,0.07081280416190032
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_binary, circular_shift_within_regime, sign of net GEX (scale irrelevant)",-4.056438285002485,0.012993503248375811,1.0,0.05988310192729721
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_controls, circular_shift_within_regime, sign of net GEX (scale irrelevant)",0.1085147024491376,0.9380309845077461,1.0,0.9888389138763952
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, random_resign, share",-0.5051469586085272,0.6121939030484758,1.0,0.8346724073860506
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, random_resign, share",1.7627398698639034,0.09345327336331834,1.0,0.22225105396019937
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1, random_resign, ratio",-2.764064385364507,0.004497751124437781,1.0,0.02902027247245942
-T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, random_resign, ratio",3.2178403426485693,0.0029985007496251873,1.0,0.02366901655555201
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, random_resign, share",-0.505153344119994,0.6121939030484758,1.0,0.8350144780550901
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, random_resign, share",1.7627441590541792,0.09345327336331834,1.0,0.22225105396019937
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1, random_resign, ratio",-2.7640957123571215,0.004497751124437781,1.0,0.02902027247245942
+T1 permutation,pre_auction,F1,client_mirror,"gex_l1_x_exp, random_resign, ratio",3.217870125773545,0.0029985007496251873,1.0,0.02366901655555201
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_binary, random_resign, sign of net GEX (scale irrelevant)",-4.056438285002485,0.0009995002498750624,0.688655672163918,0.012569986193344006
 T1 permutation,pre_auction,F2,client_mirror,"x_neg_controls, random_resign, sign of net GEX (scale irrelevant)",0.1085147024491376,0.92103948025987,1.0,0.9888389138763952
-T2 timing,full,F1,us_convention,"gex_l1, GEX at t (same evening), share",5.160519730128197,2.4626520583034785e-07,0.00018198998710862706,4.568219568152952e-05
-T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), share",0.053791786846358755,0.9571010531941161,1.0,0.9888389138763952
-T2 timing,full,F1,us_convention,"gex_l1, GEX at t (same evening), ratio",2.010898762280861,0.04433615112930523,1.0,0.12489848663126309
-T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), ratio",1.0028058343322923,0.31595455329233246,1.0,0.5316060737934483
+T2 timing,full,F1,us_convention,"gex_l1, GEX at t (same evening), share",5.160493315702004,2.462999570867616e-07,0.00018201566828711683,4.568864203959428e-05
+T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), share",0.05377644654150796,0.9571132752960961,1.0,0.9888389138763952
+T2 timing,full,F1,us_convention,"gex_l1, GEX at t (same evening), ratio",2.010871921971914,0.04433898681433366,1.0,0.12489848663126309
+T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), ratio",1.0027928451830772,0.3159608216834561,1.0,0.5316166206102595
 T2 timing,full,F2,us_convention,"r_rod_x_neg binary, GEX at t (same evening)",2.1475102815544944,0.03175267954711973,1.0,0.1002573966977142
 T2 timing,full,F2,us_convention,"r_rod_x_neg controls, GEX at t (same evening)",1.7658812468203113,0.07741577401706352,1.0,0.19406251459682816
-T2 timing,full,F1,us_convention,"gex_l1, GEX at t+1 (lead), share",0.7700977694136817,0.4412418990777758,1.0,0.6641003836018451
-T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), share",-0.7247292912747344,0.46861812173532724,1.0,0.6968229385322902
-T2 timing,full,F1,us_convention,"gex_l1, GEX at t+1 (lead), ratio",-1.0894950191300934,0.27593565013342536,1.0,0.47949473629742767
-T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), ratio",-0.031914894761517126,0.9745399203887587,1.0,0.9888389138763952
+T2 timing,full,F1,us_convention,"gex_l1, GEX at t+1 (lead), share",0.770105577011962,0.4412372680549711,1.0,0.6640934135837496
+T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), share",-0.7247630023566848,0.46859743677704224,1.0,0.6967921805382071
+T2 timing,full,F1,us_convention,"gex_l1, GEX at t+1 (lead), ratio",-1.0894877716448328,0.2759388444317439,1.0,0.47950028704532544
+T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), ratio",-0.03195698078975572,0.9745063577163228,1.0,0.9888389138763952
 T2 timing,full,F2,us_convention,"r_rod_x_neg binary, GEX at t+1 (lead)",2.199358228686438,0.027852460335157564,1.0,0.09226127486020944
-T2 timing,full,F2,us_convention,"r_rod_x_neg controls, GEX at t+1 (lead)",1.6868354815792412,0.09163499079715241,1.0,0.22034666658266755
-T2 timing,full,F1,us_convention,"gex_l1, GEX at t+2 (lead), share",0.09564993163973398,0.9237986072510812,1.0,0.9888389138763952
-T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), share",0.26045925009434,0.794509544510345,1.0,0.9372433736513132
-T2 timing,full,F1,us_convention,"gex_l1, GEX at t+2 (lead), ratio",-0.5047482489049102,0.6137356680584948,1.0,0.8346724073860506
-T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), ratio",0.22427582123329545,0.8225426888846316,1.0,0.9551278171399008
-T2 timing,full,F2,us_convention,"r_rod_x_neg binary, GEX at t+2 (lead)",-0.24986808031497684,0.8026893685885067,1.0,0.9417895393767789
+T2 timing,full,F2,us_convention,"r_rod_x_neg controls, GEX at t+1 (lead)",1.6868354815792412,0.09163499079715241,1.0,0.22033225425134345
+T2 timing,full,F1,us_convention,"gex_l1, GEX at t+2 (lead), share",0.09569329654705926,0.9237641650480254,1.0,0.9888389138763952
+T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), share",0.2604316438309273,0.794530836595488,1.0,0.9357807631013525
+T2 timing,full,F1,us_convention,"gex_l1, GEX at t+2 (lead), ratio",-0.5047244336753511,0.6137523972390577,1.0,0.8356041811951942
+T2 timing,full,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), ratio",0.2242630333607516,0.8225526387351086,1.0,0.9536469655335166
+T2 timing,full,F2,us_convention,"r_rod_x_neg binary, GEX at t+2 (lead)",-0.24986808031497684,0.8026893685885067,1.0,0.9417521367727781
 T2 timing,full,F2,us_convention,"r_rod_x_neg controls, GEX at t+2 (lead)",-0.5885811337740875,0.55614229283168,1.0,0.7890202318950412
-T2 timing,full,F1,us_convention,"horse race gex_l1, share",0.8672822378114657,0.3857873863999117,1.0,0.6129641128666691
-T2 timing,full,F1,us_convention,"horse race gex_l1_x_exp, share",0.5416585198069355,0.588053770015015,1.0,0.8155811165441891
-T2 timing,full,F1,us_convention,"horse race lead_gex, share",0.5948904655615689,0.5519166909209705,1.0,0.7845252579757857
-T2 timing,full,F1,us_convention,"horse race lead_gex_x_exp, share",-0.6228763846245012,0.5333657577658887,1.0,0.7667326878146999
-T2 timing,full,F1,us_convention,"horse race gex_l1, ratio",-2.042199851789179,0.04113171118933515,1.0,0.1212612310220343
-T2 timing,full,F1,us_convention,"horse race gex_l1_x_exp, ratio",1.4703140087292057,0.14147672870295538,1.0,0.29404967142182886
-T2 timing,full,F1,us_convention,"horse race lead_gex, ratio",-0.940612502145873,0.34690347268758304,1.0,0.5669655875202348
-T2 timing,full,F1,us_convention,"horse race lead_gex_x_exp, ratio",-0.0854644447579131,0.9318921609915104,1.0,0.9888389138763952
-T2 timing,full,F2,us_convention,horse race r_rod_x_neg,0.16442038580261495,0.8694002164117256,1.0,0.9792295836474568
-T2 timing,full,F2,us_convention,horse race lead_r_rod_x_neg,2.209358934961296,0.027149684938703924,1.0,0.0907858361257978
-T2 timing,full,F1,participant_pro,"gex_l1, GEX at t (same evening), share",-3.6217948032127762,0.0002925661506531169,0.21006249616893793,0.008061186797905396
-T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), share",2.8741439057997593,0.004051243258348825,1.0,0.027081283763016474
-T2 timing,full,F1,participant_pro,"gex_l1, GEX at t (same evening), ratio",-2.525361866137425,0.011557920891323053,1.0,0.0560521392245863
-T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), ratio",1.7426635559612011,0.08139240113892837,1.0,0.200641733040149
+T2 timing,full,F1,us_convention,"horse race gex_l1, share",0.8673737877490091,0.3857372391189263,1.0,0.612884435602234
+T2 timing,full,F1,us_convention,"horse race gex_l1_x_exp, share",0.5415972082557852,0.5880960154600121,1.0,0.8156397074230449
+T2 timing,full,F1,us_convention,"horse race lead_gex, share",0.594871419443931,0.5519294230706018,1.0,0.7845433561654913
+T2 timing,full,F1,us_convention,"horse race lead_gex_x_exp, share",-0.6229090555570286,0.5333442869041919,1.0,0.7667326878146999
+T2 timing,full,F1,us_convention,"horse race gex_l1, ratio",-2.042111028264695,0.04114051919249402,1.0,0.1212612310220343
+T2 timing,full,F1,us_convention,"horse race gex_l1_x_exp, ratio",1.4702484019339417,0.14149449004878017,1.0,0.2940865871602098
+T2 timing,full,F1,us_convention,"horse race lead_gex, ratio",-0.9406092923566455,0.3469051181796874,1.0,0.5669682768487402
+T2 timing,full,F1,us_convention,"horse race lead_gex_x_exp, ratio",-0.08550370523909992,0.9318609499062369,1.0,0.9888389138763952
+T2 timing,full,F2,us_convention,horse race r_rod_x_neg,0.16442038580261495,0.8694002164117256,1.0,0.9792089791545766
+T2 timing,full,F2,us_convention,horse race lead_r_rod_x_neg,2.209358934961296,0.027149684938703924,1.0,0.09078529637219804
+T2 timing,full,F1,participant_pro,"gex_l1, GEX at t (same evening), share",-3.6217890747205344,0.00029257263070076695,0.21006714884315067,0.008061186797905396
+T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), share",2.8741413168700194,0.004051276468666928,1.0,0.027081505763521266
+T2 timing,full,F1,participant_pro,"gex_l1, GEX at t (same evening), ratio",-2.5253462169262515,0.011558435639559729,1.0,0.0560546355853158
+T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), ratio",1.742664589901877,0.08139222042734623,1.0,0.20064128756508604
 T2 timing,full,F2,participant_pro,"r_rod_x_neg binary, GEX at t (same evening)",-1.7716280458551394,0.07645632098288896,1.0,0.1929611910520531
 T2 timing,full,F2,participant_pro,"r_rod_x_neg controls, GEX at t (same evening)",-0.9480043762644508,0.34312722632139836,1.0,0.5640582979061358
-T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+1 (lead), share",-4.267918420362826,1.9730545215982526e-05,0.014423028552883226,0.0012200053791882528
-T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), share",2.4384111861776083,0.01475198320030007,1.0,0.06438806785072149
-T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+1 (lead), ratio",-3.068645033749452,0.0021503192357709214,1.0,0.01945776674319541
-T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), ratio",1.486740961947025,0.13708323960474797,1.0,0.2873326660641893
+T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+1 (lead), share",-4.267916313652754,1.9730731502778963e-05,0.014423164728531421,0.0012200168979218326
+T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), share",2.438411461874763,0.014751971947840272,1.0,0.06438801873704401
+T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+1 (lead), ratio",-3.0686456150481116,0.0021503150521327142,1.0,0.019457728886371633
+T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), ratio",1.4867386353544307,0.13708385432734438,1.0,0.2873339545505354
 T2 timing,full,F2,participant_pro,"r_rod_x_neg binary, GEX at t+1 (lead)",-1.0169556171638092,0.30917454347971474,1.0,0.5225683627834814
 T2 timing,full,F2,participant_pro,"r_rod_x_neg controls, GEX at t+1 (lead)",-0.07362143255333149,0.9413116167049609,1.0,0.9888389138763952
-T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+2 (lead), share",-4.244270367776658,2.193058114520711e-05,0.01600932423600119,0.0012517300930572058
-T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), share",2.209176897836121,0.027162339110413897,1.0,0.0907858361257978
-T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+2 (lead), ratio",-3.7251062821306276,0.00019523294835340686,0.14095818871115975,0.0068982308418203755
-T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.5630539257186074,0.1180399114798847,1.0,0.26381209131950134
-T2 timing,full,F2,participant_pro,"r_rod_x_neg binary, GEX at t+2 (lead)",-2.2594218617395776,0.02385715578116801,1.0,0.08347384699172879
+T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+2 (lead), share",-4.244274390595098,2.1930187764464982e-05,0.016009037068059437,0.0012517076400948475
+T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), share",2.2091792204908227,0.027162177620792406,1.0,0.09078529637219804
+T2 timing,full,F1,participant_pro,"gex_l1, GEX at t+2 (lead), ratio",-3.7251141910506154,0.0001952268273133631,0.14095376932024817,0.006898014565072163
+T2 timing,full,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.5630553189509078,0.11803958380546466,1.0,0.26381135898691194
+T2 timing,full,F2,participant_pro,"r_rod_x_neg binary, GEX at t+2 (lead)",-2.2594218617395776,0.02385715578116801,1.0,0.08382582314878934
 T2 timing,full,F2,participant_pro,"r_rod_x_neg controls, GEX at t+2 (lead)",-1.2261056525886647,0.2201589189773332,1.0,0.4144535326813713
-T2 timing,full,F1,participant_pro,"horse race gex_l1, share",-0.35850753808119745,0.7199635277135135,1.0,0.9022888422867557
-T2 timing,full,F1,participant_pro,"horse race gex_l1_x_exp, share",2.0368760913530672,0.04166246060071667,1.0,0.12132592691475759
-T2 timing,full,F1,participant_pro,"horse race lead_gex, share",-3.551775260028708,0.0003826415319686752,0.27320605382563407,0.008061186797905396
-T2 timing,full,F1,participant_pro,"horse race lead_gex_x_exp, share",0.9545424744319874,0.33980911999617636,1.0,0.5615553831562647
-T2 timing,full,F1,participant_pro,"horse race gex_l1, ratio",-0.7748080204690346,0.4384531092554549,1.0,0.6625910530907281
-T2 timing,full,F1,participant_pro,"horse race gex_l1_x_exp, ratio",2.4267118211488223,0.015236353068334423,1.0,0.06531393394211985
-T2 timing,full,F1,participant_pro,"horse race lead_gex, ratio",-2.4241255060092954,0.015345301163425005,1.0,0.06531393394211985
-T2 timing,full,F1,participant_pro,"horse race lead_gex_x_exp, ratio",-0.23824297883926296,0.8116926443226594,1.0,0.949962053765636
+T2 timing,full,F1,participant_pro,"horse race gex_l1, share",-0.3585186556018011,0.7199552093534829,1.0,0.9012547748842279
+T2 timing,full,F1,participant_pro,"horse race gex_l1_x_exp, share",2.03687613987165,0.041662455737386764,1.0,0.12132592691475759
+T2 timing,full,F1,participant_pro,"horse race lead_gex, share",-3.5517668915029215,0.00038265370110305836,0.27321474258758366,0.008061186797905396
+T2 timing,full,F1,participant_pro,"horse race lead_gex_x_exp, share",0.9545389539238459,0.3398109011119328,1.0,0.5615583265591406
+T2 timing,full,F1,participant_pro,"horse race gex_l1, ratio",-0.7747927438257448,0.4384621376621928,1.0,0.6626046968337006
+T2 timing,full,F1,participant_pro,"horse race gex_l1_x_exp, ratio",2.4267007029538425,0.015236819959060446,1.0,0.06531393394211985
+T2 timing,full,F1,participant_pro,"horse race lead_gex, ratio",-2.4241324992939894,0.015345005650204642,1.0,0.06531393394211985
+T2 timing,full,F1,participant_pro,"horse race lead_gex_x_exp, ratio",-0.23824816581515482,0.8116886215192763,1.0,0.9493222686213556
 T2 timing,full,F2,participant_pro,horse race r_rod_x_neg,-4.393159911381811,1.1171489130201683e-05,0.008188701532437833,0.0008289244934609648
-T2 timing,full,F2,participant_pro,horse race lead_r_rod_x_neg,1.3211011269726614,0.18646764735142152,1.0,0.36794247838875943
-T2 timing,full,F1,client_mirror,"gex_l1, GEX at t (same evening), share",-1.2613715912740198,0.2071749986743774,1.0,0.3982483135139586
-T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), share",1.2415766721964903,0.21439279315215976,1.0,0.40894460801774435
-T2 timing,full,F1,client_mirror,"gex_l1, GEX at t (same evening), ratio",-3.9124233955484446,9.137452791608178e-05,0.06624653273915929,0.003766661095207371
-T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), ratio",0.9895444208449803,0.3223968475371869,1.0,0.5387803172806142
+T2 timing,full,F2,participant_pro,horse race lead_r_rod_x_neg,1.3211011269726614,0.18646764735142152,1.0,0.36795416132353803
+T2 timing,full,F1,client_mirror,"gex_l1, GEX at t (same evening), share",-1.2613665076697924,0.20717682938317217,1.0,0.39825183264848124
+T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), share",1.2415749531038096,0.21439342775878378,1.0,0.40894581850133055
+T2 timing,full,F1,client_mirror,"gex_l1, GEX at t (same evening), ratio",-3.912436834894648,9.13694413858664e-05,0.06624284500475314,0.003766451417128493
+T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), ratio",0.989542322527415,0.32239787361795946,1.0,0.5387820320372205
 T2 timing,full,F2,client_mirror,"r_rod_x_neg binary, GEX at t (same evening)",-2.0299773504084677,0.04235884161949087,1.0,0.12229673339168182
 T2 timing,full,F2,client_mirror,"r_rod_x_neg controls, GEX at t (same evening)",0.8496526026864022,0.39551825716592137,1.0,0.6218312123805887
-T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+1 (lead), share",-2.0207556952272556,0.0433050612259523,1.0,0.12406314837705254
-T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), share",1.3521891246564064,0.17631482182987301,1.0,0.35073886809052485
-T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+1 (lead), ratio",-3.2917445515498587,0.0009956800663162724,0.687019245758228,0.012569986193344006
-T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), ratio",0.8881542070294776,0.37445780743248436,1.0,0.6027064926570572
+T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+1 (lead), share",-2.0207545325328184,0.043305181645083055,1.0,0.1240634933615893
+T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), share",1.3521924429854508,0.17631376056651482,1.0,0.35073675694464873
+T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+1 (lead), ratio",-3.2917454951684118,0.0009956767257577762,0.6870169407728656,0.012569986193344006
+T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), ratio",0.8881468932670216,0.374461741055109,1.0,0.6027128239975941
 T2 timing,full,F2,client_mirror,"r_rod_x_neg binary, GEX at t+1 (lead)",-2.004940344432395,0.044969424965304344,1.0,0.12544102753479633
 T2 timing,full,F2,client_mirror,"r_rod_x_neg controls, GEX at t+1 (lead)",0.9455768968805873,0.3443644325491638,1.0,0.5640582979061358
-T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+2 (lead), share",-2.343735676709756,0.019091696175310858,1.0,0.07190882518822668
-T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), share",1.6711735769613105,0.09468739773861336,1.0,0.22375174879634113
-T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+2 (lead), ratio",-2.8691241041674886,0.004116102604673693,1.0,0.027269179755963217
-T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.2963906298109078,0.19484093866286245,1.0,0.3794540065297741
-T2 timing,full,F2,client_mirror,"r_rod_x_neg binary, GEX at t+2 (lead)",0.41447023157289803,0.6785297637290502,1.0,0.8832790959420268
+T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+2 (lead), share",-2.343740194459851,0.019091464942677567,1.0,0.07154478276498362
+T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), share",1.6711765745578837,0.09468680582441763,1.0,0.22375035006916524
+T2 timing,full,F1,client_mirror,"gex_l1, GEX at t+2 (lead), ratio",-2.86910952589106,0.004116292330646373,1.0,0.02727043669053222
+T2 timing,full,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.2963877816106293,0.1948419194336236,1.0,0.37945591658726696
+T2 timing,full,F2,client_mirror,"r_rod_x_neg binary, GEX at t+2 (lead)",0.41447023157289803,0.6785297637290502,1.0,0.8817321973501843
 T2 timing,full,F2,client_mirror,"r_rod_x_neg controls, GEX at t+2 (lead)",-0.032658769212671045,0.9739467037395105,1.0,0.9888389138763952
-T2 timing,full,F1,client_mirror,"horse race gex_l1, share",0.12017506712836871,0.9043444681656774,1.0,0.9867994049690185
-T2 timing,full,F1,client_mirror,"horse race gex_l1_x_exp, share",1.4549276478660662,0.14568929275190243,1.0,0.30028182006086557
-T2 timing,full,F1,client_mirror,"horse race lead_gex, share",-2.3233503770896036,0.020160337575246014,1.0,0.07405430931105218
-T2 timing,full,F1,client_mirror,"horse race lead_gex_x_exp, share",0.8405287944179917,0.4006119638885941,1.0,0.6234322994014939
-T2 timing,full,F1,client_mirror,"horse race gex_l1, ratio",-1.686177494988646,0.09176161721569309,1.0,0.22034666658266755
-T2 timing,full,F1,client_mirror,"horse race gex_l1_x_exp, ratio",2.590805119205688,0.009575169763245696,1.0,0.04866284907074182
-T2 timing,full,F1,client_mirror,"horse race lead_gex, ratio",-2.7081102048415926,0.00676675485379122,1.0,0.03903311502143665
-T2 timing,full,F1,client_mirror,"horse race lead_gex_x_exp, ratio",0.07530206234591243,0.9399743806287678,1.0,0.9888389138763952
+T2 timing,full,F1,client_mirror,"horse race gex_l1, share",0.12016778947295843,0.9043502331175909,1.0,0.9868056955489006
+T2 timing,full,F1,client_mirror,"horse race gex_l1_x_exp, share",1.4549304355702386,0.14568852091516474,1.0,0.3002802292195895
+T2 timing,full,F1,client_mirror,"horse race lead_gex, share",-2.323346230470747,0.02016056015456433,1.0,0.07405512690438976
+T2 timing,full,F1,client_mirror,"horse race lead_gex_x_exp, share",0.8405337385099025,0.40060919303465814,1.0,0.6234322994014939
+T2 timing,full,F1,client_mirror,"horse race gex_l1, ratio",-1.6862086660804574,0.09175561531491257,1.0,0.22033225425134345
+T2 timing,full,F1,client_mirror,"horse race gex_l1_x_exp, ratio",2.590835926144116,0.009574312685721524,1.0,0.048658493238392955
+T2 timing,full,F1,client_mirror,"horse race lead_gex, ratio",-2.708096362145037,0.00676703710853176,1.0,0.03903311502143665
+T2 timing,full,F1,client_mirror,"horse race lead_gex_x_exp, ratio",0.0752932703002995,0.9399813758076676,1.0,0.9888389138763952
 T2 timing,full,F2,client_mirror,horse race r_rod_x_neg,-2.408354375184551,0.01602461786842686,1.0,0.06642606959984765
-T2 timing,full,F2,client_mirror,horse race lead_r_rod_x_neg,-0.2635276230440278,0.7921439356409171,1.0,0.9372433736513132
-T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t (same evening), share",5.582569714633932,2.3699056349845737e-08,1.758469981158554e-05,8.828034676781362e-06
-T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), share",-0.04267773522020632,0.965958428115883,1.0,0.9888389138763952
-T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t (same evening), ratio",2.1928796339302883,0.028316052430178245,1.0,0.09338004845863225
-T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), ratio",0.9597934872648788,0.3371591607586579,1.0,0.5596691214383092
+T2 timing,full,F2,client_mirror,horse race lead_r_rod_x_neg,-0.2635276230440278,0.7921439356409171,1.0,0.9357807631013525
+T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t (same evening), share",5.5825382765644775,2.3703342051182737e-08,1.7587879801977592e-05,8.824931472356092e-06
+T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), share",-0.04269331382684962,0.9659460095050085,1.0,0.9888389138763952
+T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t (same evening), ratio",2.192851692578429,0.028318066155651845,1.0,0.09338668927774964
+T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t (same evening), ratio",0.9597815233261271,0.337165183301933,1.0,0.5596791185906808
 T2 timing,pre_auction,F2,us_convention,"r_rod_x_neg binary, GEX at t (same evening)",2.0014634107081988,0.0453424730610749,1.0,0.12544285478078804
 T2 timing,pre_auction,F2,us_convention,"r_rod_x_neg controls, GEX at t (same evening)",1.574538245991384,0.11536306678645963,1.0,0.2609737669376617
-T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+1 (lead), share",0.915436371332386,0.3599625916426783,1.0,0.5844469212229043
-T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), share",-0.8504567392805814,0.39507120230607007,1.0,0.6218312123805887
-T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+1 (lead), ratio",-0.7429864217708683,0.4574899011438883,1.0,0.6857727407045761
-T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), ratio",-0.24889706948869236,0.8034404021907022,1.0,0.9417895393767789
+T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+1 (lead), share",0.915444697054525,0.3599582226051613,1.0,0.5844398275121
+T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), share",-0.8504900064722692,0.39505271419565724,1.0,0.6218312123805887
+T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+1 (lead), ratio",-0.7429789297138142,0.4574944371205397,1.0,0.6857795400877585
+T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+1 (lead), ratio",-0.24893831873612657,0.8034084940393108,1.0,0.9417521367727781
 T2 timing,pre_auction,F2,us_convention,"r_rod_x_neg binary, GEX at t+1 (lead)",2.1689553352302062,0.03008607503190863,1.0,0.09635815117263548
 T2 timing,pre_auction,F2,us_convention,"r_rod_x_neg controls, GEX at t+1 (lead)",1.5980844089709885,0.11002419295260199,1.0,0.2519689850951564
-T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+2 (lead), share",0.10247990635410414,0.9183757612771206,1.0,0.9888389138763952
-T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), share",0.14569484628137447,0.8841622900276861,1.0,0.9832157842618545
-T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+2 (lead), ratio",-0.3308303473385263,0.7407726365703955,1.0,0.9025505686949645
-T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), ratio",0.027424561299280708,0.9781211085298591,1.0,0.9901307810766105
+T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+2 (lead), share",0.1025254010724171,0.9183396519396191,1.0,0.9888389138763952
+T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), share",0.14566661296671665,0.8841845791743065,1.0,0.9832157842618545
+T2 timing,pre_auction,F1,us_convention,"gex_l1, GEX at t+2 (lead), ratio",-0.33080505819066186,0.7407917399227701,1.0,0.9025738440438349
+T2 timing,pre_auction,F1,us_convention,"gex_l1_x_exp, GEX at t+2 (lead), ratio",0.027411342608999127,0.9781316515551755,1.0,0.9901414535524423
 T2 timing,pre_auction,F2,us_convention,"r_rod_x_neg binary, GEX at t+2 (lead)",-0.5786029299286304,0.5628571273134152,1.0,0.7924857466158521
 T2 timing,pre_auction,F2,us_convention,"r_rod_x_neg controls, GEX at t+2 (lead)",-1.0186708658716765,0.30835924838858986,1.0,0.5223802792336386
-T2 timing,pre_auction,F1,us_convention,"horse race gex_l1, share",1.1376312063287375,0.2552745102431979,1.0,0.452061304535687
-T2 timing,pre_auction,F1,us_convention,"horse race gex_l1_x_exp, share",0.6955315691157096,0.4867222342455886,1.0,0.713731023340369
-T2 timing,pre_auction,F1,us_convention,"horse race lead_gex, share",0.6987503378986935,0.4847080694985869,1.0,0.7121849258771317
-T2 timing,pre_auction,F1,us_convention,"horse race lead_gex_x_exp, share",-0.6501380865782667,0.5156030293188143,1.0,0.748683850791703
-T2 timing,pre_auction,F1,us_convention,"horse race gex_l1, ratio",-1.7990635298219197,0.07200863183923906,1.0,0.18298083844080612
-T2 timing,pre_auction,F1,us_convention,"horse race gex_l1_x_exp, ratio",1.4482017512556327,0.14756063496998564,1.0,0.3024585390821253
-T2 timing,pre_auction,F1,us_convention,"horse race lead_gex, ratio",-0.6300880541125471,0.5286369750214013,1.0,0.7644987796126946
-T2 timing,pre_auction,F1,us_convention,"horse race lead_gex_x_exp, ratio",-0.2648225774703831,0.7911461433572278,1.0,0.9372433736513132
+T2 timing,pre_auction,F1,us_convention,"horse race gex_l1, share",1.137728713737998,0.2552337796628885,1.0,0.45198917544120115
+T2 timing,pre_auction,F1,us_convention,"horse race gex_l1_x_exp, share",0.6954655458652066,0.48676359599331986,1.0,0.7137916763380303
+T2 timing,pre_auction,F1,us_convention,"horse race lead_gex, share",0.6987297612854813,0.48472093108367953,1.0,0.712203823493248
+T2 timing,pre_auction,F1,us_convention,"horse race lead_gex_x_exp, share",-0.6501741057551486,0.515579765282544,1.0,0.7486500701362968
+T2 timing,pre_auction,F1,us_convention,"horse race gex_l1, ratio",-1.79896936156905,0.07202352737669734,1.0,0.18301868942982683
+T2 timing,pre_auction,F1,us_convention,"horse race gex_l1_x_exp, ratio",1.4481335106320214,0.14757971522336072,1.0,0.30249764833075593
+T2 timing,pre_auction,F1,us_convention,"horse race lead_gex, ratio",-0.6300842220021934,0.5286394821046732,1.0,0.7644987796126946
+T2 timing,pre_auction,F1,us_convention,"horse race lead_gex_x_exp, ratio",-0.26486360206757437,0.7911145385405811,1.0,0.9357807631013525
 T2 timing,pre_auction,F2,us_convention,horse race r_rod_x_neg,0.1430544346706512,0.886247190591029,1.0,0.9832157842618545
 T2 timing,pre_auction,F2,us_convention,horse race lead_r_rod_x_neg,2.18153742312997,0.029143689610398798,1.0,0.09526263299962955
-T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t (same evening), share",-3.4280632677161313,0.0006079037702216259,0.42249312030402997,0.009397179114675965
-T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), share",2.8529168583455258,0.004331995382434729,1.0,0.02837357006461777
-T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t (same evening), ratio",-2.3784249295542756,0.017386776807925212,1.0,0.06862227867808782
-T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), ratio",1.7063557084912901,0.08794187175948504,1.0,0.21258426161512078
+T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t (same evening), share",-3.428057472836892,0.0006079167467162233,0.42250213896777516,0.00939737970965495
+T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), share",2.852914210370825,0.004332031478919546,1.0,0.02837357006461777
+T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t (same evening), ratio",-2.3784089861313906,0.017387528687897277,1.0,0.06862524620436053
+T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t (same evening), ratio",1.7063564939549842,0.08794172560600369,1.0,0.21258426161512078
 T2 timing,pre_auction,F2,participant_pro,"r_rod_x_neg binary, GEX at t (same evening)",-1.7569647550600727,0.07892381687148317,1.0,0.19588973281172498
 T2 timing,pre_auction,F2,participant_pro,"r_rod_x_neg controls, GEX at t (same evening)",-0.9499868153662357,0.34211895201014775,1.0,0.5640582979061358
-T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+1 (lead), share",-4.154379900394566,3.261708778066028e-05,0.023777856992101346,0.0017287056523749948
-T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), share",2.501021734039017,0.012383557842580663,1.0,0.05799739676329705
-T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+1 (lead), ratio",-2.7869560001961933,0.005320570261281967,1.0,0.033456467236196774
-T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), ratio",1.4924320069340173,0.13558592950802564,1.0,0.2866232469941739
+T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+1 (lead), share",-4.1543777375098525,3.261739628328941e-05,0.02377808189051798,0.0017287220030143388
+T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), share",2.5010219743673625,0.012383549438985708,1.0,0.05799739676329705
+T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+1 (lead), ratio",-2.7869566300004123,0.005320559920919701,1.0,0.03345640221459676
+T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+1 (lead), ratio",1.4924298100852538,0.13558650505040884,1.0,0.28662446366781585
 T2 timing,pre_auction,F2,participant_pro,"r_rod_x_neg binary, GEX at t+1 (lead)",-1.4361800480120324,0.1509511148693185,1.0,0.3065285833649806
 T2 timing,pre_auction,F2,participant_pro,"r_rod_x_neg controls, GEX at t+1 (lead)",-0.5198284939284367,0.6031831175875207,1.0,0.8269276139078786
-T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+2 (lead), share",-4.325577526280632,1.5213275046553516e-05,0.011136117334077173,0.0010262045531402462
-T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), share",2.2783251475196176,0.022707212443930667,1.0,0.08100361362209882
-T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+2 (lead), ratio",-3.563264073733114,0.0003662718857466025,0.2618843983088208,0.008061186797905396
-T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.5905978274336086,0.11170011373906973,1.0,0.2550199519827377
+T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+2 (lead), share",-4.325581619405633,1.5212992538058203e-05,0.011135910537858604,0.0010261854966581079
+T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), share",2.2783275106042584,0.022707071755699988,1.0,0.0810031117438913
+T2 timing,pre_auction,F1,participant_pro,"gex_l1, GEX at t+2 (lead), ratio",-3.563272118261744,0.00036626065655981864,0.2618763694402703,0.008061186797905396
+T2 timing,pre_auction,F1,participant_pro,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.5905993048420206,0.11169978103563494,1.0,0.2550191923952035
 T2 timing,pre_auction,F2,participant_pro,"r_rod_x_neg binary, GEX at t+2 (lead)",-2.4927099807951523,0.0126772346902414,1.0,0.058790675875994486
 T2 timing,pre_auction,F2,participant_pro,"r_rod_x_neg controls, GEX at t+2 (lead)",-1.4729643357856292,0.14076065264267804,1.0,0.29338315803614357
-T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1, share",-0.8054207285078271,0.42057693405381413,1.0,0.6421154013743418
-T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1_x_exp, share",2.2692732085921783,0.0232517167187615,1.0,0.08176670049915181
-T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex, share",-3.273306678457872,0.0010629707665522421,0.7260090335551814,0.013145405146362728
-T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex_x_exp, share",0.8374876190276078,0.40231853341399537,1.0,0.6234322994014939
-T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1, ratio",-1.3196661233890008,0.1869465152999492,1.0,0.36794247838875943
-T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1_x_exp, ratio",2.749003108467202,0.005977681932817146,1.0,0.03559820089955022
-T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex, ratio",-1.9943760138286155,0.046110977791837024,1.0,0.1267197982279373
-T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex_x_exp, ratio",-0.3390533965619416,0.7345695052933763,1.0,0.9022888422867557
+T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1, share",-0.805432949461765,0.420569884217031,1.0,0.642104638043286
+T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1_x_exp, share",2.2692732439482475,0.023251714570028795,1.0,0.08215605814743508
+T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex, share",-3.273297680835222,0.0010630046074728526,0.7260321469039583,0.01314582364574761
+T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex_x_exp, share",0.8374836965458446,0.40232073734390694,1.0,0.6234322994014939
+T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1, ratio",-1.3196483524564304,0.18695245123850923,1.0,0.36795416132353803
+T2 timing,pre_auction,F1,participant_pro,"horse race gex_l1_x_exp, ratio",2.748990022506718,0.005977920586339917,1.0,0.03559820089955022
+T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex, ratio",-1.994383699370819,0.046110138524454065,1.0,0.12671749179683303
+T2 timing,pre_auction,F1,participant_pro,"horse race lead_gex_x_exp, ratio",-0.3390580740611596,0.7345659816593055,1.0,0.9012547748842279
 T2 timing,pre_auction,F2,participant_pro,horse race r_rod_x_neg,-4.730929954029977,2.2349363436827634e-06,0.0016449131489505138,0.00023690325243037294
 T2 timing,pre_auction,F2,participant_pro,horse race lead_r_rod_x_neg,0.9465225627846545,0.3438821197147798,1.0,0.5640582979061358
-T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t (same evening), share",-1.209028843788598,0.2266517642287672,1.0,0.42045483953473817
-T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), share",1.134626755538138,0.2565317378845742,1.0,0.4521295712835013
-T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t (same evening), ratio",-3.929145574931899,8.524822268627455e-05,0.06189020967023533,0.0037208341901891597
-T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), ratio",0.8839847752941132,0.3767044314935434,1.0,0.6047997485188497
+T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t (same evening), share",-1.2090238155190063,0.22665369595151807,1.0,0.42038929384536944
+T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), share",1.1346250055013098,0.25653247144708324,1.0,0.4521308641656432
+T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t (same evening), ratio",-3.9291589777847293,8.524347188780331e-05,0.0618867605905452,0.003720626831808827
+T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t (same evening), ratio",0.8839832668392945,0.376705245799269,1.0,0.6047997485188497
 T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg binary, GEX at t (same evening)",-1.9909826891291895,0.04648279041671713,1.0,0.12727022320739526
 T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg controls, GEX at t (same evening)",0.8827182442083855,0.37738852232375664,1.0,0.6047997485188497
-T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+1 (lead), share",-1.9399691179786136,0.052383443095827695,1.0,0.13881612420394338
-T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), share",1.3418703058790329,0.1796380512528507,1.0,0.35639420863533483
-T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+1 (lead), ratio",-2.932070086572286,0.0033671074983134416,1.0,0.025328554360812425
-T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), ratio",0.7852848624446106,0.43228656910813157,1.0,0.6559440373788009
+T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+1 (lead), share",-1.9399679599368296,0.05238358384162705,1.0,0.13881649718031167
+T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), share",1.3418734789097073,0.17963702225461797,1.0,0.3563921671468624
+T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+1 (lead), ratio",-2.9320709902925843,0.003367097700005284,1.0,0.025328554360812425
+T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+1 (lead), ratio",0.7852778410589251,0.43229068491887546,1.0,0.6559502826376392
 T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg binary, GEX at t+1 (lead)",-2.011155203798304,0.04430906573765947,1.0,0.12489848663126309
 T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg controls, GEX at t+1 (lead)",0.9748026795413338,0.32965814771286706,1.0,0.5484447210828416
-T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+2 (lead), share",-2.1760671982357374,0.029550236216073885,1.0,0.09574792695339224
-T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), share",1.5559269184788826,0.11972547154951621,1.0,0.26597694577766773
-T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+2 (lead), ratio",-2.52621286011819,0.011529959827540397,1.0,0.0560521392245863
-T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.2235587123860991,0.221118742888757,1.0,0.4144535326813713
-T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg binary, GEX at t+2 (lead)",0.4076240876736814,0.6835496772168229,1.0,0.8867025533127318
+T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+2 (lead), share",-2.1760718580188914,0.029549887836176222,1.0,0.09574679814167143
+T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), share",1.5559299482844473,0.11972475100605909,1.0,0.26597534504938875
+T2 timing,pre_auction,F1,client_mirror,"gex_l1, GEX at t+2 (lead), ratio",-2.526198571485316,0.011530428812446317,1.0,0.0560546355853158
+T2 timing,pre_auction,F1,client_mirror,"gex_l1_x_exp, GEX at t+2 (lead), ratio",1.2235558173094707,0.2211198356131675,1.0,0.4144535326813713
+T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg binary, GEX at t+2 (lead)",0.4076240876736814,0.6835496772168229,1.0,0.8851550793977009
 T2 timing,pre_auction,F2,client_mirror,"r_rod_x_neg controls, GEX at t+2 (lead)",-0.10263184382561791,0.9182551685644036,1.0,0.9888389138763952
-T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1, share",-0.0679260228486386,0.9458445233522521,1.0,0.9888389138763952
-T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1_x_exp, share",1.5482733253735748,0.1215565038687208,1.0,0.26923858468833084
-T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex, share",-2.1763646461049535,0.029528005170276664,1.0,0.09574792695339224
-T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex_x_exp, share",0.8038340967475444,0.4214927950774948,1.0,0.6421923079004132
-T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1, ratio",-2.1564165351947824,0.031051154672957514,1.0,0.0987490018631887
-T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1_x_exp, ratio",2.8897433978153493,0.003855564027210228,1.0,0.02648915285361101
-T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex, ratio",-2.229027747091665,0.025812058660987514,1.0,0.0870570342111488
-T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex_x_exp, ratio",-0.07039638492401225,0.9438781685248208,1.0,0.9888389138763952
+T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1, share",-0.067933424515416,0.9458386312866143,1.0,0.9888389138763952
+T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1_x_exp, share",1.5482763506803605,0.12155577579745033,1.0,0.26923697206480046
+T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex, share",-2.1763603463808594,0.029528326426152062,1.0,0.09574679814167143
+T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex_x_exp, share",0.8038386924253756,0.42149014059841317,1.0,0.6421882634990197
+T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1, ratio",-2.156450260818833,0.031048523672822115,1.0,0.0987490018631887
+T2 timing,pre_auction,F1,client_mirror,"horse race gex_l1_x_exp, ratio",2.8897764800022006,0.0038551583318026726,1.0,0.026486365575903545
+T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex, ratio",-2.229012162125419,0.025813095576461494,1.0,0.0870605314442474
+T2 timing,pre_auction,F1,client_mirror,"horse race lead_gex_x_exp, ratio",-0.07040595480114668,0.9438705517665777,1.0,0.9888389138763952
 T2 timing,pre_auction,F2,client_mirror,horse race r_rod_x_neg,-2.4095056587991492,0.01597414833858475,1.0,0.06642606959984765
-T2 timing,pre_auction,F2,client_mirror,horse race lead_r_rod_x_neg,-0.2873426979057458,0.7738499322485195,1.0,0.9271684072877134
+T2 timing,pre_auction,F2,client_mirror,horse race lead_r_rod_x_neg,-0.2873426979057458,0.7738499322485195,1.0,0.925602518152153
 T3 sign-rule cloud,full,F1,us_convention,share_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),0.9054607027329621,0.6026986506746627,1.0,0.8269276139078786
 T3 sign-rule cloud,full,F1,participant_pro,share_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-2.8574156381179376,0.0004997501249375312,0.35482258870564715,0.008061186797905396
 T3 sign-rule cloud,full,F1,client_mirror,share_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-0.35937620938298365,1.0,1.0,1.0
@@ -359,9 +359,9 @@ T3 sign-rule cloud,full,F1,client_mirror,ratio_t_gex_l1: rank of |t| among place
 T3 sign-rule cloud,full,F1,us_convention,ratio_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),1.5751265637359502,0.0879560219890055,1.0,0.21258426161512078
 T3 sign-rule cloud,full,F1,participant_pro,ratio_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),3.1078207241922056,0.0004997501249375312,0.35482258870564715,0.008061186797905396
 T3 sign-rule cloud,full,F1,client_mirror,ratio_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),3.0325041275794677,0.0004997501249375312,0.35482258870564715,0.008061186797905396
-T3 sign-rule cloud,full,F2,us_convention,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),0.5442545077543742,0.7231833910034602,1.0,0.9022888422867557
+T3 sign-rule cloud,full,F2,us_convention,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),0.5442545077543742,0.7231833910034602,1.0,0.9012547748842279
 T3 sign-rule cloud,full,F2,participant_pro,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-3.702227618808394,0.031141868512110725,1.0,0.0987490018631887
-T3 sign-rule cloud,full,F2,client_mirror,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-4.174172600172396,0.01730103806228374,1.0,0.06862227867808782
+T3 sign-rule cloud,full,F2,client_mirror,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-4.174172600172396,0.01730103806228374,1.0,0.06862524620436053
 T3 sign-rule cloud,full,F2,us_convention,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-0.03615512191780292,0.9480968858131488,1.0,0.9888389138763952
 T3 sign-rule cloud,full,F2,participant_pro,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-2.9810472040442417,0.0034602076124567475,1.0,0.025328554360812425
 T3 sign-rule cloud,full,F2,client_mirror,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),0.06734962147279447,0.889273356401384,1.0,0.9832157842618545
@@ -372,7 +372,7 @@ T3 sign-rule cloud,pre_auction,F1,us_convention,share_t_gex_l1_x_exp: rank of |t
 T3 sign-rule cloud,pre_auction,F1,participant_pro,share_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),3.4674421761138423,0.0004997501249375312,0.35482258870564715,0.008061186797905396
 T3 sign-rule cloud,pre_auction,F1,client_mirror,share_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),1.7627441590556974,0.0004997501249375312,0.35482258870564715,0.008061186797905396
 T3 sign-rule cloud,pre_auction,F1,us_convention,ratio_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-1.8382956068269036,0.9330334832583708,1.0,0.9888389138763952
-T3 sign-rule cloud,pre_auction,F1,participant_pro,ratio_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-2.494351758319715,0.9020489755122438,1.0,0.9867994049690185
+T3 sign-rule cloud,pre_auction,F1,participant_pro,ratio_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-2.494351758319715,0.9020489755122438,1.0,0.9868056955489006
 T3 sign-rule cloud,pre_auction,F1,client_mirror,ratio_t_gex_l1: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-2.764095712355314,0.8915542228885557,1.0,0.9832157842618545
 T3 sign-rule cloud,pre_auction,F1,us_convention,ratio_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),1.5273167803356187,0.09295352323838081,1.0,0.22225105396019937
 T3 sign-rule cloud,pre_auction,F1,participant_pro,ratio_t_gex_l1_x_exp: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),3.4093552083741243,0.0004997501249375312,0.35482258870564715,0.008061186797905396
@@ -380,178 +380,178 @@ T3 sign-rule cloud,pre_auction,F1,client_mirror,ratio_t_gex_l1_x_exp: rank of |t
 T3 sign-rule cloud,pre_auction,F2,us_convention,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),0.24609007015099071,0.8387096774193549,1.0,0.9633476480575253
 T3 sign-rule cloud,pre_auction,F2,participant_pro,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-3.951244275883291,0.0035842293906810036,1.0,0.025328554360812425
 T3 sign-rule cloud,pre_auction,F2,client_mirror,t_x_neg_binary: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-4.056438285002481,0.0035842293906810036,1.0,0.025328554360812425
-T3 sign-rule cloud,pre_auction,F2,us_convention,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-0.4220917363632978,0.7025089605734767,1.0,0.9022888422867557
+T3 sign-rule cloud,pre_auction,F2,us_convention,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-0.4220917363632978,0.7025089605734767,1.0,0.9012547748842279
 T3 sign-rule cloud,pre_auction,F2,participant_pro,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),-3.2232770568217437,0.0035842293906810036,1.0,0.025328554360812425
 T3 sign-rule cloud,pre_auction,F2,client_mirror,t_x_neg_controls: rank of |t| among placebo weight pairs ((1 + k) / (n + 1)),0.10851470244913898,0.8566308243727598,1.0,0.9723960649644596
-T3 gross and OI,full,F1,log gross GEX (demeaned),gex_l1,-4.458494775668757,8.253720834661011e-06,0.006058231092641182,0.0006804734288131634
-T3 gross and OI,full,F1,log gross GEX (demeaned),gex_l1_x_exp,1.7695935798394151,0.07679486914174392,1.0,0.19315862001075929
-T3 gross and OI,full,F2,log gross GEX (demeaned),r_rod x 1[below median],0.26698317976903335,0.7894821117765944,1.0,0.9372433736513132
+T3 gross and OI,full,F1,log gross GEX (demeaned),gex_l1,-4.458528457649172,8.252424210616502e-06,0.006057279370592513,0.0006803665293641605
+T3 gross and OI,full,F1,log gross GEX (demeaned),gex_l1_x_exp,1.7696072924649602,0.07679258318926643,1.0,0.19315287025910405
+T3 gross and OI,full,F2,log gross GEX (demeaned),r_rod x 1[below median],0.26698317976903335,0.7894821117765944,1.0,0.9357759216265703
 T3 gross and OI,full,F2,log gross GEX (demeaned),"r_rod x 1[below median], VIX and size controls",1.0349098582168879,0.3007110103068711,1.0,0.5117604808433448
-T3 gross and OI,full,F2,log gross GEX (demeaned),r_rod x standardized value,0.8752928138388884,0.38141460317885933,1.0,0.6088814530410782
-T3 gross and OI,full,F1,gross GEX / 20-day median,gex_l1,-5.307634744465208,1.1105690362410782e-07,8.218210868183978e-05,2.7468074163029334e-05
-T3 gross and OI,full,F1,gross GEX / 20-day median,gex_l1_x_exp,0.034690648950021455,0.9723264174977153,1.0,0.9888389138763952
+T3 gross and OI,full,F2,log gross GEX (demeaned),r_rod x standardized value,0.875301934191946,0.3814096419948855,1.0,0.6088814530410782
+T3 gross and OI,full,F1,gross GEX / 20-day median,gex_l1,-5.307694676108595,1.1102040511158968e-07,8.215509978257637e-05,2.7459046864266512e-05
+T3 gross and OI,full,F1,gross GEX / 20-day median,gex_l1_x_exp,0.03471285033117067,0.9723087140210424,1.0,0.9888389138763952
 T3 gross and OI,full,F2,gross GEX / 20-day median,r_rod x 1[below median],-0.6075080261449406,0.543513817799359,1.0,0.7740638249656898
 T3 gross and OI,full,F2,gross GEX / 20-day median,"r_rod x 1[below median], VIX and size controls",0.6286390210757983,0.5295854079796833,1.0,0.7644987796126946
-T3 gross and OI,full,F2,gross GEX / 20-day median,r_rod x standardized value,0.9100674730653614,0.3627869271950256,1.0,0.5877465065037314
+T3 gross and OI,full,F2,gross GEX / 20-day median,r_rod x standardized value,0.9100799797392193,0.36278033191685655,1.0,0.5877358215770907
 T3 gross and OI,full,F1,log total OI (demeaned),gex_l1,-1.9317737392156793,0.05338743872954755,1.0,0.14088566497030863
 T3 gross and OI,full,F1,log total OI (demeaned),gex_l1_x_exp,1.3896520386284115,0.16463456541715782,1.0,0.33105378737000296
 T3 gross and OI,full,F2,log total OI (demeaned),r_rod x 1[below median],-0.5236631881146075,0.6005128237204755,1.0,0.8266799910957197
 T3 gross and OI,full,F2,log total OI (demeaned),"r_rod x 1[below median], VIX and size controls",0.4282644878556671,0.6684585704827068,1.0,0.8779002724786018
 T3 gross and OI,full,F2,log total OI (demeaned),r_rod x standardized value,0.1530612049353614,0.8783500092945075,1.0,0.9832157842618545
-T3 gross and OI,pre_auction,F1,log gross GEX (demeaned),gex_l1,-4.588571521565906,4.462894049218708e-06,0.0032802271261757505,0.00041393342306503516
-T3 gross and OI,pre_auction,F1,log gross GEX (demeaned),gex_l1_x_exp,1.5847707809699902,0.1130184233734263,1.0,0.2572382519726451
+T3 gross and OI,pre_auction,F1,log gross GEX (demeaned),gex_l1,-4.588606699426276,4.462142180966669e-06,0.0032796745030105015,0.00041386368728465854
+T3 gross and OI,pre_auction,F1,log gross GEX (demeaned),gex_l1_x_exp,1.584783451975568,0.11301554344410995,1.0,0.2572316970415018
 T3 gross and OI,pre_auction,F2,log gross GEX (demeaned),r_rod x 1[below median],0.570766689795449,0.5681578054511858,1.0,0.79692455887482
 T3 gross and OI,pre_auction,F2,log gross GEX (demeaned),"r_rod x 1[below median], VIX and size controls",1.4353101552613732,0.15119873519081253,1.0,0.3065285833649806
-T3 gross and OI,pre_auction,F2,log gross GEX (demeaned),r_rod x standardized value,0.6808954961185739,0.49593761814624915,1.0,0.7258100841509209
-T3 gross and OI,pre_auction,F1,gross GEX / 20-day median,gex_l1,-5.581865464208811,2.379524171639181e-08,1.763227411184633e-05,8.828034676781362e-06
-T3 gross and OI,pre_auction,F1,gross GEX / 20-day median,gex_l1_x_exp,-0.010255226802704577,0.9918176562892489,1.0,0.9985464056534907
-T3 gross and OI,pre_auction,F2,gross GEX / 20-day median,r_rod x 1[below median],-0.3431831882023353,0.7314606514158328,1.0,0.9022888422867557
+T3 gross and OI,pre_auction,F2,log gross GEX (demeaned),r_rod x standardized value,0.6809057392601237,0.4959311363077683,1.0,0.7258005979099884
+T3 gross and OI,pre_auction,F1,gross GEX / 20-day median,gex_l1,-5.581926597153768,2.3786877283978685e-08,1.7626076067428205e-05,8.824931472356092e-06
+T3 gross and OI,pre_auction,F1,gross GEX / 20-day median,gex_l1_x_exp,-0.010234673879769137,0.9918340542885568,1.0,0.9985629149010978
+T3 gross and OI,pre_auction,F2,gross GEX / 20-day median,r_rod x 1[below median],-0.3431831882023353,0.7314606514158328,1.0,0.9012547748842279
 T3 gross and OI,pre_auction,F2,gross GEX / 20-day median,"r_rod x 1[below median], VIX and size controls",0.9915431110917273,0.3214204522259029,1.0,0.5383611186266816
-T3 gross and OI,pre_auction,F2,gross GEX / 20-day median,r_rod x standardized value,0.8487800973597621,0.3960036668253487,1.0,0.6218312123805887
+T3 gross and OI,pre_auction,F2,gross GEX / 20-day median,r_rod x standardized value,0.848794789666986,0.395995489929288,1.0,0.6218312123805887
 T3 gross and OI,pre_auction,F1,log total OI (demeaned),gex_l1,-2.0822251082542076,0.037321912882423584,1.0,0.11303207901534
 T3 gross and OI,pre_auction,F1,log total OI (demeaned),gex_l1_x_exp,1.286487899713025,0.1982728391146923,1.0,0.3841212705564013
 T3 gross and OI,pre_auction,F2,log total OI (demeaned),r_rod x 1[below median],-0.5594302217112829,0.5758681406582281,1.0,0.8046971005054713
-T3 gross and OI,pre_auction,F2,log total OI (demeaned),"r_rod x 1[below median], VIX and size controls",0.41135547517555565,0.6808118972172643,1.0,0.8846977718655168
+T3 gross and OI,pre_auction,F2,log total OI (demeaned),"r_rod x 1[below median], VIX and size controls",0.41135547517555565,0.6808118972172643,1.0,0.8831510974391785
 T3 gross and OI,pre_auction,F2,log total OI (demeaned),r_rod x standardized value,-0.06560279723047999,0.9476940620453809,1.0,0.9888389138763952
-T3 calendar controls,full,F1,us_convention (share),gex_l1,1.139092560714979,0.25466455002970756,1.0,0.45206003856948085
-T3 calendar controls,full,F1,us_convention (share),gex_l1_x_exp,0.4392944759382535,0.660448176346697,1.0,0.871071848105183
-T3 calendar controls,full,F1,participant_pro (share),gex_l1,-3.5480425795269444,0.0003881054744808765,0.27671920330486494,0.008061186797905396
-T3 calendar controls,full,F1,participant_pro (share),gex_l1_x_exp,3.4579555445819055,0.0005442911897798079,0.3788266680867463,0.008592852400353564
-T3 calendar controls,full,F1,client_mirror (share),gex_l1,-1.1155017896300197,0.2646354519721942,1.0,0.4653068847473177
-T3 calendar controls,full,F1,client_mirror (share),gex_l1_x_exp,2.303543736736024,0.021248269299811284,1.0,0.07690836985590231
-T3 calendar controls,full,F1,us_convention (ratio),gex_l1,-1.2255339588694074,0.22037410329412477,1.0,0.4144535326813713
-T3 calendar controls,full,F1,us_convention (ratio),gex_l1_x_exp,1.0232228298885482,0.3062025010118059,1.0,0.5199136287202746
-T3 calendar controls,full,F1,participant_pro (ratio),gex_l1,-3.1374213152981287,0.0017044101525783562,1.0,0.01756489351684917
-T3 calendar controls,full,F1,participant_pro (ratio),gex_l1_x_exp,3.7336763479320627,0.00018870495859313075,0.13643368506283354,0.0068982308418203755
-T3 calendar controls,full,F1,client_mirror (ratio),gex_l1,-2.602540358427297,0.009253592306839989,1.0,0.04748212811518949
-T3 calendar controls,full,F1,client_mirror (ratio),gex_l1_x_exp,3.2985010830082944,0.0009720250512269757,0.6716693103978403,0.012569986193344006
-T3 calendar controls,full,F1,gross GEX / 20-day median,gex_l1,-4.874990409714397,1.0881374129387658e-06,0.0008030454107488092,0.00016147959208011282
-T3 calendar controls,full,F1,gross GEX / 20-day median,gex_l1_x_exp,1.4868823265432654,0.1370458928299318,1.0,0.2873326660641893
+T3 calendar controls,full,F1,us_convention (share),gex_l1,1.1391897067759211,0.25462403783571497,1.0,0.4519881245791878
+T3 calendar controls,full,F1,us_convention (share),gex_l1_x_exp,0.43921080488401887,0.6605087966755356,1.0,0.871071848105183
+T3 calendar controls,full,F1,participant_pro (share),gex_l1,-3.5480525353115366,0.00038809080459313583,0.27670874367490583,0.008061186797905396
+T3 calendar controls,full,F1,participant_pro (share),gex_l1_x_exp,3.4579562955833016,0.0005442896725493812,0.3788256120943693,0.00859282844748172
+T3 calendar controls,full,F1,client_mirror (share),gex_l1,-1.115510430140729,0.26463175137800765,1.0,0.4653003780153594
+T3 calendar controls,full,F1,client_mirror (share),gex_l1_x_exp,2.3035481092071732,0.021248023595126533,1.0,0.07690748052479945
+T3 calendar controls,full,F1,us_convention (ratio),gex_l1,-1.22542074175842,0.22041673586736021,1.0,0.4144535326813713
+T3 calendar controls,full,F1,us_convention (ratio),gex_l1_x_exp,1.0231283017397432,0.3062471870983078,1.0,0.519989503036486
+T3 calendar controls,full,F1,participant_pro (ratio),gex_l1,-3.137406291614662,0.0017044975013603982,1.0,0.017565793694575216
+T3 calendar controls,full,F1,participant_pro (ratio),gex_l1_x_exp,3.733659502459041,0.0001887175864823241,0.13644281502672032,0.006898014565072163
+T3 calendar controls,full,F1,client_mirror (ratio),gex_l1,-2.602569255343798,0.00925281249468864,1.0,0.04748212811518949
+T3 calendar controls,full,F1,client_mirror (ratio),gex_l1_x_exp,3.2985395023054007,0.0009718920436989142,0.6715774021959497,0.012569986193344006
+T3 calendar controls,full,F1,gross GEX / 20-day median,gex_l1,-4.875063177299995,1.087736378744998e-06,0.0008027494475138086,0.0001614200786057577
+T3 calendar controls,full,F1,gross GEX / 20-day median,gex_l1_x_exp,1.4869658914674468,0.1370238197037308,1.0,0.2873339545505354
 T3 calendar controls,full,F2,us_convention,r_rod_x_neg binary,-0.16977271039261357,0.8651888892926989,1.0,0.9786130424621686
-T3 calendar controls,full,F2,us_convention,r_rod_x_neg controls,-0.3461003045717524,0.7292673345430194,1.0,0.9022888422867557
+T3 calendar controls,full,F2,us_convention,r_rod_x_neg controls,-0.3461003045717524,0.7292673345430194,1.0,0.9012547748842279
 T3 calendar controls,full,F2,participant_pro,r_rod_x_neg binary,-3.5308725635492824,0.00041419125032912094,0.29490417023433413,0.008061186797905396
 T3 calendar controls,full,F2,participant_pro,r_rod_x_neg controls,-2.6872934983927594,0.007203362730930649,1.0,0.0394539944864933
 T3 calendar controls,full,F2,client_mirror,r_rod_x_neg binary,-2.6904654140875555,0.007135243068625008,1.0,0.0394539944864933
 T3 calendar controls,full,F2,client_mirror,r_rod_x_neg controls,0.10811512174245154,0.9139043730502192,1.0,0.9886587318585606
-T3 calendar controls,pre_auction,F1,us_convention (share),gex_l1,1.4924409981646107,0.13558357395621606,1.0,0.2866232469941739
-T3 calendar controls,pre_auction,F1,us_convention (share),gex_l1_x_exp,0.5527577808844322,0.5804292817464158,1.0,0.8080272552642411
-T3 calendar controls,pre_auction,F1,participant_pro (share),gex_l1,-3.7754824535467635,0.00015969826641164988,0.11562154488203451,0.006236637561970748
-T3 calendar controls,pre_auction,F1,participant_pro (share),gex_l1_x_exp,3.664373584079357,0.0002479446642301017,0.17876810290990333,0.008061186797905396
-T3 calendar controls,pre_auction,F1,client_mirror (share),gex_l1,-1.2942477581421958,0.19557985520395194,1.0,0.37989594911343544
-T3 calendar controls,pre_auction,F1,client_mirror (share),gex_l1_x_exp,2.40378894949162,0.01622613802813571,1.0,0.0668877467604261
-T3 calendar controls,pre_auction,F1,us_convention (ratio),gex_l1,-0.7130456914838308,0.4758174837828003,1.0,0.7019017355205524
-T3 calendar controls,pre_auction,F1,us_convention (ratio),gex_l1_x_exp,0.8455105868413422,0.39782582423944135,1.0,0.6218312123805887
-T3 calendar controls,pre_auction,F1,participant_pro (ratio),gex_l1,-3.4852005245608897,0.0004917683579330011,0.3496473024903638,0.008061186797905396
-T3 calendar controls,pre_auction,F1,participant_pro (ratio),gex_l1_x_exp,3.9805406041397458,6.875871821256668e-05,0.04998758814053598,0.0031886855571077797
-T3 calendar controls,pre_auction,F1,client_mirror (ratio),gex_l1,-2.757025359566373,0.005832982755236615,1.0,0.035293207242777985
-T3 calendar controls,pre_auction,F1,client_mirror (ratio),gex_l1_x_exp,3.3631021446628058,0.0007707184073347018,0.5333371378756137,0.011213197220438209
-T3 calendar controls,pre_auction,F1,gross GEX / 20-day median,gex_l1,-4.797082040712688,1.6099367447000828e-06,0.001186523380843961,0.00019909551076124357
-T3 calendar controls,pre_auction,F1,gross GEX / 20-day median,gex_l1_x_exp,1.400917752196536,0.16123866956469857,1.0,0.3251062304809955
+T3 calendar controls,pre_auction,F1,us_convention (share),gex_l1,1.4925440621579522,0.13555657517401054,1.0,0.28662446366781585
+T3 calendar controls,pre_auction,F1,us_convention (share),gex_l1_x_exp,0.5526670426989546,0.5804914249476512,1.0,0.8081137660622085
+T3 calendar controls,pre_auction,F1,participant_pro (share),gex_l1,-3.77549258771793,0.0001596917734165791,0.11561684395360326,0.006236383993426405
+T3 calendar controls,pre_auction,F1,participant_pro (share),gex_l1_x_exp,3.664374227951908,0.0002479440405443308,0.17876765323246252,0.008061186797905396
+T3 calendar controls,pre_auction,F1,client_mirror (share),gex_l1,-1.2942565563278554,0.19557681717221953,1.0,0.3798900480151489
+T3 calendar controls,pre_auction,F1,client_mirror (share),gex_l1_x_exp,2.4037932706550973,0.0162259462416374,1.0,0.06688695617386083
+T3 calendar controls,pre_auction,F1,us_convention (ratio),gex_l1,-0.7129194990788675,0.4758955724017535,1.0,0.7020169278769406
+T3 calendar controls,pre_auction,F1,us_convention (ratio),gex_l1_x_exp,0.8454094488341259,0.39788227074123006,1.0,0.6218312123805887
+T3 calendar controls,pre_auction,F1,participant_pro (ratio),gex_l1,-3.485184856245927,0.0004917971563494074,0.3496677781644286,0.008061186797905396
+T3 calendar controls,pre_auction,F1,participant_pro (ratio),gex_l1_x_exp,3.980523198107796,6.876375346483828e-05,0.04999124876893743,0.003188919066931875
+T3 calendar controls,pre_auction,F1,client_mirror (ratio),gex_l1,-2.757054434343474,0.00583246412018388,1.0,0.035293207242777985
+T3 calendar controls,pre_auction,F1,client_mirror (ratio),gex_l1_x_exp,3.363141362600433,0.0007706089205125031,0.5332613729946521,0.01121160429451524
+T3 calendar controls,pre_auction,F1,gross GEX / 20-day median,gex_l1,-4.79715561334587,1.6093457436378245e-06,0.0011860878130610767,0.00019902242362987763
+T3 calendar controls,pre_auction,F1,gross GEX / 20-day median,gex_l1_x_exp,1.401006078661077,0.16121225537702155,1.0,0.32505297143953804
 T3 calendar controls,pre_auction,F2,us_convention,r_rod_x_neg binary,-0.5835431055575016,0.5595277478782783,1.0,0.7907992170013001
 T3 calendar controls,pre_auction,F2,us_convention,r_rod_x_neg controls,-0.8372388618362357,0.40245831726861936,1.0,0.6234322994014939
 T3 calendar controls,pre_auction,F2,participant_pro,r_rod_x_neg binary,-3.6128326827450943,0.0003028701475759577,0.21715789581196168,0.008061186797905396
 T3 calendar controls,pre_auction,F2,participant_pro,r_rod_x_neg controls,-2.76239097696525,0.005737972130548018,1.0,0.035186572899724204
 T3 calendar controls,pre_auction,F2,client_mirror,r_rod_x_neg binary,-2.665335495966752,0.007691155045655368,1.0,0.04120674027780681
 T3 calendar controls,pre_auction,F2,client_mirror,r_rod_x_neg controls,0.18925277727482914,0.8498947046936461,1.0,0.9672114584090268
-T4 split,full,F1,us_convention,"gex_l1, 2023 to 2024, share",1.1722156175667306,0.24111049971914533,1.0,0.43683767872161483
-T4 split,full,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, share",-1.2075330068718895,0.22722694158144208,1.0,0.42045483953473817
-T4 split,full,F1,us_convention,"gex_l1, 2023 to 2024, ratio",-1.0579235473989577,0.2900902988478816,1.0,0.49482069366696135
-T4 split,full,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, ratio",-0.27968245483683113,0.7797211403605568,1.0,0.9271684072877134
+T4 split,full,F1,us_convention,"gex_l1, 2023 to 2024, share",1.1723345685279873,0.24106275800535948,1.0,0.43683767872161483
+T4 split,full,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, share",-1.2076250515913116,0.22719151864150022,1.0,0.42038929384536944
+T4 split,full,F1,us_convention,"gex_l1, 2023 to 2024, ratio",-1.0577889166204935,0.2901516868739442,1.0,0.4949254061160152
+T4 split,full,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, ratio",-0.27977293601400033,0.779651716772366,1.0,0.925602518152153
 T4 split,full,F2,us_convention,"r_rod_x_neg binary, 2023 to 2024",-0.3178490483908969,0.7505994432227926,1.0,0.9079204002782394
-T4 split,full,F2,us_convention,"r_rod_x_neg controls, 2023 to 2024",-0.6507020881428619,0.5152388149861722,1.0,0.748683850791703
+T4 split,full,F2,us_convention,"r_rod_x_neg controls, 2023 to 2024",-0.6507020881428619,0.5152388149861722,1.0,0.7486500701362968
 T4 split,full,F1,us_convention,"gex_l1, 2025 onward, share",-0.145540747666982,0.8842839462388596,1.0,0.9832157842618545
 T4 split,full,F1,us_convention,"gex_l1_x_exp, 2025 onward, share",1.5788840981332017,0.11436264408086068,1.0,0.25950177953516396
 T4 split,full,F1,us_convention,"gex_l1, 2025 onward, ratio",-1.8805811880069772,0.060028912737257044,1.0,0.1562858008808587
 T4 split,full,F1,us_convention,"gex_l1_x_exp, 2025 onward, ratio",1.8782201789878112,0.06035105077040404,1.0,0.1565751037469923
 T4 split,full,F2,us_convention,"r_rod_x_neg binary, 2025 onward",0.5561981718348987,0.5780753888576889,1.0,0.8062630423541451
 T4 split,full,F2,us_convention,"r_rod_x_neg controls, 2025 onward",0.29837123824862155,0.7654198384256525,1.0,0.921982987194536
-T4 forecast,full,F1,us_convention,"fit 2023 to 2024, test 2025 onward, share",-1.6930189037147658,0.9547740654832354,1.0,0.9888389138763952
-T4 forecast,full,F1,us_convention,"fit 2023 to 2024, test 2025 onward, ratio",-0.45915915418510445,0.6769400600175348,1.0,0.8832790959420268
+T4 forecast,full,F1,us_convention,"fit 2023 to 2024, test 2025 onward, share",-1.6930754749966836,0.9547794490899585,1.0,0.9888389138763952
+T4 forecast,full,F1,us_convention,"fit 2023 to 2024, test 2025 onward, ratio",-0.45923940761365706,0.676968872795304,1.0,0.8817321973501843
 T4 forecast,full,F2,us_convention,"fit 2023 to 2024, test 2025 onward",-1.4134251731005847,0.9212346258503136,1.0,0.9888389138763952
-T4 forecast,full,F1,us_convention,"fit 2025 onward, test 2023 to 2024, share",-0.40969078620413774,0.6589836050899087,1.0,0.871071848105183
-T4 forecast,full,F1,us_convention,"fit 2025 onward, test 2023 to 2024, ratio",0.7057076259069044,0.24018498879728623,1.0,0.43683767872161483
+T4 forecast,full,F1,us_convention,"fit 2025 onward, test 2023 to 2024, share",-0.4097031540705673,0.6589881419599461,1.0,0.871071848105183
+T4 forecast,full,F1,us_convention,"fit 2025 onward, test 2023 to 2024, ratio",0.7055815892208468,0.2402241884283115,1.0,0.43683767872161483
 T4 forecast,full,F2,us_convention,"fit 2025 onward, test 2023 to 2024",0.04344643967245253,0.4826728295611072,1.0,0.7106016657427412
-T4 pre-registered F2,full,F2,us_convention,"binary, 2025 onward, one-sided",0.5561981718348987,0.7109623055711556,1.0,0.9022888422867557
-T4 split,full,F1,participant_pro,"gex_l1, 2023 to 2024, share",-1.507556686852944,0.13166802525189988,1.0,0.2831816659040861
-T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, share",2.975101795399651,0.0029289133723922212,1.0,0.02366901655555201
-T4 split,full,F1,participant_pro,"gex_l1, 2023 to 2024, ratio",0.162372103854555,0.8710128372066327,1.0,0.9792295836474568
-T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, ratio",2.0102815069562916,0.0444014030254459,1.0,0.12489848663126309
-T4 split,full,F2,participant_pro,"r_rod_x_neg binary, 2023 to 2024",-2.354363502353664,0.018554456764894797,1.0,0.0709660150492368
+T4 pre-registered F2,full,F2,us_convention,"binary, 2025 onward, one-sided",0.5561981718348987,0.7109623055711556,1.0,0.9012547748842279
+T4 split,full,F1,participant_pro,"gex_l1, 2023 to 2024, share",-1.5075694747517996,0.1316647501966213,1.0,0.2831746221620087
+T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, share",2.975105345324877,0.0029288794773132953,1.0,0.02366901655555201
+T4 split,full,F1,participant_pro,"gex_l1, 2023 to 2024, ratio",0.16239537875014529,0.8709945097601355,1.0,0.9792089791545766
+T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, ratio",2.0102623230813106,0.044403432307662534,1.0,0.12489848663126309
+T4 split,full,F2,participant_pro,"r_rod_x_neg binary, 2023 to 2024",-2.354363502353664,0.018554456764894797,1.0,0.07081280416190032
 T4 split,full,F2,participant_pro,"r_rod_x_neg controls, 2023 to 2024",-1.524625574604489,0.12735251473911469,1.0,0.27549727678257463
 T4 split,full,F1,participant_pro,"gex_l1, 2025 onward, share",-2.478082549289499,0.013209058058355917,1.0,0.060500747403086974
 T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2025 onward, share",1.7445788762759993,0.08105820046242804,1.0,0.20048394914373868
 T4 split,full,F1,participant_pro,"gex_l1, 2025 onward, ratio",-2.999402765132199,0.0027050945169606955,1.0,0.023071035995228
-T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2025 onward, ratio",2.4552727695921663,0.014077772256962688,1.0,0.06330731524040191
+T4 split,full,F1,participant_pro,"gex_l1_x_exp, 2025 onward, ratio",2.4552727695921663,0.014077772256962688,1.0,0.06292594587148381
 T4 split,full,F2,participant_pro,"r_rod_x_neg binary, 2025 onward",-2.521036167840828,0.01170098245515281,1.0,0.05622383385738895
 T4 split,full,F2,participant_pro,"r_rod_x_neg controls, 2025 onward",-3.641716849225632,0.0002708258597636049,0.19499461902979554,0.008061186797905396
-T4 forecast,full,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, share",-2.102942799329835,0.9822646150246306,1.0,0.9911058286362397
-T4 forecast,full,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, ratio",-1.8856537088498593,0.9703291826407049,1.0,0.9888389138763952
+T4 forecast,full,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, share",-2.102948594237323,0.9822648683325842,1.0,0.991105659449751
+T4 forecast,full,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, ratio",-1.8856594431181157,0.9703295692546101,1.0,0.9888389138763952
 T4 forecast,full,F2,participant_pro,"fit 2023 to 2024, test 2025 onward",2.4636433007636254,0.006876645285544252,1.0,0.03903311502143665
-T4 forecast,full,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, share",-1.9456363802967251,0.9741507831460113,1.0,0.9888389138763952
-T4 forecast,full,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, ratio",-2.9434272026791035,0.9983769992330679,1.0,1.0
-T4 forecast,full,F2,participant_pro,"fit 2025 onward, test 2023 to 2024",0.7484857510032765,0.22708360828992968,1.0,0.42045483953473817
+T4 forecast,full,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, share",-1.945632314243474,0.9741505387614511,1.0,0.9888389138763952
+T4 forecast,full,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, ratio",-2.943433931231023,0.9983770345119642,1.0,1.0
+T4 forecast,full,F2,participant_pro,"fit 2025 onward, test 2023 to 2024",0.7484857510032765,0.22708360828992968,1.0,0.42038929384536944
 T4 pre-registered F2,full,F2,participant_pro,"binary, 2025 onward, one-sided",-2.521036167840828,0.005850491227576405,1.0,0.035293207242777985
-T4 split,full,F1,client_mirror,"gex_l1, 2023 to 2024, share",-0.47685307415653644,0.6334667492173174,1.0,0.8469050953499991
-T4 split,full,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, share",1.0925956425646177,0.27457137675170773,1.0,0.47824404119663644
-T4 split,full,F1,client_mirror,"gex_l1, 2023 to 2024, ratio",-1.5683874009964585,0.11679074961578916,1.0,0.26214687218324373
-T4 split,full,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, ratio",2.069110272941411,0.038535739947785155,1.0,0.11437407616502634
+T4 split,full,F1,client_mirror,"gex_l1, 2023 to 2024, share",-0.4768615032230136,0.6334607465841261,1.0,0.8468970702079668
+T4 split,full,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, share",1.0926006988999963,0.27456915573458696,1.0,0.47824017266446833
+T4 split,full,F1,client_mirror,"gex_l1, 2023 to 2024, ratio",-1.5684302096571492,0.11678076549418098,1.0,0.26214687218324373
+T4 split,full,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, ratio",2.069155125483874,0.03853153217339626,1.0,0.11436158749064011
 T4 split,full,F2,client_mirror,"r_rod_x_neg binary, 2023 to 2024",-3.121359304168291,0.0018001824541914004,1.0,0.018050478121757016
 T4 split,full,F2,client_mirror,"r_rod_x_neg controls, 2023 to 2024",0.20613562375019512,0.8366849725459702,1.0,0.9625120149288525
-T4 split,full,F1,client_mirror,"gex_l1, 2025 onward, share",0.3359837409260413,0.7368831273627982,1.0,0.9022888422867557
+T4 split,full,F1,client_mirror,"gex_l1, 2025 onward, share",0.3359837409260413,0.7368831273627982,1.0,0.9022562384541192
 T4 split,full,F1,client_mirror,"gex_l1_x_exp, 2025 onward, share",1.5268792285336736,0.12679104556166385,1.0,0.27549727678257463
 T4 split,full,F1,client_mirror,"gex_l1, 2025 onward, ratio",-2.1069361464635676,0.03512311485868553,1.0,0.1081383868263264
 T4 split,full,F1,client_mirror,"gex_l1_x_exp, 2025 onward, ratio",2.2498882362808006,0.024456040885264086,1.0,0.08382582314878934
-T4 split,full,F2,client_mirror,"r_rod_x_neg binary, 2025 onward",-2.4455554716982646,0.014462919811760348,1.0,0.06426039820554598
+T4 split,full,F2,client_mirror,"r_rod_x_neg binary, 2025 onward",-2.4455554716982646,0.014462919811760348,1.0,0.06387789583527487
 T4 split,full,F2,client_mirror,"r_rod_x_neg controls, 2025 onward",-2.4997523931795946,0.012428013592135082,1.0,0.05799739676329705
-T4 forecast,full,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, share",-0.027232591091194656,0.5108628892960728,1.0,0.7461816217670985
-T4 forecast,full,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, ratio",0.15003862054337672,0.44036707266777947,1.0,0.6641003836018451
+T4 forecast,full,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, share",-0.027245442117977532,0.5108680142123986,1.0,0.7461891073732277
+T4 forecast,full,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, ratio",0.14999505897474552,0.4403842567628162,1.0,0.6640934135837496
 T4 forecast,full,F2,client_mirror,"fit 2023 to 2024, test 2025 onward",0.5626767780780199,0.2868274999251365,1.0,0.49379583513793807
-T4 forecast,full,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, share",-0.5545797761379835,0.7104089373936415,1.0,0.9022888422867557
-T4 forecast,full,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, ratio",0.09629495504454762,0.46164315887990093,1.0,0.6892137301587253
+T4 forecast,full,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, share",-0.5545829062292846,0.7104100081265857,1.0,0.9012547748842279
+T4 forecast,full,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, ratio",0.09632022569670513,0.46163312399392614,1.0,0.6891987484979742
 T4 forecast,full,F2,client_mirror,"fit 2025 onward, test 2023 to 2024",-1.8903981282713473,0.970647633216613,1.0,0.9888389138763952
 T4 pre-registered F2,full,F2,client_mirror,"binary, 2025 onward, one-sided",-2.4455554716982646,0.007231459905880174,1.0,0.0394539944864933
-T4 split,pre_auction,F1,us_convention,"gex_l1, 2023 to 2024, share",1.1722156175667306,0.24111049971914533,1.0,0.43683767872161483
-T4 split,pre_auction,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, share",-1.2075330068718895,0.22722694158144208,1.0,0.42045483953473817
-T4 split,pre_auction,F1,us_convention,"gex_l1, 2023 to 2024, ratio",-1.0579235473989577,0.2900902988478816,1.0,0.49482069366696135
-T4 split,pre_auction,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, ratio",-0.27968245483683113,0.7797211403605568,1.0,0.9271684072877134
+T4 split,pre_auction,F1,us_convention,"gex_l1, 2023 to 2024, share",1.1723345685279873,0.24106275800535948,1.0,0.43683767872161483
+T4 split,pre_auction,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, share",-1.2076250515913116,0.22719151864150022,1.0,0.42038929384536944
+T4 split,pre_auction,F1,us_convention,"gex_l1, 2023 to 2024, ratio",-1.0577889166204935,0.2901516868739442,1.0,0.4949254061160152
+T4 split,pre_auction,F1,us_convention,"gex_l1_x_exp, 2023 to 2024, ratio",-0.27977293601400033,0.779651716772366,1.0,0.925602518152153
 T4 split,pre_auction,F2,us_convention,"r_rod_x_neg binary, 2023 to 2024",-0.3178490483908969,0.7505994432227926,1.0,0.9079204002782394
-T4 split,pre_auction,F2,us_convention,"r_rod_x_neg controls, 2023 to 2024",-0.6507020881428619,0.5152388149861722,1.0,0.748683850791703
+T4 split,pre_auction,F2,us_convention,"r_rod_x_neg controls, 2023 to 2024",-0.6507020881428619,0.5152388149861722,1.0,0.7486500701362968
 T4 split,pre_auction,F1,us_convention,"gex_l1, 2025 onward, share",0.32590788637995904,0.7444940487277198,1.0,0.9055976789442101
 T4 split,pre_auction,F1,us_convention,"gex_l1_x_exp, 2025 onward, share",1.889932581364472,0.0587669773706712,1.0,0.15353907467971137
 T4 split,pre_auction,F1,us_convention,"gex_l1, 2025 onward, ratio",-1.4517180187749106,0.14658002703283426,1.0,0.3012808311866012
 T4 split,pre_auction,F1,us_convention,"gex_l1_x_exp, 2025 onward, ratio",1.8250347832943918,0.06799578052833984,1.0,0.17443294131351839
-T4 split,pre_auction,F2,us_convention,"r_rod_x_neg binary, 2025 onward",0.23434768049104485,0.8147150726287518,1.0,0.9508149136978044
+T4 split,pre_auction,F2,us_convention,"r_rod_x_neg binary, 2025 onward",0.23434768049104485,0.8147150726287518,1.0,0.9493222686213556
 T4 split,pre_auction,F2,us_convention,"r_rod_x_neg controls, 2025 onward",-0.07010514619042744,0.9441099707151239,1.0,0.9888389138763952
-T4 forecast,pre_auction,F1,us_convention,"fit 2023 to 2024, test 2025 onward, share",-1.243479228995678,0.893154354798916,1.0,0.9832157842618545
-T4 forecast,pre_auction,F1,us_convention,"fit 2023 to 2024, test 2025 onward, ratio",-1.0231311572148971,0.8468770814137836,1.0,0.9666242147743332
+T4 forecast,pre_auction,F1,us_convention,"fit 2023 to 2024, test 2025 onward, share",-1.243509853752848,0.8931599939349555,1.0,0.9832157842618545
+T4 forecast,pre_auction,F1,us_convention,"fit 2023 to 2024, test 2025 onward, ratio",-1.0232008933690526,0.8468935646850411,1.0,0.9666242147743332
 T4 forecast,pre_auction,F2,us_convention,"fit 2023 to 2024, test 2025 onward",-1.265115417194582,0.8970850214895896,1.0,0.9832157842618545
-T4 forecast,pre_auction,F1,us_convention,"fit 2025 onward, test 2023 to 2024, share",-0.24140951847880585,0.5953811318977409,1.0,0.8211390332121259
-T4 forecast,pre_auction,F1,us_convention,"fit 2025 onward, test 2023 to 2024, ratio",0.60095334171087,0.2739355317242233,1.0,0.47824404119663644
+T4 forecast,pre_auction,F1,us_convention,"fit 2025 onward, test 2023 to 2024, share",-0.24137600736715903,0.5953681467878428,1.0,0.821121124380259
+T4 forecast,pre_auction,F1,us_convention,"fit 2025 onward, test 2023 to 2024, ratio",0.6008404018045073,0.27397314581806465,1.0,0.47824017266446833
 T4 forecast,pre_auction,F2,us_convention,"fit 2025 onward, test 2023 to 2024",0.7785682568424518,0.21811704202596366,1.0,0.4128644009777169
 T4 pre-registered F2,pre_auction,F2,us_convention,"binary, 2025 onward, one-sided",0.23434768049104485,0.5926424636856241,1.0,0.8188840001019239
-T4 split,pre_auction,F1,participant_pro,"gex_l1, 2023 to 2024, share",-1.507556686852944,0.13166802525189988,1.0,0.2831816659040861
-T4 split,pre_auction,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, share",2.975101795399651,0.0029289133723922212,1.0,0.02366901655555201
-T4 split,pre_auction,F1,participant_pro,"gex_l1, 2023 to 2024, ratio",0.162372103854555,0.8710128372066327,1.0,0.9792295836474568
-T4 split,pre_auction,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, ratio",2.0102815069562916,0.0444014030254459,1.0,0.12489848663126309
-T4 split,pre_auction,F2,participant_pro,"r_rod_x_neg binary, 2023 to 2024",-2.354363502353664,0.018554456764894797,1.0,0.0709660150492368
+T4 split,pre_auction,F1,participant_pro,"gex_l1, 2023 to 2024, share",-1.5075694747517996,0.1316647501966213,1.0,0.2831746221620087
+T4 split,pre_auction,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, share",2.975105345324877,0.0029288794773132953,1.0,0.02366901655555201
+T4 split,pre_auction,F1,participant_pro,"gex_l1, 2023 to 2024, ratio",0.16239537875014529,0.8709945097601355,1.0,0.9792089791545766
+T4 split,pre_auction,F1,participant_pro,"gex_l1_x_exp, 2023 to 2024, ratio",2.0102623230813106,0.044403432307662534,1.0,0.12489848663126309
+T4 split,pre_auction,F2,participant_pro,"r_rod_x_neg binary, 2023 to 2024",-2.354363502353664,0.018554456764894797,1.0,0.07081280416190032
 T4 split,pre_auction,F2,participant_pro,"r_rod_x_neg controls, 2023 to 2024",-1.524625574604489,0.12735251473911469,1.0,0.27549727678257463
-T4 split,pre_auction,F1,participant_pro,"gex_l1, 2025 onward, share",-2.89037561989719,0.0038478176326647373,1.0,0.02648915285361101
+T4 split,pre_auction,F1,participant_pro,"gex_l1, 2025 onward, share",-2.89037561989719,0.0038478176326647373,1.0,0.026486365575903545
 T4 split,pre_auction,F1,participant_pro,"gex_l1_x_exp, 2025 onward, share",2.00098201659474,0.04539432792816155,1.0,0.12544285478078804
 T4 split,pre_auction,F1,participant_pro,"gex_l1, 2025 onward, ratio",-3.599533595800114,0.0003187884470145392,0.22825252806241006,0.008061186797905396
 T4 split,pre_auction,F1,participant_pro,"gex_l1_x_exp, 2025 onward, ratio",2.777723003073456,0.005474126216799718,1.0,0.03399133766450108
 T4 split,pre_auction,F2,participant_pro,"r_rod_x_neg binary, 2025 onward",-2.7011756772601476,0.006909483149195421,1.0,0.03903311502143665
 T4 split,pre_auction,F2,participant_pro,"r_rod_x_neg controls, 2025 onward",-4.078704868548061,4.528728412908736e-05,0.032969142845975595,0.0022402109882521883
-T4 forecast,pre_auction,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, share",-1.5941678433886797,0.9445507766103874,1.0,0.9888389138763952
-T4 forecast,pre_auction,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, ratio",-1.7647161738759916,0.9611942605352598,1.0,0.9888389138763952
+T4 forecast,pre_auction,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, share",-1.594171389744744,0.9445511736551309,1.0,0.9888389138763952
+T4 forecast,pre_auction,F1,participant_pro,"fit 2023 to 2024, test 2025 onward, ratio",-1.7647266209680927,0.9611951388628314,1.0,0.9888389138763952
 T4 forecast,pre_auction,F2,participant_pro,"fit 2023 to 2024, test 2025 onward",3.22583889564127,0.0006280201816762648,0.4358460060833278,0.009510019893954868
-T4 forecast,pre_auction,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, share",-2.12224691869117,0.9830914957901246,1.0,0.9911058286362397
-T4 forecast,pre_auction,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, ratio",-3.098504037810981,0.9990274984015103,1.0,1.0
+T4 forecast,pre_auction,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, share",-2.1222429197585986,0.9830913279717207,1.0,0.991105659449751
+T4 forecast,pre_auction,F1,participant_pro,"fit 2025 onward, test 2023 to 2024, ratio",-3.0985102147567978,0.9990275186740548,1.0,1.0
 T4 forecast,pre_auction,F2,participant_pro,"fit 2025 onward, test 2023 to 2024",0.7111448064717164,0.23849725336527827,1.0,0.43683767872161483
 T4 pre-registered F2,pre_auction,F2,participant_pro,"binary, 2025 onward, one-sided",-2.7011756772601476,0.0034547415745977104,1.0,0.025328554360812425
-T4 split,pre_auction,F1,client_mirror,"gex_l1, 2023 to 2024, share",-0.47685307415653644,0.6334667492173174,1.0,0.8469050953499991
-T4 split,pre_auction,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, share",1.0925956425646177,0.27457137675170773,1.0,0.47824404119663644
-T4 split,pre_auction,F1,client_mirror,"gex_l1, 2023 to 2024, ratio",-1.5683874009964585,0.11679074961578916,1.0,0.26214687218324373
-T4 split,pre_auction,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, ratio",2.069110272941411,0.038535739947785155,1.0,0.11437407616502634
+T4 split,pre_auction,F1,client_mirror,"gex_l1, 2023 to 2024, share",-0.4768615032230136,0.6334607465841261,1.0,0.8468970702079668
+T4 split,pre_auction,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, share",1.0926006988999963,0.27456915573458696,1.0,0.47824017266446833
+T4 split,pre_auction,F1,client_mirror,"gex_l1, 2023 to 2024, ratio",-1.5684302096571492,0.11678076549418098,1.0,0.26214687218324373
+T4 split,pre_auction,F1,client_mirror,"gex_l1_x_exp, 2023 to 2024, ratio",2.069155125483874,0.03853153217339626,1.0,0.11436158749064011
 T4 split,pre_auction,F2,client_mirror,"r_rod_x_neg binary, 2023 to 2024",-3.121359304168291,0.0018001824541914004,1.0,0.018050478121757016
 T4 split,pre_auction,F2,client_mirror,"r_rod_x_neg controls, 2023 to 2024",0.20613562375019512,0.8366849725459702,1.0,0.9625120149288525
 T4 split,pre_auction,F1,client_mirror,"gex_l1, 2025 onward, share",0.03159421401597693,0.9747956576344216,1.0,0.9888389138763952
@@ -560,23 +560,23 @@ T4 split,pre_auction,F1,client_mirror,"gex_l1, 2025 onward, ratio",-2.6173792535
 T4 split,pre_auction,F1,client_mirror,"gex_l1_x_exp, 2025 onward, ratio",2.3952717009578963,0.016608053292520998,1.0,0.06733707542014783
 T4 split,pre_auction,F2,client_mirror,"r_rod_x_neg binary, 2025 onward",-2.4219224706694242,0.015438643931577215,1.0,0.06531393394211985
 T4 split,pre_auction,F2,client_mirror,"r_rod_x_neg controls, 2025 onward",-2.5125845681833465,0.011985037579800567,1.0,0.05700575566802578
-T4 forecast,pre_auction,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, share",0.23217586572402368,0.40820071099427896,1.0,0.6296983940909667
-T4 forecast,pre_auction,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, ratio",0.7280981677763148,0.23327674768078538,1.0,0.4305754895003551
+T4 forecast,pre_auction,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, share",0.2321667611231047,0.4082042466175166,1.0,0.6297038482124684
+T4 forecast,pre_auction,F1,client_mirror,"fit 2023 to 2024, test 2025 onward, ratio",0.728056723403592,0.233289431983156,1.0,0.4305989018196561
 T4 forecast,pre_auction,F2,client_mirror,"fit 2023 to 2024, test 2025 onward",0.6869490002010327,0.24605743360183835,1.0,0.44371746165752074
-T4 forecast,pre_auction,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, share",-0.6275477987325775,0.7348498928182224,1.0,0.9022888422867557
-T4 forecast,pre_auction,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, ratio",0.07229263573985954,0.4711845125959524,1.0,0.6978421324275383
+T4 forecast,pre_auction,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, share",-0.6275499308542752,0.7348505913813448,1.0,0.9012547748842279
+T4 forecast,pre_auction,F1,client_mirror,"fit 2025 onward, test 2023 to 2024, ratio",0.07231583772776605,0.4711752805057894,1.0,0.6978284593518878
 T4 forecast,pre_auction,F2,client_mirror,"fit 2025 onward, test 2023 to 2024",-1.703331301841667,0.9557469570425089,1.0,0.9888389138763952
 T4 pre-registered F2,pre_auction,F2,client_mirror,"binary, 2025 onward, one-sided",-2.4219224706694242,0.007719321965788607,1.0,0.04120674027780681
-T5 Bank Nifty,banknifty,F1,us_convention,"gex_l1, share",1.0931077406020993,0.2743464977863447,1.0,0.47824404119663644
-T5 Bank Nifty,banknifty,F1,us_convention,"gex_l1_x_exp, share",-0.3796643155552907,0.704194612208245,1.0,0.9022888422867557
+T5 Bank Nifty,banknifty,F1,us_convention,"gex_l1, share",1.0931077406020993,0.2743464977863447,1.0,0.47824017266446833
+T5 Bank Nifty,banknifty,F1,us_convention,"gex_l1_x_exp, share",-0.3796643155552907,0.704194612208245,1.0,0.9012547748842279
 T5 Bank Nifty,banknifty,F1,us_convention,"gex_l1, ratio",-0.11678634799637178,0.9070293624362937,1.0,0.9882757517294126
 T5 Bank Nifty,banknifty,F1,us_convention,"gex_l1_x_exp, ratio",-0.6384103579065232,0.5232065901532299,1.0,0.7582408005736261
-T5 Bank Nifty,banknifty,F2,us_convention,r_rod_x_neg binary,0.35110149633545157,0.7255122054082397,1.0,0.9022888422867557
+T5 Bank Nifty,banknifty,F2,us_convention,r_rod_x_neg binary,0.35110149633545157,0.7255122054082397,1.0,0.9012547748842279
 T5 Bank Nifty,banknifty,F2,us_convention,r_rod_x_neg controls,0.07948545825261838,0.936646497648929,1.0,0.9888389138763952
 T5 Bank Nifty,banknifty,F1,participant_pro,"gex_l1, share",-2.9007229974172875,0.003723028287545325,1.0,0.026061198012817276
-T5 Bank Nifty,banknifty,F1,participant_pro,"gex_l1_x_exp, share",1.1394814029051112,0.2545024206241363,1.0,0.45206003856948085
+T5 Bank Nifty,banknifty,F1,participant_pro,"gex_l1_x_exp, share",1.1394814029051112,0.2545024206241363,1.0,0.4519881245791878
 T5 Bank Nifty,banknifty,F1,participant_pro,"gex_l1, ratio",-2.2489590861440383,0.024515099222759146,1.0,0.08382582314878934
-T5 Bank Nifty,banknifty,F1,participant_pro,"gex_l1_x_exp, ratio",2.073541652905823,0.03812189886746617,1.0,0.11437407616502634
+T5 Bank Nifty,banknifty,F1,participant_pro,"gex_l1_x_exp, ratio",2.073541652905823,0.03812189886746617,1.0,0.11436158749064011
 T5 Bank Nifty,banknifty,F2,participant_pro,r_rod_x_neg binary,-3.6335372837891624,0.0002795620283166173,0.20100509835964783,0.008061186797905396
 T5 Bank Nifty,banknifty,F2,participant_pro,r_rod_x_neg controls,-3.0939914395585295,0.0019748318451339375,1.0,0.018311831738451762
 T5 Bank Nifty,banknifty,F1,client_mirror,"gex_l1, share",-0.8749492340570388,0.3816015285755715,1.0,0.6088814530410782
@@ -587,29 +587,29 @@ T5 Bank Nifty,banknifty,F2,client_mirror,r_rod_x_neg binary,-2.3873779896136407,
 T5 Bank Nifty,banknifty,F2,client_mirror,r_rod_x_neg controls,-0.8122982583460265,0.41662050969286135,1.0,0.6400257105426566
 T6 roll-off,nifty full,roll-off,us_convention,"real expiry days, main",2.1893681694858262,0.028570091246107918,1.0,0.09380091904695609
 T6 roll-off,nifty full,roll-off,us_convention,"real expiry days, plus expiry-day RV (post-treatment control)",2.143965388850036,0.03203566012830265,1.0,0.10072228735254476
-T6 roll-off,nifty full,roll-off,us_convention,"real expiry days, plus monthly-expiry dummy",2.269557243765012,0.023234460302950503,1.0,0.08176670049915181
+T6 roll-off,nifty full,roll-off,us_convention,"real expiry days, plus monthly-expiry dummy",2.2495177723718025,0.024479573395869775,1.0,0.08382582314878934
 T6 roll-off IV,nifty full,roll-off,us_convention,main,,0.019619235066546233,1.0,0.07278736209688653
 T6 roll-off IV,nifty full,roll-off,us_convention,plus expiry-day RV (post-treatment control),,0.01656701018817777,1.0,0.06733707542014783
-T6 roll-off,nifty full,roll-off,participant_pro,"real expiry days, main",-0.225430753811611,0.8216441892122172,1.0,0.9551278171399008
-T6 roll-off,nifty full,roll-off,participant_pro,"real expiry days, plus expiry-day RV (post-treatment control)",-0.3402632460272713,0.7336582929777964,1.0,0.9022888422867557
-T6 roll-off,nifty full,roll-off,participant_pro,"real expiry days, plus monthly-expiry dummy",-0.33594843013727893,0.7369097552908005,1.0,0.9022888422867557
+T6 roll-off,nifty full,roll-off,participant_pro,"real expiry days, main",-0.225430753811611,0.8216441892122172,1.0,0.9536469655335166
+T6 roll-off,nifty full,roll-off,participant_pro,"real expiry days, plus expiry-day RV (post-treatment control)",-0.3402632460272713,0.7336582929777964,1.0,0.9012547748842279
+T6 roll-off,nifty full,roll-off,participant_pro,"real expiry days, plus monthly-expiry dummy",-0.3501069434461258,0.726258440159302,1.0,0.9012547748842279
 T6 roll-off IV,nifty full,roll-off,participant_pro,main,,0.9714117165811014,1.0,0.9888389138763952
 T6 roll-off IV,nifty full,roll-off,participant_pro,plus expiry-day RV (post-treatment control),,0.9270698706441007,1.0,0.9888389138763952
 T6 roll-off,nifty full,roll-off,client_mirror,"real expiry days, main",-2.5095205775884994,0.012089517162561972,1.0,0.0571364441695604
 T6 roll-off,nifty full,roll-off,client_mirror,"real expiry days, plus expiry-day RV (post-treatment control)",-2.519718532158251,0.011744870954036776,1.0,0.05622383385738895
-T6 roll-off,nifty full,roll-off,client_mirror,"real expiry days, plus monthly-expiry dummy",-2.4418588907849696,0.014611856704587001,1.0,0.06438806785072149
+T6 roll-off,nifty full,roll-off,client_mirror,"real expiry days, plus monthly-expiry dummy",-2.4648488077948083,0.013707107644441966,1.0,0.06164044771015721
 T6 roll-off IV,nifty full,roll-off,client_mirror,main,,0.042223955204611044,1.0,0.12229673339168182
 T6 roll-off IV,nifty full,roll-off,client_mirror,plus expiry-day RV (post-treatment control),,0.04736577829890917,1.0,0.12827253928441604
 T6 roll-off,nifty full,roll-off,gross,"real expiry days, main",-0.4386232197804238,0.6609345693843909,1.0,0.871071848105183
-T6 roll-off,nifty full,roll-off,gross,"real expiry days, plus expiry-day RV (post-treatment control)",-0.23400098787365778,0.8149842117409751,1.0,0.9508149136978044
-T6 roll-off,nifty full,roll-off,gross,"real expiry days, plus monthly-expiry dummy",-0.2544653661823158,0.7991360574100668,1.0,0.9406220520882101
+T6 roll-off,nifty full,roll-off,gross,"real expiry days, plus expiry-day RV (post-treatment control)",-0.23400098787365778,0.8149842117409751,1.0,0.9493222686213556
+T6 roll-off,nifty full,roll-off,gross,"real expiry days, plus monthly-expiry dummy",-0.28018454548024646,0.7793359229323821,1.0,0.925602518152153
 T6 roll-off IV,nifty full,roll-off,gross,main,,0.5645587791071542,1.0,0.793376163063463
 T6 roll-off IV,nifty full,roll-off,gross,plus expiry-day RV (post-treatment control),,0.5585123678453967,1.0,0.7907992170013001
 T6 roll-off,nifty full,roll-off,us_convention,"pseudo: expiry -2 trading days, main",0.06643561031160358,0.9470310198869593,1.0,0.9888389138763952
 T6 roll-off,nifty full,roll-off,participant_pro,"pseudo: expiry -2 trading days, main",-0.13154847527114394,0.8953414419967972,1.0,0.9832157842618545
 T6 roll-off,nifty full,roll-off,client_mirror,"pseudo: expiry -2 trading days, main",-2.930840489310598,0.0033804631018632845,1.0,0.025328554360812425
 T6 roll-off,nifty full,roll-off,gross,"pseudo: expiry -2 trading days, main",-2.8509208702747073,0.0043592816541326495,1.0,0.02837357006461777
-T6 roll-off,nifty full,roll-off,us_convention,"pseudo: expiry -1 trading days, main",-0.38475146293254286,0.7004215628304103,1.0,0.90227916600723
+T6 roll-off,nifty full,roll-off,us_convention,"pseudo: expiry -1 trading days, main",-0.38475146293254286,0.7004215628304103,1.0,0.9012547748842279
 T6 roll-off,nifty full,roll-off,participant_pro,"pseudo: expiry -1 trading days, main",3.4067903363957823,0.0006573159886872107,0.455519980160237,0.009754569272118208
 T6 roll-off,nifty full,roll-off,client_mirror,"pseudo: expiry -1 trading days, main",0.7229141486475889,0.4697326304441639,1.0,0.6970832235791393
 T6 roll-off,nifty full,roll-off,gross,"pseudo: expiry -1 trading days, main",-1.8238510100673557,0.06817459970474438,1.0,0.17443294131351839
@@ -617,66 +617,66 @@ T6 roll-off,nifty full,roll-off,us_convention,"pseudo: expiry +1 trading days, m
 T6 roll-off,nifty full,roll-off,participant_pro,"pseudo: expiry +1 trading days, main",-2.1015600057797204,0.03559183639048182,1.0,0.10912868843693187
 T6 roll-off,nifty full,roll-off,client_mirror,"pseudo: expiry +1 trading days, main",-2.2371071639357445,0.025279336861337102,1.0,0.0860425135372116
 T6 roll-off,nifty full,roll-off,gross,"pseudo: expiry +1 trading days, main",-2.601605482515451,0.00927885252924862,1.0,0.04748212811518949
-T6 roll-off,nifty full,roll-off,us_convention,"pseudo: expiry +2 trading days, main",0.3673520133317981,0.7133564609042995,1.0,0.9022888422867557
-T6 roll-off,nifty full,roll-off,participant_pro,"pseudo: expiry +2 trading days, main",0.28250886381908785,0.7775533509337699,1.0,0.9271684072877134
+T6 roll-off,nifty full,roll-off,us_convention,"pseudo: expiry +2 trading days, main",0.3673520133317981,0.7133564609042995,1.0,0.9012547748842279
+T6 roll-off,nifty full,roll-off,participant_pro,"pseudo: expiry +2 trading days, main",0.28250886381908785,0.7775533509337699,1.0,0.925602518152153
 T6 roll-off,nifty full,roll-off,client_mirror,"pseudo: expiry +2 trading days, main",-1.172471558759461,0.24100778436544834,1.0,0.43683767872161483
-T6 roll-off,nifty full,roll-off,gross,"pseudo: expiry +2 trading days, main",-2.25444773454295,0.024168015181957464,1.0,0.08379751058417027
+T6 roll-off,nifty full,roll-off,gross,"pseudo: expiry +2 trading days, main",-2.25444773454295,0.024168015181957464,1.0,0.08382582314878934
 T6 roll-off,nifty full,roll-off,us_convention,"pseudo: other regime's expiry weekday, main",0.19958847573101043,0.8418024414754264,1.0,0.96388939582597
 T6 roll-off,nifty full,roll-off,participant_pro,"pseudo: other regime's expiry weekday, main",0.31692829293676467,0.7512980131682466,1.0,0.9079204002782394
 T6 roll-off,nifty full,roll-off,client_mirror,"pseudo: other regime's expiry weekday, main",-1.6075323490020015,0.10793763902926878,1.0,0.24872586385005416
 T6 roll-off,nifty full,roll-off,gross,"pseudo: other regime's expiry weekday, main",-1.246162240453472,0.21270483846636978,1.0,0.40677059314960406
-T6 roll-off,nifty pre_auction,roll-off,us_convention,"real expiry days, main",2.069486191015464,0.038500485830962376,1.0,0.11437407616502634
+T6 roll-off,nifty pre_auction,roll-off,us_convention,"real expiry days, main",2.069486191015464,0.038500485830962376,1.0,0.11436158749064011
 T6 roll-off,nifty pre_auction,roll-off,us_convention,"real expiry days, plus expiry-day RV (post-treatment control)",1.9816709810000175,0.04751607711176482,1.0,0.12827253928441604
-T6 roll-off,nifty pre_auction,roll-off,us_convention,"real expiry days, plus monthly-expiry dummy",2.1373750673325036,0.032567497650209054,1.0,0.10196237660951527
+T6 roll-off,nifty pre_auction,roll-off,us_convention,"real expiry days, plus monthly-expiry dummy",2.113430483508139,0.03456393914693387,1.0,0.10730729224696624
 T6 roll-off IV,nifty pre_auction,roll-off,us_convention,main,,0.019572780615417833,1.0,0.07278736209688653
 T6 roll-off IV,nifty pre_auction,roll-off,us_convention,plus expiry-day RV (post-treatment control),,0.017082861518774153,1.0,0.06814775939209905
 T6 roll-off,nifty pre_auction,roll-off,participant_pro,"real expiry days, main",-0.2534648117254288,0.7999090496868742,1.0,0.9406220520882101
-T6 roll-off,nifty pre_auction,roll-off,participant_pro,"real expiry days, plus expiry-day RV (post-treatment control)",-0.344624697721653,0.7303765359107401,1.0,0.9022888422867557
-T6 roll-off,nifty pre_auction,roll-off,participant_pro,"real expiry days, plus monthly-expiry dummy",-0.4023702987726153,0.6874115252515953,1.0,0.8886051423984036
+T6 roll-off,nifty pre_auction,roll-off,participant_pro,"real expiry days, plus expiry-day RV (post-treatment control)",-0.344624697721653,0.7303765359107401,1.0,0.9012547748842279
+T6 roll-off,nifty pre_auction,roll-off,participant_pro,"real expiry days, plus monthly-expiry dummy",-0.418888439164164,0.6752976664708894,1.0,0.8817321973501843
 T6 roll-off IV,nifty pre_auction,roll-off,participant_pro,main,,0.9119233560943256,1.0,0.9886587318585606
 T6 roll-off IV,nifty pre_auction,roll-off,participant_pro,plus expiry-day RV (post-treatment control),,0.8913278369389487,1.0,0.9832157842618545
-T6 roll-off,nifty pre_auction,roll-off,client_mirror,"real expiry days, main",-2.4385634962816116,0.0147457678816428,1.0,0.06438806785072149
+T6 roll-off,nifty pre_auction,roll-off,client_mirror,"real expiry days, main",-2.4385634962816116,0.0147457678816428,1.0,0.06438801873704401
 T6 roll-off,nifty pre_auction,roll-off,client_mirror,"real expiry days, plus expiry-day RV (post-treatment control)",-2.4157179021433763,0.01570422284961998,1.0,0.06583352177637301
-T6 roll-off,nifty pre_auction,roll-off,client_mirror,"real expiry days, plus monthly-expiry dummy",-2.3353296999760027,0.019526203788232447,1.0,0.07278736209688653
-T6 roll-off IV,nifty pre_auction,roll-off,client_mirror,main,,0.03423034647137372,1.0,0.10627161958895104
+T6 roll-off,nifty pre_auction,roll-off,client_mirror,"real expiry days, plus monthly-expiry dummy",-2.351353197620387,0.018705269023898196,1.0,0.07081280416190032
+T6 roll-off IV,nifty pre_auction,roll-off,client_mirror,main,,0.03423034647137372,1.0,0.10671813899898866
 T6 roll-off IV,nifty pre_auction,roll-off,client_mirror,plus expiry-day RV (post-treatment control),,0.04118305959238901,1.0,0.1212612310220343
-T6 roll-off,nifty pre_auction,roll-off,gross,"real expiry days, main",-0.3690182121487372,0.7121141499931004,1.0,0.9022888422867557
+T6 roll-off,nifty pre_auction,roll-off,gross,"real expiry days, main",-0.3690182121487372,0.7121141499931004,1.0,0.9012547748842279
 T6 roll-off,nifty pre_auction,roll-off,gross,"real expiry days, plus expiry-day RV (post-treatment control)",-0.1475132723818558,0.8827269044843681,1.0,0.9832157842618545
-T6 roll-off,nifty pre_auction,roll-off,gross,"real expiry days, plus monthly-expiry dummy",-0.21211446285749064,0.8320177366972635,1.0,0.9601200009788018
+T6 roll-off,nifty pre_auction,roll-off,gross,"real expiry days, plus monthly-expiry dummy",-0.23516767032580568,0.8140785977296829,1.0,0.9493222686213556
 T6 roll-off IV,nifty pre_auction,roll-off,gross,main,,0.4561171628091689,1.0,0.6850990583085088
 T6 roll-off IV,nifty pre_auction,roll-off,gross,plus expiry-day RV (post-treatment control),,0.45931442595367167,1.0,0.6871195646323072
-T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry -2 trading days, main",0.21775090944552714,0.8276231952774267,1.0,0.9565364655698607
+T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry -2 trading days, main",0.21775090944552714,0.8276231952774267,1.0,0.9550488505378704
 T6 roll-off,nifty pre_auction,roll-off,participant_pro,"pseudo: expiry -2 trading days, main",-0.1350468350676781,0.8925748444489032,1.0,0.9832157842618545
 T6 roll-off,nifty pre_auction,roll-off,client_mirror,"pseudo: expiry -2 trading days, main",-2.995848487825651,0.0027368238055577245,1.0,0.02307640072413445
 T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: expiry -2 trading days, main",-2.973179860628389,0.002947316868886606,1.0,0.02366901655555201
-T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry -1 trading days, main",0.3522475366438892,0.7246526294580771,1.0,0.9022888422867557
+T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry -1 trading days, main",0.3522475366438892,0.7246526294580771,1.0,0.9012547748842279
 T6 roll-off,nifty pre_auction,roll-off,participant_pro,"pseudo: expiry -1 trading days, main",3.1532774161372514,0.0016144829838099536,1.0,0.016872484140661767
-T6 roll-off,nifty pre_auction,roll-off,client_mirror,"pseudo: expiry -1 trading days, main",0.3712544980714231,0.7104479852465193,1.0,0.9022888422867557
+T6 roll-off,nifty pre_auction,roll-off,client_mirror,"pseudo: expiry -1 trading days, main",0.3712544980714231,0.7104479852465193,1.0,0.9012547748842279
 T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: expiry -1 trading days, main",-2.0099330467249223,0.0444382755669184,1.0,0.12489848663126309
-T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry +1 trading days, main",-0.9167516461605155,0.35927279596330697,1.0,0.5844469212229043
-T6 roll-off,nifty pre_auction,roll-off,participant_pro,"pseudo: expiry +1 trading days, main",-2.351982716549201,0.018673642581526317,1.0,0.07105560407944887
+T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry +1 trading days, main",-0.9167516461605155,0.35927279596330697,1.0,0.5844398275121
+T6 roll-off,nifty pre_auction,roll-off,participant_pro,"pseudo: expiry +1 trading days, main",-2.351982716549201,0.018673642581526317,1.0,0.07081280416190032
 T6 roll-off,nifty pre_auction,roll-off,client_mirror,"pseudo: expiry +1 trading days, main",-2.3932876803051775,0.01669814269178868,1.0,0.06733707542014783
 T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: expiry +1 trading days, main",-2.421452026398588,0.015458641318930507,1.0,0.06531393394211985
 T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: expiry +2 trading days, main",0.32313612671881986,0.7465921514480072,1.0,0.9066634637879236
 T6 roll-off,nifty pre_auction,roll-off,participant_pro,"pseudo: expiry +2 trading days, main",0.4664912430140501,0.6408639142921266,1.0,0.8552536410157517
 T6 roll-off,nifty pre_auction,roll-off,client_mirror,"pseudo: expiry +2 trading days, main",-1.309458379034814,0.19037912746256602,1.0,0.37272114136470713
-T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: expiry +2 trading days, main",-2.4501580332723436,0.01427935276015329,1.0,0.0638269864339382
-T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: other regime's expiry weekday, main",0.26157505718824786,0.793649076108019,1.0,0.9372433736513132
+T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: expiry +2 trading days, main",-2.4501580332723436,0.01427935276015329,1.0,0.06344478891038167
+T6 roll-off,nifty pre_auction,roll-off,us_convention,"pseudo: other regime's expiry weekday, main",0.26157505718824786,0.793649076108019,1.0,0.9357807631013525
 T6 roll-off,nifty pre_auction,roll-off,participant_pro,"pseudo: other regime's expiry weekday, main",0.5186052119806238,0.6040360737709841,1.0,0.8269276139078786
 T6 roll-off,nifty pre_auction,roll-off,client_mirror,"pseudo: other regime's expiry weekday, main",-1.9793010588288986,0.04778212046779778,1.0,0.12845772966342736
-T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: other regime's expiry weekday, main",-1.497591093095204,0.13423952230601424,1.0,0.2866232469941739
-T6 real minus placebo,nifty full,roll-off,client_mirror,pseudo: expiry -2 trading days,-0.2207964298269564,0.8252509435692098,1.0,0.9555192128833142
+T6 roll-off,nifty pre_auction,roll-off,gross,"pseudo: other regime's expiry weekday, main",-1.497591093095204,0.13423952230601424,1.0,0.28662446366781585
+T6 real minus placebo,nifty full,roll-off,client_mirror,pseudo: expiry -2 trading days,-0.2207964298269564,0.8252509435692098,1.0,0.9540308651996954
 T6 real minus placebo,nifty full,roll-off,client_mirror,pseudo: expiry +2 trading days,-1.0766353065516567,0.2816432245322953,1.0,0.4871311715686785
 T6 real minus placebo,nifty full,roll-off,client_mirror,pseudo: other regime's expiry weekday,-1.0061748241473814,0.3143314804283758,1.0,0.530077178358761
-T6 real minus placebo,nifty full,roll-off,gross,pseudo: expiry -2 trading days,1.0581912473095847,0.28996826083998695,1.0,0.49482069366696135
-T6 real minus placebo,nifty full,roll-off,gross,pseudo: expiry +2 trading days,1.1356484009845418,0.25610374362282695,1.0,0.4521295712835013
-T6 real minus placebo,nifty full,roll-off,gross,pseudo: other regime's expiry weekday,0.3402549970833453,0.7336645044981884,1.0,0.9022888422867557
-T6 real minus placebo,nifty full,roll-off,participant_pro,pseudo: expiry -2 trading days,-0.12074258117639652,0.9038949308019796,1.0,0.9867994049690185
-T6 real minus placebo,nifty full,roll-off,participant_pro,pseudo: expiry +2 trading days,-0.332378094406739,0.7396037773497698,1.0,0.9025505686949645
-T6 real minus placebo,nifty full,roll-off,participant_pro,pseudo: other regime's expiry weekday,-0.3463355571312175,0.7290905494421278,1.0,0.9022888422867557
+T6 real minus placebo,nifty full,roll-off,gross,pseudo: expiry -2 trading days,1.0581912473095847,0.28996826083998695,1.0,0.4949254061160152
+T6 real minus placebo,nifty full,roll-off,gross,pseudo: expiry +2 trading days,1.1356484009845418,0.25610374362282695,1.0,0.4521308641656432
+T6 real minus placebo,nifty full,roll-off,gross,pseudo: other regime's expiry weekday,0.3402549970833453,0.7336645044981884,1.0,0.9012547748842279
+T6 real minus placebo,nifty full,roll-off,participant_pro,pseudo: expiry -2 trading days,-0.12074258117639652,0.9038949308019796,1.0,0.9868056955489006
+T6 real minus placebo,nifty full,roll-off,participant_pro,pseudo: expiry +2 trading days,-0.332378094406739,0.7396037773497698,1.0,0.9025738440438349
+T6 real minus placebo,nifty full,roll-off,participant_pro,pseudo: other regime's expiry weekday,-0.3463355571312175,0.7290905494421278,1.0,0.9012547748842279
 T6 real minus placebo,nifty full,roll-off,us_convention,pseudo: expiry -2 trading days,1.6736824028905315,0.09419303398315225,1.0,0.2232946684201245
 T6 real minus placebo,nifty full,roll-off,us_convention,pseudo: expiry +2 trading days,1.3343265922408105,0.1820968462166226,1.0,0.36030895971395727
-T6 real minus placebo,nifty full,roll-off,us_convention,pseudo: other regime's expiry weekday,1.4946314512015715,0.13501065324415398,1.0,0.2866232469941739
+T6 real minus placebo,nifty full,roll-off,us_convention,pseudo: other regime's expiry weekday,1.4946314512015715,0.13501065324415398,1.0,0.28662446366781585
 T6 real minus placebo,nifty pre_auction,roll-off,client_mirror,pseudo: expiry -2 trading days,-0.13755041922272604,0.8905957426589478,1.0,0.9832157842618545
 T6 real minus placebo,nifty pre_auction,roll-off,client_mirror,pseudo: expiry +2 trading days,-0.9799415297598038,0.32711498150268525,1.0,0.5454366657865
 T6 real minus placebo,nifty pre_auction,roll-off,client_mirror,pseudo: other regime's expiry weekday,-0.8375377161223037,0.40229038593120037,1.0,0.6234322994014939
@@ -689,9 +689,9 @@ T6 real minus placebo,nifty pre_auction,roll-off,participant_pro,pseudo: other r
 T6 real minus placebo,nifty pre_auction,roll-off,us_convention,pseudo: expiry -2 trading days,1.5365728292056227,0.12439795046547554,1.0,0.2730866249863398
 T6 real minus placebo,nifty pre_auction,roll-off,us_convention,pseudo: expiry +2 trading days,1.3008492506351519,0.19331006005005513,1.0,0.37746332778194974
 T6 real minus placebo,nifty pre_auction,roll-off,us_convention,pseudo: other regime's expiry weekday,1.386322912357886,0.16564832354852244,1.0,0.3321920434405504
-T6 roll-off,banknifty full,roll-off,us_convention,"real expiry days, main",0.2855477538923741,0.7752245241959073,1.0,0.9271684072877134
-T6 roll-off,banknifty full,roll-off,us_convention,"real expiry days, plus expiry-day RV (post-treatment control)",0.4145586879145349,0.6784649960535598,1.0,0.8832790959420268
-T6 roll-off,banknifty full,roll-off,us_convention,"real expiry days, plus monthly-expiry dummy",0.2815731007896476,0.7782708684259425,1.0,0.9271684072877134
+T6 roll-off,banknifty full,roll-off,us_convention,"real expiry days, main",0.2855477538923741,0.7752245241959073,1.0,0.925602518152153
+T6 roll-off,banknifty full,roll-off,us_convention,"real expiry days, plus expiry-day RV (post-treatment control)",0.4145586879145349,0.6784649960535598,1.0,0.8817321973501843
+T6 roll-off,banknifty full,roll-off,us_convention,"real expiry days, plus monthly-expiry dummy",0.2815731007896476,0.7782708684259425,1.0,0.925602518152153
 T6 roll-off IV,banknifty full,roll-off,us_convention,main,,0.9223969897677619,1.0,0.9888389138763952
 T6 roll-off IV,banknifty full,roll-off,us_convention,plus expiry-day RV (post-treatment control),,0.3980725416183014,1.0,0.6218312123805887
 T6 roll-off,banknifty full,roll-off,participant_pro,"real expiry days, main",-1.9305062011860266,0.053544147603270933,1.0,0.14088566497030863
@@ -699,10 +699,10 @@ T6 roll-off,banknifty full,roll-off,participant_pro,"real expiry days, plus expi
 T6 roll-off,banknifty full,roll-off,participant_pro,"real expiry days, plus monthly-expiry dummy",-2.5372546760761883,0.011172564336175863,1.0,0.05526695158294993
 T6 roll-off IV,banknifty full,roll-off,participant_pro,main,,0.0964994923982006,1.0,0.22516548226246808
 T6 roll-off IV,banknifty full,roll-off,participant_pro,plus expiry-day RV (post-treatment control),,0.017988629160554673,1.0,0.07062202559328871
-T6 roll-off,banknifty full,roll-off,client_mirror,"real expiry days, main",-0.8275064954402503,0.4079500420271265,1.0,0.6296983940909667
+T6 roll-off,banknifty full,roll-off,client_mirror,"real expiry days, main",-0.8275064954402503,0.4079500420271265,1.0,0.6297038482124684
 T6 roll-off,banknifty full,roll-off,client_mirror,"real expiry days, plus expiry-day RV (post-treatment control)",-0.8734878116294237,0.38239724678860165,1.0,0.6088814530410782
-T6 roll-off,banknifty full,roll-off,client_mirror,"real expiry days, plus monthly-expiry dummy",-0.7141158370174187,0.4751555537886766,1.0,0.7019017355205524
-T6 roll-off IV,banknifty full,roll-off,client_mirror,main,,0.7390646679010289,1.0,0.9025505686949645
+T6 roll-off,banknifty full,roll-off,client_mirror,"real expiry days, plus monthly-expiry dummy",-0.7141158370174187,0.4751555537886766,1.0,0.7020169278769406
+T6 roll-off IV,banknifty full,roll-off,client_mirror,main,,0.7390646679010289,1.0,0.9025738440438349
 T6 roll-off IV,banknifty full,roll-off,client_mirror,plus expiry-day RV (post-treatment control),,0.8959302025453182,1.0,0.9832157842618545
 T6 roll-off,banknifty full,roll-off,gross,"real expiry days, main",0.8915228295757469,0.3726487495996248,1.0,0.6010986352237425
 T6 roll-off,banknifty full,roll-off,gross,"real expiry days, plus expiry-day RV (post-treatment control)",1.8516796262172064,0.06407184132597064,1.0,0.16564915074519238
@@ -715,10 +715,10 @@ T6 roll-off,banknifty full,roll-off,client_mirror,"pseudo: expiry -2 trading day
 T6 roll-off,banknifty full,roll-off,gross,"pseudo: expiry -2 trading days, main",-2.008007812068634,0.04464246152988889,1.0,0.12499889228368889
 T6 roll-off,banknifty full,roll-off,us_convention,"pseudo: expiry -1 trading days, main",1.6032938002185502,0.10886980462768489,1.0,0.25009719824687987
 T6 roll-off,banknifty full,roll-off,participant_pro,"pseudo: expiry -1 trading days, main",1.8274591316295294,0.06763076558847297,1.0,0.1742431530091908
-T6 roll-off,banknifty full,roll-off,client_mirror,"pseudo: expiry -1 trading days, main",0.8069735816796715,0.4196817037932389,1.0,0.6421154013743418
+T6 roll-off,banknifty full,roll-off,client_mirror,"pseudo: expiry -1 trading days, main",0.8069735816796715,0.4196817037932389,1.0,0.642104638043286
 T6 roll-off,banknifty full,roll-off,gross,"pseudo: expiry -1 trading days, main",-0.20020341444419484,0.841321496894413,1.0,0.96388939582597
-T6 roll-off,banknifty full,roll-off,us_convention,"pseudo: expiry +1 trading days, main",0.22053402444931866,0.8254552768978496,1.0,0.9555192128833142
-T6 roll-off,banknifty full,roll-off,participant_pro,"pseudo: expiry +1 trading days, main",-2.2577352687100123,0.023962169015145866,1.0,0.08347384699172879
+T6 roll-off,banknifty full,roll-off,us_convention,"pseudo: expiry +1 trading days, main",0.22053402444931866,0.8254552768978496,1.0,0.9540308651996954
+T6 roll-off,banknifty full,roll-off,participant_pro,"pseudo: expiry +1 trading days, main",-2.2577352687100123,0.023962169015145866,1.0,0.08382582314878934
 T6 roll-off,banknifty full,roll-off,client_mirror,"pseudo: expiry +1 trading days, main",1.317983247745644,0.18750925589128264,1.0,0.3680737245273326
 T6 roll-off,banknifty full,roll-off,gross,"pseudo: expiry +1 trading days, main",0.5817632963168625,0.5607261299509402,1.0,0.7909862897787027
 T6 roll-off,banknifty full,roll-off,us_convention,"pseudo: expiry +2 trading days, main",1.1554742028475282,0.2478962907572546,1.0,0.4453729969537117
@@ -728,16 +728,16 @@ T6 roll-off,banknifty full,roll-off,gross,"pseudo: expiry +2 trading days, main"
 T6 roll-off,banknifty full,roll-off,us_convention,"pseudo: other regime's expiry weekday, main",-1.069422180363732,0.28487947721580753,1.0,0.49158272580030044
 T6 roll-off,banknifty full,roll-off,participant_pro,"pseudo: other regime's expiry weekday, main",-1.2336378653357831,0.21733787662969462,1.0,0.41244169938422864
 T6 roll-off,banknifty full,roll-off,client_mirror,"pseudo: other regime's expiry weekday, main",-2.0365459106086936,0.04169556787501777,1.0,0.12132592691475759
-T6 roll-off,banknifty full,roll-off,gross,"pseudo: other regime's expiry weekday, main",-0.3606562256860407,0.7183564520740646,1.0,0.9022888422867557
+T6 roll-off,banknifty full,roll-off,gross,"pseudo: other regime's expiry weekday, main",-0.3606562256860407,0.7183564520740646,1.0,0.9012547748842279
 T6 real minus placebo,banknifty full,roll-off,client_mirror,pseudo: expiry -2 trading days,0.29998100263206223,0.7641916463927013,1.0,0.921982987194536
-T6 real minus placebo,banknifty full,roll-off,client_mirror,pseudo: expiry +2 trading days,0.3500326668323615,0.7263141819618992,1.0,0.9022888422867557
-T6 real minus placebo,banknifty full,roll-off,client_mirror,pseudo: other regime's expiry weekday,0.29067868097303345,0.7712970780115858,1.0,0.9271684072877134
+T6 real minus placebo,banknifty full,roll-off,client_mirror,pseudo: expiry +2 trading days,0.3500326668323615,0.7263141819618992,1.0,0.9012547748842279
+T6 real minus placebo,banknifty full,roll-off,client_mirror,pseudo: other regime's expiry weekday,0.29067868097303345,0.7712970780115858,1.0,0.925602518152153
 T6 real minus placebo,banknifty full,roll-off,gross,pseudo: expiry -2 trading days,2.168401455209739,0.030128155083627265,1.0,0.09635815117263548
 T6 real minus placebo,banknifty full,roll-off,gross,pseudo: expiry +2 trading days,1.7288193145416064,0.08384143822303401,1.0,0.20531467710063114
 T6 real minus placebo,banknifty full,roll-off,gross,pseudo: other regime's expiry weekday,0.8198574365898541,0.41229738343250044,1.0,0.6346984616326045
 T6 real minus placebo,banknifty full,roll-off,participant_pro,pseudo: expiry -2 trading days,-1.3708256719951697,0.1704293061256431,1.0,0.3408586122512862
 T6 real minus placebo,banknifty full,roll-off,participant_pro,pseudo: expiry +2 trading days,-1.2641907728098647,0.20616156190689472,1.0,0.3973295556751062
 T6 real minus placebo,banknifty full,roll-off,participant_pro,pseudo: other regime's expiry weekday,-0.9185907107098719,0.3583096925877216,1.0,0.5843204217584383
-T6 real minus placebo,banknifty full,roll-off,us_convention,pseudo: expiry -2 trading days,0.2248729609036883,0.82207810466955,1.0,0.9551278171399008
+T6 real minus placebo,banknifty full,roll-off,us_convention,pseudo: expiry -2 trading days,0.2248729609036883,0.82207810466955,1.0,0.9536469655335166
 T6 real minus placebo,banknifty full,roll-off,us_convention,pseudo: expiry +2 trading days,-0.5383687398490101,0.5903225032924229,1.0,0.8172001817966003
-T6 real minus placebo,banknifty full,roll-off,us_convention,pseudo: other regime's expiry weekday,0.8065879517244571,0.41990391743887767,1.0,0.6421154013743418
+T6 real minus placebo,banknifty full,roll-off,us_convention,pseudo: other regime's expiry weekday,0.8065879517244571,0.41990391743887767,1.0,0.642104638043286

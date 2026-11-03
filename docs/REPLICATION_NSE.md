@@ -2,7 +2,7 @@
 
 Paper: B. Chhimwal, V. Pandey and P. Pandey (2025), "Effect of multiple index derivative expiry on volatility, volume, and connectedness: a tale of two stock indices in India", *Review of Derivatives Research* 28(3), article 14.
 
-**Every number in this note is REAL DATA** (third-party 1-minute Nifty 50 and Bank Nifty bars, validated against NSE's official daily index values, plus NSE's official F&O bhavcopy), unless it is marked **paper (printed)**. Printed values are typed in by hand from the paper's tables, only so that we can compare. A second person re-keyed all 223 of them blind against the PDF: 222 matched first time and the one difference is the paper's own typesetting slip, so no value changed (`docs/REKEY_CHECK.md`). Every one of our numbers comes from a file written by `experiments/replicate_paper.py` into `results/replication_nse/` (the file is named next to each table) or into `results/replication_nse_stdout.txt`.
+**Every number in this note is REAL DATA** (third-party 1-minute Nifty 50 and Bank Nifty bars, validated against NSE's official daily index values, plus NSE's official F&O bhavcopy), unless it is marked **paper (printed)**. Printed values are typed in by hand from the paper's tables, only so that we can compare. A separate AI agent re-keyed all 223 of them blind against the PDF: 222 matched first time and the one difference is the paper's own typesetting slip, so no value changed (`docs/REKEY_CHECK.md`). Every one of our numbers comes from a file written by `experiments/replicate_paper.py` into `results/replication_nse/` (the file is named next to each table) or into `results/replication_nse_stdout.txt`.
 
 ## Findings
 

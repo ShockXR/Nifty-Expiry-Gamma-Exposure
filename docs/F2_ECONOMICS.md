@@ -240,6 +240,14 @@ pre-registration was silent, and what was done:
 3. **Drawdown length** is counted in trading days from the peak to the trough.
 4. **Cost rates were not re-checked at the source.** The network block on nseindia.com and zerodha.com
    persisted, so the pre-registered rates were used unchanged (as the pre-registration requires).
+5. **Input panels (a deviation, found on 3 November 2026).** The plan names the first forecasting run's
+   panels (`results/pipeline_nse/daily_market.csv` and `daily_gex_panel.csv`) as inputs. Since commit bf6edc0
+   every study, this one included, reads the second run's panels (`results/pipeline_nse_v2/`). The full
+   reproduction of 3 November 2026 reran this study on those panels from the raw files: every number in
+   `metrics.csv` is unchanged, the DSR moves from 1.38606e-12 to 1.38611e-12 (the trial
+   variance V changes in its sixth significant digit), and the only other change is one flag in `trades.csv`: 24 April 2025, a
+   Nifty monthly expiry that the first panel had not marked as one. No rule uses that flag, so the verdict is
+   the same on either panel.
 
 Additions not in the pre-registration, none of which enters the decision: the two figures (requested
 afterwards), the note on how concentrated the gross profit is, the split of rule P by calendar year, and the

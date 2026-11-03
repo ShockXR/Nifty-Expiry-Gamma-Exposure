@@ -9,7 +9,7 @@
     "seed": 7,
     "oi_unit": "keep_units",
     "start": "2023-01-01",
-    "end": null,
+    "end": "2026-11-02",
     "holdout_start": "2025-07-01",
     "min_coverage": 0.95,
     "rate": 0.065,
@@ -30,14 +30,14 @@
     "min_train": 150,
     "block": 21,
     "mcs_refit_every": 21,
-    "verbose": true,
+    "verbose": false,
     "out": "results/pipeline_nse_v2"
   },
-  "seconds": 5961.7,
+  "seconds": 6899.5,
   "target_seconds": {
-    "next15": 2047.6,
-    "next30": 1832.4,
-    "last_hour": 1417.8
+    "next15": 2570.1,
+    "next30": 2006.3,
+    "last_hour": 1590.0
   },
   "models": [
     "naive_last",

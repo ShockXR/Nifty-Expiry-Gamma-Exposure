@@ -54,11 +54,11 @@
   ],
   "rule": "participant_pro",
   "forecast_split": "2024-12-31",
-  "seconds_total": 408.5,
-  "seconds_simulation": 405.1,
+  "seconds_total": 352.9,
+  "seconds_simulation": 349.1,
   "inputs": {
-    "daily_market.csv": "959c5c633f855569",
-    "daily_gex_panel.csv": "92d479816ac95eea",
+    "daily_market.csv": "b9f57f0875240996",
+    "daily_gex_panel.csv": "f0be1a255eb3fde0",
     "nifty_1min.csv": "8ab19906a0a350b4"
   },
   "python": "3.13.18",

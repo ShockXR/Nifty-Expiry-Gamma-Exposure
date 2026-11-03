@@ -1,5 +1,5 @@
 Replication of Chhimwal, Pandey and Pandey (2025) on REAL DATA (third-party 1-minute bars validated against NSE official daily values).
-Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets (not yet re-keyed by a second person).
+Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets and re-keyed blind by a separate AI agent (docs/REKEY_CHECK.md).
 Primary session rule: 360_drop_last15 ('09:15', '15:14'); bootstrap draws: persistence 400, connectedness 300, medians 2000.
 
 ====================================================================================================
@@ -427,4 +427,4 @@ Table 6 all banknifty      False    False                      True     True
         wed banknifty      False    False                     False    False
         wed nifty          False    False                      True     True
 
-Wrote 22 CSV files and 2 figures to results/replication_nse/.
+Wrote 24 CSV files and 2 figures to results/replication_nse/.

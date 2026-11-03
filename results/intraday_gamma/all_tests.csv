@@ -113,9 +113,9 @@ test_id,family,test,coef,ci95_low,ci95_high,p,source,p_holm_headline,p_holm_with
 112,placebo,ordinary | conc | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|),-0.0020890615744646518,-0.21090351184159598,0.20069879470886526,0.17412935323383086,placebo_summary.csv,,1.0
 113,placebo,expiry afternoon (13:00 to 15:00) | log_gross | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|),-0.07800338006340803,-0.3039578763622123,0.19759597126760134,0.05472636815920398,placebo_summary.csv,,1.0
 114,placebo,expiry afternoon (13:00 to 15:00) | conc | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|),-0.10920393672959211,-0.4599745616506364,0.2819532387350959,0.20398009950248755,placebo_summary.csv,,1.0
-115,headline,"H: OOS DM: main: last hour 14:30 to 15:30, closing-auction days excluded, log gross GEX at 14:30",-1.811301458760406,,,0.5319597689119493,oos_summary.csv,0.9032391364232786,0.9032391364232786
-116,secondary,"OOS DM: 14:30 to 15:15, all expiry days, log gross GEX at 14:30",1.1108946174238854,,,0.4616716158071459,oos_summary.csv,,1.0
-117,secondary,"OOS DM: last hour, closing-auction days excluded, log(gross GEX at 14:30 / gross at previous close)",0.7923194080952545,,,0.6479007295478172,oos_summary.csv,,1.0
+115,headline,"H: OOS DM: main: last hour 14:30 to 15:30, closing-auction days excluded, log gross GEX at 14:30",-1.811301458760406,,,0.5328847743547023,oos_summary.csv,0.9032391364232786,0.9032391364232786
+116,secondary,"OOS DM: 14:30 to 15:15, all expiry days, log gross GEX at 14:30",1.1108946174238854,,,0.4627042940583208,oos_summary.csv,,1.0
+117,secondary,"OOS DM: last hour, closing-auction days excluded, log(gross GEX at 14:30 / gross at previous close)",0.7923194080952545,,,0.6485442001733575,oos_summary.csv,,1.0
 118,followup_primary,"FH1: final half hour, log gross GEX at spot, next 5 min",0.25721005250378903,-0.3265424700394186,0.8409625750469967,0.38583337605018675,followup_regressions.csv,,1.0
 119,followup_primary,"FH2: final half hour, concentration within +/-0.5%, next 5 min",-0.42392188583249346,-1.9099956653449963,1.0621518936800092,0.574271301944868,followup_regressions.csv,,1.0
 120,followup_secondary,"final half hour (15:00 to 15:24), expiry days before the closing auction | y5 | log_gross_floor2 | time floor 2 minutes",0.25721005250378903,-0.3265424700394186,0.8409625750469967,0.38583337605018675,followup_regressions.csv,,1.0

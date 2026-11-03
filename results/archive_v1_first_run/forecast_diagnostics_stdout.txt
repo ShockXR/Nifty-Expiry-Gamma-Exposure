@@ -1,0 +1,124 @@
+REAL DATA. Diagnostics of the R1 forecasting contest (from results/pipeline_nse/forecasts_*.csv).
+
+== QLIKE gain vs mcsGARCH by subset (negative = better than mcsGARCH)
+   target                   subset       model  anchors  qlike_pct_vs_mcsgarch  qlike_trimmed_pct_vs_mcsgarch  median_qlike_pct_vs_mcsgarch  share_anchors_better_than_mcsgarch        mse  mse_mcsgarch
+   next15              all anchors         har    19800                 5.2199                         9.7762                       16.4440                              0.4514 3.4958e-11    2.3317e-10
+   next15              all anchors   lgbm_base    19800                -3.9343                        -2.0789                       -4.8111                              0.5233 3.5255e-11    2.3317e-10
+   next15              all anchors hybrid_base    19800                -6.7096                        -6.1509                       -4.8971                              0.5253 1.4804e-10    2.3317e-10
+   next15        09:15 anchor only         har      792                15.0579                        12.4241                      -16.4517                              0.5556 6.4848e-10    5.4632e-09
+   next15        09:15 anchor only   lgbm_base      792               -18.3863                       -18.1514                      -31.3587                              0.6263 6.4800e-10    5.4632e-09
+   next15        09:15 anchor only hybrid_base      792               -16.3811                       -19.3655                      -26.7836                              0.6414 3.4227e-09    5.4632e-09
+   next15   excluding 09:15 anchor         har    19008                 4.2516                         9.5909                       18.2191                              0.4470 9.3943e-12    1.5250e-11
+   next15   excluding 09:15 anchor   lgbm_base    19008                -2.5118                        -0.9545                       -3.3700                              0.5190 9.7243e-12    1.5250e-11
+   next15   excluding 09:15 anchor hybrid_base    19008                -5.7576                        -5.2264                       -4.0159                              0.5205 1.1593e-11    1.5250e-11
+   next15      regime multi_weekly         har     7800                 8.3309                        10.3424                        8.8364                              0.4690 5.0245e-11    5.3340e-10
+   next15      regime multi_weekly   lgbm_base     7800                 2.7665                         5.1895                       -6.5290                              0.5222 5.2808e-11    5.3340e-10
+   next15      regime multi_weekly hybrid_base     7800                -5.4013                        -6.3938                       -6.7861                              0.5342 3.3536e-10    5.3340e-10
+   next15 regime single_weekly_thu         har     4800                 6.6537                         8.5912                       18.9916                              0.4375 1.9626e-11    1.9267e-11
+   next15 regime single_weekly_thu   lgbm_base     4800                -6.1777                        -5.9223                       -3.8347                              0.5246 1.8794e-11    1.9267e-11
+   next15 regime single_weekly_thu hybrid_base     4800                -7.0241                        -5.9871                       -2.5095                              0.5175 1.8585e-11    1.9267e-11
+   next15 regime single_weekly_tue         har     7200                 1.3266                        10.0916                       22.5690                              0.4415 2.8617e-11    5.0527e-11
+   next15 regime single_weekly_tue   lgbm_base     7200                -8.4697                        -7.3034                       -2.8603                              0.5238 2.7214e-11    5.0527e-11
+   next15 regime single_weekly_tue hybrid_base     7200                -7.6842                        -6.0051                       -3.3592                              0.5208 3.1411e-11    5.0527e-11
+   next15              expiry days         har     4225                 4.0054                         7.1162                       12.1027                              0.4495 4.5407e-11    7.3305e-11
+   next15              expiry days   lgbm_base     4225                -6.2490                        -4.1739                       -3.3296                              0.5049 4.4035e-11    7.3305e-11
+   next15              expiry days hybrid_base     4225                -6.2110                        -3.2120                       -1.7770                              0.5004 4.9287e-11    7.3305e-11
+   next30              all anchors         har    19008                 6.7147                        11.0424                       17.7491                              0.4629 6.1693e-11    4.4154e-10
+   next30              all anchors   lgbm_base    19008                -4.1969                        -1.8895                       -7.0418                              0.5303 6.2970e-11    4.4154e-10
+   next30              all anchors hybrid_base    19008                -9.0397                        -7.8865                       -7.4718                              0.5316 2.9970e-10    4.4154e-10
+   next30        09:15 anchor only         har      792                 5.0588                         9.2344                      -11.2319                              0.5568 8.0596e-10    9.5555e-09
+   next30        09:15 anchor only   lgbm_base      792               -25.7074                       -29.0272                      -32.1362                              0.6389 8.0127e-10    9.5555e-09
+   next30        09:15 anchor only hybrid_base      792               -26.9093                       -29.2218                      -30.6829                              0.6465 6.4047e-09    9.5555e-09
+   next30   excluding 09:15 anchor         har    18216                 6.8910                        11.1785                       19.4793                              0.4588 2.9334e-11    4.5283e-11
+   next30   excluding 09:15 anchor   lgbm_base    18216                -1.9077                         0.1527                       -5.4086                              0.5256 3.0871e-11    4.5283e-11
+   next30   excluding 09:15 anchor hybrid_base    18216                -7.1380                        -6.2809                       -5.9817                              0.5266 3.4265e-11    4.5283e-11
+   next30      regime multi_weekly         har     7488                 8.3257                        10.9604                        7.5720                              0.4804 1.0706e-10    1.0372e-09
+   next30      regime multi_weekly   lgbm_base     7488                 4.7509                         8.0196                       -6.7927                              0.5210 1.1422e-10    1.0372e-09
+   next30      regime multi_weekly hybrid_base     7488                -6.9153                        -7.1224                       -7.4061                              0.5319 7.0752e-10    1.0372e-09
+   next30 regime single_weekly_thu         har     4608                 6.3460                        10.5261                       26.2756                              0.4523 3.0411e-11    3.0347e-11
+   next30 regime single_weekly_thu   lgbm_base     4608                -8.2775                        -6.7449                       -4.8089                              0.5206 2.8082e-11    3.0347e-11
+   next30 regime single_weekly_thu hybrid_base     4608                -8.6368                        -7.1911                       -5.9509                              0.5265 2.8186e-11    3.0347e-11
+   next30 regime single_weekly_tue         har     6912                 5.2184                        11.5980                       21.7571                              0.4510 3.3401e-11    7.0418e-11
+   next30 regime single_weekly_tue   lgbm_base     6912               -10.8129                        -9.3931                       -7.6778                              0.5469 3.0707e-11    7.0418e-11
+   next30 regime single_weekly_tue hybrid_base     6912               -11.7545                        -9.4137                       -7.3879                              0.5346 3.8905e-11    7.0418e-11
+   next30              expiry days         har     4056                 4.9883                         9.9995                       11.1617                              0.4581 5.4282e-11    1.0216e-10
+   next30              expiry days   lgbm_base     4056                -6.5646                        -4.4522                       -7.1599                              0.5138 5.1408e-11    1.0216e-10
+   next30              expiry days hybrid_base     4056                -6.6415                        -3.3801                       -5.2297                              0.5012 6.2598e-11    1.0216e-10
+last_hour              all anchors         har      792               -10.7971                        -4.1666                       14.0641                              0.5063 2.9336e-11    3.3557e-11
+last_hour              all anchors   lgbm_base      792                -0.4981                         5.8723                        4.8841                              0.4886 4.3199e-11    3.3557e-11
+last_hour              all anchors hybrid_base      792                -1.2993                         1.9404                        5.3197                              0.4987 3.3588e-11    3.3557e-11
+last_hour      regime multi_weekly         har      312                -6.2603                        -1.3410                        8.3709                              0.5064 2.6400e-11    2.8770e-11
+last_hour      regime multi_weekly   lgbm_base      312                12.1276                        19.7074                       -0.5483                              0.4391 6.2052e-11    2.8770e-11
+last_hour      regime multi_weekly hybrid_base      312                -2.5013                         0.3330                        0.9891                              0.4776 3.0625e-11    2.8770e-11
+last_hour regime single_weekly_thu         har      192                 5.2113                         7.6734                       52.0081                              0.4635 2.2322e-11    3.0563e-11
+last_hour regime single_weekly_thu   lgbm_base      192                -7.6766                        -3.5068                        9.1643                              0.5156 2.1021e-11    3.0563e-11
+last_hour regime single_weekly_thu hybrid_base      192                -0.8003                        -0.9624                        1.1825                              0.5156 2.7202e-11    3.0563e-11
+last_hour regime single_weekly_tue         har      288               -18.6276                       -15.4414                        2.0594                              0.5347 3.7192e-11    4.0740e-11
+last_hour regime single_weekly_tue   lgbm_base      288                -3.5688                         0.2764                       16.2523                              0.5243 3.7561e-11    4.0740e-11
+last_hour regime single_weekly_tue hybrid_base      288                -0.9401                         5.5311                       19.1473                              0.5104 4.1055e-11    4.0740e-11
+last_hour              expiry days         har      169               -10.1769                        -7.0400                        3.6980                              0.5148 3.2236e-11    4.2676e-11
+last_hour              expiry days   lgbm_base      169                -8.1720                        -6.1152                       28.3609                              0.4793 3.0111e-11    4.2676e-11
+last_hour              expiry days hybrid_base      169                 3.1942                         5.5171                        4.3418                              0.5089 4.0552e-11    4.2676e-11
+
+== the 10 largest mcsGARCH squared errors per target
+   target       date  minute_after_0915   realized   mcsgarch  hybrid_base  lgbm_base        har  share_of_mcsgarch_total_mse_top10
+   next15 2024-06-05                  0 9.8604e-05 2.0098e-03   1.5732e-03 7.8304e-06 8.6773e-05                             0.9667
+   next15 2024-06-04                  0 4.8590e-04 5.9942e-06   5.4853e-06 7.5478e-06 6.4059e-06                             0.9667
+   next15 2026-02-03                  0 4.1160e-04 5.5317e-06   7.2971e-06 7.0055e-06 4.9795e-06                             0.9667
+   next15 2024-06-05                 15 1.2181e-05 3.9392e-04   3.2474e-04 7.2759e-06 5.5438e-05                             0.9667
+   next15 2026-08-04                  0 1.7866e-05 3.5840e-04   1.5843e-04 1.1194e-05 3.8048e-05                             0.9667
+   next15 2025-04-07                  0 2.6160e-04 6.2692e-06   7.9976e-06 6.7111e-06 3.8480e-06                             0.9667
+   next15 2026-08-05                  0 1.5142e-06 1.7708e-04   9.0907e-05 1.1437e-05 2.6802e-05                             0.9667
+   next15 2024-06-04                165 1.8954e-04 4.0340e-05   4.3273e-05 6.2559e-06 9.0935e-06                             0.9667
+   next15 2024-06-05                 30 1.0347e-05 1.5861e-04   1.3509e-04 6.4802e-06 2.9533e-05                             0.9667
+   next15 2024-06-04                195 1.9845e-04 8.5289e-05   9.2039e-05 6.3019e-06 1.1087e-05                             0.9667
+   next30 2024-06-05                  0 1.1079e-04 2.6924e-03   2.2058e-03 1.3046e-05 1.2032e-04                             0.9578
+   next30 2024-06-05                 15 2.2528e-05 6.8055e-04   5.5636e-04 1.1747e-05 8.9542e-05                             0.9578
+   next30 2024-06-04                  0 5.8070e-04 8.2117e-06   9.8913e-06 1.0562e-05 8.8338e-06                             0.9578
+   next30 2026-08-04                  0 1.8276e-05 4.4934e-04   2.1843e-04 1.6563e-05 4.2823e-05                             0.9578
+   next30 2026-02-03                  0 4.1430e-04 7.9449e-06   1.1179e-05 9.2742e-06 9.3036e-06                             0.9578
+   next30 2025-04-07                  0 2.9291e-04 8.6927e-06   1.0970e-05 1.1163e-05 6.0302e-06                             0.9578
+   next30 2024-06-05                 30 2.8901e-05 2.9346e-04   2.6381e-04 1.1088e-05 7.3870e-05                             0.9578
+   next30 2026-08-05                  0 2.5801e-06 2.2685e-04   1.1834e-04 1.8138e-05 3.1157e-05                             0.9578
+   next30 2024-06-04                 90 2.0845e-04 3.2905e-05   3.0730e-05 1.0388e-05 1.4648e-05                             0.9578
+   next30 2024-06-04                165 2.5381e-04 8.0709e-05   7.5374e-05 1.0441e-05 1.6111e-05                             0.9578
+last_hour 2024-09-20                315 2.1220e-05 9.2259e-05   8.3956e-05 1.3661e-05 3.7997e-05                             0.6144
+last_hour 2026-08-03                315 6.7329e-05 1.6813e-06   1.7225e-06 1.6746e-06 2.0275e-06                             0.6144
+last_hour 2024-11-28                315 6.3707e-06 5.6733e-05   5.0581e-05 1.6945e-05 2.2205e-05                             0.6144
+last_hour 2026-08-04                315 4.0069e-05 4.5207e-06   4.8072e-06 4.3393e-06 5.3995e-06                             0.6144
+last_hour 2026-05-29                315 3.4331e-05 3.8563e-06   4.1085e-06 4.1504e-06 4.7864e-06                             0.6144
+last_hour 2024-12-05                315 5.7509e-05 2.9657e-05   2.6184e-05 1.6339e-05 1.5654e-05                             0.6144
+last_hour 2024-06-04                315 1.4194e-04 1.6197e-04   1.8844e-04 1.4073e-05 7.1098e-05                             0.6144
+last_hour 2026-11-02                315 2.3666e-05 4.1914e-06   4.3827e-06 4.5593e-06 4.7144e-06                             0.6144
+last_hour 2026-03-05                315 2.8480e-05 9.2672e-06   7.8445e-06 7.4683e-06 8.2424e-06                             0.6144
+last_hour 2025-04-07                315 3.6026e-05 1.8195e-05   1.7787e-05 1.5193e-05 2.0271e-05                             0.6144
+
+== QLIKE tail shares and last-hour DM tests
+   target                                  model  top1pct_share_of_qlike  dm_two_sided_p  mean_loss_diff  n_days
+   next15                               mcsgarch                  0.2870             NaN             NaN     NaN
+   next15                                    har                  0.2752             NaN             NaN     NaN
+   next15                                    vix                  0.2393             NaN             NaN     NaN
+   next15                              lgbm_base                  0.3019             NaN             NaN     NaN
+   next15                               lgbm_gex                  0.2996             NaN             NaN     NaN
+   next15                            hybrid_base                  0.2866             NaN             NaN     NaN
+   next15                             hybrid_gex                  0.2900             NaN             NaN     NaN
+   next30                               mcsgarch                  0.2740             NaN             NaN     NaN
+   next30                                    har                  0.2712             NaN             NaN     NaN
+   next30                                    vix                  0.2367             NaN             NaN     NaN
+   next30                              lgbm_base                  0.3010             NaN             NaN     NaN
+   next30                               lgbm_gex                  0.3002             NaN             NaN     NaN
+   next30                            hybrid_base                  0.2688             NaN             NaN     NaN
+   next30                             hybrid_gex                  0.2692             NaN             NaN     NaN
+last_hour                               mcsgarch                  0.3355             NaN             NaN     NaN
+last_hour                                    har                  0.2884             NaN             NaN     NaN
+last_hour                                    vix                  0.1900             NaN             NaN     NaN
+last_hour                              lgbm_base                  0.3265             NaN             NaN     NaN
+last_hour                               lgbm_gex                  0.3404             NaN             NaN     NaN
+last_hour                            hybrid_base                  0.3150             NaN             NaN     NaN
+last_hour                             hybrid_gex                  0.3174             NaN             NaN     NaN
+last_hour          hybrid_base vs har (all days)                     NaN          0.0191          0.0232   792.0
+last_hour            lgbm_base vs har (all days)                     NaN          0.0806          0.0252   792.0
+last_hour hybrid_base vs har (before 3 Aug 2026)                     NaN          0.0617          0.0104   729.0
+last_hour   lgbm_base vs har (before 3 Aug 2026)                     NaN          0.1259          0.0163   729.0
+last_hour       hybrid_base vs har (expiry days)                     NaN          0.0645          0.0324   169.0
+last_hour         lgbm_base vs har (expiry days)                     NaN          0.7949          0.0049   169.0

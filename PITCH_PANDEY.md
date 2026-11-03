@@ -44,7 +44,7 @@ Offered as a careful reader's questions, each now checked on real data:
 
 ## How to check any of this
 
-Every one of the project's 4,930 hypothesis tests is listed in [TEST_LEDGER.md](docs/TEST_LEDGER.md) with its raw p-value and a p-value corrected for all of them at once (Benjamini-Yekutieli). The forecasting result survives that correction; the end-of-day reversal survives in sample only.
+Every one of the project's 22,525 hypothesis tests (25 studies) is listed in [TEST_LEDGER.md](docs/TEST_LEDGER.md) with its raw p-value and a p-value corrected for all of them at once (Benjamini-Yekutieli). The hybrid's gain over mcsGARCH on all days survives that correction at every horizon, and so do the Bank Nifty replication and the Tuesday last-hour premium; the edge over an mcsGARCH given the implied variance does not, and the end-of-day reversal survives only in its in-sample form.
 
 The code is a tested Python package with one command that downloads the public data (pinned sources), checks every raw file against a list of SHA-256 hashes and reruns every study ([REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md)). Each step that went wrong and how it was fixed is logged in [ITERATION_LOG.md](ITERATION_LOG.md), including two of my own headline claims that were withdrawn after a referee-style review and the closing-auction check ([INDEPENDENT_REVIEW.md](docs/INDEPENDENT_REVIEW.md)).
 

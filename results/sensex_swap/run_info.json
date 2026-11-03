@@ -20,12 +20,12 @@
   "sample_end": "2026-11-02",
   "n_days": 480,
   "per_day_check_max_abs_diff": 4.007461029686965e-12,
-  "timing_s": 25.4,
+  "timing_s": 32.0,
   "input_sha256_16": {
     "data/raw/nifty_1min.csv": "8ab19906a0a350b4",
     "data/raw/sensex_1min.csv": "471a519e0300fbf0",
     "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
     "data/external/sensex_expiry_calendar.csv": "5d9329e40c8c75b2",
-    "results/connectedness_gamma/sample_days.csv": "f663478536e920a6"
+    "results/connectedness_gamma/sample_days.csv": "045518eb3ef34064"
   }
 }

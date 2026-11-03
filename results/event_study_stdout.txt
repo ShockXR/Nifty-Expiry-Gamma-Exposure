@@ -22,7 +22,7 @@ Bank Nifty minute bars: 2297 days 2017-01-02 to 2026-04-22; dropped 14 (weekend 
 Rule check NIFTY 2022-10-20 to 2025-08-31: rule 150 expiries, bhavcopy 150; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
 Rule check BANKNIFTY 2022-10-20 to 2023-08-31: rule 46 expiries, bhavcopy 46; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
 Closing auction detected in the Nifty bars from 2026-08-03 (63 days, every one with >= 8 flat bars in the last 20 minutes; 0 valid days before it had that many).
-Data assembled in 27.7s.
+Data assembled in 26.3s.
 
 == Schedule changes detected from the bhavcopies
    symbol    kind  change last_old_expiry old_weekday first_new_expiry new_weekday
@@ -268,4 +268,4 @@ index                            regime  days  expiry_days  median_opt_premium_c
 - Changed: a table splitting the extra variance into first-hour and last-hour shares was dropped because the whole-day excess is close to zero, so the shares were ratios of noise. Replaced by log premia per part of the day (first hour, 10:15 to 14:30, last hour, last 30 minutes).
 - Added after seeing results (post hoc, labelled as such): the frequency diagnostics rv1/rv5 and RS/rv5, because the per-minute Rogers-Satchell premium differed from the 5-minute RV premium.
 
-Total run time 121s.
+Total run time 115s.

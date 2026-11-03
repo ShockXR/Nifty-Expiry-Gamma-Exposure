@@ -313,3 +313,322 @@ def test_auction_rows_repeating_a_contest_test_are_counted_once(tmp_path):
     assert len(ctx.rows) == 1 and "har" in ctx.rows[0]["hypothesis"]
     reasons = " ".join(x["reason"] for x in ctx.not_counted)
     assert "counted under R1)" in reasons and "counted under R1V2)" in reasons and not ctx.warnings
+
+
+# ---------------------------------------------------------------------------------------------------------
+# Pre-registration status from the reflogs (also inside a git worktree), and the doubled max-type p
+# ---------------------------------------------------------------------------------------------------------
+
+T_COMMIT = 1_700_000_000  # Nov 2023: older than any file the tests write
+
+
+def _reflog_line(ts, msg):
+    return f"{'0' * 40} {'1' * 40} A Author <a@example.com> {ts} +0000\t{msg}\n"
+
+
+def _fake_repo(root, phrase, ts=T_COMMIT, doc=None):
+    """A plain checkout whose reflog (logs/HEAD) holds a commit with the given message."""
+    logs = root / ".git" / "logs"
+    logs.mkdir(parents=True, exist_ok=True)
+    (logs / "HEAD").write_text(_reflog_line(ts, f"commit: {phrase}"))
+    if doc:
+        (root / doc).parent.mkdir(parents=True, exist_ok=True)
+        (root / doc).write_text("plan")
+
+
+def test_doubled_max_type_p(tmp_path):
+    """SPA-style one-sided max p: min(1, 2p), not 2 min(p, 1 - p) (a p near 1 is not evidence of the other direction)."""
+    ctx = btl.Ctx(tmp_path)
+    kw = dict(role="exploratory", pre_specified=btl.PS_NO, source_file="f.csv", sidedness=btl.SIDE_DOUBLED)
+    assert ctx.add("X", "h", "o", "s", 0.03, source_key="a", **kw)["p_raw"] == pytest.approx(0.06)
+    r = ctx.add("X", "h", "o", "s", 0.8, source_key="b", **kw)
+    assert r["p_reported"] == pytest.approx(0.8) and r["p_raw"] == 1.0
+
+
+def test_reflog_read_through_a_worktree(tmp_path):
+    """A worktree's .git is a file; its commits are in the worktree's HEAD log and in the branch logs (nested
+    branch names) of the main repository's git directory."""
+    main_git = tmp_path / "main" / ".git"
+    wt_git = main_git / "worktrees" / "wt"
+    (wt_git / "logs").mkdir(parents=True)
+    (wt_git / "commondir").write_text("../..\n")
+    (wt_git / "logs" / "HEAD").write_text(_reflog_line(T_COMMIT + 5, "commit: work in the worktree"))
+    branch_log = main_git / "logs" / "refs" / "heads" / "claude" / "thread"
+    branch_log.parent.mkdir(parents=True)
+    branch_log.write_text(_reflog_line(T_COMMIT, "commit: Pre-registration P92") + "not a reflog line\n")
+    (main_git / "logs" / "HEAD").write_text(_reflog_line(T_COMMIT, "commit: Pre-registration P92"))
+    wt = tmp_path / "wt"
+    wt.mkdir()
+    (wt / ".git").write_text(f"gitdir: {wt_git}\n")
+    assert [p.resolve() for p in btl.git_dirs(wt)] == [wt_git.resolve(), main_git.resolve()]
+    commits = btl.reflog_commits(wt)
+    assert sorted(commits) == [(T_COMMIT, "commit: Pre-registration P92"), (T_COMMIT + 5, "commit: work in the worktree")]
+    # the plan is older than the outcome files, but a run file written with the plan is older still
+    (wt / "docs" / "prereg").mkdir(parents=True)
+    (wt / "docs" / "prereg" / "P92_SENSEX_SWAP.md").write_text("plan")
+    _write(wt / "results" / "sensex_swap" / "tests.csv", pd.DataFrame({"p": [0.5]}))
+    _write(wt / "results" / "sensex_swap" / "coverage.csv", pd.DataFrame({"n": [1]}))
+    os.utime(wt / "results" / "sensex_swap" / "coverage.csv", (T_COMMIT - 100, T_COMMIT - 100))
+    ctx = btl.Ctx(wt)
+    ps, note = btl.prereg_status(ctx, "sensex_swap", ["tests.csv"])
+    assert ps == btl.PS_YES and "per the reflogs" in note and "outcome file" in note
+    assert btl.prereg_status(ctx, "sensex_swap")[0] == btl.PS_STATED  # every result file counts without the globs
+    assert btl.git_dirs(tmp_path / "nowhere") == []
+
+
+# ---------------------------------------------------------------------------------------------------------
+# P92 (sensex_swap) and P96 (synthetic_control)
+# ---------------------------------------------------------------------------------------------------------
+
+
+def _swap_tests():
+    p_sec = [0.02, 0.04, 0.5]
+    return pd.DataFrame({
+        "test": ["P1", "S1", "S2", "S3", "PL1"], "family": ["primary", "secondary", "secondary", "secondary", "placebo"],
+        "what": ["Tue minus Thu NET, after minus before", "last hour", "regression", "total", "fake date"],
+        "outcome": ["net_day", "net_lh", "net_day", "tot_day", "net_day"],
+        "alternative": ["greater", "greater", "two-sided", "less", "two-sided"],
+        "estimate": [0.5, 0.7, 0.3, -0.2, 0.1], "block_weeks": 4,
+        "perm_p": [0.33, 0.02, np.nan, 0.5, 0.7], "perm_p_greater": [0.33, 0.02, np.nan, 0.52, 0.35],
+        "perm_p_less": [0.67, 0.98, np.nan, 0.5, 0.65], "hac_p": [0.4, 0.03, 0.04, 0.6, 0.8],
+        "p_used": [0.33, 0.02, 0.04, 0.5, 0.7], "n_days": 300, "n_cells": "70/80/70/80",
+        "holm_p_secondary": [np.nan] + list(multipletests(p_sec, method="holm")[1]) + [np.nan],
+    })
+
+
+def test_swap_adapter_roles_alternatives_and_holm(tmp_path):
+    base = tmp_path / "results" / "sensex_swap"
+    _write(base / "tests.csv", _swap_tests())
+    _write(base / "robustness.csv", pd.DataFrame({
+        "check": ["block of 1 week(s)", "drop September 2025", "total connectedness (descriptive)"],
+        "estimate": [0.5, 0.4, 1.0], "perm_p": [0.31, 0.2, 0.05], "hac_p": [0.4, 0.3, 0.06], "n_days": 300,
+        "alternative_used": ["greater", "greater", "two-sided"]}))
+    _write(base / "h2_regression.csv", pd.DataFrame({"term": ["expiry"], "coef": [0.3], "p": [0.04]}))
+    _write(base / "coverage.csv", pd.DataFrame({"n": [1]}))
+    _fake_repo(tmp_path, "Pre-registration P92", doc="docs/prereg/P92_SENSEX_SWAP.md")
+    ctx = btl.Ctx(tmp_path)
+    btl.adapt_swap(ctx)
+    rows = {r["source_key"]: r for r in ctx.rows}
+    assert len(ctx.rows) == 7 and not ctx.warnings
+    p1 = rows["tests.csv|P1"]
+    assert p1["role"] == "primary" and p1["pre_specified"] == btl.PS_YES and p1["sidedness"] == btl.SIDE_ONE_PRE
+    assert p1["p_raw"] == pytest.approx(0.33)  # registered one-sided: kept
+    assert "perm_p_block_1_week=0.31" in p1["alt_p"] and "perm_p_other_direction=0.67" in p1["alt_p"]
+    assert rows["tests.csv|S2"]["p_raw"] == pytest.approx(0.04) and "Newey-West" in rows["tests.csv|S2"]["p_method"]
+    assert rows["tests.csv|PL1"]["role"] == "placebo" and rows["tests.csv|PL1"]["sidedness"] == btl.SIDE_TWO
+    s1 = rows["tests.csv|S1"]
+    assert s1["p_study_adjusted_recomputed"] == pytest.approx(s1["p_study_adjusted"])
+    assert [c["result"] for c in ctx.checks] == ["match"]
+    assert rows["robustness.csv|drop September 2025"]["role"] == "robustness"
+    desc = rows["robustness.csv|total connectedness (descriptive)"]
+    assert desc["role"] == "exploratory" and desc["pre_specified"] == btl.PS_NO and desc["sidedness"] == btl.SIDE_TWO
+    nc = {x["what"]: x for x in ctx.not_counted}
+    assert nc["block lengths of 1, 2 and 8 weeks and the within-weekday permutation"]["n_items"] == 1
+    assert {"sensex_swap/h2_regression.csv", "sensex_swap/coverage.csv"} <= ctx.consumed
+
+
+def test_synth_adapter_ratio_did_joint_and_dedup(tmp_path):
+    base = tmp_path / "results" / "synthetic_control"
+    rows = [  # analysis, treated, effect, ratio, p_ratio, p_neg, did, did_hac_p, did_rank_p_neg
+        ("primary", "BN", -0.02, 1.1, 0.95, 0.4, 0.05, 0.01, 0.9),
+        ("secondary", "FIN", 0.01, 1.5, 0.3, 0.6, 0.06, 0.2, 0.8),
+        ("secondary", "MID", 0.03, 1.2, 0.6, 0.7, 0.07, 0.3, 0.7),
+        ("S7 drop the last month", "MID", 0.03, 1.2, 0.6, 0.7, 0.07, 0.3, 0.7),  # same as MID's main run
+        ("placebo in time (2023)", "BN", 0.002, 0.9, 0.5, 0.5, 0.01, 0.6, 0.4),
+        ("descriptive", "NIFTY", 0.04, 2.0, 0.2, 0.9, 0.08, 0.05, 0.95),
+    ]
+    d = pd.DataFrame(rows, columns=["analysis", "treated", "effect", "ratio", "p_ratio", "p_neg", "did", "did_hac_p", "did_rank_p_neg"])
+    _write(base / "results.csv", d.assign(n_pre=100, n_post=50, J=19))
+    (base / "decision.json").write_text(
+        '{"secondaries": {"FIN": {"p_ratio": 0.3, "holm_p": 0.6}, "MID": {"p_ratio": 0.6, "holm_p": 0.6}},'
+        ' "joint_test_all_three": {"p_neg": 0.966, "n_combinations": 6859, "mean_std_effect": 0.2}}')
+    _write(base / "placebo_space_BN.csv", pd.DataFrame({"donor": ["x"], "ratio": [1.0]}))
+    ctx = btl.Ctx(tmp_path)
+    btl.adapt_synth(ctx)
+    assert len(ctx.rows) == 6 + 6 - 2 + 1
+    rows = {r["source_key"]: r for r in ctx.rows}
+    bn = rows["ratio|primary|BN"]
+    assert bn["role"] == "primary" and bn["sidedness"] == btl.SIDE_TWO and bn["p_raw"] == pytest.approx(0.95)
+    assert "p_signed_one_sided_fall=0.4" in bn["alt_p"]
+    fin = rows["ratio|secondary|FIN"]
+    assert fin["p_study_adjusted"] == pytest.approx(0.6) and fin["p_study_adjusted_recomputed"] == pytest.approx(0.6)
+    assert rows["ratio|placebo in time (2023)|BN"]["role"] == "placebo"
+    assert rows["ratio|descriptive|NIFTY"]["role"] == "exploratory" and rows["ratio|descriptive|NIFTY"]["pre_specified"] == btl.PS_NO
+    assert "ratio|S7 drop the last month|MID" not in rows and "did|S7 drop the last month|MID" not in rows
+    assert all(r["role"] == "exploratory" and r["pre_specified"] == btl.PS_NO for k, r in rows.items() if k.startswith("did|"))
+    joint = rows["joint_test_all_three"]
+    assert joint["role"] == "secondary" and joint["sidedness"] == btl.SIDE_ONE_STATED and joint["p_raw"] == pytest.approx(0.966)
+    assert joint["pre_specified"] == btl.PS_UNKNOWN  # no plan in this fake project
+    assert [c["result"] for c in ctx.checks] == ["match"]
+    assert [x["n_items"] for x in ctx.not_counted if x["what"].startswith("rows repeating")] == [2]
+    assert "synthetic_control/placebo_space_BN.csv" in ctx.consumed
+
+
+# ---------------------------------------------------------------------------------------------------------
+# Referee responses (post hoc): F2, forecasting, expiry premia
+# ---------------------------------------------------------------------------------------------------------
+
+
+def _f2_group(rule, sample, coef, nw5, others, n=932):
+    methods = {"newey_west_5": nw5, **others}
+    return pd.DataFrame({"rule": rule, "spec": "binary", "outcome": "r_last", "sample": sample, "term": "N_x_r_rod",
+                         "coef": coef, "n": n, "n_neg": 300, "method": list(methods), "p": list(methods.values())})
+
+
+def test_ref_f2_one_row_per_estimate(tmp_path):
+    base = tmp_path / "results" / "referee_f2"
+    robust = {"driscoll_kraay": 0.002, "wild_cluster_month": 0.012, "block_perm_t": 0.008}
+    item3 = pd.concat([_f2_group("pro", "full", -0.5, 0.001, robust),
+                       _f2_group("pro", "2023_2024", np.nan, np.nan, {"wild_cluster_month": np.nan}, n=400)])
+    _write(base / "item3_f2_inference.csv", item3)
+    item4 = pd.concat([_f2_group("pro", "full", -0.5, 0.001, {"wild_cluster_month": 0.011}),  # same estimate as item 3
+                       _f2_group("fii", "full", 0.2, 0.3, {"wild_cluster_month": 0.45, "driscoll_kraay": 0.9})])
+    _write(base / "item4_other_rules.csv", item4)
+    _write(base / "item8_horse_race.csv", pd.DataFrame({
+        "horse_race": "raw states", "position": "all", "form": "joint", "coef": np.nan, "n": 932,
+        "method": ["newey_west_5", "wild_cluster_month"], "p": [0.01, 0.2]}))
+    _write(base / "item2_sign_shares.csv", pd.DataFrame({"share": [0.4]}))
+    ctx = btl.Ctx(tmp_path)
+    btl.adapt_ref_f2(ctx)
+    assert len(ctx.rows) == 3
+    rows = {r["source_key"]: r for r in ctx.rows}
+    f2 = rows["item3_f2_inference.csv|pro|binary|r_last|full|N_x_r_rod"]
+    # Driscoll-Kraay (0.9 for fii) and Newey-West 5 are comparisons only, never the main p
+    assert f2["p_raw"] == pytest.approx(0.012) and "wild_cluster_month" in f2["p_method"]
+    assert "newey_west_5=0.001" in f2["alt_p"] and f2["role"] == "exploratory" and f2["pre_specified"] == btl.PS_NO
+    assert rows["item4_other_rules.csv|fii|binary|r_last|full|N_x_r_rod"]["p_raw"] == pytest.approx(0.45)
+    hr = rows["item8_horse_race|raw states|all|joint"]
+    assert hr["sidedness"] == btl.SIDE_NONDIR and hr["p_raw"] == pytest.approx(0.2)
+    assert ctx.ref_f2_counts == ({"1-7": 4 + 2 + 3, "8": 2}, {"1-7": 2, "8": 1})  # p-values seen, tests counted
+    nc = {x["what"]: x for x in ctx.not_counted}
+    assert nc["groups marked 'not estimable'"]["n_items"] == 1
+    assert nc["estimates already counted from another file"]["n_items"] == 1
+    assert "referee_f2/item2_sign_shares.csv" in ctx.consumed
+
+
+def test_ref_forecast_spa_fair_benchmarks_and_gw(tmp_path):
+    _write(tmp_path / "results" / "pipeline_nse_v2" / "tests_next15.csv", _v2_tests())
+    base = tmp_path / "results" / "referee_forecast"
+    _write(base / "spa_reality_check.csv", pd.DataFrame({
+        "target": "next15", "subset": "all", "mean_block": [5, 10, 20], "p_spa_consistent": [0.02, 0.03, 0.04],
+        "p_spa_lower": 0.01, "p_spa_upper": 0.05, "p_reality_check": [0.06, 0.07, 0.08], "n_challengers": 12,
+        "best_by_t": "hybrid_base", "days": 792, "best_by_t_pct_vs_mcsgarch": -6.0, "T_spa": 3.1, "reps": 2000}))
+    fb = pd.DataFrame({
+        "target": "next15", "subset": "all", "benchmark": ["mcsgarch", "vix", "best_matched_mcsgarch"],
+        "benchmark_model": ["mcsgarch", "mcsgarch_vix", "mcsgarch_vix"], "p_benchmark_beats_mcsgarch": [np.nan, 0.2, 0.2],
+        "benchmark_pct_vs_mcsgarch": [0.0, -1.0, -1.0], "days": 792,
+        "p_hybrid_beats_benchmark": [0.001, 0.01, 0.01],  # the first is the R1V2 test (same p): not counted again
+        "hybrid_pct_vs_benchmark": [-5.0, -3.0, -3.0], "dm_stat": [3.5, 2.3, 2.3]})
+    _write(base / "fair_benchmarks.csv", fb)
+    gw = pd.DataFrame({
+        "target": "next15", "benchmark": "mcsgarch", "benchmark_model": "mcsgarch",
+        "test": ["unconditional", "conditional C1", "conditional C1 (Newey-West)"], "family": ["main", "main", "newey_west"],
+        "instruments": ["constant", "constant and lagged difference", "constant and lagged difference"], "n": 792,
+        "p": [0.01, 0.04, 0.05], "mean_d_points": [0.2, 0.21, 0.21], "df": [1, 2, 2], "stat": [6.6, 6.4, 6.0]})
+    gw["p_holm_main_family"] = [0.02, 0.04, np.nan]
+    _write(base / "gw_tests.csv", gw)
+    _write(base / "mcs_summary.csv", pd.DataFrame({"model": ["a"], "p": [0.5]}))
+    ctx = btl.Ctx(tmp_path)
+    btl.adapt_ref_forecast(ctx)
+    assert len(ctx.rows) == 1 + 2 + 2
+    rows = {r["source_key"]: r for r in ctx.rows}
+    spa = rows["spa_reality_check.csv|next15|all"]
+    assert spa["sidedness"] == btl.SIDE_DOUBLED and spa["p_raw"] == pytest.approx(0.06)
+    assert "p_spa_block_5=0.02" in spa["alt_p"] and "p_reality_check=0.07" in spa["alt_p"]
+    vix = rows["fair_benchmarks.csv|next15|all|vix|vs mcsgarch"]
+    assert vix["sidedness"] == btl.SIDE_CONVERTED and vix["p_raw"] == pytest.approx(0.4)
+    assert rows["fair_benchmarks.csv|next15|all|vix|hybrid"]["p_raw"] == pytest.approx(0.02)
+    c1 = rows["gw_tests.csv|next15|mcsgarch|conditional C1"]
+    assert c1["sidedness"] == btl.SIDE_NONDIR and "p_newey_west=0.05" in c1["alt_p"]
+    assert c1["p_study_adjusted_recomputed"] == pytest.approx(0.04)
+    assert all(r["role"] == "exploratory" and r["pre_specified"] == btl.PS_NO for r in ctx.rows)
+    assert [c["result"] for c in ctx.checks] == ["match"]
+    nc = {(x["source_file"], x["what"]): x["n_items"] for x in ctx.not_counted}
+    assert nc[("results/referee_forecast/fair_benchmarks.csv", "rows that repeat a test of the current contest")] == 1
+    assert nc[("results/referee_forecast/", "rows repeating another row of this study (same p and estimate)")] == 2
+    assert nc[("results/referee_forecast/spa_reality_check.csv", "SPA and Reality Check with blocks of 5 and 20 days")] == 2
+    assert nc[("results/referee_forecast/gw_tests.csv", "Newey-West versions of C1 and C2")] == 1
+    assert "referee_forecast/mcs_summary.csv" in ctx.consumed
+
+
+def test_ref_expiry_repeats_and_trend_rows(tmp_path):
+    ctx = btl.Ctx(tmp_path)
+    ctx.add("EVENT", "published row", "o", "s", 0.0123, role="secondary", pre_specified=btl.PS_NO,
+            source_file="event_study/tests.csv", source_key="e", estimate=0.05)
+    base = tmp_path / "results" / "referee_expiry"
+    _write(base / "negative_control_rows.csv", pd.DataFrame({
+        "spec_id": ["a_Fri", "b_Thu"], "comparison": ["Negative control: Nifty Friday", "Nifty Thursday"],
+        "event": ["a", "b"], "measure": "rv_day", "window": "8 weeks", "n_pre": 8, "n_post": 8,
+        "hac_p": [0.0123, 0.04], "diff": [0.05, 0.1], "placebo_p": [0.1, 0.2],
+        "trend_adjusted_p": [0.3, 0.2], "trend_adjusted_change": [0.02, 0.03], "pretrend_p": [0.5, 0.6]}))
+    _write(base / "pooled_all_index_regression.csv", pd.DataFrame({
+        "index": "NIFTY", "term": ["own_thu_to_a", "x_bn"], "measure": "rv_day", "spec": "week fixed effects",
+        "n_days": 900, "n_weeks": 180, "p": [0.01, 0.001], "coef": [0.2, 0.1]}))
+    _write(base / "expiry_calendar.csv", pd.DataFrame({"date": ["2024-01-04"]}))
+    btl.adapt_ref_expiry(ctx)
+    new = [r for r in ctx.rows if r["study"] == "REFEXP"]
+    assert len(new) == 4  # the Friday HAC row repeats the EVENT row; its trend-adjusted test is new
+    fri = [r for r in new if r["hypothesis"].startswith("Negative control (Friday): ")]
+    assert len(fri) == 1 and "trend" in fri[0]["hypothesis"] and "Negative control:" not in fri[0]["hypothesis"]
+    assert fri[0]["p_raw"] == pytest.approx(0.3)
+    thu = [r for r in new if r["source_key"].endswith("b_Thu|rv_day|8 weeks|")][0]
+    assert "placebo_p=0.2" in thu["alt_p"]
+    assert all(r["role"] == "exploratory" and r["pre_specified"] == btl.PS_NO for r in new)
+    nc = {x["what"]: x["n_items"] for x in ctx.not_counted}
+    assert nc["rows that repeat a test of EVENT"] == 1 and nc["other p-values of those repeated tests"] == 1
+    assert nc["pre-trend p-values (pretrend_p)"] == 2 and nc["other indices' expiry dummies"] == 1
+    assert "referee_expiry/expiry_calendar.csv" in ctx.consumed
+
+
+# ---------------------------------------------------------------------------------------------------------
+# P91: the forecasting pipeline on Bank Nifty
+# ---------------------------------------------------------------------------------------------------------
+
+
+def test_bnfc_absent_folder_is_a_note_not_an_error(tmp_path):
+    ctx = btl.Ctx(tmp_path)
+    assert btl.adapt_bnfc(ctx) == 0
+    assert not ctx.rows and not ctx.warnings
+    assert len(ctx.not_counted) == 1 and "registered run not finished" in ctx.not_counted[0]["reason"]
+
+
+def test_bnfc_on_a_copy_of_the_v2_layout(tmp_path):
+    """The v2 files under pipeline_nse_banknifty: the plan's H1 to H4 keep their one-sided p and its status;
+    everything else is doubled and not pre-specified; the regime split and other ablation groups are exploratory."""
+    v2 = _write_v2(tmp_path)
+    bn = tmp_path / "results" / "pipeline_nse_banknifty"
+    bn.mkdir(parents=True)
+    for f in v2.iterdir():
+        (bn / f.name).write_bytes(f.read_bytes())
+    t30 = _v2_tests().assign(mean_diff=lambda d: d["mean_diff"] * 1.1, stat=lambda d: d["stat"] * 1.1)
+    t30.loc[0, "p"] = 0.004
+    t30.loc[len(t30)] = ("multi_weekly_expiry", "qlike", "mcsgarch vs hybrid_base", 0.03, 2.0, 0.03, 60)
+    _write(bn / "tests_next30.csv", t30)
+    _write(bn / "p91" / "hypotheses.csv", pd.DataFrame({
+        "hypothesis": ["H1", "H1"], "target": ["next15", "next30"], "p_one_sided": [0.001, 0.004], "p_holm": [0.002, 0.004]}))
+    _write(bn / "daily_market.csv", pd.DataFrame({"date": ["2024-01-01"]}))
+    _fake_repo(tmp_path, "P91 pre-registration", doc="docs/prereg/P91_BANKNIFTY_FORECAST.md")
+    ctx = btl.Ctx(tmp_path)
+    n = btl.adapt_bnfc(ctx)
+    new = [r for r in ctx.rows if r["study"] == "BNFC"]
+    assert n == len(new) == 5 + 6 + 7 + 1 and not ctx.warnings
+    rows = {r["source_key"]: r for r in new}
+    for t, p, ph in (("next15", 0.001, 0.002), ("next30", 0.004, 0.004)):
+        h1 = rows[f"tests_{t}.csv|qlike|all|mcsgarch vs hybrid_base"]
+        assert h1["role"] == "primary" and h1["pre_specified"] == btl.PS_YES and h1["sidedness"] == btl.SIDE_ONE_PRE
+        assert h1["p_raw"] == pytest.approx(p) and h1["hypothesis"].startswith("P91 H1")
+        assert h1["p_study_adjusted"] == pytest.approx(ph) and h1["p_study_adjusted_recomputed"] == pytest.approx(ph)
+    har = rows["tests_next15.csv|qlike|expiry|mcsgarch vs har"]
+    assert har["sidedness"] == btl.SIDE_CONVERTED and har["p_raw"] == pytest.approx(0.2) and har["pre_specified"] == btl.PS_NO
+    assert rows["tests_next30.csv|qlike|multi_weekly_expiry|mcsgarch vs hybrid_base"]["role"] == "exploratory"
+    ab = {tuple(r["source_key"].split("|")[:4]): r for r in new if r["source_key"].startswith("ablation_next15.csv|")}
+    h4 = ab[("ablation_next15.csv", "hybrid: base vs base+GEX", "us", "all")]
+    assert h4["role"] == "secondary" and h4["hypothesis"].startswith("P91 H4") and h4["p_raw"] == pytest.approx(0.27)
+    assert h4["pre_specified"] == btl.PS_YES
+    us_exp = ab[("ablation_next15.csv", "hybrid: base vs base+GEX", "us", "expiry")]  # an R1V2 headline, not a P91 hypothesis
+    assert us_exp["role"] == "secondary" and us_exp["sidedness"] == btl.SIDE_CONVERTED and us_exp["p_raw"] == pytest.approx(0.26)
+    assert ab[("ablation_next15.csv", "hybrid: base vs base+GEX", "us", "holdout")]["role"] == "exploratory"
+    assert not any(r["role"] == "headline" for r in new)
+    checks = {c["family"]: c["result"] for c in ctx.checks if c["study"] == "BNFC"}
+    assert checks["H1: Holm over the next 15 and next 30 minutes"] == "match"
+    assert "pipeline_nse_banknifty/daily_market.csv" in ctx.consumed

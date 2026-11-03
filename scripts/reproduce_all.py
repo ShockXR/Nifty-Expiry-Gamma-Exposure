@@ -51,7 +51,7 @@ STEPS = [
     ("validate_minute_bars", [PY, "scripts/validate_minute_bars.py"], "results/data_validation/"),
     ("check_oi_units", [PY, "scripts/check_oi_units.py"], "results/data_validation/"),
     # The forecasting contest (v2: mcsGARCH refit every 21 days, option-implied features, 5 LightGBM seeds).
-    # About 100 minutes on one core. Every later study reads its daily panels from this folder.
+    # About 100 to 115 minutes on one core. Every later study reads its daily panels from this folder.
     ("run_pipeline", [PY, "scripts/run_pipeline.py", "--source", "nse", "--end", END, "--n-seeds", "5", "--seed-study", "3",
                       "--out", "results/pipeline_nse_v2"], "results/pipeline_nse_v2/"),
     ("forecast_diagnostics", [PY, "experiments/forecast_diagnostics.py"], "results/forecast_diagnostics/"),

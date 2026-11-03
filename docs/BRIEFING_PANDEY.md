@@ -1,6 +1,6 @@
 # Briefing: Prof. Pandey project (Nifty expiry and dealer gamma)
 
-*For Shreyan. Updated 3 November 2026 (about 08:30 IST). Plain-language summary of where the project stands. **Everything below is from real NSE data** (2 January 2023 to 2 November 2026: 942 trading days, 200 Nifty expiry days) unless it says "simulation". Each point names the document with the full detail.*
+*For Shreyan. Updated 3 November 2026 (about 09:00 IST). Plain-language summary of where the project stands. **Everything below is from real NSE data** (2 January 2023 to 2 November 2026: 942 trading days, 200 Nifty expiry days) unless it says "simulation". Each point names the document with the full detail.*
 
 ## The one-paragraph version
 
@@ -16,7 +16,7 @@ We downloaded four years of real NSE data, rebuilt the professor's paper on it, 
 6. **The one GEX result that held up: the end-of-day reversal.** A 1% move over the day tends to be followed by about a 0.03% move back in the last 30 minutes, and only after evenings when GEX under the Pro rule was negative. It survived shuffles, placebo dates, random sign rules and a split-sample test, but the evenings that drive it come in long stretches (95% of 2023 evenings, about one in five from 2025), so there is less independent evidence than the day count suggests. It is really about Pro traders' positions: asking whether Pro traders were net short index options the evening before gives the same answer, and that agrees with the GEX sign on 916 of 932 evenings. The simplest hedging story (the close continues the day's move) fails outright, and as a trade it earns about zero after costs. ([FALSIFICATION.md](FALSIFICATION.md), [REFEREE_RESPONSE_F2.md](REFEREE_RESPONSE_F2.md), [F2_ECONOMICS.md](F2_ECONOMICS.md))
 7. **The GEX results that did not survive.** "Higher GEX, calmer next day" tracks the total amount of option gamma, not who holds it. The "sign flip on expiry day" holds only in sample, only under the Pro rule, and does not appear in Bank Nifty. Expiry-day gamma re-priced minute by minute shows no effect. And we could not identify the dealer sign from the data at all. ([FALSIFICATION.md](FALSIFICATION.md), [INTRADAY_GAMMA.md](INTRADAY_GAMMA.md), [DEALER_SIGN.md](DEALER_SIGN.md))
 
-**How much to trust each finding.** [TEST_LEDGER.md](TEST_LEDGER.md) lists every statistical test the project ran, with a p-value corrected for all of them at once. The forecasting result survives that correction; the end-of-day reversal survives in sample only. [NUMBER_TRACE.md](NUMBER_TRACE.md) checks that every number in the pitch traces to a results file.
+**How much to trust each finding.** [TEST_LEDGER.md](TEST_LEDGER.md) lists all 22,525 statistical tests the project ran, with a p-value corrected for all of them at once. The forecasting gain over the paper's model survives that correction, as do the Bank Nifty replication and the Tuesday last-hour premium; the edge over the information-matched model does not, and the end-of-day reversal survives in sample only. [NUMBER_TRACE.md](NUMBER_TRACE.md) checks that every number in the pitch traces to a results file.
 
 ## What went wrong and got fixed (the honest part)
 
@@ -34,8 +34,8 @@ Full log of every iteration: [ITERATION_LOG.md](../ITERATION_LOG.md).
 
 ## Status (3 November, morning)
 
-* Done: replication, forecasting (Nifty and Bank Nifty), expiry event study, pinning, falsification, dealer sign, power study, Sensex confound, synthetic control, three referee responses, number trace.
-* Running: the whole project is being regenerated from the raw downloads with one command, to check it reproduces; the test ledger is being extended to the newest studies.
+* Done: replication, forecasting (Nifty and Bank Nifty), expiry event study, pinning, falsification, dealer sign, power study, Sensex confound, synthetic control, three referee responses, number trace, and a full rerun of every study from the raw downloads with one command (about two hours; the headline forecasts came out byte for byte the same, see [REPRODUCIBILITY.md](REPRODUCIBILITY.md)). The test ledger now covers all 25 studies.
+* Running: a check of how much the forecasting gains move when the machine-learning part is retrained with different random seeds.
 * A forecast for today's expiry was frozen in the repository before the market opened; it will be scored after the close.
 * A forward test is written down before the future data exist ([FORWARD_TEST.md](prereg/FORWARD_TEST.md)): the reversal and the Tuesday premium will be tested once, on new days only, in about two to three years.
 * Private, in the project files only: a working-paper draft and a short replication note for the professor.

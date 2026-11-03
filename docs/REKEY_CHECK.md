@@ -44,7 +44,7 @@ The Anderson-Darling statistic measures how far returns are from a normal "bell 
 
 Nothing. No value in `replicate_paper.py` was a transcription slip, so no constant was edited, the replication was not rerun, and no row of `results/replication_nse/*.csv` changed.
 
-Some wording in `experiments/replicate_paper.py` still says the values are "not yet re-keyed by a second person". This is in the module docstring (line 10), the comment above `P_T1`, the `caveat` column it writes into `paper_printed_checks.csv` (line 1031) and one stdout line (line 1124). It was left alone because this check was only allowed to change constants. Updating it needs a rerun, so that the output files carry the new wording.
+Some wording in `experiments/replicate_paper.py` said the values were "not yet re-keyed by a second person" (the module docstring, the comment above `P_T1`, the `caveat` column of `paper_printed_checks.csv` and one stdout line). On 3 November 2026 it was changed to say that the values were re-keyed blind by a separate AI agent, which is who did the re-key, and the replication was rerun from the raw files: only that caveat column and the stdout line changed.
 
 ## The Section 8 "small printed-number points": ours or the paper's?
 

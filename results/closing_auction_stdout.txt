@@ -7,93 +7,93 @@ from 3 Aug 2026    63             0.9646                 8.2886                 
 
 == r1_scoreboards
    target            sample  group                  model  anchors  days  qlike_vs_mcsgarch_pct
-   next15     all test days    all                    har    19800   792                 5.2199
-   next15     all test days    all              lgbm_base    19800   792                -3.9343
-   next15     all test days    all            hybrid_base    19800   792                -6.7096
-   next15     all test days    all hybrid_gex_participant    19800   792                -6.7604
-   next15     all test days expiry                    har     4225   169                 4.0054
-   next15     all test days expiry              lgbm_base     4225   169                -6.2490
-   next15     all test days expiry            hybrid_base     4225   169                -6.2110
-   next15     all test days expiry hybrid_gex_participant     4225   169                -6.5031
-   next15 before 3 Aug 2026    all                    har    18225   729                 8.4617
-   next15 before 3 Aug 2026    all              lgbm_base    18225   729                -2.5352
-   next15 before 3 Aug 2026    all            hybrid_base    18225   729                -6.0133
-   next15 before 3 Aug 2026    all hybrid_gex_participant    18225   729                -6.1383
-   next15 before 3 Aug 2026 expiry                    har     3900   156                 8.7390
-   next15 before 3 Aug 2026 expiry              lgbm_base     3900   156                -5.0376
-   next15 before 3 Aug 2026 expiry            hybrid_base     3900   156                -5.4689
-   next15 before 3 Aug 2026 expiry hybrid_gex_participant     3900   156                -5.7345
-   next30     all test days    all                    har    19008   792                 6.7147
-   next30     all test days    all              lgbm_base    19008   792                -4.1969
-   next30     all test days    all            hybrid_base    19008   792                -9.0397
-   next30     all test days    all hybrid_gex_participant    19008   792                -9.1769
-   next30     all test days expiry                    har     4056   169                 4.9883
-   next30     all test days expiry              lgbm_base     4056   169                -6.5646
-   next30     all test days expiry            hybrid_base     4056   169                -6.6415
-   next30     all test days expiry hybrid_gex_participant     4056   169                -6.1053
-   next30 before 3 Aug 2026    all                    har    17496   729                 8.2811
-   next30 before 3 Aug 2026    all              lgbm_base    17496   729                -2.4688
-   next30 before 3 Aug 2026    all            hybrid_base    17496   729                -7.7684
-   next30 before 3 Aug 2026    all hybrid_gex_participant    17496   729                -8.0012
-   next30 before 3 Aug 2026 expiry                    har     3744   156                 6.5725
-   next30 before 3 Aug 2026 expiry              lgbm_base     3744   156                -5.5855
-   next30 before 3 Aug 2026 expiry            hybrid_base     3744   156                -5.7311
-   next30 before 3 Aug 2026 expiry hybrid_gex_participant     3744   156                -5.0756
-last_hour     all test days    all                    har      792   792               -10.7971
-last_hour     all test days    all              lgbm_base      792   792                -0.4981
-last_hour     all test days    all            hybrid_base      792   792                -1.2993
-last_hour     all test days    all hybrid_gex_participant      792   792                -1.2906
-last_hour     all test days expiry                    har      169   169               -10.1769
-last_hour     all test days expiry              lgbm_base      169   169                -8.1720
-last_hour     all test days expiry            hybrid_base      169   169                 3.1942
-last_hour     all test days expiry hybrid_gex_participant      169   169                 2.5027
-last_hour before 3 Aug 2026    all                    har      729   729                -4.2335
-last_hour before 3 Aug 2026    all              lgbm_base      729   729                 5.5251
-last_hour before 3 Aug 2026    all            hybrid_base      729   729                 1.9672
-last_hour before 3 Aug 2026    all hybrid_gex_participant      729   729                 2.0607
-last_hour before 3 Aug 2026 expiry                    har      156   156                -7.1471
-last_hour before 3 Aug 2026 expiry              lgbm_base      156   156                -9.4694
-last_hour before 3 Aug 2026 expiry            hybrid_base      156   156                 6.5711
-last_hour before 3 Aug 2026 expiry hybrid_gex_participant      156   156                 5.5265
+   next15     all test days    all                    har    19800   792                 6.1482
+   next15     all test days    all              lgbm_base    19800   792                -3.6173
+   next15     all test days    all            hybrid_base    19800   792                -5.7988
+   next15     all test days    all hybrid_gex_participant    19800   792                -5.8926
+   next15     all test days expiry                    har     4225   169                 4.5630
+   next15     all test days expiry              lgbm_base     4225   169                -6.2563
+   next15     all test days expiry            hybrid_base     4225   169                -6.6426
+   next15     all test days expiry hybrid_gex_participant     4225   169                -6.8299
+   next15 before 3 Aug 2026    all                    har    18225   729                 8.9702
+   next15 before 3 Aug 2026    all              lgbm_base    18225   729                -2.2924
+   next15 before 3 Aug 2026    all            hybrid_base    18225   729                -5.5210
+   next15 before 3 Aug 2026    all hybrid_gex_participant    18225   729                -5.8702
+   next15 before 3 Aug 2026 expiry                    har     3900   156                 8.9904
+   next15 before 3 Aug 2026 expiry              lgbm_base     3900   156                -4.5461
+   next15 before 3 Aug 2026 expiry            hybrid_base     3900   156                -5.4395
+   next15 before 3 Aug 2026 expiry hybrid_gex_participant     3900   156                -5.8203
+   next30     all test days    all                    har    19008   792                 7.8792
+   next30     all test days    all              lgbm_base    19008   792                -3.4737
+   next30     all test days    all            hybrid_base    19008   792                -7.6493
+   next30     all test days    all hybrid_gex_participant    19008   792                -8.0256
+   next30     all test days expiry                    har     4056   169                 5.6798
+   next30     all test days expiry              lgbm_base     4056   169                -6.5542
+   next30     all test days expiry            hybrid_base     4056   169                -6.2348
+   next30     all test days expiry hybrid_gex_participant     4056   169                -7.0231
+   next30 before 3 Aug 2026    all                    har    17496   729                 9.0942
+   next30 before 3 Aug 2026    all              lgbm_base    17496   729                -1.7228
+   next30 before 3 Aug 2026    all            hybrid_base    17496   729                -6.8624
+   next30 before 3 Aug 2026    all hybrid_gex_participant    17496   729                -7.1125
+   next30 before 3 Aug 2026 expiry                    har     3744   156                 6.9938
+   next30 before 3 Aug 2026 expiry              lgbm_base     3744   156                -5.4864
+   next30 before 3 Aug 2026 expiry            hybrid_base     3744   156                -5.4253
+   next30 before 3 Aug 2026 expiry hybrid_gex_participant     3744   156                -6.1031
+last_hour     all test days    all                    har      792   792                 1.9317
+last_hour     all test days    all              lgbm_base      792   792                -6.2155
+last_hour     all test days    all            hybrid_base      792   792                -6.3626
+last_hour     all test days    all hybrid_gex_participant      792   792                -5.3388
+last_hour     all test days expiry                    har      169   169                10.1681
+last_hour     all test days expiry              lgbm_base      169   169                -2.3942
+last_hour     all test days expiry            hybrid_base      169   169                -7.9120
+last_hour     all test days expiry hybrid_gex_participant      169   169                -7.7241
+last_hour before 3 Aug 2026    all                    har      729   729                 3.9732
+last_hour before 3 Aug 2026    all              lgbm_base      729   729                -1.1929
+last_hour before 3 Aug 2026    all            hybrid_base      729   729                -7.0121
+last_hour before 3 Aug 2026    all hybrid_gex_participant      729   729                -6.8139
+last_hour before 3 Aug 2026 expiry                    har      156   156                12.6203
+last_hour before 3 Aug 2026 expiry              lgbm_base      156   156                -0.5704
+last_hour before 3 Aug 2026 expiry            hybrid_base      156   156                -6.4555
+last_hour before 3 Aug 2026 expiry hybrid_gex_participant      156   156                -7.6539
 
 == r1_dm_tests
    target            sample  group              comparison  mean_diff    stat          p   n
-   next15     all test days    all         mcsgarch vs har    -0.0151 -2.6504 9.9598e-01 792
-   next15     all test days    all   mcsgarch vs lgbm_base     0.0114  1.3298 9.1796e-02 792
-   next15     all test days    all mcsgarch vs hybrid_base     0.0194  6.9764 1.5142e-12 792
-   next15     all test days expiry         mcsgarch vs har    -0.0140 -1.0368 8.5010e-01 169
-   next15     all test days expiry   mcsgarch vs lgbm_base     0.0218  3.0457 1.1608e-03 169
-   next15     all test days expiry mcsgarch vs hybrid_base     0.0217  3.2082 6.6788e-04 169
-   next15 before 3 Aug 2026    all         mcsgarch vs har    -0.0224 -4.8301 1.0000e+00 729
-   next15 before 3 Aug 2026    all   mcsgarch vs lgbm_base     0.0067  0.7609 2.2335e-01 729
-   next15 before 3 Aug 2026    all mcsgarch vs hybrid_base     0.0159  8.6012 0.0000e+00 729
-   next15 before 3 Aug 2026 expiry         mcsgarch vs har    -0.0282 -3.7254 9.9990e-01 156
-   next15 before 3 Aug 2026 expiry   mcsgarch vs lgbm_base     0.0163  3.0246 1.2448e-03 156
-   next15 before 3 Aug 2026 expiry mcsgarch vs hybrid_base     0.0176  3.0712 1.0661e-03 156
-   next30     all test days    all         mcsgarch vs har    -0.0149 -3.1080 9.9906e-01 792
-   next30     all test days    all   mcsgarch vs lgbm_base     0.0093  0.9267 1.7705e-01 792
-   next30     all test days    all mcsgarch vs hybrid_base     0.0200  8.3311 0.0000e+00 792
-   next30     all test days expiry         mcsgarch vs har    -0.0131 -1.8903 9.7064e-01 169
-   next30     all test days expiry   mcsgarch vs lgbm_base     0.0172  3.6729 1.1992e-04 169
-   next30     all test days expiry mcsgarch vs hybrid_base     0.0174  3.4920 2.3971e-04 169
-   next30 before 3 Aug 2026    all         mcsgarch vs har    -0.0175 -3.5158 9.9978e-01 729
-   next30 before 3 Aug 2026    all   mcsgarch vs lgbm_base     0.0052  0.4863 3.1336e-01 729
-   next30 before 3 Aug 2026    all mcsgarch vs hybrid_base     0.0164  9.7584 0.0000e+00 729
-   next30 before 3 Aug 2026 expiry         mcsgarch vs har    -0.0170 -2.6287 9.9571e-01 156
-   next30 before 3 Aug 2026 expiry   mcsgarch vs lgbm_base     0.0144  3.2458 5.8562e-04 156
-   next30 before 3 Aug 2026 expiry mcsgarch vs hybrid_base     0.0148  3.0158 1.2816e-03 156
-last_hour     all test days    all         mcsgarch vs har     0.0264  2.1767 1.4752e-02 792
-last_hour     all test days    all   mcsgarch vs lgbm_base     0.0012  0.1003 4.6004e-01 792
-last_hour     all test days    all mcsgarch vs hybrid_base     0.0032  0.6312 2.6396e-01 792
-last_hour     all test days expiry         mcsgarch vs har     0.0247  1.4777 6.9741e-02 169
-last_hour     all test days expiry   mcsgarch vs lgbm_base     0.0198  1.1780 1.1940e-01 169
-last_hour     all test days expiry mcsgarch vs hybrid_base    -0.0077 -0.7454 7.7198e-01 169
-last_hour before 3 Aug 2026    all         mcsgarch vs har     0.0071  1.2351 1.0839e-01 729
-last_hour before 3 Aug 2026    all   mcsgarch vs lgbm_base    -0.0092 -0.7808 7.8254e-01 729
-last_hour before 3 Aug 2026    all mcsgarch vs hybrid_base    -0.0033 -0.7441 7.7159e-01 729
-last_hour before 3 Aug 2026 expiry         mcsgarch vs har     0.0146  0.9674 1.6668e-01 156
-last_hour before 3 Aug 2026 expiry   mcsgarch vs lgbm_base     0.0194  1.0822 1.3958e-01 156
-last_hour before 3 Aug 2026 expiry mcsgarch vs hybrid_base    -0.0135 -1.2946 9.0227e-01 156
+   next15     all test days    all         mcsgarch vs har    -0.0175 -3.2259 9.9935e-01 792
+   next15     all test days    all   mcsgarch vs lgbm_base     0.0103  1.4284 7.6789e-02 792
+   next15     all test days    all mcsgarch vs hybrid_base     0.0165  5.9731 1.7577e-09 792
+   next15     all test days expiry         mcsgarch vs har    -0.0158 -1.2240 8.8867e-01 169
+   next15     all test days expiry   mcsgarch vs lgbm_base     0.0216  2.7792 3.0354e-03 169
+   next15     all test days expiry mcsgarch vs hybrid_base     0.0229  3.1290 1.0342e-03 169
+   next15 before 3 Aug 2026    all         mcsgarch vs har    -0.0236 -5.1842 1.0000e+00 729
+   next15 before 3 Aug 2026    all   mcsgarch vs lgbm_base     0.0060  0.8544 1.9659e-01 729
+   next15 before 3 Aug 2026    all mcsgarch vs hybrid_base     0.0145  9.4858 1.6661e-20 729
+   next15 before 3 Aug 2026 expiry         mcsgarch vs har    -0.0289 -3.9413 9.9994e-01 156
+   next15 before 3 Aug 2026 expiry   mcsgarch vs lgbm_base     0.0146  3.1648 9.3417e-04 156
+   next15 before 3 Aug 2026 expiry mcsgarch vs hybrid_base     0.0175  3.7645 1.1820e-04 156
+   next30     all test days    all         mcsgarch vs har    -0.0171 -3.7215 9.9989e-01 792
+   next30     all test days    all   mcsgarch vs lgbm_base     0.0076  0.8220 2.0566e-01 792
+   next30     all test days    all mcsgarch vs hybrid_base     0.0166  7.9359 3.5703e-15 792
+   next30     all test days expiry         mcsgarch vs har    -0.0147 -2.2515 9.8717e-01 169
+   next30     all test days expiry   mcsgarch vs lgbm_base     0.0170  3.0931 1.1600e-03 169
+   next30     all test days expiry mcsgarch vs hybrid_base     0.0162  3.5949 2.1310e-04 169
+   next30 before 3 Aug 2026    all         mcsgarch vs har    -0.0189 -3.9178 9.9995e-01 729
+   next30 before 3 Aug 2026    all   mcsgarch vs lgbm_base     0.0036  0.3688 3.5618e-01 729
+   next30 before 3 Aug 2026    all mcsgarch vs hybrid_base     0.0143  8.1954 5.6187e-16 729
+   next30 before 3 Aug 2026 expiry         mcsgarch vs har    -0.0179 -2.8662 9.9763e-01 156
+   next30 before 3 Aug 2026 expiry   mcsgarch vs lgbm_base     0.0140  2.6144 4.9102e-03 156
+   next30 before 3 Aug 2026 expiry mcsgarch vs hybrid_base     0.0139  3.0706 1.2616e-03 156
+last_hour     all test days    all         mcsgarch vs har    -0.0046 -0.5749 7.1724e-01 792
+last_hour     all test days    all   mcsgarch vs lgbm_base     0.0149  1.3709 8.5401e-02 792
+last_hour     all test days    all mcsgarch vs hybrid_base     0.0152  3.7285 1.0320e-04 792
+last_hour     all test days expiry         mcsgarch vs har    -0.0241 -1.1195 8.6774e-01 169
+last_hour     all test days expiry   mcsgarch vs lgbm_base     0.0057  0.3684 3.5653e-01 169
+last_hour     all test days expiry mcsgarch vs hybrid_base     0.0188  2.3607 9.6934e-03 169
+last_hour before 3 Aug 2026    all         mcsgarch vs har    -0.0065 -0.8136 7.9193e-01 729
+last_hour before 3 Aug 2026    all   mcsgarch vs lgbm_base     0.0020  0.2288 4.0953e-01 729
+last_hour before 3 Aug 2026    all mcsgarch vs hybrid_base     0.0115  2.9479 1.6506e-03 729
+last_hour before 3 Aug 2026 expiry         mcsgarch vs har    -0.0252 -1.1171 8.6717e-01 156
+last_hour before 3 Aug 2026 expiry   mcsgarch vs lgbm_base     0.0011  0.0701 4.7210e-01 156
+last_hour before 3 Aug 2026 expiry mcsgarch vs hybrid_base     0.0129  1.8102 3.6101e-02 156
 
 == r2_tuesday_split
      measure                            sample  weeks  pct_expiry_vs_week  ci95_low_pct  ci95_high_pct  p_signed_rank

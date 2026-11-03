@@ -1,8 +1,8 @@
-"""Second-person check of the paper's printed values typed into replicate_paper.py.
+"""Blind re-key check of the paper's printed values typed into replicate_paper.py.
 
 The comparison targets in ``experiments/replicate_paper.py`` (``P_T1``, ``P_T1_CORR``,
 ``P_T2``, ``P_T34``, ``P_T5``, ``P_T5_TEXT_PCT`` and ``P_T6``) were typed in by hand from
-the paper's tables. A second person re-keyed the same cells BLIND (without looking at the
+the paper's tables. A separate AI agent (not a person) re-keyed the same cells BLIND (without looking at the
 dicts) into ``results/replication_nse/rekey_blind.csv``, with table, page, row and column
 labels exactly as printed. This script matches the two, cell by cell, and writes
 ``results/replication_nse/rekey_check.csv`` plus a short summary on stdout.

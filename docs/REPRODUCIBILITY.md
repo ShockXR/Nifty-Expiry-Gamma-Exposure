@@ -29,7 +29,13 @@ python scripts/reproduce_all.py              # if data/raw is already there
 
 `data/MANIFEST.csv` (committed) lists every raw file with its SHA-256 hash (of the decompressed content for `.gz` files, because gzip headers carry a time stamp). `scripts/data_manifest.py check` compares data/raw with it, and `reproduce_all.py` stops if anything is missing or different. The minute-bar datasets are fetched at the exact git commits recorded in `data/raw/minute_bars_source.json` and cut at 2 November 2026 (`--nifty-ref`, `--bank-ref`, `--until`), so a later download gives the same files. Each step's run time and exit status go to `results/reproduce_log.csv`.
 
-Check on 2 November 2026: rerunning `real_day_level`, `momentum_gex` and `closing_auction_check` from the hashed data reproduced their committed outputs byte for byte. A full run is logged here once the remaining studies are added.
+Check on 2 November 2026: rerunning `real_day_level`, `momentum_gex` and `closing_auction_check` from the hashed data reproduced their committed outputs byte for byte. Full run on 3 November 2026 (`results/reproduce_log.csv`): the 22 steps that `reproduce_all.py` listed at the time, from the hash check to the Sensex swap study, took about 2 hours 20 minutes on one core, of which the five-seed forecasting pipeline took 1 hour 55 minutes. Every step finished without error except the notebook, which stopped on a model name that had changed and was fixed and re-executed (commit eb2127d). What the comparison with the committed outputs showed:
+
+* The headline forecasts (`results/pipeline_nse_v2/`, the model study behind REAL_DATA_RESULTS.md finding 2) came out byte for byte the same.
+* The other studies moved only in late decimal places, because they now read the GEX panels written by the second forecasting run rather than the first. The cells quoted in the documents that moved were updated (for example the R5 table in REAL_DATA_RESULTS.md and the F2_ECONOMICS deviation note); the pinning-mechanism study (P87) was identical.
+* A few committed diagnostic files had come from the first forecasting run and were overwritten by second-run versions. The first-run files, which some documents cite as history, are kept in `results/archive_v1_first_run/`.
+
+The steps added to `reproduce_all.py` afterwards (the synthetic control P96, the Bank Nifty replication P91, the referee-response analyses, the DSR check, the test ledger and the number trace) were each run separately on the same hashed data when they were written; they were not part of this timed run. The Bank Nifty pipeline adds about 80 minutes.
 
 Files for the live dry run (`experiments/live_dry_run.py score`) go to `data/live/`, not `data/raw/`, so scoring a live day never changes the hashed data.
 

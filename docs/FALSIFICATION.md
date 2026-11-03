@@ -453,7 +453,7 @@ conclusions), and the other regime's expiry weekday. Nifty has 200 real events (
 | gross | 1.06 (0.29) | 1.14 (0.26) | 0.34 (0.73) |
 
 Other checks: US real coefficient with the expiry-day RV added as a control 0.726 (p 0.032), with a
-monthly-expiry dummy 0.753 (p 0.023). Pre-auction, US real +0.086 per SD (p 0.039), IV -6.33 (p 0.020), real
+monthly-expiry dummy 0.746 (p 0.024). Pre-auction, US real +0.086 per SD (p 0.039), IV -6.33 (p 0.020), real
 minus placebo z 1.54, 1.30 and 1.39 (p 0.12 to 0.19). The contaminated day-before placebo is large under Pro
 (+0.353 per SD, p 0.0007), which is why it is not used. Bank Nifty: US real +0.018 per SD (p 0.78); Pro
 -0.327 per SD (p 0.054), IV +40.4 (p 0.097), the opposite of the damping prediction.

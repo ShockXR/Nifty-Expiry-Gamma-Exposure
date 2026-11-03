@@ -18,11 +18,11 @@ n_days,809
 closing_auction_days_in_sample,0
 fast_vs_replication_check_max_abs_diff,2.0179413695586845e-12
 workers,4
-timing_load_s,9.5
-timing_mcsgarch_s,3.1
-timing_cross_products_s,1.5
-timing_draws_s,78.3
-timing_total_s,92.8
+timing_load_s,10.7
+timing_mcsgarch_s,3.3
+timing_cross_products_s,1.9
+timing_draws_s,41.0
+timing_total_s,57.4
 n_days_multi_weekly,461
 n_days_single_weekly_thu,192
 n_days_single_weekly_tue,156

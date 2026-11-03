@@ -136,4 +136,4 @@ single_weekly_tue | VIX tercile 2         0.04103  long gamma      23  85.72    
 single_weekly_tue | VIX tercile 3         0.04359 short gamma      18  88.28         87.85          91.8
 single_weekly_tue | VIX tercile 3         0.04359  long gamma      16  90.03         82.09         91.25
 
-Timing (seconds): {"load_s": 9.5, "mcsgarch_s": 3.1, "cross_products_s": 1.5, "draws_s": 78.3, "total_s": 92.8}
+Timing (seconds): {"load_s": 10.7, "mcsgarch_s": 3.3, "cross_products_s": 1.9, "draws_s": 41.0, "total_s": 57.4}

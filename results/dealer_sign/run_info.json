@@ -1,8 +1,8 @@
 {
-  "source": "REAL DATA: results/pipeline_nse (NSE bhavcopy chains), NSE participant-wise OI, validated 1-minute bars",
-  "seconds": 110.8,
+  "source": "REAL DATA: results/pipeline_nse_v2 (NSE bhavcopy chains), NSE participant-wise OI, validated 1-minute bars",
+  "seconds": 118.6,
   "args": {
-    "run": "results/pipeline_nse",
+    "run": "results/pipeline_nse_v2",
     "raw": "data/raw",
     "out": "results/dealer_sign",
     "n_boot": 200,

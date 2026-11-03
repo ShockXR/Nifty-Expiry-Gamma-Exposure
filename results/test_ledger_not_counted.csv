@@ -1,9 +1,14 @@
 study,source_file,what,n_items,reason
 R1,results/pipeline_nse/mcs_*.csv,Model Confidence Set p-values,6,set-level p-values (already adjusted for the model set) that answer the same question as the DM tests
-R1b,results/forecast_diagnostics/tails_and_last_hour_tests.csv,tail-share rows (top 1% share of QLIKE),21,"descriptive shares, no p-value"
+R1b,results/forecast_diagnostics/tails_and_last_hour_tests.csv,tail-share rows (top 1% share of QLIKE),27,"descriptive shares, no p-value"
 R1b,results/forecast_diagnostics/gains_by_subset.csv,descriptive table,1,no p-value
 R1b,results/forecast_diagnostics/largest_mcsgarch_errors.csv,descriptive table,1,no p-value
-AUCTION,results/closing_auction/r1_dm_tests.csv,rows on all test days,18,identical to results/pipeline_nse/tests_*.csv (counted under R1)
+R1b,results/archive_v1_first_run/forecast_diagnostics/tails_and_last_hour_tests.csv,tail-share rows (top 1% share of QLIKE),21,"descriptive shares, no p-value"
+R1b,results/archive_v1_first_run/forecast_diagnostics/gains_by_subset.csv,descriptive table,1,no p-value
+R1b,results/archive_v1_first_run/forecast_diagnostics/largest_mcsgarch_errors.csv,descriptive table,1,no p-value
+AUCTION,results/closing_auction/r1_dm_tests.csv,rows on all test days,18,"identical to results/pipeline_nse_v2/tests_*.csv, subsets all and expiry (counted under R1V2)"
+AUCTION,results/closing_auction/r1_dm_tests.csv,rows on test days before 3 Aug 2026,18,"identical to results/pipeline_nse_v2/tests_*.csv, subsets pre_auction and pre_auction_expiry (counted under R1V2)"
+AUCTION,results/archive_v1_first_run/closing_auction/r1_dm_tests.csv,rows on all test days,18,identical to results/pipeline_nse/tests_*.csv (counted under R1)
 AUCTION,results/closing_auction/r2_tuesday_split.csv,"'Tuesday regime, all' rows",2,same test as results/real_day_level/r2_expiry_effect_by_regime.csv (counted under R2)
 AUCTION,results/closing_auction/r5_without_auction.csv,'all days' rows,7,identical to results/momentum_gex/regressions.csv (counted under R5)
 AUCTION,results/closing_auction/auction_evidence.csv,evidence that the auction exists,1,"descriptive, no p-value"
@@ -51,7 +56,6 @@ FALS,results/falsification/chain_gex_by_expiry_banknifty.csv.gz,chain_gex_by_exp
 FALS,results/falsification/chain_gex_by_expiry_nifty.csv.gz,chain_gex_by_expiry_nifty.csv.gz,1,"data, chain recomputation or replication check; no hypothesis test"
 FALS,results/falsification/chain_recompute_check.csv,chain_recompute_check.csv,1,"data, chain recomputation or replication check; no hypothesis test"
 FALS,results/falsification/replication_check.csv,replication_check.csv,1,"data, chain recomputation or replication check; no hypothesis test"
-FALS,results/falsification/t1_permutation_draws.csv.gz,t1_permutation_draws.csv.gz,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
 FALS,results/falsification/t1_permutation_summary.csv,t1_permutation_summary.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
 FALS,results/falsification/t2_gex_persistence.csv,t2_gex_persistence.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
 FALS,results/falsification/t2_timing_placebo.csv,t2_timing_placebo.csv,1,"source table of family B; its tests are counted once there (draw files are placebo draws, not tests)"
@@ -119,6 +123,7 @@ F2ECON,results/f2_economics/bootstrap_sharpe.csv,bootstrap_sharpe.csv,1,"deflate
 F2ECON,results/f2_economics/cost_schedule.csv,cost_schedule.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
 F2ECON,results/f2_economics/daily_pnl.csv,daily_pnl.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
 F2ECON,results/f2_economics/dsr.csv,dsr.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
+F2ECON,results/f2_economics/dsr_power_posthoc.csv,dsr_power_posthoc.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
 F2ECON,results/f2_economics/trades.csv,trades.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
 F2ECON,results/f2_economics/walkforward_params.csv,walkforward_params.csv,1,"deflated Sharpe ratio, bootstrap, costs, trades or daily P&L; no further p-value"
 PINMECH,results/pinning_mechanism/decisions.csv,decisions.csv,1,repeats the primary and Holm-adjusted secondary p-values (p_used)
@@ -127,6 +132,113 @@ PINMECH,results/pinning_mechanism/between_regime.csv,between_regime.csv,1,predic
 PINMECH,results/pinning_mechanism/candidates.csv,candidates.csv,1,candidate variables (data)
 PINMECH,results/pinning_mechanism/candidate_checks.csv,candidate_checks.csv,1,data checks
 PINMECH,results/pinning_mechanism/design_log.csv,design_log.csv,1,design log
+R1V2,results/pipeline_nse_v2/seed_noise_next30.csv,single-seed scores,12,"a model's score for one seed, no p-value"
+R1V2,results/pipeline_nse_v2/mcs_*.csv,Model Confidence Set p-values (QLIKE and MSE),18,set-level p-values (already adjusted for the model set) that answer the same question as the DM tests
+R1V2,"results/pipeline_nse_v2/scoreboard_*.csv, gain_by_anchor_*.csv",scoreboards and gains by anchor time,6,"losses relative to mcsGARCH, no p-value; the DM tests behind them are in tests_*.csv"
+R1V2DEV,results/pipeline_nse_v2/development/dev_scoreboards.csv,mcsGARCH rows,82,"the reference model itself, no test"
+R1V2DEV,results/pipeline_nse_v2/development/dev_seed_noise_next30.csv,single-seed scores,21,"a model's score for one seed, no p-value"
+R1V2DEV,results/pipeline_nse_v2/development/,rows repeating another development row (same p and estimate),34,"the same forecasts tested twice (models that are not trained, under both last-hour training schemes; the seed-0 GEX ablation, which is also the single-seed ablation): counted once"
+R1V2DEV,results/pipeline_nse_v2/development/dev_implied_checks.csv,dev_implied_checks.csv,1,"descriptive checks (correlations, ratios), no p-value"
+BNFC,results/pipeline_nse_banknifty/seed_noise_next30.csv,single-seed scores,12,"a model's score for one seed, no p-value"
+BNFC,results/pipeline_nse_banknifty/mcs_*.csv,Model Confidence Set p-values (QLIKE and MSE),12,set-level p-values (already adjusted for the model set) that answer the same question as the DM tests
+BNFC,"results/pipeline_nse_banknifty/scoreboard_*.csv, gain_by_anchor_*.csv",scoreboards and gains by anchor time,6,"losses relative to mcsGARCH, no p-value; the DM tests behind them are in tests_*.csv"
+BNFC,results/pipeline_nse_banknifty/p91/hypotheses.csv,registered summary of H1 to H3,6,repeats tests_*.csv (counted there); Holm values cross-checked
+BNFC,results/pipeline_nse_banknifty/p91/h4_ablation_hybrid.csv,registered H4 table (hybrid ablation),36,repeats ablation_*.csv rows (counted there)
+BNFC,results/pipeline_nse_banknifty/p91/scoreboard_vs_mcsgarch.csv,registered scoreboard against mcsGARCH (QLIKE and MSE p-values),1736,repeats tests_*.csv (counted there)
+BNFC,results/pipeline_nse_banknifty/p91/period_split.csv,periods that are a pipeline group,6,same test as a tests_*.csv row (counted there)
+BNFC,results/pipeline_nse_banknifty/,"daily_gex_panel.csv, daily_implied_panel.csv, daily_market.csv, feature_importance_last_hour.csv, feature_importance_next15.csv and 31 more",36,"forecasts, daily panels, hyperparameters, coefficients, feature importance, mcsGARCH parameters, figures, data checks or run information; no p-value"
+BNFC,results/pipeline_nse_banknifty/,"gain_by_anchor_last_hour.csv, gain_by_anchor_next15.csv, gain_by_anchor_next30.csv, scoreboard_last_hour.csv, scoreboard_next15.csv and 1 more",6,"losses relative to mcsGARCH, no p-value (tests in tests_*.csv)"
+BNFC,results/pipeline_nse_banknifty/p91/mcs_membership.csv,p91/mcs_membership.csv,1,Model Confidence Set membership (set-level)
+SWAP,results/sensex_swap/robustness.csv,"block lengths of 1, 2 and 8 weeks and the within-weekday permutation",4,other permutation schemes for P1's own estimate: alternative p-values of P1 (in its alt_p)
+SWAP,results/sensex_swap/,"calendar_check.csv, calendar_days.csv, coverage.csv, excluded_days.csv, mcsgarch_fits.csv and 2 more",7,"coverage, calendars, excluded days, mcsGARCH fits or run information; no p-value"
+SWAP,results/sensex_swap/,"cell_means.csv, day_values.csv",2,cell means and per-day values behind the tests; no p-value
+SWAP,results/sensex_swap/h2_regression.csv,h2_regression.csv,1,coefficients of S2's regression (the expiry term is S2; weekday and period terms are controls)
+SWAP,results/sensex_swap/,"mde.csv, mde_proxy.csv",2,"minimum detectable effects (design), no p-value"
+SWAP,results/sensex_swap/verdict.json,verdict.json,1,"verdict and Holm values, repeating tests.csv"
+SYNTH,results/synthetic_control/results.csv,rows repeating another row (same p and estimate),5,same test (Midcap S7 equals its main run; the classic synthetic control S3 leaves the DiD unchanged); counted once
+SYNTH,results/synthetic_control/donor_table.csv,donor_table.csv,1,donor pool checks (data)
+SYNTH,results/synthetic_control/,"fig_gaps.png, run_info.json",2,figure or run information; no p-value
+SYNTH,results/synthetic_control/,"placebo_space_BN.csv, placebo_space_FIN.csv, placebo_space_MID.csv",3,placebo draws (one per donor) behind p_ratio
+SYNTH,results/synthetic_control/,"test_inversion_BN.csv, test_inversion_FIN.csv, test_inversion_MID.csv",3,"confidence set by test inversion: ratio p over a grid of shifted effects, not separate hypotheses"
+SYNTH,results/synthetic_control/,"weekly_BN.csv, weekly_FIN.csv, weekly_MID.csv",3,weekly series of the treated index and donors (data)
+SYNTH,results/synthetic_control/,"weights_BN.csv, weights_FIN.csv, weights_MID.csv",3,synthetic-control weights
+REFFC,results/referee_forecast/spa_reality_check.csv,SPA and Reality Check with blocks of 5 and 20 days,18,the same test with another bootstrap block length (in alt_p of the block-10 row)
+REFFC,results/referee_forecast/refit_envelope.csv,variant_p_max,12,"the largest of the six p-values in the row, not a test"
+REFFC,results/referee_forecast/spa_adjusted_pvalues_by_model.csv,single-step and step-down max-t adjusted p-values,558,"multiple-testing adjustments of the DM tests (Romano and Wolf), not new tests"
+REFFC,results/referee_forecast/seed_adjusted_dm.csv,noise-adjusted DM p-values,72,"the same estimate (hybrid against mcsGARCH, an R1V2 test) with seed noise added to the DM variance: alternatives"
+REFFC,results/referee_forecast/gw_tests.csv,Newey-West versions of C1 and C2,12,another variance for the same statistic (in alt_p of the C1 and C2 rows); the study counts 54 = 42 + 12
+REFFC,results/referee_forecast/fair_benchmarks.csv,rows that repeat a test of the current contest,50,"same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)"
+REFFC,results/referee_forecast/holdout_table.csv,rows that repeat a test of the current contest,72,"same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)"
+REFFC,results/referee_forecast/mse_ranking.csv,rows that repeat a test of the current contest,248,"same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)"
+REFFC,results/referee_forecast/refit_envelope.csv,rows that repeat a test of the current contest,72,"same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)"
+REFFC,results/referee_forecast/spa_adjusted_pvalues_by_model.csv,rows that repeat a test of the current contest,279,"same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)"
+REFFC,results/referee_forecast/seed_adjusted_dm.csv,rows that repeat a test of the current contest,12,"same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)"
+REFFC,results/referee_forecast/,rows repeating another row of this study (same p and estimate),37,the best-matched benchmark is one of the named benchmarks (counted once)
+REFFC,results/referee_forecast/,"gw_group_margins.csv, gw_regression_coefficients.csv",2,coefficients and margins behind the GW tests (descriptive)
+REFFC,results/referee_forecast/mcs_summary.csv,mcs_summary.csv,1,"Model Confidence Set p-values (set-level, already adjusted)"
+REFFC,results/referee_forecast/,"mcsgarchx_forecasts_last_hour.csv, mcsgarchx_forecasts_next15.csv, mcsgarchx_forecasts_next30.csv, mcsgarchx_params.csv, mcsgarchx_run_info.json",5,"mcsGARCH-X forecasts, parameters and likelihood ratios (no p-value) and run information"
+REFFC,results/referee_forecast/,"rank_by_mean_qlike.csv, seed_noise_summary.csv, seed_rerun_cost.csv",3,"seed summaries, run costs or ranks; no p-value"
+REFEXP,results/referee_expiry/event_tests_clean_baseline.csv,clean-baseline columns of rows that are not estimable,288,no clean baseline in the window (no p-value used)
+REFEXP,results/referee_expiry/autocorrelation_1min_returns.csv,own-expiry rows,39,"reference group, no test"
+REFEXP,results/referee_expiry/pooled_all_index_regression.csv,other indices' expiry dummies,78,control coefficients
+REFEXP,results/referee_expiry/event_tests_clean_baseline.csv,rows that repeat a test of EVENT,408,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/negative_control_rows.csv,rows that repeat a test of EVENT,133,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/placebo_inference_all_rows.csv,rows that repeat a test of EVENT,1308,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/placebo_inference_headline_rows.csv,rows that repeat a test of EVENT,30,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/pretrends_and_comparisons.csv,rows that repeat a test of EVENT,99,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/noise_robust_event_tests.csv,rows that repeat a test of EVENT,36,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/switch_comparison_a_vs_d.csv,rows that repeat a test of EVENT,4,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/switch_comparison_a_vs_d.csv,rows that repeat a test of SENSEX,4,same p and estimate as a counted SENSEX row (counted once there)
+REFEXP,results/referee_expiry/event_premium_by_regime_clean_baseline.csv,rows that repeat a test of EVENT,228,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/event_premium_by_regime_clean_baseline.csv,rows that repeat a test of SENSEX,6,same p and estimate as a counted SENSEX row (counted once there)
+REFEXP,results/referee_expiry/noise_robust_premium_by_regime.csv,rows that repeat a test of EVENT,14,same p and estimate as a counted EVENT row (counted once there)
+REFEXP,results/referee_expiry/r2_clean_baseline.csv,rows that repeat a test of R2,8,same p and estimate as a counted R2 row (counted once there)
+REFEXP,results/referee_expiry/r2_clean_baseline.csv,rows that repeat a test of SENSEX,8,same p and estimate as a counted SENSEX row (counted once there)
+REFEXP,results/referee_expiry/noise_robust_r2.csv,rows that repeat a test of R2,3,same p and estimate as a counted R2 row (counted once there)
+REFEXP,results/referee_expiry/noise_robust_r2.csv,rows that repeat a test of SENSEX,1,same p and estimate as a counted SENSEX row (counted once there)
+REFEXP,results/referee_expiry/r2_tue_vs_thu_by_baseline.csv,rows that repeat a test of R2,2,same p and estimate as a counted R2 row (counted once there)
+REFEXP,results/referee_expiry/r2_tue_vs_thu_by_baseline.csv,rows that repeat a test of SENSEX,2,same p and estimate as a counted SENSEX row (counted once there)
+REFEXP,results/referee_expiry/event_tests_clean_baseline.csv,other p-values of those repeated tests,256,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/negative_control_rows.csv,other p-values of those repeated tests,861,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/placebo_inference_all_rows.csv,other p-values of those repeated tests,5030,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/placebo_inference_headline_rows.csv,other p-values of those repeated tests,130,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/pretrends_and_comparisons.csv,other p-values of those repeated tests,318,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/noise_robust_event_tests.csv,other p-values of those repeated tests,126,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/switch_comparison_a_vs_d.csv,other p-values of those repeated tests,16,"placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)"
+REFEXP,results/referee_expiry/negative_control_rows.csv,rows without a p-value,468,not estimable in that window or variant
+REFEXP,results/referee_expiry/placebo_inference_all_rows.csv,rows without a p-value,96,not estimable in that window or variant
+REFEXP,results/referee_expiry/pretrends_and_comparisons.csv,rows without a p-value,3,not estimable in that window or variant
+REFEXP,results/referee_expiry/switch_comparison_a_vs_d.csv,rows without a p-value,2,not estimable in that window or variant
+REFEXP,results/referee_expiry/event_premium_by_regime_clean_baseline.csv,rows without a p-value,192,not estimable in that window or variant
+REFEXP,results/referee_expiry/noise_robust_premium_by_regime.csv,rows without a p-value,42,not estimable in that window or variant
+REFEXP,results/referee_expiry/r2_clean_baseline.csv,rows without a p-value,4,not estimable in that window or variant
+REFEXP,results/referee_expiry/event_tests_clean_baseline.csv,pre-trend p-values (pretrend_p),516,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/negative_control_rows.csv,pre-trend p-values (pretrend_p),240,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/placebo_inference_all_rows.csv,pre-trend p-values (pretrend_p),1116,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/placebo_inference_headline_rows.csv,pre-trend p-values (pretrend_p),30,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/pretrends_and_comparisons.csv,pre-trend p-values (pretrend_p),90,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/two_day_raw_differences.csv,pre-trend p-values (pretrend_p),24,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/noise_robust_event_tests.csv,pre-trend p-values (pretrend_p),180,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/switch_comparison_a_vs_d.csv,pre-trend p-values (pretrend_p),18,"diagnostic of the design, not a hypothesis"
+REFEXP,results/referee_expiry/,rows repeating another row of this study (same p and estimate),503,same test (counted once)
+REFEXP,results/referee_expiry/,"all_index_expiries.csv, all_index_expiry_calendar.csv, calendar_changes.csv, no_expiry_days_by_regime.csv, no_expiry_days_by_week.csv and 5 more",10,"calendar, expiry activity or weekday table; no p-value"
+REFEXP,results/referee_expiry/,"negative_control_recomputed.csv, placebo_inference_summary.csv",2,"shares of rejections across tests, not a test"
+REFEXP,results/referee_expiry/noise_estimator_simulation.csv,noise_estimator_simulation.csv,1,simulation (SYNTHETIC)
+REFEXP,results/referee_expiry/noise_robust_daily.csv.gz,noise_robust_daily.csv.gz,1,daily data behind the noise-robust tests
+REFEXP,results/referee_expiry/summary.md,summary.md,1,text summary
+REFF2,results/referee_f2/item4_other_rules.csv,groups marked 'not estimable',12,"no p-value (fewer than 5 days in one sign state, or net GEX below zero on every evening)"
+REFF2,results/referee_f2/item6_angle_equality.csv,"Wald test of theta_a = 0, full sample",2,same statistic as the J test in this sample (counted once there)
+REFF2,results/referee_f2/item7_minute_autocorrelation.csv,per-group autocorrelations,36,"descriptive, no p-value"
+REFF2,results/referee_f2/item4_other_rules.csv,estimates already counted from another file,6,"same coefficient, days and Newey-West p as a row of referee_f2/item3_f2_inference.csv (counted once there)"
+REFF2,results/referee_f2/item5_alternatives.csv,estimates already counted from another file,2,"same coefficient, days and Newey-West p as a row of referee_f2/item3_f2_inference.csv (counted once there)"
+REFF2,results/referee_f2/item8_positions_f2.csv,estimates already counted from another file,3,"same coefficient, days and Newey-West p as a row of referee_f2/item3_f2_inference.csv (counted once there)"
+REFF2,results/referee_f2/item8_positions_f2.csv,estimates already counted from another file,2,"same coefficient, days and Newey-West p as a row of referee_f2/item4_other_rules.csv (counted once there)"
+REFF2,results/referee_f2/item1 to item7,p-values reported for items 1 to 7 (REFEREE_RESPONSE_F2.md says 598),598,counted as 93 tests: the rest are other inference methods for the same estimate (in alt_p) or the same estimate in another file
+REFF2,results/referee_f2/item8_*,p-values reported for item 8 (REFEREE_RESPONSE_F2.md says 381),381,counted as 82 tests: the rest are other inference methods for the same estimate (in alt_p) or the same estimate as an item 3 or item 4 row
+REFF2,results/referee_f2/,"input_checks.csv, item8_input_checks.csv, item8_run_info.json, run_info.json",4,input checks or run information; no p-value
+REFF2,results/referee_f2/,"item2_acf.csv, item2_by_quarter.csv, item2_by_segment.csv, item2_by_year.csv, item2_positions.csv and 2 more",7,"shares, runs and autocorrelations of the Pro sign (descriptive, no p-value)"
+REFF2,results/referee_f2/item6_angle_bootstrap_draws.csv.gz,item6_angle_bootstrap_draws.csv.gz,1,bootstrap draws behind the item 6 tests
+REFF2,results/referee_f2/item8_positions_describe.csv,item8_positions_describe.csv,1,description of the positions (no p-value)
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods

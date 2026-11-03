@@ -1,8 +1,8 @@
 REAL DATA. P87 pinning mechanism. Pre-registration docs/prereg/P87_PINNING_MECHANISM.md, commit e50a77506692aaf9b53cfca6c3cff6010308d3f7.
-Loaded 944 NIFTY and 944 BANKNIFTY bhavcopy days (36s)
-Scanned bhavcopies for turnover, OI and lot sizes: 24460 contract-days (60s)
-NIFTY: day panel 939 days (82s)
-BANKNIFTY: day panel 939 days (103s)
+Loaded 944 NIFTY and 944 BANKNIFTY bhavcopy days (42s)
+Scanned bhavcopies for turnover, OI and lot sizes: 24460 contract-days (67s)
+NIFTY: day panel 939 days (90s)
+BANKNIFTY: day panel 939 days (113s)
 
 == candidate_checks (stage A, written before any outcome was joined)
                                                                                                          check      value  expected   ok                                         note
@@ -136,7 +136,7 @@ NIFTY:single_weekly_tue:auction expiry days: mean lot size / mean contract value
    BANKNIFTY:weekly_options:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count      17.96       NaN  NaN  contract value 8.21 lakh; weekly count 5.12
      BANKNIFTY:monthly_only:pre expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count      29.29       NaN  NaN contract value 16.28 lakh; weekly count 0.24
  BANKNIFTY:monthly_only:auction expiry days: mean lot size / mean contract value (Rs lakh) / mean weekly count       30.0       NaN  NaN contract value 16.64 lakh; weekly count 0.33
-Stage A done (124s)
+Stage A done (135s)
 
 == settlement price equals official close on expiry days (pre-registered check)
                            cell  expiry_days_settlement_equals_close  expiry_days
@@ -155,7 +155,7 @@ NIFTY:single_weekly_tue:auction                                   13           1
    1878       322         200  0.0410    0.0122        0.0170         0.0650   0.0009  2.0603e-03 0.0052   -0.0082     0.0123 0.6921        C3                     contract size, log of lot size times previous close secondary              0.0032                     2.0504                         4.1008  0.0037      0.0037                False                    True
    1878       322         200 -0.0280    0.0094       -0.0465        -0.0094   0.0033  1.4220e-03 0.0024   -0.0033     0.0061 0.5518        C5                    log of expiring OI over next-expiry OI, previous day secondary              0.0031                    -1.3987                        -2.7975  0.0099      0.0099                 True                   False
    1878       322         200  0.0114    0.0105       -0.0093         0.0321   0.2782  1.4889e-03 0.0040   -0.0064     0.0094 0.7097        C6              log of strike spacing over typical daily move (20-day RMS) secondary              0.2217                     0.5711                         1.1422  0.5565      0.5565                False                   False
-Main tests done (128s)
+Main tests done (139s)
 
 == placebos
  n_days  n_expiry  n_clusters       gamma  gamma_se  gamma_ci_low  gamma_ci_high  gamma_p           d       d_se    d_ci_low  d_ci_high    d_p candidate placebo  p_perm_within_cell                                             flag_rule  flagged  gamma_close_same_sample  gamma_close_same_sample_p
@@ -194,7 +194,7 @@ Main tests done (128s)
    1878     322.0       200.0  3.4664e-03    0.0092       -0.0147         0.0216   0.7071  2.7342e-03 4.1927e-03 -5.5337e-03     0.0110 0.5151        C6      P3              0.7032                                              p < 0.05    False                      NaN                        NaN
    1878     322.0       200.0  1.1283e-02    0.0284       -0.0447         0.0672   0.6913 -8.0622e-03 1.0243e-02 -2.8261e-02     0.0121 0.4322        C6      P4              0.6383                                gamma > 0 and p < 0.05    False                      NaN                        NaN
    1878     322.0       200.0  7.5664e-03    0.0123       -0.0168         0.0319   0.5404  1.4889e-03 4.0090e-03 -6.4167e-03     0.0094 0.7107        C6      P5                 NaN            not (same sign and at least half the size)    False                      NaN                        NaN
-Placebos done (143s)
+Placebos done (155s)
 
 == between-regime prediction
        row_type candidate                        contrast                    cell_from                     cell_to  observed_change  observed_ci_low  observed_ci_high    weight  predicted_change  predicted_ci_low  predicted_ci_high  share_explained_s  s_ci_low  s_ci_high pred_sign_ok_nifty_multi_to_thu pred_sign_ok_nifty_thu_to_tue
@@ -218,7 +218,7 @@ share_explained        C5                       all three                       
        contrast        C6      Nifty, Thursday to Tuesday  NIFTY:single_weekly_thu:pre NIFTY:single_weekly_tue:pre           0.1153           0.0529            0.1784  970.1585            0.0022           -0.0032             0.0113                NaN       NaN        NaN                             NaN                           NaN
        contrast        C6   Bank Nifty, weekly to monthly BANKNIFTY:weekly_options:pre  BANKNIFTY:monthly_only:pre           0.0288          -0.0453            0.1053  671.8033           -0.0051           -0.0212             0.0043                NaN       NaN        NaN                             NaN                           NaN
 share_explained        C6                       all three                          NaN                         NaN              NaN              NaN               NaN       NaN               NaN               NaN                NaN             0.0499   -0.0407     0.1846                            True                          True
-Between-regime bootstrap done (171s)
+Between-regime bootstrap done (185s)
 
 == decisions (pre-registered rule)
 candidate      role   gamma  p_used  cond1_within_regime placebo_flags  cond2_no_flag  share_explained_s  cond3_between_regime                                                                              decision
@@ -285,4 +285,4 @@ Primary (C1): gamma = 0.0224 of the strike spacing per SD [0.0054, 0.0393] = 1.1
   C3: not supported; significant wrong sign (not a pre-stated falsifier for this candidate) (gamma 0.0410, p used 0.0037, flags none, s = -0.10)
   C5: matters day to day but not for the regime pattern (gamma -0.0280, p used 0.0099, flags none, s = -0.03)
   C6: not supported (gamma 0.0114, p used 0.5565, flags none, s = 0.05)
-Total run time 172s.
+Total run time 186s.

@@ -1,6 +1,6 @@
 study,family,source_file,method,m_tests,n_compared,n_mismatch,max_abs_diff,result,note
-R3,30 GEX-term rows of r3_robustness,results/real_day_level/r3_robustness.csv,holm,30,30,0,2.400857290751901e-15,match,
-R3,30 GEX-term rows of r3_robustness,results/real_day_level/r3_robustness.csv,bh,30,30,0,4.996003610813204e-16,match,
+R3,30 GEX-term rows of r3_robustness,results/real_day_level/r3_robustness.csv,holm,30,30,0,2.6020852139652106e-15,match,
+R3,30 GEX-term rows of r3_robustness,results/real_day_level/r3_robustness.csv,bh,30,30,0,4.0072112295064244e-16,match,
 R5,36 interaction terms (family_size 36),results/momentum_gex/regressions.csv,holm,36,36,0,2.7026991755718655e-15,match,
 R5,36 interaction terms (family_size 36),results/momentum_gex/regressions.csv,bh,36,36,0,5.997806418189811e-16,match,
 PIN,"NIFTY C1 expiry rows, Holm over 3 rules",results/pinning/t5_gamma_conditioning.csv,holm,3,3,0,1.1102230246251565e-16,match,
@@ -9,8 +9,8 @@ EVENT,event_tests window '3 months' (BH on hac_p),results/event_study/event_test
 EVENT,event_tests window '6 months' (BH on hac_p),results/event_study/event_tests.csv,bh,404,404,0,4.830120678422922e-16,match,
 EVENT,event_tests window '12 months' (BH on hac_p),results/event_study/event_tests.csv,bh,404,404,0,4.5232914636095245e-16,match,
 EVENT,event_tests window 'paper window' (BH on hac_p),results/event_study/event_tests.csv,bh,96,96,0,5.429684479807406e-16,match,
-FALS,family B (742 tests),results/falsification/t7_family_B_all_tests_this_study.csv,holm,742,742,0,5.445643935786393e-14,match,
-FALS,family B (742 tests),results/falsification/t7_family_B_all_tests_this_study.csv,bh,742,742,0,1.8995222061946038e-15,match,
+FALS,family B (742 tests),results/falsification/t7_family_B_all_tests_this_study.csv,holm,742,742,0,5.719036355600338e-14,match,
+FALS,family B (742 tests),results/falsification/t7_family_B_all_tests_this_study.csv,bh,742,742,0,3.0834709785487746e-15,match,
 FALS,family A (78 original GEX-term tests),results/falsification/t7_family_A_original_tests.csv,holm,78,78,0,6.807054919732991e-15,match,family A re-runs R3 and R5 with older code (n 932 for F2 against 929 now) and lists 6 pairs twice
 FALS,family A (78 original GEX-term tests),results/falsification/t7_family_A_original_tests.csv,bh,78,78,0,2.2004967292765798e-15,match,
 FALS,18 headline tests (Holm within headline),results/falsification/t7_headline_adjusted.csv,holm,18,18,0,1.3999218451132833e-15,match,
@@ -37,4 +37,16 @@ SENSEX,family '(i) level' (BH within family),results/sensex_confound/all_tests.c
 SENSEX,family '(ii) change' (BH within family),results/sensex_confound/all_tests.csv,bh,13,13,0,3.9985376121265404e-16,match,
 SENSEX,family '(iii) re-estimate' (BH within family),results/sensex_confound/all_tests.csv,bh,54,54,0,7.799750428860719e-16,match,
 PINMECH,"secondary family C2, C3, C5, C6 (Holm)",results/pinning_mechanism/secondary_tests.csv,holm,4,4,0,3.0010716134398763e-16,match,
+R1V2,"Holm within each ablation family (264 families: one model family and one subset, placebo excluded)",results/pipeline_nse_v2/ablation_last_hour.csv,holm,696,696,0,4.440892098500626e-16,match,"one-sided p-values, as the study uses them"
+R1V2,"Holm within each ablation family (308 families: one model family and one subset, placebo excluded)",results/pipeline_nse_v2/ablation_next15.csv,holm,812,812,0,3.3306690738754696e-16,match,"one-sided p-values, as the study uses them"
+R1V2,"Holm within each ablation family (308 families: one model family and one subset, placebo excluded)",results/pipeline_nse_v2/ablation_next30.csv,holm,812,812,0,4.440892098500626e-16,match,"one-sided p-values, as the study uses them"
+BNFC,"Holm within each ablation family (165 families: one model family and one subset, placebo excluded)",results/pipeline_nse_banknifty/ablation_last_hour.csv,holm,435,435,0,4.440892098500626e-16,match,"one-sided p-values, as the study uses them"
+BNFC,"Holm within each ablation family (198 families: one model family and one subset, placebo excluded)",results/pipeline_nse_banknifty/ablation_next15.csv,holm,522,522,0,4.440892098500626e-16,match,"one-sided p-values, as the study uses them"
+BNFC,"Holm within each ablation family (198 families: one model family and one subset, placebo excluded)",results/pipeline_nse_banknifty/ablation_next30.csv,holm,522,522,0,3.3306690738754696e-16,match,"one-sided p-values, as the study uses them"
+BNFC,H1: Holm over the next 15 and next 30 minutes,results/pipeline_nse_banknifty/p91/hypotheses.csv,holm,2,2,0,8.077935669463161e-28,match,
+BNFC,H3: Holm over the next 15 and next 30 minutes,results/pipeline_nse_banknifty/p91/hypotheses.csv,holm,2,2,0,0.0,match,
+SWAP,secondaries S1 to S3 (Holm),results/sensex_swap/tests.csv,holm,3,3,0,1.734723475976807e-18,match,
+SYNTH,secondaries Fin Nifty and Midcap Select (Holm),results/synthetic_control/decision.json,holm,2,2,0,0.0,match,
+REFFC,Giacomini-White main family (Holm over all main-family tests),results/referee_forecast/gw_tests.csv,holm,42,42,0,3.0999508515705543e-15,match,
+REFEXP,"Tuesday against Thursday regime (Bonferroni over 18, as the study states)",results/referee_expiry/r2_tue_vs_thu_by_baseline.csv,bonferroni (m = 18),18,10,0,1.4988010832439613e-15,match,the file lists 10 of the 18 tests in the study's family
 FALS,"18 headline tests, recomputed from the current R3 and R5 files",results/falsification/t7_headline_adjusted.csv,holm,18,18,3,0.00015938215503170233,MISMATCH,the study's F2 rows used 932 days (older code); R5 now uses 929

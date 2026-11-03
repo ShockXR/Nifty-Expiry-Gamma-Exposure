@@ -1,9 +1,9 @@
 REAL DATA. Intraday dealer gamma at spot and next-minutes Nifty volatility.
-Run started 2026-11-02 21:47:21; workers=4; placebo draws=200
-Loaded 944 NIFTY bhavcopies (2023-01-02 to 2026-11-02), 944 participant files, minute bars for 1009 days (12 s)
+Run started 2026-11-03 02:53:34; workers=4; placebo draws=200
+Loaded 944 NIFTY bhavcopies (2023-01-02 to 2026-11-02), 944 participant files, minute bars for 1009 days (13 s)
 Official Nifty days: 944; special or incomplete sessions left out: 2024-11-01, 2025-10-21
 Panel days: 937 (2023-01-03 to 2026-10-27); by type: {'ordinary': 537, 'day_before': 200, 'expiry': 200}; expiry days in bhavcopies: 200
-Anchor panel: 62779 rows, 67 anchors per day (09:30 to 15:00) (26 s)
+Anchor panel: 62779 rows, 67 anchors per day (09:30 to 15:00) (29 s)
 
 == data checks (data_checks.csv)
                                                                    check        value
@@ -71,12 +71,12 @@ corr_with_net_us_convention     0.260031    0.554989  0.630621                  
 corr_with_net_participant_pro  -0.381322   -0.580194 -0.561414                          -0.146539
 corr_with_net_client_mirror     0.019155    -0.30213 -0.389505                           0.257772
 
-Placebo draws (b) and (c): 3200 regressions in 78 s
+Placebo draws (b) and (c): 3200 regressions in 61 s
 
 Final half hour panel: 4675 rows on 187 expiry days (1 s)
 Official Nifty Bank days: 944; special or incomplete sessions left out: 134 days, 2024-11-01, 2025-10-21, 2026-04-23, ..., 2026-11-02 (the 1-minute bars end on 2026-04-22)
-Bank Nifty panel: 6566 rows on 98 expiry days (12 s)
-Follow-up placebo draws (b) and (c): 1600 regressions in 15 s
+Bank Nifty panel: 6566 rows on 98 expiry days (11 s)
+Follow-up placebo draws (b) and (c): 1600 regressions in 12 s
 
 == FOLLOW-UPS (pre-registered 2026-11-02 21:36 UTC, see design_log.csv)
 
@@ -207,7 +207,7 @@ nifty_main_study_coef_same_spec                                                 
 nifty_main_study_ci95                                                                                                                                                                  -0.727 to -0.044                                                   -0.727 to -0.044
 power_vs_nifty_coef_two_sided                                                                                   NaN                                                                            0.080512                                                           0.294739
 power_vs_nifty_coef_one_sided                                                                                   NaN                                                                            0.128602                                                           0.410781
-Follow-ups finished in 27 s
+Follow-ups finished in 23 s
 
 Tests run, by family: {'robustness': 48, 'placebo': 40, 'followup_placebo': 20, 'secondary': 19, 'followup_secondary': 10, 'headline': 7, 'exploratory': 3, 'followup_primary': 3, 'followup_robustness': 1}
 
@@ -341,8 +341,8 @@ qlike_change_pct                                                                
 mean_loss_diff_har_minus_gamma                                                                                 0.003269                                                -0.002097                                                                                     -0.00143
 se_naive                                                                                                       0.004967                                                 0.002696                                                                                     0.003539
 dm_stat                                                                                                        0.625017                                                -0.736097                                                                                     -0.45668
-p_dm_two_sided                                                                                                  0.53196                                                 0.461672                                                                                     0.647901
-p_dm_gamma_better                                                                                               0.26598                                                 0.769164                                                                                      0.67605
+p_dm_two_sided                                                                                                 0.532885                                                 0.462704                                                                                     0.648544
+p_dm_gamma_better                                                                                              0.266442                                                 0.768648                                                                                     0.675728
 mde_80pct_power_pct_of_har_qlike                                                                               7.707519                                                 3.999518                                                                                     5.490791
 share_days_gamma_better                                                                                        0.425806                                                 0.410714                                                                                     0.477419
 
@@ -462,9 +462,9 @@ share_days_gamma_better                                                         
      112             placebo                                                                      ordinary | conc | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|)  -0.002089  -0.210904   0.200699 1.741294e-01          placebo_summary.csv              NaN          1.000000e+00
      113             placebo                                        expiry afternoon (13:00 to 15:00) | log_gross | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|)  -0.078003  -0.303958   0.197596 5.472637e-02          placebo_summary.csv              NaN          1.000000e+00
      114             placebo                                             expiry afternoon (13:00 to 15:00) | conc | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|)  -0.109204  -0.459975   0.281953 2.039801e-01          placebo_summary.csv              NaN          1.000000e+00
-     115            headline                                                                                         H: OOS DM: main: last hour 14:30 to 15:30, closing-auction days excluded, log gross GEX at 14:30  -1.811301        NaN        NaN 5.319598e-01              oos_summary.csv         0.903239          9.032391e-01
-     116           secondary                                                                                                                          OOS DM: 14:30 to 15:15, all expiry days, log gross GEX at 14:30   1.110895        NaN        NaN 4.616716e-01              oos_summary.csv              NaN          1.000000e+00
-     117           secondary                                                                                      OOS DM: last hour, closing-auction days excluded, log(gross GEX at 14:30 / gross at previous close)   0.792319        NaN        NaN 6.479007e-01              oos_summary.csv              NaN          1.000000e+00
+     115            headline                                                                                         H: OOS DM: main: last hour 14:30 to 15:30, closing-auction days excluded, log gross GEX at 14:30  -1.811301        NaN        NaN 5.328848e-01              oos_summary.csv         0.903239          9.032391e-01
+     116           secondary                                                                                                                          OOS DM: 14:30 to 15:15, all expiry days, log gross GEX at 14:30   1.110895        NaN        NaN 4.627043e-01              oos_summary.csv              NaN          1.000000e+00
+     117           secondary                                                                                      OOS DM: last hour, closing-auction days excluded, log(gross GEX at 14:30 / gross at previous close)   0.792319        NaN        NaN 6.485442e-01              oos_summary.csv              NaN          1.000000e+00
      118    followup_primary                                                                                                                                  FH1: final half hour, log gross GEX at spot, next 5 min   0.257210  -0.326542   0.840963 3.858334e-01     followup_regressions.csv              NaN          1.000000e+00
      119    followup_primary                                                                                                                           FH2: final half hour, concentration within +/-0.5%, next 5 min  -0.423922  -1.909996   1.062152 5.742713e-01     followup_regressions.csv              NaN          1.000000e+00
      120  followup_secondary                                                                  final half hour (15:00 to 15:24), expiry days before the closing auction | y5 | log_gross_floor2 | time floor 2 minutes   0.257210  -0.326542   0.840963 3.858334e-01     followup_regressions.csv              NaN          1.000000e+00
@@ -500,4 +500,4 @@ share_days_gamma_better                                                         
      150    followup_placebo        Bank Nifty expiry days with weekly options (Jan 2023 to Nov 2024) | log_gross | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|)  -0.123349  -0.377737   0.172287 6.169154e-01 followup_placebo_summary.csv              NaN          1.000000e+00
      151    followup_placebo             Bank Nifty expiry days with weekly options (Jan 2023 to Nov 2024) | conc | (c) strike-level OI permuted within +/-5% | randomization p (share of draws with |t| >= real |t|)   0.152834  -0.122776   0.504869 7.363184e-01 followup_placebo_summary.csv              NaN          1.000000e+00
 
-Finished in 137 s
+Finished in 120 s

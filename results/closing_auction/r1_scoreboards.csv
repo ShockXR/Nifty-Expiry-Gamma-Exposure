@@ -1,97 +1,109 @@
 target,sample,group,model,anchors,days,qlike_vs_mcsgarch_pct
-next15,all test days,all,har,19800,792,5.219915274458242
-next15,all test days,all,vix,19800,792,52.50147740137039
-next15,all test days,all,lgbm_base,19800,792,-3.9342707614661965
-next15,all test days,all,lgbm_gex,19800,792,-4.424377521940858
-next15,all test days,all,hybrid_base,19800,792,-6.709554385059857
-next15,all test days,all,hybrid_gex,19800,792,-6.349330294912114
-next15,all test days,all,hybrid_gex_us,19800,792,-6.698298451472306
-next15,all test days,all,hybrid_gex_participant,19800,792,-6.7604003479500685
-next15,all test days,expiry,har,4225,169,4.005382095427001
-next15,all test days,expiry,vix,4225,169,33.8370895499001
-next15,all test days,expiry,lgbm_base,4225,169,-6.248985259251805
-next15,all test days,expiry,lgbm_gex,4225,169,-7.232034662552145
-next15,all test days,expiry,hybrid_base,4225,169,-6.211037812973363
-next15,all test days,expiry,hybrid_gex,4225,169,-5.505401926897102
-next15,all test days,expiry,hybrid_gex_us,4225,169,-6.323127715757648
-next15,all test days,expiry,hybrid_gex_participant,4225,169,-6.503130830016124
-next15,before 3 Aug 2026,all,har,18225,729,8.461710683807944
-next15,before 3 Aug 2026,all,vix,18225,729,63.729244416080256
-next15,before 3 Aug 2026,all,lgbm_base,18225,729,-2.5351960001439355
-next15,before 3 Aug 2026,all,lgbm_gex,18225,729,-3.244249549886946
-next15,before 3 Aug 2026,all,hybrid_base,18225,729,-6.013347472297859
-next15,before 3 Aug 2026,all,hybrid_gex,18225,729,-6.0982765013703695
-next15,before 3 Aug 2026,all,hybrid_gex_us,18225,729,-6.205315416916535
-next15,before 3 Aug 2026,all,hybrid_gex_participant,18225,729,-6.1382867907625265
-next15,before 3 Aug 2026,expiry,har,3900,156,8.738986020366513
-next15,before 3 Aug 2026,expiry,vix,3900,156,42.56024436682397
-next15,before 3 Aug 2026,expiry,lgbm_base,3900,156,-5.03757200370395
-next15,before 3 Aug 2026,expiry,lgbm_gex,3900,156,-5.785666794237887
-next15,before 3 Aug 2026,expiry,hybrid_base,3900,156,-5.468851592425628
-next15,before 3 Aug 2026,expiry,hybrid_gex,3900,156,-4.7284870273060715
-next15,before 3 Aug 2026,expiry,hybrid_gex_us,3900,156,-5.100755720532657
-next15,before 3 Aug 2026,expiry,hybrid_gex_participant,3900,156,-5.7344766563277805
-next30,all test days,all,har,19008,792,6.714729303368938
-next30,all test days,all,vix,19008,792,63.60827606528772
-next30,all test days,all,lgbm_base,19008,792,-4.196916603001199
-next30,all test days,all,lgbm_gex,19008,792,-4.700057987197037
-next30,all test days,all,hybrid_base,19008,792,-9.039729621982895
-next30,all test days,all,hybrid_gex,19008,792,-8.94404842169807
-next30,all test days,all,hybrid_gex_us,19008,792,-9.188403693244329
-next30,all test days,all,hybrid_gex_participant,19008,792,-9.176910015996864
-next30,all test days,expiry,har,4056,169,4.988328617696114
-next30,all test days,expiry,vix,4056,169,42.2383200927482
-next30,all test days,expiry,lgbm_base,4056,169,-6.564575402138228
-next30,all test days,expiry,lgbm_gex,4056,169,-7.130867141999852
-next30,all test days,expiry,hybrid_base,4056,169,-6.641528610872238
-next30,all test days,expiry,hybrid_gex,4056,169,-5.919378375453544
-next30,all test days,expiry,hybrid_gex_us,4056,169,-5.813059834691236
-next30,all test days,expiry,hybrid_gex_participant,4056,169,-6.105318840540197
-next30,before 3 Aug 2026,all,har,17496,729,8.281111172760802
-next30,before 3 Aug 2026,all,vix,17496,729,73.34791847281072
-next30,before 3 Aug 2026,all,lgbm_base,17496,729,-2.4687679747604996
-next30,before 3 Aug 2026,all,lgbm_gex,17496,729,-2.9671011645530876
-next30,before 3 Aug 2026,all,hybrid_base,17496,729,-7.7683612543041125
-next30,before 3 Aug 2026,all,hybrid_gex,17496,729,-7.8651202526937585
-next30,before 3 Aug 2026,all,hybrid_gex_us,17496,729,-7.843825824621886
-next30,before 3 Aug 2026,all,hybrid_gex_participant,17496,729,-8.001193614384727
-next30,before 3 Aug 2026,expiry,har,3744,156,6.57246272094818
-next30,before 3 Aug 2026,expiry,vix,3744,156,47.26106028638477
-next30,before 3 Aug 2026,expiry,lgbm_base,3744,156,-5.585540934309985
-next30,before 3 Aug 2026,expiry,lgbm_gex,3744,156,-5.8803980642688325
-next30,before 3 Aug 2026,expiry,hybrid_base,3744,156,-5.7310792855550075
-next30,before 3 Aug 2026,expiry,hybrid_gex,3744,156,-4.92334462151457
-next30,before 3 Aug 2026,expiry,hybrid_gex_us,3744,156,-4.515539020518888
-next30,before 3 Aug 2026,expiry,hybrid_gex_participant,3744,156,-5.0755846374300635
-last_hour,all test days,all,har,792,792,-10.797053721105776
-last_hour,all test days,all,vix,792,792,17.59077274301695
-last_hour,all test days,all,lgbm_base,792,792,-0.49807314204154407
-last_hour,all test days,all,lgbm_gex,792,792,1.9146184869429872
-last_hour,all test days,all,hybrid_base,792,792,-1.2992555082395274
-last_hour,all test days,all,hybrid_gex,792,792,-1.7221828719248267
-last_hour,all test days,all,hybrid_gex_us,792,792,-1.6348625486779622
-last_hour,all test days,all,hybrid_gex_participant,792,792,-1.2905878497849077
-last_hour,all test days,expiry,har,169,169,-10.176949177684424
-last_hour,all test days,expiry,vix,169,169,27.711165461169717
-last_hour,all test days,expiry,lgbm_base,169,169,-8.17204803710495
-last_hour,all test days,expiry,lgbm_gex,169,169,-8.819257228192257
-last_hour,all test days,expiry,hybrid_base,169,169,3.194223394247331
-last_hour,all test days,expiry,hybrid_gex,169,169,0.6262734954958438
-last_hour,all test days,expiry,hybrid_gex_us,169,169,3.395086394197855
-last_hour,all test days,expiry,hybrid_gex_participant,169,169,2.502699626875682
-last_hour,before 3 Aug 2026,all,har,729,729,-4.23354962979221
-last_hour,before 3 Aug 2026,all,vix,729,729,55.74978579501653
-last_hour,before 3 Aug 2026,all,lgbm_base,729,729,5.52505140344135
-last_hour,before 3 Aug 2026,all,lgbm_gex,729,729,5.3102314157558395
-last_hour,before 3 Aug 2026,all,hybrid_base,729,729,1.9671913570018962
-last_hour,before 3 Aug 2026,all,hybrid_gex,729,729,1.0300410854565012
-last_hour,before 3 Aug 2026,all,hybrid_gex_us,729,729,2.192118814705424
-last_hour,before 3 Aug 2026,all,hybrid_gex_participant,729,729,2.0607207400672234
-last_hour,before 3 Aug 2026,expiry,har,156,156,-7.1471499289958444
-last_hour,before 3 Aug 2026,expiry,vix,156,156,33.39674767252707
-last_hour,before 3 Aug 2026,expiry,lgbm_base,156,156,-9.469357251524979
-last_hour,before 3 Aug 2026,expiry,lgbm_gex,156,156,-7.003701292021991
-last_hour,before 3 Aug 2026,expiry,hybrid_base,156,156,6.571074596709714
-last_hour,before 3 Aug 2026,expiry,hybrid_gex,156,156,3.386741417826622
-last_hour,before 3 Aug 2026,expiry,hybrid_gex_us,156,156,6.756430071402231
-last_hour,before 3 Aug 2026,expiry,hybrid_gex_participant,156,156,5.526529640397637
+next15,all test days,all,har,19800,792,6.148235824691373
+next15,all test days,all,vix,19800,792,53.94832701573016
+next15,all test days,all,implied,19800,792,41.56934776155548
+next15,all test days,all,linear_base,19800,792,-2.2187596706393142
+next15,all test days,all,lgbm_base,19800,792,-3.6173137375314357
+next15,all test days,all,hybrid_base,19800,792,-5.798820343996248
+next15,all test days,all,hybrid_gex_us,19800,792,-5.965693698987895
+next15,all test days,all,hybrid_gex_participant,19800,792,-5.892555347107919
+next15,all test days,all,hybrid_gex_gross,19800,792,-5.66418273886562
+next15,all test days,expiry,har,4225,169,4.562992377133268
+next15,all test days,expiry,vix,4225,169,34.85458923792943
+next15,all test days,expiry,implied,4225,169,30.0510374247837
+next15,all test days,expiry,linear_base,4225,169,-1.006995786898901
+next15,all test days,expiry,lgbm_base,4225,169,-6.256294388931805
+next15,all test days,expiry,hybrid_base,4225,169,-6.642615566243837
+next15,all test days,expiry,hybrid_gex_us,4225,169,-6.243978163372688
+next15,all test days,expiry,hybrid_gex_participant,4225,169,-6.829925854536645
+next15,all test days,expiry,hybrid_gex_gross,4225,169,-6.638801485651369
+next15,before 3 Aug 2026,all,har,18225,729,8.970191431398744
+next15,before 3 Aug 2026,all,vix,18225,729,64.59806270889472
+next15,before 3 Aug 2026,all,implied,18225,729,49.37508797930206
+next15,before 3 Aug 2026,all,linear_base,18225,729,-0.9017578770554535
+next15,before 3 Aug 2026,all,lgbm_base,18225,729,-2.292397126586454
+next15,before 3 Aug 2026,all,hybrid_base,18225,729,-5.520968846509144
+next15,before 3 Aug 2026,all,hybrid_gex_us,18225,729,-5.786310388940419
+next15,before 3 Aug 2026,all,hybrid_gex_participant,18225,729,-5.870237871661632
+next15,before 3 Aug 2026,all,hybrid_gex_gross,18225,729,-5.594610278511225
+next15,before 3 Aug 2026,expiry,har,3900,156,8.990355283778362
+next15,before 3 Aug 2026,expiry,vix,3900,156,43.333337164737884
+next15,before 3 Aug 2026,expiry,implied,3900,156,35.781218676715774
+next15,before 3 Aug 2026,expiry,linear_base,3900,156,2.159093736083406
+next15,before 3 Aug 2026,expiry,lgbm_base,3900,156,-4.546121234444122
+next15,before 3 Aug 2026,expiry,hybrid_base,3900,156,-5.439451053271749
+next15,before 3 Aug 2026,expiry,hybrid_gex_us,3900,156,-4.920485317633883
+next15,before 3 Aug 2026,expiry,hybrid_gex_participant,3900,156,-5.820260504670493
+next15,before 3 Aug 2026,expiry,hybrid_gex_gross,3900,156,-5.422208338079537
+next30,all test days,all,har,19008,792,7.879239931048154
+next30,all test days,all,vix,19008,792,65.76378194661314
+next30,all test days,all,implied,19008,792,48.10201798179015
+next30,all test days,all,linear_base,19008,792,-3.927325073555832
+next30,all test days,all,lgbm_base,19008,792,-3.4736778866111706
+next30,all test days,all,hybrid_base,19008,792,-7.649283071359802
+next30,all test days,all,hybrid_gex_us,19008,792,-7.9567943645601495
+next30,all test days,all,hybrid_gex_participant,19008,792,-8.025604442809398
+next30,all test days,all,hybrid_gex_gross,19008,792,-8.0337546127333
+next30,all test days,expiry,har,4056,169,5.679752290455498
+next30,all test days,expiry,vix,4056,169,44.10313903156986
+next30,all test days,expiry,implied,4056,169,35.090718006382836
+next30,all test days,expiry,linear_base,4056,169,-1.6978032426951284
+next30,all test days,expiry,lgbm_base,4056,169,-6.554189073360595
+next30,all test days,expiry,hybrid_base,4056,169,-6.234804087017409
+next30,all test days,expiry,hybrid_gex_us,4056,169,-5.857836547873108
+next30,all test days,expiry,hybrid_gex_participant,4056,169,-7.023083058201552
+next30,all test days,expiry,hybrid_gex_gross,4056,169,-6.570696557198952
+next30,before 3 Aug 2026,all,har,17496,729,9.094181808517089
+next30,before 3 Aug 2026,all,vix,17496,729,75.03064854775934
+next30,before 3 Aug 2026,all,implied,17496,729,55.31873747428357
+next30,before 3 Aug 2026,all,linear_base,17496,729,-3.0168874364183917
+next30,before 3 Aug 2026,all,lgbm_base,17496,729,-1.7227862605411426
+next30,before 3 Aug 2026,all,hybrid_base,17496,729,-6.862401785287853
+next30,before 3 Aug 2026,all,hybrid_gex_us,17496,729,-6.946471009049516
+next30,before 3 Aug 2026,all,hybrid_gex_participant,17496,729,-7.112532573782793
+next30,before 3 Aug 2026,all,hybrid_gex_gross,17496,729,-7.084250425012284
+next30,before 3 Aug 2026,expiry,har,3744,156,6.993823408047661
+next30,before 3 Aug 2026,expiry,vix,3744,156,48.89090775567364
+next30,before 3 Aug 2026,expiry,implied,3744,156,38.35694099362854
+next30,before 3 Aug 2026,expiry,linear_base,3744,156,-0.6231420535510623
+next30,before 3 Aug 2026,expiry,lgbm_base,3744,156,-5.486351546865276
+next30,before 3 Aug 2026,expiry,hybrid_base,3744,156,-5.425309608554474
+next30,before 3 Aug 2026,expiry,hybrid_gex_us,3744,156,-4.768454673614508
+next30,before 3 Aug 2026,expiry,hybrid_gex_participant,3744,156,-6.103076458699164
+next30,before 3 Aug 2026,expiry,hybrid_gex_gross,3744,156,-5.5843433196198
+last_hour,all test days,all,har,792,792,1.9317274932791895
+last_hour,all test days,all,vix,792,792,20.43990873774817
+last_hour,all test days,all,implied,792,792,26.204931244630348
+last_hour,all test days,all,linear_base,792,792,-6.955814920183445
+last_hour,all test days,all,lgbm_base,792,792,-6.215527168442181
+last_hour,all test days,all,hybrid_base,792,792,-6.362567916873463
+last_hour,all test days,all,hybrid_gex_us,792,792,-5.498513646956049
+last_hour,all test days,all,hybrid_gex_participant,792,792,-5.338752807094915
+last_hour,all test days,all,hybrid_gex_gross,792,792,-5.294774380945622
+last_hour,all test days,expiry,har,169,169,10.168126444316993
+last_hour,all test days,expiry,vix,169,169,32.186792496115004
+last_hour,all test days,expiry,implied,169,169,60.886915553000854
+last_hour,all test days,expiry,linear_base,169,169,-6.4492394367643975
+last_hour,all test days,expiry,lgbm_base,169,169,-2.394189804438529
+last_hour,all test days,expiry,hybrid_base,169,169,-7.911954710916325
+last_hour,all test days,expiry,hybrid_gex_us,169,169,-6.412874162551818
+last_hour,all test days,expiry,hybrid_gex_participant,169,169,-7.7241424088477455
+last_hour,all test days,expiry,hybrid_gex_gross,169,169,-7.515655983617742
+last_hour,before 3 Aug 2026,all,har,729,729,3.9731508985605846
+last_hour,before 3 Aug 2026,all,vix,729,729,59.74047708444712
+last_hour,before 3 Aug 2026,all,implied,729,729,60.70925241278371
+last_hour,before 3 Aug 2026,all,linear_base,729,729,-7.631976152241659
+last_hour,before 3 Aug 2026,all,lgbm_base,729,729,-1.1928795363827072
+last_hour,before 3 Aug 2026,all,hybrid_base,729,729,-7.012084455012646
+last_hour,before 3 Aug 2026,all,hybrid_gex_us,729,729,-6.786459774317111
+last_hour,before 3 Aug 2026,all,hybrid_gex_participant,729,729,-6.8139286778677866
+last_hour,before 3 Aug 2026,all,hybrid_gex_gross,729,729,-6.955558757437497
+last_hour,before 3 Aug 2026,expiry,har,156,156,12.620256148295361
+last_hour,before 3 Aug 2026,expiry,vix,156,156,39.810156155168826
+last_hour,before 3 Aug 2026,expiry,implied,156,156,62.64546982070638
+last_hour,before 3 Aug 2026,expiry,linear_base,156,156,-4.655040747598482
+last_hour,before 3 Aug 2026,expiry,lgbm_base,156,156,-0.570439300462533
+last_hour,before 3 Aug 2026,expiry,hybrid_base,156,156,-6.4555272917112605
+last_hour,before 3 Aug 2026,expiry,hybrid_gex_us,156,156,-6.055380669395927
+last_hour,before 3 Aug 2026,expiry,hybrid_gex_participant,156,156,-7.653871727764139
+last_hour,before 3 Aug 2026,expiry,hybrid_gex_gross,156,156,-7.380307761528194

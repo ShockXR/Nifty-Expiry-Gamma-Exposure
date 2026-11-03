@@ -2,8 +2,8 @@
   "label": "REAL DATA",
   "prereg": "docs/prereg/P87_PINNING_MECHANISM.md",
   "prereg_commit": "e50a77506692aaf9b53cfca6c3cff6010308d3f7",
-  "started_utc": "2026-11-02T22:57:42Z",
-  "run_seconds": 172.5,
+  "started_utc": "2026-11-03T03:07:25Z",
+  "run_seconds": 186.1,
   "seeds": {
     "primary": 8701,
     "secondary": 8702,

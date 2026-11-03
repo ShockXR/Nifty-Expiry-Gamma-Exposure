@@ -22,7 +22,7 @@ Bank Nifty minute bars: 2297 days 2017-01-02 to 2026-04-22; dropped 14 (weekend 
 Rule check NIFTY 2022-10-20 to 2025-08-31: rule 150 expiries, bhavcopy 150; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
 Rule check BANKNIFTY 2022-10-20 to 2023-08-31: rule 46 expiries, bhavcopy 46; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
 Closing auction detected in the Nifty bars from 2026-08-03 (63 days, every one with >= 8 flat bars in the last 20 minutes; 0 valid days before it had that many).
-Data assembled in 25.8s.
+Data assembled in 27.2s.
 
 == Sensex calendar (rule from reported regimes, checked against third-party option prices)
 Regimes: [('2023-05-15', '2025-01-03', 'Fri'), ('2025-01-01', '2025-08-31', 'Tue'), ('2025-09-01', '2100-01-01', 'Thu')]
@@ -215,4 +215,4 @@ index      measure regime                     version  n_weeks   mean  boot_lo  
    BN    rv_last30     R1 Sensex days out of baseline       42  0.409    0.151    0.679 3.637e-03
 
 == Tests run: 83 p-values ({'(iii) re-estimate': 54, '(ii) change': 13, '(i) level': 12, 'calendar check': 3, 'main': 1}); one main test.
-Total run time 53s.
+Total run time 57s.

@@ -4,7 +4,7 @@
   "prereg_file": "docs/prereg/P90_F2_ECONOMICS.md",
   "prereg_commit": "236e3dba89ea8abd6bb6ec275e3e4210460c6dc9",
   "verdict": "not economically meaningful (no net edge)",
-  "dsr_primary": 1.3860613339809962e-12,
+  "dsr_primary": 1.3861116541801853e-12,
   "seeds": {
     "P": [
       20261102,
@@ -39,7 +39,7 @@
       824,
       3624
     ],
-    "V": 0.011222534607177717,
+    "V": 0.011222517262812629,
     "T": 389
   },
   "samples": {
@@ -76,11 +76,11 @@
     "ok": true
   },
   "input_sha256_16": {
-    "results/pipeline_nse/daily_market.csv": "959c5c633f855569",
-    "results/pipeline_nse/daily_gex_panel.csv": "92d479816ac95eea",
+    "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
+    "results/pipeline_nse_v2/daily_gex_panel.csv": "f0be1a255eb3fde0",
     "data/raw/nifty_1min.csv": "8ab19906a0a350b4",
-    "results/momentum_gex/regressions.csv": "b27beb17665c1509",
-    "results/falsification/t7_family_A_original_tests.csv": "9721efe89f2b4671"
+    "results/momentum_gex/regressions.csv": "ccb8b3e005577067",
+    "results/falsification/t7_family_A_original_tests.csv": "a32c6e75711fb02c"
   },
   "versions": {
     "python": "3.13.18",
@@ -89,5 +89,5 @@
     "statsmodels": "0.15.0",
     "scipy": "1.18.1"
   },
-  "runtime_seconds": 3.5
+  "runtime_seconds": 3.6
 }

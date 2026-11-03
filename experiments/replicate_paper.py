@@ -7,7 +7,7 @@ third-party 1-minute Nifty 50 and Bank Nifty bars (data/raw/*_1min.csv),
 validated here against NSE's official daily index values, plus NSE's daily
 F&O bhavcopy. The paper's printed values appear only in columns named
 ``paper_printed`` (comparison targets typed in by hand from its tables;
-re-keyed blind by a second person on 3 Nov 2026, see docs/REKEY_CHECK.md).
+re-keyed blind by a separate AI agent on 3 Nov 2026, see docs/REKEY_CHECK.md).
 
 Usage (about 3 minutes on 4 cores):
 
@@ -76,7 +76,7 @@ PAPER_WEEKDAY_DAYS = {("before", "wed"): 13, ("before", "thu"): 13, ("after", "w
 # ---------------------------------------------------------------------------
 # Paper (printed) comparison targets
 # ---------------------------------------------------------------------------
-# These values were typed in BY HAND from the paper's tables. A second person
+# These values were typed in BY HAND from the paper's tables. A separate AI agent
 # re-keyed all 223 cells blind from the PDF on 3 November 2026
 # (experiments/rekey_check.py, docs/REKEY_CHECK.md): 222 matched first time and
 # the one difference is a typesetting slip in the paper (a comma for a decimal
@@ -1029,7 +1029,7 @@ def printed_checks() -> pd.DataFrame:
                              "p_matches": p_ok, "direction_matches_medians": direction_ok,
                              "consistent": bool(in_range and p_ok)})
     out = pd.DataFrame(rows)
-    out["caveat"] = "printed values typed in by hand and re-keyed blind by a second person (docs/REKEY_CHECK.md); the inconsistency is in the printed paper"
+    out["caveat"] = "printed values typed in by hand and re-keyed blind by a separate AI agent (docs/REKEY_CHECK.md); the inconsistency is in the printed paper"
     return out
 
 
@@ -1122,7 +1122,7 @@ def main():
     pd.set_option("display.max_colwidth", 60)
 
     print(f"Replication of Chhimwal, Pandey and Pandey (2025) on {LABEL}.")
-    print("Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets and re-keyed blind by a second person (docs/REKEY_CHECK.md).")
+    print("Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets and re-keyed blind by a separate AI agent (docs/REKEY_CHECK.md).")
     print(f"Primary session rule: {a.trim} {rp.SESSION_RULES[a.trim]}; bootstrap draws: persistence {n_pboot}, connectedness {n_cboot}, medians {n_dboot}.")
 
     # ---------------- data

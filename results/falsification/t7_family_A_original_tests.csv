@@ -1,79 +1,79 @@
 finding,rule,spec_detail,term,coef,p,n,family,p_holm,p_bh
-F1,us_convention,none,gex_l1,-0.36782807204985124,0.036804037946041736,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.08202042742260729
-F1,us_convention,none,gex_l1_x_exp,0.32223601017455955,0.19331133875470208,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.335072987174817
-F1,participant_pro,none,gex_l1,-0.9471387385946611,0.24147184378537934,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.3923917461512414
-F1,participant_pro,none,gex_l1_x_exp,3.129619444755277,0.007303198787615694,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.4089791321064789,0.02476736980147931
-F1,client_mirror,none,gex_l1,-1.7044215584186984,0.058897687542027934,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.12089525337574156
-F1,client_mirror,none,gex_l1_x_exp,3.088503284679798,0.00618297581132462,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.3524296212455033,0.021921459694696378
-F1,us_convention,regime x expiry,gex_l1,-0.3823821283590943,0.02965652324611729,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07710696043990495
-F1,us_convention,regime x expiry,gex_l1_x_exp,0.39347220292076773,0.11305822042247488,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.2050823533244893
-F1,participant_pro,regime x expiry,gex_l1,-2.0680746444767646,0.03299120358063868,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07751705626321494
-F1,participant_pro,regime x expiry,gex_l1_x_exp,4.929323938529489,0.0016501760133828785,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.10726144086987466,0.008580915269590967
-F1,client_mirror,regime x expiry,gex_l1,-2.3534108020036646,0.013291843927088067,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.6911758842085263,0.0370272795111739
-F1,client_mirror,regime x expiry,gex_l1_x_exp,3.6523996597143795,0.0022990338054783553,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.14483912974512947,0.010548508048665394
+F1,us_convention,none,gex_l1,-0.3678119394522449,0.0368122736635396,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.08203878130731682
+F1,us_convention,none,gex_l1_x_exp,0.32221900338102755,0.19333496343973733,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.33511393662887806
+F1,participant_pro,none,gex_l1,-0.9471298704696471,0.2414765721254687,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.3923994297038866
+F1,participant_pro,none,gex_l1_x_exp,3.1296077603999435,0.007303435574044174,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.40899239214647376,0.02476817281632372
+F1,client_mirror,none,gex_l1,-1.7044456313595433,0.058893845233434564,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.12088736653178674
+F1,client_mirror,none,gex_l1_x_exp,3.0885300057444636,0.006182456800518877,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.352400037629576,0.021919619565476018
+F1,us_convention,regime x expiry,gex_l1,-0.3823665488146655,0.02966322397156197,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07712438232606282
+F1,us_convention,regime x expiry,gex_l1_x_exp,0.3934556635971249,0.11307354031212272,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.20511014289175802
+F1,participant_pro,regime x expiry,gex_l1,-2.0680608022160594,0.03299247743103503,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07751566151844201
+F1,participant_pro,regime x expiry,gex_l1_x_exp,4.92930834423349,0.0016502455014061122,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.10726595759139729,0.008581276607312472
+F1,client_mirror,regime x expiry,gex_l1,-2.3534386882792946,0.013290694983608896,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.6911161391476626,0.037024078882918574
+F1,client_mirror,regime x expiry,gex_l1_x_exp,3.6524292040790862,0.0022988085141383077,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.1448249363907134,0.010547474358990172
 F2,us_convention,"binary, all days",r_rod_x_neg,0.012948202343817097,0.5862663473729262,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7750639846625126
 F2,us_convention,"regime_slopes, all days",r_rod_x_neg,0.0014768232807248092,0.9519502121082644,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.9643132018759041
 F2,us_convention,"controls, all days",r_rod_x_neg,-0.0008430345293839805,0.971158670094685,931,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.971158670094685
-F2,us_convention,"continuous, all days",r_rod_x_gex,-0.0718608872521369,0.49497586979762487,929,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.6965331931876646
+F2,us_convention,"continuous, all days",r_rod_x_gex,-0.07186289488278824,0.4949639862268932,929,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.6965331931876646
 F2,us_convention,"binary, non_expiry days",r_rod_x_neg,0.015810473378568023,0.5693743431355685,734,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7657103235271437
 F2,us_convention,"regime_slopes, non_expiry days",r_rod_x_neg,0.007027557460792186,0.8016126713384238,734,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8932255480628151
 F2,us_convention,"controls, non_expiry days",r_rod_x_neg,0.003605307970831483,0.8980156085878849,733,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.9339362329314003
-F2,us_convention,"continuous, non_expiry days",r_rod_x_gex,-0.24395207346171394,0.13613455765008536,732,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.24132944310696952
+F2,us_convention,"continuous, non_expiry days",r_rod_x_gex,-0.2439549094800969,0.13612990557282212,732,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.24132119624273013
 F2,us_convention,"binary, expiry days",r_rod_x_neg,-0.018058690589690583,0.8322605895417103,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.9016156386701861
 F2,us_convention,"regime_slopes, expiry days",r_rod_x_neg,-0.036856385835138415,0.6708381439032198,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8175839878820492
 F2,us_convention,"controls, expiry days",r_rod_x_neg,-0.05585157496547025,0.46106616908135745,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.6659844664508496
-F2,us_convention,"continuous, expiry days",r_rod_x_gex,0.26896780959767036,0.0499800627643006,197,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.10536337555717425
+F2,us_convention,"continuous, expiry days",r_rod_x_gex,0.26896536377353486,0.04998144024037746,197,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.1053662794256606
 F2,participant_pro,"binary, all days",r_rod_x_neg,-0.06808827671835406,0.00021371474924648787,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.016242320942733077,0.0055565834804086845
 F2,participant_pro,"regime_slopes, all days",r_rod_x_neg,-0.0693511635953357,0.0006291234113617808,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.04592600902941,0.007314946512563795
 F2,participant_pro,"controls, all days",r_rod_x_neg,-0.04962313772923902,0.002872645095084069,931,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.17235870570504414,0.011792964074555653
-F2,participant_pro,"continuous, all days",r_rod_x_gex,1.2067832885508185,0.007849675966021909,929,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.43173217813120496,0.0255114468895712
+F2,participant_pro,"continuous, all days",r_rod_x_gex,1.2067786283296276,0.00784990864078154,929,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.4317449752429847,0.025512203082540003
 F2,participant_pro,"binary, non_expiry days",r_rod_x_neg,-0.07062945037096359,0.0008326366580587969,734,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.05911720272217458,0.00811820741607327
 F2,participant_pro,"regime_slopes, non_expiry days",r_rod_x_neg,-0.0760097871496029,0.0006564695588198278,734,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.0472658082350276,0.007314946512563795
-F2,participant_pro,"controls, non_expiry days",r_rod_x_neg,-0.050083874715923175,0.009053329524588316,733,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.48887979432776907,0.027599599914786905
-F2,participant_pro,"continuous, non_expiry days",r_rod_x_gex,2.1541566656091895,0.001421346704350841,732,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.09523022919150635,0.008542705071472145
-F2,participant_pro,"binary, expiry days",r_rod_x_neg,-0.06131335747733309,0.10909447189835499,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.2050823533244893
+F2,participant_pro,"controls, non_expiry days",r_rod_x_neg,-0.050083874715923175,0.009053329524588316,733,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.48887979432776907,0.02759949805985223
+F2,participant_pro,"continuous, non_expiry days",r_rod_x_gex,2.1541511507998536,0.0014213942481068294,732,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.09523341462315757,0.008542435209231591
+F2,participant_pro,"binary, expiry days",r_rod_x_neg,-0.06131335747733309,0.10909447189835499,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.20511014289175802
 F2,participant_pro,"regime_slopes, expiry days",r_rod_x_neg,-0.05051662570533687,0.2076741652236147,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.35214314972699884
 F2,participant_pro,"controls, expiry days",r_rod_x_neg,-0.03822391875640664,0.33474297015462906,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.5119598367070798
-F2,participant_pro,"continuous, expiry days",r_rod_x_gex,-0.18900505484848665,0.7433727228170839,197,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8526922408784198
+F2,participant_pro,"continuous, expiry days",r_rod_x_gex,-0.18900707780567758,0.7433699977026609,197,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8526891150118757
 F2,client_mirror,"binary, all days",r_rod_x_neg,-0.07202029537067432,2.9907096355709747e-05,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.0023028464193896505,0.0011663767578726802
-F2,client_mirror,"regime_slopes, all days",r_rod_x_neg,-0.0685203580792236,0.0011452987636470897,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.08017091345529628,0.008542705071472145
+F2,client_mirror,"regime_slopes, all days",r_rod_x_neg,-0.0685203580792236,0.0011452987636470897,932,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.08017091345529628,0.008542435209231591
 F2,client_mirror,"controls, all days",r_rod_x_neg,0.002598723225394728,0.9463033743102862,931,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.9643132018759041
-F2,client_mirror,"continuous, all days",r_rod_x_gex,0.5633464479270447,0.03069195191914597,929,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.0772249112804318
+F2,client_mirror,"continuous, all days",r_rod_x_gex,0.5633475897918434,0.030691319980578526,929,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07722332124145564
 F2,client_mirror,"binary, non_expiry days",r_rod_x_neg,-0.07704988241372128,2.785393646878043e-05,734,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.0021726070445648735,0.0011663767578726802
 F2,client_mirror,"regime_slopes, non_expiry days",r_rod_x_neg,-0.0784542848903987,0.00048072551437435863,734,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.0360544135780769,0.007314946512563795
 F2,client_mirror,"controls, non_expiry days",r_rod_x_neg,0.012216996886640963,0.7659865263214127,733,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8658978123633362
-F2,client_mirror,"continuous, non_expiry days",r_rod_x_gex,0.9848988664992815,0.009199866638262302,732,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.48887979432776907,0.027599599914786905
+F2,client_mirror,"continuous, non_expiry days",r_rod_x_gex,0.9848995838607448,0.00919983268661741,732,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.48887979432776907,0.02759949805985223
 F2,client_mirror,"binary, expiry days",r_rod_x_neg,-0.03143116871019741,0.8587491623742796,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.9123966721852137
 F2,client_mirror,"regime_slopes, expiry days",r_rod_x_neg,-0.02899237556504082,0.8656070992526386,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.9123966721852137
 F2,client_mirror,"controls, expiry days",r_rod_x_neg,-0.08121030544131383,0.6426891637565684,198,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.795710393222418
-F2,client_mirror,"continuous, expiry days",r_rod_x_gex,-0.16131319729698496,0.7239436476243154,197,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8450464243296382
-F1,us_convention,robustness: per_sd,gex_l1,-0.04024561485112327,0.029656523246115674,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07710696043990495
-F1,us_convention,robustness: per_sd,gex_l1_x_exp,0.041412842177867525,0.1130582204224686,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.2050823533244893
+F2,client_mirror,"continuous, expiry days",r_rod_x_gex,-0.16130891001196543,0.7239505044046282,197,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8450464243296382
+F1,us_convention,robustness: per_sd,gex_l1,-0.04024394792989169,0.029663223971562624,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07712438232606282
+F1,us_convention,robustness: per_sd,gex_l1_x_exp,0.041411073451926406,0.11307354031212302,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.20511014289175802
 F1,us_convention,robustness: sign,gex_l1,0.016838076351878478,0.7258732106421251,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8450464243296382
 F1,us_convention,robustness: sign,gex_l1_x_exp,-0.024164961828127406,0.8158337730319283,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8962680886829635
-F1,us_convention,robustness: share,gex_l1,0.27224148335845927,0.35068419326638023,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.5260262898995703
-F1,us_convention,robustness: share,gex_l1_x_exp,0.2337228825059314,0.6226062866023125,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7832788766932319
-F1,us_convention,robustness: share + gross,gex_l1,0.3110382752582626,0.27443937239482175,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.4281254209359219
-F1,us_convention,robustness: share + gross,gex_l1_x_exp,0.23116633549389112,0.6144845042611613,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7832788766932319
-F1,us_convention,"robustness: share, before auction",gex_l1,0.3679208222306725,0.23214149355395564,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.38525609568528807
-F1,us_convention,"robustness: share, before auction",gex_l1_x_exp,0.3215269517539396,0.522164634310541,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7145410785302141
-F1,participant_pro,robustness: per_sd,gex_l1,-0.05267450313021069,0.032991203580632344,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07751705626321494
-F1,participant_pro,robustness: per_sd,gex_l1_x_exp,0.12555141078845433,0.001650176013382687,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.10726144086987466,0.008580915269590967
+F1,us_convention,robustness: share,gex_l1,0.2722678511283321,0.35063909540743965,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.5259586431111595
+F1,us_convention,robustness: share,gex_l1_x_exp,0.23369309893801135,0.6226510719582017,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7833352195603183
+F1,us_convention,robustness: share + gross,gex_l1,0.3110622405609449,0.2744042743635253,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.4280706680070995
+F1,us_convention,robustness: share + gross,gex_l1_x_exp,0.23113945668005748,0.6145258523857073,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7833352195603183
+F1,us_convention,"robustness: share, before auction",gex_l1,0.36795007253164536,0.23210601527775632,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.38519721684393604
+F1,us_convention,"robustness: share, before auction",gex_l1_x_exp,0.32149378017875735,0.5222081599244022,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7146006398965504
+F1,participant_pro,robustness: per_sd,gex_l1,-0.05267415812122223,0.03299247743103506,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07751566151844201
+F1,participant_pro,robustness: per_sd,gex_l1_x_exp,0.12555103161095926,0.0016502455014062445,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.10726595759139729,0.008581276607312472
 F1,participant_pro,robustness: sign,gex_l1,-0.08768984015622096,0.04330093215144193,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.09381868632812418
 F1,participant_pro,robustness: sign,gex_l1_x_exp,0.3315409285580328,0.0024393258076313984,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.1487988742655153,0.010570411833069393
-F1,participant_pro,robustness: share,gex_l1,-3.1580850493732933,0.0036514668184342014,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.21543654228761788,0.014230093511257369
-F1,participant_pro,robustness: share,gex_l1_x_exp,8.208867673173911,0.0012632592486521155,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.08716488815699597,0.008542705071472145
-F1,participant_pro,robustness: share + gross,gex_l1,-3.0641471790595927,0.0038311790222615993,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.22220838329117276,0.014230093511257369
-F1,participant_pro,robustness: share + gross,gex_l1_x_exp,8.135257960690543,0.0013019587787472808,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.0885331969548151,0.008542705071472145
-F1,participant_pro,"robustness: share, before auction",gex_l1,-3.5140671533052164,0.0014237841785786909,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.09523022919150635,0.008542705071472145
-F1,participant_pro,"robustness: share, before auction",gex_l1_x_exp,8.942127696522604,0.0005254414765836213,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.038882669267187975,0.007314946512563795
-F1,client_mirror,robustness: per_sd,gex_l1,-0.07104506787459428,0.013291843927087044,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.6911758842085263,0.0370272795111739
-F1,client_mirror,robustness: per_sd,gex_l1_x_exp,0.11025911052529704,0.0022990338054782455,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.14483912974512947,0.010548508048665394
+F1,participant_pro,robustness: share,gex_l1,-3.15809438247856,0.0036513640442850104,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.2154304786128156,0.014229473768936607
+F1,participant_pro,robustness: share,gex_l1_x_exp,8.208875162384343,0.0012632493349242768,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.0871642041097751,0.008542435209231591
+F1,participant_pro,robustness: share + gross,gex_l1,-3.064160906646392,0.0038310121685598553,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.2221987057764716,0.014229473768936607
+F1,participant_pro,robustness: share + gross,gex_l1_x_exp,8.135271820721876,0.0013019411394816771,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.08853199748475404,0.008542435209231591
+F1,participant_pro,"robustness: share, before auction",gex_l1,-3.5140769831532963,0.0014237392015385986,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.09523341462315757,0.008542435209231591
+F1,participant_pro,"robustness: share, before auction",gex_l1_x_exp,8.942135871166059,0.0005254367760012535,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.03888232142409276,0.007314946512563795
+F1,client_mirror,robustness: per_sd,gex_l1,-0.07104595388488052,0.013290694983611795,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.6911161391476626,0.037024078882918574
+F1,client_mirror,robustness: per_sd,gex_l1_x_exp,0.11026007097321779,0.0022988085141388837,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",0.1448249363907134,0.010547474358990172
 F1,client_mirror,robustness: sign,gex_l1,-0.09794087215026606,0.5000751130578105,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.6965331931876646
 F1,client_mirror,robustness: sign,gex_l1_x_exp,0.13079611272165279,0.4377264013749018,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.6442011190045724
-F1,client_mirror,robustness: share,gex_l1,-0.5047964201580123,0.7086868566801092,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8450464243296382
-F1,client_mirror,robustness: share,gex_l1_x_exp,3.106736194713573,0.09070637923181901,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.1768774395020471
-F1,client_mirror,robustness: share + gross,gex_l1,-1.4939131842905031,0.2510481688182258,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.3996276973024819
-F1,client_mirror,robustness: share + gross,gex_l1_x_exp,3.8550671144157245,0.03378948606345267,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07751705626321494
-F1,client_mirror,"robustness: share, before auction",gex_l1,-0.6934140439338339,0.6134556214096838,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7832788766932319
-F1,client_mirror,"robustness: share, before auction",gex_l1_x_exp,3.2729328599900094,0.07794437303637802,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.15588874607275605
+F1,client_mirror,robustness: share,gex_l1,-0.5048047035075088,0.7086821458434289,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.8450464243296382
+F1,client_mirror,robustness: share,gex_l1_x_exp,3.1067436588899158,0.09070557145613334,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.17687586433946004
+F1,client_mirror,robustness: share + gross,gex_l1,-1.4939271125122915,0.2510430782534496,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.39961959395447083
+F1,client_mirror,robustness: share + gross,gex_l1_x_exp,3.855080384781539,0.033788878097782415,937,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.07751566151844201
+F1,client_mirror,"robustness: share, before auction",gex_l1,-0.6934224483073511,0.6134511367976034,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.7833352195603183
+F1,client_mirror,"robustness: share, before auction",gex_l1_x_exp,3.272940517894984,0.07794364929623043,874,"A: every GEX-term test in the original scripts (R3, R3 robustness, R5)",1.0,0.15588729859246087

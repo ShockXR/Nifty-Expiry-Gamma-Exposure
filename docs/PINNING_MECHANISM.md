@@ -178,6 +178,7 @@ As the plan stated from SEBI's 1 October 2024 rules, the weekly count and contra
 * Stage A (candidates only) was run once on its own before any outcome was joined, to check the candidates. That is how the lot-size rule switch was seen.
 * The first full run labelled C3 "falsified" and lacked the pre-registered settlement-price check. Before the final run, the label was corrected to the plan's wording and the check was added; no estimate changed.
 * Added output files (`decisions.csv`, `descriptive_c4_a1.csv`, `settlement_check.csv`, `run_info.json`) do not change any decision.
+* Rerun from the raw files in the full reproduction of 3 November 2026 (`results/reproduce_log.csv`): every result file was identical except the run time and start time in `run_info.json`.
 
 ## 7. Limitations
 

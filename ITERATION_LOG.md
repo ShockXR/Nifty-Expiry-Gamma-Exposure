@@ -486,10 +486,20 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The R5 table cells (RD30 to RD36) wait for the reproduction; the seed bootstrap (P99) is running.
 * **NEXT ITERATION:** Compare the reproduction with the committed outputs.
 
+## Iteration 41: the full reproduction and a ledger of every study
+
+* **OBJECTIVE:** Check that the whole project reruns from the hashed raw files with one command, and count every hypothesis test of all 25 studies in one ledger.
+* **PROBLEM IDENTIFIED:** The ledger (iteration 32) covered 17 studies and 4,930 tests; the registered plans P91, P92 and P96 and the three referee responses were missing. No full rerun had been logged.
+* **HYPOTHESIS:** None (verification).
+* **CHANGES IMPLEMENTED:** Full run of `scripts/reproduce_all.py` (22 steps, logged in `results/reproduce_log.csv`) and a file-by-file comparison with the committed outputs. Notebook cell fixed (a renamed model column). Diagnostic files from the first forecasting run that the rerun replaced with second-run versions are kept in `results/archive_v1_first_run/` and the documents that cite them point there. The R5 table in REAL_DATA_RESULTS.md had mixed 929-day and 932-day estimates; it now quotes `results/real_day_level/regressions.csv` throughout. Ledger adapters for BNFC (P91), SWAP (P92), SYNTH (P96), REFFC, REFEXP and REFF2, plus the archived first-run files. The wording that a "second person" re-keyed the paper's numbers was wrong (it was a separate AI agent) and is corrected in the code and the documents.
+* **EXPERIMENTS PERFORMED:** Full rerun (about 2 hours 20 minutes on one core); ledger rebuild; number trace with the private paper.
+* **RESULTS:** Every step exited cleanly except the notebook (fixed). The headline forecasts (`results/pipeline_nse_v2/`) are byte for byte the same; other studies moved only in late decimals because they now read the second run's GEX panels; P87 is identical. Ledger (REAL DATA): 22,525 tests from 25 studies, 6,595 with raw p below 0.05, 2,691 survive project-wide Benjamini-Yekutieli (cut-off about 5.6e-4 on the raw p), 1,925 survive Holm within their study. Against the findings: the hybrid's gain over mcsGARCH on all days survives at every horizon; on expiry days only at 30 minutes; the edge over the mcsGARCH given the implied variance does not survive at either horizon; P91 H1 survives, none of the 12 H4 rows does (the "prediction failed" reading rests on the plan's own Holm family); the Tuesday last-hour premium survives; the in-sample R5 row survives (BY 0.021) but the out-of-sample and referee rows do not; nothing in P92 or P96 survives, as their nulls imply.
+* **IMPROVEMENTS:** The "one command" and "every test counted" claims are now both checked. The pitch, briefing and REAL_DATA_RESULTS quote the new ledger and say which parts of finding 2 do not survive.
+* **REMAINING ISSUES:** The timed run predates the steps added for P96, P91 and the referee analyses (each was run on the same data when written). P99 seed bootstrap still running.
+* **NEXT ITERATION:** Refresh the ledger numbers in the private working paper and replication note; score the frozen 3 November forecast after the close.
+
 ## Iterations in progress (3 November 2026, about 09:00 IST)
 
-* **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
-* **The test ledger** rebuilt to count every study test by test.
 * **P99, a seed bootstrap of the forecasting hybrid** (registered plan): 20 independent LightGBM seed ensembles, closing the referee's estimation-noise item.
 * **Scoring the frozen forecast** for 3 November after the close.
 

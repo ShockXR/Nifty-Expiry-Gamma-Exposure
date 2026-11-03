@@ -6,10 +6,10 @@
   "permutations": 2000,
   "newey_west_lags": 5,
   "workers": 4,
-  "seconds": 303.0,
+  "seconds": 269.0,
   "inputs": {
-    "daily_market.csv": "959c5c633f855569",
-    "daily_gex_panel.csv": "92d479816ac95eea"
+    "daily_market.csv": "b9f57f0875240996",
+    "daily_gex_panel.csv": "f0be1a255eb3fde0"
   },
   "samples": {
     "full": "2023-01-02 to 2026-11-02, closing-auction days (from 2026-08-03) are their own regime",

@@ -32,9 +32,17 @@ Rules followed throughout:
   (``results/pipeline_nse``, archived), R1V2 the current contest
   (``results/pipeline_nse_v2``) and R1V2DEV its development runs
   (``results/pipeline_nse_v2/development``). Different forecasts are different
-  tests, so they are not deduplicated against each other.
+  tests, so they are not deduplicated against each other. BNFC is the same
+  pipeline on Bank Nifty (P91, ``results/pipeline_nse_banknifty``).
+* Pre-registered studies P92 (``sensex_swap``), P96 (``synthetic_control``) and
+  P91 (``pipeline_nse_banknifty``) and the post hoc referee responses
+  (``referee_f2``, ``referee_forecast``, ``referee_expiry``) have their own
+  adapters; a referee row that repeats a test already in the ledger is not
+  counted again.
 
-No git command is run. Commit times are read from ``.git/logs/HEAD`` only.
+No git command is run. Commit times are read from the reflogs (``logs/HEAD`` and
+``logs/refs/heads/**`` of the repository, followed through a worktree's
+``.git`` file to the main repository).
 
 Usage::
 
@@ -126,6 +134,8 @@ SIDE_ONE_PRE = "one-sided (pre-stated)"
 SIDE_ONE_STATED = "one-sided (stated by the study, not time-stamped)"
 SIDE_CONVERTED = "two-sided (doubled from a one-sided p that was not pre-stated)"
 SIDE_NONDIR = "not directional (Wald, LR or chi-square), as reported"
+SIDE_DOUBLED = ("two-sided equivalent min(1, 2p) of a one-sided max-type p (SPA or Reality Check) that was not "
+                "pre-stated")
 
 ROLES = ["primary", "headline", "secondary", "robustness", "placebo",
          "exploratory", "post hoc", "unlabelled"]
@@ -154,11 +164,20 @@ STUDIES = {
     "SENSEX": ("BSE Sensex expiry as a confounder", "docs/SENSEX_CONFOUND.md"),
     "F2ECON": ("Economic size of F2 after costs (P90)", "docs/F2_ECONOMICS.md"),
     "PINMECH": ("Pinning mechanism (P87)", "docs/PINNING_MECHANISM.md"),
+    "BNFC": ("Bank Nifty forecasting contest (P91)", "docs/BANKNIFTY_FORECAST.md; docs/prereg/P91_BANKNIFTY_FORECAST.md"),
+    "SWAP": ("Nifty and Sensex expiry-weekday swap, spillovers (P92)", "docs/SENSEX_SWAP.md; docs/prereg/P92_SENSEX_SWAP.md"),
+    "SYNTH": ("Loss of weekly expiries, synthetic control (P96)", "docs/SYNTHETIC_CONTROL.md; docs/prereg/P96_SYNTHETIC_CONTROL.md"),
+    "REFFC": ("Referee response: forecasting (post hoc)", "docs/REFEREE_RESPONSE_FORECAST.md"),
+    "REFEXP": ("Referee response: expiry premia and event study (post hoc)", "docs/REFEREE_RESPONSE_EXPIRY.md"),
+    "REFF2": ("Referee response: F2 inference and positions (post hoc)", "docs/REFEREE_RESPONSE_F2.md"),
 }
 
 PREREG = {
     "pinning_mechanism": ("docs/prereg/P87_PINNING_MECHANISM.md", "Pre-registration P87"),
     "f2_economics": ("docs/prereg/P90_F2_ECONOMICS.md", "Pre-registration P90"),
+    "pipeline_nse_banknifty": ("docs/prereg/P91_BANKNIFTY_FORECAST.md", "P91 pre-registration"),
+    "sensex_swap": ("docs/prereg/P92_SENSEX_SWAP.md", "Pre-registration P92"),
+    "synthetic_control": ("docs/prereg/P96_SYNTHETIC_CONTROL.md", "P96 pre-registration"),
 }
 
 COLUMNS = [
@@ -278,7 +297,12 @@ class Ctx:
         if not (-1e-12 <= p_rep <= 1 + 1e-12):
             self.warn(f"{study}: p outside [0, 1] in {source_file} ({source_key}); skipped")
             return None
-        p_raw = two_sided_from_one_sided(p_rep) if sidedness == SIDE_CONVERTED else p_rep
+        if sidedness == SIDE_CONVERTED:
+            p_raw = two_sided_from_one_sided(p_rep)
+        elif sidedness == SIDE_DOUBLED:
+            p_raw = float(min(1.0, 2.0 * p_rep))
+        else:
+            p_raw = p_rep
         if p_rep == 0.0:
             note = (note + "; " if note else "") + "reported p is exactly 0 (below the method's resolution or floating-point underflow); kept as 0"
         row = dict(
@@ -822,26 +846,29 @@ def adapt_r1b(ctx: Ctx):
     Columns: target, model ("A vs B (sample)"), dm_two_sided_p, mean_loss_diff, n_days.
     Rows without dm_two_sided_p are tail shares (descriptive): not tests.
     """
-    rel = "forecast_diagnostics/tails_and_last_hour_tests.csv"
-    if not ctx.has(rel):
-        return
-    d = ctx.read(rel)
-    t = d[d["dm_two_sided_p"].notna()]
-    for _, r in t.iterrows():
-        m = re.match(r"(.+?) vs (.+?) \((.+)\)", clean(r["model"]))
-        a, b, s = m.groups() if m else (clean(r["model"]), "", "")
-        ctx.add("R1b", f"{a} and {b} forecast the last hour equally well (QLIKE)",
-                f"QLIKE loss of forecasts of {TARGETS.get(clean(r['target']), clean(r['target']))}",
-                f"{s} (n = {int(num(r['n_days']))})", r["dm_two_sided_p"], role="post hoc",
-                pre_specified=PS_NO, pre_spec_note="diagnostic run after the R1 results",
-                source_file=rel, source_key=key(r["target"], r["model"]), estimate=r["mean_loss_diff"],
-                statistic_name="mean loss difference", p_method="Diebold-Mariano, two-sided")
-    ctx.skip("R1b", rel, "tail-share rows (top 1% share of QLIKE)", int(d["dm_two_sided_p"].isna().sum()),
-             "descriptive shares, no p-value")
-    for other in ("gains_by_subset.csv", "largest_mcsgarch_errors.csv"):
-        if ctx.has(f"forecast_diagnostics/{other}"):
-            ctx.consumed.add(f"forecast_diagnostics/{other}")
-            ctx.skip("R1b", f"forecast_diagnostics/{other}", "descriptive table", 1, "no p-value")
+    # The current file reads the second run; the first run's version (which holds the withdrawn HAR
+    # last-hour claim) is archived in results/archive_v1_first_run/ and counted too, labelled as such.
+    for prefix, label in (("", ""), ("archive_v1_first_run/", " (first run, archived)")):
+        rel = prefix + "forecast_diagnostics/tails_and_last_hour_tests.csv"
+        if not ctx.has(rel):
+            continue
+        d = ctx.read(rel)
+        t = d[d["dm_two_sided_p"].notna()]
+        for _, r in t.iterrows():
+            m = re.match(r"(.+?) vs (.+?) \((.+)\)", clean(r["model"]))
+            a, b, s = m.groups() if m else (clean(r["model"]), "", "")
+            ctx.add("R1b", f"{a} and {b} forecast the last hour equally well (QLIKE){label}",
+                    f"QLIKE loss of forecasts of {TARGETS.get(clean(r['target']), clean(r['target']))}",
+                    f"{s} (n = {int(num(r['n_days']))})", r["dm_two_sided_p"], role="post hoc",
+                    pre_specified=PS_NO, pre_spec_note="diagnostic run after the R1 results",
+                    source_file=rel, source_key=key(r["target"], r["model"]), estimate=r["mean_loss_diff"],
+                    statistic_name="mean loss difference", p_method="Diebold-Mariano, two-sided")
+        ctx.skip("R1b", rel, "tail-share rows (top 1% share of QLIKE)", int(d["dm_two_sided_p"].isna().sum()),
+                 "descriptive shares, no p-value")
+        for other in ("gains_by_subset.csv", "largest_mcsgarch_errors.csv"):
+            if ctx.has(f"{prefix}forecast_diagnostics/{other}"):
+                ctx.consumed.add(f"{prefix}forecast_diagnostics/{other}")
+                ctx.skip("R1b", f"{prefix}forecast_diagnostics/{other}", "descriptive table", 1, "no p-value")
 
 
 def _same_num(a: float, b: float, rel=1e-9, tol=1e-12) -> bool:
@@ -882,8 +909,9 @@ def adapt_auction(ctx: Ctx):
     r2_tuesday_split.csv: measure, sample, pct_expiry_vs_week, p_signed_rank (two-sided Wilcoxon).
     r5_without_auction.csv: sample, spec, rule, term, coef, p (HAC, two-sided).
     """
-    rel = "closing_auction/r1_dm_tests.csv"
-    if ctx.has(rel):
+    for rel in ("closing_auction/r1_dm_tests.csv", "archive_v1_first_run/closing_auction/r1_dm_tests.csv"):
+        if not ctx.has(rel):
+            continue
         d = ctx.read(rel)
         look = _contest_dm_tests(ctx)
         dups = {}
@@ -1899,41 +1927,79 @@ def adapt_sensex(ctx: Ctx):
 # ----------------------------------------------------------------------------
 
 
-def reflog_commits(root: Path):
-    f = root / ".git" / "logs" / "HEAD"
+def git_dirs(root: Path):
+    """The repository directories whose reflogs hold this checkout's commits: ``.git`` itself, or, when ``.git``
+    is a file (a worktree), the worktree's own git directory and the main repository's (``commondir``)."""
+    g = Path(root) / ".git"
+    if g.is_dir():
+        return [g]
     out = []
-    if not f.exists():
-        return out
-    for line in f.read_text(errors="replace").splitlines():
-        try:
-            head, msg = line.split("\t", 1)
-            parts = head.split()
-            out.append((int(parts[-2]), msg))
-        except (ValueError, IndexError):
+    if g.is_file():
+        txt = g.read_text(errors="replace").strip()
+        if txt.startswith("gitdir:"):
+            gd = Path(txt.split(":", 1)[1].strip())
+            gd = gd if gd.is_absolute() else (Path(root) / gd)
+            out.append(gd)
+            cd = gd / "commondir"
+            if cd.is_file():
+                c = Path(cd.read_text(errors="replace").strip())
+                out.append(c if c.is_absolute() else (gd / c))
+    return [d for d in out if d.is_dir()]
+
+
+def reflog_commits(root: Path):
+    """(unix time, message) of every reflog entry in logs/HEAD and logs/refs/heads/** of the repository (read
+    only; no git command). A commit made in another worktree is in its branch's reflog, so both are read."""
+    files = []
+    for d in git_dirs(Path(root)):
+        files.append(d / "logs" / "HEAD")
+        heads = d / "logs" / "refs" / "heads"
+        if heads.is_dir():
+            files.extend(sorted(p for p in heads.rglob("*") if p.is_file()))
+    out, seen = [], set()
+    for f in files:
+        if not f.is_file():
             continue
+        for line in f.read_text(errors="replace").splitlines():
+            try:
+                head, msg = line.split("\t", 1)
+                parts = head.split()
+                item = (int(parts[-2]), msg)
+            except (ValueError, IndexError):
+                continue
+            if item not in seen:
+                seen.add(item)
+                out.append(item)
     return out
 
 
-def prereg_status(ctx: Ctx, folder: str):
+def prereg_status(ctx: Ctx, folder: str, outcome=None):
+    """PS_YES when the pre-registration's commit (found by its message in the reflogs) is older than the earliest
+    result file. ``outcome``: glob patterns (relative to the folder) of the files that hold outcomes; files written
+    before the outcomes on purpose (phase-1 coverage counts committed with the plan) are then left out."""
     if folder not in PREREG:
         return PS_UNKNOWN, ""
     doc, phrase = PREREG[folder]
     if not (ctx.root / doc).exists():
         return PS_UNKNOWN, f"{doc} not found"
     commits = [ts for ts, msg in reflog_commits(ctx.root) if phrase in msg]
-    files = [p for p in ctx.res(folder).rglob("*") if p.is_file()]
+    if outcome:
+        files = sorted({p for pat in outcome for p in ctx.res(folder).glob(pat) if p.is_file()})
+    else:
+        files = [p for p in ctx.res(folder).rglob("*") if p.is_file()]
+    what = "outcome file" if outcome else "result file"
     if not commits:
-        return PS_STATED, f"{doc} exists, but no commit '{phrase}' was found in .git/logs/HEAD"
+        return PS_STATED, f"{doc} exists, but no commit '{phrase}' was found in the reflogs"
     t_c = min(commits)
     t_r = min(p.stat().st_mtime for p in files) if files else float("inf")
     tc = datetime.fromtimestamp(t_c, timezone.utc).strftime("%d %b %Y %H:%M UTC")
     if not files:
-        return PS_YES, f"{doc} committed {tc} per .git/logs/HEAD; no result files yet"
+        return PS_YES, f"{doc} committed {tc} per the reflogs; no {what}s yet"
     if t_c < t_r:
         tr = datetime.fromtimestamp(t_r, timezone.utc).strftime("%H:%M UTC")
-        return PS_YES, (f"{doc} committed {tc} per .git/logs/HEAD, before the earliest result file ({tr}); "
+        return PS_YES, (f"{doc} committed {tc} per the reflogs, before the earliest {what} ({tr}); "
                         "confirm with git log")
-    return PS_STATED, f"{doc} committed {tc}, but result files are older"
+    return PS_STATED, f"{doc} committed {tc}, but {what}s are older"
 
 
 P_COL = re.compile(r"(^|_)(p|pvalue|p_value)(_|$)|^Pvalue$")
@@ -2168,6 +2234,1104 @@ def adapt_power_real(ctx: Ctx):
                  "review: " + "; ".join(unmatched[:12]))
 
 
+# ----------------------------------------------------------------------------
+# Pre-registered studies P92 (Sensex swap) and P96 (synthetic control)
+# ----------------------------------------------------------------------------
+
+
+def _consume_rest(ctx: Ctx, study: str, folder: str, reasons: dict, default: str):
+    """Mark every file of a study folder that the adapter did not read as consumed, with one not-counted line per
+    reason (reasons: {regular expression on the file name: reason})."""
+    base = ctx.res(folder)
+    if not base.exists():
+        return
+    groups = {}
+    for f in sorted(p for p in base.rglob("*") if p.is_file()):
+        rel = str(f.relative_to(ctx.res(""))).replace("\\", "/")
+        if rel in ctx.consumed:
+            continue
+        ctx.consumed.add(rel)
+        why = next((v for k, v in reasons.items() if re.fullmatch(k, f.name)), default)
+        groups.setdefault(why, []).append(str(f.relative_to(base)).replace("\\", "/"))
+    for why, names in groups.items():
+        what = ", ".join(names[:5]) + (f" and {len(names) - 5} more" if len(names) > 5 else "")
+        ctx.skip(study, f"{folder}/" if len(names) > 1 else f"{folder}/{names[0]}", what, len(names), why)
+
+
+SWAP_OUTCOME = ["tests.csv", "robustness.csv", "verdict.json", "cell_means.csv", "day_values.csv", "h2_regression.csv"]
+SWAP_P1_ALT = {"block of 1 week(s)": "perm_p_block_1_week", "block of 2 week(s)": "perm_p_block_2_weeks",
+               "block of 8 week(s)": "perm_p_block_8_weeks",
+               "labels moved separately within each weekday (blocks of 4 same-weekday days)": "perm_p_within_weekday"}
+SWAP_OUTCOME_DESC = {"net_day": "net spillover from Nifty to Sensex (NET), whole day",
+                     "net_lh": "net spillover from Nifty to Sensex (NET), last hour",
+                     "tot_day": "total connectedness of Nifty and Sensex, whole day"}
+
+
+def adapt_swap(ctx: Ctx):
+    """P92: the Nifty and Sensex expiry-weekday swap of 1 September 2025 (docs/prereg/P92_SENSEX_SWAP.md).
+
+    tests.csv: test (P1 primary; S1 to S3 secondary; PL1 to PL3 placebo), alternative (greater, less or
+      two-sided, as registered), estimate, perm_p (block permutation, 4-week blocks: one-sided in the registered
+      direction for P1, S1 and S3, two-sided for the placebos), perm_p_greater, perm_p_less, hac_p (Newey-West,
+      two-sided), p_used (the p the study decides on: perm_p, or hac_p for S2, a regression), holm_p_secondary
+      (Holm over S1 to S3; cross-checked).
+    robustness.csv: check, estimate, perm_p (one-sided as P1 unless alternative_used says otherwise), hac_p.
+      The block lengths of 1, 2 and 8 weeks and the within-weekday permutation re-test P1's own estimate with
+      another permutation scheme: alternative p-values of P1 (its alt_p), not new tests. Every other row changes
+      the estimate and is counted as robustness. The two rows the plan calls description (total connectedness,
+      and H2 without weekday effects) have p-values and are counted as exploratory.
+    Not counted: h2_regression.csv (coefficients of S2's regression, controls included), cell means, per-day
+      values, coverage, calendars, excluded days, MDE files, mcsGARCH fits, verdict.json (repeats tests.csv).
+    """
+    folder = "sensex_swap"
+    rel = f"{folder}/tests.csv"
+    need = {"test", "family", "alternative", "estimate", "perm_p", "hac_p", "p_used"}
+    if not ctx.has(rel) or not need.issubset(pd.read_csv(ctx.res(rel), nrows=0).columns):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "SWAP", folder)
+        return
+    ps_status, ps_note = prereg_status(ctx, folder, SWAP_OUTCOME)
+    side_pre = SIDE_ONE_PRE if ps_status == PS_YES else SIDE_ONE_STATED
+    d = ctx.read(rel)
+    rob_rel = f"{folder}/robustness.csv"
+    rob = ctx.read(rob_rel) if ctx.has(rob_rel) else None
+    p1_alt = {}
+    if rob is not None:
+        for _, r in rob.iterrows():
+            if clean(r["check"]) in SWAP_P1_ALT:
+                p1_alt[SWAP_P1_ALT[clean(r["check"])]] = r["perm_p"]
+    sec = (d["family"] == "secondary") & d["holm_p_secondary"].notna()
+    rmap = {}
+    if sec.any():
+        rec = ctx.check("SWAP", "secondaries S1 to S3 (Holm)", rel, "holm", d.loc[sec, "p_used"], d.loc[sec, "holm_p_secondary"])
+        rmap = dict(zip(d.index[sec], rec))
+    for idx, r in d.iterrows():
+        test, fam, dirn = clean(r["test"]), clean(r["family"]), clean(r["alternative"]).lower()
+        role = {"primary": "primary", "secondary": "secondary", "placebo": "placebo"}.get(fam, "unlabelled")
+        use_perm = np.isfinite(num(r["perm_p"]))
+        directional = dirn in ("greater", "less")
+        if use_perm:
+            p = r["perm_p"]
+            side = side_pre if directional else SIDE_TWO
+            pm = (f"block permutation (blocks of {_int(r.get('block_weeks'))} weeks), "
+                  + (f"one-sided ({dirn})" if directional else "two-sided"))
+            other = r["perm_p_less"] if dirn == "greater" else (r["perm_p_greater"] if dirn == "less" else float("nan"))
+            extra = dict(p1_alt) if test == "P1" else {}
+            altp = alt(hac_p_two_sided=r["hac_p"], perm_p_other_direction=other, **extra)
+        else:
+            p, side, pm, altp = r["hac_p"], SIDE_TWO, "OLS with Newey-West standard errors, two-sided", ""
+        if not _same_num(num(p), num(r["p_used"])):
+            ctx.warn(f"{rel}: {test} p_used differs from the p the ledger uses")
+        pred = {"greater": " (registered prediction: positive)", "less": " (registered prediction: negative)"}.get(dirn, "")
+        row = ctx.add("SWAP", f"{test}: {clean(r['what'])}{pred}", SWAP_OUTCOME_DESC.get(clean(r["outcome"]), clean(r["outcome"])),
+                      f"{_int(r['n_days'])} days" + (f"; cells {clean(r['n_cells'])}" if clean(r.get("n_cells")) else ""), p,
+                      role=role, pre_specified=ps_status, pre_spec_note=ps_note, source_file=rel,
+                      source_key=key("tests.csv", test), sidedness=side, estimate=r["estimate"],
+                      statistic_name="difference in differences of NET (points)" if use_perm else "expiry-day coefficient (points)",
+                      p_method=pm, alt_p=altp,
+                      note=("P1's other permutation schemes (block lengths, within weekday) are in alt_p, not counted"
+                            if test == "P1" and p1_alt else ""),
+                      p_study_adjusted=r["holm_p_secondary"] if idx in rmap else float("nan"),
+                      study_adjust_method="Holm over S1 to S3" if idx in rmap else "")
+        if idx in rmap:
+            _set(row, "p_study_adjusted_recomputed", rmap[idx])
+    if rob is not None:
+        n_alt = 0
+        for _, r in rob.iterrows():
+            chk = clean(r["check"])
+            if chk in SWAP_P1_ALT:
+                n_alt += 1
+                continue
+            used = clean(r.get("alternative_used", "")).lower()
+            descriptive = "descriptive" in chk.lower()
+            use_perm = np.isfinite(num(r["perm_p"]))
+            p = r["perm_p"] if use_perm else r["hac_p"]
+            if descriptive or used == "two-sided" or not use_perm:
+                side = SIDE_TWO
+            else:
+                side = side_pre
+            dirn = used if used in ("greater", "less") else "greater"
+            pm = (f"block permutation, one-sided ({dirn})" if side != SIDE_TWO else
+                  ("block permutation, two-sided" if use_perm else "OLS with Newey-West standard errors, two-sided"))
+            if descriptive:
+                role, ps, psn = "exploratory", PS_NO, ("the plan reports this as description only (Sections 7 and 9); "
+                                                       "counted because a p-value was reported and seen")
+            else:
+                role, ps, psn = "robustness", ps_status, ps_note + "; robustness of the primary (plan Section 9, never decisive)"
+            ctx.add("SWAP", f"Robustness of P1: {chk}", "net spillover from Nifty to Sensex (NET), whole day",
+                    f"{_int(r['n_days'])} days", p, role=role, pre_specified=ps, pre_spec_note=psn, source_file=rob_rel,
+                    source_key=key("robustness.csv", chk), sidedness=side, estimate=r["estimate"],
+                    statistic_name="estimate (points)", p_method=pm,
+                    alt_p=alt(hac_p_two_sided=r["hac_p"]) if use_perm else "")
+        ctx.skip("SWAP", rob_rel, "block lengths of 1, 2 and 8 weeks and the within-weekday permutation", n_alt,
+                 "other permutation schemes for P1's own estimate: alternative p-values of P1 (in its alt_p)")
+    _consume_rest(ctx, "SWAP", folder, {
+        r"h2_regression\.csv": "coefficients of S2's regression (the expiry term is S2; weekday and period terms are controls)",
+        r"verdict\.json": "verdict and Holm values, repeating tests.csv",
+        r"(cell_means|day_values)\.csv": "cell means and per-day values behind the tests; no p-value",
+        r"mde.*\.csv": "minimum detectable effects (design), no p-value",
+    }, "coverage, calendars, excluded days, mcsGARCH fits or run information; no p-value")
+
+
+SYNTH_INDEX = {"BN": "Bank Nifty (Wednesday)", "FIN": "Fin Nifty (Tuesday)", "MID": "Nifty Midcap Select (Monday)",
+               "NIFTY": "Nifty 50 Wednesday (kept its weekly options)"}
+SYNTH_OUTCOME = ["results.csv", "decision.json", "placebo_space_*.csv", "test_inversion_*.csv"]
+
+
+def adapt_synth(ctx: Ctx):
+    """P96: did losing the weekly expiry (November 2024) remove the expiry-weekday premium? Synthetic control
+    (docs/prereg/P96_SYNTHETIC_CONTROL.md).
+
+    results.csv: analysis (primary, secondary, S1 to S8 sensitivities, placebo in time, descriptive), treated
+      (BN, FIN, MID; NIFTY descriptive), effect (post-period gap to the synthetic control minus the pre-period
+      gap, log points), p_ratio (rank of the post/pre RMSPE ratio among the treated unit and its placebos: the
+      registered test, not directional; main p), p_neg (one-sided rank p of the standardized effect, registered
+      as "reported only": alternative), did (treated minus the plain donor average, post minus pre), did_hac_p
+      (Newey-West, two-sided), did_rank_p_neg (one-sided rank p for a fall: alternative).
+    decision.json: Holm over the two secondaries (cross-checked) and the joint test of all three (one-sided p for
+      a negative mean standardized effect, registered as supplementary, not a decision input).
+    Ratio-test rows: primary (BN), secondary (FIN, MID), robustness (S1 to S8), placebo (placebo in time),
+      exploratory (Nifty 50's Wednesday, descriptive by design). Difference-in-differences rows: exploratory
+      (registered as a cross-check, not as a hypothesis; reading it as a rise is post hoc).
+    Rows with the same p and estimate are counted once (Midcap S7 equals its main run, and the classic synthetic
+      control S3 leaves the DiD unchanged).
+    Not counted: test_inversion_*.csv (the confidence set: ratio p over a grid of shifted effects),
+      placebo_space_*.csv (placebo draws behind p_ratio), weights, weekly series, donor table, figure.
+    """
+    folder = "synthetic_control"
+    rel = f"{folder}/results.csv"
+    need = {"analysis", "treated", "effect", "p_ratio", "p_neg", "did", "did_hac_p"}
+    if not ctx.has(rel) or not need.issubset(pd.read_csv(ctx.res(rel), nrows=0).columns):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "SYNTH", folder)
+        return
+    ps_status, ps_note = prereg_status(ctx, folder, SYNTH_OUTCOME)
+    side_pre = SIDE_ONE_PRE if ps_status == PS_YES else SIDE_ONE_STATED
+    d = ctx.read(rel)
+    dec = {}
+    if ctx.has(f"{folder}/decision.json"):
+        ctx.consumed.add(f"{folder}/decision.json")
+        dec = json.loads(ctx.res(f"{folder}/decision.json").read_text())
+    holm = {}
+    secs = dec.get("secondaries", {})
+    if secs:
+        names = list(secs)
+        rec = ctx.check("SYNTH", "secondaries Fin Nifty and Midcap Select (Holm)", f"{folder}/decision.json", "holm",
+                        [secs[k].get("p_ratio") for k in names], [secs[k].get("holm_p") for k in names])
+        holm = {k: (secs[k].get("holm_p"), rec[i]) for i, k in enumerate(names)}
+    ratio_rows, did_rows = [], []
+    for _, r in d.iterrows():
+        an, tr = clean(r["analysis"]), clean(r["treated"])
+        idx_desc = SYNTH_INDEX.get(tr, tr)
+        if an == "primary":
+            role = "primary"
+        elif an == "secondary":
+            role = "secondary"
+        elif re.match(r"S\d", an):
+            role = "robustness"
+        elif an.startswith("placebo in time"):
+            role = "placebo"
+        elif an.startswith("descriptive"):
+            role = "exploratory"
+        else:
+            role = "unlabelled"
+        if role == "exploratory":
+            ps, psn = PS_NO, ("descriptive only in the plan (Section 9); counted because a p-value was reported and seen")
+        else:
+            ps, psn = ps_status, ps_note + ("; sensitivity, plan Section 10 (none changes a verdict)" if role == "robustness" else "")
+        samp = f"{_int(r['n_pre'])} pre and {_int(r['n_post'])} post weeks, {_int(r['J'])} donor placebos"
+        label = an if an not in ("primary", "secondary") else f"{an} analysis"
+        hy = (f"{idx_desc}: the old expiry weekday's volatility premium over its synthetic control changed after the "
+              f"November 2024 cut ({label}; registered prediction: it fell)")
+        n0 = len(ctx.rows)
+        row = ctx.add("SYNTH", hy, "week-relative log Parkinson variance of the old expiry weekday", samp, r["p_ratio"],
+                      role=role, pre_specified=ps, pre_spec_note=psn, source_file=rel, source_key=key("ratio", an, tr),
+                      estimate=r["effect"], statistic_name="effect (log points; gap post minus gap pre)",
+                      statistic=r["ratio"], p_method="rank of the post/pre RMSPE ratio among the treated unit and its "
+                      "placebos in space (not directional; smallest possible p = 1/(J+1))",
+                      alt_p=alt(p_signed_one_sided_fall=r["p_neg"]),
+                      p_study_adjusted=holm[tr][0] if (role == "secondary" and tr in holm) else float("nan"),
+                      study_adjust_method="Holm over Fin Nifty and Midcap Select" if (role == "secondary" and tr in holm) else "")
+        if row is not None and role == "secondary" and tr in holm:
+            row["p_study_adjusted_recomputed"] = holm[tr][1]
+        if len(ctx.rows) > n0:
+            ratio_rows.append(ctx.rows.pop())
+        n0 = len(ctx.rows)
+        ctx.add("SYNTH", f"{idx_desc}: the old expiry weekday moved against the plain average of the donors "
+                f"(difference-in-differences cross-check; {label})", "week-relative log Parkinson variance of the old expiry weekday",
+                samp, r["did_hac_p"], role="exploratory", pre_specified=PS_NO,
+                pre_spec_note=("registered as a cross-check reported with a two-sided Newey-West p (plan Section 9), not as a "
+                               "hypothesis; reading it as evidence of a rise is post hoc (SYNTHETIC_CONTROL.md Section 9)"),
+                source_file=rel, source_key=key("did", an, tr), estimate=r["did"],
+                statistic_name="DiD (log points)", p_method="Newey-West (4 lags), two-sided",
+                alt_p=alt(did_rank_p_fall=r["did_rank_p_neg"]))
+        if len(ctx.rows) > n0:
+            did_rows.append(ctx.rows.pop())
+    kept, dropped = dedup_exact(ratio_rows + did_rows)
+    ctx.rows.extend(kept)
+    ctx.skip("SYNTH", rel, "rows repeating another row (same p and estimate)", len(dropped),
+             "same test (Midcap S7 equals its main run; the classic synthetic control S3 leaves the DiD unchanged); counted once")
+    jt = dec.get("joint_test_all_three")
+    if jt and np.isfinite(num(jt.get("p_neg"))):
+        ctx.add("SYNTH", "Bank Nifty, Fin Nifty and Midcap Select together: the mean standardized effect is negative "
+                "(the old expiry weekdays calmed down)", "standardized effect (effect / pre RMSPE), mean of three",
+                f"{_int(jt.get('n_combinations'))} combinations of donor placebos", jt["p_neg"], role="secondary",
+                pre_specified=ps_status, pre_spec_note=ps_note + "; supplementary test, not a decision input (plan Section 8)",
+                source_file=f"{folder}/decision.json", source_key="joint_test_all_three", sidedness=side_pre,
+                estimate=jt.get("mean_std_effect"), statistic_name="mean standardized effect",
+                p_method="rank among all combinations of one donor placebo per index, one-sided (mean < 0)",
+                note="not in the Holm family of the two secondaries")
+    _consume_rest(ctx, "SYNTH", folder, {
+        r"test_inversion_.*\.csv": "confidence set by test inversion: ratio p over a grid of shifted effects, not separate hypotheses",
+        r"placebo_space_.*\.csv": "placebo draws (one per donor) behind p_ratio",
+        r"weights_.*\.csv": "synthetic-control weights",
+        r"weekly_.*\.csv": "weekly series of the treated index and donors (data)",
+        r"donor_table\.csv": "donor pool checks (data)",
+    }, "figure or run information; no p-value")
+
+
+# ----------------------------------------------------------------------------
+# Referee responses (post hoc): F2, forecasting, expiry premia
+# ----------------------------------------------------------------------------
+
+REF_PS = "post hoc: done after the referee report of 3 November 2026 ({}); nothing in it is pre-registered"
+F2_NOT_ROBUST = ("newey_west_5", "driscoll_kraay", "within_block_shuffle")
+F2_RULE = {"pro": "NSE Pro participant", "fii": "NSE FII", "fii_plus_pro": "NSE FII plus Pro", "client": "NSE Client",
+           "client_mirror": "mirror of NSE Client", "us_convention": "US convention", "dii": "NSE DII",
+           "short_all": "every category short"}
+F2_SAMPLE = {"full": "full sample", "2023_2024": "2023 to 2024", "2025_onward": "2025 onward", "pre_auction": "before the closing auction"}
+
+
+def _f2_robust(method: str) -> bool:
+    return not clean(method).startswith(F2_NOT_ROBUST)
+
+
+def _f2_pick(g: pd.DataFrame, pcol="p"):
+    """Main p of one estimate reported under several inference methods: the largest p among the methods that
+    respect the persistence of the state (the study's cautious reading; the maximum of valid p-values is a valid,
+    conservative p-value). Newey-West with 5 lags, Driscoll-Kraay and the within-block shuffle are reported by
+    the study for comparison only. Returns (p, method, robust methods, {other method: p})."""
+    pm = [(clean(m), num(p)) for m, p in zip(g["method"], g[pcol]) if np.isfinite(num(p))]
+    if not pm:
+        return float("nan"), "", [], {}
+    rob = [x for x in pm if _f2_robust(x[0])] or pm
+    m_main, p_main = max(rob, key=lambda x: x[1])
+    others = {m: p for m, p in pm if m != m_main}
+    return p_main, m_main, [m for m, _ in rob], others
+
+
+def _f2_nw(g: pd.DataFrame, pcol="p"):
+    h = g[g["method"].map(clean) == "newey_west_5"]
+    return num(h[pcol].iloc[0]) if len(h) else float("nan")
+
+
+def adapt_ref_f2(ctx: Ctx):
+    """Referee response on F2 (docs/REFEREE_RESPONSE_F2.md; experiments/referee_f2.py and referee_f2_positions.py).
+    All post hoc, so every row is exploratory.
+
+    One row per estimate. Each estimate is reported under several inference methods (Newey-West 5 lags,
+    Driscoll-Kraay, Newey-West 60 lags fixed-b, CR1 and wild cluster bootstraps by month, episode and quarter,
+    block permutations of the t and the coefficient, within-block shuffles). The main p is the largest p among the
+    methods that respect the persistence of the state, the study's own cautious reading; every other p is in
+    alt_p. Files:
+    item1_unconditional_slope.csv (test, sample, coef, method, p_two_sided; p_one_sided_momentum as alt),
+    item3_f2_inference.csv, item4_other_rules.csv, item5_alternatives.csv (rule, spec, sample or case, term,
+      coef, method, p; rows "not estimable" have no p),
+    item6_angle_equality.csv (per sample and block length: the bootstrap test of equal response angles, the
+      minimum-distance J test (chi-square, 1 or 2 df) and the Wald test of theta_a = 0; the block lengths and df
+      are alternatives; the Wald test is counted only where it differs from the J test),
+    item7_minute_autocorrelation.csv (rows "expiry minus other": p_two_sided) and item7_junction.csv (p),
+    item8_positions_f2.csv (category, position, form, sample, coef, method, p) and item8_horse_race.csv
+      (horse_race, position, form, coef, method, p; joint Wald rows are not directional).
+    The same estimate in two files is counted once (same coefficient, days and Newey-West p; item 3 first):
+    simulated p-values differ slightly between files because each draws its own. The F2 rows re-estimate R5 on
+    932 days (R5 now uses 929), so they are different estimates from R5's and are counted.
+    Not counted: item 2 (shares, runs, autocorrelations of the sign: descriptive), item 6 bootstrap draws,
+    input checks, item8_positions_describe.csv.
+    """
+    folder = "referee_f2"
+    if not ctx.res(folder).exists():
+        return
+    psn = REF_PS.format("REFEREE_RESPONSE_F2.md")
+    seen = {}
+    n_dup = {}
+    n_items = {"1-7": 0, "8": 0}
+    n_pv = {"1-7": 0, "8": 0}
+
+    def _key(coef, n, nw):
+        return (round(num(coef), 10), _int(n), round(nw, 10) if np.isfinite(nw) else "nan")
+
+    def _add_group(g, rel, item, hyp, samp, est, n, pcol="p", side=SIDE_TWO, stat_name="coefficient", alt_extra=None,
+                   skey="", dedup=True):
+        p, m_main, rob, others = _f2_pick(g, pcol)
+        n_pv[item] += int(g[pcol].notna().sum())
+        if not np.isfinite(p):
+            return None
+        if dedup:
+            k = _key(est, n, _f2_nw(g, pcol))
+            if k in seen:
+                n_dup[(rel, seen[k])] = n_dup.get((rel, seen[k]), 0) + 1
+                return None
+            seen[k] = rel
+        row = ctx.add("REFF2", hyp, "Nifty return over the last 30 minutes (r_last) and its reversal slope", samp, p,
+                      role="exploratory", pre_specified=PS_NO, pre_spec_note=psn, source_file=rel, source_key=skey,
+                      sidedness=side, estimate=est, statistic_name=stat_name,
+                      p_method=(f"largest p among the methods that respect the persistence of the state ({', '.join(rob)}); "
+                                f"here {m_main}; " + ("not directional" if side == SIDE_NONDIR else "two-sided")),
+                      alt_p=alt(**{**others, **(alt_extra or {})}))
+        if row is not None:
+            n_items[item] += 1
+        return row
+
+    rel = f"{folder}/item1_unconditional_slope.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for (test, samp), g in d.groupby(["test", "sample"], sort=False):
+            mom = g["p_one_sided_momentum"].dropna()
+            _add_group(g, rel, "1-7", f"Referee item 1: {clean(test)}; tested against zero",
+                       f"{F2_SAMPLE.get(clean(samp), clean(samp))} ({_int(g['n'].iloc[0])} days)", num(g["coef"].iloc[0]),
+                       g["n"].iloc[0], pcol="p_two_sided", skey=key("item1", test, samp),
+                       alt_extra={"p_one_sided_momentum_nw5": mom.iloc[0]} if len(mom) else None, dedup=False)
+    for fname, item_lab, col in (("item3_f2_inference.csv", "item 3 (inference for a persistent state)", "sample"),
+                                 ("item4_other_rules.csv", "item 4 (other categories as the dealer)", "sample"),
+                                 ("item5_alternatives.csv", "item 5 (alternative specifications)", "case")):
+        rel = f"{folder}/{fname}"
+        if not ctx.has(rel):
+            continue
+        d = ctx.read(rel)
+        n_ne = 0
+        for gk, g in d.groupby(["rule", "spec", "outcome", col, "term"], sort=False):
+            rule, spec, outc, sc, term = (clean(x) for x in gk)
+            if g["p"].notna().sum() == 0:
+                n_ne += 1
+                continue
+            t_txt = "" if term == "N_x_r_rod" else f", term {term}"
+            hyp = (f"F2, referee {item_lab}: after a negative-GEX evening ({F2_RULE.get(rule, rule)} as the dealer) the "
+                   f"end-of-day reversal slope differs ({spec} specification, outcome {outc}{t_txt}"
+                   + (f"; {sc}" if col == "case" else "") + ")")
+            _add_group(g, rel, "1-7", hyp,
+                       f"{F2_SAMPLE.get(sc, sc)} ({_int(g['n'].iloc[0])} days, "
+                       f"{_int(g['n_neg'].iloc[0])} negative)",
+                       num(g["coef"].iloc[0]), g["n"].iloc[0], skey=key(fname, rule, spec, outc, sc, term))
+        ctx.skip("REFF2", rel, "groups marked 'not estimable'", n_ne, "no p-value (fewer than 5 days in one sign state, or "
+                 "net GEX below zero on every evening)")
+    rel = f"{folder}/item6_angle_equality.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for samp, g in d.groupby("sample", sort=False):
+            n_pv["1-7"] += 3 * len(g)
+            blocks = [int(num(b)) for b in g["block_days"]]
+            pb = [num(x) for x in g["p_equal_basic_bootstrap"]]
+            i = int(np.nanargmax(pb))
+            r = g.iloc[i]
+            row = ctx.add("REFF2", "Referee item 6: the response angles of the two Pro states are equal (basic bootstrap of angle a minus angle b)",
+                          "direction of the end-of-day response (angle, degrees)",
+                          f"{clean(samp)} ({_int(r['n_days_a'])} and {_int(r['n_days_b'])} days)", pb[i], role="exploratory",
+                          pre_specified=PS_NO, pre_spec_note=psn, source_file=rel, source_key=key("item6", samp, "angle"),
+                          estimate=r["diff_a_minus_b"], statistic_name="angle a minus angle b (degrees)",
+                          p_method=f"moving-block bootstrap, larger p of the two block lengths (here {blocks[i]} days), two-sided",
+                          alt_p=alt(**{f"p_block_{b}": p for b, p in zip(blocks, pb) if b != blocks[i]}))
+            n_items["1-7"] += row is not None
+            cand = [(f"chi2_{df}_block_{b}", num(x[f"md_p_chi2_{df}"]), num(x["md_J"]))
+                    for b, (_, x) in zip(blocks, g.iterrows()) for df in (1, 2)]
+            nm, pj, jv = max(cand, key=lambda c: c[1])
+            row = ctx.add("REFF2", "Referee item 6: one common response angle fits both Pro states (minimum-distance J test)",
+                          "direction of the end-of-day response", clean(samp), pj, role="exploratory", pre_specified=PS_NO,
+                          pre_spec_note=psn, source_file=rel, source_key=key("item6", samp, "md_J"), sidedness=SIDE_NONDIR,
+                          statistic_name="J", statistic=jv,
+                          p_method=f"minimum-distance J, largest p over 1 or 2 degrees of freedom and block lengths (here {nm})",
+                          alt_p=alt(**{c[0]: c[1] for c in cand if c[0] != nm}))
+            n_items["1-7"] += row is not None
+            same = all(_same_num(num(x["wald_theta_a_zero_boot"]), num(x["md_J"]), rel=1e-5) for _, x in g.iterrows())
+            if same:
+                ctx.skip("REFF2", rel, f"Wald test of theta_a = 0, {clean(samp)}", len(g),
+                         "same statistic as the J test in this sample (counted once there)")
+                continue
+            pw = [num(x) for x in g["wald_theta_a_zero_boot_p"]]
+            i = int(np.nanargmax(pw))
+            row = ctx.add("REFF2", "Referee item 6: the response of the negative-GEX state is zero (Wald test of theta_a = 0)",
+                          "end-of-day response coefficients", clean(samp), pw[i], role="exploratory", pre_specified=PS_NO,
+                          pre_spec_note=psn, source_file=rel, source_key=key("item6", samp, "wald_theta_a"), sidedness=SIDE_NONDIR,
+                          statistic_name="Wald", statistic=g["wald_theta_a_zero_boot"].iloc[i],
+                          p_method=f"bootstrap Wald, larger p of the two block lengths (here {blocks[i]} days)",
+                          alt_p=alt(**{f"p_block_{b}": p for b, p in zip(blocks, pw) if b != blocks[i]}))
+            n_items["1-7"] += row is not None
+    rel = f"{folder}/item7_minute_autocorrelation.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d[d["p_two_sided"].notna()].iterrows():
+            n_pv["1-7"] += 1
+            row = ctx.add("REFF2", f"Referee item 7: first-order autocorrelation of 1-minute returns in {clean(r['window'])} differs "
+                          f"between expiry and other days ({clean(r['grouping'])}: {clean(r['group'])})",
+                          "first-order autocorrelation of 1-minute returns", clean(r["group"]), r["p_two_sided"],
+                          role="exploratory", pre_specified=PS_NO, pre_spec_note=psn, source_file=rel,
+                          source_key=key("item7", r["window"], r["grouping"], r["group"]), estimate=r["ac1_pooled"],
+                          statistic_name="difference in pooled autocorrelation", p_method="day bootstrap, two-sided")
+            n_items["1-7"] += row is not None
+        ctx.skip("REFF2", rel, "per-group autocorrelations", int(d["p_two_sided"].isna().sum()), "descriptive, no p-value")
+    rel = f"{folder}/item7_junction.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        ccol = next(c for c in d.columns if c.startswith("corr"))
+        for _, r in d.iterrows():
+            n_pv["1-7"] += int(np.isfinite(num(r["p"])))
+            row = ctx.add("REFF2", "Referee item 7: returns of the 14:58 to 14:59 and 14:59 to 15:00 bars are correlated",
+                          "correlation of two consecutive 1-minute returns", f"{clean(r['days'])} ({_int(r['n'])} days)", r["p"],
+                          role="exploratory", pre_specified=PS_NO, pre_spec_note=psn, source_file=rel,
+                          source_key=key("item7_junction", r["days"]), estimate=r[ccol], statistic_name="correlation",
+                          p_method="correlation test, two-sided")
+            n_items["1-7"] += row is not None
+    rel = f"{folder}/item8_positions_f2.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for gk, g in d.groupby(["category", "position", "form", "sample"], sort=False):
+            cat, pos, form, samp = (clean(x) for x in gk)
+            _add_group(g, rel, "8", f"F2, referee item 8: with the {cat} {pos.replace('_', ' ')} position as the state ({form}), the "
+                       f"end-of-day reversal slope differs (F2's direction: {'negative' if form == 'dummy' else 'positive'} coefficient)",
+                       f"{F2_SAMPLE.get(samp, samp)} ({_int(g['n'].iloc[0])} days)", num(g["coef"].iloc[0]), g["n"].iloc[0],
+                       skey=key("item8_positions", cat, pos, form, samp))
+    rel = f"{folder}/item8_horse_race.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for gk, g in d.groupby(["horse_race", "position", "form"], sort=False):
+            hr, pos, form = (clean(x) for x in gk)
+            joint = form == "joint"
+            hyp = (f"Horse race '{hr}' (Pro, full sample): the raw position states jointly change the reversal slope (Wald)" if joint else
+                   f"Horse race '{hr}' (Pro, full sample): the {pos.replace('_', ' ')} state ({form}) changes the reversal slope, "
+                   "the other states held fixed")
+            _add_group(g, rel, "8", hyp, f"full sample ({_int(g['n'].iloc[0])} days)",
+                       float("nan") if joint else num(g["coef"].iloc[0]), g["n"].iloc[0], side=SIDE_NONDIR if joint else SIDE_TWO,
+                       stat_name="Wald" if joint else "coefficient", skey=key("item8_horse_race", hr, pos, form), dedup=False)
+    for (rel, first), n in n_dup.items():
+        ctx.skip("REFF2", rel, "estimates already counted from another file", n,
+                 f"same coefficient, days and Newey-West p as a row of {first} (counted once there)")
+    ctx.ref_f2_counts = (dict(n_pv), dict(n_items))
+    ctx.skip("REFF2", f"{folder}/item1 to item7", "p-values reported for items 1 to 7 (REFEREE_RESPONSE_F2.md says 598)",
+             n_pv["1-7"], f"counted as {n_items['1-7']} tests: the rest are other inference methods for the same estimate "
+             "(in alt_p) or the same estimate in another file")
+    ctx.skip("REFF2", f"{folder}/item8_*", "p-values reported for item 8 (REFEREE_RESPONSE_F2.md says 381)", n_pv["8"],
+             f"counted as {n_items['8']} tests: the rest are other inference methods for the same estimate (in alt_p) "
+             "or the same estimate as an item 3 or item 4 row")
+    _consume_rest(ctx, "REFF2", folder, {
+        r"item2_.*\.csv": "shares, runs and autocorrelations of the Pro sign (descriptive, no p-value)",
+        r"item6_angle_bootstrap_draws\.csv\.gz": "bootstrap draws behind the item 6 tests",
+        r"item8_positions_describe\.csv": "description of the positions (no p-value)",
+    }, "input checks or run information; no p-value")
+
+
+REFFC_MODEL = {
+    "mcsgarch_realtime": "mcsGARCH with a strictly real-time EWMA fallback",
+    "mcsgarch_vix": "mcsGARCH with India VIX as its daily level",
+    "mcsgarchx_vix": "mcsGARCH-X, daily EGARCH with log India VIX",
+    "mcsgarchx_vix_iv": "mcsGARCH-X, daily EGARCH with log India VIX and the log straddle-implied variance",
+}
+
+
+def _v2_lookup(ctx: Ctx, folder="pipeline_nse_v2"):
+    """(target, loss, subset, comparison) -> one-sided DM p of the current contest's tests_*.csv (QLIKE and MSE)."""
+    out = {}
+    for f in sorted(ctx.res(folder).glob("tests_*.csv")):
+        d = pd.read_csv(f)
+        if not V2_TESTS_COLS.issubset(d.columns):
+            continue
+        t = f.stem.replace("tests_", "")
+        for loss, sub, comp, p in zip(d["loss"], d["subset"], d["comparison"], d["p"]):
+            out[(t, clean(loss).lower(), clean(sub), clean(comp))] = num(p)
+    return out
+
+
+def _reffc_hyp_name(bm, bmm):
+    if bm == "best_matched_mcsgarch":
+        return f"the best information-matched mcsGARCH of the subset, here {REFFC_MODEL.get(bmm, v2_model(bmm))}"
+    return REFFC_MODEL.get(bmm) or v2_model(bmm)
+
+
+def adapt_ref_forecast(ctx: Ctx):
+    """Referee response on the forecasting contest (docs/REFEREE_RESPONSE_FORECAST.md). All post hoc: exploratory.
+
+    spa_reality_check.csv: target, subset, mean_block (5, 10, 20), p_spa_consistent (Hansen's SPA: does any
+      challenger beat mcsGARCH; main p at block 10, the study's choice), p_spa_lower, p_spa_upper,
+      p_reality_check and the other block lengths (alternatives). A max-type one-sided p that was not pre-stated
+      is doubled as min(1, 2p) (a p near 1 does not mean a challenger is worse).
+    fair_benchmarks.csv: each information-matched benchmark against mcsGARCH (p_benchmark_beats_mcsgarch) and the
+      hybrid against each benchmark (p_hybrid_beats_benchmark, dm_stat); one-sided, doubled to two-sided.
+    holdout_lightgbm_vs_hybrid.csv: p_two_sided (main), p_lightgbm_better_one_sided (alternative).
+    gw_tests.csv: Giacomini-White tests, family main (42 tests; chi-square, not directional;
+      p_holm_main_family cross-checked); the 12 Newey-West versions of C1 and C2 are alternatives of those rows.
+    Rows that repeat a test of the current contest (R1V2: same models, days, loss and p) are not counted again:
+      holdout_table.csv, mse_ranking.csv, refit_envelope.csv, the DM p of spa_adjusted_pvalues_by_model.csv and
+      seed_adjusted_dm.csv, and the hybrid-against-mcsGARCH rows of fair_benchmarks.csv; any row that does not
+      match is counted. Rows with the same p and estimate within this study are counted once (the "best matched"
+      benchmark is one of the named ones).
+    Not counted: step-down and single-step max-t adjusted p-values (adjustments), noise-adjusted DM p-values
+      (alternatives of R1V2 tests), MCS p-values, GW regression coefficients and group margins, mcsGARCH-X
+      parameters and likelihood ratios (no p-value), forecasts, seed summaries and ranks.
+    """
+    folder = "referee_forecast"
+    if not ctx.res(folder).exists():
+        return
+    psn = REF_PS.format("REFEREE_RESPONSE_FORECAST.md")
+    v2 = _v2_lookup(ctx)
+    rows, dup = [], {}
+
+    def keep(row):
+        if row is not None:
+            rows.append(ctx.rows.pop())
+
+    def vs_ref(rel, t, loss, subset, ref, model, p, pct, n, skey, desc_a=None, desc_b=None, stat=float("nan")):
+        """'model' against 'ref' with a one-sided p that model has the lower loss; pct: model's loss relative to ref (%)."""
+        if not np.isfinite(num(p)):
+            return
+        if _same_num(v2.get((t, loss, subset, f"{ref} vs {model}"), float("nan")), num(p)):
+            dup[rel] = dup.get(rel, 0) + 1
+            return
+        _, b, hyp = _v2_vs_mcsgarch(f"{ref} vs {model}", num(pct), better_if_positive=False, desc_a=desc_a, desc_b=desc_b)
+        keep(_v2_add(ctx, "REFFC", hyp, f"{V2_LOSS.get(loss, loss)} loss of forecasts of {TARGETS.get(t, t)}",
+                     f"{v2_subset(subset)} (n = {_int(n)} days), horizon {t}", p, SIDE_CONVERTED, role="exploratory",
+                     pre_specified=PS_NO, pre_spec_note=psn, source_file=rel, source_key=skey, sign_rule=v2_rule(b),
+                     estimate=pct, statistic_name=f"loss relative to {'mcsGARCH' if ref == 'mcsgarch' else ref} (%)",
+                     statistic=stat, p_method=V2_DM.format("second model better")))
+
+    rel = f"{folder}/spa_reality_check.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        n_alt = 0
+        for (t, s), g in d.groupby(["target", "subset"], sort=False):
+            m = g[g["mean_block"] == 10]
+            r = m.iloc[0] if len(m) else g.iloc[len(g) // 2]
+            altd = {"p_spa_lower": r["p_spa_lower"], "p_spa_upper": r["p_spa_upper"], "p_reality_check": r["p_reality_check"]}
+            for _, o in g.iterrows():
+                if num(o["mean_block"]) != num(r["mean_block"]):
+                    b = _int(o["mean_block"])
+                    altd[f"p_spa_block_{b}"] = o["p_spa_consistent"]
+                    altd[f"p_reality_check_block_{b}"] = o["p_reality_check"]
+                    n_alt += 1
+            keep(ctx.add("REFFC", f"At least one of the {_int(r['n_challengers'])} challengers beats mcsGARCH (Hansen SPA, "
+                         f"allowing for the search; best by t: {clean(r['best_by_t'])})", f"QLIKE loss of forecasts of {TARGETS.get(t, t)}",
+                         f"{v2_subset(s)} (n = {_int(r['days'])} days), horizon {t}", r["p_spa_consistent"], role="exploratory",
+                         pre_specified=PS_NO, pre_spec_note=psn, source_file=rel, source_key=key("spa_reality_check.csv", t, s),
+                         sidedness=SIDE_DOUBLED, estimate=r["best_by_t_pct_vs_mcsgarch"],
+                         statistic_name="SPA statistic (largest studentized loss difference)", statistic=r["T_spa"],
+                         p_method=(f"Hansen SPA, consistent p, stationary bootstrap (mean block {_int(r['mean_block'])} days, "
+                                   f"{_int(r['reps'])} replications)"), alt_p=alt(**altd)))
+        ctx.skip("REFFC", rel, "SPA and Reality Check with blocks of 5 and 20 days", n_alt,
+                 "the same test with another bootstrap block length (in alt_p of the block-10 row)")
+    rel = f"{folder}/fair_benchmarks.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            t, s, bm, bmm = clean(r["target"]), clean(r["subset"]), clean(r["benchmark"]), clean(r["benchmark_model"])
+            name = _reffc_hyp_name(bm, bmm)
+            if bmm != "mcsgarch":
+                vs_ref(rel, t, "qlike", s, "mcsgarch", bmm, r["p_benchmark_beats_mcsgarch"], r["benchmark_pct_vs_mcsgarch"],
+                       r["days"], key("fair_benchmarks.csv", t, s, bm, "vs mcsgarch"), desc_b=name)
+            vs_ref(rel, t, "qlike", s, bmm, "hybrid_base", r["p_hybrid_beats_benchmark"], r["hybrid_pct_vs_benchmark"],
+                   r["days"], key("fair_benchmarks.csv", t, s, bm, "hybrid"), desc_a=name, stat=r["dm_stat"])
+    rel = f"{folder}/holdout_table.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            vs_ref(rel, clean(r["target"]), "qlike", clean(r["period"]), "mcsgarch", clean(r["model"]), r["p_beats_mcsgarch"],
+                   r["pct_vs_mcsgarch"], r["days"], key("holdout_table.csv", r["target"], r["period"], r["model"]))
+    rel = f"{folder}/mse_ranking.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            vs_ref(rel, clean(r["target"]), "mse", clean(r["subset"]), "mcsgarch", clean(r["model"]), r["p_mse_beats_mcsgarch"],
+                   r["mse_pct_vs_mcsgarch"], float("nan"), key("mse_ranking.csv", r["target"], r["subset"], r["model"]))
+    rel = f"{folder}/refit_envelope.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        models = [c[:-2] for c in d.columns if c.endswith("_p") and c != "variant_p_max" and f"{c[:-2]}_pct" in d.columns]
+        for _, r in d.iterrows():
+            for m_ in models:
+                vs_ref(rel, clean(r["target"]), "qlike", clean(r["subset"]), "mcsgarch", m_, r[f"{m_}_p"], r[f"{m_}_pct"],
+                       r["days"], key("refit_envelope.csv", r["target"], r["subset"], m_))
+        ctx.skip("REFFC", rel, "variant_p_max", int(d["variant_p_max"].notna().sum()), "the largest of the six p-values in the row, not a test")
+    rel = f"{folder}/spa_adjusted_pvalues_by_model.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            vs_ref(rel, clean(r["target"]), "qlike", clean(r["subset"]), "mcsgarch", clean(r["model"]), r["p_dm_one_sided"],
+                   r["pct_vs_mcsgarch"], r["days"], key("spa_adjusted_pvalues_by_model.csv", r["target"], r["subset"], r["model"]))
+        ctx.skip("REFFC", rel, "single-step and step-down max-t adjusted p-values", int(d[["p_maxt_single_step", "p_maxt_stepdown"]].notna().sum().sum()),
+                 "multiple-testing adjustments of the DM tests (Romano and Wolf), not new tests")
+    rel = f"{folder}/seed_adjusted_dm.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            vs_ref(rel, clean(r["target"]), "qlike", clean(r["subset"]), "mcsgarch", "hybrid_base", r["dm_p"],
+                   r["hybrid_pct_vs_mcsgarch"], r["days"], key("seed_adjusted_dm.csv", r["target"], r["subset"]))
+        pc = [c for c in d.columns if c.startswith("p[")]
+        ctx.skip("REFFC", rel, "noise-adjusted DM p-values", int(d[pc].notna().sum().sum()),
+                 "the same estimate (hybrid against mcsGARCH, an R1V2 test) with seed noise added to the DM variance: alternatives")
+    rel = f"{folder}/holdout_lightgbm_vs_hybrid.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            t, per, lg = clean(r["target"]), clean(r["period"]), clean(r["lightgbm"])
+            pct = num(r["lightgbm_pct_vs_hybrid"])
+            keep(ctx.add("REFFC", f"{lg} and the hybrid differ in forecast loss (observed: {lg} {_v2_obs(pct, False, 'better', 'worse')}); "
+                         f"{lg} = {v2_model(lg)}", f"QLIKE loss of forecasts of {TARGETS.get(t, t)}",
+                         f"{v2_subset(per)} (n = {_int(r['days'])} days), horizon {t}", r["p_two_sided"], role="exploratory",
+                         pre_specified=PS_NO, pre_spec_note=psn, source_file=rel, source_key=key("holdout_lightgbm_vs_hybrid.csv", t, per, lg),
+                         estimate=pct, statistic_name="loss relative to the hybrid (%)", statistic=r["dm_stat"],
+                         p_method="Diebold-Mariano (HLN), two-sided", alt_p=alt(p_lightgbm_better_one_sided=r["p_lightgbm_better_one_sided"])))
+    rel = f"{folder}/gw_tests.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        main = d[d["family"] == "main"]
+        nw = d[d["family"] != "main"]
+        rec = ctx.check("REFFC", "Giacomini-White main family (Holm over all main-family tests)", rel, "holm", main["p"], main["p_holm_main_family"])
+        for i, (_, r) in enumerate(main.iterrows()):
+            t, bm, test = clean(r["target"]), clean(r["benchmark_model"]), clean(r["test"])
+            w = nw[(nw["target"] == r["target"]) & (nw["benchmark"] == r["benchmark"]) & (nw["test"].map(clean) == f"{test} (Newey-West)")]
+            bname = "mcsGARCH" if bm == "mcsgarch" else bm
+            if test == "unconditional":
+                hyp = f"The hybrid's mean QLIKE advantage over {bname} is zero (Giacomini-White unconditional)"
+            elif test.startswith("conditional"):
+                hyp = f"The hybrid's advantage over {bname} cannot be predicted from {clean(r['instruments'])} (Giacomini-White {test})"
+            else:
+                hyp = f"Giacomini-White {test}: the hybrid's advantage over {bname} does not vary with {clean(r['instruments'])}"
+            row = ctx.add("REFFC", hyp + f" ({clean(r['benchmark'])})", f"daily QLIKE difference, forecasts of {TARGETS.get(t, t)}",
+                          f"all test days (n = {_int(r['n'])}), horizon {t}", r["p"], role="exploratory", pre_specified=PS_NO,
+                          pre_spec_note=psn, source_file=rel, source_key=key("gw_tests.csv", t, r["benchmark"], test),
+                          sidedness=SIDE_NONDIR, estimate=r["mean_d_points"], statistic_name=f"Wald chi-square ({_int(r['df'])} df)",
+                          statistic=r["stat"], p_method="Giacomini-White Wald test",
+                          alt_p=alt(p_newey_west=w["p"].iloc[0]) if len(w) else "",
+                          p_study_adjusted=r["p_holm_main_family"], study_adjust_method="Holm over the main family")
+            _set(row, "p_study_adjusted_recomputed", rec[i])
+            keep(row)
+        ctx.skip("REFFC", rel, "Newey-West versions of C1 and C2", len(nw),
+                 "another variance for the same statistic (in alt_p of the C1 and C2 rows); the study counts 54 = 42 + 12")
+    kept, dropped = dedup_exact(rows)
+    ctx.rows.extend(kept)
+    for rel_, n in dup.items():
+        ctx.skip("REFFC", rel_, "rows that repeat a test of the current contest", n,
+                 "same models, days, loss and p as an R1V2 row of results/pipeline_nse_v2/tests_*.csv (counted once there)")
+    ctx.skip("REFFC", f"{folder}/", "rows repeating another row of this study (same p and estimate)", len(dropped),
+             "the best-matched benchmark is one of the named benchmarks (counted once)")
+    _consume_rest(ctx, "REFFC", folder, {
+        r"mcs_summary\.csv": "Model Confidence Set p-values (set-level, already adjusted)",
+        r"gw_(regression_coefficients|group_margins)\.csv": "coefficients and margins behind the GW tests (descriptive)",
+        r"mcsgarchx_.*": "mcsGARCH-X forecasts, parameters and likelihood ratios (no p-value) and run information",
+    }, "seed summaries, run costs or ranks; no p-value")
+
+
+REFEXP_ALT = ("boot_p", "welch_p", "mwu_p", "ri_p", "nonoverlap_p", "prediction_t_p", "wild_cluster_p", "placebo_p")
+REFEXP_TERM = {"own_thu_to_a": "own expiry on Thursday, before event a", "own_wed_a_to_c": "own expiry on Wednesday, events a to c",
+               "own_thu_to_d": "own expiry on Thursday, before event d", "own_tue_from_d": "own expiry on Tuesday, from event d"}
+
+
+class _Known:
+    """Index of counted ledger rows by (p, estimate), to recognise a test that another file already reports."""
+
+    def __init__(self, rows, studies):
+        self.idx = {}
+        for r in rows:
+            p = num(r["p_reported"])
+            if r["study"] in studies and np.isfinite(p):
+                self.idx.setdefault(f"{p:.6g}", []).append((p, num(r["estimate"]), r["study"]))
+
+    def find(self, p, est):
+        p, est = num(p), num(est)
+        for pp, ee, s in self.idx.get(f"{p:.6g}", []):
+            if _same_num(pp, p) and (_same_num(ee, est) or not (np.isfinite(ee) or np.isfinite(est))):
+                return s
+        return None
+
+
+def _refexp_meas(m):
+    m = clean(m)
+    if m in MEASURES:
+        return MEASURES[m]
+    if m.startswith("last30_"):
+        return f"last-30-minute variance ({m[7:]} estimator)"
+    return m
+
+
+def adapt_ref_expiry(ctx: Ctx):
+    """Referee response on the expiry premia and the event study (docs/REFEREE_RESPONSE_EXPIRY.md). All post hoc:
+    exploratory. Friday rows say "Negative control (Friday)" in the hypothesis.
+
+    Event-style files (event_tests_clean_baseline, negative_control_rows, placebo_inference_all_rows,
+    placebo_inference_headline_rows, pretrends_and_comparisons, two_day_raw_differences, switch_comparison_a_vs_d,
+    noise_robust_event_tests): main p hac_p (as in EVENT), estimate diff; boot, Welch, Mann-Whitney, placebo-date,
+    non-overlap, prediction-interval and wild cluster p-values are alternatives. The clean-baseline columns of
+    event_tests_clean_baseline (hac_p_clean, diff_clean, ri_p_clean) are new tests where estimable. The
+    trend-adjusted change (trend_adjusted_change, trend_adjusted_p, HAC) is a new estimate and is counted.
+    Premium files (event_premium_by_regime_clean_baseline, noise_robust_premium_by_regime): hac_p and mean,
+    wilcoxon_p alternative. R2-style files (r2_clean_baseline, noise_robust_r2: wilcoxon_p and mean_rel;
+    r2_tue_vs_thu_by_baseline: mannwhitney_p, with a Bonferroni over 18 cross-checked).
+    autocorrelation_1min_returns.csv: welch_p_own_minus_this_group. pooled_all_index_regression.csv: p of the own
+    expiry terms; the other indices' expiry dummies are controls.
+    A row whose p and estimate equal a counted EVENT, R2, SENSEX or AUCTION row is that test again and is not
+    counted; rows repeating each other within this study are counted once. pretrend_p is a diagnostic.
+    Not counted: calendars, activity tables, shares of rejections (negative_control_recomputed,
+    placebo_inference_summary), the noise-estimator simulation (SYNTHETIC) and the daily data.
+    """
+    folder = "referee_expiry"
+    if not ctx.res(folder).exists():
+        return
+    psn = REF_PS.format("REFEREE_RESPONSE_EXPIRY.md")
+    known = _Known(ctx.rows, {"EVENT", "R2", "SENSEX", "AUCTION"})
+    rows, dups, n_na, n_alt_dup, n_pre = [], {}, {}, {}, {}
+
+    def add(rel, hyp, outcome, samp, p, est, skey, stat_name, pm, altp="", **kw):
+        if not np.isfinite(num(p)):
+            n_na[rel] = n_na.get(rel, 0) + 1
+            return "na"
+        s = known.find(p, est)
+        if s:
+            dups[(rel, s)] = dups.get((rel, s), 0) + 1
+            return "dup"
+        n0 = len(ctx.rows)
+        ctx.add("REFEXP", hyp, outcome, samp, p, role="exploratory", pre_specified=PS_NO, pre_spec_note=psn,
+                source_file=rel, source_key=skey, estimate=est, statistic_name=stat_name, p_method=pm, alt_p=altp, **kw)
+        if len(ctx.rows) > n0:
+            rows.append(ctx.rows.pop())
+            return rows[-1]
+        return None
+
+    def ev_text(r, what):
+        spec, comp = clean(r.get("spec_id", "")), clean(r.get("comparison", "")) or clean(r.get("series", ""))
+        fri = "_Fri" in spec or "negative control" in (comp + " " + clean(r.get("comparison_type", ""))).lower()
+        comp = re.sub(r"^Negative control:\s*", "", comp)
+        return ("Negative control (Friday): " if fri else "") + f"Event {clean(r['event'])}: {comp} {what} in {_refexp_meas(r['measure'])}"
+
+    def alts(r, cols=REFEXP_ALT):
+        return alt(**{c: r[c] for c in cols if c in r.index})
+
+    def n_alts(r, cols=REFEXP_ALT):
+        return sum(int(np.isfinite(num(r[c]))) for c in cols if c in r.index)
+
+    def ev_file(fname, extra=""):
+        rel = f"{folder}/{fname}"
+        if not ctx.has(rel):
+            return
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            win = clean(r.get("window", ""))
+            var = clean(r.get("variant", "")) or clean(r.get("series", "")) if fname != "two_day_raw_differences.csv" else ""
+            tail = f" ({var})" if var and var not in ("published Friday rows",) else ""
+            samp = f"{win} ({clean(r.get('n_pre'))} vs {clean(r.get('n_post'))} weeks)"
+            sk = key(fname, r.get("spec_id", r.get("series", "")), r["measure"], win, r.get("variant", ""))
+            res = add(rel, ev_text(r, "changed") + tail + extra, f"week-relative {clean(r['measure'])}", samp, r["hac_p"],
+                      r["diff"], sk, "change (log points)", "HAC (Newey-West), two-sided", alts(r))
+            if res == "dup":
+                n_alt_dup[rel] = n_alt_dup.get(rel, 0) + n_alts(r)
+            if "trend_adjusted_p" in r.index:
+                add(rel, ev_text(r, "shifted in level after a linear trend through both sides") + tail + extra,
+                    f"week-relative {clean(r['measure'])}", samp, r["trend_adjusted_p"], r["trend_adjusted_change"],
+                    sk + "|trend", "trend-adjusted level shift (log points)", "HAC, two-sided")
+            if "pretrend_p" in r.index:
+                n_pre[rel] = n_pre.get(rel, 0) + int(np.isfinite(num(r["pretrend_p"])))
+
+    rel = f"{folder}/event_tests_clean_baseline.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            win, meas = clean(r["window"]), clean(r["measure"])
+            sk = key("event_tests_clean_baseline.csv", r["spec_id"], meas, win)
+            res = add(rel, ev_text(r, "changed") + " (published baseline)", f"week-relative {meas}",
+                      f"{win} ({clean(r['n_pre'])} vs {clean(r['n_post'])} weeks)", r["hac_p"], r["diff"], sk + "|published",
+                      "change (log points)", "HAC (Newey-West), two-sided", alt(placebo_ri_p=r["ri_p"]))
+            if res == "dup":
+                n_alt_dup[rel] = n_alt_dup.get(rel, 0) + int(np.isfinite(num(r["ri_p"])))
+            if str(r["estimable_clean"]).lower() in ("true", "1", "1.0"):
+                add(rel, ev_text(r, "changed") + " (baseline: days with no expiry of any index)", f"week-relative {meas}, clean baseline",
+                    f"{win} ({clean(r['n_pre_clean'])} vs {clean(r['n_post_clean'])} weeks)", r["hac_p_clean"], r["diff_clean"],
+                    sk + "|clean", "change (log points)", "HAC (Newey-West), two-sided", alt(placebo_ri_p=r["ri_p_clean"]))
+            n_pre[rel] = n_pre.get(rel, 0) + int(np.isfinite(num(r["pretrend_p"]))) + int(np.isfinite(num(r["pretrend_p_clean"])))
+        ctx.skip("REFEXP", rel, "clean-baseline columns of rows that are not estimable", int((d["estimable_clean"].astype(str).str.lower() != "true").sum()),
+                 "no clean baseline in the window (no p-value used)")
+    for fname in ("negative_control_rows.csv", "placebo_inference_all_rows.csv", "placebo_inference_headline_rows.csv",
+                  "pretrends_and_comparisons.csv", "two_day_raw_differences.csv", "noise_robust_event_tests.csv"):
+        ev_file(fname, " (raw two-day difference, no baseline)" if fname == "two_day_raw_differences.csv" else "")
+    rel = f"{folder}/switch_comparison_a_vs_d.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            spec, meas, ver = clean(r["spec_id"]), clean(r["measure"]), clean(r["version"])
+            res = add(rel, f"Event {spec[0]}: the expiry premium followed the switch ({spec}: new expiry weekday minus old) in "
+                      f"{_refexp_meas(meas)}; version: {ver}", f"week-relative {meas}", f"{clean(r['weeks'])} weeks", r["hac_p"],
+                      r["diff"], key("switch_comparison_a_vs_d.csv", spec, meas, ver), "change (log points)",
+                      "HAC (Newey-West), two-sided", alts(r))
+            if res == "dup":
+                n_alt_dup[rel] = n_alt_dup.get(rel, 0) + n_alts(r)
+            n_pre[rel] = n_pre.get(rel, 0) + int(np.isfinite(num(r["pretrend_p"])))
+    for fname, has_base in (("event_premium_by_regime_clean_baseline.csv", True), ("noise_robust_premium_by_regime.csv", False)):
+        rel = f"{folder}/{fname}"
+        if not ctx.has(rel):
+            continue
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            tgt, meas = clean(r["target"]), clean(r["measure"])
+            base = clean(r["baseline"]) if has_base else ""
+            add(rel, f"{r['index']} {'own expiry day' if tgt == 'own' else tgt} has a premium in {_refexp_meas(meas)} over the rest "
+                f"of the week ({clean(r['regime'])}" + (f"; baseline: {base})" if base else ")"), f"week-relative {meas}",
+                f"{clean(r['regime'])} ({_int(r['n_weeks'])} weeks)", r["hac_p"], r["mean"],
+                key(fname, r["index"], tgt, meas, r["regime"], base), "mean week-relative log value",
+                "HAC (Newey-West), two-sided", alt(wilcoxon_p=r["wilcoxon_p"]))
+    for fname in ("r2_clean_baseline.csv", "noise_robust_r2.csv"):
+        rel = f"{folder}/{fname}"
+        if not ctx.has(rel):
+            continue
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            meas = clean(r["measure"])
+            add(rel, f"Expiry days have a different {_refexp_meas(meas)} from the baseline days of their week "
+                f"({clean(r['period'])}; baseline: {clean(r['baseline'])})", f"log({meas} on expiry day / baseline days)",
+                f"{clean(r['period'])} ({_int(r['weeks'])} weeks)", r["wilcoxon_p"], r["mean_rel"],
+                key(fname, r["baseline"], meas, r["period"]), "mean log ratio", "Wilcoxon signed-rank, two-sided")
+    rel = f"{folder}/r2_tue_vs_thu_by_baseline.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        if "bonferroni_p_18_tests" in d.columns:
+            a = np.minimum(1.0, 18.0 * pd.to_numeric(d["mannwhitney_p"], errors="coerce").to_numpy(float))
+            b = pd.to_numeric(d["bonferroni_p_18_tests"], errors="coerce").to_numpy(float)
+            both = np.isfinite(a) & np.isfinite(b)
+            diff = np.abs(a[both] - b[both])
+            n_mis = int((diff > 1e-6).sum())
+            ctx.checks.append(dict(study="REFEXP", family="Tuesday against Thursday regime (Bonferroni over 18, as the study states)",
+                                   source_file=f"results/{rel}", method="bonferroni (m = 18)", m_tests=18, n_compared=int(both.sum()),
+                                   n_mismatch=n_mis, max_abs_diff=float(diff.max()) if diff.size else float("nan"),
+                                   result="match" if n_mis == 0 and both.sum() else ("MISMATCH" if n_mis else "nothing to compare"),
+                                   note=f"the file lists {len(d)} of the 18 tests in the study's family"))
+        for i, (_, r) in enumerate(d.iterrows()):
+            meas = clean(r["measure"])
+            row = add(rel, f"The expiry-day premium in {_refexp_meas(meas)} differs between the Tuesday and Thursday single-weekly "
+                      f"regimes (baseline: {clean(r['baseline'])})", f"log({meas} on expiry day / baseline days)",
+                      f"{clean(r['weeks_tue'])} Tuesday and {clean(r['weeks_thu'])} Thursday weeks", r["mannwhitney_p"],
+                      r["tue_minus_thu"], key("r2_tue_vs_thu_by_baseline.csv", r["baseline"], meas), "difference in mean log ratio",
+                      "Mann-Whitney, two-sided", p_study_adjusted=r.get("bonferroni_p_18_tests", float("nan")),
+                      study_adjust_method="Bonferroni over 18 tests (the study's family)")
+            if isinstance(row, dict):
+                row["p_study_adjusted_recomputed"] = min(1.0, 18.0 * num(r["mannwhitney_p"]))
+    rel = f"{folder}/autocorrelation_1min_returns.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d[d["welch_p_own_minus_this_group"].notna()].iterrows():
+            add(rel, f"{r['index']}, {clean(r['window'])}: first-order autocorrelation of 1-minute returns differs between its own "
+                f"expiry days and {clean(r['group'])} ({clean(r['regime'])})", "first-order autocorrelation of 1-minute returns",
+                f"{clean(r['regime'])}", r["welch_p_own_minus_this_group"], r["own_minus_this_group"],
+                key("autocorrelation_1min_returns.csv", r["index"], r["regime"], r["window"], r["group"]),
+                "difference in mean autocorrelation", "Welch t, two-sided")
+        ctx.skip("REFEXP", rel, "own-expiry rows", int(d["welch_p_own_minus_this_group"].isna().sum()), "reference group, no test")
+    rel = f"{folder}/pooled_all_index_regression.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        own = d["term"].astype(str).str.startswith("own_")
+        for _, r in d[own].iterrows():
+            term, meas = clean(r["term"]), clean(r["measure"])
+            add(rel, f"{r['index']}: {REFEXP_TERM.get(term, term)} raises {_refexp_meas(meas)} (pooled day-level regression; {clean(r['spec'])})",
+                meas, f"{_int(r['n_days'])} days, {_int(r['n_weeks'])} weeks", r["p"], r["coef"],
+                key("pooled_all_index_regression.csv", r["index"], meas, r["spec"], term), "coefficient",
+                "OLS with week fixed effects, week-clustered, two-sided")
+        ctx.skip("REFEXP", rel, "other indices' expiry dummies", int((~own).sum()), "control coefficients")
+    kept, dropped = dedup_exact(rows)
+    ctx.rows.extend(kept)
+    for (rel_, s), n in dups.items():
+        ctx.skip("REFEXP", rel_, f"rows that repeat a test of {s}", n, f"same p and estimate as a counted {s} row (counted once there)")
+    for rel_, n in n_alt_dup.items():
+        ctx.skip("REFEXP", rel_, "other p-values of those repeated tests", n,
+                 "placebo-date, non-overlap, prediction-interval, wild cluster or other p-values of a test counted elsewhere (alternatives)")
+    for rel_, n in n_na.items():
+        ctx.skip("REFEXP", rel_, "rows without a p-value", n, "not estimable in that window or variant")
+    for rel_, n in n_pre.items():
+        ctx.skip("REFEXP", rel_, "pre-trend p-values (pretrend_p)", n, "diagnostic of the design, not a hypothesis")
+    ctx.skip("REFEXP", f"{folder}/", "rows repeating another row of this study (same p and estimate)", len(dropped), "same test (counted once)")
+    _consume_rest(ctx, "REFEXP", folder, {
+        r"(negative_control_recomputed|placebo_inference_summary)\.csv": "shares of rejections across tests, not a test",
+        r"noise_estimator_simulation\.csv": "simulation (SYNTHETIC)",
+        r"noise_robust_daily\.csv\.gz": "daily data behind the noise-robust tests",
+        r"summary\.md": "text summary",
+    }, "calendar, expiry activity or weekday table; no p-value")
+
+
+# ----------------------------------------------------------------------------
+# P91: the forecasting pipeline on Bank Nifty (same layout as pipeline_nse_v2)
+# ----------------------------------------------------------------------------
+
+BNFC_FOLDER = "pipeline_nse_banknifty"
+BNFC_OUTCOME = ["tests_*.csv", "ablation_*.csv", "p91/*.csv"]
+BNFC_GEX_SETS = ("gross", "us", "participant", "client")
+BNFC_REGIME_SPLIT = re.compile(r"^(multi_weekly|single_weekly_thu|single_weekly_tue)_(expiry|non_expiry)$")
+BNFC_PS_REPORT = "registered to be reported without a hypothesis (plan Sections 4, 6 and 7); one-sided p doubled to two-sided"
+BNFC_PS_EXPL = "labelled exploratory in BANKNIFTY_FORECAST.md (Section 10: not in the plan)"
+
+
+def _bnfc_h(sk: str):
+    """(code, role, hypothesis) of a registered hypothesis row of the Bank Nifty contest, from its source_key."""
+    p = sk.split("|")
+    if len(p) == 4 and p[1] == "qlike" and p[3] == "mcsgarch vs hybrid_base":
+        t = p[0].replace("tests_", "").replace(".csv", "")
+        if p[2] == "all" and t in ("next15", "next30"):
+            return "H1", "primary", f"P91 H1: on Bank Nifty the hybrid has a lower QLIKE than mcsGARCH (horizon {t}, all test days)"
+        if p[2] == "all" and t == "last_hour":
+            return "H2", "secondary", "P91 H2: on Bank Nifty the hybrid has a lower QLIKE than mcsGARCH in the last hour (all test days)"
+        if p[2] == "expiry" and t in ("next15", "next30"):
+            return "H3", "secondary", f"P91 H3: on Bank Nifty expiry days the hybrid has a lower QLIKE than mcsGARCH (horizon {t})"
+    if (len(p) == 6 and re.fullmatch(r"ablation_(next15|next30|last_hour)\.csv", p[0]) and p[1] == "hybrid: base vs base+GEX"
+            and p[2] in BNFC_GEX_SETS and p[3] == "all"):
+        return "H4", "secondary", (f"P91 H4: adding {V2_SET.get(p[2], p[2])} lowers the Bank Nifty hybrid's QLIKE "
+                                   f"({p[0].replace('ablation_', '').replace('.csv', '')}, all test days; the registered prediction is no improvement)")
+    return None
+
+
+def _bnfc_exploratory(sk: str) -> bool:
+    p = sk.split("|")
+    if p[0].startswith("ablation_") and len(p) == 6:
+        return p[3] not in ("all", "expiry")
+    if p[0].startswith("tests_") and len(p) == 4:
+        return bool(BNFC_REGIME_SPLIT.match(p[2]))
+    return False
+
+
+def adapt_bnfc(ctx: Ctx):
+    """P91: the Nifty forecasting pipeline run unchanged on Bank Nifty (docs/prereg/P91_BANKNIFTY_FORECAST.md;
+    write-up docs/BANKNIFTY_FORECAST.md). The files have the layout of results/pipeline_nse_v2 and are read by
+    adapt_r1v2 (same columns, Holm cross-checks and deduplication); this adapter then sets the registered roles.
+
+    H1 (primary): hybrid_base against mcsGARCH, QLIKE, all days, next 15 and next 30 minutes (Holm over the two,
+      cross-checked against p91/hypotheses.csv). H2 (secondary): the same, last hour. H3 (secondary): the same on
+      expiry days, next 15 and 30 minutes (Holm over two). H4 (secondary): the hybrid with each of the four GEX sets
+      against the base hybrid, QLIKE, all days, three targets (Holm within target from the ablation file). These
+      keep their one-sided p (direction stated in the plan) and get the plan's pre-specification status.
+    Exploratory (BANKNIFTY_FORECAST.md Section 10): the ablation by anchor time and period (every ablation group
+      other than all days and expiry days) and the regime split into expiry and other days.
+    Everything else was registered to be reported without a hypothesis: roles as in R1V2 (a headline role there
+      becomes secondary), not pre-specified as a test, one-sided p doubled to two-sided.
+    p91/: hypotheses.csv and h4_ablation_hybrid.csv repeat the pipeline's p-values (cross-checked, not counted);
+      scoreboard_vs_mcsgarch.csv repeats tests_*.csv; period_split.csv is counted where it is not a pipeline
+      group (the pooled monthly-only period); nifty_same_dates.csv (Nifty v2 forecasts on the same dates, called a
+      description by the plan) is counted as exploratory; mcs_membership.csv is a Model Confidence Set table.
+    If the folder does not exist (run not finished), nothing is counted and a note is written.
+    """
+    folder = BNFC_FOLDER
+    if not ctx.res(folder).exists():
+        ctx.skip("BNFC", f"{folder}/", "P91 Bank Nifty forecasting contest", 1,
+                 "registered run not finished: the folder does not exist yet; the adapter reads the plan's layout "
+                 "(as pipeline_nse_v2) when it appears")
+        return 0
+    if not sorted(ctx.res(folder).glob("tests_*.csv")):
+        ctx.skip("BNFC", f"{folder}/", "P91 Bank Nifty forecasting contest", 1,
+                 "folder present but no tests_*.csv yet (run not finished?); nothing counted")
+        ctx.warn(f"{folder}: no tests_*.csv; nothing counted")
+        return 0
+    if not v2_shape_ok(ctx, folder):
+        adapt_generic(ctx, "BNFC", folder)
+        return 0
+    ps_status, ps_note = prereg_status(ctx, folder, BNFC_OUTCOME)
+    side_pre = SIDE_ONE_PRE if ps_status == PS_YES else SIDE_ONE_STATED
+    n0 = len(ctx.rows)
+    adapt_r1v2(ctx, study="BNFC", folder=folder)
+    new = [r for r in ctx.rows[n0:] if r["study"] == "BNFC"]
+    holm = {}
+    rel = f"{folder}/p91/hypotheses.csv"
+    if ctx.has(rel):
+        h = ctx.read(rel)
+        for code in ("H1", "H3"):
+            g = h[h["hypothesis"].map(clean) == code]
+            if len(g) and "p_holm" in g.columns:
+                rec = ctx.check("BNFC", f"{code}: Holm over the next 15 and next 30 minutes", rel, "holm", g["p_one_sided"], g["p_holm"])
+                for (_, r), rc in zip(g.iterrows(), rec):
+                    holm[(code, clean(r["target"]))] = (num(r["p_one_sided"]), num(r["p_holm"]), rc)
+        ctx.skip("BNFC", rel, "registered summary of H1 to H3", len(h), "repeats tests_*.csv (counted there); Holm values cross-checked")
+    for r in new:
+        h = _bnfc_h(r["source_key"])
+        if h:
+            code, role, text = h
+            r.update(role=role, hypothesis=text, pre_specified=ps_status, sidedness=side_pre, p_raw=r["p_reported"],
+                     pre_spec_note=f"{code} of the plan (Section 4); " + ps_note)
+            r["note"] = re.sub(r"(; )?" + re.escape(V2_P_IS_ONE), "", r["note"])
+            t = r["source_key"].split("|")[0].replace("tests_", "").replace(".csv", "")
+            if (code, t) in holm:
+                p1, ph, rc = holm[(code, t)]
+                if not _same_num(p1, r["p_reported"]):
+                    ctx.warn(f"{rel}: {code} {t} p differs from tests_{t}.csv")
+                r.update(p_study_adjusted=ph, p_study_adjusted_recomputed=rc,
+                         study_adjust_method=f"Holm over the two {code} tests (next 15 and next 30 minutes)")
+            continue
+        if r["sidedness"] in (SIDE_ONE_PRE, SIDE_ONE_STATED):
+            r["sidedness"] = SIDE_CONVERTED
+            r["p_raw"] = two_sided_from_one_sided(r["p_reported"])
+            if r["p_reported"] >= 1.0:
+                r["note"] = (r["note"] + "; " if r["note"] else "") + V2_P_IS_ONE
+        if _bnfc_exploratory(r["source_key"]):
+            r.update(role="exploratory", pre_specified=PS_NO, pre_spec_note=BNFC_PS_EXPL)
+        else:
+            r.update(role="secondary" if r["role"] == "headline" else r["role"], pre_specified=PS_NO, pre_spec_note=BNFC_PS_REPORT)
+    lookup = _v2_lookup(ctx, folder)
+    known = {round(num(r["p_reported"]), 12) for r in new}
+    rel = f"{folder}/p91/h4_ablation_hybrid.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        miss = int(sum(round(num(p), 12) not in known for p in d["p_one_sided"] if np.isfinite(num(p))))
+        if miss:
+            ctx.warn(f"{rel}: {miss} p-values not found in the ablation files")
+        ctx.skip("BNFC", rel, "registered H4 table (hybrid ablation)", len(d), "repeats ablation_*.csv rows (counted there)")
+    rel = f"{folder}/p91/scoreboard_vs_mcsgarch.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        n, miss = 0, 0
+        for _, r in d.iterrows():
+            for loss, pc in (("qlike", "p_qlike"), ("mse", "p_mse")):
+                if np.isfinite(num(r[pc])):
+                    n += 1
+                    miss += not _same_num(lookup.get((clean(r["target"]), loss, clean(r["group"]), f"mcsgarch vs {clean(r['model'])}"),
+                                                     float("nan")), num(r[pc]))
+        if miss:
+            ctx.warn(f"{rel}: {miss} p-values not found in tests_*.csv")
+        ctx.skip("BNFC", rel, "registered scoreboard against mcsGARCH (QLIKE and MSE p-values)", n, "repeats tests_*.csv (counted there)")
+    rows = []
+    rel = f"{folder}/p91/period_split.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        n_dup = 0
+        for _, r in d.iterrows():
+            t, sub = clean(r["target"]), clean(r["subset"])
+            if any(_same_num(v, num(r["p_one_sided"])) for (tt, ll, _, cc), v in lookup.items()
+                   if tt == t and ll == "qlike" and cc == "mcsgarch vs hybrid_base"):
+                n_dup += 1
+                continue
+            expl = sub != "all"
+            _, b, hyp = _v2_vs_mcsgarch("mcsgarch vs hybrid_base", num(r["change_pct"]), better_if_positive=False)
+            row = _v2_add(ctx, "BNFC", hyp, f"QLIKE loss of forecasts of {TARGETS.get(t, t)}",
+                          f"{clean(r['period'])}, {'expiry days' if sub == 'expiry' else 'all test days'} (n = {_int(r['days'])} days), horizon {t}",
+                          r["p_one_sided"], SIDE_CONVERTED, role="exploratory" if expl else "robustness", pre_specified=PS_NO,
+                          pre_spec_note=BNFC_PS_EXPL if expl else BNFC_PS_REPORT, source_file=rel,
+                          source_key=key("period_split.csv", t, r["period"], sub), estimate=r["change_pct"],
+                          statistic_name="loss relative to mcsGARCH (%)", statistic=r["dm_stat"],
+                          p_method=V2_DM.format("model better than mcsGARCH"))
+            if row is not None:
+                rows.append(ctx.rows.pop())
+        ctx.skip("BNFC", rel, "periods that are a pipeline group", n_dup, "same test as a tests_*.csv row (counted there)")
+    rel = f"{folder}/p91/nifty_same_dates.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            t, sub = clean(r["target"]), clean(r["subset"])
+            _, b, hyp = _v2_vs_mcsgarch("mcsgarch vs hybrid_base", num(r["change_pct"]), better_if_positive=False)
+            row = _v2_add(ctx, "BNFC", "Nifty on the Bank Nifty test dates: " + hyp, f"QLIKE loss of Nifty forecasts of {TARGETS.get(t, t)}",
+                          f"{sub} (n = {_int(r['days'])} days), horizon {t}", r["p_one_sided"], SIDE_CONVERTED, role="exploratory",
+                          pre_specified=PS_NO, pre_spec_note="the plan calls this a description, not a test (Section 7, item 5); "
+                          "counted because a p-value was reported", source_file=rel, source_key=key("nifty_same_dates.csv", t, sub),
+                          estimate=r["change_pct"], statistic_name="loss relative to mcsGARCH (%)", statistic=r["dm_stat"],
+                          p_method=V2_DM.format("model better than mcsGARCH"))
+            if row is not None:
+                rows.append(ctx.rows.pop())
+    kept, dropped = dedup_exact(rows, cols=("p_reported", "statistic"))
+    ctx.rows.extend(kept)
+    ctx.skip("BNFC", f"{folder}/p91/", "rows repeating another row (same p and DM statistic)", len(dropped), "same test (counted once)")
+    _consume_rest(ctx, "BNFC", folder, {
+        r"mcs_membership\.csv": "Model Confidence Set membership (set-level)",
+        r"(scoreboard|gain_by_anchor)_.*\.csv": "losses relative to mcsGARCH, no p-value (tests in tests_*.csv)",
+    }, "forecasts, daily panels, hyperparameters, coefficients, feature importance, mcsGARCH parameters, figures, data checks "
+       "or run information; no p-value")
+    return len(new) + len(kept)
+
+
 EXCLUDED_TOP = {
     "pipeline_synthetic": "synthetic data (simulation of the pipeline)",
     "inference_checks": "simulation checks of inference methods",
@@ -2211,7 +3375,10 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
             adapt_pin, adapt_event, adapt_fals, adapt_dsign, adapt_intra, adapt_conn, adapt_sensex]
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
-               "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH"]
+               "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2"]
+
+# Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
+LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2]
 
 
 def headline18_check(ctx: Ctx):
@@ -2258,6 +3425,8 @@ def build(root, write=True, write_doc=True, quiet=False):
             adapt_r1v2_dev(ctx)
         else:
             adapt_generic(ctx, "R1V2", "pipeline_nse_v2")
+    for a in LATE_ADAPTERS:
+        a(ctx)
     adapt_power_real(ctx)
     headline18_check(ctx)
     uncovered = scan_uncovered(ctx)
@@ -2350,16 +3519,28 @@ def _sel(df, study, pattern):
 RECON = [
     (1, "The data hold up.", [],
      "No p-values: this is data validation (results/data_validation), not a hypothesis test. Nothing to correct."),
-    (2, "The paper's model can be beaten out of sample at every horizon, mostly but not only at the open: the hybrid (mcsGARCH corrected by LightGBM) "
+    (2, "The paper's model can be beaten out of sample at 15 and 30 minutes, even when it is given the same information; "
+        "most of the gain comes at the open: the hybrid (mcsGARCH corrected by LightGBM) "
         "is 5.8%, 7.6% and 6.4% better at 15 minutes, 30 minutes and the last hour on all days and 6.6%, 6.2% and 7.9% "
-        "better on expiry days (QLIKE; one-sided DM p at most 0.010 in all six cells), against an mcsGARCH refitted as "
-        "often as every other model; also before the closing auction and on a hold-out. Under MSE the ranking reverses, "
-        "but no MSE difference is significant.",
+        "better on expiry days (QLIKE; one-sided DM p at most 0.010 in all six cells). Post hoc, the 15- and 30-minute gains "
+        "survive Hansen's SPA and hold against an mcsGARCH given VIX or the implied variance (4.8%, p 0.005; 5.9%, p below "
+        "0.001). It replicates on Bank Nifty (P91, registered plan): 3.9% and 5.0% at 15 and 30 minutes (Holm p 5e-12 "
+        "and 2e-11), 8.1% in the last hour.",
      [("hybrid against mcsGARCH, QLIKE, all days (15 min, 30 min, last hour)", "R1V2",
        r"^tests_(next15|next30|last_hour)\.csv\|qlike\|all\|mcsgarch vs hybrid_base$"),
       ("hybrid against mcsGARCH, QLIKE, expiry days (15 min, 30 min, last hour)", "R1V2",
-       r"^tests_(next15|next30|last_hour)\.csv\|qlike\|expiry\|mcsgarch vs hybrid_base$")],
-     "The ledger doubles these one-sided p-values, because the v2 comparison was not stated before the data were seen."),
+       r"^tests_(next15|next30|last_hour)\.csv\|qlike\|expiry\|mcsgarch vs hybrid_base$"),
+      ("post hoc (referee): Hansen SPA, some challenger beats mcsGARCH, all days", "REFFC",
+       r"^spa_reality_check\.csv\|(next15|next30|last_hour)\|all$"),
+      ("post hoc (referee): hybrid against each information-matched mcsGARCH, QLIKE, all days", "REFFC",
+       r"^fair_benchmarks\.csv\|(next15|next30|last_hour)\|all\|(mcsgarch_iv|mcsgarch_vix|mcsgarchx_vix|mcsgarchx_vix_iv)\|hybrid$"),
+      ("P91 Bank Nifty (registered): H1 (15 and 30 min) and H2 (last hour), all days", "BNFC",
+       r"^tests_(next15|next30|last_hour)\.csv\|qlike\|all\|mcsgarch vs hybrid_base$"),
+      ("P91 Bank Nifty (registered): H3, expiry days (15 and 30 min)", "BNFC",
+       r"^tests_(next15|next30)\.csv\|qlike\|expiry\|mcsgarch vs hybrid_base$")],
+     "The ledger doubles the one-sided p-values of the current contest and of the referee checks, because those "
+     "comparisons were not stated before the data were seen; the P91 rows keep their one-sided p (stated in the plan). "
+     "An information-matched benchmark that is the best in a subset appears once (under its own name)."),
     (3, "The last hour: the first run's HAR edge (about 11%) came mostly from the closing-auction days and "
         "was withdrawn. In the model study the hybrid is 6.4% better than mcsGARCH (p below 0.001), 7.0% before the "
         "auction (p = 0.002), and HAR is not better at all (+1.9%). The least secure of the three horizons.",
@@ -2386,20 +3567,54 @@ RECON = [
       ("R3 robustness, Pro rule, share scaling (the Holm 0.020 row)", "R3", r"^participant_pro\|share\|gex_l1"),
       ("Bank Nifty replication, Pro rule, GEX x expiry", "FALS", r"^T5 Bank Nifty\|banknifty\|F1\|participant_pro\|gex_l1_x_exp, share")],
      "The Holm 0.020 quoted in the finding is within the 18 headline tests only."),
-    (6, "Expiry-day premium: about +11% (p 0.045) in the multi-weekly regime, +21% (p 0.005) on Tuesdays, +43% in the Tuesday last hour (p 0.00005), about 63% with Sensex days out of the baseline.",
+    (6, "Expiry-day premium: about +11% (p 0.045) in the multi-weekly regime, +21% (p 0.005) on Tuesdays, +43% in the Tuesday "
+        "last hour (p 0.00005), about 63% with Sensex days out of the baseline. Post hoc, against days on which no NSE or BSE "
+        "index option expires: Tuesday +26% (p 0.0009) and +63% in the last hour; the pre-November 2024 premium cannot be identified.",
      [("whole day, multi-weekly and Tuesday regimes", "R2", r"^rv_day\|(multi_weekly|single_weekly_tue)$"),
       ("last hour, Tuesday regime", "R2", r"^rv_last_hour\|single_weekly_tue$"),
-      ("last hour, Tuesday regime, Sensex days out of the baseline", "SENSEX", r"R2 with Sensex days out of the baseline: rv_last_hour, single_weekly_tue$")], ""),
-    (7, "F2: the end-of-day reversal is stronger after negative Pro GEX (Holm 0.016 among 78; out-of-sample test p 0.006; permutation p 0.0005 to 0.010).",
+      ("last hour, Tuesday regime, Sensex days out of the baseline", "SENSEX", r"R2 with Sensex days out of the baseline: rv_last_hour, single_weekly_tue$"),
+      ("post hoc (referee): multi-weekly and Tuesday regimes, baselines without any NSE or BSE expiry", "REFEXP",
+       r"^r2_clean_baseline\.csv\|no expiry of any index, NSE or BSE[^|]*\|(rv_day|rv_last_hour)\|(multi_weekly|single_weekly_tue)$")],
+     "Referee rows that repeat an R2 or SENSEX row are counted once, under R2 or SENSEX."),
+    (7, "F2: the end-of-day reversal is stronger after negative Pro GEX (Holm 0.016 among 78; out-of-sample test p 0.006; "
+        "permutation p 0.0005 to 0.010). Post hoc, with inference built for the slow negative-Pro state, it holds over the full "
+        "sample (largest robust p 0.012) and from 2025 (0.038) but not inside 2023 to 2024.",
      [("R5 in-sample, Pro rule, binary, all days", "R5", r"^binary\|participant_pro\|all\|r_rod_x_neg$"),
       ("'pre-registered style' out-of-sample test (one-sided as stated)", "FALS", r"^T4 pre-registered F2\|(full|pre_auction)\|F2\|participant_pro"),
-      ("permutation tests, Pro rule, binary, full sample", "FALS", r"^T1 permutation\|full\|F2\|participant_pro\|x_neg_binary")],
-     "The 'Holm 0.016 among 78' comes from FALSIFICATION family A, which used an older run (932 days); see section 6."),
+      ("permutation tests, Pro rule, binary, full sample", "FALS", r"^T1 permutation\|full\|F2\|participant_pro\|x_neg_binary"),
+      ("post hoc (referee): Pro rule, binary, largest p over the persistence-robust methods; full sample, 2023 to 2024, 2025 onward",
+       "REFF2", r"^item3_f2_inference\.csv\|pro\|binary\|r_last\|(full|2023_2024|2025_onward)\|N_x_r_rod$")],
+     "The 'Holm 0.016 among 78' comes from FALSIFICATION family A, which used an older run (932 days); see section 6. "
+     "The referee rows are re-estimates on those 932 days and use, for each estimate, the largest p among the methods that "
+     "respect the persistence of the state."),
     (8, "Dealer sign: outcome (a) points weakly to Pro (p 0.18), outcome (b) to the reverse of Pro (p 4e-6); out of sample no estimated sign beats the fixed rules after correction.",
      [("estimated direction, full sample, participants, outcome (a)", "DSIGN", r"^full sample\|base\|participants\|a$"),
       ("estimated direction, full sample, participants, outcome (b)", "DSIGN", r"^full sample\|base\|participants\|b$"),
       ("the 10 primary out-of-sample DM tests", "DSIGN", r"^all test days\|(a|b)\|signed\|est_(participants|shares)\|")],
      "For the out-of-sample part the finding is a null, so not surviving is what it says."),
+    ("P91", "Bank Nifty forecasting (registered plan): the Nifty hybrid, run with nothing changed, beats mcsGARCH at 15 and 30 "
+            "minutes (H1, Holm over two); H4 predicted that GEX does not help, and that prediction failed at 15 minutes.",
+     [("H1, primary: 15 and 30 minutes, all days", "BNFC", r"^tests_(next15|next30)\.csv\|qlike\|all\|mcsgarch vs hybrid_base$"),
+      ("H4: hybrid with each GEX set against the base hybrid, all days", "BNFC",
+       r"^ablation_(next15|next30|last_hour)\.csv\|hybrid: base vs base\+GEX\|(gross|us|participant|client)\|all\|")],
+     "H1 keeps its one-sided p (stated in the plan). H4 predicted no improvement; BANKNIFTY_FORECAST.md calls the "
+     "prediction failed because four 15-minute cells have a Holm p (over the four sets) at most 0.05. Across the whole "
+     "project none of the 12 H4 rows survives, so the failure rests on the plan's own Holm family, not on project-wide "
+     "correction."),
+    ("P92", "Nifty and Sensex expiry-weekday swap (registered plan): the expiring index becomes the net transmitter of "
+            "spillovers on its own expiry day (primary P1, whole day). Not supported (+0.42 points, p 0.33); the last-hour "
+            "secondary S1 has Holm 0.015, but a placebo at a fake swap date also moved (p 0.038).",
+     [("P1, primary, whole day (one-sided, registered)", "SWAP", r"^tests\.csv\|P1$"),
+      ("S1 to S3, secondary", "SWAP", r"^tests\.csv\|S[123]$"),
+      ("placebos PL1 to PL3", "SWAP", r"^tests\.csv\|PL[123]$")],
+     "The registered result is a null finding (not supported), so the check is that nothing survives that would contradict it."),
+    ("P96", "Synthetic control of the November 2024 weekly-expiry cut (registered plan): Bank Nifty's old expiry "
+            "Wednesday calmed down relative to a synthetic control (primary). No support (ratio p 0.95; the effect is positive).",
+     [("primary: Bank Nifty, RMSPE-ratio test", "SYNTH", r"^ratio\|primary\|BN$"),
+      ("secondaries: Fin Nifty and Midcap Select", "SYNTH", r"^ratio\|secondary\|(FIN|MID)$"),
+      ("post hoc reading: difference-in-differences against the donor average, main runs", "SYNTH", r"^did\|(primary|secondary)\|")],
+     "The registered result is a null finding (no support), so the check is that nothing survives that would contradict "
+     "it. The DiD rows are the post hoc reading of a rise (exploratory)."),
 ]
 
 
@@ -2457,10 +3672,13 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
     w("")
     yes_st = sorted(set(df.loc[df["pre_specified"] == PS_YES, "study"]))
     w("**Pre-specified?** `yes` means a written statement of the test was committed to git before the "
-      "run, judged from the commit times in `.git/logs/HEAD` (no git command is run; confirm with git log). "
+      "run, judged from the commit times in the reflogs (`logs/HEAD` and `logs/refs/heads` of the repository; from a "
+      "worktree, those of the main repository; no git command is run; confirm with git log). "
       "That holds for RESEARCH_STRATEGY_PANDEY.md (RQ1 and H1), which was in the repository before the first "
-      "real-data run, and for the P87 and P90 pre-registrations in `docs/prereg/` when their commit is older "
-      f"than the study's result files. Studies with `yes` rows now: {', '.join(yes_st) if yes_st else 'none'}. "
+      "real-data run, and for the P87, P90, P91, P92 and P96 pre-registrations in `docs/prereg/` when their commit is "
+      "older than the study's result files. For P91, P92 and P96 only the files that hold outcomes are compared, because "
+      "P92's coverage counts were committed together with its plan on purpose. "
+      f"Studies with `yes` rows now: {', '.join(yes_st) if yes_st else 'none'}. "
       "Every other study was committed together with its results, so a claim that a test was fixed in advance "
       "is marked `stated, not time-stamped`. `partly` means the direction was stated in advance but the exact "
       "specification was chosen later.")
@@ -2507,6 +3725,42 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
           "mean that a model is clearly worse than the one it is compared with; the hypothesis text says which way "
           "the difference went.")
         w("")
+    newst = [s_ for s_ in ("BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2") if (df["study"] == s_).any()]
+    if newst:
+        cnt = {s_: int((df["study"] == s_).sum()) for s_ in newst}
+        bn = df[df["study"] == "BNFC"]
+        n_h = int((bn["pre_specified"] == PS_YES).sum()) if len(bn) else 0
+        f2c = getattr(ctx, "ref_f2_counts", None)
+        w("**Registered plans and referee responses.** " + ", ".join(f"{s_} {cnt[s_]}" for s_ in newst) + " tests. "
+          "Three studies have a registered analysis plan: **P91** (BNFC, the Nifty forecasting pipeline run unchanged on "
+          "Bank Nifty), **P92** (SWAP, the Nifty and Sensex expiry-weekday swap) and **P96** (SYNTH, a synthetic control "
+          "of the November 2024 cut in weekly expiries). Their primary, secondary, placebo and robustness tests carry the "
+          "plan's status and role, and only the tests whose direction the plan states keep a one-sided p. BNFC has the "
+          "same files as R1V2 and is counted the same way: every comparison the pipeline wrote is a test. "
+          f"{n_h} of them are the plan's hypotheses (H1 primary; H2, H3 and H4 secondary); the rest were registered to "
+          "be reported without a hypothesis (roles as in R1V2) or are labelled exploratory in BANKNIFTY_FORECAST.md, "
+          "and their one-sided p-values are doubled. Rows that a plan calls descriptive but that report a p-value "
+          "(P92's total connectedness and H2 without weekday effects, P96's Nifty 50 Wednesday and its "
+          "difference-in-differences cross-checks, P91's Nifty on the same dates) are counted as exploratory, because "
+          "the p-values were reported and seen.")
+        w("")
+        w("The three **referee responses** (REFFC forecasting, REFEXP expiry premia, REFF2 the F2 reversal) were all "
+          "done after the referee report, so every row is exploratory and none is pre-specified. A referee row that "
+          "repeats a test already in the ledger (same estimate and p, for example a published event-study row, an R2 "
+          "premium or a DM test of the current contest) is not counted again; the referee files' other p-values for "
+          "such a test (placebo-date, prediction-interval, wild cluster) are listed as not counted. The trend-adjusted "
+          "change of the expiry response is a new estimate for each event-study row and is counted. Hansen's SPA p is "
+          "one-sided by construction (does any challenger beat mcsGARCH); it was not stated in advance, so it is doubled "
+          "as min(1, 2p). The F2 files report each estimate under up to 17 inference methods; the ledger counts one row "
+          "per estimate, with the largest p among the methods that respect the persistence of the Pro state as the main "
+          "p (the study's own cautious reading; the largest of several valid p-values is itself valid) and the others in "
+          "`alt_p`."
+          + (f" So the {f2c[0]['1-7']} p-values of items 1 to 7 "
+             + ("(as REFEREE_RESPONSE_F2.md says)" if f2c[0]['1-7'] == 598 else "(REFEREE_RESPONSE_F2.md says 598)")
+             + f" are {f2c[1]['1-7']} tests, and the {f2c[0]['8']} of item 8 "
+             + ("(as it says)" if f2c[0]['8'] == 381 else "(it says 381)")
+             + f" are {f2c[1]['8']} tests." if f2c else ""))
+        w("")
     # survivors
     w("## 3. What survives project-wide BY at 5%")
     w("")
@@ -2518,12 +3772,13 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
         ev = surv[surv["study"] == "EVENT"]
         ev_turn = ev[ev["hypothesis"].str.contains("turnover", case=False)]
         ev_plc = ev[ev["role"] == "placebo"]
-        gex_studies = {"R3", "R5", "FALS", "DSIGN", "INTRA", "CONN"}
+        gex_studies = {"R3", "R5", "FALS", "DSIGN", "INTRA", "CONN", "REFF2"}
+        contest = {"R1", "R1V2", "R1V2DEV", "BNFC", "REFFC"}
         gex_mask = (df["study"].isin(gex_studies) |
                     (df["study"].isin({"AUCTION", "PIN"}) & df["hypothesis"].str.contains("GEX|gamma", case=False, regex=True)) |
-                    (df["study"].isin({"R1", "R1V2", "R1V2DEV"}) & df["hypothesis"].str.contains("GEX", regex=False)
+                    (df["study"].isin(contest) & df["hypothesis"].str.contains("GEX", regex=False)
                      & ~df["hypothesis"].str.contains("mcsGARCH", regex=False)))
-        con_s = surv[surv["study"].isin(["R1", "R1V2", "R1V2DEV"])]
+        con_s = surv[surv["study"].isin(contest)]
         con_worse = con_s[con_s["hypothesis"].str.contains(r"observed: \S+ worse\)", regex=True)]
         gs = surv[gex_mask.loc[surv.index]]
         gs_claims = gs[~gs["role"].isin(["placebo"])]
@@ -2593,13 +3848,14 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
     w(_md_table(["test_id", "role", "pre-specified", "hypothesis", "rule", "sample", "raw p", "Holm study", "BY project"], rows))
     w("")
     # reconciliation
-    w("## 5. Reconciliation with the eight findings of REAL_DATA_RESULTS.md")
+    w("## 5. Reconciliation with the eight findings of REAL_DATA_RESULTS.md and the registered plans")
     w("")
-    w("For each finding: the ledger rows that carry it, and whether it survives BY across the whole project. "
-      "REAL_DATA_RESULTS.md itself is not changed here.")
+    w("For each finding, and for the primary test of each registered analysis plan added since (P91, P92, P96): the "
+      "ledger rows that carry it, and whether it survives BY across the whole project. Post hoc referee checks are "
+      "listed under the finding they test. REAL_DATA_RESULTS.md itself is not changed here.")
     w("")
     for num_, claim, groups, extra in RECON:
-        w(f"**Finding {num_}.** {claim}")
+        w(f"**Finding {num_}.** {claim}" if isinstance(num_, int) else f"**{num_}.** {claim}")
         w("")
         if not groups:
             w(extra)
