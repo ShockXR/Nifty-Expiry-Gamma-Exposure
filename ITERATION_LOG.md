@@ -594,10 +594,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The fixes were chosen after P106 on the same days, so this explains the gain rather than proving a better model; the time-of-day factor is fitted, not structural; the intervals are wide; the last hour is not explained.
 * **NEXT ITERATION:** P112 runs once, at the 250th valid Nifty day from 4 November 2026 or 31 December 2027. P110 (P106's claims stress-tested on Bank Nifty and Fin Nifty) is running.
 
-## Iterations in progress (3 November 2026, about 15:30 IST)
+## Iteration 50: which connectedness settings reproduce the paper's hour-level numbers (registered plan, P113)
+
+* **OBJECTIVE:** Turn the one replication gap left to "unreported settings", the hour-level connectedness totals of Tables 3 and 4, into a precise question for the authors.
+* **PROBLEM IDENTIFIED:** The replication's 40-setting grid could not reach the before first-hour and last-hour totals (99.42 and 105.22). A total above 100 needs both cross shares above one half, which a row-normalised decomposition almost never gives, so either the paper used another normalisation or setting, or the numbers cannot be produced from these data.
+* **HYPOTHESIS:** Registered before any connectedness number was computed (`docs/prereg/P113_CONNECTEDNESS_SETTINGS.md`, commit 313a3ac): some setting among 5,440 per before window (row, column or no normalisation, Cholesky in both orders, 8 inputs, 8 horizons, 17 constructions and lag rules) reproduces the 15 printed totals, judged by a mean-absolute-miss rule with shuffle and leave-one-table-out guards.
+* **CHANGES IMPLEMENTED:** `experiments/p113_connectedness_settings.py`, optional decompositions in `src/niftygex/connectedness.py` (defaults unchanged; the replication's totals reproduce exactly), `tests/test_p113_connectedness_settings.py` (17 synthetic tests). Run by an AI agent; results c764984, 19 minutes after the plan. Ledger adapter CONNSET.
+* **EXPERIMENTS PERFORMED:** 16,320 settings over three before windows, 1,000 shuffles, 999 day-level bootstrap draws; 148 seconds on one core. The lead recomputed the best fit and the before last-hour maximum from `grid_cells.csv.gz`.
+* **RESULTS:** (REAL DATA.) Not reproduced. The closest setting (column-normalised generalized decomposition of the log mcsGARCH variance, days joined, VAR(5), horizon 5) misses the 15 totals by 5.34 points on average (8 within 2 points; better than shuffled totals, p 0.003) but misses the before last hour by 23.1 points; no setting whose shares sum to 100 per row exceeds 94.66 there. The after totals are fitted no better than chance (p 0.63). Under the closest setting the falls on expiry days hold (Holm p 0.012); the larger last-hour fall does not.
+* **IMPROVEMENTS:** The question for the authors becomes specific (how were the shares normalised, with which input, lag and horizon). Pitch, briefing, README, results summary, paper (6.1.3, contribution 1, 5.8, Tables B1 and C), replication note, referee response and deck updated. Ledger: 28,001 tests, 32 studies, 3,271 survive; trace 536 entries, 529 MATCH, no mismatch.
+* **REMAINING ISSUES:** The grid is finite (other hour definitions, time-varying VARs and CPP's exact mcsGARCH estimates were not tried); each one-hour cell has 180 observations from three days.
+* **NEXT ITERATION:** None planned; the answer has to come from the authors.
+
+## Iterations in progress (3 November 2026, about 16:15 IST)
 
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
 * **P110**, a stress test of P106's three claims on Bank Nifty and Fin Nifty (plan 5128e53).
+* **P114**, whether the paper's fall in intraday persistence survives P109's fixed mcsGARCH (registered).
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.

@@ -179,6 +179,8 @@ STUDIES = {
               "docs/P106_GAIN_DECOMPOSITION.md; docs/prereg/P106_GAIN_DECOMPOSITION.md"),
     "MCSX": ("Five parametric fixes to mcsGARCH against the forecasting hybrid (P109)",
              "docs/P109_MCSGARCH_EXTENSIONS.md; docs/prereg/P109_MCSGARCH_EXTENSIONS.md"),
+    "CONNSET": ("Which connectedness setting reproduces the paper's printed totals (P113)",
+                "docs/P113_CONNECTEDNESS_SETTINGS.md; docs/prereg/P113_CONNECTEDNESS_SETTINGS.md"),
 }
 
 PREREG = {
@@ -193,6 +195,7 @@ PREREG = {
     "p107_pooled_test": ("docs/prereg/P107_POOLED_THREE_INDEX.md", "P107 registered plan"),
     "p106_gain_decomposition": ("docs/prereg/P106_GAIN_DECOMPOSITION.md", "P106 registered plan"),
     "p109_mcsgarch_extensions": ("docs/prereg/P109_MCSGARCH_EXTENSIONS.md", "P109 registered plan"),
+    "p113_connectedness_settings": ("docs/prereg/P113_CONNECTEDNESS_SETTINGS.md", "P113 registered plan"),
 }
 
 COLUMNS = [
@@ -2536,6 +2539,59 @@ def adapt_p109mcsx(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+
+P113_OUTCOME = ["tests.csv", "verdict.csv", "best.csv", "spec_fit.csv", "grid_cells.csv.gz", "permutation.csv",
+                "bootstrap.csv", "changes.csv", "reach.csv"]
+
+
+def adapt_p113connset(ctx: Ctx):
+    """P113: which connectedness setting reproduces the paper's 15 printed totals (docs/prereg/P113_CONNECTEDNESS_SETTINGS.md).
+
+    tests.csv: P1 to P3 (primary) compare the grid's fit to the printed totals with fits to the same totals
+      shuffled among the cells (permutation p); P2 and P3 have no p-value because no specification met their
+      criteria, so they are not counted. S3 rows (secondary) are day-level bootstrap tests of the paper's
+      connectedness changes under the best specification and under the best of the paper's written method.
+    """
+    folder = "p113_connectedness_settings"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "CONNSET", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "CONNSET", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P113_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("CONNSET", f"P113 {tid}: {clean(r['hypothesis'])}", "Diebold-Yilmaz connectedness totals (paper's "
+                "scale) against the printed Tables 3 and 4", clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="fit (mean absolute miss) or change in total", statistic=r["statistic"],
+                p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "CONNSET", folder, {
+        r"verdict\.csv|best\.csv|spec_fit\.csv|grid_cells\.csv\.gz|permutation\.csv|bootstrap\.csv|changes\.csv|"
+        r"reach\.csv|by_dimension\.csv|near_ties\.csv|loto\.csv|subsets\.csv|windows\.csv|targets\.csv|"
+        r"alt_targets\.csv|direction\.csv|baseline_check\.csv":
+            "grid fits, bootstrap draws, targets and checks behind tests.csv; no new p-value",
+    }, "run information, counts or log; no p-value")
+
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -3889,11 +3945,12 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
-                 adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx]
+                 adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx,
+                 adapt_p113connset]
 
 
 def headline18_check(ctx: Ctx):
@@ -4171,6 +4228,10 @@ RECON = [
              "Holm over two) and recover the hybrid's gain.",
      [("P1, primary: the combination against mcsGARCH, 15 and 30 minutes", "MCSX", r"^tests\.csv\|P1_")],
      "The extensions were chosen after P106 on the same days, so this explains the gain rather than confirming it."),
+    ("P113", "Some setting among 5,440 per before window reproduces the paper's 15 printed connectedness totals "
+             "better than chance (primary P1; P2 and P3 have no p-value because no setting met their criteria).",
+     [("P1, primary: best fit against shuffled totals", "CONNSET", r"^tests\.csv\|P1_")],
+     "Verdict 'not reproduced': the best setting fits better than chance but misses the before last hour by 23 points."),
 ]
 
 
