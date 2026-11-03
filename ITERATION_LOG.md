@@ -690,11 +690,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The committed hybrid stays the project's model: switching to `hybrid_cpp` after seeing these results would be a choice made on the same 792 days. The equivalence margin of 0.5 point is a choice, and the seed-against-seed placebo shows the equivalence test has limited power.
 * **NEXT ITERATION:** None planned before the meeting.
 
-## Iterations in progress (3 November 2026, about 19:15 IST)
+## Iteration 58: a second AI referee round on the working paper, and what it changed in the summaries
+
+* **OBJECTIVE:** Have the whole project read again by a separate AI agent acting as a hostile referee, now that P116 to P118 are in, and fix what it finds before the meeting.
+* **PROBLEM IDENTIFIED:** The referee (round 2, private, seven major points) found no number that disagrees with its file, but four places where the wording is firmer than the evidence: (1) P117's "within the normal range" for Nifty rests on placebo pairs that are not clean, (2) the expiry-day forecasting gains are measured against our own mcsGARCH, which is weakest on expiry days, (3) "not from option-market information" is firmer than an ablation that removed one group at a time, and (4) the replication summary was silent on one Table 6 cell where we disagree with the paper.
+* **HYPOTHESIS:** None; this is a check of claims against files that already exist. Every new number below was already in a committed results file.
+* **CHANGES IMPLEMENTED:** Pitch, briefing, README, `docs/REAL_DATA_RESULTS.md`, `docs/REPLICATION_NSE.md`, the deck (careful and forecast slides) and the `forecast.py` docstring. The private working paper, response and note are being revised separately.
+* **EXPERIMENTS PERFORMED:** None new. Numbers read from `results/p117_persistence_placebo/posthoc_extreme_pairs.csv` and `posthoc_without_flat_days.csv`, `results/p116_benchmark_as_printed/tests.csv` (S2 rows), `results/p106_gain_decomposition/tests.csv` (S3_next15_optionmkt), `results/p114_persistence_fixed_model/posthoc_night_cap.csv` and `results/replication_nse/table6_volatility.csv`.
+* **RESULTS:** (REAL DATA.) (1) Under the fixed model all 128 Nifty placebo pairs that fell as far as the actual pair straddle a later calendar change (88) or contain the February 2021 NSE outage day with flat minute data (40); in the registered clean set p is 0.095 and 0.057, and 0.0083 and 0.0017 without the outage-day pairs (post hoc). So P117 cannot tell an expiry effect from a market-wide change for Nifty; Fin Nifty's equal fall points to a market-wide change but does not settle it. (2) Against the paper's specification the hybrid's expiry-day gain is 2.97% and 4.35% (P116 S2, Holm 0.050 and 0.018), not 6.6% and 6.2%, because our version is 3.93% and 2.01% worse than the paper's on those days. (3) Removing both option-market groups together raises the loss by 0.6 points (p 0.16, never tested for equivalence), so the wording is now "mainly" rather than "not". (4) Over all days the paper's Table 6 shows no change for Bank Nifty (printed p 0.087) while we find +14.8% (day-level p 0.0017), which fits the paper's own conclusion; our medians are 18% to 32% below the printed ones before and 5% to 24% below after, so the earlier sentence "25% to 30% below in every column" was wrong and is corrected. Also disclosed: under the fixed model a 12:15 shock's half-life cannot exceed about 179 minutes, and 153 of 400 bootstrap draws for the Nifty before window sit at that bound.
+* **IMPROVEMENTS:** Trace 664 entries, 651 MATCH, 0 mismatch, every number in the pitch registered.
+* **REMAINING ISSUES:** The referee's first point (the working paper reports everything and should be cut to one focused paper) is for Shreyan and the professor to decide. Its fifth point (no prospective test of the hybrid itself) is being answered by a forward-test plan registered before the 4 November open (P119).
+* **NEXT ITERATION:** P119 registration; scoring the 3 November frozen forecast.
+
+## Iterations in progress (3 November 2026, about 19:30 IST)
 
 * **Scoring the frozen forecast** for 3 November after the minute bars are published.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
 * **A timed rerun of every reproduce step** at commit 0de679b (before P117 and P118 were added), in a separate copy of the repository (started 12:26 UTC).
-* **A timed rerun of every reproduce step** at commit 0de679b, in a separate copy of the repository (started 12:26 UTC).
+* **A registered forward test of the hybrid itself** (P119), committed before the first forward day.
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.
