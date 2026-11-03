@@ -1,0 +1,29 @@
+{
+  "label": "REAL DATA",
+  "study": "P108 blind window search",
+  "plan_commit": "6b289ca7b3f29803dfab0159377235eb7452761b",
+  "run_started_utc": "2026-11-03T05:54:40Z",
+  "run_seconds": 177.1,
+  "inputs": {
+    "nifty_1min.csv": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+    "banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+    "printed_values.csv": "64c51a919a842a7243522c2104037633c6914b1ba0ace77f673e1808b92abbe0"
+  },
+  "n_calendar_days_common": 2235,
+  "calendar_first": "2017-04-03",
+  "calendar_last": "2026-04-22",
+  "n_definitions": 204,
+  "lengths": [
+    40,
+    100
+  ],
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v230-x86_64-with-glibc2.39",
+    "statsmodels": "0.15.0"
+  },
+  "winning_definition": "0915-1514|concat|log|all"
+}

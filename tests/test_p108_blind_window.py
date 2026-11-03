@@ -243,3 +243,36 @@ def test_run_end_to_end_synthetic(tmp_path):
               "run_info.json", "all_windows_winning_definition.csv.gz", "after_window_check.csv"):
         assert (out / f).exists(), f
     assert len(res["best"]) == 2
+
+
+def test_posthoc_one_day_dropped_equals_direct(synth):
+    """SYNTHETIC: the post hoc 'one day left out' sums equal a direct pandas construction."""
+    spec = importlib.util.spec_from_file_location("p108_posthoc", ROOT / "experiments/p108_blind_window/posthoc.py")
+    P = importlib.util.module_from_spec(spec)
+    sys.modules["p108_posthoc"] = P
+    spec.loader.exec_module(P)
+    dfn, dfb, days, mats = synth
+    d = S.Definition(15, 360, "concat", "log", "all")
+    dl = S.day_level(days, mats, d)
+    # dummy printed values: only the window statistics are compared here
+    printed = {k: {"mean": (0.0, 6), "sd": (3e-4, 9), "min": (-0.01, 9), "max": (0.01, 9), "skew": (0.1, 9),
+                   "kurt": (5.0, 7), "n": (1, 0)} for k in S.INDICES}
+    printed["corr"] = (0.5, 3)
+    r = P.one_day_dropped(days, mats, d, printed, span=45)
+    for _, row in r.sample(5, random_state=1).iterrows():
+        win = dl["days"][(dl["days"] >= row.start) & (dl["days"] <= row.end)]
+        win = win[win != pd.Timestamp(row.dropped_day)]
+        assert len(win) == 44
+        xs = {}
+        for k, df in (("nifty", dfn), ("bank", dfb)):
+            x = independent_returns(df, "09:30", "15:29", win, "concat", "log")
+            xs[k] = x
+            v = x.to_numpy()
+            assert row[f"{k}_n"] == len(v)
+            assert row[f"{k}_min"] == pytest.approx(v.min(), abs=1e-13)
+            assert row[f"{k}_max"] == pytest.approx(v.max(), abs=1e-13)
+            assert row[f"{k}_mean"] == pytest.approx(v.mean(), rel=1e-8, abs=1e-15)
+            sd = v.std(ddof=1) if row.sd_variant == "sample" else v.std()
+            assert row[f"{k}_sd"] == pytest.approx(sd, rel=1e-9)
+        j = pd.concat([xs["nifty"], xs["bank"]], axis=1, join="inner")
+        assert row["corr"] == pytest.approx(np.corrcoef(j.iloc[:, 0], j.iloc[:, 1])[0, 1], rel=1e-9)

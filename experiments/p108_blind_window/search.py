@@ -747,11 +747,18 @@ def run(raw: Path, out: Path, definitions=None, lengths=LENGTHS, top_defs: int =
     # all windows for the winning definition, and the E distribution (null reference)
     if write_all_windows:
         full, _ = score_definition(days, mats, win_def, printed, lengths)
+        # compact file with every window's score; ok_mask lists the 15 exact-match flags in the order
+        # nifty mean, sd, min, max, skew, kurt, n; bank mean, sd, min, max, skew, kurt, n; corr
+        flag_cols = [f"{k}_{it}_ok" for k in INDICES for it in STAT_ITEMS] + ["corr_ok"]
+        compact = full[["start", "end", "L", "E", "E1", "D", "n_extreme_ok"]].copy()
+        compact["ok_mask"] = full[flag_cols].astype(int).astype(str).agg("".join, axis=1)
+        compact.to_csv(out / "all_windows_winning_definition.csv.gz", index=False, float_format="%.6g",
+                       compression="gzip")
         keep_cols = ["start", "end", "L", "E", "E1", "D", "n_extreme_ok"] + \
             [c for c in full.columns if c.endswith("_ok") or c.startswith(("nifty_", "bank_"))] + ["corr"]
         keep_cols = list(dict.fromkeys(keep_cols))
-        full[keep_cols].to_csv(out / "all_windows_winning_definition.csv.gz", index=False,
-                               float_format="%.10g", compression="gzip")
+        full.head(5000)[keep_cols].to_csv(out / "top5000_windows_winning_definition.csv.gz", index=False,
+                                          float_format="%.10g", compression="gzip")
         top_all = pd.concat([ranked_store[n] for n in best["definition"]], ignore_index=True)
         top_all[["definition"] + [c for c in top_all.columns if c != "definition"]].to_csv(
             out / "top20_by_definition.csv.gz", index=False, float_format="%.10g", compression="gzip")
