@@ -1,0 +1,78 @@
+test_id,family,index,target,subset,l1,l2,days
+P_next15_hybrid_vs_cpp,primary,NIFTY,next15,all days,mcs_cpp,hybrid,792
+P_next15_ours_vs_cpp,primary,NIFTY,next15,all days,mcs_cpp,mcs_ours,792
+S2_next15_expiry_hybrid_vs_cpp,S2_expiry_days,NIFTY,next15,expiry days,mcs_cpp,hybrid,169
+S2_next15_expiry_ours_vs_cpp,S2_expiry_days,NIFTY,next15,expiry days,mcs_cpp,mcs_ours,169
+S3_next15_combination_vs_cpp,S3_combination,NIFTY,next15,all days,mcs_cpp,combination,792
+E5_next15_nonexpiry_hybrid_vs_cpp,E5_nonexpiry,NIFTY,next15,non-expiry days,mcs_cpp,hybrid,623
+E5_next15_nonexpiry_ours_vs_cpp,E5_nonexpiry,NIFTY,next15,non-expiry days,mcs_cpp,mcs_ours,623
+E4_next15_0915_hybrid_vs_cpp,E4_anchor,NIFTY,next15,09:15 anchor only,mcs_cpp,hybrid,792
+E4_next15_0915_ours_vs_cpp,E4_anchor,NIFTY,next15,09:15 anchor only,mcs_cpp,mcs_ours,792
+E4_next15_rest_hybrid_vs_cpp,E4_anchor,NIFTY,next15,without the 09:15 anchor,mcs_cpp,hybrid,792
+E4_next15_rest_ours_vs_cpp,E4_anchor,NIFTY,next15,without the 09:15 anchor,mcs_cpp,mcs_ours,792
+E1_nifty_next15_ours_no_expiry,E1_one_switch_from_ours,NIFTY,next15,all days,ours_no_expiry,mcs_ours,792
+E1_nifty_next15_ours_no_smooth,E1_one_switch_from_ours,NIFTY,next15,all days,ours_no_smooth,mcs_ours,792
+E1_nifty_next15_ours_arma,E1_one_switch_from_ours,NIFTY,next15,all days,ours_arma,mcs_ours,792
+E2_nifty_next15_cpp_expiry,E2_one_switch_from_cpp,NIFTY,next15,all days,mcs_cpp,cpp_expiry,792
+E2_nifty_next15_cpp_smooth,E2_one_switch_from_cpp,NIFTY,next15,all days,mcs_cpp,cpp_smooth,792
+E2_nifty_next15_cpp_zero_mean,E2_one_switch_from_cpp,NIFTY,next15,all days,mcs_cpp,cpp_zero_mean,792
+E3_next15_varonly,E3_mean_term,NIFTY,next15,all days,mcs_cpp_varonly,mcs_cpp,792
+P_next30_hybrid_vs_cpp,primary,NIFTY,next30,all days,mcs_cpp,hybrid,792
+P_next30_ours_vs_cpp,primary,NIFTY,next30,all days,mcs_cpp,mcs_ours,792
+S2_next30_expiry_hybrid_vs_cpp,S2_expiry_days,NIFTY,next30,expiry days,mcs_cpp,hybrid,169
+S2_next30_expiry_ours_vs_cpp,S2_expiry_days,NIFTY,next30,expiry days,mcs_cpp,mcs_ours,169
+S3_next30_combination_vs_cpp,S3_combination,NIFTY,next30,all days,mcs_cpp,combination,792
+E5_next30_nonexpiry_hybrid_vs_cpp,E5_nonexpiry,NIFTY,next30,non-expiry days,mcs_cpp,hybrid,623
+E5_next30_nonexpiry_ours_vs_cpp,E5_nonexpiry,NIFTY,next30,non-expiry days,mcs_cpp,mcs_ours,623
+E4_next30_0915_hybrid_vs_cpp,E4_anchor,NIFTY,next30,09:15 anchor only,mcs_cpp,hybrid,792
+E4_next30_0915_ours_vs_cpp,E4_anchor,NIFTY,next30,09:15 anchor only,mcs_cpp,mcs_ours,792
+E4_next30_rest_hybrid_vs_cpp,E4_anchor,NIFTY,next30,without the 09:15 anchor,mcs_cpp,hybrid,792
+E4_next30_rest_ours_vs_cpp,E4_anchor,NIFTY,next30,without the 09:15 anchor,mcs_cpp,mcs_ours,792
+E1_nifty_next30_ours_no_expiry,E1_one_switch_from_ours,NIFTY,next30,all days,ours_no_expiry,mcs_ours,792
+E1_nifty_next30_ours_no_smooth,E1_one_switch_from_ours,NIFTY,next30,all days,ours_no_smooth,mcs_ours,792
+E1_nifty_next30_ours_arma,E1_one_switch_from_ours,NIFTY,next30,all days,ours_arma,mcs_ours,792
+E2_nifty_next30_cpp_expiry,E2_one_switch_from_cpp,NIFTY,next30,all days,mcs_cpp,cpp_expiry,792
+E2_nifty_next30_cpp_smooth,E2_one_switch_from_cpp,NIFTY,next30,all days,mcs_cpp,cpp_smooth,792
+E2_nifty_next30_cpp_zero_mean,E2_one_switch_from_cpp,NIFTY,next30,all days,mcs_cpp,cpp_zero_mean,792
+E3_next30_varonly,E3_mean_term,NIFTY,next30,all days,mcs_cpp_varonly,mcs_cpp,792
+S1_last_hour_hybrid_vs_cpp,S1_last_hour,NIFTY,last_hour,all days,mcs_cpp,hybrid,792
+S1_last_hour_ours_vs_cpp,S1_last_hour,NIFTY,last_hour,all days,mcs_cpp,mcs_ours,792
+E1_nifty_last_hour_ours_no_expiry,E1_one_switch_from_ours,NIFTY,last_hour,all days,ours_no_expiry,mcs_ours,792
+E1_nifty_last_hour_ours_no_smooth,E1_one_switch_from_ours,NIFTY,last_hour,all days,ours_no_smooth,mcs_ours,792
+E1_nifty_last_hour_ours_arma,E1_one_switch_from_ours,NIFTY,last_hour,all days,ours_arma,mcs_ours,792
+E2_nifty_last_hour_cpp_expiry,E2_one_switch_from_cpp,NIFTY,last_hour,all days,mcs_cpp,cpp_expiry,792
+E2_nifty_last_hour_cpp_smooth,E2_one_switch_from_cpp,NIFTY,last_hour,all days,mcs_cpp,cpp_smooth,792
+E2_nifty_last_hour_cpp_zero_mean,E2_one_switch_from_cpp,NIFTY,last_hour,all days,mcs_cpp,cpp_zero_mean,792
+E3_last_hour_varonly,E3_mean_term,NIFTY,last_hour,all days,mcs_cpp_varonly,mcs_cpp,792
+S4_next15_hybrid_vs_cpp,S4_banknifty,BANKNIFTY,next15,all days,mcs_cpp,hybrid,660
+S4_next15_ours_vs_cpp,S4_banknifty,BANKNIFTY,next15,all days,mcs_cpp,mcs_ours,660
+E1_banknifty_next15_ours_no_expiry,E1_one_switch_from_ours,BANKNIFTY,next15,all days,ours_no_expiry,mcs_ours,660
+E1_banknifty_next15_ours_no_smooth,E1_one_switch_from_ours,BANKNIFTY,next15,all days,ours_no_smooth,mcs_ours,660
+E1_banknifty_next15_ours_arma,E1_one_switch_from_ours,BANKNIFTY,next15,all days,ours_arma,mcs_ours,660
+E2_banknifty_next15_cpp_expiry,E2_one_switch_from_cpp,BANKNIFTY,next15,all days,mcs_cpp,cpp_expiry,660
+E2_banknifty_next15_cpp_smooth,E2_one_switch_from_cpp,BANKNIFTY,next15,all days,mcs_cpp,cpp_smooth,660
+E2_banknifty_next15_cpp_zero_mean,E2_one_switch_from_cpp,BANKNIFTY,next15,all days,mcs_cpp,cpp_zero_mean,660
+S4_next30_hybrid_vs_cpp,S4_banknifty,BANKNIFTY,next30,all days,mcs_cpp,hybrid,660
+S4_next30_ours_vs_cpp,S4_banknifty,BANKNIFTY,next30,all days,mcs_cpp,mcs_ours,660
+E1_banknifty_next30_ours_no_expiry,E1_one_switch_from_ours,BANKNIFTY,next30,all days,ours_no_expiry,mcs_ours,660
+E1_banknifty_next30_ours_no_smooth,E1_one_switch_from_ours,BANKNIFTY,next30,all days,ours_no_smooth,mcs_ours,660
+E1_banknifty_next30_ours_arma,E1_one_switch_from_ours,BANKNIFTY,next30,all days,ours_arma,mcs_ours,660
+E2_banknifty_next30_cpp_expiry,E2_one_switch_from_cpp,BANKNIFTY,next30,all days,mcs_cpp,cpp_expiry,660
+E2_banknifty_next30_cpp_smooth,E2_one_switch_from_cpp,BANKNIFTY,next30,all days,mcs_cpp,cpp_smooth,660
+E2_banknifty_next30_cpp_zero_mean,E2_one_switch_from_cpp,BANKNIFTY,next30,all days,mcs_cpp,cpp_zero_mean,660
+S5_next15_hybrid_vs_cpp,S5_finnifty,FINNIFTY,next15,all days,mcs_cpp,hybrid,604
+S5_next15_ours_vs_cpp,S5_finnifty,FINNIFTY,next15,all days,mcs_cpp,mcs_ours,604
+E1_finnifty_next15_ours_no_expiry,E1_one_switch_from_ours,FINNIFTY,next15,all days,ours_no_expiry,mcs_ours,604
+E1_finnifty_next15_ours_no_smooth,E1_one_switch_from_ours,FINNIFTY,next15,all days,ours_no_smooth,mcs_ours,604
+E1_finnifty_next15_ours_arma,E1_one_switch_from_ours,FINNIFTY,next15,all days,ours_arma,mcs_ours,604
+E2_finnifty_next15_cpp_expiry,E2_one_switch_from_cpp,FINNIFTY,next15,all days,mcs_cpp,cpp_expiry,604
+E2_finnifty_next15_cpp_smooth,E2_one_switch_from_cpp,FINNIFTY,next15,all days,mcs_cpp,cpp_smooth,604
+E2_finnifty_next15_cpp_zero_mean,E2_one_switch_from_cpp,FINNIFTY,next15,all days,mcs_cpp,cpp_zero_mean,604
+S5_next30_hybrid_vs_cpp,S5_finnifty,FINNIFTY,next30,all days,mcs_cpp,hybrid,604
+S5_next30_ours_vs_cpp,S5_finnifty,FINNIFTY,next30,all days,mcs_cpp,mcs_ours,604
+E1_finnifty_next30_ours_no_expiry,E1_one_switch_from_ours,FINNIFTY,next30,all days,ours_no_expiry,mcs_ours,604
+E1_finnifty_next30_ours_no_smooth,E1_one_switch_from_ours,FINNIFTY,next30,all days,ours_no_smooth,mcs_ours,604
+E1_finnifty_next30_ours_arma,E1_one_switch_from_ours,FINNIFTY,next30,all days,ours_arma,mcs_ours,604
+E2_finnifty_next30_cpp_expiry,E2_one_switch_from_cpp,FINNIFTY,next30,all days,mcs_cpp,cpp_expiry,604
+E2_finnifty_next30_cpp_smooth,E2_one_switch_from_cpp,FINNIFTY,next30,all days,mcs_cpp,cpp_smooth,604
+E2_finnifty_next30_cpp_zero_mean,E2_one_switch_from_cpp,FINNIFTY,next30,all days,mcs_cpp,cpp_zero_mean,604

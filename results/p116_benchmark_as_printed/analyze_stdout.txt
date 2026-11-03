@@ -1,0 +1,184 @@
+[REAL DATA] P116 benchmark as printed, stage 2 (docs/prereg/P116_BENCHMARK_AS_PRINTED.md)
+
+[REAL DATA] verdict:
+                                                                                     0                                                  1                                                                    2
+study                                                                             P116                                               P116                                                                 P116
+index                                                                            NIFTY                                          BANKNIFTY                                                             FINNIFTY
+role                                                           primary (decision rule)       secondary (same rule, applied descriptively)                         secondary (same rule, applied descriptively)
+verdict                                                            headline overstated                               headline understated                                                         inconclusive
+h1                                   the hybrid beats mcs_cpp at every primary horizon  the hybrid beats mcs_cpp at every primary horizon                    the hybrid beats mcs_cpp at every primary horizon
+outcome_next15                                                     headline overstated                               headline understated  inconclusive (the change exceeds the margin but is not significant)
+outcome_next30                                                     headline overstated                               headline understated  inconclusive (the change exceeds the margin but is not significant)
+hybrid_beats_mcs_cpp_next15                                                       True                                               True                                                                 True
+hybrid_beats_mcs_cpp_next30                                                       True                                               True                                                                 True
+hybrid_gain_vs_mcs_ours_pct_next15                                             5.79882                                           3.920065                                                             4.898896
+hybrid_gain_vs_mcs_cpp_pct_next15                                             4.430535                                           4.729857                                                             4.028834
+delta_points_next15                                                          -1.368285                                           0.809792                                                            -0.870062
+delta_ci_low_next15                                                          -2.145425                                           0.227378                                                              -1.6671
+delta_ci_high_next15                                                         -0.579091                                           1.459082                                                            -0.060625
+mcs_ours_gain_vs_mcs_cpp_pct_next15                                          -1.452514                                           0.842832                                                            -0.914881
+p_h1_holm_next15                                                                   0.0                                                0.0                                                                  0.0
+p_h2_holm_next15                                                              0.004995                                           0.002535                                                             0.059478
+hybrid_gain_vs_mcs_ours_pct_next30                                            7.649283                                           5.032552                                                             6.091932
+hybrid_gain_vs_mcs_cpp_pct_next30                                             6.644749                                           6.197718                                                              5.18224
+delta_points_next30                                                          -1.004534                                           1.165166                                                            -0.909692
+delta_ci_low_next30                                                          -1.770539                                            0.52915                                                            -1.921507
+delta_ci_high_next30                                                         -0.231537                                           1.849547                                                               0.1128
+mcs_ours_gain_vs_mcs_cpp_pct_next30                                          -1.087738                                           1.226911                                                            -0.968704
+p_h1_holm_next30                                                                   0.0                                                0.0                                                                  0.0
+p_h2_holm_next30                                                              0.014497                                           0.000081                                                             0.074254
+
+[REAL DATA] tests (primary and secondary):
+                       test_id  estimate  statistic        p_raw   p_adjusted
+        P_next15_hybrid_vs_cpp  4.430535   6.408841 1.258681e-10 3.776044e-10
+          P_next15_ours_vs_cpp -1.452514  -3.033366 2.497492e-03 4.994984e-03
+S2_next15_expiry_hybrid_vs_cpp  2.973867   1.656358 4.975790e-02 4.975790e-02
+  S2_next15_expiry_ours_vs_cpp -3.929790  -3.835033 1.773186e-04 7.092743e-04
+  S3_next15_combination_vs_cpp  5.477212   4.819998 8.607046e-07 1.721409e-06
+        P_next30_hybrid_vs_cpp  6.644749   8.339621 1.647774e-16 6.591097e-16
+          P_next30_ours_vs_cpp -1.087738  -2.450120 1.449653e-02 1.449653e-02
+S2_next30_expiry_hybrid_vs_cpp  4.349494   2.537327 6.040246e-03 1.812074e-02
+  S2_next30_expiry_ours_vs_cpp -2.010671  -2.373483 1.875077e-02 3.750154e-02
+  S3_next30_combination_vs_cpp  7.253623   4.783672 1.026637e-06 1.721409e-06
+    S1_last_hour_hybrid_vs_cpp  6.158287   3.800668 7.769547e-05 1.553909e-04
+      S1_last_hour_ours_vs_cpp -0.218161  -0.358767 7.198650e-01 7.198650e-01
+       S4_next15_hybrid_vs_cpp  4.729857   7.217235 7.325684e-13 2.197705e-12
+         S4_next15_ours_vs_cpp  0.842832   3.030703 2.535462e-03 2.535462e-03
+       S4_next30_hybrid_vs_cpp  6.197718   7.274324 4.959139e-13 1.983656e-12
+         S4_next30_ours_vs_cpp  1.226911   4.132296 4.054667e-05 8.109334e-05
+       S5_next15_hybrid_vs_cpp  4.028834   5.428519 4.122556e-08 1.236767e-07
+         S5_next15_ours_vs_cpp -0.914881  -2.178722 2.973879e-02 5.947759e-02
+       S5_next30_hybrid_vs_cpp  5.182240   6.124473 8.206933e-10 3.282773e-09
+         S5_next30_ours_vs_cpp -0.968704  -1.788148 7.425419e-02 7.425419e-02
+
+[REAL DATA] mean QLIKE, all days:
+    index    target           model  qlike_mean  gain_pct_vs_mcs_ours  gain_pct_vs_mcs_cpp
+    NIFTY    next15          hybrid    0.268014              5.798820             4.430535
+    NIFTY    next15        mcs_ours    0.284513              0.000000            -1.452514
+    NIFTY    next15         mcs_cpp    0.280439              1.431718             0.000000
+    NIFTY    next15 mcs_cpp_varonly    0.280452              1.427260            -0.004522
+    NIFTY    next15  ours_no_expiry    0.282555              0.688049            -0.754470
+    NIFTY    next15  ours_no_smooth    0.283180              0.468540            -0.977168
+    NIFTY    next15       ours_arma    0.284530             -0.006043            -1.458645
+    NIFTY    next15      cpp_expiry    0.283185              0.466693            -0.979042
+    NIFTY    next15      cpp_smooth    0.282580              0.679143            -0.763507
+    NIFTY    next15   cpp_zero_mean    0.280414              1.440398             0.008806
+    NIFTY    next15     combination    0.265079              6.830511             5.477212
+    NIFTY    next30          hybrid    0.200910              7.649283             6.644749
+    NIFTY    next30        mcs_ours    0.217551              0.000000            -1.087738
+    NIFTY    next30         mcs_cpp    0.215210              1.076034             0.000000
+    NIFTY    next30 mcs_cpp_varonly    0.215217              1.072796            -0.003273
+    NIFTY    next30  ours_no_expiry    0.216866              0.314722            -0.769593
+    NIFTY    next30  ours_no_smooth    0.216213              0.614995            -0.466054
+    NIFTY    next30       ours_arma    0.217527              0.010757            -1.076865
+    NIFTY    next30      cpp_expiry    0.216196              0.622739            -0.458226
+    NIFTY    next30      cpp_smooth    0.216852              0.321330            -0.762913
+    NIFTY    next30   cpp_zero_mean    0.215212              1.074997            -0.001048
+    NIFTY    next30     combination    0.199599              8.251606             7.253623
+    NIFTY last_hour          hybrid    0.224276              6.362568             6.158287
+    NIFTY last_hour        mcs_ours    0.239515              0.000000            -0.218161
+    NIFTY last_hour         mcs_cpp    0.238994              0.217686             0.000000
+    NIFTY last_hour mcs_cpp_varonly    0.239031              0.202040            -0.015681
+    NIFTY last_hour  ours_no_expiry    0.240086             -0.238309            -0.456990
+    NIFTY last_hour  ours_no_smooth    0.238581              0.389765             0.172454
+    NIFTY last_hour       ours_arma    0.239194              0.134207            -0.083661
+    NIFTY last_hour      cpp_expiry    0.238260              0.523797             0.306779
+    NIFTY last_hour      cpp_smooth    0.239787             -0.113602            -0.332012
+    NIFTY last_hour   cpp_zero_mean    0.239309              0.085933            -0.132041
+    NIFTY last_hour     combination    0.237601              0.799272             0.582854
+BANKNIFTY    next15          hybrid    0.238503              3.920065             4.729857
+BANKNIFTY    next15        mcs_ours    0.248234              0.000000             0.842832
+BANKNIFTY    next15         mcs_cpp    0.250344             -0.849996             0.000000
+BANKNIFTY    next15 mcs_cpp_varonly    0.250330             -0.844287             0.005660
+BANKNIFTY    next15  ours_no_expiry    0.249087             -0.343364             0.502362
+BANKNIFTY    next15  ours_no_smooth    0.250246             -0.810315             0.039346
+BANKNIFTY    next15       ours_arma    0.247964              0.108840             0.950754
+BANKNIFTY    next15      cpp_expiry    0.249968             -0.698592             0.150127
+BANKNIFTY    next15      cpp_smooth    0.248827             -0.238838             0.606007
+BANKNIFTY    next15   cpp_zero_mean    0.250618             -0.960436            -0.109510
+BANKNIFTY    next15     combination    0.235890              4.972769             5.773689
+BANKNIFTY    next30          hybrid    0.186922              5.032552             6.197718
+BANKNIFTY    next30        mcs_ours    0.196827              0.000000             1.226911
+BANKNIFTY    next30         mcs_cpp    0.199272             -1.242151             0.000000
+BANKNIFTY    next30 mcs_cpp_varonly    0.199240             -1.225820             0.016131
+BANKNIFTY    next30  ours_no_expiry    0.198004             -0.598140             0.636110
+BANKNIFTY    next30  ours_no_smooth    0.198867             -1.036683             0.202947
+BANKNIFTY    next30       ours_arma    0.196661              0.084370             1.310246
+BANKNIFTY    next30      cpp_expiry    0.198695             -0.949179             0.289377
+BANKNIFTY    next30      cpp_smooth    0.197852             -0.520879             0.712423
+BANKNIFTY    next30   cpp_zero_mean    0.199438             -1.326385            -0.083200
+BANKNIFTY    next30     combination    0.183385              6.829067             7.972192
+ FINNIFTY    next15          hybrid    0.242883              4.898896             4.028834
+ FINNIFTY    next15        mcs_ours    0.255395              0.000000            -0.914881
+ FINNIFTY    next15         mcs_cpp    0.253080              0.906587             0.000000
+ FINNIFTY    next15 mcs_cpp_varonly    0.253086              0.903987            -0.002624
+ FINNIFTY    next15  ours_no_expiry    0.252624              1.085051             0.180097
+ FINNIFTY    next15  ours_no_smooth    0.256876             -0.579729            -1.499914
+ FINNIFTY    next15       ours_arma    0.255229              0.065067            -0.849219
+ FINNIFTY    next15      cpp_expiry    0.256687             -0.505899            -1.425409
+ FINNIFTY    next15      cpp_smooth    0.252472              1.144512             0.240102
+ FINNIFTY    next15   cpp_zero_mean    0.253238              0.844647            -0.062507
+ FINNIFTY    next15     combination    0.243307              4.732878             3.861298
+ FINNIFTY    next30          hybrid    0.191206              6.091932             5.182240
+ FINNIFTY    next30        mcs_ours    0.203609              0.000000            -0.968704
+ FINNIFTY    next30         mcs_cpp    0.201656              0.959411             0.000000
+ FINNIFTY    next30 mcs_cpp_varonly    0.201654              0.960192             0.000789
+ FINNIFTY    next30  ours_no_expiry    0.201317              1.125785             0.167986
+ FINNIFTY    next30  ours_no_smooth    0.205537             -0.946688            -1.924563
+ FINNIFTY    next30       ours_arma    0.203498              0.054616            -0.913559
+ FINNIFTY    next30      cpp_expiry    0.205424             -0.891165            -1.868502
+ FINNIFTY    next30      cpp_smooth    0.201221              1.172848             0.215505
+ FINNIFTY    next30   cpp_zero_mean    0.201757              0.909629            -0.050264
+ FINNIFTY    next30     combination    0.190860              6.261470             5.353420
+
+[REAL DATA] attribution (points of mcs_cpp's QLIKE):
+    index    target                   subset  days  total_points  shapley_expiry_curve_points  shapley_smoothing_points  shapley_mean_points  from_ours_ours_no_expiry_points  from_ours_ours_no_smooth_points  from_ours_ours_arma_points  from_cpp_cpp_expiry_points  from_cpp_cpp_smooth_points  from_cpp_cpp_zero_mean_points  hybrid_gain_vs_mcs_ours_pct  hybrid_gain_vs_mcs_cpp_pct  delta_points
+    NIFTY    next15                 all days   792     -1.452514                    -0.839214                 -0.620097             0.006797                        -0.698044                        -0.475346                    0.006131                   -0.979042                   -0.763507                       0.008806                     5.798820                    4.430535     -1.368285
+    NIFTY    next15              expiry days   169     -3.929790                    -3.364634                 -0.552054            -0.013102                        -2.840629                        -0.012380                   -0.014817                   -3.883714                   -1.086803                      -0.006462                     6.642616                    2.973867     -3.668749
+    NIFTY    next15          non-expiry days   623     -0.613947                     0.015650                 -0.643130             0.013533                         0.027229                        -0.632061                    0.013222                    0.004199                   -0.654070                       0.013974                     5.503780                    4.923623     -0.580157
+    NIFTY    next15      regime multi_weekly   312     -1.567517                    -0.877063                 -0.731265             0.040810                        -0.624483                        -0.470276                    0.038372                   -1.129499                   -0.992111                       0.043390                     5.189866                    3.703700     -1.486165
+    NIFTY    next15 regime single_weekly_thu   192     -0.528346                    -0.673470                  0.126923             0.018200                        -0.702533                         0.095255                    0.009249                   -0.643044                    0.159954                       0.028514                     5.159488                    4.658402     -0.501086
+    NIFTY    next15 regime single_weekly_tue   288     -2.031826                    -0.927103                 -1.071443            -0.033280                        -0.763077                        -0.903730                   -0.026149                   -1.088687                   -1.236714                      -0.037970                     6.829915                    4.936861     -1.893054
+    NIFTY    next15        09:15 anchor only   792     -2.973533                    -8.776009                  5.614112             0.188363                        -8.030435                         6.355235                    0.208308                   -9.521497                    4.873075                       0.168505                    13.299661                   10.721597     -2.578063
+    NIFTY    next15 without the 09:15 anchor   792     -1.308200                    -0.086175                 -1.211596            -0.010430                        -0.002350                        -1.123428                   -0.013052                   -0.168538                   -1.298303                      -0.006346                     5.075446                    3.833642     -1.241803
+    NIFTY    next30                 all days   792     -1.087738                    -0.388617                 -0.692730            -0.006392                        -0.318146                        -0.621684                   -0.010874                   -0.458226                   -0.762913                      -0.001048                     7.649283                    6.644749     -1.004534
+    NIFTY    next30              expiry days   169     -2.010671                    -1.590312                 -0.394495            -0.025864                        -1.324333                        -0.111385                   -0.029828                   -1.853518                   -0.674833                      -0.019127                     6.234804                    4.349494     -1.885310
+    NIFTY    next30          non-expiry days   623     -0.777026                     0.015944                 -0.793133             0.000163                         0.020596                        -0.793481                   -0.004493                    0.011511                   -0.792566                       0.005038                     8.131308                    7.417465     -0.713843
+    NIFTY    next30      regime multi_weekly   312     -1.070355                    -0.185407                 -0.918560             0.033612                        -0.018525                        -0.745373                    0.031980                   -0.351410                   -1.090867                       0.036122                     6.702124                    5.703505     -0.998619
+    NIFTY    next30 regime single_weekly_thu   192     -0.144103                    -0.557428                  0.375575             0.037750                        -0.617500                         0.308593                    0.027049                   -0.496110                    0.443803                       0.049698                     6.422189                    6.287341     -0.134849
+    NIFTY    next30 regime single_weekly_tue   288     -1.914499                    -0.472043                 -1.353447            -0.089008                        -0.397992                        -1.278844                   -0.091364                   -0.545579                   -1.427536                      -0.086137                     9.733991                    8.005849     -1.728142
+    NIFTY    next30        09:15 anchor only   792     -2.843629                    -6.943193                  3.904839             0.194725                        -6.619536                         4.232160                    0.209550                   -7.265316                    3.579052                       0.181433                    23.861307                   21.696204     -2.165102
+    NIFTY    next30 without the 09:15 anchor   792     -0.908744                     0.279554                 -1.161404            -0.026894                         0.324215                        -1.116483                   -0.033344                    0.235686                   -1.205531                      -0.019650                     5.964948                    5.110410     -0.854538
+    NIFTY last_hour                 all days   792     -0.218161                     0.274010                 -0.360107            -0.132064                         0.238829                        -0.390615                   -0.134500                    0.306779                   -0.332012                      -0.132041                     6.362568                    6.158287     -0.204281
+    NIFTY last_hour              expiry days   169     -0.036835                     2.084648                 -1.968808            -0.152676                         1.767203                        -2.286994                   -0.186090                    2.388999                   -1.663718                      -0.132358                     7.911955                    7.878034     -0.033921
+    NIFTY last_hour          non-expiry days   623     -0.266852                    -0.212194                  0.071872            -0.126529                        -0.171580                         0.118613                   -0.120647                   -0.252352                    0.025587                      -0.131955                     5.947471                    5.696490     -0.250981
+    NIFTY last_hour      regime multi_weekly   312     -1.407577                    -0.970266                 -0.417850            -0.019461                        -1.389545                        -0.841845                   -0.038861                   -0.562725                   -0.005594                      -0.011801                     9.933071                    8.665310     -1.267761
+    NIFTY last_hour regime single_weekly_thu   192      2.948382                     0.682442                  2.243315             0.022625                         0.861897                         2.429358                    0.021741                    0.506378                    2.060662                       0.026900                    -0.035537                    2.913893      2.949430
+    NIFTY last_hour regime single_weekly_tue   288     -0.891580                     0.669142                 -1.320334            -0.240388                         0.722404                        -1.258975                   -0.235916                    0.615391                   -1.382181                      -0.245348                     7.107217                    6.279004     -0.828213
+BANKNIFTY    next15                 all days   660      0.842832                     0.245799                  0.705247            -0.108215                         0.340470                         0.803486                   -0.107923                    0.150127                    0.606007                      -0.109510                     3.920065                    4.729857      0.809792
+BANKNIFTY    next15              expiry days    84      1.432493                     1.286773                  0.279452            -0.133732                         1.961066                         0.949852                   -0.148177                    0.603277                   -0.400151                      -0.128489                     2.818841                    4.210955      1.392114
+BANKNIFTY    next30                 all days   660      1.226911                     0.440721                  0.868825            -0.082636                         0.590801                         1.023964                   -0.083335                    0.289377                    0.712423                      -0.083200                     5.032552                    6.197718      1.165166
+BANKNIFTY    next30              expiry days    84      3.160973                     2.347807                  0.984585            -0.171419                         3.514414                         2.149591                   -0.195542                    1.167059                   -0.194562                      -0.161436                     3.388231                    6.442102      3.053872
+ FINNIFTY    next15                 all days   604     -0.914881                    -1.261250                  0.411511            -0.065141                        -1.094978                         0.585033                   -0.065662                   -1.425409                    0.240102                      -0.062507                     4.898896                    4.028834     -0.870062
+ FINNIFTY    next15              expiry days    82     -4.855406                    -5.889076                  1.105789            -0.072119                        -4.572223                         2.451393                   -0.080244                   -7.194863                   -0.228749                      -0.052927                     3.895164                   -0.771116     -4.666280
+ FINNIFTY    next30                 all days   604     -0.968704                    -1.502292                  0.585987            -0.052400                        -1.136691                         0.955859                   -0.055145                   -1.868502                    0.215505                      -0.050264                     6.091932                    5.182240     -0.909692
+ FINNIFTY    next30              expiry days    82     -6.283630                    -8.035725                  1.793667            -0.041573                        -5.894788                         3.949634                   -0.059980                  -10.178867                   -0.364505                      -0.025371                     5.256302                   -0.697041     -5.953343
+
+[REAL DATA] reproduction checks:
+                                                                                          check  rows_committed  rows_rebuilt  y_n_identical  y_max_abs_rel_diff  mcsgarch_n_identical  mcsgarch_max_abs_rel_diff  mcsgarch_daily_max_abs_rel_diff  hybrid_daily_max_abs_rel_diff
+           NIFTY next15: rebuilt mcs_ours and y vs results/pipeline_nse_v2/forecasts_next15.csv           19800         19800        19800.0                 0.0               19800.0                        0.0                              NaN                            NaN
+            NIFTY next15: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             792           792            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+           NIFTY next30: rebuilt mcs_ours and y vs results/pipeline_nse_v2/forecasts_next30.csv           19008         19008        19008.0                 0.0               19008.0                        0.0                              NaN                            NaN
+            NIFTY next30: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             792           792            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+     NIFTY last_hour: rebuilt mcs_ours and y vs results/pipeline_nse_v2/forecasts_last_hour.csv             792           792          792.0                 0.0                 792.0                        0.0                              NaN                            NaN
+         NIFTY last_hour: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             792           792            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+BANKNIFTY next15: rebuilt mcs_ours and y vs results/pipeline_nse_banknifty/forecasts_next15.csv           16500         16500        16500.0                 0.0               16500.0                        0.0                              NaN                            NaN
+        BANKNIFTY next15: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             660           660            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+BANKNIFTY next30: rebuilt mcs_ours and y vs results/pipeline_nse_banknifty/forecasts_next30.csv           15840         15840        15840.0                 0.0               15840.0                        0.0                              NaN                            NaN
+        BANKNIFTY next30: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             660           660            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+  FINNIFTY next15: rebuilt mcs_ours and y vs results/pipeline_nse_finnifty/forecasts_next15.csv           15100         15100        15100.0                 0.0               15100.0                        0.0                              NaN                            NaN
+         FINNIFTY next15: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             604           604            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+  FINNIFTY next30: rebuilt mcs_ours and y vs results/pipeline_nse_finnifty/forecasts_next30.csv           14496         14496        14496.0                 0.0               14496.0                        0.0                              NaN                            NaN
+         FINNIFTY next30: P109 committed daily QLIKE of mcsGARCH and the hybrid vs this study's             604           604            NaN                 NaN                   NaN                        NaN                              0.0                            0.0
+
+written to /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a2e45eb394cbc16d9/results/p116_benchmark_as_printed (8s)
