@@ -426,6 +426,18 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Pro's raw call, put and futures positions are not yet tested separately; SEBI and Sensex dates are not verified against primary documents (hosts blocked).
 * **NEXT ITERATION:** The forecasting and expiry-identification parts of the referee report.
 
+## Iteration 36: did ending weekly options calm the old expiry weekday? (registered plan, P96)
+
+* **OBJECTIVE:** Use SEBI's November 2024 cut (Bank Nifty, Fin Nifty and Midcap Select lost their weekly options) as a natural experiment for the anchor paper's question: does an expiry make its weekday more volatile?
+* **PROBLEM IDENTIFIED:** A before-and-after comparison of one index mixes the rule change with everything else that changed in markets at the same time.
+* **HYPOTHESIS:** Against a synthetic control built from option-free sector indices, Bank Nifty's Wednesday (its old expiry day) becomes calmer after the cut.
+* **CHANGES IMPLEMENTED:** Plan committed before any outcome was computed (`docs/prereg/P96_SYNTHETIC_CONTROL.md`, commit 9634054), with the downloaded NSE files locked by a SHA-256 fingerprint. `experiments/synthetic_control.py`, `tests/test_synthetic_control.py` (23 tests on simulated data), `docs/SYNTHETIC_CONTROL.md`, results in `results/synthetic_control/`.
+* **EXPERIMENTS PERFORMED:** Synthetic control (Abadie, Diamond and Hainmueller 2010) on weekly week-relative Parkinson variance; placebo ranks over 19 donors; a fake date in time; 8 registered sensitivity variants for each of the three indices.
+* **RESULTS:** (REAL DATA.) No support: Bank Nifty's gap moved +0.12 log points, the wrong sign (placebo p = 0.95); Fin Nifty +0.28 and Midcap Select +0.37 (Holm 1.00). No sensitivity p below 0.20. The design could only detect effects of about 1.44 log points, so this is "too imprecise to tell", as the plan warned. Post hoc: the option-free sector indices had a Wednesday premium of their own before the cut (+0.28, Bank Nifty +0.19) that fell market-wide afterwards. No deviations from the plan.
+* **IMPROVEMENTS:** Whole-day weekday premia are shown not to be clean evidence of expiry effects, which supports reading the expiry effect at the end of the day.
+* **REMAINING ISSUES:** A finer (intraday) outcome for the sector indices would need minute bars that are not available here.
+* **NEXT ITERATION:** The Bank Nifty forecasting replication (P91).
+
 ## Iterations in progress (3 November 2026, about 07:00 IST)
 
 * **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
