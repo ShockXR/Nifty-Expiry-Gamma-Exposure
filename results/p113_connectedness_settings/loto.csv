@@ -1,0 +1,10 @@
+held_out,chosen_spec,train_mad10,held_out_mad5,held_out_errors,held_out_mad5_median_spec,pooled_held_out_mad15,window
+Table 3,GC|logvar|C|p=5|H=5,4.2042,7.6251,0.43;7.41;-5.18;-1.96;-23.14,17.4921,6.7211,A
+Table 4 Panel I,GC|logvar|S|p=aic|H=100,6.3495,7.3200,-2.32;-5.01;-12.09;-3.12;14.05,14.3126,6.7211,A
+Table 4 Panel II,GC|logvar|C|p=5|H=5,5.4076,5.2183,1.41;2.23;20.87;-0.28;1.30,20.0613,6.7211,A
+Table 3,GC|logvar|C|p=5|H=5,4.2042,8.4366,0.22;7.30;-5.20;-7.29;-22.18,17.5394,7.1850,B
+Table 4 Panel I,GR|logvar|S|p=aic|H=50,5.7077,7.3703,-3.02;-4.80;-11.00;-2.98;15.05,14.3126,7.1850,B
+Table 4 Panel II,GC|logvar|C|p=bic|H=5,5.0470,5.7483,0.43;2.23;20.17;-4.61;-1.31,20.0613,7.1850,B
+Table 3,GC|logvar|C|p=5|H=5,4.2042,9.9724,-3.99;4.38;-8.62;-3.88;-28.99,24.6760,6.8152,ST
+Table 4 Panel I,GR|logvar|C|p=10|H=10,7.5639,4.3828,-0.18;-0.01;8.92;2.81;9.99,14.3126,6.8152,ST
+Table 4 Panel II,GC|logvar|C|p=bic|H=11,6.0550,6.0904,0.51;3.91;20.17;-4.61;1.26,20.0613,6.8152,ST

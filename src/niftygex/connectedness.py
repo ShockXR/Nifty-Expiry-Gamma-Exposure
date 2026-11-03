@@ -10,7 +10,9 @@ Steps
        theta_ij = Sigma_jj^{-1} sum_{h<H} (e_i' Psi_h Sigma e_j)^2
                   / sum_{h<H} e_i' Psi_h Sigma Psi_h' e_i
 
-4. Normalise each row to sum to 1: theta~_ij.
+4. Normalise each row to sum to 1: theta~_ij. (``fevd_table`` and
+   ``cholesky_fevd`` also give the unnormalised, column-normalised and
+   Cholesky versions, used by study P113; the defaults here are unchanged.)
 5. Total connectedness (DY 2012 standard scale, 0 to 100):
 
        C = 100 * sum_{i != j} theta~_ij / N
@@ -74,6 +76,53 @@ def gfevd(A: np.ndarray, Sigma: np.ndarray, H: int, normalise: bool = True) -> n
     if normalise:
         theta = theta / theta.sum(axis=1, keepdims=True)
     return theta
+
+
+def cholesky_fevd(A: np.ndarray, Sigma: np.ndarray, H: int, order=None) -> np.ndarray:
+    """Orthogonalised (Cholesky) forecast error variance decomposition, rows sum to 1.
+
+    The structural shocks come from the Cholesky factor of Sigma with the
+    variables taken in ``order`` (a list of variable indices, first = not
+    affected on impact by the others; default 0, 1, ..., N - 1). Entry (i, j)
+    is the share of variable i's H-step forecast error variance due to the
+    shock of variable j (sum over h = 0, ..., H - 1), as in Diebold and
+    Yilmaz (2009). The result depends on the order.
+    """
+    Sigma = np.asarray(Sigma, float)
+    N = Sigma.shape[0]
+    order = list(range(N)) if order is None else list(order)
+    L = np.linalg.cholesky(Sigma[np.ix_(order, order)])
+    B = np.zeros((N, N))
+    B[np.ix_(order, range(N))] = L  # impact of shock k (variable order[k]) on each original variable
+    Psi = ma_coefficients(np.asarray(A, float), H)
+    contrib = (np.einsum("hij,jk->hik", Psi, B) ** 2).sum(axis=0)  # (N, N): column k = shock order[k]
+    theta = np.zeros((N, N))
+    theta[:, order] = contrib
+    return theta / theta.sum(axis=1, keepdims=True)
+
+
+def fevd_table(A: np.ndarray, Sigma: np.ndarray, H: int, method: str = "generalized_row") -> np.ndarray:
+    """Variance decomposition table (fractions) under one of several conventions.
+
+    ``generalized_row``: Diebold and Yilmaz (2012), each row divided by its sum (same as ``gfevd``).
+    ``generalized_raw``: Pesaran and Shin (1998) shares, not normalised (a row can sum to more than 1).
+    ``generalized_column``: each column divided by its sum.
+    ``cholesky``: orthogonalised shares with variables in their given order.
+    ``cholesky_reversed``: orthogonalised shares with the order reversed.
+    """
+    if method == "generalized_row":
+        return gfevd(A, Sigma, H, normalise=True)
+    if method == "generalized_raw":
+        return gfevd(A, Sigma, H, normalise=False)
+    if method == "generalized_column":
+        th = gfevd(A, Sigma, H, normalise=False)
+        return th / th.sum(axis=0, keepdims=True)
+    N = np.asarray(Sigma).shape[0]
+    if method == "cholesky":
+        return cholesky_fevd(A, Sigma, H, order=range(N))
+    if method == "cholesky_reversed":
+        return cholesky_fevd(A, Sigma, H, order=range(N - 1, -1, -1))
+    raise ValueError(f"unknown method {method!r}")
 
 
 @dataclass

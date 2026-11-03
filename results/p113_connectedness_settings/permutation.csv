@@ -1,0 +1,4 @@
+window,best_mad15,p_best_mad15,perm_best_mad15_median,perm_best_mad15_p05,obs_b,p_b,perm_share_b,best_mad10a,p_best_mad10a,obs_c,p_c,perm_share_c,perm_best_mad10a_median
+A,5.34447,0.002997,7.87939,6.46185,False,,0,4.20417,0.632368,False,,0,3.95819
+B,5.28074,0.002997,8.01434,6.56712,False,,0,4.20417,0.632368,False,,0,3.95819
+ST,6.06679,0.030969,7.50287,6.19207,False,,0,4.20417,0.632368,False,,0,3.95819

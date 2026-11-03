@@ -1,0 +1,31 @@
+data,specification,reported_as,cell,point,boot_ci95_lo,boot_ci95_hi,n_draws_finite,printed_total
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T3.1,84.4296,82.5001,86.3497,999,84.0000
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T3.2,82.1116,78.3944,83.5623,999,74.7000
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T3.3,94.2426,89.7515,95.7015,999,99.4200
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T3.4,66.6780,54.1116,85.1666,999,68.6400
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T3.5,82.0753,78.3167,86.1228,999,105.2200
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.I.1,76.4830,75.3791,77.9033,999,76.3800
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.I.2,74.4913,73.2603,77.3436,999,74.5800
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.I.3,88.7412,87.4993,91.3553,999,80.1800
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.I.4,69.2360,59.1522,85.6853,999,68.8100
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.I.5,73.2113,69.1963,84.3464,999,66.4400
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.II.1,74.4336,73.0842,76.0100,999,73.0200
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.II.2,74.9677,73.1180,75.9582,999,72.7400
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.II.3,91.8440,90.3710,92.6539,999,70.9700
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.II.4,66.2618,61.1610,71.9538,999,66.5400
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,T4.II.5,75.7280,70.5909,87.0448,999,74.4300
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T3.1,82.8825,78.1599,86.5272,999,84.0000
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T3.2,80.6920,71.9868,87.0877,999,74.7000
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T3.3,90.2842,82.3625,97.0488,999,99.4200
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T3.4,74.4555,58.6737,83.4674,999,68.6400
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T3.5,87.1060,86.8241,96.4116,999,105.2200
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.I.1,74.2312,69.1564,80.0466,999,76.3800
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.I.2,68.1200,64.5002,79.4106,999,74.5800
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.I.3,66.6021,66.6021,85.7820,999,80.1800
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.I.4,64.9046,60.7090,89.5403,999,68.8100
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.I.5,82.3006,82.3006,99.8798,999,66.4400
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.II.1,66.7386,62.8420,72.5406,999,73.0200
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.II.2,69.9726,65.2618,72.1760,999,72.7400
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.II.3,80.1301,74.4242,85.1857,999,70.9700
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.II.4,67.4446,66.9684,74.4110,999,66.5400
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,T4.II.5,80.7994,76.4941,100.2623,999,74.4300
