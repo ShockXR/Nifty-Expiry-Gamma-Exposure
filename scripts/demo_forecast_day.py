@@ -12,7 +12,7 @@ It reads COMMITTED files only and refits nothing:
 * ``<run>/forecasts_next15.csv`` (required), ``forecasts_next30.csv`` and ``forecasts_last_hour.csv``
   (optional): one row per (test day, anchor minute) with the realized variance ``y`` of the window
   that starts at the anchor and every model's forecast of it, made at the anchor. The two models
-  shown are ``mcsgarch`` (the anchor paper's model) and ``hybrid_base`` (mcsGARCH times a LightGBM
+  shown are ``mcsgarch`` (our implementation of the anchor paper's model; see docs/P116_BENCHMARK_AS_PRINTED.md) and ``hybrid_base`` (mcsGARCH times a LightGBM
   correction), the pair behind the headline 5.8% and 7.6% gains.
 * ``<run>/daily_market.csv`` (optional): the last one-minute price of each day, for the caption.
 * ``results/p106_gain_decomposition/shares.csv``, ``contributions.csv`` and ``run_info.json``
@@ -700,7 +700,7 @@ def build_page(date: str, index: str, run: Path, f: pd.DataFrame, daily: pd.Data
     gain_word = "lower" if r["gain_pct"] >= 0 else "higher"
     tiles = f"""
 <section class="tiles" aria-label="The day's QLIKE">
-  <div class="tile"><div class="lab"><span class="sw mcs"></span>mcsGARCH (the paper's model): day's QLIKE</div>
+  <div class="tile"><div class="lab"><span class="sw mcs"></span>mcsGARCH (our implementation): day's QLIKE</div>
     <div class="val">{fmt_q(r['l_mcs'])}</div>
     <div class="rank">{ordinal(rank_m)} highest of {nd:,} test days (1st = hardest day)</div></div>
   <div class="tile"><div class="lab"><span class="sw hyb"></span>Hybrid (mcsGARCH \u00d7 LightGBM correction): day's QLIKE</div>
@@ -865,9 +865,9 @@ def write_png(day: pd.DataFrame, date: str, summary: dict, path: Path, label: st
     ax.grid(axis="y", color=C_GRID, lw=1, zorder=0)
     for s in ("top", "right", "left"):
         ax.spines[s].set_visible(False)
-    handles = [Patch(color=C_REAL, label="Realized (what happened)"),
+    handles = [Patch(color=C_REAL, label="Realized"),
                Line2D([], [], color=C_MCS, lw=4, ls=(0, (4, 2.5)), marker="o", ms=10, mec="white",
-                      label="mcsGARCH (paper's model)"),
+                      label="mcsGARCH (our version)"),
                Line2D([], [], color=C_HYB, lw=4, marker="s", ms=9, mec="white",
                       label="Hybrid (mcsGARCH × LightGBM)")]
     fig.legend(handles=handles, loc="upper left", fontsize=20, frameon=False, ncol=3,
