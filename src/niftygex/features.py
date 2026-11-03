@@ -11,10 +11,15 @@ produce it):
     participant  DataFrame per publish day: pro_call, pro_put, client_call, client_put
     vix       India VIX (annualised, decimal) per publish day
     lot_size, r
-    option_tables  (real data) dict publish date -> every listed Nifty option series
+    option_tables  (real data) dict publish date -> every listed option series of the index
               (expiry, strike, is_call, settle, close, oi, volume), for implied.py
-    futures   (real data) per publish day: Nifty futures traded value, OI, near settle
-    other_index_expiries  (real data) Bank Nifty expiry dates
+    futures   (real data) per publish day: the index's futures traded value, OI, near settle
+    other_index_expiries  (real data) expiry dates of the other big NSE index: Bank Nifty when
+              the index is Nifty, Nifty when it is Bank Nifty (feature ``bn_expiry_only``, whose
+              name is kept from the Nifty design: "the other index expires today, this one does not")
+
+The index is Nifty unless the market was built with symbol="BANKNIFTY"
+(scripts/run_pipeline.py --symbol, docs/prereg/P91_BANKNIFTY_FORECAST.md).
 
 Timing rule: anything published at the close of day t-1 (bhavcopy, the
 participant file, VIX, and the option-implied panel built from the

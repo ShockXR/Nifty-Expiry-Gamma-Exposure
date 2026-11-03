@@ -2,8 +2,13 @@
 
     python scripts/run_pipeline.py --source synthetic --days 500 --kappa 0.5
     python scripts/run_pipeline.py --source nse --raw data/raw --out results/pipeline_nse_v2
+    python scripts/run_pipeline.py --source nse --symbol BANKNIFTY --end 2026-04-22 --out results/pipeline_nse_banknifty
 
-Outputs go to results/pipeline_<source>/ (or --out):
+--symbol picks the index (default NIFTY, the index the design was chosen on). BANKNIFTY is the
+pre-registered out-of-sample replication (docs/prereg/P91_BANKNIFTY_FORECAST.md): the same models,
+features and settings, fed with Bank Nifty's own minute bars, option chains, futures and expiry calendar.
+
+Outputs go to results/pipeline_<source>/ (or --out; results/pipeline_<source>_<symbol>/ for a symbol other than NIFTY):
     daily_market.csv             one row per day: labels, realized variance pieces, VIX
     daily_gex_panel.csv          GEX under each sign rule (all strikes and near the money), flip, walls, max pain
     daily_implied_panel.csv      option-implied quantities from each day's published chain (all expiries)
@@ -58,6 +63,16 @@ SIGNED = ["us", "participant", "client"]
 # hybrid with the full version 2 base. hybridiv and linear are reported as robustness families.
 HEADLINE_KIND = "hybrid"
 
+# What changes with --symbol (nse source only). Everything else, the India VIX file and the
+# participant-wise OI file included, is shared: NSE publishes no Bank Nifty VIX, and the participant
+# file covers all index options together. "official" is the index name in index_daily.csv.
+SYMBOLS = {
+    "NIFTY": {"bars": "nifty_1min.csv", "futures_bars": "nifty_fut_1min.csv", "official": "nifty 50",
+              "bars_label": "Nifty"},
+    "BANKNIFTY": {"bars": "banknifty_1min.csv", "futures_bars": "banknifty_fut_1min.csv",
+                  "official": "nifty bank", "bars_label": "Bank Nifty"},
+}
+
 
 def load_market(a):
     if a.source == "synthetic":
@@ -66,20 +81,22 @@ def load_market(a):
                                          participant_noise=a.participant_noise))
     from niftygex.data import build_market_from_nse
     raw = Path(a.raw)
+    symbol = getattr(a, "symbol", "NIFTY")  # callers written before --symbol existed get Nifty
+    spec = SYMBOLS[symbol]
     official = None
     if (raw / "index_daily.csv").exists():  # NSE's own list of trading days (from download_nse.py)
         idx = pd.read_csv(raw / "index_daily.csv", parse_dates=["date"])
-        official = idx.loc[idx["index"].str.lower() == "nifty 50", "date"]
-    return build_market_from_nse(raw / "nifty_1min.csv", raw / "bhavcopy",
+        official = idx.loc[idx["index"].str.lower() == spec["official"], "date"]
+    return build_market_from_nse(raw / spec["bars"], raw / "bhavcopy",
                                  raw / "participant_oi" if (raw / "participant_oi").exists() else None,
                                  raw / "india_vix.csv" if (raw / "india_vix.csv").exists() else None,
-                                 raw / "nifty_fut_1min.csv" if (raw / "nifty_fut_1min.csv").exists() else None,
-                                 oi_unit=a.oi_unit, lot_size=a.lot_size, r=a.rate,
+                                 raw / spec["futures_bars"] if (raw / spec["futures_bars"]).exists() else None,
+                                 symbol=symbol, oi_unit=a.oi_unit, lot_size=a.lot_size, r=a.rate,
                                  start=a.start, end=a.end, min_coverage=a.min_coverage,
                                  official_days=official, use_file_expiries=True)
 
 
-def write_daily_market(m, path):
+def write_daily_market(m, path, symbol: str = "NIFTY"):
     """One row per day: expiry labels, realized variance pieces, VIX and the chain's spot and forward."""
     R = np.asarray(m["R"], float)
     lab = m["labels"]
@@ -100,7 +117,7 @@ def write_daily_market(m, path):
         "bhavcopy_missing": [bool(c.attrs.get("missing", False)) for c in m["chains"]],
     }, index=pd.DatetimeIndex(m["days"], name="date"))
     if m.get("futures") is not None:
-        df["nifty_futures_traded_value"] = m["futures"]["fut_value"].reindex(df.index).to_numpy()
+        df[f"{symbol.lower()}_futures_traded_value"] = m["futures"]["fut_value"].reindex(df.index).to_numpy()
     df.to_csv(path)
 
 
@@ -167,6 +184,8 @@ def seed_study(m, ds, base_cfg: WalkForwardConfig, seeds, models):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", choices=["synthetic", "nse"], default="synthetic")
+    ap.add_argument("--symbol", choices=list(SYMBOLS), default="NIFTY",
+                    help="index to forecast (nse source only); BANKNIFTY is the pre-registered replication P91")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--days", type=int, default=500)
     ap.add_argument("--kappa", type=float, default=0.5)
@@ -197,32 +216,37 @@ def main():
     ap.add_argument("--verbose", action="store_true", help="print one line per walk-forward block")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
+    if a.source == "synthetic" and a.symbol != "NIFTY":
+        ap.error("--symbol applies to --source nse only")
+    # Figure titles and the default output folder name the index, except for Nifty (unchanged).
+    mk = "" if a.symbol == "NIFTY" else f"{a.symbol}: "
 
-    out = Path(a.out or f"results/pipeline_{a.source}")
+    out = Path(a.out or (f"results/pipeline_{a.source}" if a.symbol == "NIFTY"
+                         else f"results/pipeline_{a.source}_{a.symbol.lower()}"))
     (out / "figures").mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     m = load_market(a)
     label = ("SYNTHETIC (simulated market, not real data)" if a.source == "synthetic" else
-             "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute Nifty bars "
-             "validated against NSE daily values")
+             "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute "
+             f"{SYMBOLS[a.symbol]['bars_label']} bars validated against NSE daily values")
     holdout = a.holdout_start if a.source == "nse" else None
     print(f"[{label}] {len(m['days'])} days loaded", flush=True)
 
-    write_daily_market(m, out / "daily_market.csv")
+    write_daily_market(m, out / "daily_market.csv", symbol=a.symbol)
     panel = build_gex_panel(m)
     panel.to_csv(out / "daily_gex_panel.csv")
     implied = build_implied_panel(m)
     implied.to_csv(out / "daily_implied_panel.csv")
     print(f"panels built ({time.time() - t0:.0f}s)", flush=True)
     plots.gex_timeseries(panel, out / "figures" / "gex_by_sign_rule.png",
-                         f"Net GEX / 20-day median gross GEX, by sign rule ({'synthetic' if a.source == 'synthetic' else 'NSE'})")
+                         f"{mk}Net GEX / 20-day median gross GEX, by sign rule ({'synthetic' if a.source == 'synthetic' else 'NSE'})")
 
     # Full-sample mcsGARCH for the diurnal figure and a parameter table like the paper's Table 2
     is_exp = m["labels"]["is_expiry"].to_numpy()
     h, _ = daily_egarch_variance(m["R"].sum(axis=1))
     full = McsGarch(expiry_diurnal=True, smooth=5).fit(m["R"], h, is_exp, compute_tstats=True)
     plots.diurnal_curves(full.s, full.s_expiry, out / "figures" / "diurnal_curves.png",
-                         "mcsGARCH diurnal variance curve (in-sample)")
+                         f"{mk}mcsGARCH diurnal variance curve (in-sample)")
     pd.DataFrame([{k: v for k, v in full.params.items() if k != "tstats"} |
                   {f"z_{k}": v for k, v in full.params["tstats"].items()}]).to_csv(out / "mcsgarch_full_sample.csv", index=False)
 
@@ -247,7 +271,7 @@ def main():
         sb.to_csv(out / f"scoreboard_{name}.csv", index=False)
         for g in ("all", "expiry"):
             plots.scoreboard_bars(sb, g, out / "figures" / f"scoreboard_{name}_{g}.png",
-                                  f"{name}, {g} days: out-of-sample QLIKE vs mcsGARCH")
+                                  f"{mk}{name}, {g} days: out-of-sample QLIKE vs mcsGARCH")
         tests = []
         for subset, mask in groups.items():
             sub = pred[mask]
@@ -283,7 +307,7 @@ def main():
         ablation_table(pred, pairs, abl_groups, loss="mse").to_csv(out / f"ablation_{name}_mse.csv", index=False)
         for kind in ("hybrid", "hybridiv", "linear"):
             plots.ablation_dots(abl, f"{kind}: base vs base+GEX", out / "figures" / f"ablation_{name}_{kind}.png",
-                                f"{name}: {kind} model, adding each GEX set (REAL DATA)" if a.source == "nse"
+                                f"{mk}{name}: {kind} model, adding each GEX set (REAL DATA)" if a.source == "nse"
                                 else f"{name}: {kind} model, adding each GEX set (synthetic)")
         if info["importance"]:
             imp = pd.concat(info["importance"], axis=1)

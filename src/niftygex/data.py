@@ -331,9 +331,16 @@ def build_market_from_nse(
     min_coverage: float = 0.0,
     official_days=None,
     use_file_expiries: bool = False,
+    other_symbol: str | None = None,
 ) -> dict:
     """Assemble the market dict from raw NSE-layout files.
 
+    * ``symbol``: the index whose options, futures and expiry calendar are
+      used (NIFTY or BANKNIFTY); ``bars_path`` must hold that index's bars.
+    * ``other_symbol``: the other big NSE index, whose expiry dates are
+      returned as ``other_index_expiries`` (the calendar feature
+      ``bn_expiry_only``). Default: BANKNIFTY for NIFTY (the original
+      design) and NIFTY for BANKNIFTY.
     * ``bars_path``: 1-minute index bars (CSV, see load_minute_bars).
     * ``bhavcopy_dir``: one bhavcopy CSV per trading day, any file name; the
       trade date is read from inside the file.
@@ -354,11 +361,14 @@ def build_market_from_nse(
     * ``use_file_expiries``: label expiry days from the bhavcopies (dates on
       which a contract really expired) instead of the weekday rule.
 
-    For each day t the chain used is the nearest weekly expiry strictly after
-    t, i.e. the contract that will be live on day t+1 (or expiring on it).
+    For each day t the chain used is the nearest expiry strictly after t
+    (a weekly when the index has weeklies, otherwise the monthly), i.e. the
+    contract that will be live on day t+1 (or expiring on it).
     """
     from .expiry_calendar import label_days
 
+    if other_symbol is None:
+        other_symbol = "NIFTY" if symbol == "BANKNIFTY" else "BANKNIFTY"
     bars = load_minute_bars(bars_path)
     if start is not None:
         bars = bars[bars.index >= pd.Timestamp(start)]
@@ -381,7 +391,7 @@ def build_market_from_nse(
         grid["volume"] = np.ones_like(grid["close"])
     # bhavcopy, keyed by trade date
     bhav = {}
-    other_bhav = {}  # other index (BANKNIFTY) options: only their expiry dates are kept
+    other_bhav = {}  # other index (other_symbol) options: only their expiry dates are kept
     fut_rows = {}
     lo, hi = days.min() - pd.Timedelta(days=10), days.max() + pd.Timedelta(days=10)
     for f in bhavcopy_files(bhavcopy_dir):
@@ -392,12 +402,12 @@ def build_market_from_nse(
                 continue
         except ValueError:
             pass
-        full = load_bhavcopy_all(f, symbols=(symbol, "BANKNIFTY"))
+        full = load_bhavcopy_all(f, symbols=(symbol, other_symbol))
         df = full[(full["instrument"] == "OPT") & (full["symbol"] == symbol)][OPTION_SCHEMA].reset_index(drop=True)
         if len(df):
             dkey = pd.Timestamp(df["date"].iloc[0]).normalize()
             bhav[dkey] = df
-            other = full[(full["instrument"] == "OPT") & (full["symbol"] == "BANKNIFTY")]
+            other = full[(full["instrument"] == "OPT") & (full["symbol"] == other_symbol)]
             if len(other):
                 other_bhav[dkey] = other[["date", "expiry"]]
             fu = full[(full["instrument"] == "FUT") & (full["symbol"] == symbol)].sort_values("expiry")
@@ -409,7 +419,7 @@ def build_market_from_nse(
     expiries = actual_expiries(bhav) if use_file_expiries else None
     monthly = None
     if use_file_expiries:
-        # Monthly expiry = a day on which a NIFTY index future expires (read from the same files).
+        # Monthly expiry = a day on which an index future of `symbol` expires (read from the same files).
         fut = set()
         for f in bhavcopy_files(bhavcopy_dir):
             stamp = "".join(ch for ch in Path(f).name if ch.isdigit())[-8:]
@@ -496,7 +506,7 @@ def build_market_from_nse(
         vix = np.where(np.isfinite(vix), vix, np.sqrt(rv * 252))
 
     lots = np.asarray(lot_used, float)
-    # Slim copy of every NIFTY option series published each day (all expiries), for
+    # Slim copy of every option series of `symbol` published each day (all expiries), for
     # option-implied features (term structure, skew, put/call ratios). Keyed by publish date.
     option_tables = {}
     for d in days:
