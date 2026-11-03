@@ -1,0 +1,2 @@
+source,regimes,first,last,n_days,sigma_net,rho_week_net,corr_tue_thu_net,n_pairs_week_net,n_weeks_tue_thu_net,sigma_total,rho_week_total,corr_tue_thu_total,n_pairs_week_total,n_weeks_tue_thu_total
+results/connectedness_gamma/sample_days.csv,single_weekly_thu;single_weekly_tue,2024-11-21,2026-04-22,348,6.381961900989525,0.1278004467372622,0.03012116536406653,321,63,5.270482949392593,0.06877865420707828,0.07221794690520567,321,63

@@ -1,0 +1,15 @@
+{
+  "data": "REAL DATA",
+  "phase": "1 (coverage only, no outcome)",
+  "sample_start": "2024-11-21",
+  "sample_end": "2026-11-02",
+  "n_days": 480,
+  "pre_registered_mde_points": 4.9,
+  "input_sha256_16": {
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b4",
+    "data/raw/sensex_1min.csv": "471a519e0300fbf0",
+    "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
+    "data/external/sensex_expiry_calendar.csv": "5d9329e40c8c75b2",
+    "results/connectedness_gamma/sample_days.csv": "f663478536e920a6"
+  }
+}
