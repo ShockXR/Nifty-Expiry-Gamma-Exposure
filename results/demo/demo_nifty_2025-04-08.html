@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecast demo 2025-04-08</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface: #f7f6f2; --card: #ffffff; --ink: #141413; --ink2: #45443f; --muted: #6b6a64;
+  --line: #e4e3de; --mcs: #2a78d6; --hyb: #eb6834; --real: #9b9a94;
+}
+* { box-sizing: border-box; }
+html { font-size: 20px; }
+body { margin: 0; background: var(--surface); color: var(--ink);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif; line-height: 1.45; }
+main { max-width: 1500px; margin: 0 auto; padding: 24px 16px 48px; }
+.eyebrow { font-size: 1rem; color: var(--ink2); letter-spacing: 0.02em; }
+h1 { font-size: 2.2rem; margin: 4px 0 8px; line-height: 1.15; }
+h2 { font-size: 1.35rem; margin: 0 0 6px; }
+.caption { font-size: 1.25rem; margin: 0 0 20px; max-width: 70em; }
+.tag { display: inline-block; background: var(--ink); color: #fff; font-weight: 700; font-size: 0.85rem;
+  letter-spacing: 0.06em; padding: 3px 10px; border-radius: 6px; vertical-align: middle; margin-left: 8px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+  margin: 0 0 20px; }
+.sub { color: var(--ink2); margin: 0 0 10px; font-size: 1.05rem; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;
+  margin: 0 0 20px; }
+.tile { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; }
+.tile .lab { font-size: 1.05rem; color: var(--ink2); display: flex; align-items: center; gap: 10px; }
+.tile .val { font-size: 2.4rem; font-weight: 700; line-height: 1.1; margin: 6px 0 4px; }
+.tile .rank { font-size: 1rem; color: var(--ink2); }
+.sw { display: inline-block; width: 28px; height: 6px; border-radius: 3px; flex: none; }
+.sw.mcs { background: repeating-linear-gradient(90deg, var(--mcs) 0 9px, transparent 9px 14px); height: 5px; }
+.sw.hyb { background: var(--hyb); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; }
+.cols .card { margin: 0; }
+.chartwrap { position: relative; }
+svg.chart { width: 100%; height: auto; display: block; }
+.warn { background: #fff4d6; border-left: 6px solid #c98500; padding: 8px 12px; margin: 0 0 10px;
+  font-weight: 600; }
+table { border-collapse: collapse; width: 100%; font-size: 1rem; }
+th, td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--ink2); font-weight: 600; }
+.scroll { overflow-x: auto; }
+details summary { cursor: pointer; font-weight: 600; font-size: 1.1rem; }
+.note { color: var(--ink2); font-size: 0.95rem; }
+footer { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
+code { font-size: 0.9em; }
+#tip { position: absolute; pointer-events: none; background: #141413; color: #fff; border-radius: 8px;
+  padding: 10px 14px; font-size: 1rem; line-height: 1.4; min-width: 260px; display: none; z-index: 5;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
+#tip b { font-weight: 700; }
+#tip .k { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 6px; }
+.hit:focus { outline: 3px solid #141413; }
+@media (max-width: 700px) { html { font-size: 16px; } .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Nifty volatility forecasts, one test day (day 407 of 792) <span class="tag">REAL DATA</span></div>
+<h1>Tuesday 8 April 2025</h1>
+<p class="caption" id="caption">The trading day after the global tariff sell-off of 7 April 2025. Nifty ended the day 1.4% higher (last one-minute price against the day before), and the session was much busier than usual (realized variance 6.9 times the median test day&#x27;s).</p>
+
+<section class="tiles" aria-label="The day's QLIKE">
+  <div class="tile"><div class="lab"><span class="sw mcs"></span>mcsGARCH (the paper's model): day's QLIKE</div>
+    <div class="val">0.185</div>
+    <div class="rank">495th highest of 792 test days (1st = hardest day)</div></div>
+  <div class="tile"><div class="lab"><span class="sw hyb"></span>Hybrid (mcsGARCH × LightGBM correction): day's QLIKE</div>
+    <div class="val">0.159</div>
+    <div class="rank">559th highest of 792 test days</div></div>
+  <div class="tile"><div class="lab">Hybrid's loss compared with mcsGARCH's, this day</div>
+    <div class="val">13.7% lower</div>
+    <div class="rank">148th best of 792 days for the hybrid. Over all 792 days: 5.8% lower.</div></div>
+</section>
+<section class="card">
+  <h2>What happened, and what each model forecast</h2>
+  <p class="sub">Grey bars: the realized variance of each 15-minute window (the sum of squared one-minute
+  returns). Lines: the forecast of that window, made at its start. The hybrid was closer in
+  14 of 25 windows. In the first window (09:15) the hybrid was closer: QLIKE 0.242 for mcsGARCH and 0.138 for the hybrid. Hover over a window for its numbers.</p>
+  <div class="chartwrap" id="sess-wrap"><svg class="chart session" viewBox="0 0 1400 660" role="img" aria-labelledby="sess-title" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<title id="sess-title">REAL DATA: realized 15-minute variance in each window against the mcsGARCH and hybrid forecasts made at the start of the window</title>
+<rect x="0" y="0" width="1400" height="660" fill="#ffffff"/>
+<rect x="130" y="16" width="26" height="30" rx="3" fill="#9b9a94"/><text x="166" y="40" font-size="25" fill="#141413">Realized (what happened)</text>
+<line x1="515" y1="31" x2="567" y2="31" stroke="#2a78d6" stroke-width="4" stroke-dasharray="10 6"/><circle cx="541" cy="31" r="7" fill="#2a78d6" stroke="#fff" stroke-width="2"/><text x="579" y="40" font-size="25" fill="#141413">mcsGARCH forecast</text>
+<line x1="850" y1="31" x2="902" y2="31" stroke="#eb6834" stroke-width="4"/><rect x="869" y="24" width="14" height="14" fill="#eb6834" stroke="#fff" stroke-width="2"/><text x="914" y="40" font-size="25" fill="#141413">Hybrid forecast</text>
+<g class="data-label"><rect x="1225" y="12" width="150" height="34" rx="6" fill="#141413"/><text x="1300" y="36" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff" letter-spacing="1">REAL DATA</text></g>
+<line x1="130" y1="470.0" x2="1375" y2="470.0" stroke="#e4e3de" stroke-width="1"/><text x="118" y="477.0" text-anchor="end" font-size="23" fill="#45443f">0</text>
+<line x1="130" y1="375.5" x2="1375" y2="375.5" stroke="#e4e3de" stroke-width="1"/><text x="118" y="382.5" text-anchor="end" font-size="23" fill="#45443f">20</text>
+<line x1="130" y1="281.0" x2="1375" y2="281.0" stroke="#e4e3de" stroke-width="1"/><text x="118" y="288.0" text-anchor="end" font-size="23" fill="#45443f">40</text>
+<line x1="130" y1="186.5" x2="1375" y2="186.5" stroke="#e4e3de" stroke-width="1"/><text x="118" y="193.5" text-anchor="end" font-size="23" fill="#45443f">60</text>
+<line x1="130" y1="92.0" x2="1375" y2="92.0" stroke="#e4e3de" stroke-width="1"/><text x="118" y="99.0" text-anchor="end" font-size="23" fill="#45443f">80</text>
+<text transform="translate(34 281) rotate(-90)" text-anchor="middle" font-size="23" fill="#45443f">Variance (× 10⁻⁶)</text>
+<path d="M142.9,470.0V350.2Q142.9,346.2 146.9,346.2H162.9Q166.9,346.2 166.9,350.2V470.0Z" fill="#9b9a94"/>
+<path d="M192.7,470.0V454.7Q192.7,450.7 196.7,450.7H212.7Q216.7,450.7 216.7,454.7V470.0Z" fill="#9b9a94"/>
+<path d="M242.5,470.0V434.5Q242.5,430.5 246.5,430.5H262.5Q266.5,430.5 266.5,434.5V470.0Z" fill="#9b9a94"/>
+<path d="M292.3,470.0V446.8Q292.3,442.8 296.3,442.8H312.3Q316.3,442.8 316.3,446.8V470.0Z" fill="#9b9a94"/>
+<path d="M342.1,470.0V463.8Q342.1,459.8 346.1,459.8H362.1Q366.1,459.8 366.1,463.8V470.0Z" fill="#9b9a94"/>
+<path d="M391.9,470.0V444.3Q391.9,440.3 395.9,440.3H411.9Q415.9,440.3 415.9,444.3V470.0Z" fill="#9b9a94"/>
+<path d="M441.7,470.0V411.8Q441.7,407.8 445.7,407.8H461.7Q465.7,407.8 465.7,411.8V470.0Z" fill="#9b9a94"/>
+<path d="M491.5,470.0V426.6Q491.5,422.6 495.5,422.6H511.5Q515.5,422.6 515.5,426.6V470.0Z" fill="#9b9a94"/>
+<path d="M541.3,470.0V422.9Q541.3,418.9 545.3,418.9H561.3Q565.3,418.9 565.3,422.9V470.0Z" fill="#9b9a94"/>
+<path d="M591.1,470.0V440.2Q591.1,436.2 595.1,436.2H611.1Q615.1,436.2 615.1,440.2V470.0Z" fill="#9b9a94"/>
+<path d="M640.9,470.0V433.0Q640.9,429.0 644.9,429.0H660.9Q664.9,429.0 664.9,433.0V470.0Z" fill="#9b9a94"/>
+<path d="M690.7,470.0V425.0Q690.7,421.0 694.7,421.0H710.7Q714.7,421.0 714.7,425.0V470.0Z" fill="#9b9a94"/>
+<path d="M740.5,470.0V438.8Q740.5,434.8 744.5,434.8H760.5Q764.5,434.8 764.5,438.8V470.0Z" fill="#9b9a94"/>
+<path d="M790.3,470.0V438.7Q790.3,434.7 794.3,434.7H810.3Q814.3,434.7 814.3,438.7V470.0Z" fill="#9b9a94"/>
+<path d="M840.1,470.0V456.8Q840.1,452.8 844.1,452.8H860.1Q864.1,452.8 864.1,456.8V470.0Z" fill="#9b9a94"/>
+<path d="M889.9,470.0V446.6Q889.9,442.6 893.9,442.6H909.9Q913.9,442.6 913.9,446.6V470.0Z" fill="#9b9a94"/>
+<path d="M939.7,470.0V455.5Q939.7,451.5 943.7,451.5H959.7Q963.7,451.5 963.7,455.5V470.0Z" fill="#9b9a94"/>
+<path d="M989.5,470.0V421.4Q989.5,417.4 993.5,417.4H1009.5Q1013.5,417.4 1013.5,421.4V470.0Z" fill="#9b9a94"/>
+<path d="M1039.3,470.0V417.8Q1039.3,413.8 1043.3,413.8H1059.3Q1063.3,413.8 1063.3,417.8V470.0Z" fill="#9b9a94"/>
+<path d="M1089.1,470.0V433.4Q1089.1,429.4 1093.1,429.4H1109.1Q1113.1,429.4 1113.1,433.4V470.0Z" fill="#9b9a94"/>
+<path d="M1138.9,470.0V453.5Q1138.9,449.5 1142.9,449.5H1158.9Q1162.9,449.5 1162.9,453.5V470.0Z" fill="#9b9a94"/>
+<path d="M1188.7,470.0V438.1Q1188.7,434.1 1192.7,434.1H1208.7Q1212.7,434.1 1212.7,438.1V470.0Z" fill="#9b9a94"/>
+<path d="M1238.5,470.0V447.0Q1238.5,443.0 1242.5,443.0H1258.5Q1262.5,443.0 1262.5,447.0V470.0Z" fill="#9b9a94"/>
+<path d="M1288.3,470.0V459.1Q1288.3,455.1 1292.3,455.1H1308.3Q1312.3,455.1 1312.3,459.1V470.0Z" fill="#9b9a94"/>
+<path d="M1338.1,470.0V470.0Q1338.1,467.1 1341.0,467.1H1359.2Q1362.1,467.1 1362.1,470.0V470.0Z" fill="#9b9a94"/>
+<polyline points="154.9,198.0 204.7,417.8 254.5,444.0 304.3,446.1 354.1,445.6 403.9,456.5 453.7,451.1 503.5,426.2 553.3,435.8 603.1,436.3 652.9,439.3 702.7,428.2 752.5,429.6 802.3,431.8 852.1,444.2 901.9,450.2 951.7,447.3 1001.5,449.1 1051.3,432.9 1101.1,424.4 1150.9,431.2 1200.7,440.4 1250.5,433.6 1300.3,434.5 1350.1,459.6" fill="none" stroke="#2a78d6" stroke-width="4" stroke-dasharray="10 6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="154.9,249.7 204.7,427.8 254.5,432.9 304.3,436.3 354.1,444.2 403.9,455.5 453.7,443.7 503.5,436.3 553.3,442.7 603.1,440.4 652.9,442.9 702.7,437.6 752.5,438.1 802.3,439.1 852.1,445.1 901.9,450.1 951.7,447.6 1001.5,448.6 1051.3,422.7 1101.1,433.4 1150.9,438.4 1200.7,441.9 1250.5,424.5 1300.3,438.9 1350.1,456.9" fill="none" stroke="#eb6834" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="154.9" cy="198.0" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="148.9" y="243.7" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="204.7" cy="417.8" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="198.7" y="421.8" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="254.5" cy="444.0" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="248.5" y="426.9" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="304.3" cy="446.1" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="298.3" y="430.3" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="354.1" cy="445.6" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="348.1" y="438.2" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="403.9" cy="456.5" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="397.9" y="449.5" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="453.7" cy="451.1" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="447.7" y="437.7" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="503.5" cy="426.2" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="497.5" y="430.3" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="553.3" cy="435.8" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="547.3" y="436.7" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="603.1" cy="436.3" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="597.1" y="434.4" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="652.9" cy="439.3" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="646.9" y="436.9" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="702.7" cy="428.2" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="696.7" y="431.6" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="752.5" cy="429.6" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="746.5" y="432.1" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="802.3" cy="431.8" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="796.3" y="433.1" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="852.1" cy="444.2" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="846.1" y="439.1" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="901.9" cy="450.2" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="895.9" y="444.1" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="951.7" cy="447.3" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="945.7" y="441.6" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1001.5" cy="449.1" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="995.5" y="442.6" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1051.3" cy="432.9" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1045.3" y="416.7" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1101.1" cy="424.4" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1095.1" y="427.4" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1150.9" cy="431.2" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1144.9" y="432.4" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1200.7" cy="440.4" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1194.7" y="435.9" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1250.5" cy="433.6" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1244.5" y="418.5" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1300.3" cy="434.5" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1294.3" y="432.9" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="1350.1" cy="459.6" r="6" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<rect x="1344.1" y="450.9" width="12" height="12" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<line x1="130" y1="470" x2="1375" y2="470" stroke="#45443f" stroke-width="1.5"/>
+<line x1="130.0" y1="470" x2="130.0" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="130.0" y="504" text-anchor="middle" font-size="23" fill="#45443f">09:15</text>
+<line x1="329.2" y1="470" x2="329.2" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="329.2" y="504" text-anchor="middle" font-size="23" fill="#45443f">10:15</text>
+<line x1="528.4" y1="470" x2="528.4" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="528.4" y="504" text-anchor="middle" font-size="23" fill="#45443f">11:15</text>
+<line x1="727.6" y1="470" x2="727.6" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="727.6" y="504" text-anchor="middle" font-size="23" fill="#45443f">12:15</text>
+<line x1="926.8" y1="470" x2="926.8" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="926.8" y="504" text-anchor="middle" font-size="23" fill="#45443f">13:15</text>
+<line x1="1126.0" y1="470" x2="1126.0" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="1126.0" y="504" text-anchor="middle" font-size="23" fill="#45443f">14:15</text>
+<line x1="1325.2" y1="470" x2="1325.2" y2="478" stroke="#45443f" stroke-width="1.5"/><text x="1325.2" y="504" text-anchor="middle" font-size="23" fill="#45443f">15:15</text>
+<text x="752" y="538" text-anchor="middle" font-size="23" fill="#45443f">Start of the 15-minute window (India time)</text>
+<text x="130" y="568" font-size="23" fill="#141413">Closer forecast in each window (lower QLIKE): <tspan font-weight="700">M</tspan> = mcsGARCH, <tspan font-weight="700">H</tspan> = hybrid</text>
+<rect x="132.0" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="154.9" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="181.8" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="204.7" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="231.6" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="254.5" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="281.4" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="304.3" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="331.2" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="354.1" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="381.0" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="403.9" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="430.8" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="453.7" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="480.6" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="503.5" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="530.4" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="553.3" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="580.2" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="603.1" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="630.0" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="652.9" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="679.8" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="702.7" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="729.6" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="752.5" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="779.4" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="802.3" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="829.2" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="852.1" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="879.0" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="901.9" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="928.8" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="951.7" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="978.6" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="1001.5" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="1028.4" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="1051.3" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="1078.2" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="1101.1" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="1128.0" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="1150.9" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="1177.8" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="1200.7" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="1227.6" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="1250.5" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<rect x="1277.4" y="580" width="45.8" height="38" rx="4" fill="#eb6834"/><text x="1300.3" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">H</text>
+<rect x="1327.2" y="580" width="45.8" height="38" rx="4" fill="#2a78d6"/><text x="1350.1" y="607" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">M</text>
+<line class="xhair" x1="0" y1="92" x2="0" y2="618" stroke="#141413" stroke-width="1.5" visibility="hidden"/>
+<rect class="hit" data-i="0" x="130.0" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="1" x="179.8" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="2" x="229.6" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="3" x="279.4" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="4" x="329.2" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="5" x="379.0" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="6" x="428.8" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="7" x="478.6" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="8" x="528.4" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="9" x="578.2" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="10" x="628.0" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="11" x="677.8" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="12" x="727.6" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="13" x="777.4" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="14" x="827.2" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="15" x="877.0" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="16" x="926.8" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="17" x="976.6" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="18" x="1026.4" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="19" x="1076.2" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="20" x="1126.0" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="21" x="1175.8" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="22" x="1225.6" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="23" x="1275.4" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+<rect class="hit" data-i="24" x="1325.2" y="92" width="49.8" height="526" fill="transparent" tabindex="0"/>
+</svg><div id="tip" role="status"></div></div>
+</section>
+<section class="cols">
+  <div class="card">
+    <h2>How unusual was this day?</h2>
+    <p class="sub">Each bar counts test days. The hybrid beat mcsGARCH on 565 of 792 days; on the
+    median day its QLIKE was 5.2% lower. The black bar holds this day.</p>
+    <svg class="chart hist" viewBox="0 0 760 470" role="img" aria-labelledby="hist-title" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<title id="hist-title">REAL DATA: the hybrid's gain over mcsGARCH on each test day</title>
+<rect x="0" y="0" width="760" height="470" fill="#ffffff"/>
+<g class="data-label"><rect x="600" y="6" width="150" height="34" rx="6" fill="#141413"/><text x="675" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff" letter-spacing="1">REAL DATA</text></g>
+<line x1="86" y1="330.0" x2="740" y2="330.0" stroke="#e4e3de"/><text x="76" y="338.0" text-anchor="end" font-size="23" fill="#45443f">0</text>
+<line x1="86" y1="270.0" x2="740" y2="270.0" stroke="#e4e3de"/><text x="76" y="278.0" text-anchor="end" font-size="23" fill="#45443f">50</text>
+<line x1="86" y1="210.0" x2="740" y2="210.0" stroke="#e4e3de"/><text x="76" y="218.0" text-anchor="end" font-size="23" fill="#45443f">100</text>
+<line x1="86" y1="150.0" x2="740" y2="150.0" stroke="#e4e3de"/><text x="76" y="158.0" text-anchor="end" font-size="23" fill="#45443f">150</text>
+<line x1="86" y1="90.0" x2="740" y2="90.0" stroke="#e4e3de"/><text x="76" y="98.0" text-anchor="end" font-size="23" fill="#45443f">200</text>
+<path d="M87.0,330.0V330.0Q87.0,327.6 89.4,327.6H117.0Q119.4,327.6 119.4,330.0V330.0Z" fill="#c9c8c1"/>
+<path d="M121.4,330.0V330.0Q121.4,327.6 123.8,327.6H151.4Q153.8,327.6 153.8,330.0V330.0Z" fill="#c9c8c1"/>
+<path d="M155.8,330.0V330.0Q155.8,328.8 157.0,328.8H187.1Q188.3,328.8 188.3,330.0V330.0Z" fill="#c9c8c1"/>
+<path d="M190.3,330.0V330.0Q190.3,328.8 191.5,328.8H221.5Q222.7,328.8 222.7,330.0V330.0Z" fill="#c9c8c1"/>
+<path d="M224.7,330.0V328.0Q224.7,324.0 228.7,324.0H253.1Q257.1,324.0 257.1,328.0V330.0Z" fill="#c9c8c1"/>
+<path d="M259.1,330.0V330.0Q259.1,328.8 260.3,328.8H290.3Q291.5,328.8 291.5,330.0V330.0Z" fill="#c9c8c1"/>
+<path d="M293.5,330.0V324.4Q293.5,320.4 297.5,320.4H321.9Q325.9,320.4 325.9,324.4V330.0Z" fill="#c9c8c1"/>
+<path d="M327.9,330.0V311.2Q327.9,307.2 331.9,307.2H356.4Q360.4,307.2 360.4,311.2V330.0Z" fill="#c9c8c1"/>
+<path d="M362.4,330.0V302.8Q362.4,298.8 366.4,298.8H390.8Q394.8,298.8 394.8,302.8V330.0Z" fill="#c9c8c1"/>
+<path d="M396.8,330.0V260.8Q396.8,256.8 400.8,256.8H425.2Q429.2,256.8 429.2,260.8V330.0Z" fill="#c9c8c1"/>
+<path d="M431.2,330.0V212.8Q431.2,208.8 435.2,208.8H459.6Q463.6,208.8 463.6,212.8V330.0Z" fill="#c9c8c1"/>
+<path d="M465.6,330.0V140.8Q465.6,136.8 469.6,136.8H494.1Q498.1,136.8 498.1,140.8V330.0Z" fill="#c9c8c1"/>
+<path d="M500.1,330.0V143.2Q500.1,139.2 504.1,139.2H528.5Q532.5,139.2 532.5,143.2V330.0Z" fill="#c9c8c1"/>
+<path d="M534.5,330.0V178.0Q534.5,174.0 538.5,174.0H562.9Q566.9,174.0 566.9,178.0V330.0Z" fill="#141413"/>
+<path d="M568.9,330.0V253.6Q568.9,249.6 572.9,249.6H597.3Q601.3,249.6 601.3,253.6V330.0Z" fill="#c9c8c1"/>
+<path d="M603.3,330.0V302.8Q603.3,298.8 607.3,298.8H631.7Q635.7,298.8 635.7,302.8V330.0Z" fill="#c9c8c1"/>
+<path d="M637.7,330.0V312.4Q637.7,308.4 641.7,308.4H666.2Q670.2,308.4 670.2,312.4V330.0Z" fill="#c9c8c1"/>
+<path d="M672.2,330.0V330.0Q672.2,326.4 675.8,326.4H701.0Q704.6,326.4 704.6,330.0V330.0Z" fill="#c9c8c1"/>
+<path d="M706.6,330.0V330.0Q706.6,328.8 707.8,328.8H737.8Q739.0,328.8 739.0,330.0V330.0Z" fill="#c9c8c1"/>
+<line x1="464.6" y1="80" x2="464.6" y2="330" stroke="#45443f" stroke-width="2"/>
+<text x="550.7" y="160.0" text-anchor="middle" font-size="23" font-weight="700" fill="#141413" stroke="#ffffff" stroke-width="6" paint-order="stroke">this day</text>
+<text x="120.4" y="362" text-anchor="middle" font-size="23" fill="#45443f">-50%</text>
+<text x="258.1" y="362" text-anchor="middle" font-size="23" fill="#45443f">-30%</text>
+<text x="395.8" y="362" text-anchor="middle" font-size="23" fill="#45443f">-10%</text>
+<text x="533.5" y="362" text-anchor="middle" font-size="23" fill="#45443f">10%</text>
+<text x="671.2" y="362" text-anchor="middle" font-size="23" fill="#45443f">30%</text>
+<text x="86" y="402" font-size="23" fill="#45443f">&#8592; hybrid worse</text><text x="740" y="402" text-anchor="end" font-size="23" fill="#45443f">hybrid better &#8594;</text>
+<text x="413" y="442" text-anchor="middle" font-size="21" fill="#45443f">Hybrid's QLIKE below mcsGARCH's that day (%)</text>
+<text transform="translate(24 210) rotate(-90)" text-anchor="middle" font-size="21" fill="#45443f">Test days</text>
+</svg>
+  </div>
+  
+  <div class="card">
+    <h2>Where the hybrid's gain comes from (study P106)</h2>
+    <p class="warn">An AVERAGE over all 792 test days, not this day.</p>
+    <p class="sub">P106 refitted the hybrid without one group of inputs at a time and measured how much of
+    the gain was lost.</p>
+    <svg class="chart p106" viewBox="0 0 760 656" role="img" aria-labelledby="p106-title" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<title id="p106-title">REAL DATA: study P106, share of the hybrid's gain carried by each group of inputs, average over all test days</title>
+<rect x="0" y="0" width="760" height="656" fill="#ffffff"/>
+<g class="data-label"><rect x="600" y="6" width="150" height="34" rx="6" fill="#141413"/><text x="675" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff" letter-spacing="1">REAL DATA</text></g>
+<text x="300" y="74" font-size="21" fill="#45443f">15-minute forecasts</text>
+<text x="754" y="74" text-anchor="end" font-size="21" fill="#45443f">30 min</text>
+<line x1="300.0" y1="92" x2="300.0" y2="536" stroke="#e4e3de"/><text x="300.0" y="566" text-anchor="middle" font-size="21" fill="#45443f">-25%</text>
+<line x1="416.7" y1="92" x2="416.7" y2="536" stroke="#e4e3de"/><text x="416.7" y="566" text-anchor="middle" font-size="21" fill="#45443f">0%</text>
+<line x1="533.3" y1="92" x2="533.3" y2="536" stroke="#e4e3de"/><text x="533.3" y="566" text-anchor="middle" font-size="21" fill="#45443f">25%</text>
+<line x1="650.0" y1="92" x2="650.0" y2="536" stroke="#e4e3de"/><text x="650.0" y="566" text-anchor="middle" font-size="21" fill="#45443f">50%</text>
+<line x1="416.7" y1="92" x2="416.7" y2="536" stroke="#45443f" stroke-width="2"/>
+<text x="286" y="139.0" text-anchor="end" font-size="23" fill="#141413">Recent realized volatility</text>
+<text x="286" y="163.0" text-anchor="end" font-size="19" fill="#6b6a64">12 inputs</text>
+<rect x="416.7" y="127.0" width="160.9" height="26" rx="3" fill="#45443f"/>
+<line x1="541.1" y1="140.0" x2="618.4" y2="140.0" stroke="#141413" stroke-width="2"/><line x1="541.1" y1="130.0" x2="541.1" y2="150.0" stroke="#141413" stroke-width="2"/><line x1="618.4" y1="130.0" x2="618.4" y2="150.0" stroke="#141413" stroke-width="2"/>
+<text x="626.4" y="148.0" font-size="23" font-weight="700" fill="#141413">34%</text>
+<text x="754" y="148.0" text-anchor="end" font-size="23" fill="#45443f">38%</text>
+<text x="286" y="211.0" text-anchor="end" font-size="23" fill="#141413">Time of day</text>
+<text x="286" y="235.0" text-anchor="end" font-size="19" fill="#6b6a64">4 inputs</text>
+<rect x="416.7" y="199.0" width="107.6" height="26" rx="3" fill="#45443f"/>
+<line x1="483.9" y1="212.0" x2="565.5" y2="212.0" stroke="#141413" stroke-width="2"/><line x1="483.9" y1="202.0" x2="483.9" y2="222.0" stroke="#141413" stroke-width="2"/><line x1="565.5" y1="202.0" x2="565.5" y2="222.0" stroke="#141413" stroke-width="2"/>
+<text x="573.5" y="220.0" font-size="23" font-weight="700" fill="#141413">23%</text>
+<text x="754" y="220.0" text-anchor="end" font-size="23" fill="#45443f">25%</text>
+<text x="286" y="283.0" text-anchor="end" font-size="23" fill="#141413">Option market + VIX</text>
+<text x="286" y="307.0" text-anchor="end" font-size="19" fill="#6b6a64">17 inputs</text>
+<rect x="416.7" y="271.0" width="48.1" height="26" rx="3" fill="#b4b3ac"/>
+<line x1="380.7" y1="284.0" x2="545.9" y2="284.0" stroke="#141413" stroke-width="2"/><line x1="380.7" y1="274.0" x2="380.7" y2="294.0" stroke="#141413" stroke-width="2"/><line x1="545.9" y1="274.0" x2="545.9" y2="294.0" stroke="#141413" stroke-width="2"/>
+<text x="553.9" y="292.0" font-size="23" font-weight="700" fill="#141413">10%</text>
+<text x="754" y="292.0" text-anchor="end" font-size="23" fill="#45443f">-1%</text>
+<text x="286" y="355.0" text-anchor="end" font-size="23" fill="#141413">Option prices</text>
+<text x="286" y="379.0" text-anchor="end" font-size="19" fill="#6b6a64">16 inputs</text>
+<rect x="416.7" y="343.0" width="8.9" height="26" rx="3" fill="#b4b3ac"/>
+<line x1="351.4" y1="356.0" x2="489.5" y2="356.0" stroke="#141413" stroke-width="2"/><line x1="351.4" y1="346.0" x2="351.4" y2="366.0" stroke="#141413" stroke-width="2"/><line x1="489.5" y1="346.0" x2="489.5" y2="366.0" stroke="#141413" stroke-width="2"/>
+<text x="497.5" y="364.0" font-size="23" font-weight="700" fill="#141413">2%</text>
+<text x="754" y="364.0" text-anchor="end" font-size="23" fill="#45443f">-4%</text>
+<text x="286" y="427.0" text-anchor="end" font-size="23" fill="#141413">India VIX</text>
+<text x="286" y="451.0" text-anchor="end" font-size="19" fill="#6b6a64">1 input</text>
+<rect x="401.5" y="415.0" width="15.2" height="26" rx="3" fill="#b4b3ac"/>
+<line x1="377.0" y1="428.0" x2="422.7" y2="428.0" stroke="#141413" stroke-width="2"/><line x1="377.0" y1="418.0" x2="377.0" y2="438.0" stroke="#141413" stroke-width="2"/><line x1="422.7" y1="418.0" x2="422.7" y2="438.0" stroke="#141413" stroke-width="2"/>
+<text x="430.7" y="436.0" font-size="23" font-weight="700" fill="#141413">-3%</text>
+<text x="754" y="436.0" text-anchor="end" font-size="23" fill="#45443f">-4%</text>
+<text x="286" y="499.0" text-anchor="end" font-size="23" fill="#141413">Calendar and expiry</text>
+<text x="286" y="523.0" text-anchor="end" font-size="19" fill="#6b6a64">8 inputs</text>
+<rect x="383.7" y="487.0" width="32.9" height="26" rx="3" fill="#b4b3ac"/>
+<line x1="353.3" y1="500.0" x2="413.7" y2="500.0" stroke="#141413" stroke-width="2"/><line x1="353.3" y1="490.0" x2="353.3" y2="510.0" stroke="#141413" stroke-width="2"/><line x1="413.7" y1="490.0" x2="413.7" y2="510.0" stroke="#141413" stroke-width="2"/>
+<text x="421.7" y="508.0" font-size="23" font-weight="700" fill="#141413">-7%</text>
+<text x="754" y="508.0" text-anchor="end" font-size="23" fill="#45443f">-8%</text>
+<text x="10" y="608" font-size="20" fill="#45443f">Bar: share of the gain lost without the group. Whiskers: 95% interval.</text>
+<text x="10" y="638" font-size="20" fill="#45443f">Dark bars: groups that pass P106's registered test at both horizons.</text>
+</svg>
+    <p class="note">The five separate groups&#x27; shares add up to 49% at 15 minutes; the rest of the gain is shared, because when one group is removed others can partly stand in for it.</p><p class="note">A hybrid that sees only what mcsGARCH sees (past one-minute returns, the time of day and the expiry-day flag) is 6.1% better than mcsGARCH at 15 minutes; the full hybrid is 5.8% better.</p>
+  </div>
+</section>
+<section class="card">
+  <h2>The same day at every forecast horizon</h2>
+  <p class="sub">QLIKE averaged over the day's forecast windows; lower is better. In brackets: the day's rank
+  among all test days (1st = highest loss, or for the gain, 1st = the hybrid's best day).</p>
+  <div class="scroll"><table>
+  <thead><tr><th>Horizon</th><th>Windows</th><th>mcsGARCH QLIKE</th><th>Hybrid QLIKE</th>
+  <th>Hybrid vs mcsGARCH</th><th>All test days</th></tr></thead>
+  <tbody><tr><td>Next 15 minutes</td><td>25</td><td>0.185 (495th)</td><td>0.159 (559th)</td><td>-13.7% (148th)</td><td>-5.8%</td></tr><tr><td>Next 30 minutes</td><td>24</td><td>0.179 (309th)</td><td>0.148 (379th)</td><td>-17.6% (145th)</td><td>-7.6%</td></tr><tr><td>Last hour (14:30 to 15:30)</td><td>1</td><td>0.065 (424th)</td><td>0.079 (376th)</td><td>+22.0% (554th)</td><td>-6.4%</td></tr></tbody></table></div>
+  <p class="note">Negative = the hybrid's loss is lower. "All test days" compares the average QLIKE over all
+  days, the project's headline measure.</p>
+</section>
+<section class="card">
+<details>
+  <summary>Every window of the day (table view of the chart)</summary>
+  <div class="scroll"><table>
+  <thead><tr><th>Window</th><th>Realized (× 10⁻⁶)</th><th>mcsGARCH (× 10⁻⁶)</th><th>Hybrid (× 10⁻⁶)</th>
+  <th>Correction</th><th>QLIKE mcsGARCH</th><th>QLIKE hybrid</th><th>Closer</th></tr></thead>
+  <tbody><tr><td>09:15 to 09:30</td><td>26.2</td><td>57.6</td><td>46.6</td><td>0.81</td><td>0.242</td><td>0.138</td><td>hybrid</td></tr><tr><td>09:30 to 09:45</td><td>4.08</td><td>11.1</td><td>8.92</td><td>0.81</td><td>0.366</td><td>0.240</td><td>hybrid</td></tr><tr><td>09:45 to 10:00</td><td>8.35</td><td>5.50</td><td>7.85</td><td>1.43</td><td>0.101</td><td>0.002</td><td>hybrid</td></tr><tr><td>10:00 to 10:15</td><td>5.75</td><td>5.05</td><td>7.14</td><td>1.41</td><td>0.009</td><td>0.022</td><td>mcsGARCH</td></tr><tr><td>10:15 to 10:30</td><td>2.15</td><td>5.16</td><td>5.45</td><td>1.06</td><td>0.291</td><td>0.324</td><td>mcsGARCH</td></tr><tr><td>10:30 to 10:45</td><td>6.29</td><td>2.86</td><td>3.07</td><td>1.07</td><td>0.413</td><td>0.331</td><td>hybrid</td></tr><tr><td>10:45 to 11:00</td><td>13.2</td><td>3.99</td><td>5.57</td><td>1.40</td><td>1.102</td><td>0.502</td><td>hybrid</td></tr><tr><td>11:00 to 11:15</td><td>10.0</td><td>9.27</td><td>7.13</td><td>0.77</td><td>0.003</td><td>0.065</td><td>mcsGARCH</td></tr><tr><td>11:15 to 11:30</td><td>10.8</td><td>7.23</td><td>5.78</td><td>0.80</td><td>0.093</td><td>0.244</td><td>mcsGARCH</td></tr><tr><td>11:30 to 11:45</td><td>7.14</td><td>7.13</td><td>6.27</td><td>0.88</td><td>0.000</td><td>0.009</td><td>mcsGARCH</td></tr><tr><td>11:45 to 12:00</td><td>8.68</td><td>6.51</td><td>5.74</td><td>0.88</td><td>0.046</td><td>0.099</td><td>mcsGARCH</td></tr><tr><td>12:00 to 12:15</td><td>10.4</td><td>8.84</td><td>6.85</td><td>0.78</td><td>0.013</td><td>0.099</td><td>mcsGARCH</td></tr><tr><td>12:15 to 12:30</td><td>7.44</td><td>8.54</td><td>6.75</td><td>0.79</td><td>0.009</td><td>0.005</td><td>hybrid</td></tr><tr><td>12:30 to 12:45</td><td>7.48</td><td>8.09</td><td>6.53</td><td>0.81</td><td>0.003</td><td>0.010</td><td>mcsGARCH</td></tr><tr><td>12:45 to 13:00</td><td>3.64</td><td>5.47</td><td>5.27</td><td>0.96</td><td>0.072</td><td>0.060</td><td>hybrid</td></tr><tr><td>13:00 to 13:15</td><td>5.80</td><td>4.20</td><td>4.20</td><td>1.00</td><td>0.059</td><td>0.058</td><td>hybrid</td></tr><tr><td>13:15 to 13:30</td><td>3.92</td><td>4.81</td><td>4.75</td><td>0.99</td><td>0.020</td><td>0.017</td><td>hybrid</td></tr><tr><td>13:30 to 13:45</td><td>11.1</td><td>4.43</td><td>4.53</td><td>1.02</td><td>0.590</td><td>0.556</td><td>hybrid</td></tr><tr><td>13:45 to 14:00</td><td>11.9</td><td>7.86</td><td>10.0</td><td>1.27</td><td>0.099</td><td>0.016</td><td>hybrid</td></tr><tr><td>14:00 to 14:15</td><td>8.60</td><td>9.65</td><td>7.74</td><td>0.80</td><td>0.006</td><td>0.006</td><td>hybrid</td></tr><tr><td>14:15 to 14:30</td><td>4.33</td><td>8.21</td><td>6.69</td><td>0.82</td><td>0.167</td><td>0.082</td><td>hybrid</td></tr><tr><td>14:30 to 14:45</td><td>7.61</td><td>6.27</td><td>5.94</td><td>0.95</td><td>0.020</td><td>0.033</td><td>mcsGARCH</td></tr><tr><td>14:45 to 15:00</td><td>5.72</td><td>7.71</td><td>9.64</td><td>1.25</td><td>0.040</td><td>0.115</td><td>mcsGARCH</td></tr><tr><td>15:00 to 15:15</td><td>3.15</td><td>7.51</td><td>6.58</td><td>0.88</td><td>0.289</td><td>0.215</td><td>hybrid</td></tr><tr><td>15:15 to 15:30</td><td>0.609</td><td>2.20</td><td>2.76</td><td>1.25</td><td>0.562</td><td>0.732</td><td>mcsGARCH</td></tr></tbody></table></div>
+  <p class="note">Correction = hybrid / mcsGARCH, the factor LightGBM multiplied mcsGARCH's forecast by.</p>
+</details>
+</section>
+<section class="card note">
+  <b>How to read QLIKE.</b> QLIKE(y, f) = y / f - log(y / f) - 1 scores a variance forecast f against the
+  realized variance y. It is 0 for a perfect forecast and grows as the forecast misses; forecasting too low is
+  punished more than forecasting too high. Both models were fitted only on days before each test day
+  (walk-forward), so every forecast here was made without seeing the future.
+</section>
+<footer>
+  Data: REAL DATA. Source files: <code>results/pipeline_nse_v2/forecasts_next15.csv</code> and the other horizons' files in the same folder,
+  <code>daily_market.csv</code> (caption) and <code>results/p106_gain_decomposition/</code> (P106 panel). The models are the
+  columns <code>mcsgarch</code> and <code>hybrid_base</code>. Nothing was refitted for this page. Made with
+  <code>scripts/demo_forecast_day.py</code>, written by an AI agent (Claude).
+</footer>
+</main>
+<script type="application/json" id="win-data">[{"w": "09:15 to 09:30", "y": "26.2", "m": "57.6", "h": "46.6", "lm": "0.242", "lh": "0.138", "c": "0.81", "win": "hybrid"}, {"w": "09:30 to 09:45", "y": "4.08", "m": "11.1", "h": "8.92", "lm": "0.366", "lh": "0.240", "c": "0.81", "win": "hybrid"}, {"w": "09:45 to 10:00", "y": "8.35", "m": "5.50", "h": "7.85", "lm": "0.101", "lh": "0.002", "c": "1.43", "win": "hybrid"}, {"w": "10:00 to 10:15", "y": "5.75", "m": "5.05", "h": "7.14", "lm": "0.009", "lh": "0.022", "c": "1.41", "win": "mcsGARCH"}, {"w": "10:15 to 10:30", "y": "2.15", "m": "5.16", "h": "5.45", "lm": "0.291", "lh": "0.324", "c": "1.06", "win": "mcsGARCH"}, {"w": "10:30 to 10:45", "y": "6.29", "m": "2.86", "h": "3.07", "lm": "0.413", "lh": "0.331", "c": "1.07", "win": "hybrid"}, {"w": "10:45 to 11:00", "y": "13.2", "m": "3.99", "h": "5.57", "lm": "1.102", "lh": "0.502", "c": "1.40", "win": "hybrid"}, {"w": "11:00 to 11:15", "y": "10.0", "m": "9.27", "h": "7.13", "lm": "0.003", "lh": "0.065", "c": "0.77", "win": "mcsGARCH"}, {"w": "11:15 to 11:30", "y": "10.8", "m": "7.23", "h": "5.78", "lm": "0.093", "lh": "0.244", "c": "0.80", "win": "mcsGARCH"}, {"w": "11:30 to 11:45", "y": "7.14", "m": "7.13", "h": "6.27", "lm": "0.000", "lh": "0.009", "c": "0.88", "win": "mcsGARCH"}, {"w": "11:45 to 12:00", "y": "8.68", "m": "6.51", "h": "5.74", "lm": "0.046", "lh": "0.099", "c": "0.88", "win": "mcsGARCH"}, {"w": "12:00 to 12:15", "y": "10.4", "m": "8.84", "h": "6.85", "lm": "0.013", "lh": "0.099", "c": "0.78", "win": "mcsGARCH"}, {"w": "12:15 to 12:30", "y": "7.44", "m": "8.54", "h": "6.75", "lm": "0.009", "lh": "0.005", "c": "0.79", "win": "hybrid"}, {"w": "12:30 to 12:45", "y": "7.48", "m": "8.09", "h": "6.53", "lm": "0.003", "lh": "0.010", "c": "0.81", "win": "mcsGARCH"}, {"w": "12:45 to 13:00", "y": "3.64", "m": "5.47", "h": "5.27", "lm": "0.072", "lh": "0.060", "c": "0.96", "win": "hybrid"}, {"w": "13:00 to 13:15", "y": "5.80", "m": "4.20", "h": "4.20", "lm": "0.059", "lh": "0.058", "c": "1.00", "win": "hybrid"}, {"w": "13:15 to 13:30", "y": "3.92", "m": "4.81", "h": "4.75", "lm": "0.020", "lh": "0.017", "c": "0.99", "win": "hybrid"}, {"w": "13:30 to 13:45", "y": "11.1", "m": "4.43", "h": "4.53", "lm": "0.590", "lh": "0.556", "c": "1.02", "win": "hybrid"}, {"w": "13:45 to 14:00", "y": "11.9", "m": "7.86", "h": "10.0", "lm": "0.099", "lh": "0.016", "c": "1.27", "win": "hybrid"}, {"w": "14:00 to 14:15", "y": "8.60", "m": "9.65", "h": "7.74", "lm": "0.006", "lh": "0.006", "c": "0.80", "win": "hybrid"}, {"w": "14:15 to 14:30", "y": "4.33", "m": "8.21", "h": "6.69", "lm": "0.167", "lh": "0.082", "c": "0.82", "win": "hybrid"}, {"w": "14:30 to 14:45", "y": "7.61", "m": "6.27", "h": "5.94", "lm": "0.020", "lh": "0.033", "c": "0.95", "win": "mcsGARCH"}, {"w": "14:45 to 15:00", "y": "5.72", "m": "7.71", "h": "9.64", "lm": "0.040", "lh": "0.115", "c": "1.25", "win": "mcsGARCH"}, {"w": "15:00 to 15:15", "y": "3.15", "m": "7.51", "h": "6.58", "lm": "0.289", "lh": "0.215", "c": "0.88", "win": "hybrid"}, {"w": "15:15 to 15:30", "y": "0.609", "m": "2.20", "h": "2.76", "lm": "0.562", "lh": "0.732", "c": "1.25", "win": "mcsGARCH"}]</script>
+<script>
+(function () {
+  var data = JSON.parse(document.getElementById('win-data').textContent);
+  var wrap = document.getElementById('sess-wrap');
+  var tip = document.getElementById('tip');
+  var svg = wrap.querySelector('svg');
+  var xh = svg.querySelector('.xhair');
+  function show(el, evt) {
+    var d = data[+el.getAttribute('data-i')];
+    var x = +el.getAttribute('x') + (+el.getAttribute('width')) / 2;
+    xh.setAttribute('x1', x); xh.setAttribute('x2', x); xh.setAttribute('visibility', 'visible');
+    tip.innerHTML = '<b>' + d.w + '</b><br>' +
+      'Realized: <b>' + d.y + '</b><br>' +
+      '<span class="k" style="background:#2a78d6"></span>mcsGARCH: <b>' + d.m + '</b> (QLIKE ' + d.lm + ')<br>' +
+      '<span class="k" style="background:#eb6834"></span>Hybrid: <b>' + d.h + '</b> (QLIKE ' + d.lh + ')<br>' +
+      'LightGBM correction: × ' + d.c + '<br>Closer: <b>' + d.win + '</b>';
+    tip.style.display = 'block';
+    var r = wrap.getBoundingClientRect(), b = el.getBoundingClientRect();
+    var left = b.left - r.left + b.width + 12;
+    if (left + tip.offsetWidth > r.width) left = b.left - r.left - tip.offsetWidth - 12;
+    tip.style.left = Math.max(0, left) + 'px';
+    tip.style.top = '70px';
+  }
+  function hide() { tip.style.display = 'none'; xh.setAttribute('visibility', 'hidden'); }
+  svg.querySelectorAll('.hit').forEach(function (el) {
+    el.addEventListener('mouseenter', function (e) { show(el, e); });
+    el.addEventListener('focus', function (e) { show(el, e); });
+    el.addEventListener('mouseleave', hide);
+    el.addEventListener('blur', hide);
+  });
+})();
+</script>
+</body>
+</html>
