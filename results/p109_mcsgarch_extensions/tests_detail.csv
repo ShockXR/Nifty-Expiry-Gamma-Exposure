@@ -1,0 +1,101 @@
+test_id,family,index,target,subset,worse,better,days
+P1_next15_combination,primary,NIFTY,next15,all days,mcsgarch,combination,792
+S1_next15_x1_har,S1_single_extensions,NIFTY,next15,all days,mcsgarch,x1_har,792
+S1_next15_x2_overnight,S1_single_extensions,NIFTY,next15,all days,mcsgarch,x2_overnight,792
+S1_next15_x3_todayrv,S1_single_extensions,NIFTY,next15,all days,mcsgarch,x3_todayrv,792
+S1_next15_x4_leverage,S1_single_extensions,NIFTY,next15,all days,mcsgarch,x4_leverage,792
+S1_next15_x5_calibration,S1_single_extensions,NIFTY,next15,all days,mcsgarch,x5_calibration,792
+S2_next15_hybrid_vs_combination,S2_hybrid_vs_combination,NIFTY,next15,all days,combination,hybrid,792
+S4_next15_0915,S4_anchor,NIFTY,next15,09:15 anchor only,mcsgarch,combination,792
+E2_next15_0915_x1_har,E2_singles_by_anchor,NIFTY,next15,09:15 anchor only,mcsgarch,x1_har,792
+E2_next15_0915_x2_overnight,E2_singles_by_anchor,NIFTY,next15,09:15 anchor only,mcsgarch,x2_overnight,792
+E2_next15_0915_x3_todayrv,E2_singles_by_anchor,NIFTY,next15,09:15 anchor only,mcsgarch,x3_todayrv,792
+E2_next15_0915_x4_leverage,E2_singles_by_anchor,NIFTY,next15,09:15 anchor only,mcsgarch,x4_leverage,792
+E2_next15_0915_x5_calibration,E2_singles_by_anchor,NIFTY,next15,09:15 anchor only,mcsgarch,x5_calibration,792
+S4_next15_rest,S4_anchor,NIFTY,next15,without the 09:15 anchor,mcsgarch,combination,792
+E2_next15_rest_x1_har,E2_singles_by_anchor,NIFTY,next15,without the 09:15 anchor,mcsgarch,x1_har,792
+E2_next15_rest_x2_overnight,E2_singles_by_anchor,NIFTY,next15,without the 09:15 anchor,mcsgarch,x2_overnight,792
+E2_next15_rest_x3_todayrv,E2_singles_by_anchor,NIFTY,next15,without the 09:15 anchor,mcsgarch,x3_todayrv,792
+E2_next15_rest_x4_leverage,E2_singles_by_anchor,NIFTY,next15,without the 09:15 anchor,mcsgarch,x4_leverage,792
+E2_next15_rest_x5_calibration,E2_singles_by_anchor,NIFTY,next15,without the 09:15 anchor,mcsgarch,x5_calibration,792
+R1_next15_combination,R1_excl_ewma,NIFTY,next15,without the 42 EWMA-fallback days,mcsgarch,combination,750
+R2_next15_combination,R2_pre_auction,NIFTY,next15,before the closing auction,mcsgarch,combination,729
+R3_next15_seedavg_hybrid_vs_combination,R3_seed_averaged_hybrid,NIFTY,next15,"all days, seed-averaged hybrid",combination,hybrid_seedavg,792
+E1_next15_comb_no_x1,E1_leave_one_out,NIFTY,next15,all days,comb_no_x1,combination,792
+E1_next15_comb_no_x2,E1_leave_one_out,NIFTY,next15,all days,comb_no_x2,combination,792
+E1_next15_comb_no_x3,E1_leave_one_out,NIFTY,next15,all days,comb_no_x3,combination,792
+E1_next15_comb_no_x4,E1_leave_one_out,NIFTY,next15,all days,comb_no_x4,combination,792
+E1_next15_comb_no_x5,E1_leave_one_out,NIFTY,next15,all days,comb_no_x5,combination,792
+E3_next15_expiry_combination,E3_expiry,NIFTY,next15,expiry days,mcsgarch,combination,169
+E3_next15_expiry_hybrid_vs_combination,E3_expiry,NIFTY,next15,expiry days,combination,hybrid,169
+E5_next15_mcsinfo_vs_combination,E5_mcsinfo,NIFTY,next15,all days,combination,mcsinfo,792
+P1_next30_combination,primary,NIFTY,next30,all days,mcsgarch,combination,792
+S1_next30_x1_har,S1_single_extensions,NIFTY,next30,all days,mcsgarch,x1_har,792
+S1_next30_x2_overnight,S1_single_extensions,NIFTY,next30,all days,mcsgarch,x2_overnight,792
+S1_next30_x3_todayrv,S1_single_extensions,NIFTY,next30,all days,mcsgarch,x3_todayrv,792
+S1_next30_x4_leverage,S1_single_extensions,NIFTY,next30,all days,mcsgarch,x4_leverage,792
+S1_next30_x5_calibration,S1_single_extensions,NIFTY,next30,all days,mcsgarch,x5_calibration,792
+S2_next30_hybrid_vs_combination,S2_hybrid_vs_combination,NIFTY,next30,all days,combination,hybrid,792
+S4_next30_0915,S4_anchor,NIFTY,next30,09:15 anchor only,mcsgarch,combination,792
+E2_next30_0915_x1_har,E2_singles_by_anchor,NIFTY,next30,09:15 anchor only,mcsgarch,x1_har,792
+E2_next30_0915_x2_overnight,E2_singles_by_anchor,NIFTY,next30,09:15 anchor only,mcsgarch,x2_overnight,792
+E2_next30_0915_x3_todayrv,E2_singles_by_anchor,NIFTY,next30,09:15 anchor only,mcsgarch,x3_todayrv,792
+E2_next30_0915_x4_leverage,E2_singles_by_anchor,NIFTY,next30,09:15 anchor only,mcsgarch,x4_leverage,792
+E2_next30_0915_x5_calibration,E2_singles_by_anchor,NIFTY,next30,09:15 anchor only,mcsgarch,x5_calibration,792
+S4_next30_rest,S4_anchor,NIFTY,next30,without the 09:15 anchor,mcsgarch,combination,792
+E2_next30_rest_x1_har,E2_singles_by_anchor,NIFTY,next30,without the 09:15 anchor,mcsgarch,x1_har,792
+E2_next30_rest_x2_overnight,E2_singles_by_anchor,NIFTY,next30,without the 09:15 anchor,mcsgarch,x2_overnight,792
+E2_next30_rest_x3_todayrv,E2_singles_by_anchor,NIFTY,next30,without the 09:15 anchor,mcsgarch,x3_todayrv,792
+E2_next30_rest_x4_leverage,E2_singles_by_anchor,NIFTY,next30,without the 09:15 anchor,mcsgarch,x4_leverage,792
+E2_next30_rest_x5_calibration,E2_singles_by_anchor,NIFTY,next30,without the 09:15 anchor,mcsgarch,x5_calibration,792
+R1_next30_combination,R1_excl_ewma,NIFTY,next30,without the 42 EWMA-fallback days,mcsgarch,combination,750
+R2_next30_combination,R2_pre_auction,NIFTY,next30,before the closing auction,mcsgarch,combination,729
+R3_next30_seedavg_hybrid_vs_combination,R3_seed_averaged_hybrid,NIFTY,next30,"all days, seed-averaged hybrid",combination,hybrid_seedavg,792
+E1_next30_comb_no_x1,E1_leave_one_out,NIFTY,next30,all days,comb_no_x1,combination,792
+E1_next30_comb_no_x2,E1_leave_one_out,NIFTY,next30,all days,comb_no_x2,combination,792
+E1_next30_comb_no_x3,E1_leave_one_out,NIFTY,next30,all days,comb_no_x3,combination,792
+E1_next30_comb_no_x4,E1_leave_one_out,NIFTY,next30,all days,comb_no_x4,combination,792
+E1_next30_comb_no_x5,E1_leave_one_out,NIFTY,next30,all days,comb_no_x5,combination,792
+E3_next30_expiry_combination,E3_expiry,NIFTY,next30,expiry days,mcsgarch,combination,169
+E3_next30_expiry_hybrid_vs_combination,E3_expiry,NIFTY,next30,expiry days,combination,hybrid,169
+E5_next30_mcsinfo_vs_combination,E5_mcsinfo,NIFTY,next30,all days,combination,mcsinfo,792
+S3_last_hour_combination,S3_last_hour,NIFTY,last_hour,all days,mcsgarch,combination,792
+S3_last_hour_hybrid_vs_combination,S3_last_hour,NIFTY,last_hour,all days,combination,hybrid,792
+E4_last_hour_x1_har,E4_last_hour,NIFTY,last_hour,all days,mcsgarch,x1_har,792
+E4_last_hour_x2_overnight,E4_last_hour,NIFTY,last_hour,all days,mcsgarch,x2_overnight,792
+E4_last_hour_x3_todayrv,E4_last_hour,NIFTY,last_hour,all days,mcsgarch,x3_todayrv,792
+E4_last_hour_x4_leverage,E4_last_hour,NIFTY,last_hour,all days,mcsgarch,x4_leverage,792
+E4_last_hour_x5_calibration,E4_last_hour,NIFTY,last_hour,all days,mcsgarch,x5_calibration,792
+E1_last_hour_comb_no_x1,E1_leave_one_out,NIFTY,last_hour,all days,comb_no_x1,combination,792
+E1_last_hour_comb_no_x2,E1_leave_one_out,NIFTY,last_hour,all days,comb_no_x2,combination,792
+E1_last_hour_comb_no_x3,E1_leave_one_out,NIFTY,last_hour,all days,comb_no_x3,combination,792
+E1_last_hour_comb_no_x4,E1_leave_one_out,NIFTY,last_hour,all days,comb_no_x4,combination,792
+E1_last_hour_comb_no_x5,E1_leave_one_out,NIFTY,last_hour,all days,comb_no_x5,combination,792
+S5_next15_combination,S5_banknifty,BANKNIFTY,next15,all days,mcsgarch,combination,660
+S5_next15_hybrid_vs_combination,S5_banknifty,BANKNIFTY,next15,all days,combination,hybrid,660
+E6_banknifty_next15_x1_har,E6_other_index_singles,BANKNIFTY,next15,all days,mcsgarch,x1_har,660
+E6_banknifty_next15_x2_overnight,E6_other_index_singles,BANKNIFTY,next15,all days,mcsgarch,x2_overnight,660
+E6_banknifty_next15_x3_todayrv,E6_other_index_singles,BANKNIFTY,next15,all days,mcsgarch,x3_todayrv,660
+E6_banknifty_next15_x4_leverage,E6_other_index_singles,BANKNIFTY,next15,all days,mcsgarch,x4_leverage,660
+E6_banknifty_next15_x5_calibration,E6_other_index_singles,BANKNIFTY,next15,all days,mcsgarch,x5_calibration,660
+S5_next30_combination,S5_banknifty,BANKNIFTY,next30,all days,mcsgarch,combination,660
+S5_next30_hybrid_vs_combination,S5_banknifty,BANKNIFTY,next30,all days,combination,hybrid,660
+E6_banknifty_next30_x1_har,E6_other_index_singles,BANKNIFTY,next30,all days,mcsgarch,x1_har,660
+E6_banknifty_next30_x2_overnight,E6_other_index_singles,BANKNIFTY,next30,all days,mcsgarch,x2_overnight,660
+E6_banknifty_next30_x3_todayrv,E6_other_index_singles,BANKNIFTY,next30,all days,mcsgarch,x3_todayrv,660
+E6_banknifty_next30_x4_leverage,E6_other_index_singles,BANKNIFTY,next30,all days,mcsgarch,x4_leverage,660
+E6_banknifty_next30_x5_calibration,E6_other_index_singles,BANKNIFTY,next30,all days,mcsgarch,x5_calibration,660
+S6_next15_combination,S6_finnifty,FINNIFTY,next15,all days,mcsgarch,combination,604
+S6_next15_hybrid_vs_combination,S6_finnifty,FINNIFTY,next15,all days,combination,hybrid,604
+E6_finnifty_next15_x1_har,E6_other_index_singles,FINNIFTY,next15,all days,mcsgarch,x1_har,604
+E6_finnifty_next15_x2_overnight,E6_other_index_singles,FINNIFTY,next15,all days,mcsgarch,x2_overnight,604
+E6_finnifty_next15_x3_todayrv,E6_other_index_singles,FINNIFTY,next15,all days,mcsgarch,x3_todayrv,604
+E6_finnifty_next15_x4_leverage,E6_other_index_singles,FINNIFTY,next15,all days,mcsgarch,x4_leverage,604
+E6_finnifty_next15_x5_calibration,E6_other_index_singles,FINNIFTY,next15,all days,mcsgarch,x5_calibration,604
+S6_next30_combination,S6_finnifty,FINNIFTY,next30,all days,mcsgarch,combination,604
+S6_next30_hybrid_vs_combination,S6_finnifty,FINNIFTY,next30,all days,combination,hybrid,604
+E6_finnifty_next30_x1_har,E6_other_index_singles,FINNIFTY,next30,all days,mcsgarch,x1_har,604
+E6_finnifty_next30_x2_overnight,E6_other_index_singles,FINNIFTY,next30,all days,mcsgarch,x2_overnight,604
+E6_finnifty_next30_x3_todayrv,E6_other_index_singles,FINNIFTY,next30,all days,mcsgarch,x3_todayrv,604
+E6_finnifty_next30_x4_leverage,E6_other_index_singles,FINNIFTY,next30,all days,mcsgarch,x4_leverage,604
+E6_finnifty_next30_x5_calibration,E6_other_index_singles,FINNIFTY,next30,all days,mcsgarch,x5_calibration,604
