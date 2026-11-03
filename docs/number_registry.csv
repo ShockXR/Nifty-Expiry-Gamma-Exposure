@@ -45,7 +45,7 @@ PI63,PITCH_PANDEY.md,"(197 to 1,255 minutes)","1,255",,results/replication_nse/t
 PI64,PITCH_PANDEY.md,first-hour Nifty rows sum to 101,101,,results/replication_nse/paper_printed_checks.csv,csv:item=after nifty monthly_first_hour Nifty 50 row@value,
 PI65,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,223,,results/replication_nse/rekey_check.csv,csv:status=compared@#count,
 PI66,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,222,,results/replication_nse/rekey_check.csv,csv:match=yes@#count,
-PI67,PITCH_PANDEY.md,"Every one of the project's 22,525 hypothesis tests","22,525",,results/test_ledger.csv,csv:@#count,
+PI67,PITCH_PANDEY.md,"Every one of the project's 22,586 hypothesis tests","22,586",,results/test_ledger.csv,csv:@#count,
 PI68,PITCH_PANDEY.md,2 weeks |,2,,,UNTRACED,"a time estimate in the plan, not a result (the snippet covers both cells)"
 PI69,PITCH_PANDEY.md,Scoring every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
 PI70,PITCH_PANDEY.md,a correction for having tried 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
@@ -285,8 +285,13 @@ PI92,PITCH_PANDEY.md,With 360 minutes a day,360,,,UNTRACED,"a setting of the rep
 PI93,PITCH_PANDEY.md,about 3 bp per 100 bp move,100,,,UNTRACED,"the size of the move the slope is scaled to, not a result"
 PI94,PITCH_PANDEY.md,closer to a 50-point strike,50,,,UNTRACED,"Nifty strike spacing, a contract term"
 PI95,PITCH_PANDEY.md,none of those results reaches 5% under,5,,,UNTRACED,"the significance level, not a result"
-PI96,PITCH_PANDEY.md,"hypothesis tests (25 studies)",25,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
-RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 22,525 hypothesis tests","22,525",,results/test_ledger.csv,csv:@#count,
-RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 25 studies",25,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
-RD87,docs/REAL_DATA_RESULTS.md,"2,691 survive","2,691",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
-BR25,docs/BRIEFING_PANDEY.md,"lists all 22,525 statistical tests","22,525",,results/test_ledger.csv,csv:@#count,
+PI96,PITCH_PANDEY.md,"hypothesis tests (26 studies)",26,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 22,586 hypothesis tests","22,586",,results/test_ledger.csv,csv:@#count,
+RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 26 studies",26,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD87,docs/REAL_DATA_RESULTS.md,"2,709 survive","2,709",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
+BR25,docs/BRIEFING_PANDEY.md,"lists all 22,586 statistical tests","22,586",,results/test_ledger.csv,csv:@#count,
+PI97,PITCH_PANDEY.md,"pay only about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+BR26,docs/BRIEFING_PANDEY.md,"it is worth about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+RD88,docs/REAL_DATA_RESULTS.md,"the hybrid beats mcsGARCH (one-sided p 8.1e-7)",8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
+RD89,docs/REAL_DATA_RESULTS.md,"the gain is worth about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+RD90,docs/REAL_DATA_RESULTS.md,"not significant after Holm (p 0.096)",0.096,,results/p103_economic_value/utility_tests.csv,csv:test_id=S4@p_holm_secondary,

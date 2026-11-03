@@ -30,7 +30,7 @@ information it is given.**
 
 1. **The gain is real but tiny.** An investor who sizes a Nifty position by forecast volatility every 30 minutes
    is better off with the hybrid than with mcsGARCH (H1: one-sided p 8.1e-7, better on 69% of days). But the
-   yearly fee she would pay for the switch is 0.041% of wealth, which closes only 8.7% of the gap between
+   yearly fee the investor would pay for the switch is 0.041% of wealth, which closes only 8.7% of the gap between
    mcsGARCH and a perfect forecast. Even under the most generous values tried (annual Sharpe ratio 0.8, risk
    aversion 1) it is 0.33% a year. The 15-minute and last-hour gains over mcsGARCH are of the same size (0.040%
    and 0.037%, both significant after Holm).
@@ -81,7 +81,7 @@ information it is given.**
   stock index has earned historically.
 * **Risk aversion (gamma).** How much the investor dislikes variance. With SR = 0.4 and gamma = 2 the best
   volatility target is SR/gamma = 20% a year.
-* **Realized utility.** The investor's satisfaction (expected gain minus a penalty for risk) when she sizes her
+* **Realized utility.** The investor's satisfaction (expected gain minus a penalty for risk) when they size their
   position with a forecast, measured after the fact with the realized variance. It is highest, 4% of wealth a
   year at SR 0.4 and gamma 2, when the forecast is perfect.
 * **Fee.** The difference in realized utility between two forecasts: the share of wealth per year the investor
