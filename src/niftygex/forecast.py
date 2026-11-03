@@ -34,6 +34,7 @@ Feature sets (the part after the first underscore):
     gex             base + all version 1 GEX features
     v1gex           v1 + all version 1 GEX features (the first real-data run)
     gex_<name>      base + ``cfg.gex_sets[name]``
+    drop_<name>     base minus ``cfg.drop_sets[name]`` (leave-group-out ablation, study P106)
 
 The GEX ablation compares <kind>_base with <kind>_gex_<name>: identical
 models, data and training; the only difference is the positioning features.
@@ -89,6 +90,10 @@ class WalkForwardConfig:
     # Used for the last-hour target: one test window per day, but 22 training windows per day.
     eval_minutes: list | None = None
     models: list = field(default_factory=lambda: list(ALL_MODELS))
+    # Leave-columns-out feature sets (study P106): model "<kind>_drop_<name>" uses the version 2 base
+    # set (with its extra columns) minus drop_sets[name], in the same order. Empty by default, so no
+    # existing model or result changes.
+    drop_sets: dict = field(default_factory=dict)
 
 
 def parse_model(name: str):
@@ -114,6 +119,9 @@ def model_columns(rest: str, cfg: WalkForwardConfig, extra_v2: list, extra_v1: l
         return base_v1 + list(cfg.gex_sets[rest[6:]])
     if rest.startswith("gex_"):
         return base_v2 + list(cfg.gex_sets[rest[4:]])
+    if rest.startswith("drop_"):
+        drop = set(cfg.drop_sets[rest[5:]])
+        return [c for c in base_v2 if c not in drop]
     raise ValueError(f"unknown feature set {rest!r}")
 
 
