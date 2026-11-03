@@ -932,3 +932,89 @@ def fit_garch_ext_fixed(X, weights=None, overnight_decay=False, garchx_today=Fal
     p = {"omega": qbar * (1 - pers), "alpha": alpha, "beta": beta, "gam_l": 0.0, "gam_x": gam_x, "delta": delta,
          "nu": nu, "qbar": qbar, "measure": measure, "value": float(value)}
     return float(-best.fun), p, bool(res.success or res2.success)
+
+
+# ---------------------------------------------------------------------------
+# The expected squared conditional mean of an ARMA(1,1) intraday mean (study P116,
+# docs/prereg/P116_BENCHMARK_AS_PRINTED.md)
+#
+# New code only. Nothing above this line was changed for P116, so every existing result stays bit-for-bit
+# the same.
+# ---------------------------------------------------------------------------
+
+
+def arma11_conditional_mean(model: McsGarch, R) -> np.ndarray:
+    """(days x minutes) conditional mean mu[t, i] = c + phi r[t, i-1] + theta e[t, i-1] of a fitted McsGarch.
+
+    The ARMA(1,1) runs on the flattened series exactly as ``McsGarch._residuals`` runs it: across day
+    boundaries (the last minute of day t-1 feeds the first minute of day t), with first lag c / (1 - phi) and
+    first residual 0. Missing returns count as 0, as in ``McsGarch.filter``. mu[t, i] uses only returns up to
+    minute i - 1. A "constant" mean gives c everywhere and a "zero" mean gives 0.
+    """
+    R = np.asarray(R, float)
+    Rf = np.where(np.isfinite(R), R, 0.0)
+    if model.mean == "zero":
+        return np.zeros_like(Rf)
+    if model.mean == "constant":
+        return np.full_like(Rf, model.mean_params["c"])
+    if model.mean != "arma11":
+        raise ValueError(model.mean)
+    c, phi, theta = (model.mean_params[k] for k in ("c", "phi", "theta"))
+    e = model._residuals(Rf).ravel()
+    r = Rf.ravel()
+    r_prev = np.concatenate([[c / (1 - phi)], r[:-1]])
+    e_prev = np.concatenate([[0.0], e[:-1]])
+    return (c + phi * r_prev + theta * e_prev).reshape(Rf.shape)
+
+
+def arma11_mean_square_forecast(model: McsGarch, R, filt: dict, h, anchors_t, anchors_i, horizon) -> np.ndarray:
+    """Sum over the window [i, i + horizon) of E[mu_j^2], given the data up to the end of minute i - 1.
+
+    With r_j = mu_j + eps_j, E[r_j^2] = E[mu_j^2] + E[eps_j^2], so the model's forecast of the sum of squared
+    one-minute returns over the window is ``McsGarch.forecast_variance`` (the eps part) plus this term. For an
+    ARMA(1,1) mean, mu_j = c + phi r_{j-1} + theta e_{j-1}; the first mu_i is known, and for later minutes
+    mu_j = c + phi mu_{j-1} + (phi + theta) e_{j-1}, so
+
+        m_j = E[mu_j] = c + phi m_{j-1},     V_j = Var(mu_j) = phi^2 V_{j-1} + (phi + theta)^2 sigma2_{j-1},
+
+    with m_i = mu_i, V_i = 0 and sigma2_j = h_t s_j E[q_j] the expected variance of eps_j on the same expected
+    path of the intraday GARCH(1,1) that ``forecast_variance`` uses. The term is sum_j (m_j^2 + V_j). Windows
+    that run past the close are cut at the close, as in ``forecast_variance``. Zero for a "zero" mean.
+    Arguments as ``McsGarch.forecast_variance``, plus R, the (days x minutes) returns the filter ran on.
+    """
+    at = np.asarray(anchors_t, int)
+    out = np.zeros(len(at))
+    if model.mean == "zero":
+        return out
+    if getattr(model, "extended", False):
+        raise NotImplementedError("the expected q path here is the plain GARCH(1,1) one; not for McsGarchExt extensions")
+    mp_ = model.mean_params
+    c = mp_["c"]
+    phi = mp_.get("phi", 0.0)
+    psi = phi + mp_.get("theta", 0.0)
+    p = model.params
+    persist = p["alpha"] + p["beta"]
+    qbar = p["omega"] / max(1e-12, 1 - persist)
+    mu = arma11_conditional_mean(model, R)
+    S, q2 = filt["S"], filt["q2"]
+    T, M = S.shape
+    h = np.asarray(h, float)
+    ai = np.asarray(anchors_i, int)
+    hz = np.broadcast_to(np.asarray(horizon, int), at.shape)
+    keys = ai.astype(np.int64) * (M + 1) + hz
+    for key in np.unique(keys):
+        sel = np.flatnonzero(keys == key)
+        i, hn = int(ai[sel[0]]), int(hz[sel[0]])
+        n = min(i + hn, M) - i
+        tt = at[sel]
+        m = mu[tt, i].copy()
+        V = np.zeros(len(sel))
+        q_next = q2[tt, i]
+        tot = m * m
+        for k in range(1, n):
+            sig2_prev = h[tt] * S[tt, i + k - 1] * (qbar + persist ** (k - 1) * (q_next - qbar))
+            V = phi * phi * V + psi * psi * sig2_prev
+            m = c + phi * m
+            tot = tot + m * m + V
+        out[sel] = tot
+    return out

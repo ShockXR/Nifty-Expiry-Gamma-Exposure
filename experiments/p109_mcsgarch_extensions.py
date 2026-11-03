@@ -51,7 +51,8 @@ import pandas as pd  # noqa: E402
 
 from niftygex.evaluation import REGIMES, daily_losses, diebold_mariano  # noqa: E402
 from niftygex.features import CLOSING_AUCTION_START  # noqa: E402
-from niftygex.volatility import McsGarchExt, daily_egarch_variance, har_daily_variance  # noqa: E402
+from niftygex.volatility import (McsGarchExt, arma11_mean_square_forecast, daily_egarch_variance,  # noqa: E402
+                                 har_daily_variance)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -124,9 +125,25 @@ SYNTH = dict(n_days=200, start="2024-06-03", seed=3, min_train=60, block=20, n_s
 ID_COLS = ["target", "t", "date", "minute", "horizon", "y"]
 
 
+# Optional switches of a variant's spec (added for study P116, docs/prereg/P116_BENCHMARK_AS_PRINTED.md). No P109
+# variant sets them, so every P109 variant gets the defaults below and runs exactly as before:
+#   expiry_diurnal  separate diurnal curve for expiry days (default EXPIRY_DIURNAL, as committed)
+#   smooth          centred moving-average window of the diurnal curve (default DIURNAL_SMOOTH, as committed)
+#   mean            intraday conditional mean of McsGarch: "zero" (as committed) or "arma11" (the paper's)
+#   mean_sq         add the model's expected squared conditional mean over the window to the variance forecast
+#                   (niftygex.volatility.arma11_mean_square_forecast); default False. Not part of the fit key:
+#                   the same fit gives the forecast with and without it.
+SPEC_DEFAULTS = {"expiry_diurnal": EXPIRY_DIURNAL, "smooth": DIURNAL_SMOOTH, "mean": "zero", "mean_sq": False}
+
+
+def spec_value(variant: str, key: str):
+    return SPECS[variant].get(key, SPEC_DEFAULTS[key])
+
+
 def fit_key(variant: str) -> tuple:
     s = SPECS[variant]
-    return (s["daily"], s["decay"], s["lev"], s["todayrv"])
+    return (s["daily"], s["decay"], s["lev"], s["todayrv"], spec_value(variant, "expiry_diurnal"),
+            spec_value(variant, "smooth"), spec_value(variant, "mean"))
 
 
 def target_specs(synthetic: bool) -> dict:
@@ -199,9 +216,9 @@ def run_block(job):
     params = []
     fit_seconds = {}
     for key, vs in fits.items():
-        dkind, decay, lev, todayrv = key
+        dkind, decay, lev, todayrv, exp_d, smooth, mean = key
         tf = time.time()
-        mdl = McsGarchExt(expiry_diurnal=EXPIRY_DIURNAL, smooth=DIURNAL_SMOOTH, overnight_decay=decay,
+        mdl = McsGarchExt(expiry_diurnal=exp_d, smooth=smooth, mean=mean, overnight_decay=decay,
                           leverage=lev, garchx_today=todayrv)
         mdl.fit(R[:start], h[dkind][:start], is_exp[:start])
         filt = mdl.filter(R, h[dkind], is_exp)
@@ -210,8 +227,14 @@ def run_block(job):
              for k, v in mdl.params.items() if k != "tstats"}
         for tname, d in rows.items():
             f = mdl.forecast_variance(filt, h[dkind], d["t"].to_numpy(), d["minute"].to_numpy(), d["horizon"].to_numpy())
+            msq = None
+            if any(spec_value(v, "mean_sq") for v in vs):   # P116 only; no P109 variant sets mean_sq
+                msq = arma11_mean_square_forecast(mdl, R, filt, h[dkind], d["t"].to_numpy(), d["minute"].to_numpy(),
+                                                  d["horizon"].to_numpy())
+            f_var = f
             train = d["t"].to_numpy() < start
             for v in vs:
+                f = f_var + msq if spec_value(v, "mean_sq") else f_var
                 if SPECS[v]["cal"]:
                     c = calibration_factors(d["y"].to_numpy(), f, d["minute"].to_numpy(), train)
                     out[tname][v] = f * d["minute"].map(c).to_numpy(float)
@@ -226,7 +249,12 @@ def run_block(job):
                            **{k: p.get(k) for k in ("omega", "alpha", "beta", "gam_l", "gam_x", "delta", "nu",
                                                     "persistence", "qbar", "loglik", "nobs", "converged", "start")
                               if k in p and k != "start"},
-                           "ext_start_used": mdl.params.get("start")})   # which registered start won (extended fits)
+                           "ext_start_used": mdl.params.get("start"),   # which registered start won (extended fits)
+                           # P116 switches and the fitted ARMA(1,1) mean, only for variants that set a switch
+                           **({"expiry_diurnal": exp_d, "smooth": smooth, "mean": mean,
+                               "mean_sq": spec_value(v, "mean_sq"),
+                               **{f"arma_{k}": float(val) for k, val in mdl.mean_params.items()}}
+                              if any(k in SPECS[v] for k in SPEC_DEFAULTS) else {})})
     frames = []
     for tname, d in rows.items():
         ev = st["targets"][tname][2]
@@ -311,7 +339,8 @@ def stage_run(a):
     if a.blocks:
         starts = [s for s in starts if s in set(a.blocks)]
     jobs = [(index, s, str(work)) for s in starts if not block_file(work, index, s).exists()]
-    print(f"[{label}] P109 mcsGARCH extensions, stage 1, {index}: {len(m['days'])} days, {len(starts)} refit blocks, "
+    print(f"[{label}] {getattr(a, 'study', 'P109 mcsGARCH extensions')}, stage 1, {index}: {len(m['days'])} days, "
+          f"{len(starts)} refit blocks, "
           f"{len(jobs)} to run; variants {variants}; workers {a.workers} (market loaded in {time.time() - t0:.0f}s)",
           flush=True)
     _STATE.update(R=R, is_exp=m["labels"]["is_expiry"].to_numpy(), days=m["days"], block=block,
