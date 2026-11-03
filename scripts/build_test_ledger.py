@@ -170,6 +170,7 @@ STUDIES = {
     "REFFC": ("Referee response: forecasting (post hoc)", "docs/REFEREE_RESPONSE_FORECAST.md"),
     "REFEXP": ("Referee response: expiry premia and event study (post hoc)", "docs/REFEREE_RESPONSE_EXPIRY.md"),
     "REFF2": ("Referee response: F2 inference and positions (post hoc)", "docs/REFEREE_RESPONSE_F2.md"),
+    "P103ECON": ("Economic value of the forecasting hybrid (P103)", "docs/P103_ECONOMIC_VALUE.md; docs/prereg/P103_ECONOMIC_VALUE.md"),
 }
 
 PREREG = {
@@ -178,6 +179,7 @@ PREREG = {
     "pipeline_nse_banknifty": ("docs/prereg/P91_BANKNIFTY_FORECAST.md", "P91 pre-registration"),
     "sensex_swap": ("docs/prereg/P92_SENSEX_SWAP.md", "Pre-registration P92"),
     "synthetic_control": ("docs/prereg/P96_SYNTHETIC_CONTROL.md", "P96 pre-registration"),
+    "p103_economic_value": ("docs/prereg/P103_ECONOMIC_VALUE.md", "P103 registered plan"),
 }
 
 COLUMNS = [
@@ -2204,6 +2206,95 @@ def adapt_pinmech(ctx: Ctx):
             ctx.warn(f"{rel}: not read by the PINMECH adapter; check whether it holds tests")
 
 
+P103_OUTCOME = ["utility_tests.csv", "trading_tests.csv", "trading_metrics.csv", "verdict.csv", "dsr.csv"]
+
+
+def adapt_p103econ(ctx: Ctx):
+    """P103: is the hybrid's forecasting gain worth anything economically? (docs/prereg/P103_ECONOMIC_VALUE.md)
+
+    utility_tests.csv: test_id (H1 primary; S1 to S4 secondary, Holm over the four in p_holm_secondary,
+      cross-checked; R1 to R4 robustness, all registered), window_set, subset, model, benchmark, fee_pct_year
+      (estimate: realized-utility fee of the model over the benchmark, percent of wealth a year), dm_stat,
+      p_one_sided (repository DM test on day-level utility losses, one-sided as registered).
+    trading_tests.csv: T1 (tracking) and T2 (net utility at base-case costs) are the registered trading tests
+      (secondary); T1-iv, T2-iv, T2-rebal and T2-grid are registered robustness versions. One-sided DM p.
+    trading_metrics.csv: HAC t of each strategy's mean daily net return at each cost level (one-sided, mean > 0),
+      a registered metric, counted as robustness (P90 counted its cost grid the same way).
+    Not counted: fees, utilities of every model, QLIKE on the same windows, daily series, DSR, bootstrap of the
+      Sharpe ratio, verdict, checks and the descriptive files added in phase 2.
+    """
+    folder = "p103_economic_value"
+    need = {"test_id", "role", "window_set", "subset", "model", "benchmark", "fee_pct_year", "dm_stat", "p_one_sided"}
+    rel_u = f"{folder}/utility_tests.csv"
+    if not ctx.has(rel_u):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "P103ECON", folder)
+        return
+    if not need.issubset(pd.read_csv(ctx.res(rel_u), nrows=0).columns):
+        adapt_generic(ctx, "P103ECON", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P103_OUTCOME)
+    side = SIDE_ONE_PRE if ps == PS_YES else SIDE_ONE_STATED
+    tgt = {"next15": "next 15 minutes", "next30": "next 30 minutes", "last_hour": "last hour"}
+    rows = []
+    u = ctx.read(rel_u)
+    for _, r in u.iterrows():
+        tid = clean(r["test_id"])
+        role = "primary" if tid == "H1" else "secondary" if tid.startswith("S") else "robustness"
+        hyp = (f"P103 {tid}: {clean(r['model'])} gives a higher realized utility (Bollerslev, Hood, Huss and Pedersen) "
+               f"than {clean(r['benchmark'])}, {tgt.get(clean(r['target']), clean(r['target']))}, windows "
+               f"{clean(r['window_set'])}")
+        ctx.add("P103ECON", hyp, "day-level realized utility (volatility-timing investor)", clean(r["subset"]),
+                r["p_one_sided"], role=role, pre_specified=ps, pre_spec_note=psn, source_file=rel_u,
+                source_key=key("utility_tests.csv", tid, r["window_set"], r["subset"], r["benchmark"]), sidedness=side,
+                estimate=r["fee_pct_year"], statistic_name="DM (HLN), fee in percent of wealth a year as estimate",
+                statistic=r["dm_stat"], p_method="Diebold-Mariano on daily utility losses, one-sided",
+                p_study_adjusted=r["p_holm_secondary"] if role == "secondary" else float("nan"),
+                study_adjust_method="Holm over S1 to S4" if role == "secondary" else "")
+        rows.append(ctx.rows.pop())
+    secm = u["test_id"].astype(str).str.startswith("S")
+    if secm.any():
+        rec = ctx.check("P103ECON", "S1 to S4 (Holm)", rel_u, "holm", u.loc[secm, "p_one_sided"].to_numpy(float),
+                        u.loc[secm, "p_holm_secondary"].to_numpy(float))
+        for r_, v in zip([r for r in rows if r["role"] == "secondary"], rec):
+            r_["p_study_adjusted_recomputed"] = v
+    rel_t = f"{folder}/trading_tests.csv"
+    if ctx.has(rel_t):
+        t = ctx.read(rel_t)
+        for _, r in t.iterrows():
+            tid = clean(r["test_id"])
+            role = "secondary" if tid in ("T1", "T2") else "robustness"
+            what = ("tracks its volatility target more closely (daily squared log deviation)" if r["kind"] == "tracking"
+                    else f"has a higher daily net realized utility ({clean(r['costs'])})")
+            ctx.add("P103ECON", f"P103 {tid}: the vol-targeted rule sized by {clean(r['model'])} {what} than the one sized "
+                    f"by {clean(r['benchmark'])}", clean(r["kind"]), "all test days", r["p_one_sided"], role=role,
+                    pre_specified=ps, pre_spec_note=psn, source_file=rel_t,
+                    source_key=key("trading_tests.csv", tid, r["benchmark"], r["costs"]), sidedness=side,
+                    estimate=r["estimate"], statistic_name="DM (HLN)", statistic=r["dm_stat"],
+                    p_method="Diebold-Mariano on daily differences, one-sided")
+            rows.append(ctx.rows.pop())
+    rel_m = f"{folder}/trading_metrics.csv"
+    if ctx.has(rel_m):
+        m = ctx.read(rel_m)
+        for _, r in m.iterrows():
+            ctx.add("P103ECON", f"P103: the vol-targeted rule sized by {clean(r['strategy'])} earns a positive mean daily net "
+                    f"return ({clean(r['costs'])})", "daily net return (bp of capital)", "all test days", r["p_one_sided"],
+                    role="robustness", pre_specified=ps, pre_spec_note=psn, source_file=rel_m,
+                    source_key=key("trading_metrics.csv", r["strategy"], r["costs"]), sidedness=side,
+                    estimate=r["mean_net_bp_day"], statistic_name="HAC t", statistic=r["hac_t"],
+                    p_method="HAC t of the mean (Newey-West, 5 lags), one-sided (mean > 0)")
+            rows.append(ctx.rows.pop())
+    kept, dropped = dedup_exact(rows)
+    ctx.rows.extend(kept)
+    ctx.skip("P103ECON", f"{folder}/", "rows repeating another row (same p and estimate)", len(dropped), "counted once")
+    _consume_rest(ctx, "P103ECON", folder, {
+        r"utility_models\.csv|fee_grid\.csv|qlike_same_windows\.csv": "fees, utilities and QLIKE margins; no p-value",
+        r"daily_utility\.csv|trading_daily\.csv": "daily series behind the tests; no p-value",
+        r"dsr\.csv|bootstrap_sharpe\.csv|sizing_rules_33\.csv": "Deflated Sharpe Ratio, bootstrap intervals and the 33 sizing rules; no p-value",
+        r"window_contributions\.csv|index_drift\.csv": "descriptive, added in phase 2; no p-value",
+    }, "verdict, checks, run information or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -3375,10 +3466,11 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
             adapt_pin, adapt_event, adapt_fals, adapt_dsign, adapt_intra, adapt_conn, adapt_sensex]
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
-               "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2"]
+               "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
+               "P103ECON"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
-LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2]
+LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ]
 
 
 def headline18_check(ctx: Ctx):
@@ -3615,6 +3707,14 @@ RECON = [
       ("post hoc reading: difference-in-differences against the donor average, main runs", "SYNTH", r"^did\|(primary|secondary)\|")],
      "The registered result is a null finding (no support), so the check is that nothing survives that would contradict "
      "it. The DiD rows are the post hoc reading of a rise (exploratory)."),
+    ("P103", "Economic value of the forecasting hybrid (registered plan): at 30 minutes the hybrid gives a higher "
+             "realized utility than mcsGARCH (H1), but the fee is tiny (about 0.04% of wealth a year); against the "
+             "information-matched mcsgarch_iv at 15 and 30 minutes it is not significant after Holm.",
+     [("H1, primary: 30 minutes, non-overlapping windows, all days", "P103ECON", r"^utility_tests\.csv\|H1\|"),
+      ("S1 to S4, secondary (Holm over four)", "P103ECON", r"^utility_tests\.csv\|S[1-4]\|"),
+      ("T1 and T2, the registered trading tests", "P103ECON", r"^trading_tests\.csv\|T[12]\|")],
+     "The verdict of P103 rests on the size of the fee and on T1, not only on whether a p-value survives; see "
+     "docs/P103_ECONOMIC_VALUE.md."),
 ]
 
 
@@ -3761,6 +3861,14 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
              + ("(as it says)" if f2c[0]['8'] == 381 else "(it says 381)")
              + f" are {f2c[1]['8']} tests." if f2c else ""))
         w("")
+    if (df["study"] == "P103ECON").any():
+        n103 = int((df["study"] == "P103ECON").sum())
+        w(f"**P103** (P103ECON, {n103} tests, registered plan): the economic value of the forecasting hybrid. H1 is "
+          "primary, S1 to S4 are secondary (Holm over the four, cross-checked), T1 and T2 are the registered trading "
+          "tests (secondary), and every other row is a robustness check that the plan lists (other windows and subsets, "
+          "the trading tests against mcsgarch_iv and at other cost levels, and each rule's mean net return at each cost "
+          "level). All keep their one-sided p because the plan states the direction.")
+        w("")
     # survivors
     w("## 3. What survives project-wide BY at 5%")
     w("")
@@ -3850,7 +3958,7 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
     # reconciliation
     w("## 5. Reconciliation with the eight findings of REAL_DATA_RESULTS.md and the registered plans")
     w("")
-    w("For each finding, and for the primary test of each registered analysis plan added since (P91, P92, P96): the "
+    w("For each finding, and for the primary test of each registered analysis plan added since (P91, P92, P96, P103): the "
       "ledger rows that carry it, and whether it survives BY across the whole project. Post hoc referee checks are "
       "listed under the finding they test. REAL_DATA_RESULTS.md itself is not changed here.")
     w("")

@@ -1,0 +1,14 @@
+label,item,statistic,result
+REAL DATA,"H1 (30 minutes, hybrid_base vs mcsgarch, realized utility)",8.13066996406162e-07,supported
+REAL DATA,"fee at SR 0.4, gamma 2, percent of wealth a year",0.04132615444157617,tiny
+REAL DATA,fee in rupees a year per Rs 1 crore,4132.615444157616,tiny
+REAL DATA,S1 (Holm),1.004717123727213e-05,supported
+REAL DATA,S2 (Holm),0.0010373128292397319,supported
+REAL DATA,S3 (Holm),0.0962992484264472,not supported
+REAL DATA,S4 (Holm),0.0962992484264472,not supported
+REAL DATA,"T1 tracking, one-sided p",0.8069243645652393,fail
+REAL DATA,"T2 net utility at base-case costs, one-sided p",2.76523918612256e-72,pass
+REAL DATA,Part B verdict,,no implementation gain
+REAL DATA,standalone DSR of the hybrid rule (N = 4),6.083096975656134e-15,not a standalone strategy
+REAL DATA,S4 information-matched check,0.0962992484264472,fails: value over mcsGARCH not shown to come from the method
+REAL DATA,OVERALL,,detectable but not economically meaningful (the fee is tiny; Part B: no implementation gain)

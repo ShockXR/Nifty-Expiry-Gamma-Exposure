@@ -239,6 +239,11 @@ REFF2,results/referee_f2/,"input_checks.csv, item8_input_checks.csv, item8_run_i
 REFF2,results/referee_f2/,"item2_acf.csv, item2_by_quarter.csv, item2_by_segment.csv, item2_by_year.csv, item2_positions.csv and 2 more",7,"shares, runs and autocorrelations of the Pro sign (descriptive, no p-value)"
 REFF2,results/referee_f2/item6_angle_bootstrap_draws.csv.gz,item6_angle_bootstrap_draws.csv.gz,1,bootstrap draws behind the item 6 tests
 REFF2,results/referee_f2/item8_positions_describe.csv,item8_positions_describe.csv,1,description of the positions (no p-value)
+P103ECON,results/p103_economic_value/,"bootstrap_sharpe.csv, dsr.csv, sizing_rules_33.csv",3,"Deflated Sharpe Ratio, bootstrap intervals and the 33 sizing rules; no p-value"
+P103ECON,results/p103_economic_value/,"checks.csv, run_info.json, stdout.txt, verdict.csv",4,"verdict, checks, run information or log; no p-value"
+P103ECON,results/p103_economic_value/,"daily_utility.csv, trading_daily.csv",2,daily series behind the tests; no p-value
+P103ECON,results/p103_economic_value/,"fee_grid.csv, qlike_same_windows.csv, utility_models.csv",3,"fees, utilities and QLIKE margins; no p-value"
+P103ECON,results/p103_economic_value/,"index_drift.csv, window_contributions.csv",2,"descriptive, added in phase 2; no p-value"
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods

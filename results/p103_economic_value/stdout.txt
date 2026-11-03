@@ -1,0 +1,232 @@
+REAL DATA. P103: economic value of the forecasting hybrid. Research evaluation, not trading advice.
+Registered plan: docs/prereg/P103_ECONOMIC_VALUE.md, commit 77b435aec493b7e0acf1eab90e51490bb9377f17.
+check origins_next15: ok (792 days, 25 origins each)
+check forecasts_positive_next15: ok (32 model columns, min 1.197e-08)
+check published_qlike_margin_next15: ok (recomputed -5.7988203440% vs published -5.7988203440%)
+check origins_next30: ok (792 days, 24 origins each)
+check forecasts_positive_next30: ok (32 model columns, min 6.797e-08)
+check published_qlike_margin_next30: ok (recomputed -7.6492830714% vs published -7.6492830714%)
+check origins_last_hour: ok (792 days, 1 origins each)
+check forecasts_positive_last_hour: ok (32 model columns, min 4.398e-07)
+check published_qlike_margin_last_hour: ok (recomputed -6.3625679169% vs published -6.3625679169%)
+check no_overlap_next30_primary: ok (origins 0 to 330)
+check no_overlap_next30_offset15: ok (origins 15 to 345)
+check no_overlap_next30_no0915: ok (origins 30 to 330)
+check no_overlap_next15_all: ok (origins 0 to 360)
+check no_overlap_last_hour: ok (origins 315 to 315)
+check y_rebuilt_from_bars: ok (9504 windows, largest relative difference 8.40e-13)
+
+== Part A: realized utility, SR 0.4, gamma 2 (percent of wealth a year; perfect forecast 4%)
+test_id       role      window_set            subset       model   benchmark  n_days  utility_model_pct_year  utility_benchmark_pct_year  fee_pct_year  fee_rs_per_crore_year  share_of_shortfall_closed   dm_stat  p_one_sided  p_holm_secondary  share_days_model_better
+     H1    primary  next30_primary               all hybrid_base    mcsgarch     792                  3.5645                     3.52318     0.0413262                4132.62                  0.0866698   4.83168  8.13067e-07               NaN                 0.688131
+     S1  secondary      next15_all               all hybrid_base    mcsgarch     792                 3.40658                     3.36616     0.0404155                4041.55                  0.0637633   4.59548  2.51179e-06       1.00472e-05                 0.691919
+     S2  secondary       last_hour               all hybrid_base    mcsgarch     792                 3.47447                     3.43711      0.037366                 3736.6                  0.0663822   3.40638  0.000345771        0.00103731                 0.535354
+     S3  secondary      next15_all               all hybrid_base mcsgarch_iv     792                 3.40658                     3.37718     0.0294004                2940.04                  0.0472053   1.66505    0.0481496         0.0962992                 0.592172
+     S4  secondary  next30_primary               all hybrid_base mcsgarch_iv     792                  3.5645                      3.5336     0.0309004                3090.04                  0.0662534   1.44309    0.0746961         0.0962992                  0.60101
+     R1 robustness next30_offset15               all hybrid_base    mcsgarch     792                 3.55653                     3.51586     0.0406665                4066.65                  0.0839982   4.79513  9.71252e-07               NaN                 0.695707
+     R2 robustness      next30_all               all hybrid_base    mcsgarch     792                 3.56052                     3.51952     0.0409963                4099.63                  0.0853238   6.37098  1.59276e-10               NaN                 0.731061
+     R3 robustness   next30_no0915               all hybrid_base    mcsgarch     792                 3.60899                     3.59026     0.0187251                1872.51                  0.0457002   4.96919  4.12207e-07               NaN                 0.643939
+     R1 robustness next30_offset15               all hybrid_base mcsgarch_iv     792                 3.55653                     3.53614     0.0203899                2038.99                  0.0439572    2.5238   0.00590211               NaN                 0.578283
+     R2 robustness      next30_all               all hybrid_base mcsgarch_iv     792                 3.56052                     3.53487     0.0256452                2564.52                  0.0551357   2.20563    0.0138485               NaN                 0.626263
+     R3 robustness   next30_no0915               all hybrid_base mcsgarch_iv     792                 3.60899                     3.60561    0.00337138                337.138                 0.00854845  0.826603     0.204356               NaN                 0.532828
+  R4-H1 robustness  next30_primary            expiry hybrid_base    mcsgarch     169                 3.43998                      3.3923     0.0476851                4768.51                  0.0784678   2.24884    0.0129112               NaN                 0.650888
+  R4-S4 robustness  next30_primary            expiry hybrid_base mcsgarch_iv     169                 3.43998                     3.37528     0.0647022                6470.22                    0.10357  0.963651     0.168303               NaN                 0.550296
+  R4-H1 robustness  next30_primary        non_expiry hybrid_base    mcsgarch     623                 3.59828                     3.55868     0.0396012                3960.12                  0.0897336     4.386  6.77886e-06               NaN                 0.698234
+  R4-S4 robustness  next30_primary        non_expiry hybrid_base mcsgarch_iv     623                 3.59828                     3.57655     0.0217311                2173.11                  0.0513192   1.11573     0.132485               NaN                 0.614767
+  R4-H1 robustness  next30_primary       pre_auction hybrid_base    mcsgarch     729                 3.55874                     3.51794     0.0408053                4080.53                  0.0846476   4.42226  5.62915e-06               NaN                 0.684499
+  R4-S4 robustness  next30_primary       pre_auction hybrid_base mcsgarch_iv     729                 3.55874                     3.52851     0.0302338                3023.38                  0.0641239    1.3005    0.0969201               NaN                 0.592593
+  R4-H1 robustness  next30_primary       development hybrid_base    mcsgarch     462                 3.51592                     3.46924     0.0466845                4668.45                   0.087957   3.80887  7.92498e-05               NaN                  0.67316
+  R4-S4 robustness  next30_primary       development hybrid_base mcsgarch_iv     462                 3.51592                     3.50309       0.01283                   1283                  0.0258195  0.480794     0.315446               NaN                 0.551948
+  R4-H1 robustness  next30_primary           holdout hybrid_base    mcsgarch     330                 3.63252                      3.5987     0.0338245                3382.45                  0.0842863   3.09108   0.00108234               NaN                 0.709091
+  R4-S4 robustness  next30_primary           holdout hybrid_base mcsgarch_iv     330                 3.63252                     3.57632     0.0561991                5619.91                   0.132645    1.6066    0.0545509               NaN                 0.669697
+  R4-H1 robustness  next30_primary      multi_weekly hybrid_base    mcsgarch     312                 3.55125                     3.50838     0.0428695                4286.95                  0.0872014   2.48903   0.00666596               NaN                 0.657051
+  R4-S4 robustness  next30_primary      multi_weekly hybrid_base mcsgarch_iv     312                 3.55125                     3.56949    -0.0182364               -1823.64                 -0.0423602 -0.785313     0.783566               NaN                 0.528846
+  R4-H1 robustness  next30_primary single_weekly_thu hybrid_base    mcsgarch     192                 3.46641                     3.42073     0.0456748                4567.48                  0.0788491   4.56511  4.46304e-06               NaN                 0.708333
+  R4-S4 robustness  next30_primary single_weekly_thu hybrid_base mcsgarch_iv     192                 3.46641                     3.39226     0.0741461                7414.61                   0.122003   1.47243    0.0712756               NaN                 0.666667
+  R4-H1 robustness  next30_primary single_weekly_tue hybrid_base    mcsgarch     288                 3.64425                      3.6075     0.0367551                3675.51                  0.0936432   2.97354   0.00159685               NaN                 0.708333
+  R4-S4 robustness  next30_primary single_weekly_tue hybrid_base mcsgarch_iv     288                 3.64425                     3.58895     0.0553016                5530.16                   0.134538   1.38332    0.0838217               NaN                 0.635417
+
+== R6: QLIKE and utility-loss margins on the same windows
+    label test_id     window_set       model   benchmark  n_windows  qlike_model  qlike_benchmark  qlike_margin_pct  utility_loss_margin_pct
+REAL DATA      H1 next30_primary hybrid_base    mcsgarch       9504      0.20001         0.217538          -8.05721                 -8.66698
+REAL DATA      S1     next15_all hybrid_base    mcsgarch      19800     0.268014         0.284513          -5.79882                 -6.37633
+REAL DATA      S2      last_hour hybrid_base    mcsgarch        792     0.224276         0.239515          -6.36257                 -6.63822
+REAL DATA      S3     next15_all hybrid_base mcsgarch_iv      19800     0.268014         0.281534          -4.80233                 -4.72053
+REAL DATA      S4 next30_primary hybrid_base mcsgarch_iv       9504      0.20001         0.214867          -6.91454                 -6.62534
+
+== R5: utility rank vs QLIKE rank (top 8 by utility)
+-- last_hour
+                 model  utility_pct_year  fee_vs_mcsgarch_pct_year  qlike_vs_mcsgarch_pct  utility_rank  qlike_rank
+             linear_v1           3.49971                 0.0625978               -8.45991             1           1
+     linear_gex_client           3.49606                 0.0589568                -8.2301             2           2
+linear_gex_participant            3.4904                 0.0532934               -7.60086             3           4
+    linear_gex_placebo           3.48968                 0.0525717               -7.10877             4           7
+      linear_gex_gross           3.48807                 0.0509647               -7.44186             5           5
+           linear_base            3.4875                 0.0503933               -6.95581             6           8
+         linear_gex_us           3.48562                 0.0485141               -7.68306             7           3
+            lgbmt_base           3.48487                 0.0477606                -7.1911             8           6
+-- next15_all
+                 model  utility_pct_year  fee_vs_mcsgarch_pct_year  qlike_vs_mcsgarch_pct  utility_rank  qlike_rank
+       hybridiv_gex_us            3.4087                 0.0425312               -5.79041             1           4
+         hybridiv_base           3.40821                 0.0420479               -5.56013             2           9
+   hybridiv_gex_client            3.4074                 0.0412357               -5.63859             3           7
+    hybridiv_gex_gross           3.40666                 0.0404928               -5.44477             4          12
+           hybrid_base           3.40658                 0.0404155               -5.79882             5           3
+         hybrid_gex_us           3.40637                 0.0402107               -5.96569             6           1
+hybrid_gex_participant           3.40601                  0.039841               -5.89256             7           2
+  hybridiv_gex_placebo           3.40567                 0.0395042               -5.21603             8          14
+-- next30_primary
+                 model  utility_pct_year  fee_vs_mcsgarch_pct_year  qlike_vs_mcsgarch_pct  utility_rank  qlike_rank
+         hybridiv_base           3.56665                 0.0434757                -7.8039             1           9
+      hybrid_gex_gross           3.56651                 0.0433355               -8.45665             2           2
+   hybridiv_gex_client           3.56624                 0.0430611               -7.89398             3           8
+hybrid_gex_participant           3.56606                 0.0428787                -8.4376             4           3
+    hybridiv_gex_gross           3.56573                 0.0425571               -7.68802             5          11
+         hybrid_gex_us           3.56571                 0.0425315               -8.33464             6           4
+          hybrid_v1gex           3.56469                 0.0415114               -8.50628             7           1
+           hybrid_base            3.5645                 0.0413262               -8.05721             8           6
+
+== Part B: vol-targeted long Nifty, 12 windows a day, target 20%, cap 4, base-case costs
+   strategy  mean_gross_bp_day  mean_cost_bp_day  mean_net_bp_day  sr_annual  boot_sr_lo  boot_sr_hi    hac_t  p_one_sided  turnover_per_day  turnover_rebalancing_per_day  cost_pct_year  mean_position  share_windows_at_cap  realized_vol_rv_pct  realized_vol_returns_pct    rmsld  share_days_in_band  net_utility_pct_year  net_utility_realized_returns_pct_year     mdd        psr0      dsr_N4
+hybrid_base           -10.2576           20.5249         -30.7825   -3.51643    -4.52859    -2.54302 -6.78719            1           7.80627                       4.07937        51.7228        2.64779             0.0997475              20.1425                   20.7017 0.140733            0.907828              -48.1622                               -81.6291 24833.1  1.6962e-10  6.0831e-15
+   mcsgarch           -11.0298           22.1768         -33.2066   -3.77066    -4.77764    -2.79451 -7.28759            1           8.43247                       4.66862        55.8855        2.65518              0.108375               20.293                   20.8477  0.13897            0.911616              -52.3656                               -87.7986 26786.3 7.88041e-12 1.45736e-16
+mcsgarch_iv           -10.1449           21.0159         -31.1608   -3.59121    -4.60722    -2.57865 -6.87656            1           7.99863                       4.26878        52.9601         2.6221              0.113321                19.96                   20.5019 0.144218            0.909091              -49.4286                               -82.5093 25149.4 7.52207e-11  2.2951e-15
+   constant           -7.13607           10.5462         -17.6823   -2.11402    -3.05439    -1.19546 -4.32618     0.999992                 4                             0        26.5765              2                     0              19.7634                    19.985 0.385707            0.414141              -23.8097                               -48.4653 14508.1 5.80871e-05 5.22835e-08
+
+== cost grid: annualised Sharpe ratio and net utility
+   strategy                       costs  mean_net_bp_day  sr_annual  net_utility_pct_year
+hybrid_base                       gross         -10.2576   -1.17601               3.56066
+hybrid_base   statutory + 0 bp per side         -22.9762   -2.62631              -28.4903
+hybrid_base statutory + 0.5 bp per side         -26.8794   -3.07155              -38.3262
+hybrid_base   statutory + 1 bp per side         -30.7825   -3.51643              -48.1622
+hybrid_base   statutory + 2 bp per side         -38.5888   -4.40495               -67.834
+hybrid_base   statutory + 3 bp per side          -46.395   -5.29154              -87.5058
+   mcsgarch                       gross         -11.0298   -1.25703               3.51983
+   mcsgarch   statutory + 0 bp per side         -24.7741   -2.81509              -31.1158
+   mcsgarch statutory + 0.5 bp per side         -28.9903    -3.2931              -41.7407
+   mcsgarch   statutory + 1 bp per side         -33.2066   -3.77066              -52.3656
+   mcsgarch   statutory + 2 bp per side          -41.639   -4.72424              -73.6155
+   mcsgarch   statutory + 3 bp per side         -50.0715   -5.67545              -94.8653
+mcsgarch_iv                       gross         -10.1449   -1.17443               3.53152
+mcsgarch_iv   statutory + 0 bp per side         -23.1622   -2.67185              -29.2721
+mcsgarch_iv statutory + 0.5 bp per side         -27.1615   -3.13181              -39.3503
+mcsgarch_iv   statutory + 1 bp per side         -31.1608   -3.59121              -49.4286
+mcsgarch_iv   statutory + 2 bp per side         -39.1595   -4.50812              -69.5852
+mcsgarch_iv   statutory + 3 bp per side         -47.1581   -5.42214              -89.7417
+   constant                       gross         -7.13607  -0.853363               2.76677
+   constant   statutory + 0 bp per side         -13.6823    -1.6358              -13.7297
+   constant statutory + 0.5 bp per side         -15.6823   -1.87491              -18.7697
+   constant   statutory + 1 bp per side         -17.6823   -2.11402              -23.8097
+   constant   statutory + 2 bp per side         -21.6823   -2.59224              -33.8897
+   constant   statutory + 3 bp per side         -25.6823   -3.07047              -43.9697
+
+== trading tests
+ test_id       role        kind       model   benchmark                                              costs    estimate                                    estimate_name  dm_mean_diff   dm_stat  p_one_sided  n_days  share_days_model_better
+      T1 registered    tracking hybrid_base    mcsgarch      not applicable (tracking uses positions only)  0.00176372                      RMSLD model minus benchmark  -0.000493317 -0.867098     0.806924     792                 0.472222
+      T2 registered net_utility hybrid_base    mcsgarch                          statutory + 1 bp per side     4.20349 net utility difference, percent of wealth a year   0.000166805   19.9397  2.76524e-72     792                 0.897727
+   T1-iv robustness    tracking hybrid_base mcsgarch_iv      not applicable (tracking uses positions only) -0.00348415                      RMSLD model minus benchmark   0.000992813  0.786024     0.216044     792                 0.492424
+   T2-iv robustness net_utility hybrid_base mcsgarch_iv                          statutory + 1 bp per side     1.26646 net utility difference, percent of wealth a year   5.02565e-05   3.68265  0.000123257     792                 0.635101
+T2-rebal robustness net_utility hybrid_base    mcsgarch rebalancing trades only, statutory + 1 bp per side     4.01877 net utility difference, percent of wealth a year   0.000159475   16.2953  5.40226e-52     792                    0.875
+ T2-grid robustness net_utility hybrid_base    mcsgarch                                              gross   0.0408293 net utility difference, percent of wealth a year   1.62021e-06   4.81282   8.9129e-07     792                 0.703283
+ T2-grid robustness net_utility hybrid_base    mcsgarch                          statutory + 0 bp per side     2.62548 net utility difference, percent of wealth a year   0.000104186   17.2262  5.18951e-57     792                 0.897727
+ T2-grid robustness net_utility hybrid_base    mcsgarch                        statutory + 0.5 bp per side     3.41449 net utility difference, percent of wealth a year   0.000135496   18.9345  1.57955e-66     792                 0.897727
+ T2-grid robustness net_utility hybrid_base    mcsgarch                          statutory + 2 bp per side     5.78151 net utility difference, percent of wealth a year   0.000229425   20.9471  3.77262e-78     792                  0.89899
+ T2-grid robustness net_utility hybrid_base    mcsgarch                          statutory + 3 bp per side     7.35952 net utility difference, percent of wealth a year   0.000292044   21.3842  1.01312e-80     792                  0.89899
+
+== Deflated Sharpe Ratio
+   strategy  N           V                                       V_source  primary   T  multiplier  sr0_annual  sr_annual      skew    kurt        psr0         dsr
+hybrid_base  4   0.0023134 sample variance of the 4 registered strategies     True 792     1.05212    0.803326   -3.51643 -0.205869 3.43323  1.6962e-10  6.0831e-15
+hybrid_base 33 0.000618919         sample variance of the 33 sizing rules    False 792      2.1124    0.834245   -3.51643 -0.205869 3.43323  1.6962e-10 3.93982e-15
+hybrid_base  4  0.00126263                               1/T (pure noise)    False 792     1.05212    0.593477   -3.51643 -0.205869 3.43323  1.6962e-10 1.07169e-13
+hybrid_base 33  0.00126263                               1/T (pure noise)    False 792      2.1124     1.19155   -3.51643 -0.205869 3.43323  1.6962e-10 2.09262e-17
+   mcsgarch  4   0.0023134 sample variance of the 4 registered strategies     True 792     1.05212    0.803326   -3.77066 -0.224748 3.52249 7.88041e-12 1.45736e-16
+   mcsgarch 33 0.000618919         sample variance of the 33 sizing rules    False 792      2.1124    0.834245   -3.77066 -0.224748 3.52249 7.88041e-12  9.1998e-17
+   mcsgarch  4  0.00126263                               1/T (pure noise)    False 792     1.05212    0.593477   -3.77066 -0.224748 3.52249 7.88041e-12 3.05487e-15
+   mcsgarch 33  0.00126263                               1/T (pure noise)    False 792      2.1124     1.19155   -3.77066 -0.224748 3.52249 7.88041e-12  3.6301e-19
+mcsgarch_iv  4   0.0023134 sample variance of the 4 registered strategies     True 792     1.05212    0.803326   -3.59121  -0.19475 3.41181 7.52207e-11  2.2951e-15
+mcsgarch_iv 33 0.000618919         sample variance of the 33 sizing rules    False 792      2.1124    0.834245   -3.59121  -0.19475 3.41181 7.52207e-11 1.47736e-15
+mcsgarch_iv  4  0.00126263                               1/T (pure noise)    False 792     1.05212    0.593477   -3.59121  -0.19475 3.41181 7.52207e-11 4.21608e-14
+mcsgarch_iv 33  0.00126263                               1/T (pure noise)    False 792      2.1124     1.19155   -3.59121  -0.19475 3.41181 7.52207e-11  7.3132e-18
+   constant  4   0.0023134 sample variance of the 4 registered strategies     True 792     1.05212    0.803326   -2.11402  -0.66987 8.58046 5.80871e-05 5.22835e-08
+   constant 33 0.000618919         sample variance of the 33 sizing rules    False 792      2.1124    0.834245   -2.11402  -0.66987 8.58046 5.80871e-05 3.82976e-08
+   constant  4  0.00126263                               1/T (pure noise)    False 792     1.05212    0.593477   -2.11402  -0.66987 8.58046 5.80871e-05 3.98648e-07
+   constant 33  0.00126263                               1/T (pure noise)    False 792      2.1124     1.19155   -2.11402  -0.66987 8.58046 5.80871e-05 8.38357e-10
+
+== bootstrap of the Sharpe ratio
+                             series  sr_annual   lo_2_5  hi_97_5  share_draws_le_0     B  mean_block               seed
+                        hybrid_base   -3.51643 -4.52859 -2.54302                 1 10000           5 [20261102, 103, 0]
+                           mcsgarch   -3.77066 -4.77764 -2.79451                 1 10000           5 [20261102, 103, 1]
+                        mcsgarch_iv   -3.59121 -4.60722 -2.57865                 1 10000           5 [20261102, 103, 2]
+                           constant   -2.11402 -3.05439 -1.19546                 1 10000           5 [20261102, 103, 3]
+hybrid_base minus mcsgarch (paired)   0.254224  0.18371 0.324409                 0 10000           5 [20261102, 103, 4]
+
+== descriptive (added in phase 2): Nifty's drift by part of the day, and gross contribution by window
+                                                     part_of_day  days  mean_bp_per_day   sd_bp    t_iid  sum_log_return
+overnight: previous day's last bar close to the 09:15 bar's open   792          5.11975 54.5505  2.64127        0.405484
+                   09:15 to 15:15 (the windows traded in Part B)   792          -3.7664  66.485 -1.59428       -0.298299
+            of which the first minute (09:15 bar, open to close)   792         -2.91726 20.4496  -4.0147       -0.231047
+                      15:15 to the last bar's close (not traded)   792          1.16993 11.1262  2.95922       0.0926587
+                      constant  hybrid_base  mcsgarch  mcsgarch_iv  mean_index_return_bp
+window_origin_minute                                                                    
+0                     -5.29166     -4.24433  -4.51842     -4.23581              -2.64583
+30                    -1.15695     -1.91619  -2.00174     -1.76246             -0.578477
+60                   -0.357911    -0.479966  -0.43556    -0.451849             -0.178956
+90                     1.31687      1.65534   1.60556      1.72653              0.658437
+120                   0.329428     -0.45511 -0.313747    -0.357465              0.164714
+150                   0.462235     0.791551  0.591826     0.541148              0.231118
+180                   0.160441     0.548203  0.464145     0.472078             0.0802205
+210                  -0.760286     -1.66981  -1.62125     -1.67591             -0.380143
+240                  -0.420857     -1.49393   -1.4942     -1.43326             -0.210428
+270                   0.810166     0.218836  0.100763      0.22737              0.405083
+300                  -0.308364     -0.91044   -1.0055    -0.893965             -0.154182
+330                   -1.91918     -2.30173  -2.40168     -2.30132             -0.959589
+                    rule  sr_annual_net_base  sr_annual_gross  turnover_per_day  rebalancing_turnover_per_day  mean_abs_change_log_forecast    rmsld  gross_utility_pct_year  net_utility_pct_year_base
+                constant            -2.11402        -0.853363                 4                             0                             0 0.385707                 2.76677                   -23.8097
+                     vix            -2.52644         -0.75043           5.88395                       2.64162                       0.23101 0.316429                 3.24936                   -35.4982
+                 implied            -2.68497        -0.858263           5.95356                        2.6474                       0.23101 0.300617                 3.37001                   -35.7993
+           linear_gex_us            -3.31204         -1.10663           7.29559                       3.45562                      0.279779 0.153669                 3.53717                    -44.874
+  linear_gex_participant            -3.31169         -1.10231           7.31761                       3.47182                      0.280447 0.156085                 3.52807                   -45.0492
+        linear_gex_gross            -3.31576          -1.1012           7.33403                       3.48717                      0.282394 0.154259                 3.53813                   -45.1265
+       linear_gex_client            -3.31083         -1.09266           7.33782                       3.50347                      0.283539 0.154261                 3.53828                   -45.1415
+      linear_gex_placebo             -3.3191         -1.10363           7.36149                       3.53753                      0.287168 0.154858                 3.52992                   -45.3121
+             linear_base            -3.32544         -1.10451           7.36429                       3.54372                      0.288174 0.153514                 3.53155                   -45.3282
+                     har            -3.38663         -1.15648           7.52622                       3.50993                      0.285901 0.172943                 3.46825                   -46.3793
+              lgbmt_base            -3.40606         -1.13757           7.52895                       3.77328                      0.304325 0.148383                 3.55353                   -46.3231
+               linear_v1            -3.37373         -1.11323           7.53867                       3.72104                      0.303732  0.15156                 3.51215                   -46.4318
+               lgbm_base            -3.37016         -1.11061            7.5416                       3.79512                      0.306393 0.151349                 3.53452                   -46.4906
+                 lgbm_v1            -3.41584         -1.14417           7.61984                       3.83763                      0.312344 0.149669                 3.52506                   -47.0093
+           hybridiv_base            -3.39924         -1.08934           7.65536                        3.9428                      0.329474 0.144833                 3.56321                    -47.221
+         hybridiv_gex_us            -3.40159         -1.09397           7.65866                       3.94412                      0.328719 0.145525                 3.55764                   -47.1647
+     hybridiv_gex_client            -3.40562         -1.09817           7.66902                       3.94271                      0.329368 0.144122                 3.56284                   -47.2287
+hybridiv_gex_participant            -3.39813         -1.08806           7.67718                       3.95715                      0.329976 0.145112                  3.5602                   -47.3059
+      hybridiv_gex_gross            -3.40846         -1.09603           7.68074                       3.95486                      0.330386 0.143983                 3.56237                   -47.3198
+    hybridiv_gex_placebo            -3.40843         -1.09288           7.68391                       3.96857                      0.331466 0.144862                 3.56088                   -47.3915
+               hybrid_v1            -3.45579         -1.14716           7.71999                       3.97959                      0.330464 0.141764                 3.55804                   -47.5892
+            hybrid_v1gex            -3.49097         -1.17171           7.72656                       3.99244                      0.330307   0.1418                 3.56052                   -47.6143
+           hybrid_gex_us            -3.50426         -1.17105           7.78799                       4.06548                      0.335284 0.140982                 3.56088                   -48.0096
+  hybrid_gex_participant            -3.51041         -1.17406           7.79778                        4.0705                      0.336142 0.140612                 3.56194                   -48.1002
+        hybrid_gex_gross            -3.51338         -1.17542             7.804                       4.07477                      0.336624 0.140345                 3.56248                   -48.1276
+             hybrid_base            -3.51643         -1.17601           7.80627                       4.07937                      0.337356 0.140733                 3.56066                   -48.1622
+       hybrid_gex_client            -3.51426         -1.17716           7.80952                       4.07638                      0.336588 0.140803                 3.56026                   -48.1541
+      hybrid_gex_placebo            -3.51112         -1.17035           7.82282                       4.09565                       0.33837 0.141197                 3.55813                   -48.2556
+             mcsgarch_iv            -3.59121         -1.17443           7.99863                       4.26878                      0.363306 0.144218                 3.53152                   -49.4286
+            mcsgarch_r63            -3.74092         -1.22696           8.39418                       4.66287                      0.388063 0.142951                 3.51251                   -52.1887
+                mcsgarch            -3.77066         -1.25703           8.43247                       4.66862                      0.388038  0.13897                 3.51983                   -52.3656
+           naive_prevday            -3.34913        -0.815207           9.99122                       5.85364                      0.546058 0.306601                 2.67465                   -63.6342
+              naive_last            -4.68264         -1.52099           12.0134                       6.47742                      0.610729 0.207175                 2.82641                   -76.7356
+
+== REGISTERED VERDICTS
+                                                      item   statistic                                                                                       result
+H1 (30 minutes, hybrid_base vs mcsgarch, realized utility) 8.13067e-07                                                                                    supported
+          fee at SR 0.4, gamma 2, percent of wealth a year   0.0413262                                                                                         tiny
+                       fee in rupees a year per Rs 1 crore     4132.62                                                                                         tiny
+                                                 S1 (Holm) 1.00472e-05                                                                                    supported
+                                                 S2 (Holm)  0.00103731                                                                                    supported
+                                                 S3 (Holm)   0.0962992                                                                                not supported
+                                                 S4 (Holm)   0.0962992                                                                                not supported
+                                  T1 tracking, one-sided p    0.806924                                                                                         fail
+            T2 net utility at base-case costs, one-sided p 2.76524e-72                                                                                         pass
+                                            Part B verdict         NaN                                                                       no implementation gain
+                 standalone DSR of the hybrid rule (N = 4)  6.0831e-15                                                                    not a standalone strategy
+                              S4 information-matched check   0.0962992                                 fails: value over mcsGARCH not shown to come from the method
+                                                   OVERALL         NaN detectable but not economically meaningful (the fee is tiny; Part B: no implementation gain)

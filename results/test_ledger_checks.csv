@@ -49,4 +49,5 @@ SWAP,secondaries S1 to S3 (Holm),results/sensex_swap/tests.csv,holm,3,3,0,1.7347
 SYNTH,secondaries Fin Nifty and Midcap Select (Holm),results/synthetic_control/decision.json,holm,2,2,0,0.0,match,
 REFFC,Giacomini-White main family (Holm over all main-family tests),results/referee_forecast/gw_tests.csv,holm,42,42,0,3.0999508515705543e-15,match,
 REFEXP,"Tuesday against Thursday regime (Bonferroni over 18, as the study states)",results/referee_expiry/r2_tue_vs_thu_by_baseline.csv,bonferroni (m = 18),18,10,0,1.4988010832439613e-15,match,the file lists 10 of the 18 tests in the study's family
+P103ECON,S1 to S4 (Holm),results/p103_economic_value/utility_tests.csv,holm,4,4,0,0.0,match,
 FALS,"18 headline tests, recomputed from the current R3 and R5 files",results/falsification/t7_headline_adjusted.csv,holm,18,18,3,0.00015938215503170233,MISMATCH,the study's F2 rows used 932 days (older code); R5 now uses 929

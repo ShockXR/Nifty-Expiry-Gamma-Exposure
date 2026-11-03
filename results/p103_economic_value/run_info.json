@@ -1,0 +1,187 @@
+{
+  "study": "P103 economic value of the forecasting hybrid",
+  "label": "REAL DATA",
+  "prereg_file": "docs/prereg/P103_ECONOMIC_VALUE.md",
+  "prereg_commit": "77b435aec493b7e0acf1eab90e51490bb9377f17",
+  "overall_verdict": "detectable but not economically meaningful (the fee is tiny; Part B: no implementation gain)",
+  "part_b_verdict": "no implementation gain",
+  "h1_p": 8.13066996406162e-07,
+  "fee_pct_year": 0.04132615444157617,
+  "size_label": "tiny",
+  "dsr_hybrid_N4": 6.083096975656134e-15,
+  "parameters": {
+    "sr_annual": 0.4,
+    "gamma": 2.0,
+    "target_vol": 0.2,
+    "cap": 4.0,
+    "constant_position": 2.0,
+    "windows_per_day": 12,
+    "windows_per_year": 3024,
+    "origins": {
+      "next30_primary": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300,
+        330
+      ],
+      "next30_offset15": [
+        15,
+        45,
+        75,
+        105,
+        135,
+        165,
+        195,
+        225,
+        255,
+        285,
+        315,
+        345
+      ],
+      "next30_all": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        75,
+        90,
+        105,
+        120,
+        135,
+        150,
+        165,
+        180,
+        195,
+        210,
+        225,
+        240,
+        255,
+        270,
+        285,
+        300,
+        315,
+        330,
+        345
+      ],
+      "next30_no0915": [
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300,
+        330
+      ],
+      "next15_all": [
+        0,
+        15,
+        30,
+        45,
+        60,
+        75,
+        90,
+        105,
+        120,
+        135,
+        150,
+        165,
+        180,
+        195,
+        210,
+        225,
+        240,
+        255,
+        270,
+        285,
+        300,
+        315,
+        330,
+        345,
+        360
+      ],
+      "last_hour": [
+        315
+      ]
+    },
+    "slippage_base_bp_per_side": 1.0,
+    "slippage_grid": [
+      0.0,
+      0.5,
+      1.0,
+      2.0,
+      3.0
+    ]
+  },
+  "seeds": {
+    "hybrid_base": [
+      20261102,
+      103,
+      0
+    ],
+    "mcsgarch": [
+      20261102,
+      103,
+      1
+    ],
+    "mcsgarch_iv": [
+      20261102,
+      103,
+      2
+    ],
+    "constant": [
+      20261102,
+      103,
+      3
+    ],
+    "paired_difference": [
+      20261102,
+      103,
+      4
+    ]
+  },
+  "bootstrap": {
+    "B": 10000,
+    "mean_block": 5,
+    "method": "stationary (Politis and Romano 1994), percentile"
+  },
+  "dsr": {
+    "N_primary": 4,
+    "V_primary": 0.002313399500321734,
+    "V_33": 0.0006189190282825637,
+    "T": 792
+  },
+  "days": {
+    "n": 792,
+    "first": "2023-08-10",
+    "last": "2026-11-02"
+  },
+  "input_sha256_16": {
+    "results/pipeline_nse_v2/forecasts_next15.csv": "6e42630dea375b4d",
+    "results/pipeline_nse_v2/forecasts_next30.csv": "8a07a63c0c1c5c6d",
+    "results/pipeline_nse_v2/forecasts_last_hour.csv": "e9010659d0e33201",
+    "results/pipeline_nse_v2/scoreboard_next15.csv": "f06e44e8e04c54e7",
+    "results/pipeline_nse_v2/scoreboard_next30.csv": "74bfb37f901703b0",
+    "results/pipeline_nse_v2/scoreboard_last_hour.csv": "d3d800c99fd12781",
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b4"
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1"
+  },
+  "runtime_seconds": 4.7
+}

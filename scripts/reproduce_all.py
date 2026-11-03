@@ -92,6 +92,7 @@ OPTIONAL = {  # studies added later; run if the script exists
     "referee_expiry": ([PY, "experiments/referee_expiry.py"], "results/referee_expiry/"),
     "f2_dsr_power": ([PY, "experiments/f2_dsr_power.py"], "results/f2_economics/dsr_power_posthoc.csv",
                      "results/f2_economics/dsr_power_posthoc_stdout.txt"),
+    "p103_economic_value": ([PY, "experiments/p103_economic_value.py"], "results/p103_economic_value/"),
     "test_ledger": ([PY, "scripts/build_test_ledger.py"], "results/test_ledger.csv"),
     "number_trace": ([PY, "scripts/trace_numbers.py", "--quiet"], "results/number_trace/"),
 }
