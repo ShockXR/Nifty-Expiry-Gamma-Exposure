@@ -84,7 +84,7 @@ python experiments/power_study.py --reps 8 --days 500
 python scripts/download_nse.py --start 2023-01-01 --end 2026-11-02 --out data/raw
 python scripts/fetch_minute_bars.py
 python scripts/validate_minute_bars.py
-python scripts/run_pipeline.py --source nse          # about 9 minutes on 4 cores
+python scripts/run_pipeline.py --source nse          # about 8 minutes on 4 cores (the five-seed model study, --n-seeds 5, takes about 100)
 python experiments/real_day_level.py
 python experiments/momentum_gex.py
 python experiments/replicate_paper.py

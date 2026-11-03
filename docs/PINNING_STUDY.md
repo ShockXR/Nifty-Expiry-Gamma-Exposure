@@ -15,7 +15,7 @@ Written for Shreyan Thanki, to discuss with Prof. Piyush Pandey. No finance or s
 
 **In one sentence:** expiry-day pinning on NSE indices is real in some periods (Nifty in late 2024 to mid 2025, Bank Nifty while it had weekly options) and absent in others (Nifty since September 2025), and none of our public-data proxies for dealer gamma explains when it happens.
 
-**Follow-up (P87, pre-registered, REAL DATA).** A pre-registered test of five market-structure explanations ([PINNING_MECHANISM.md](PINNING_MECHANISM.md)) finds that none explains when pinning appears and disappears. More open interest near the money goes with closes *farther* from strikes (+1.1 Nifty points per SD, p = 0.0099), and the one variable that helps day to day (open interest held into expiry rather than rolled) cannot account for the regime pattern.
+**Follow-up (P87, pre-registered, REAL DATA).** A pre-registered test of six market-structure explanations (five tested by regression) ([PINNING_MECHANISM.md](PINNING_MECHANISM.md)) finds that none explains when pinning appears and disappears. More open interest near the money goes with closes *farther* from strikes (+1.1 Nifty points per SD, p = 0.0099), and the one variable that helps day to day (open interest held into expiry rather than rolled) cannot account for the regime pattern.
 
 ## 1. The question in plain words
 

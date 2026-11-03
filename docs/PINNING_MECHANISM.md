@@ -1,4 +1,4 @@
-# What decides when expiry-day pinning appears? Five market-structure candidates, tested as pre-registered (P87)
+# What decides when expiry-day pinning appears? Six market-structure candidates, tested as pre-registered (P87)
 
 **REAL DATA.** NSE F&O bhavcopies and NSE official index closes, 3 January 2023 to 27 October 2026, plus third-party 1-minute bars (one placebo only). Every number below comes from a file written by `experiments/pinning_mechanism.py` (folder `results/pinning_mechanism/`, log `results/pinning_mechanism_stdout.txt`). The only SYNTHETIC data are in the unit tests (`tests/test_pinning_mechanism.py`).
 
