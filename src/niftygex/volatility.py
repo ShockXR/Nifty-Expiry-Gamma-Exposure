@@ -675,3 +675,260 @@ class McsGarchExt(McsGarch):
                 qhat = p["omega"] + a_eff * qhat + p["gam_x"] * run / (j + 1)
             out[sel] = h[tt] * tot
         return out
+
+
+# ---------------------------------------------------------------------------
+# Persistence of the extended intraday recursion (study P114, docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md)
+#
+# New code only. Nothing above this line was changed for P114, so every existing result stays bit-for-bit
+# the same.
+# ---------------------------------------------------------------------------
+
+IRF_MAX_STEPS = 100_000          # a response that has not halved after this many trading minutes: half-life = inf
+PERSISTENCE_CAP = 0.99999        # the upper bound of persistence used by fit_garch11 and fit_garch_ext
+
+
+def ext_impulse_response(params: dict, M: int, shock_minute: int, n_steps: int = 0, stop_at_half: bool = False,
+                         max_steps: int = IRF_MAX_STEPS, kappa: float = KAPPA_NEG) -> np.ndarray:
+    """Response of the expected intraday variance to one standardised shock (exact recursion, no simulation).
+
+    The shock: at minute ``shock_minute`` (0-based) of a session of ``M`` minutes, the squared normalised
+    residual x^2 is one unit above its conditional expectation q; its sign is averaged, so the leverage term
+    responds by ``kappa`` gam_l. Every later x^2 is replaced by its expectation, so the response is linear in
+    the shock and does not depend on omega, nu or the level of q. The model's own clock is used: one step per
+    minute within a day, and the night is one step (q at the next open = qbar + delta (carry - qbar));
+    today's running mean z restarts each day, as in ``ext_q2``.
+
+    Returns r with r[k - 1] the change in E[q] k trading minutes after the shock minute, for k = 1 .. n, where
+    n is ``n_steps``, or, with ``stop_at_half``, the larger of ``n_steps`` and the first k at which the
+    response is at most half of r[0] (never more than ``max_steps``). For GARCH(1,1) (gam_l = gam_x = 0,
+    delta = 1) r[k - 1] = alpha (alpha + beta) ** (k - 1).
+    """
+    if not 0 <= int(shock_minute) < int(M):
+        raise ValueError(f"shock_minute {shock_minute} outside a session of {M} minutes")
+    al = float(params["alpha"])
+    be = float(params["beta"])
+    gl = float(params.get("gam_l", 0.0))
+    gx = float(params.get("gam_x", 0.0))
+    de = float(params.get("delta", 1.0))
+    a_x = al + kappa * gl               # weight of the expected squared residual on the next q
+    i = int(shock_minute)
+    dq, dx2, dS = 0.0, 1.0, 1.0         # responses of q_i, x_i^2 and the day's running sum of x^2 up to minute i
+    out = []
+    r1 = None
+    limit = max(int(n_steps), 1)
+    k = 0
+    while k < max_steps:
+        nxt = a_x * dx2 + gx * dS / (i + 1) + be * dq
+        if i == M - 1:                  # the night: decay toward qbar, and the running mean restarts
+            nxt = de * nxt
+            i, dS = 0, 0.0
+        else:
+            i += 1
+        dq = nxt
+        dx2 = dq
+        dS += dq
+        out.append(dq)
+        k += 1
+        if r1 is None:
+            r1 = dq
+        if k >= limit and (not stop_at_half or dq <= 0.5 * r1):
+            break
+    return np.asarray(out, float)
+
+
+def irf_half_life(r) -> float:
+    """Half-life of an impulse response r (r[0] = the response one step after the shock): the number of steps
+    after r[0] at which the response first falls to half of r[0], log-linearly interpolated between steps.
+    Equals ln(0.5) / ln(alpha + beta) for GARCH(1,1). inf if it never falls to half within r; nan if r[0] <= 0.
+    A response that falls to 0 in one step (delta = 0 at the night) halves at the start of that step."""
+    r = np.asarray(r, float)
+    if len(r) == 0 or not r[0] > 0:
+        return float("nan")
+    target = 0.5 * r[0]
+    below = np.flatnonzero(r[1:] <= target)
+    if len(below) == 0:
+        return float("inf")
+    k = int(below[0]) + 1
+    lo, hi = r[k - 1], r[k]
+    if hi <= 0:
+        return float(k - 1)
+    return float(k - 1) + float((np.log(lo) - np.log(target)) / (np.log(lo) - np.log(hi)))
+
+
+def equivalent_persistence(half_life) -> np.ndarray:
+    """0.5 ** (1 / half-life): the alpha + beta of a GARCH(1,1) with the same half-life (inf -> 1)."""
+    hl = np.asarray(half_life, float)
+    with np.errstate(divide="ignore"):
+        return np.where(np.isfinite(hl), 0.5 ** (1.0 / hl), np.where(np.isnan(hl), np.nan, 1.0))
+
+
+def ext_persistence_summary(params: dict, M: int, shock_minute: int, max_steps: int = IRF_MAX_STEPS,
+                            kappa: float = KAPPA_NEG) -> dict:
+    """Persistence measures of a fitted intraday recursion (P114).
+
+    ab: alpha + beta; total: alpha + beta + kappa gam_l + gam_x (the stationarity sum); hl_ab: ln(0.5) /
+    ln(alpha + beta); hl_irf: half-life of the impulse response to one standardised shock at ``shock_minute``
+    (``ext_impulse_response``, ``irf_half_life``); rho_irf: its equivalent persistence 0.5 ** (1 / hl_irf);
+    share_close and share_next_open: the response at the last minute of the shock's day and at the next
+    day's first minute, as shares of the first response.
+    """
+    n_close = M - 1 - int(shock_minute)            # steps from the shock minute to the last minute of the day
+    r = ext_impulse_response(params, M, shock_minute, n_steps=n_close + 1, stop_at_half=True,
+                             max_steps=max_steps, kappa=kappa)
+    hl = irf_half_life(r)
+    ab = float(params["alpha"]) + float(params["beta"])
+    tot = ab + kappa * float(params.get("gam_l", 0.0)) + float(params.get("gam_x", 0.0))
+    return {"ab": ab, "total": tot, "hl_ab": float(np.log(0.5) / np.log(ab)) if ab < 1 else float("inf"),
+            "hl_irf": hl, "rho_irf": float(equivalent_persistence(hl)), "r1": float(r[0]),
+            "share_close": float(r[n_close - 1] / r[0]) if n_close >= 1 else float("nan"),
+            "share_next_open": float(r[n_close] / r[0])}
+
+
+def _irf_hl_capped(alpha, beta, gam_x, delta, M, shock_minute, cap_steps):
+    r = ext_impulse_response({"alpha": alpha, "beta": beta, "gam_x": gam_x, "delta": delta}, M, shock_minute,
+                             stop_at_half=True, max_steps=cap_steps)
+    return irf_half_life(r)
+
+
+def solve_beta_for_half_life(alpha, gam_x, delta, M, shock_minute, half_life, cap=PERSISTENCE_CAP):
+    """The beta at which the impulse-response half-life equals ``half_life`` (it increases with beta), with
+    alpha + beta + gam_x below ``cap``; None if no such beta exists."""
+    from scipy.optimize import brentq
+
+    bmax = cap - alpha - gam_x
+    if bmax <= 0:
+        return None
+    steps = int(2 * half_life) + 20
+
+    def g(b):
+        hl = _irf_hl_capped(alpha, b, gam_x, delta, M, shock_minute, steps)
+        return (np.log(hl) if np.isfinite(hl) else np.log(steps)) - np.log(half_life)
+
+    lo, hi = g(0.0), g(bmax)
+    if not (lo <= 0 <= hi):
+        return None
+    if lo == 0:
+        return 0.0
+    return float(brentq(g, 0.0, bmax, xtol=1e-14, rtol=4 * np.finfo(float).eps, maxiter=200))
+
+
+def fit_garch_ext_fixed(X, weights=None, overnight_decay=False, garchx_today=False, measure: str = "ab",
+                        value: float = 0.99, M: int | None = None, shock_minute: int | None = None,
+                        start: dict | None = None, dist: str = "t"):
+    """Maximum likelihood of the extended intraday recursion (no leverage term) with one persistence measure
+    held fixed, for profile likelihoods and likelihood-ratio tests of equal persistence (P114).
+
+    measure "ab":  alpha + beta = value. Free: omega, the alpha share of value, gam_x (below 0.99999 - value),
+                   delta and nu.
+    measure "irf": the impulse-response half-life (shock at ``shock_minute`` of an ``M``-minute session)
+                   = value, in minutes. Free: omega, alpha, gam_x, delta and nu; beta is solved from the
+                   constraint (``solve_beta_for_half_life``).
+    With both flags off this is the GARCH(1,1) of ``fit_garch11`` with alpha + beta fixed (as
+    ``replication.profile_half_life``). X is the (days x minutes) grid of normalised residuals, as in
+    ``fit_garch_ext``; ``start`` a fitted parameter dict for starting values (alpha, gam_x, delta, nu and the
+    unconditional level are kept where the constraint allows). Returns (loglik, params, converged).
+    """
+    X = np.asarray(X, float)
+    T, Mx = X.shape
+    M = Mx if M is None else int(M)
+    w = np.ones_like(X) if weights is None else np.asarray(weights, float)
+    x2, negx2, z = _ext_inputs(X, np.zeros_like(X, bool))
+    q0 = float(np.average(x2, weights=w))
+    flat_w, flat_x = w.ravel(), X.ravel()
+    cap = PERSISTENCE_CAP
+    s = dict(start or {})
+    a0 = float(s.get("alpha", 0.05))
+    gx0 = float(s.get("gam_x", 0.0)) if garchx_today else 0.0
+    de0 = float(s.get("delta", 1.0)) if overnight_decay else 1.0
+    nu0 = float(s.get("nu", 8.0)) if dist == "t" else np.inf
+    if "omega" in s:
+        pers_s = s["alpha"] + s["beta"] + KAPPA_NEG * s.get("gam_l", 0.0) + s.get("gam_x", 0.0)
+        qbar0 = float(s["omega"] / max(1e-12, 1 - pers_s))
+    else:
+        qbar0 = q0
+
+    def clip(v):
+        return min(max(float(v), 1e-6), 1 - 1e-6)
+
+    def logit(v):
+        v = clip(v)
+        return float(np.log(v / (1 - v)))
+
+    def unpack(th):
+        qbar = float(np.exp(th[0]))       # the unconditional level, better conditioned than omega
+        j = 2
+        if measure == "ab":
+            alpha = value * float(expit(th[1]))
+            beta = value - alpha
+            gam_x = (cap - value) * float(expit(th[j])) if garchx_today else 0.0
+        else:
+            alpha = cap * float(expit(th[1]))
+            gam_x = (cap - alpha) * float(expit(th[j])) if garchx_today else 0.0
+            beta = None
+        j += 1 if garchx_today else 0
+        nu = float(2.05 + np.exp(th[j])) if dist == "t" else np.inf
+        delta = float(expit(th[j + 1])) if overnight_decay else 1.0
+        if measure == "irf":
+            beta = solve_beta_for_half_life(alpha, gam_x, delta, M, shock_minute, value, cap)
+        return qbar, alpha, beta, gam_x, delta, nu
+
+    def pack(qbar, alpha, gam_x, delta, nu):
+        th = [np.log(qbar)]
+        if measure == "ab":
+            th.append(logit(alpha / value))
+            if garchx_today:
+                th.append(logit(gam_x / (cap - value)))
+        else:
+            th.append(logit(alpha / cap))
+            if garchx_today:
+                th.append(logit(gam_x / (cap - alpha)))
+        th.append(np.log(max(nu - 2.05, 1e-3)) if dist == "t" else 0.0)
+        if overnight_decay:
+            th.append(logit(delta))
+        return np.array(th, float)
+
+    def nll(th):
+        qbar, alpha, beta, gam_x, delta, nu = unpack(th)
+        if beta is None:
+            return 1e300
+        pers = alpha + beta + gam_x
+        if not pers < 1:
+            return 1e300
+        q2 = ext_q2(x2, negx2, z, qbar * (1 - pers), alpha, beta, 0.0, gam_x, delta, q0, qbar).ravel()
+        if not np.all(q2 > 0):
+            return 1e300
+        ll = _t_loglik(flat_x, q2, nu) if dist == "t" else _norm_loglik(flat_x, q2)
+        v = -np.sum(flat_w * ll)
+        return v if np.isfinite(v) else 1e300
+
+    # starting values: keep alpha, gam_x, delta, nu and the unconditional level where the constraint allows
+    if measure == "ab":
+        a_start = value * (a0 / (a0 + float(s.get("beta", 0.9)))) if "beta" in s else min(a0, 0.5 * value)
+        g_start = min(gx0, 0.5 * (cap - value))
+        th0 = pack(qbar0, a_start, g_start, de0, nu0)
+    else:
+        a_start, g_start, d_start, beta0 = a0, gx0, de0, None
+        for _ in range(60):
+            beta0 = solve_beta_for_half_life(a_start, g_start, d_start, M, shock_minute, value, cap)
+            if beta0 is not None:
+                break
+            # an infeasible start: let more of the shock survive the night, then shrink alpha and gam_x
+            if overnight_decay and d_start < 0.999:
+                d_start = 1 - (1 - d_start) / 2
+            else:
+                a_start, g_start = a_start / 2, g_start / 2
+        if beta0 is None:
+            return float("nan"), {}, False
+        th0 = pack(qbar0, a_start, g_start, d_start, nu0)
+    # L-BFGS-B, then a Nelder-Mead polish from its result (the constrained surface can have kinks where the
+    # half-life crosses the night); the better of the two is kept
+    res = minimize(nll, th0, method="L-BFGS-B")
+    res2 = minimize(nll, res.x, method="Nelder-Mead",
+                    options={"maxiter": 4000, "maxfev": 6000, "xatol": 1e-7, "fatol": 1e-7})
+    best = res2 if res2.fun < res.fun else res
+    qbar, alpha, beta, gam_x, delta, nu = unpack(best.x)
+    pers = alpha + beta + gam_x
+    p = {"omega": qbar * (1 - pers), "alpha": alpha, "beta": beta, "gam_l": 0.0, "gam_x": gam_x, "delta": delta,
+         "nu": nu, "qbar": qbar, "measure": measure, "value": float(value)}
+    return float(-best.fun), p, bool(res.success or res2.success)
