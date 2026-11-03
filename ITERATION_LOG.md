@@ -534,8 +534,22 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Fin Nifty moves with Bank Nifty and Nifty and borrows Nifty's VIX, so this is not three independent tests; the minute bars' source is of unknown origin; the project had used Fin Nifty daily data before (P96).
 * **NEXT ITERATION:** Fold into the pitch, briefing, results summary, working paper and referee response; caveat every MSE comparison against mcsGARCH.
 
-## Iterations in progress (3 November 2026, about 11:00 IST)
+## Iteration 45: one pooled test over the three indices (registered plan, P107)
 
+* **OBJECTIVE:** Replace three separate replications of the forecasting hybrid with one test that respects how the indices move together, and measure how much independent information Bank Nifty and Fin Nifty add.
+* **PROBLEM IDENTIFIED:** Nifty, Bank Nifty and Fin Nifty share dates, news, India VIX and the participant file, so "replicated on three indices" overstates the evidence.
+* **HYPOTHESIS:** P1 (primary): pooled over the three indices, the hybrid's mean daily QLIKE is lower than mcsGARCH's at 15 and 30 minutes, with Driscoll-Kraay standard errors (Holm over two). Secondary: a joint bootstrap over dates, equal gains across indices, the last hour, expiry days, and the edge over the mcsGARCH given the implied variance. Descriptive: the correlation of daily loss differences and an effective number of independent indices. The plan says plainly that each index's own result was already known, so the pooled test is a summary, not new evidence, and shows in advance that the primary test could not fail.
+* **CHANGES IMPLEMENTED:** `experiments/p107_pooled_test.py` (its own Driscoll-Kraay estimator, checked against a hand calculation and statsmodels), `experiments/p107_posthoc.py`, `tests/test_p107_pooled_test.py` (synthetic only). Plan committed and pushed first (`docs/prereg/P107_POOLED_THREE_INDEX.md`, commit eb8580a); results 9 minutes later (af0bf1a). Write-up `docs/P107_POOLED_THREE_INDEX.md`. Ledger adapter POOL3.
+* **EXPERIMENTS PERFORMED:** One run on the committed forecasts of the three indices, 604 common dates (10 August 2023 to 27 January 2026).
+* **RESULTS:** (REAL DATA.) P1 holds: 4.7% and 6.0% lower loss (t 10.7 and 11.3; bootstrap agrees). The three gains cannot be told apart (p 0.23 and 0.37). Daily advantages correlate 0.22 (Nifty, Bank Nifty), 0.41 (Nifty, Fin Nifty) and 0.60 (Bank Nifty, Fin Nifty) at 15 minutes, so the three indices are worth about 1.8 independent ones at 15 minutes and 2.4 at 30 minutes; added last, Fin Nifty adds almost nothing. The pooled edge over the information-matched mcsGARCH is 2.5% and 3.0% (Holm 0.043 within the study, not significant project-wide). In the last hour the indices differ (Fin Nifty about 1%). No deviation from the registered analysis.
+* **IMPROVEMENTS:** "Replicated on three indices" becomes "replicated on three related indices, worth about two independent replications".
+* **REMAINING ISSUES:** Effective numbers are noisy and sensitive to a few extreme days (4 June 2024); equal weights are a choice.
+* **NEXT ITERATION:** Fold into the paper and the pitch.
+
+## Iterations in progress (3 November 2026, about 11:45 IST)
+
+* **P106, where the forecasting gain comes from** (registered plan): the hybrid refitted without each feature group (option-implied, VIX, time of day, calendar and regime, realized-variance history), and a test of what changed after the November 2024 cut.
+* **P108, a blind re-derivation of the paper's "before" window**: a separate AI agent, writing new code and transcribing the printed numbers itself, commits its answer before it may look at the earlier search.
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey, built last from the final numbers.
 

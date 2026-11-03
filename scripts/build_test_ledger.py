@@ -174,6 +174,7 @@ STUDIES = {
     "P103ECON": ("Economic value of the forecasting hybrid (P103)", "docs/P103_ECONOMIC_VALUE.md; docs/prereg/P103_ECONOMIC_VALUE.md"),
     "P99SEED": ("Seed bootstrap of the forecasting hybrid (P99)", "docs/SEED_BOOTSTRAP.md; docs/prereg/P99_SEED_BOOTSTRAP.md"),
     "FNFC": ("Fin Nifty forecasting contest, third index (P104)", "docs/THIRD_INDEX_FORECAST.md; docs/prereg/P104_THIRD_INDEX_FORECAST.md"),
+    "POOL3": ("Pooled three-index test of the forecasting hybrid (P107)", "docs/P107_POOLED_THREE_INDEX.md; docs/prereg/P107_POOLED_THREE_INDEX.md"),
 }
 
 PREREG = {
@@ -185,6 +186,7 @@ PREREG = {
     "p103_economic_value": ("docs/prereg/P103_ECONOMIC_VALUE.md", "P103 registered plan"),
     "seed_bootstrap": ("docs/prereg/P99_SEED_BOOTSTRAP.md", "P99 registered plan"),
     "pipeline_nse_finnifty": ("docs/prereg/P104_THIRD_INDEX_FORECAST.md", "P104 registered plan"),
+    "p107_pooled_test": ("docs/prereg/P107_POOLED_THREE_INDEX.md", "P107 registered plan"),
 }
 
 COLUMNS = [
@@ -2350,6 +2352,73 @@ def adapt_p99seed(ctx: Ctx):
     }, "run information or log; no p-value")
 
 
+P107_OUTCOME = ["tests.csv", "verdicts.csv", "pooled_estimates.csv", "bootstrap.csv", "correlations.csv",
+                "effective_n.csv", "per_index.csv", "daily_losses.csv"]
+# Rows whose p-value is another inference for the same estimate as a counted row: they go in that row's alt_p.
+P107_ALT = {"S1a": "joint_bootstrap_p", "R3_block5": "bootstrap_block5_p", "R3_block20": "bootstrap_block20_p",
+            "R2": "dk_double_lag_p"}
+
+
+def adapt_p107pool(ctx: Ctx):
+    """P107: one pooled test of the hybrid over Nifty, Bank Nifty and Fin Nifty (docs/prereg/P107_POOLED_THREE_INDEX.md).
+
+    tests.csv: one row per test, with the study's role and sidedness. Counted: P1 (primary, Driscoll-Kraay, Holm over
+      two horizons), S1b to S1e (secondary), R1 and R4 (robustness: other estimates) and every exploratory row.
+      Not counted separately: S1a (the joint bootstrap), R3 (other block lengths) and R2 (twice the bandwidth), which
+      test the same estimate as P1 with another inference and go in P1's alt_p.
+    Each index's own result was known before the plan, so the pooled test summarises evidence already counted in
+    R1V2, BNFC and FNFC; it is counted here because it is a separate registered hypothesis.
+    """
+    folder = "p107_pooled_test"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "POOL3", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "POOL3", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P107_OUTCOME)
+    alts = {}
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        stem, _, hor = tid.rpartition("_")
+        if stem in P107_ALT:
+            alts.setdefault(hor, {})[P107_ALT[stem]] = r["p_raw"]
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        stem, _, hor = tid.rpartition("_")
+        if stem in P107_ALT:
+            continue
+        role = clean(r["role"]) or "exploratory"
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and role in ("primary", "secondary", "robustness")) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        is_pre = role in ("primary", "secondary", "robustness")
+        a = alt(**alts.get(hor, {})) if stem == "P1" else ""
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("POOL3", f"P107 {tid}: {clean(r['hypothesis'])}", "QLIKE loss of forecasts of realized variance, "
+                "pooled over Nifty, Bank Nifty and Fin Nifty", clean(r["sample"]), r["p_raw"], role=role,
+                pre_specified=ps if is_pre else PS_NO, pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="test statistic (Driscoll-Kraay t, Wald F or DM t, see p_method)",
+                statistic=r["statistic"], p_method=clean(r["p_method"]), alt_p=a,
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "POOL3", folder, {
+        r"verdicts\.csv|pooled_estimates\.csv|per_index\.csv|se_comparison\.csv|check_against_p104\.csv":
+            "verdicts, estimates and checks behind tests.csv; no new p-value",
+        r"bootstrap\.csv": "bootstrap draws summary; its p-values are the alt_p of the P1 rows",
+        r"correlations\.csv|effective_n\.csv": "correlations and the effective number of indices: descriptive, no test",
+        r"posthoc_.*\.csv": "post hoc influence diagnostics, no p-value",
+        r"daily_losses\.csv": "daily losses behind the tests; no p-value",
+    }, "run information, counts or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -3703,11 +3772,11 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
-                 adapt_p99seed, adapt_fnfc]
+                 adapt_p99seed, adapt_fnfc, adapt_p107pool]
 
 
 def headline18_check(ctx: Ctx):
@@ -3968,6 +4037,13 @@ RECON = [
       ("H4: hybrid with each GEX set against the base hybrid, all days", "FNFC",
        r"^ablation_(next15|next30|last_hour)\.csv\|hybrid: base vs base\+GEX\|(gross|us|participant|client)\|all\|")],
      "H1 to H3 keep their one-sided p (stated in the plan). H4 is a null prediction, so not surviving is what it says."),
+    ("P107", "Pooled three-index test (registered plan): pooled over Nifty, Bank Nifty and Fin Nifty, the hybrid beats "
+             "mcsGARCH at 15 and 30 minutes (primary, Driscoll-Kraay, Holm over two). It summarises evidence already "
+             "counted in R1V2, BNFC and FNFC.",
+     [("P1, primary: 15 and 30 minutes, all common dates", "POOL3", r"^tests\.csv\|P1_"),
+      ("S1b to S1e, secondary: equal gains, last hour, expiry days, edge over mcsgarch_iv", "POOL3", r"^tests\.csv\|S1[b-e]_")],
+     "The primary test could not fail once the three single-index results were known (the plan shows the bound); "
+     "the informative outputs are the effective number of indices and the edge over mcsgarch_iv."),
 ]
 
 

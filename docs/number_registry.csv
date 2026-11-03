@@ -45,7 +45,7 @@ PI63,PITCH_PANDEY.md,"(197 to 1,255 minutes)","1,255",,results/replication_nse/t
 PI64,PITCH_PANDEY.md,first-hour Nifty rows sum to 101,101,,results/replication_nse/paper_printed_checks.csv,csv:item=after nifty monthly_first_hour Nifty 50 row@value,
 PI65,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,223,,results/replication_nse/rekey_check.csv,csv:status=compared@#count,
 PI66,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,222,,results/replication_nse/rekey_check.csv,csv:match=yes@#count,
-PI67,PITCH_PANDEY.md,"Every one of the project's 27,682 hypothesis tests","27,682",,results/test_ledger.csv,csv:@#count,
+PI67,PITCH_PANDEY.md,"Every one of the project's 27,709 hypothesis tests","27,709",,results/test_ledger.csv,csv:@#count,
 PI68,PITCH_PANDEY.md,2 weeks |,2,,,UNTRACED,"a time estimate in the plan, not a result (the snippet covers both cells)"
 PI69,PITCH_PANDEY.md,Scoring every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
 PI70,PITCH_PANDEY.md,a correction for having tried 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
@@ -285,11 +285,11 @@ PI92,PITCH_PANDEY.md,With 360 minutes a day,360,,,UNTRACED,"a setting of the rep
 PI93,PITCH_PANDEY.md,about 3 bp per 100 bp move,100,,,UNTRACED,"the size of the move the slope is scaled to, not a result"
 PI94,PITCH_PANDEY.md,closer to a 50-point strike,50,,,UNTRACED,"Nifty strike spacing, a contract term"
 PI95,PITCH_PANDEY.md,none of those results reaches 5% under,5,,,UNTRACED,"the significance level, not a result"
-PI96,PITCH_PANDEY.md,"hypothesis tests (28 studies)",28,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
-RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 27,682 hypothesis tests","27,682",,results/test_ledger.csv,csv:@#count,
-RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 28 studies",28,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
-RD87,docs/REAL_DATA_RESULTS.md,"3,201 survive","3,201",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
-BR25,docs/BRIEFING_PANDEY.md,"lists all 27,682 statistical tests","27,682",,results/test_ledger.csv,csv:@#count,
+PI96,PITCH_PANDEY.md,"hypothesis tests (29 studies)",29,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 27,709 hypothesis tests","27,709",,results/test_ledger.csv,csv:@#count,
+RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 29 studies",29,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD87,docs/REAL_DATA_RESULTS.md,"3,214 survive","3,214",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
+BR25,docs/BRIEFING_PANDEY.md,"lists all 27,709 statistical tests","27,709",,results/test_ledger.csv,csv:@#count,
 PI97,PITCH_PANDEY.md,"pay only about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 BR26,docs/BRIEFING_PANDEY.md,"it is worth about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 RD88,docs/REAL_DATA_RESULTS.md,"the hybrid beats mcsGARCH (one-sided p 8.1e-7)",8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
@@ -364,7 +364,36 @@ PA70,PAPER,No GEX set helps under any sign rule (smallest Holm p 0.40),0.40,,res
 PA71,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",79,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 PA72,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",42,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Bank Nifty (P91 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 PA73,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",98,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@share_of_mcsgarch_squared_error,post hoc
-PA74,PAPER,"counts 27,682 tests across 28 studies","27,682",,results/test_ledger.csv,csv:@#count,ledger
-PA75,PAPER,"of which 7,846 have a raw p below 0.05","7,846",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
-PA76,PAPER,"and 3,201 survive a Benjamini-Yekutieli correction","3,201",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,ledger
-PA77,PAPER,P104's primary tests survive (8.3e-10 and 1.2e-9),8.3e-10,,results/test_ledger.csv,csv:study=FNFC&role=primary@#min:p_by_project,"ledger, P104 H1, smaller of the two"
+PA74,PAPER,"counts 27,709 tests across 29 studies","27,709",,results/test_ledger.csv,csv:@#count,ledger
+PA75,PAPER,"of which 7,865 have a raw p below 0.05","7,865",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
+PA76,PAPER,"and 3,214 survive a Benjamini-Yekutieli correction","3,214",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,ledger
+PA77,PAPER,P104's primary tests survive (8.2e-10 and 1.2e-9),8.2e-10,,results/test_ledger.csv,csv:study=FNFC&role=primary@#min:p_by_project,"ledger, P104 H1, smaller of the two"
+PI105,PITCH_PANDEY.md,"Pooled in one registered test that allows for the three indices moving together, the gain is 4.7% and 6.0%",4.7,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@pooled_change_pct,P107 P1
+PI106,PITCH_PANDEY.md,"Pooled in one registered test that allows for the three indices moving together, the gain is 4.7% and 6.0%",6.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next30@pooled_change_pct,P107 P1
+PI107,PITCH_PANDEY.md,the three count as about two independent replications,two,abs=0.25,results/p107_pooled_test/effective_n.csv,csv:target=next15&benchmark=mcsgarch&set=all three&measure=design_lr@value,P107 effective number at 15 minutes (1.79)
+RD109,docs/REAL_DATA_RESULTS.md,"On the 604 dates common to Nifty, Bank Nifty and Fin Nifty",604,,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@T,P107 common dates
+RD110,docs/REAL_DATA_RESULTS.md,the hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,4.7,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@pooled_change_pct,P107 P1
+RD111,docs/REAL_DATA_RESULTS.md,the hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,6.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next30@pooled_change_pct,P107 P1
+RD112,docs/REAL_DATA_RESULTS.md,the hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,10.7,,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@stat,P107 P1 DK t
+RD113,docs/REAL_DATA_RESULTS.md,the hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,11.3,,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next30@stat,P107 P1 DK t
+RD114,docs/REAL_DATA_RESULTS.md,the three gains cannot be told apart (p 0.23 and 0.37),0.23,,results/p107_pooled_test/tests.csv,csv:test_id=S1b_next15@p_raw,P107 S1b
+RD115,docs/REAL_DATA_RESULTS.md,the three gains cannot be told apart (p 0.23 and 0.37),0.37,,results/p107_pooled_test/tests.csv,csv:test_id=S1b_next30@p_raw,P107 S1b
+RD116,docs/REAL_DATA_RESULTS.md,"(0.22 Nifty with Bank Nifty, 0.41 Nifty with Fin Nifty, 0.60 Bank Nifty with Fin Nifty, at 15 minutes)",0.22,,results/p107_pooled_test/correlations.csv,csv:target=next15&benchmark=mcsgarch&kind=pearson&index_a=Nifty&index_b=Bank Nifty@value,P107 correlation
+RD117,docs/REAL_DATA_RESULTS.md,"(0.22 Nifty with Bank Nifty, 0.41 Nifty with Fin Nifty, 0.60 Bank Nifty with Fin Nifty, at 15 minutes)",0.41,,results/p107_pooled_test/correlations.csv,csv:target=next15&benchmark=mcsgarch&kind=pearson&index_a=Nifty&index_b=Fin Nifty@value,P107 correlation
+RD118,docs/REAL_DATA_RESULTS.md,"(0.22 Nifty with Bank Nifty, 0.41 Nifty with Fin Nifty, 0.60 Bank Nifty with Fin Nifty, at 15 minutes)",0.60,,results/p107_pooled_test/correlations.csv,csv:target=next15&benchmark=mcsgarch&kind=pearson&index_a=Bank Nifty&index_b=Fin Nifty@value,P107 correlation
+RD119,docs/REAL_DATA_RESULTS.md,worth about 1.8 independent ones at 15 minutes and 2.4 at 30 minutes,1.8,,results/p107_pooled_test/effective_n.csv,csv:target=next15&benchmark=mcsgarch&set=all three&measure=design_lr@value,P107 effective number (design effect)
+RD120,docs/REAL_DATA_RESULTS.md,worth about 1.8 independent ones at 15 minutes and 2.4 at 30 minutes,2.4,,results/p107_pooled_test/effective_n.csv,csv:target=next30&benchmark=mcsgarch&set=all three&measure=design_lr@value,P107 effective number (design effect)
+RD121,docs/REAL_DATA_RESULTS.md,"the edge over the mcsGARCH given the implied variance is 2.5% and 3.0%, only just significant within the study (Holm p 0.043)",2.5,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=S1e_next15@pooled_change_pct,P107 S1e
+RD122,docs/REAL_DATA_RESULTS.md,"the edge over the mcsGARCH given the implied variance is 2.5% and 3.0%, only just significant within the study (Holm p 0.043)",3.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=S1e_next30@pooled_change_pct,P107 S1e
+RD123,docs/REAL_DATA_RESULTS.md,"the edge over the mcsGARCH given the implied variance is 2.5% and 3.0%, only just significant within the study (Holm p 0.043)",0.043,,results/p107_pooled_test/tests.csv,csv:test_id=S1e_next15@p_adjusted,P107 S1e Holm
+RD124,docs/REAL_DATA_RESULTS.md,In the last hour the indices differ clearly (Fin Nifty about 1%),1,neg;abs=0.2,results/p107_pooled_test/per_index.csv,csv:target=last_hour&benchmark=mcsgarch&subset=all&index=Fin Nifty@change_pct,P107 per index
+PA78,PAPER,The hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,4.7,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@pooled_change_pct,P107
+PA79,PAPER,The hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,6.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next30@pooled_change_pct,P107
+PA80,PAPER,The hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,10.7,,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@stat,P107
+PA81,PAPER,The hybrid's loss is 4.7% and 6.0% lower than mcsGARCH's at 15 and 30 minutes (t 10.7 and 11.3;,11.3,,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next30@stat,P107
+PA82,PAPER,the three indices are worth about 1.8 independent ones at 15 minutes and 2.4 at 30 minutes,1.8,,results/p107_pooled_test/effective_n.csv,csv:target=next15&benchmark=mcsgarch&set=all three&measure=design_lr@value,P107
+PA83,PAPER,the three indices are worth about 1.8 independent ones at 15 minutes and 2.4 at 30 minutes,2.4,,results/p107_pooled_test/effective_n.csv,csv:target=next30&benchmark=mcsgarch&set=all three&measure=design_lr@value,P107
+PA84,PAPER,the edge over the mcsGARCH given the implied variance is 2.5% and 3.0% (Holm p 0.043 within the study),2.5,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=S1e_next15@pooled_change_pct,P107
+PA85,PAPER,the edge over the mcsGARCH given the implied variance is 2.5% and 3.0% (Holm p 0.043 within the study),3.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=S1e_next30@pooled_change_pct,P107
+PA86,PAPER,the edge over the mcsGARCH given the implied variance is 2.5% and 3.0% (Holm p 0.043 within the study),0.043,,results/p107_pooled_test/tests.csv,csv:test_id=S1e_next30@p_adjusted,P107
+PA87,PAPER,"correlates 0.22 between Nifty and Bank Nifty, 0.41 between Nifty and Fin Nifty and 0.60 between Bank Nifty and Fin Nifty",0.60,,results/p107_pooled_test/correlations.csv,csv:target=next15&benchmark=mcsgarch&kind=pearson&index_a=Bank Nifty&index_b=Fin Nifty@value,P107

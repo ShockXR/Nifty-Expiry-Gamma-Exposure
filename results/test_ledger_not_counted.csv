@@ -262,6 +262,12 @@ FNFC,results/pipeline_nse_finnifty/,"daily_gex_panel.csv, daily_implied_panel.cs
 FNFC,results/pipeline_nse_finnifty/,"gain_by_anchor_last_hour.csv, gain_by_anchor_next15.csv, gain_by_anchor_next30.csv, scoreboard_last_hour.csv, scoreboard_next15.csv and 1 more",6,"losses relative to mcsGARCH, no p-value (tests in tests_*.csv)"
 FNFC,results/pipeline_nse_finnifty/p104/june5_2024.csv,p104/june5_2024.csv,1,"the 09:15 forecasts of 5 June 2024 on three indices (descriptive, no p-value)"
 FNFC,results/pipeline_nse_finnifty/p104/mcs_membership.csv,p104/mcs_membership.csv,1,Model Confidence Set membership (set-level)
+POOL3,results/p107_pooled_test/bootstrap.csv,bootstrap.csv,1,bootstrap draws summary; its p-values are the alt_p of the P1 rows
+POOL3,results/p107_pooled_test/,"check_against_p104.csv, per_index.csv, pooled_estimates.csv, se_comparison.csv, verdicts.csv",5,"verdicts, estimates and checks behind tests.csv; no new p-value"
+POOL3,results/p107_pooled_test/,"correlations.csv, effective_n.csv",2,"correlations and the effective number of indices: descriptive, no test"
+POOL3,results/p107_pooled_test/daily_losses.csv,daily_losses.csv,1,daily losses behind the tests; no p-value
+POOL3,results/p107_pooled_test/,"phase1/bounds_from_committed.csv, phase1/counts.json, run_info.json, stdout.txt",4,"run information, counts or log; no p-value"
+POOL3,results/p107_pooled_test/,"posthoc_extreme_days.csv, posthoc_influence.csv",2,"post hoc influence diagnostics, no p-value"
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods
