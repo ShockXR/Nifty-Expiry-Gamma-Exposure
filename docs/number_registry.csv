@@ -342,3 +342,29 @@ RD105,docs/REAL_DATA_RESULTS.md,was 135 times the realized variance on Fin Nifty
 RD106,docs/REAL_DATA_RESULTS.md,"98% of mcsGARCH's 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty)",98,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@share_of_mcsgarch_squared_error,post hoc
 RD107,docs/REAL_DATA_RESULTS.md,"98% of mcsGARCH's 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty)",79,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 RD108,docs/REAL_DATA_RESULTS.md,"98% of mcsGARCH's 15-minute squared error on Fin Nifty (79% on Nifty, 42% on Bank Nifty)",42,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Bank Nifty (P91 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
+PA52,PAPER,4.9% and 6.1% better over 604 Fin Nifty test days,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,"P104 H1, contribution 2"
+PA53,PAPER,4.9% and 6.1% better over 604 Fin Nifty test days,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,"P104 H1, contribution 2"
+PA54,PAPER,4.9% and 6.1% better over 604 Fin Nifty test days,604,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@days,"P104 H1, contribution 2"
+PA55,PAPER,"(daily high within 5 bp on 98.9% of days, low on 99.2%;",98.9,x100,results/data_validation_finnifty/summary.csv,csv:index=Nifty Financial Services@high_within_5bp,Fin Nifty bar check
+PA56,PAPER,"(daily high within 5 bp on 98.9% of days, low on 99.2%;",99.2,x100,results/data_validation_finnifty/summary.csv,csv:index=Nifty Financial Services@low_within_5bp,Fin Nifty bar check
+PA57,PAPER,the unchanged hybrid lowers QLIKE against mcsGARCH by 4.9% and 6.1% at 15 and 30 minutes over 604 test days,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,"P104 H1, Section 6.2"
+PA58,PAPER,the unchanged hybrid lowers QLIKE against mcsGARCH by 4.9% and 6.1% at 15 and 30 minutes over 604 test days,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,"P104 H1, Section 6.2"
+PA59,PAPER,Holm p 4.4e-12 for both,4.4e-12,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@p_holm,P104 H1
+PA60,PAPER,close to Nifty's 5.1% and 6.6% on the same dates,5.1,neg,results/pipeline_nse_finnifty/p104/other_indices_same_dates.csv,"csv:index=Nifty (v2 forecasts, same dates)&target=next15&subset=all@change_pct",
+PA61,PAPER,close to Nifty's 5.1% and 6.6% on the same dates,6.6,neg,results/pipeline_nse_finnifty/p104/other_indices_same_dates.csv,"csv:index=Nifty (v2 forecasts, same dates)&target=next30&subset=all@change_pct",
+PA62,PAPER,"In the last hour the gain is 1.0% (p 0.30, not supported)",1.0,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H2@change_pct,P104 H2
+PA63,PAPER,"In the last hour the gain is 1.0% (p 0.30, not supported)",0.30,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H2@p_one_sided,P104 H2
+PA64,PAPER,"after November 2024 (5.0%, p 0.030)",5.0,neg,results/pipeline_nse_finnifty/p104/period_split.csv,csv:target=last_hour&period=monthly-only period (from 20 Nov 2024)&subset=all@change_pct,exploratory
+PA65,PAPER,"after November 2024 (5.0%, p 0.030)",0.030,,results/pipeline_nse_finnifty/p104/period_split.csv,csv:target=last_hour&period=monthly-only period (from 20 Nov 2024)&subset=all@p_one_sided,exploratory
+PA66,PAPER,"On Fin Nifty's 82 expiry days the gains are 3.9% and 5.3% (Holm p 0.093, not supported)",82,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next15@days,P104 H3
+PA67,PAPER,"On Fin Nifty's 82 expiry days the gains are 3.9% and 5.3% (Holm p 0.093, not supported)",3.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next15@change_pct,P104 H3
+PA68,PAPER,"On Fin Nifty's 82 expiry days the gains are 3.9% and 5.3% (Holm p 0.093, not supported)",5.3,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next30@change_pct,P104 H3
+PA69,PAPER,"On Fin Nifty's 82 expiry days the gains are 3.9% and 5.3% (Holm p 0.093, not supported)",0.093,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H3&target=next30@p_holm,P104 H3
+PA70,PAPER,No GEX set helps under any sign rule (smallest Holm p 0.40),0.40,,results/pipeline_nse_finnifty/p104/h4_ablation_hybrid.csv,csv:family=hybrid: base vs base+GEX&group=all@#min:p_holm_in_family,P104 H4
+PA71,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",79,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
+PA72,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",42,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Bank Nifty (P91 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
+PA73,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",98,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@share_of_mcsgarch_squared_error,post hoc
+PA74,PAPER,"counts 27,682 tests across 28 studies","27,682",,results/test_ledger.csv,csv:@#count,ledger
+PA75,PAPER,"of which 7,846 have a raw p below 0.05","7,846",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
+PA76,PAPER,"and 3,201 survive a Benjamini-Yekutieli correction","3,201",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,ledger
+PA77,PAPER,P104's primary tests survive (8.3e-10 and 1.2e-9),8.3e-10,,results/test_ledger.csv,csv:study=FNFC&role=primary@#min:p_by_project,"ledger, P104 H1, smaller of the two"
