@@ -1,0 +1,14 @@
+[REAL DATA] P110 stress test, stage 1, FINNIFTY: 10 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a34e7589ea8fc959b/data/processed/p110); one process
+market loaded: 754 days, 2023-01-02 00:00:00 to 2026-01-27 00:00:00 (57s)
+panels and datasets built (138s)
+  [1/10] FINNIFTY next15 seed 7 full+implied+vix+intraday+calendar+realized+mcsinfo: 15100 forecasts, 448s (elapsed 9.8 min)
+  [2/10] FINNIFTY next30 seed 7 full+implied+vix+intraday+calendar+realized+mcsinfo: 14496 forecasts, 386s (elapsed 16.2 min)
+  [3/10] FINNIFTY next15 seed 101 full+implied+vix+intraday+calendar+realized+mcsinfo: 15100 forecasts, 467s (elapsed 24.0 min)
+  [4/10] FINNIFTY next30 seed 101 full+implied+vix+intraday+calendar+realized+mcsinfo: 14496 forecasts, 374s (elapsed 30.2 min)
+  [5/10] FINNIFTY next15 seed 102 full+implied+vix+intraday+calendar+realized+mcsinfo: 15100 forecasts, 432s (elapsed 37.4 min)
+  [6/10] FINNIFTY next30 seed 102 full+implied+vix+intraday+calendar+realized+mcsinfo: 14496 forecasts, 370s (elapsed 43.6 min)
+  [7/10] FINNIFTY next15 seed 103 full+implied+vix+intraday+calendar+realized+mcsinfo: 15100 forecasts, 455s (elapsed 51.2 min)
+  [8/10] FINNIFTY next30 seed 103 full+implied+vix+intraday+calendar+realized+mcsinfo: 14496 forecasts, 390s (elapsed 57.7 min)
+  [9/10] FINNIFTY next15 seed 104 full+implied+vix+intraday+calendar+realized+mcsinfo: 15100 forecasts, 444s (elapsed 65.1 min)
+  [10/10] FINNIFTY next30 seed 104 full+implied+vix+intraday+calendar+realized+mcsinfo: 14496 forecasts, 382s (elapsed 71.5 min)
+stage 1 (FINNIFTY) done in 71.5 min

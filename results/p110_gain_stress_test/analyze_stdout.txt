@@ -1,0 +1,470 @@
+[REAL DATA] P110 stress test, stage 2 (docs/prereg/P110_GAIN_STRESS_TEST.md)
+
+[REAL DATA] primary and S1/S2 rows with verdicts:
+                                       test_id     index target  variant       kind  estimate        p_raw       p_holm  seed_sets  seed_sets_agreeing  seed_sd  seed_min  seed_max  within_seed_noise       verdict verdict_if_one_family_R6
+                  F1_BANKNIFTY_next15_realized BANKNIFTY next15 realized    carrier  1.791352 3.419917e-08 1.709958e-07          5                   5 0.148808  1.582297  1.924545              False     supported                supported
+                  F1_BANKNIFTY_next15_intraday BANKNIFTY next15 intraday    carrier  1.284790 6.441582e-10 4.509107e-09          5                   5 0.205591  0.882977  1.437993              False     supported                supported
+                   F2_BANKNIFTY_next15_implied BANKNIFTY next15  implied       tost -0.216635 2.432657e-03 7.297970e-03          5                   5 0.106367 -0.324303 -0.040313              False    equivalent               equivalent
+                       F2_BANKNIFTY_next15_vix BANKNIFTY next15      vix       tost  0.080933 7.652768e-52 8.418044e-51          5                   5 0.220152 -0.188179  0.351283              False    equivalent               equivalent
+                  F2_BANKNIFTY_next15_calendar BANKNIFTY next15 calendar       tost  0.102522 5.841262e-22 4.088884e-21          5                   5 0.079965 -0.021740  0.154727              False    equivalent               equivalent
+    F3_BANKNIFTY_next15_mcsinfo_beats_mcsgarch BANKNIFTY next15  mcsinfo      beats -4.004470 2.282127e-13 1.597489e-12          5                   5 0.037036 -4.028552 -3.936573              False     supported                supported
+       F3_BANKNIFTY_next15_mcsinfo_noninferior BANKNIFTY next15  mcsinfo         ni  0.130320 5.643639e-04 2.257456e-03          5                   5 0.082814 -0.016507  0.198730              False  non-inferior             non-inferior
+                   S1_BANKNIFTY_next15_implied BANKNIFTY next15  implied       adds -0.216635 7.825590e-01 1.000000e+00          5                   0 0.106367 -0.324303 -0.040313              False not supported                         
+                       S1_BANKNIFTY_next15_vix BANKNIFTY next15      vix       adds  0.080933 7.314054e-02 6.582649e-01          5                   2 0.220152 -0.188179  0.351283               True not supported                         
+                  S1_BANKNIFTY_next15_calendar BANKNIFTY next15 calendar       adds  0.102522 1.291037e-01 9.037259e-01          5                   4 0.079965 -0.021740  0.154727               True not supported                         
+S2_BANKNIFTY_next15_mcsinfo_full_beats_mcsinfo BANKNIFTY next15  mcsinfo full_beats  0.130320 3.121109e-01 5.337788e-01          5                   4 0.082814 -0.016507  0.198730               True not supported                         
+                  F1_BANKNIFTY_next30_realized BANKNIFTY next30 realized    carrier  2.158765 3.836469e-06 7.672938e-06          5                   5 0.222640  1.788414  2.368697              False     supported                supported
+                  F1_BANKNIFTY_next30_intraday BANKNIFTY next30 intraday    carrier  1.161954 4.940801e-10 3.952641e-09          5                   5 0.132574  0.954818  1.274289              False     supported                supported
+                   F2_BANKNIFTY_next30_implied BANKNIFTY next30  implied       tost -0.204507 1.750117e-02 3.500234e-02          5                   5 0.217274 -0.475918  0.104640              False    equivalent                not shown
+                       F2_BANKNIFTY_next30_vix BANKNIFTY next30      vix       tost  0.136162 4.155050e-26 3.739545e-25          5                   5 0.172334 -0.244514  0.171278              False    equivalent               equivalent
+                  F2_BANKNIFTY_next30_calendar BANKNIFTY next30 calendar       tost  0.271350 8.754462e-13 4.377231e-12          5                   5 0.144399  0.058028  0.393325              False    equivalent               equivalent
+    F3_BANKNIFTY_next30_mcsinfo_beats_mcsgarch BANKNIFTY next30  mcsinfo      beats -5.089529 1.425374e-13 1.140299e-12          5                   5 0.047782 -5.130053 -5.000121              False     supported                supported
+       F3_BANKNIFTY_next30_mcsinfo_noninferior BANKNIFTY next30  mcsinfo         ni  0.228995 1.822471e-02 5.467412e-02          5                   5 0.160057  0.032431  0.452584              False     not shown                not shown
+                   S1_BANKNIFTY_next30_implied BANKNIFTY next30  implied       adds -0.204507 7.063903e-01 1.000000e+00          5                   1 0.217274 -0.475918  0.104640               True not supported                         
+                       S1_BANKNIFTY_next30_vix BANKNIFTY next30      vix       adds  0.136162 4.221820e-02 4.221820e-01          5                   4 0.172334 -0.244514  0.171278               True not supported                         
+                  S1_BANKNIFTY_next30_calendar BANKNIFTY next30 calendar       adds  0.271350 3.796060e-03 4.555271e-02          5                   5 0.144399  0.058028  0.393325               True     supported                         
+S2_BANKNIFTY_next30_mcsinfo_full_beats_mcsinfo BANKNIFTY next30  mcsinfo full_beats  0.228995 2.668894e-01 5.337788e-01          5                   5 0.160057  0.032431  0.452584               True not supported                         
+                   F1_FINNIFTY_next15_realized  FINNIFTY next15 realized    carrier  1.725757 5.027261e-07 2.010904e-06          5                   5 0.122871  1.644138  1.943108              False     supported                supported
+                   F1_FINNIFTY_next15_intraday  FINNIFTY next15 intraday    carrier  1.471960 4.824236e-09 2.894541e-08          5                   5 0.107289  1.383029  1.622163              False     supported                supported
+                    F2_FINNIFTY_next15_implied  FINNIFTY next15  implied       tost  0.085831 3.223449e-04 1.289380e-03          5                   5 0.057045  0.048863  0.202772              False    equivalent               equivalent
+                        F2_FINNIFTY_next15_vix  FINNIFTY next15      vix       tost  0.045955 2.553608e-64 3.064330e-63          5                   5 0.099112 -0.101765  0.149412              False    equivalent               equivalent
+                   F2_FINNIFTY_next15_calendar  FINNIFTY next15 calendar       tost  0.142983 2.178841e-48 2.178841e-47          5                   5 0.070627  0.036015  0.208129              False    equivalent               equivalent
+     F3_FINNIFTY_next15_mcsinfo_beats_mcsgarch  FINNIFTY next15  mcsinfo      beats -4.172154 7.697949e-10 4.618769e-09          5                   5 0.042090 -4.227123 -4.121753              False     supported                supported
+        F3_FINNIFTY_next15_mcsinfo_noninferior  FINNIFTY next15  mcsinfo         ni  0.654088 1.360713e-01 2.721426e-01          5                   5 0.083940  0.558929  0.758159              False     not shown                not shown
+                    S1_FINNIFTY_next15_implied  FINNIFTY next15  implied       adds  0.085831 3.737650e-01 1.000000e+00          5                   5 0.057045  0.048863  0.202772               True not supported                         
+                        S1_FINNIFTY_next15_vix  FINNIFTY next15      vix       adds  0.045955 1.788108e-01 1.000000e+00          5                   4 0.099112 -0.101765  0.149412               True not supported                         
+                   S1_FINNIFTY_next15_calendar  FINNIFTY next15 calendar       adds  0.142983 3.980521e-03 4.555271e-02          5                   5 0.070627  0.036015  0.208129              False     supported                         
+ S2_FINNIFTY_next15_mcsinfo_full_beats_mcsinfo  FINNIFTY next15  mcsinfo full_beats  0.654088 1.904820e-02 7.619281e-02          5                   5 0.083940  0.558929  0.758159              False not supported                         
+                   F1_FINNIFTY_next30_realized  FINNIFTY next30 realized    carrier  2.053419 7.913378e-07 2.374013e-06          5                   5 0.143707  1.864517  2.185942              False     supported                supported
+                   F1_FINNIFTY_next30_intraday  FINNIFTY next30 intraday    carrier  1.495329 8.783538e-06 8.783538e-06          5                   5 0.185392  1.286222  1.784860              False     supported                supported
+                    F2_FINNIFTY_next30_implied  FINNIFTY next30  implied       tost -0.073184 2.272736e-02 3.500234e-02          5                   5 0.152055 -0.181759  0.167131              False    equivalent                not shown
+                        F2_FINNIFTY_next30_vix  FINNIFTY next30      vix       tost -0.117592 2.420075e-25 1.936060e-24          5                   5 0.112045 -0.221007  0.089517              False    equivalent               equivalent
+                   F2_FINNIFTY_next30_calendar  FINNIFTY next30 calendar       tost  0.137776 4.007370e-16 2.404422e-15          5                   5 0.111091 -0.008337  0.286788              False    equivalent               equivalent
+     F3_FINNIFTY_next30_mcsinfo_beats_mcsgarch  FINNIFTY next30  mcsinfo      beats -5.529711 1.145918e-09 5.729592e-09          5                   5 0.083957 -5.617826 -5.414773              False     supported                supported
+        F3_FINNIFTY_next30_mcsinfo_noninferior  FINNIFTY next30  mcsinfo         ni  0.500726 1.610907e-01 2.721426e-01          5                   5 0.108324  0.419154  0.677159              False     not shown                not shown
+                    S1_FINNIFTY_next30_implied  FINNIFTY next30  implied       adds -0.073184 5.628581e-01 1.000000e+00          5                   2 0.152055 -0.181759  0.167131               True not supported                         
+                        S1_FINNIFTY_next30_vix  FINNIFTY next30      vix       adds -0.117592 9.250021e-01 1.000000e+00          5                   1 0.112045 -0.221007  0.089517               True not supported                         
+                   S1_FINNIFTY_next30_calendar  FINNIFTY next30 calendar       adds  0.137776 9.318027e-02 7.454422e-01          5                   4 0.111091 -0.008337  0.286788               True not supported                         
+ S2_FINNIFTY_next30_mcsinfo_full_beats_mcsinfo  FINNIFTY next30  mcsinfo full_beats  0.500726 1.603883e-01 4.811650e-01          5                   5 0.108324  0.419154  0.677159              False not supported                         
+
+[REAL DATA] claim-level verdicts:
+                                                                                                  0                                                                            1
+index                                                                                     BANKNIFTY                                                                     FINNIFTY
+claim1_carriers                                                                            survives                                                                     survives
+claim2_adds_nothing                              qualified: a group adds a little, under the margin                           qualified: a group adds a little, under the margin
+claim3_mcsinfo                                                                      partly survives                                                              partly survives
+overall                                                                       not all three survive                                                        not all three survive
+claim2_implied_next15                                                                         shown                                                                        shown
+claim2_implied_next30                                                                         shown                                                                        shown
+claim2_vix_next15                                                                             shown                                                                        shown
+claim2_vix_next30                                                                             shown                                                                        shown
+claim2_calendar_next15                                                                        shown                                             adds a little (under the margin)
+claim2_calendar_next30                                             adds a little (under the margin)                                                                        shown
+claim3_next15            beats mcsGARCH: True; non-inferior: True; full significantly better: False  beats mcsGARCH: True; non-inferior: False; full significantly better: False
+claim3_next30           beats mcsGARCH: True; non-inferior: False; full significantly better: False  beats mcsGARCH: True; non-inferior: False; full significantly better: False
+
+[REAL DATA] equivalence bounds:
+                                test_id     index target  variant kind           sample  estimate_points  se_points  ci90_low  ci90_high  smallest_margin_that_passes  hybrid_gain_points  bound_as_share_of_gain   p_margin_1  p_margin_0.5
+            F2_BANKNIFTY_next15_implied BANKNIFTY next15  implied tost new-seed average        -0.216635   0.277049 -0.673328   0.240059                     0.673328            4.134790                0.162845 2.432657e-03  1.535727e-01
+                F2_BANKNIFTY_next15_vix BANKNIFTY next15      vix tost new-seed average         0.080933   0.055600 -0.010720   0.172585                     0.172585            4.134790                0.041740 7.652768e-52  8.296190e-14
+           F2_BANKNIFTY_next15_calendar BANKNIFTY next15 calendar tost new-seed average         0.102522   0.090530 -0.046708   0.251753                     0.251753            4.134790                0.060887 5.841262e-22  6.681708e-06
+F3_BANKNIFTY_next15_mcsinfo_noninferior BANKNIFTY next15  mcsinfo   ni new-seed average         0.130320   0.265699       NaN   0.568303                     0.568303            4.134790                0.137444 5.643639e-04  8.245437e-02
+            F2_BANKNIFTY_next30_implied BANKNIFTY next30  implied tost new-seed average        -0.204507   0.376245 -0.824716   0.415701                     0.824716            5.318524                0.155065 1.750117e-02  2.164325e-01
+                F2_BANKNIFTY_next30_vix BANKNIFTY next30      vix tost new-seed average         0.136162   0.078733  0.006378   0.265947                     0.265947            5.318524                0.050004 4.155050e-26  2.333530e-06
+           F2_BANKNIFTY_next30_calendar BANKNIFTY next30 calendar tost new-seed average         0.271350   0.101251  0.104446   0.438253                     0.438253            5.318524                0.082401 8.754462e-13  1.218160e-02
+F3_BANKNIFTY_next30_mcsinfo_noninferior BANKNIFTY next30  mcsinfo   ni new-seed average         0.228995   0.367540       NaN   0.834855                     0.834855            5.318524                0.156971 1.822471e-02  2.307565e-01
+             F2_FINNIFTY_next15_implied  FINNIFTY next15  implied tost new-seed average         0.085831   0.266297 -0.353226   0.524888                     0.524888            4.826242                0.108757 3.223449e-04  6.035426e-02
+                 F2_FINNIFTY_next15_vix  FINNIFTY next15      vix tost new-seed average         0.045955   0.049876 -0.036279   0.128188                     0.128188            4.826242                0.026561 2.553608e-64  6.749580e-19
+            F2_FINNIFTY_next15_calendar  FINNIFTY next15 calendar tost new-seed average         0.142983   0.053656  0.054517   0.231448                     0.231448            4.826242                0.047956 2.178841e-48  3.324043e-11
+ F3_FINNIFTY_next15_mcsinfo_noninferior  FINNIFTY next15  mcsinfo   ni new-seed average         0.654088   0.314449       NaN   1.172536                     1.172536            4.826242                0.242950 1.360713e-01  6.877089e-01
+             F2_FINNIFTY_next30_implied  FINNIFTY next30  implied tost new-seed average        -0.073184   0.461967 -0.834851   0.688484                     0.834851            6.030437                0.138440 2.272736e-02  1.781502e-01
+                 F2_FINNIFTY_next30_vix  FINNIFTY next30      vix tost new-seed average        -0.117592   0.081516 -0.251991   0.016806                     0.251991            6.030437                0.041787 2.420075e-25  1.712445e-06
+            F2_FINNIFTY_next30_calendar  FINNIFTY next30 calendar tost new-seed average         0.137776   0.104058 -0.033790   0.309342                     0.309342            6.030437                0.051297 4.007370e-16  2.706967e-04
+ F3_FINNIFTY_next30_mcsinfo_noninferior  FINNIFTY next30  mcsinfo   ni new-seed average         0.500726   0.503493       NaN   1.330860                     1.330860            6.030437                0.220691 1.610907e-01  5.005748e-01
+                S5_NIFTY_next15_implied     NIFTY next15  implied tost new-seed average         0.120382   0.376973 -0.500803   0.741567                     0.741567            5.783213                0.128228 9.978141e-03  1.572703e-01
+                    S5_NIFTY_next15_vix     NIFTY next15      vix tost new-seed average         0.033930   0.066786 -0.076121   0.143981                     0.143981            5.783213                0.024896 1.666923e-42  3.249551e-12
+               S5_NIFTY_next15_calendar     NIFTY next15 calendar tost new-seed average        -0.240828   0.228654 -0.617610   0.135954                     0.617610            5.783213                0.106794 4.739149e-04  1.288312e-01
+    S5_NIFTY_next15_mcsinfo_noninferior     NIFTY next15  mcsinfo   ni new-seed average        -0.285406   0.284305       NaN   0.183078                     0.183078            5.783213                0.031657 3.591458e-06  2.949748e-03
+                S5_NIFTY_next30_implied     NIFTY next30  implied tost new-seed average        -0.081978   0.339994 -0.642229   0.478272                     0.642229            7.882909                0.081471 3.557917e-03  1.097712e-01
+                    S5_NIFTY_next30_vix     NIFTY next30      vix tost new-seed average        -0.085944   0.070827 -0.202655   0.030767                     0.202655            7.882909                0.025708 5.577951e-35  3.760043e-09
+               S5_NIFTY_next30_calendar     NIFTY next30 calendar tost new-seed average        -0.154608   0.221286 -0.519248   0.210032                     0.519248            7.882909                0.065870 7.254347e-05  5.959711e-02
+    S5_NIFTY_next30_mcsinfo_noninferior     NIFTY next30  mcsinfo   ni new-seed average        -0.182355   0.373353       NaN   0.432865                     0.432865            7.882909                0.054912 8.055053e-04  3.407708e-02
+
+[REAL DATA] pooled:
+                          test_id                           pool target  variant    kind  days  estimate_points       se       stat            p  dk_lag  ci90_low  ci90_high  estimate_nifty  estimate_banknifty  estimate_finnifty
+              S4a_next15_realized Nifty + Bank Nifty + Fin Nifty next15 realized carrier   604         1.793674 0.269767   6.643464 3.427304e-11       5       NaN        NaN        1.871273            1.783993           1.725757
+              S4a_next15_intraday Nifty + Bank Nifty + Fin Nifty next15 intraday carrier   604         1.411608 0.189263   7.452271 1.599471e-13       5       NaN        NaN        1.525382            1.237484           1.471960
+               S4a_next15_implied Nifty + Bank Nifty + Fin Nifty next15  implied    tost   604        -0.022177 0.172373   5.668024 1.120252e-08       5 -0.306377   0.262022       -0.041966           -0.110397           0.085831
+                   S4a_next15_vix Nifty + Bank Nifty + Fin Nifty next15      vix    tost   604         0.064562 0.039148 -23.874924 1.727844e-89       5  0.000016   0.129108        0.050763            0.096969           0.045955
+              S4a_next15_calendar Nifty + Bank Nifty + Fin Nifty next15 calendar    tost   604         0.095125 0.054655 -16.542319 2.921675e-51       5  0.005012   0.185238        0.046965            0.095428           0.142983
+S4a_next15_mcsinfo_beats_mcsgarch Nifty + Bank Nifty + Fin Nifty next15  mcsinfo   beats   604        -4.585837 0.494450   9.266949 1.674477e-19       5       NaN        NaN       -5.326818           -4.258538          -4.172154
+   S4a_next15_mcsinfo_noninferior Nifty + Bank Nifty + Fin Nifty next15  mcsinfo      ni   604         0.236341 0.185297  -4.117861 2.178792e-05       5       NaN        NaN       -0.137079            0.192013           0.654088
+              S4a_next30_realized Nifty + Bank Nifty + Fin Nifty next30 realized carrier   604         2.384483 0.330403   7.210926 8.359233e-13       5       NaN        NaN        2.896675            2.203357           2.053419
+              S4a_next30_intraday Nifty + Bank Nifty + Fin Nifty next30 intraday carrier   604         1.496796 0.220270   6.789638 1.348444e-11       5       NaN        NaN        1.833484            1.161574           1.495329
+               S4a_next30_implied Nifty + Bank Nifty + Fin Nifty next30  implied    tost   604        -0.050823 0.284053   3.338779 4.466723e-04       5 -0.519156   0.417509        0.056118           -0.135405          -0.073184
+                   S4a_next30_vix Nifty + Bank Nifty + Fin Nifty next30      vix    tost   604        -0.007194 0.051102  19.411943 7.104317e-66       5 -0.091448   0.077060       -0.074789            0.170800          -0.117592
+              S4a_next30_calendar Nifty + Bank Nifty + Fin Nifty next30 calendar    tost   604         0.162053 0.084737  -9.880598 9.676732e-22       5  0.022343   0.301763        0.079845            0.268537           0.137776
+S4a_next30_mcsinfo_beats_mcsgarch Nifty + Bank Nifty + Fin Nifty next30  mcsinfo   beats   604        -5.790529 0.616560   9.383894 6.387216e-20       5       NaN        NaN       -6.627692           -5.214183          -5.529711
+   S4a_next30_mcsinfo_noninferior Nifty + Bank Nifty + Fin Nifty next30  mcsinfo      ni   604         0.319637 0.300359  -2.263293 1.198615e-02       5       NaN        NaN        0.098451            0.359734           0.500726
+              S4b_next15_realized         Bank Nifty + Fin Nifty next15 realized carrier   604         1.754875 0.294691   5.950044 2.273407e-09       5       NaN        NaN             NaN            1.783993           1.725757
+              S4b_next15_intraday         Bank Nifty + Fin Nifty next15 intraday carrier   604         1.354722 0.204872   6.607041 4.312904e-11       5       NaN        NaN             NaN            1.237484           1.471960
+               S4b_next15_implied         Bank Nifty + Fin Nifty next15  implied    tost   604        -0.012283 0.204947   4.815386 9.300325e-07       5 -0.350189   0.325624             NaN           -0.110397           0.085831
+                   S4b_next15_vix         Bank Nifty + Fin Nifty next15      vix    tost   604         0.071462 0.038067 -24.371867 3.833632e-92       5  0.008698   0.134225             NaN            0.096969           0.045955
+              S4b_next15_calendar         Bank Nifty + Fin Nifty next15 calendar    tost   604         0.119205 0.053926 -16.319828 3.683899e-50       5  0.030295   0.208116             NaN            0.095428           0.142983
+S4b_next15_mcsinfo_beats_mcsgarch         Bank Nifty + Fin Nifty next15  mcsinfo   beats   604        -4.215346 0.525060   8.021671 2.726376e-15       5       NaN        NaN             NaN           -4.258538          -4.172154
+   S4b_next15_mcsinfo_noninferior         Bank Nifty + Fin Nifty next15  mcsinfo      ni   604         0.423050 0.227247  -2.536762 5.719648e-03       5       NaN        NaN             NaN            0.192013           0.654088
+              S4b_next30_realized         Bank Nifty + Fin Nifty next30 realized carrier   604         2.128388 0.365465   5.818961 4.809915e-09       5       NaN        NaN             NaN            2.203357           2.053419
+              S4b_next30_intraday         Bank Nifty + Fin Nifty next30 intraday carrier   604         1.328452 0.232159   5.717435 8.511632e-09       5       NaN        NaN             NaN            1.161574           1.495329
+               S4b_next30_implied         Bank Nifty + Fin Nifty next30  implied    tost   604        -0.104294 0.305170   2.932672 1.744075e-03       5 -0.607444   0.398855             NaN           -0.135405          -0.073184
+                   S4b_next30_vix         Bank Nifty + Fin Nifty next30      vix    tost   604         0.026604 0.061177 -15.897968 4.339969e-48       5 -0.074262   0.127469             NaN            0.170800          -0.117592
+              S4b_next30_calendar         Bank Nifty + Fin Nifty next30 calendar    tost   604         0.203157 0.083971  -9.481631 2.835183e-20       5  0.064709   0.341604             NaN            0.268537           0.137776
+S4b_next30_mcsinfo_beats_mcsgarch         Bank Nifty + Fin Nifty next30  mcsinfo   beats   604        -5.371947 0.707136   7.590477 6.084350e-14       5       NaN        NaN             NaN           -5.214183          -5.529711
+   S4b_next30_mcsinfo_noninferior         Bank Nifty + Fin Nifty next30  mcsinfo      ni   604         0.430230 0.334516  -1.701858 4.464872e-02       5       NaN        NaN             NaN            0.359734           0.500726
+
+[REAL DATA] reproduction checks:
+                                                                                               check  rows_rerun  rows_committed  rows_matched  y_n_identical  y_max_abs_rel_diff  mcsgarch_n_identical  mcsgarch_max_abs_rel_diff  mcsgarch_iv_n_identical  mcsgarch_iv_max_abs_rel_diff  hybrid_base_n_identical  hybrid_base_max_abs_rel_diff  forecast_n_identical  forecast_max_abs_rel_diff date_identical minute_identical y_identical mcsgarch_identical mcsgarch_iv_identical  estimate_here  estimate_p106  stat_here  stat_p106  max_abs_diff   ok
+                                       BANKNIFTY next15 seed 7 full hybrid vs pipeline_nse_banknifty     16500.0         16500.0       16500.0        16500.0                 0.0               16500.0                        0.0                  16500.0                           0.0                  16500.0                           0.0                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN  NaN
+                                                      BANKNIFTY next15 seed 7 full vs P106 work file     16500.0         16500.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               16500.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   BANKNIFTY next15 seed 7 implied vs P106 work file     16500.0         16500.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               16500.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                       BANKNIFTY next15 seed 7 vix vs P106 work file     16500.0         16500.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               16500.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                  BANKNIFTY next15 seed 7 intraday vs P106 work file     16500.0         16500.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               16500.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                  BANKNIFTY next15 seed 7 calendar vs P106 work file     16500.0         16500.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               16500.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                  BANKNIFTY next15 seed 7 realized vs P106 work file     16500.0         16500.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               16500.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                       BANKNIFTY next30 seed 7 full hybrid vs pipeline_nse_banknifty     15840.0         15840.0       15840.0        15840.0                 0.0               15840.0                        0.0                  15840.0                           0.0                  15840.0                           0.0                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN  NaN
+                                                      BANKNIFTY next30 seed 7 full vs P106 work file     15840.0         15840.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15840.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   BANKNIFTY next30 seed 7 implied vs P106 work file     15840.0         15840.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15840.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                       BANKNIFTY next30 seed 7 vix vs P106 work file     15840.0         15840.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15840.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                  BANKNIFTY next30 seed 7 intraday vs P106 work file     15840.0         15840.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15840.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                  BANKNIFTY next30 seed 7 calendar vs P106 work file     15840.0         15840.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15840.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                  BANKNIFTY next30 seed 7 realized vs P106 work file     15840.0         15840.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15840.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                         FINNIFTY next15 seed 7 full hybrid vs pipeline_nse_finnifty     15100.0         15100.0       15100.0        15100.0                 0.0               15100.0                        0.0                  15100.0                           0.0                  15100.0                           0.0                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN  NaN
+                                                       FINNIFTY next15 seed 7 full vs P106 work file     15100.0         15100.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15100.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                    FINNIFTY next15 seed 7 implied vs P106 work file     15100.0         15100.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15100.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                        FINNIFTY next15 seed 7 vix vs P106 work file     15100.0         15100.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15100.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   FINNIFTY next15 seed 7 intraday vs P106 work file     15100.0         15100.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15100.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   FINNIFTY next15 seed 7 calendar vs P106 work file     15100.0         15100.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15100.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   FINNIFTY next15 seed 7 realized vs P106 work file     15100.0         15100.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               15100.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                         FINNIFTY next30 seed 7 full hybrid vs pipeline_nse_finnifty     14496.0         14496.0       14496.0        14496.0                 0.0               14496.0                        0.0                  14496.0                           0.0                  14496.0                           0.0                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN  NaN
+                                                       FINNIFTY next30 seed 7 full vs P106 work file     14496.0         14496.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               14496.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                    FINNIFTY next30 seed 7 implied vs P106 work file     14496.0         14496.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               14496.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                        FINNIFTY next30 seed 7 vix vs P106 work file     14496.0         14496.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               14496.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   FINNIFTY next30 seed 7 intraday vs P106 work file     14496.0         14496.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               14496.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   FINNIFTY next30 seed 7 calendar vs P106 work file     14496.0         14496.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               14496.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+                                                   FINNIFTY next30 seed 7 realized vs P106 work file     14496.0         14496.0           1.0            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN               14496.0                        0.0           True             True        True               True                  True            NaN            NaN        NaN        NaN           NaN  NaN
+  BANKNIFTY next15 seed 7 implied: contribution and DM statistic vs P106 tests.csv S5_next15_implied         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN      -0.210316      -0.210316  -0.799122  -0.799122  0.000000e+00  NaN
+          BANKNIFTY next15 seed 7 vix: contribution and DM statistic vs P106 tests.csv S5_next15_vix         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN      -0.062579      -0.062579  -0.582168  -0.582168  4.163336e-17  NaN
+BANKNIFTY next15 seed 7 intraday: contribution and DM statistic vs P106 tests.csv S5_next15_intraday         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.882977       0.882977   3.653233   3.653233  0.000000e+00  NaN
+BANKNIFTY next15 seed 7 calendar: contribution and DM statistic vs P106 tests.csv S5_next15_calendar         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN      -0.021740      -0.021740  -0.203289  -0.203289  5.551115e-17  NaN
+BANKNIFTY next15 seed 7 realized: contribution and DM statistic vs P106 tests.csv S5_next15_realized         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       1.582297       1.582297   4.593263   4.593263  0.000000e+00  NaN
+  BANKNIFTY next30 seed 7 implied: contribution and DM statistic vs P106 tests.csv S5_next30_implied         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN      -0.475918      -0.475918  -1.197144  -1.197144  5.551115e-17  NaN
+          BANKNIFTY next30 seed 7 vix: contribution and DM statistic vs P106 tests.csv S5_next30_vix         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN      -0.244514      -0.244514  -1.955888  -1.955888  2.775558e-17  NaN
+BANKNIFTY next30 seed 7 intraday: contribution and DM statistic vs P106 tests.csv S5_next30_intraday         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.954818       0.954818   5.000964   5.000964  0.000000e+00  NaN
+BANKNIFTY next30 seed 7 calendar: contribution and DM statistic vs P106 tests.csv S5_next30_calendar         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.147952       0.147952   0.872328   0.872328  2.775558e-17  NaN
+BANKNIFTY next30 seed 7 realized: contribution and DM statistic vs P106 tests.csv S5_next30_realized         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       1.788414       1.788414   3.837887   3.837887  0.000000e+00  NaN
+   FINNIFTY next15 seed 7 implied: contribution and DM statistic vs P106 tests.csv S6_next15_implied         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.202772       0.202772   0.746518   0.746518  8.326673e-17  NaN
+           FINNIFTY next15 seed 7 vix: contribution and DM statistic vs P106 tests.csv S6_next15_vix         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.149412       0.149412   1.867402   1.867402  0.000000e+00  NaN
+ FINNIFTY next15 seed 7 intraday: contribution and DM statistic vs P106 tests.csv S6_next15_intraday         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       1.622163       1.622163   5.875178   5.875178  2.220446e-16  NaN
+ FINNIFTY next15 seed 7 calendar: contribution and DM statistic vs P106 tests.csv S6_next15_calendar         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.196933       0.196933   2.532382   2.532382  5.551115e-17  NaN
+ FINNIFTY next15 seed 7 realized: contribution and DM statistic vs P106 tests.csv S6_next15_realized         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       1.943108       1.943108   5.418147   5.418147  0.000000e+00  NaN
+   FINNIFTY next30 seed 7 implied: contribution and DM statistic vs P106 tests.csv S6_next30_implied         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.167131       0.167131   0.384700   0.384700  8.326673e-17  NaN
+           FINNIFTY next30 seed 7 vix: contribution and DM statistic vs P106 tests.csv S6_next30_vix         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.089517       0.089517   0.727226   0.727226  6.938894e-17  NaN
+ FINNIFTY next30 seed 7 intraday: contribution and DM statistic vs P106 tests.csv S6_next30_intraday         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       1.570772       1.570772   4.464547   4.464547  0.000000e+00  NaN
+ FINNIFTY next30 seed 7 calendar: contribution and DM statistic vs P106 tests.csv S6_next30_calendar         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       0.058497       0.058497   0.445657   0.445657  5.551115e-17  NaN
+ FINNIFTY next30 seed 7 realized: contribution and DM statistic vs P106 tests.csv S6_next30_realized         NaN             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN       1.951834       1.951834   4.118708   4.118708  2.220446e-16  NaN
+                 BANKNIFTY next15: mcsgarch and mcsgarch_iv daily QLIKE identical in all 5 seed sets       660.0             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN True
+                 BANKNIFTY next30: mcsgarch and mcsgarch_iv daily QLIKE identical in all 5 seed sets       660.0             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN True
+                  FINNIFTY next15: mcsgarch and mcsgarch_iv daily QLIKE identical in all 5 seed sets       604.0             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN True
+                  FINNIFTY next30: mcsgarch and mcsgarch_iv daily QLIKE identical in all 5 seed sets       604.0             NaN           NaN            NaN                 NaN                   NaN                        NaN                      NaN                           NaN                      NaN                           NaN                   NaN                        NaN            NaN              NaN         NaN                NaN                   NaN            NaN            NaN        NaN        NaN           NaN True
+
+[REAL DATA] other rows (id, estimate, p, Holm p):
+                                       test_id  estimate        p_raw   p_adjusted
+                   S1_BANKNIFTY_next15_implied -0.216635 7.825590e-01 1.000000e+00
+                       S1_BANKNIFTY_next15_vix  0.080933 7.314054e-02 6.582649e-01
+                  S1_BANKNIFTY_next15_calendar  0.102522 1.291037e-01 9.037259e-01
+S2_BANKNIFTY_next15_mcsinfo_full_beats_mcsinfo  0.130320 3.121109e-01 5.337788e-01
+                   S3_BANKNIFTY_next15_implied -0.216635 1.535727e-01 9.214362e-01
+                       S3_BANKNIFTY_next15_vix  0.080933 8.296190e-14 1.244428e-12
+                  S3_BANKNIFTY_next15_calendar  0.102522 6.681708e-06 7.349879e-05
+       S3_BANKNIFTY_next15_mcsinfo_noninferior  0.130320 8.245437e-02 5.771806e-01
+               R1_F1_BANKNIFTY_next15_realized  1.582297 2.614304e-06 3.398595e-05
+               R2_F1_BANKNIFTY_next15_realized  1.749541 7.428235e-08 9.656706e-07
+               R4_F1_BANKNIFTY_next15_realized  1.881591 7.454920e-09 9.691396e-08
+               R5_F1_BANKNIFTY_next15_realized  2.005314 1.012581e-09 1.417613e-08
+               R1_F1_BANKNIFTY_next15_intraday  0.882977 1.397683e-04 1.118147e-03
+               R2_F1_BANKNIFTY_next15_intraday  1.204428 8.726115e-09 1.221656e-07
+               R4_F1_BANKNIFTY_next15_intraday  1.304683 6.595562e-10 1.121245e-08
+               R5_F1_BANKNIFTY_next15_intraday  1.306816 6.422926e-11 1.027668e-09
+                R1_F2_BANKNIFTY_next15_implied -0.210316 1.398541e-03 9.789786e-03
+                R2_F2_BANKNIFTY_next15_implied -0.215371 1.522830e-03 9.136978e-03
+                R3_F2_BANKNIFTY_next15_implied -0.216635 2.428868e-03 1.457321e-02
+                R4_F2_BANKNIFTY_next15_implied -0.240518 2.979201e-03 1.787520e-02
+                R5_F2_BANKNIFTY_next15_implied -0.136600 5.200120e-04 3.640084e-03
+                    R1_F2_BANKNIFTY_next15_vix -0.062579 1.120354e-17 2.800885e-16
+                    R2_F2_BANKNIFTY_next15_vix  0.052230 5.119363e-62 1.382228e-60
+                    R3_F2_BANKNIFTY_next15_vix  0.080933 3.674916e-52 5.512374e-51
+                    R4_F2_BANKNIFTY_next15_vix  0.089109 4.562255e-51 1.186186e-49
+                    R5_F2_BANKNIFTY_next15_vix  0.067943 2.227977e-60 6.015538e-59
+               R1_F2_BANKNIFTY_next15_calendar -0.021740 3.586790e-19 9.325654e-18
+               R2_F2_BANKNIFTY_next15_calendar  0.077670 5.076866e-25 1.167679e-23
+               R3_F2_BANKNIFTY_next15_calendar  0.102522 5.945988e-22 6.540587e-21
+               R4_F2_BANKNIFTY_next15_calendar  0.125911 6.890036e-20 1.584708e-18
+               R5_F2_BANKNIFTY_next15_calendar  0.165015 1.054486e-21 2.425317e-20
+ R1_F3_BANKNIFTY_next15_mcsinfo_beats_mcsgarch -3.936573 7.789001e-15 1.869360e-13
+ R2_F3_BANKNIFTY_next15_mcsinfo_beats_mcsgarch -3.990891 9.854537e-14 1.970907e-12
+ R4_F3_BANKNIFTY_next15_mcsinfo_beats_mcsgarch -4.121667 1.505072e-14 3.160651e-13
+ R5_F3_BANKNIFTY_next15_mcsinfo_beats_mcsgarch -3.900884 2.365245e-15 4.730491e-14
+    R1_F3_BANKNIFTY_next15_mcsinfo_noninferior -0.016507 5.505135e-05 5.505135e-04
+    R2_F3_BANKNIFTY_next15_mcsinfo_noninferior  0.100954 2.169494e-04 1.735595e-03
+    R3_F3_BANKNIFTY_next15_mcsinfo_noninferior  0.130320 5.659099e-04 3.961370e-03
+    R4_F3_BANKNIFTY_next15_mcsinfo_noninferior  0.136677 5.805841e-04 4.644673e-03
+    R5_F3_BANKNIFTY_next15_mcsinfo_noninferior  0.182140 7.560986e-04 4.536591e-03
+                     PL1_BANKNIFTY_next15_s101 -0.168800 1.621440e-15 1.621440e-14
+                     PL2_BANKNIFTY_next15_s101 -0.168800 9.492197e-01 1.000000e+00
+                     PL1_BANKNIFTY_next15_s102 -0.167170 8.807557e-17 9.688313e-16
+                     PL2_BANKNIFTY_next15_s102 -0.167170 9.549713e-01 1.000000e+00
+                     PL1_BANKNIFTY_next15_s103 -0.285122 1.463465e-13 1.317118e-12
+                     PL2_BANKNIFTY_next15_s103 -0.285122 9.984648e-01 1.000000e+00
+                     PL1_BANKNIFTY_next15_s104 -0.237805 3.332257e-08 1.228847e-07
+                     PL2_BANKNIFTY_next15_s104 -0.237805 9.555991e-01 1.000000e+00
+           E1_BANKNIFTY_next15_mcsinfo_periods -0.373182 4.775406e-01 4.775406e-01
+                 PH_BANKNIFTY_next15_G_periods  1.356415 2.159283e-01 2.159283e-01
+                 PH_BANKNIFTY_next15_B_periods -0.322611 8.732352e-01 8.732352e-01
+           PH_BANKNIFTY_next15_implied_periods -1.420107 7.566393e-03 7.566393e-03
+               PH_BANKNIFTY_next15_vix_periods -0.106300 3.288661e-01 3.288661e-01
+          PH_BANKNIFTY_next15_intraday_periods -0.009499 9.808481e-01 9.808481e-01
+          PH_BANKNIFTY_next15_calendar_periods -0.120154 5.081185e-01 5.081185e-01
+          PH_BANKNIFTY_next15_realized_periods  0.481345 4.676427e-01 4.676427e-01
+                   S1_BANKNIFTY_next30_implied -0.204507 7.063903e-01 1.000000e+00
+                       S1_BANKNIFTY_next30_vix  0.136162 4.221820e-02 4.221820e-01
+                  S1_BANKNIFTY_next30_calendar  0.271350 3.796060e-03 4.555271e-02
+S2_BANKNIFTY_next30_mcsinfo_full_beats_mcsinfo  0.228995 2.668894e-01 5.337788e-01
+                   S3_BANKNIFTY_next30_implied -0.204507 2.164325e-01 9.214362e-01
+                       S3_BANKNIFTY_next30_vix  0.136162 2.333530e-06 2.800236e-05
+                  S3_BANKNIFTY_next30_calendar  0.271350 1.218160e-02 1.096344e-01
+       S3_BANKNIFTY_next30_mcsinfo_noninferior  0.228995 2.307565e-01 9.214362e-01
+               R1_F1_BANKNIFTY_next30_realized  1.788414 6.802187e-05 6.121968e-04
+               R2_F1_BANKNIFTY_next30_realized  2.084695 5.994250e-06 5.994250e-05
+               R4_F1_BANKNIFTY_next30_realized  2.234994 2.709644e-06 2.709644e-05
+               R5_F1_BANKNIFTY_next30_realized  2.272350 2.750807e-06 2.475727e-05
+               R1_F1_BANKNIFTY_next30_intraday  0.954818 3.661538e-07 5.126154e-06
+               R2_F1_BANKNIFTY_next30_intraday  1.120527 8.708020e-10 1.567444e-08
+               R4_F1_BANKNIFTY_next30_intraday  1.157690 6.819216e-10 1.121245e-08
+               R5_F1_BANKNIFTY_next30_intraday  1.172483 1.143329e-11 2.057992e-10
+                R1_F2_BANKNIFTY_next30_implied -0.475918 9.393086e-02 2.817926e-01
+                R2_F2_BANKNIFTY_next30_implied -0.258789 2.460435e-02 7.381305e-02
+                R3_F2_BANKNIFTY_next30_implied -0.204507 1.725200e-02 8.625998e-02
+                R4_F2_BANKNIFTY_next30_implied -0.240009 2.211358e-02 8.606273e-02
+                R5_F2_BANKNIFTY_next30_implied -0.054055 5.238940e-03 2.619470e-02
+                    R1_F2_BANKNIFTY_next30_vix -0.244514 1.263909e-09 2.527817e-08
+                    R2_F2_BANKNIFTY_next30_vix  0.060027 1.205172e-35 3.012931e-34
+                    R3_F2_BANKNIFTY_next30_vix  0.136162 2.321473e-26 3.017915e-25
+                    R4_F2_BANKNIFTY_next30_vix  0.134551 9.489326e-26 2.372331e-24
+                    R5_F2_BANKNIFTY_next30_vix  0.090107 6.145199e-31 1.536300e-29
+               R1_F2_BANKNIFTY_next30_calendar  0.147952 3.267568e-07 4.901352e-06
+               R2_F2_BANKNIFTY_next30_calendar  0.246670 1.375432e-14 2.888408e-13
+               R3_F2_BANKNIFTY_next30_calendar  0.271350 2.021863e-12 1.819677e-11
+               R4_F2_BANKNIFTY_next30_calendar  0.263133 3.719259e-13 7.066591e-12
+               R5_F2_BANKNIFTY_next30_calendar  0.324018 1.874334e-10 2.811501e-09
+ R1_F3_BANKNIFTY_next30_mcsinfo_beats_mcsgarch -5.000121 2.463065e-12 5.172437e-11
+ R2_F3_BANKNIFTY_next30_mcsinfo_beats_mcsgarch -5.071647 2.497062e-13 4.744418e-12
+ R4_F3_BANKNIFTY_next30_mcsinfo_beats_mcsgarch -5.171245 8.070141e-14 1.614028e-12
+ R5_F3_BANKNIFTY_next30_mcsinfo_beats_mcsgarch -5.111831 7.794527e-17 1.636851e-15
+    R1_F3_BANKNIFTY_next30_mcsinfo_noninferior  0.032431 6.323838e-03 3.161919e-02
+    R2_F3_BANKNIFTY_next30_mcsinfo_noninferior  0.189682 1.408404e-02 7.042021e-02
+    R3_F3_BANKNIFTY_next30_mcsinfo_noninferior  0.228995 1.832167e-02 8.625998e-02
+    R4_F3_BANKNIFTY_next30_mcsinfo_noninferior  0.190131 1.403230e-02 7.016151e-02
+    R5_F3_BANKNIFTY_next30_mcsinfo_noninferior  0.258485 2.152854e-02 6.936629e-02
+                     PL1_BANKNIFTY_next30_s101 -0.218729 1.262733e-08 6.313666e-08
+                     PL2_BANKNIFTY_next30_s101 -0.218729 9.425905e-01 1.000000e+00
+                     PL1_BANKNIFTY_next30_s102 -0.216374 2.769148e-09 1.661489e-08
+                     PL2_BANKNIFTY_next30_s102 -0.216374 9.483612e-01 1.000000e+00
+                     PL1_BANKNIFTY_next30_s103 -0.513151 1.133346e-03 1.133346e-03
+                     PL2_BANKNIFTY_next30_s103 -0.513151 9.993513e-01 1.000000e+00
+                     PL1_BANKNIFTY_next30_s104 -0.195633 9.652203e-08 1.930441e-07
+                     PL2_BANKNIFTY_next30_s104 -0.195633 8.994626e-01 1.000000e+00
+           E1_BANKNIFTY_next30_mcsinfo_periods -1.033222 1.566375e-01 1.566375e-01
+                 PH_BANKNIFTY_next30_G_periods  3.404106 1.909574e-02 1.909574e-02
+                 PH_BANKNIFTY_next30_B_periods -1.532768 6.315123e-01 6.315123e-01
+           PH_BANKNIFTY_next30_implied_periods -2.108628 3.538530e-03 3.538530e-03
+               PH_BANKNIFTY_next30_vix_periods  0.241498 1.215337e-01 1.215337e-01
+          PH_BANKNIFTY_next30_intraday_periods  0.421513 2.331240e-01 2.331240e-01
+          PH_BANKNIFTY_next30_calendar_periods  0.102837 6.179433e-01 6.179433e-01
+          PH_BANKNIFTY_next30_realized_periods  1.478641 1.177405e-01 1.177405e-01
+                    S1_FINNIFTY_next15_implied  0.085831 3.737650e-01 1.000000e+00
+                        S1_FINNIFTY_next15_vix  0.045955 1.788108e-01 1.000000e+00
+                   S1_FINNIFTY_next15_calendar  0.142983 3.980521e-03 4.555271e-02
+ S2_FINNIFTY_next15_mcsinfo_full_beats_mcsinfo  0.654088 1.904820e-02 7.619281e-02
+                    S3_FINNIFTY_next15_implied  0.085831 6.035426e-02 4.828341e-01
+                        S3_FINNIFTY_next15_vix  0.045955 6.749580e-19 1.079933e-17
+                   S3_FINNIFTY_next15_calendar  0.142983 3.324043e-11 4.653660e-10
+        S3_FINNIFTY_next15_mcsinfo_noninferior  0.654088 6.877089e-01 1.000000e+00
+                R1_F1_FINNIFTY_next15_realized  1.943108 4.357153e-08 6.971445e-07
+                R2_F1_FINNIFTY_next15_realized  1.769227 2.521085e-07 3.025302e-06
+                R4_F1_FINNIFTY_next15_realized  1.836080 6.359731e-08 7.631677e-07
+                R5_F1_FINNIFTY_next15_realized  1.976633 1.316733e-08 1.448406e-07
+                R1_F1_FINNIFTY_next15_intraday  1.622163 3.493852e-09 6.288933e-08
+                R2_F1_FINNIFTY_next15_intraday  1.502000 3.268349e-09 4.902524e-08
+                R4_F1_FINNIFTY_next15_intraday  1.501700 4.025125e-09 5.635175e-08
+                R5_F1_FINNIFTY_next15_intraday  1.401041 7.032154e-09 8.438585e-08
+                 R1_F2_FINNIFTY_next15_implied  0.202772 1.730994e-03 1.038596e-02
+                 R2_F2_FINNIFTY_next15_implied  0.109219 4.162025e-04 2.913418e-03
+                 R3_F2_FINNIFTY_next15_implied  0.085831 3.197205e-04 2.557764e-03
+                 R4_F2_FINNIFTY_next15_implied  0.203799 8.493374e-04 5.945362e-03
+                 R5_F2_FINNIFTY_next15_implied  0.123894 1.871015e-04 1.496812e-03
+                     R1_F2_FINNIFTY_next15_vix  0.149412 1.300536e-24 3.641499e-23
+                     R2_F2_FINNIFTY_next15_vix  0.066646 4.518732e-68 1.265245e-66
+                     R3_F2_FINNIFTY_next15_vix  0.045955 7.002038e-65 1.120326e-63
+                     R4_F2_FINNIFTY_next15_vix  0.024794 2.576829e-82 7.215122e-81
+                     R5_F2_FINNIFTY_next15_vix  0.008247 3.019443e-82 8.454441e-81
+                R1_F2_FINNIFTY_next15_calendar  0.196933 1.975568e-23 5.334034e-22
+                R2_F2_FINNIFTY_next15_calendar  0.153773 1.787453e-50 4.647379e-49
+                R3_F2_FINNIFTY_next15_calendar  0.142983 1.705603e-48 2.387844e-47
+                R4_F2_FINNIFTY_next15_calendar  0.132882 2.026558e-51 5.471706e-50
+                R5_F2_FINNIFTY_next15_calendar  0.146170 6.032282e-48 1.568393e-46
+  R1_F3_FINNIFTY_next15_mcsinfo_beats_mcsgarch -4.140737 1.903894e-09 3.617399e-08
+  R2_F3_FINNIFTY_next15_mcsinfo_beats_mcsgarch -4.165871 9.042711e-10 1.567444e-08
+  R4_F3_FINNIFTY_next15_mcsinfo_beats_mcsgarch -4.382284 2.520200e-11 4.536361e-10
+  R5_F3_FINNIFTY_next15_mcsinfo_beats_mcsgarch -4.265573 2.845246e-11 4.836917e-10
+     R1_F3_FINNIFTY_next15_mcsinfo_noninferior  0.758159 2.291288e-01 4.582576e-01
+     R2_F3_FINNIFTY_next15_mcsinfo_noninferior  0.674902 1.513338e-01 3.026677e-01
+     R3_F3_FINNIFTY_next15_mcsinfo_noninferior  0.654088 1.343154e-01 2.686309e-01
+     R4_F3_FINNIFTY_next15_mcsinfo_noninferior  0.768653 2.251048e-01 4.502096e-01
+     R5_F3_FINNIFTY_next15_mcsinfo_noninferior  0.561413 5.131889e-02 1.026378e-01
+                      PL1_FINNIFTY_next15_s101  0.189127 2.451837e-17 2.942204e-16
+                      PL2_FINNIFTY_next15_s101  0.189127 2.212092e-02 3.539348e-01
+                      PL1_FINNIFTY_next15_s102  0.023827 4.079311e-27 6.526897e-26
+                      PL2_FINNIFTY_next15_s102  0.023827 3.917948e-01 1.000000e+00
+                      PL1_FINNIFTY_next15_s103  0.002266 7.341908e-25 1.101286e-23
+                      PL2_FINNIFTY_next15_s103  0.002266 4.903158e-01 1.000000e+00
+                      PL1_FINNIFTY_next15_s104  0.075397 1.325269e-20 1.855377e-19
+                      PL2_FINNIFTY_next15_s104  0.075397 2.176741e-01 1.000000e+00
+            E1_FINNIFTY_next15_mcsinfo_periods  1.591437 8.850885e-03 8.850885e-03
+                  PH_FINNIFTY_next15_G_periods  2.393547 6.083012e-02 6.083012e-02
+                  PH_FINNIFTY_next15_B_periods  0.268692 8.978394e-01 8.978394e-01
+            PH_FINNIFTY_next15_implied_periods  0.677375 1.867877e-01 1.867877e-01
+                PH_FINNIFTY_next15_vix_periods  0.167169 8.139967e-02 8.139967e-02
+           PH_FINNIFTY_next15_intraday_periods -0.088674 8.529831e-01 8.529831e-01
+           PH_FINNIFTY_next15_calendar_periods  0.195056 8.541448e-02 8.541448e-02
+           PH_FINNIFTY_next15_realized_periods  0.465616 5.063974e-01 5.063974e-01
+                    S1_FINNIFTY_next30_implied -0.073184 5.628581e-01 1.000000e+00
+                        S1_FINNIFTY_next30_vix -0.117592 9.250021e-01 1.000000e+00
+                   S1_FINNIFTY_next30_calendar  0.137776 9.318027e-02 7.454422e-01
+ S2_FINNIFTY_next30_mcsinfo_full_beats_mcsinfo  0.500726 1.603883e-01 4.811650e-01
+                    S3_FINNIFTY_next30_implied -0.073184 1.781502e-01 9.214362e-01
+                        S3_FINNIFTY_next30_vix -0.117592 1.712445e-06 2.226178e-05
+                   S3_FINNIFTY_next30_calendar  0.137776 2.706967e-04 2.706967e-03
+        S3_FINNIFTY_next30_mcsinfo_noninferior  0.500726 5.005748e-01 1.000000e+00
+                R1_F1_FINNIFTY_next30_realized  1.951834 2.171020e-05 2.388122e-04
+                R2_F1_FINNIFTY_next30_realized  2.033102 1.364223e-06 1.500646e-05
+                R4_F1_FINNIFTY_next30_realized  2.083646 9.197953e-07 1.011775e-05
+                R5_F1_FINNIFTY_next30_realized  2.266415 4.436898e-09 5.767967e-08
+                R1_F1_FINNIFTY_next30_intraday  1.570772 4.789415e-06 5.747298e-05
+                R2_F1_FINNIFTY_next30_intraday  1.510418 6.058726e-06 5.994250e-05
+                R4_F1_FINNIFTY_next30_intraday  1.508979 1.089505e-05 9.805542e-05
+                R5_F1_FINNIFTY_next30_intraday  1.582907 1.308187e-06 1.308187e-05
+                 R1_F2_FINNIFTY_next30_implied  0.167131 2.784933e-02 1.113973e-01
+                 R2_F2_FINNIFTY_next30_implied -0.025121 1.583414e-02 7.042021e-02
+                 R3_F2_FINNIFTY_next30_implied -0.073184 2.278141e-02 8.625998e-02
+                 R4_F2_FINNIFTY_next30_implied  0.077528 2.151568e-02 8.606273e-02
+                 R5_F2_FINNIFTY_next30_implied -0.131225 1.734157e-02 6.936629e-02
+                     R1_F2_FINNIFTY_next30_vix  0.089517 2.350229e-13 5.405527e-12
+                     R2_F2_FINNIFTY_next30_vix -0.076171 1.963959e-29 4.713502e-28
+                     R3_F2_FINNIFTY_next30_vix -0.117592 2.668499e-25 3.202198e-24
+                     R4_F2_FINNIFTY_next30_vix -0.131376 1.438456e-24 3.452295e-23
+                     R5_F2_FINNIFTY_next30_vix -0.145885 8.712380e-26 2.090971e-24
+                R1_F2_FINNIFTY_next30_calendar  0.058497 1.080614e-12 2.377352e-11
+                R2_F2_FINNIFTY_next30_calendar  0.121920 3.150483e-19 6.931063e-18
+                R3_F2_FINNIFTY_next30_calendar  0.137776 5.102768e-16 5.102768e-15
+                R4_F2_FINNIFTY_next30_calendar  0.134822 1.039967e-15 2.287927e-14
+                R5_F2_FINNIFTY_next30_calendar  0.130730 2.651423e-17 5.833132e-16
+  R1_F3_FINNIFTY_next30_mcsinfo_beats_mcsgarch -5.414773 6.869423e-09 1.167802e-07
+  R2_F3_FINNIFTY_next30_mcsinfo_beats_mcsgarch -5.506723 1.590924e-09 2.545479e-08
+  R4_F3_FINNIFTY_next30_mcsinfo_beats_mcsgarch -5.662515 9.675454e-10 1.451318e-08
+  R5_F3_FINNIFTY_next30_mcsinfo_beats_mcsgarch -5.641271 6.318332e-12 1.200483e-10
+     R1_F3_FINNIFTY_next30_mcsinfo_noninferior  0.677159 2.667912e-01 4.582576e-01
+     R2_F3_FINNIFTY_next30_mcsinfo_noninferior  0.536013 1.785717e-01 3.026677e-01
+     R3_F3_FINNIFTY_next30_mcsinfo_noninferior  0.500726 1.595866e-01 2.686309e-01
+     R4_F3_FINNIFTY_next30_mcsinfo_noninferior  0.634457 2.358185e-01 4.502096e-01
+     R5_F3_FINNIFTY_next30_mcsinfo_noninferior  0.295363 6.087395e-02 1.026378e-01
+                      PL1_FINNIFTY_next30_s101  0.103821 2.000374e-09 1.400262e-08
+                      PL2_FINNIFTY_next30_s101  0.103821 2.446441e-01 1.000000e+00
+                      PL1_FINNIFTY_next30_s102  0.065919 2.305985e-11 1.844788e-10
+                      PL2_FINNIFTY_next30_s102  0.065919 3.181059e-01 1.000000e+00
+                      PL1_FINNIFTY_next30_s103  0.039722 3.072117e-08 1.228847e-07
+                      PL2_FINNIFTY_next30_s103  0.039722 4.103204e-01 1.000000e+00
+                      PL1_FINNIFTY_next30_s104  0.036517 4.699385e-18 6.109200e-17
+                      PL2_FINNIFTY_next30_s104  0.036517 3.686590e-01 1.000000e+00
+            E1_FINNIFTY_next30_mcsinfo_periods  1.506344 1.160929e-01 1.160929e-01
+                  PH_FINNIFTY_next30_G_periods  3.637354 1.576918e-02 1.576918e-02
+                  PH_FINNIFTY_next30_B_periods -0.411975 8.934764e-01 8.934764e-01
+            PH_FINNIFTY_next30_implied_periods  0.963302 2.703566e-01 2.703566e-01
+                PH_FINNIFTY_next30_vix_periods  0.408384 9.055157e-03 9.055157e-03
+           PH_FINNIFTY_next30_intraday_periods  0.688914 2.877947e-01 2.877947e-01
+           PH_FINNIFTY_next30_calendar_periods  0.408725 5.863200e-02 5.863200e-02
+           PH_FINNIFTY_next30_realized_periods  0.159760 8.415635e-01 8.415635e-01
+                       S5_NIFTY_next15_implied  0.120382 9.978141e-03 9.978141e-03
+                           S5_NIFTY_next15_vix  0.033930 1.666923e-42 1.333538e-41
+                      S5_NIFTY_next15_calendar -0.240828 4.739149e-04 1.895659e-03
+           S5_NIFTY_next15_mcsinfo_noninferior -0.285406 3.591458e-06 2.154875e-05
+                       S5_NIFTY_next30_implied -0.081978 3.557917e-03 7.115834e-03
+                           S5_NIFTY_next30_vix -0.085944 5.577951e-35 3.904566e-34
+                      S5_NIFTY_next30_calendar -0.154608 7.254347e-05 3.627173e-04
+           S5_NIFTY_next30_mcsinfo_noninferior -0.182355 8.055053e-04 2.416516e-03
+                           S4a_next15_realized  1.793674 3.427304e-11 1.713652e-10
+                           S4a_next15_intraday  1.411608 1.599471e-13 1.279577e-12
+                            S4a_next15_implied -0.022177 1.120252e-08 4.481009e-08
+                                S4a_next15_vix  0.064562 1.727844e-89 2.418982e-88
+                           S4a_next15_calendar  0.095125 2.921675e-51 3.506010e-50
+             S4a_next15_mcsinfo_beats_mcsgarch -4.585837 1.674477e-19 1.507029e-18
+                S4a_next15_mcsinfo_noninferior  0.236341 2.178792e-05 6.536375e-05
+                           S4a_next30_realized  2.384483 8.359233e-13 5.851463e-12
+                           S4a_next30_intraday  1.496796 1.348444e-11 8.090666e-11
+                            S4a_next30_implied -0.050823 4.466723e-04 8.933447e-04
+                                S4a_next30_vix -0.007194 7.104317e-66 9.235613e-65
+                           S4a_next30_calendar  0.162053 9.676732e-22 1.064440e-20
+             S4a_next30_mcsinfo_beats_mcsgarch -5.790529 6.387216e-20 6.387216e-19
+                S4a_next30_mcsinfo_noninferior  0.319637 1.198615e-02 1.198615e-02
+                           S4b_next15_realized  1.754875 2.273407e-09 1.591385e-08
+                           S4b_next15_intraday  1.354722 4.312904e-11 3.450323e-10
+                            S4b_next15_implied -0.012283 9.300325e-07 3.720130e-06
+                                S4b_next15_vix  0.071462 3.833632e-92 5.367085e-91
+                           S4b_next15_calendar  0.119205 3.683899e-50 4.789068e-49
+             S4b_next15_mcsinfo_beats_mcsgarch -4.215346 2.726376e-15 2.726376e-14
+                S4b_next15_mcsinfo_noninferior  0.423050 5.719648e-03 1.143930e-02
+                           S4b_next30_realized  2.128388 4.809915e-09 2.885949e-08
+                           S4b_next30_intraday  1.328452 8.511632e-09 4.255816e-08
+                            S4b_next30_implied -0.104294 1.744075e-03 5.232224e-03
+                                S4b_next30_vix  0.026604 4.339969e-48 5.207963e-47
+                           S4b_next30_calendar  0.203157 2.835183e-20 3.118701e-19
+             S4b_next30_mcsinfo_beats_mcsgarch -5.371947 6.084350e-14 5.475915e-13
+                S4b_next30_mcsinfo_noninferior  0.430230 4.464872e-02 4.464872e-02
+               R6_F1_BANKNIFTY_next15_realized  1.791352 3.419917e-08 4.445892e-07
+               R6_F1_BANKNIFTY_next15_intraday  1.284790 6.441582e-10 1.095069e-08
+                R6_F2_BANKNIFTY_next15_implied -0.216635 2.432657e-03 1.459594e-02
+                    R6_F2_BANKNIFTY_next15_vix  0.080933 7.652768e-52 2.066247e-50
+               R6_F2_BANKNIFTY_next15_calendar  0.102522 5.841262e-22 1.343490e-20
+ R6_F3_BANKNIFTY_next15_mcsinfo_beats_mcsgarch -4.004470 2.282127e-13 4.564254e-12
+    R6_F3_BANKNIFTY_next15_mcsinfo_noninferior  0.130320 5.643639e-04 3.950547e-03
+               R6_F1_BANKNIFTY_next30_realized  2.158765 3.836469e-06 3.836469e-05
+               R6_F1_BANKNIFTY_next30_intraday  1.161954 4.940801e-10 8.893442e-09
+                R6_F2_BANKNIFTY_next30_implied -0.204507 1.750117e-02 8.750586e-02
+                    R6_F2_BANKNIFTY_next30_vix  0.136162 4.155050e-26 1.038762e-24
+               R6_F2_BANKNIFTY_next30_calendar  0.271350 8.754462e-13 1.663348e-11
+ R6_F3_BANKNIFTY_next30_mcsinfo_beats_mcsgarch -5.089529 1.425374e-13 2.993284e-12
+    R6_F3_BANKNIFTY_next30_mcsinfo_noninferior  0.228995 1.822471e-02 8.750586e-02
+                R6_F1_FINNIFTY_next15_realized  1.725757 5.027261e-07 6.032713e-06
+                R6_F1_FINNIFTY_next15_intraday  1.471960 4.824236e-09 6.753930e-08
+                 R6_F2_FINNIFTY_next15_implied  0.085831 3.223449e-04 2.578760e-03
+                     R6_F2_FINNIFTY_next15_vix  0.045955 2.553608e-64 7.150103e-63
+                R6_F2_FINNIFTY_next15_calendar  0.142983 2.178841e-48 5.664988e-47
+  R6_F3_FINNIFTY_next15_mcsinfo_beats_mcsgarch -4.172154 7.697949e-10 1.231672e-08
+     R6_F3_FINNIFTY_next15_mcsinfo_noninferior  0.654088 1.360713e-01 2.721426e-01
+                R6_F1_FINNIFTY_next30_realized  2.053419 7.913378e-07 8.704716e-06
+                R6_F1_FINNIFTY_next30_intraday  1.495329 8.783538e-06 7.905184e-05
+                 R6_F2_FINNIFTY_next30_implied -0.073184 2.272736e-02 8.750586e-02
+                     R6_F2_FINNIFTY_next30_vix -0.117592 2.420075e-25 5.808180e-24
+                R6_F2_FINNIFTY_next30_calendar  0.137776 4.007370e-16 8.816214e-15
+  R6_F3_FINNIFTY_next30_mcsinfo_beats_mcsgarch -5.529711 1.145918e-09 1.718878e-08
+     R6_F3_FINNIFTY_next30_mcsinfo_noninferior  0.500726 1.610907e-01 2.721426e-01
+
+written to /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a34e7589ea8fc959b/results/p110_gain_stress_test (18s)

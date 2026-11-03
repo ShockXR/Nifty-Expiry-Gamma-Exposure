@@ -709,6 +709,17 @@ def stage_analyze(a):
                                         "period1_points": st["r1"], "period2_points": st["r2"], "difference": st["diff"],
                                         "se": st["se"], "t": st["stat"], "p_two_sided": st["p"], "days_p1": st["n1"],
                                         "days_p2": st["n2"]})
+                    # post hoc (added after the first analysis): the plan registered this table as descriptive, but it
+                    # shows p-values, and every p-value of the study belongs in tests.csv. No adjustment. The mcsinfo
+                    # row is E1 already.
+                    if q != "contribution of mcsinfo":
+                        qk = q.split(" ")[0] if q[0] in "GB" else q.split(" ")[-1]
+                        R.add(f"PH_{ix}_{t}_{qk}_periods", f"Post hoc (a p-value of the registered descriptive table "
+                              f"periods.csv): {q} differs between the period to 19 Nov 2024 and the period since 20 Nov "
+                              f"2024 ({TARGET_LABEL[t]}). Estimate: period 2 minus period 1, points of each period's "
+                              "mcsGARCH QLIKE.", "post hoc",
+                              sample_text(ix, t, D, f"{what_new}, {st['n1']} + {st['n2']} days"), st["diff"], st["stat"],
+                              st["p"], "two-sided", DELTA_PERIOD, "PH_period_values", index=ix, target=t, quantity=q)
 
             # descriptive: contributions in every sample, shares of the gain
             samples = [("new-seed average", D), ("seed set 7", F[ix][(t, HEADLINE_SEED)]), ("five-seed average", avg5[ix][t])] + \
@@ -793,7 +804,7 @@ def stage_analyze(a):
         "S5_nifty_reanalysis": "secondary S5", "R1_seed7": "robustness R1", "R2_five_seeds": "robustness R2",
         "R3_delta_method": "robustness R3", "R4_without_june_2024": "robustness R4",
         "R5_without_top_loss_days": "robustness R5", "PL1_seed_placebo_tost": "placebo PL1",
-        "PL2_seed_placebo_dm": "placebo PL2", "E1_mcsinfo_periods": None}
+        "PL2_seed_placebo_dm": "placebo PL2", "E1_mcsinfo_periods": None, "PH_period_values": None}
     tests = R.frame(families)
     # R6: the 28 primary p-values adjusted together (one Holm over all primary rows)
     prim = tests[tests["role"] == "primary"]
