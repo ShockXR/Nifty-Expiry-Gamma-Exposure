@@ -284,6 +284,9 @@ BENCHCPP,results/p116_benchmark_as_printed/,"daily_losses_banknifty_next15.csv, 
 GAINSTRESS,results/p110_gain_stress_test/,"analyze_stdout.txt, run_info.json, run_stdout_banknifty.txt, run_stdout_finnifty.txt",4,"run information, counts or log; no p-value"
 GAINSTRESS,results/p110_gain_stress_test/,"claims.csv, contributions.csv, equivalence_bounds.csv, other_index_ranking.csv, periods.csv and 7 more",12,"estimates, bounds, verdicts and checks behind tests.csv; no new p-value"
 GAINSTRESS,results/p110_gain_stress_test/,"daily_losses_banknifty_next15_s101.csv, daily_losses_banknifty_next15_s102.csv, daily_losses_banknifty_next15_s103.csv, daily_losses_banknifty_next15_s104.csv, daily_losses_banknifty_next15_s7.csv and 15 more",20,daily losses behind the tests; no p-value
+PERSPLAC,results/p117_persistence_placebo/,"analyze_stdout.txt, fig_placebo.png, fig_placebo_time.png, plan_checks_stdout.txt, posthoc_flat_days_stdout.txt and 6 more",11,"run information, counts or log; no p-value"
+PERSPLAC,results/p117_persistence_placebo/,"control_bootstrap_draws.csv, control_fits.csv, did.csv, placebo_pairs.csv, placebo_summary.csv and 5 more",10,"window fits, placebo pairs, the control fits and draws and the reproduction checks behind tests.csv; no new p-value"
+PERSPLAC,results/p117_persistence_placebo/,"posthoc_bound_windows.csv, posthoc_extreme_pairs.csv, posthoc_flat_days.csv, posthoc_pairs_by_period.csv, posthoc_without_flat_days.csv",5,"post hoc descriptive tables (flat-bar days, bound windows, pairs by period); no p-value"
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods

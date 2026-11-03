@@ -14,7 +14,7 @@ Steps, in order:
    if anything is missing or different, unless --no-check is given.
 3. Run each study in turn, with fixed arguments, and log its run time and
    exit status to results/reproduce_log.csv. Each registered study (P87 to
-   P116) runs with the commands given in its document; the test ledger and the
+   P117) runs with the commands given in its document; the test ledger and the
    number trace run last, because they read every study's results.
 
 Every step runs from the repository root with OMP_NUM_THREADS=1, PYTHONHASHSEED=0
@@ -205,8 +205,23 @@ OPTIONAL = {  # studies added later; run if the script exists
     "demo_2025_12_23": ([PY, "scripts/demo_forecast_day.py", "--date", "2025-12-23", "--png"], "results/demo/"),
     "demo_2024_06_04": ([PY, "scripts/demo_forecast_day.py", "--date", "2024-06-04"], "results/demo/"),
     "demo_2025_04_08": ([PY, "scripts/demo_forecast_day.py", "--date", "2025-04-08"], "results/demo/"),
-    # P117 (persistence placebo) and P118 go here, before the ledger, once their runs have finished and their
-    # documents give the commands (they were still running on 3 November 2026).
+    # P117 persistence placebo (docs/P117_PERSISTENCE_PLACEBO.md, Section 15): about 61 minutes on one core
+    # (windows 24.8 and 24.0 minutes, control 10.7). Needs P114's code; work files go to data/processed/p117/.
+    "p117_inputs": ([PY, "experiments/p117_persistence_placebo.py", "inputs"],
+                    "results/p117_persistence_placebo/", "results/p117_persistence_placebo/run_stdout_inputs.txt"),
+    "p117_windows_nifty": ([PY, "experiments/p117_persistence_placebo.py", "windows", "--index", "nifty"],
+                           "results/p117_persistence_placebo/", "results/p117_persistence_placebo/run_stdout_windows_nifty.txt"),
+    "p117_windows_banknifty": ([PY, "experiments/p117_persistence_placebo.py", "windows", "--index", "banknifty"],
+                               "results/p117_persistence_placebo/", "results/p117_persistence_placebo/run_stdout_windows_banknifty.txt"),
+    "p117_control": ([PY, "experiments/p117_persistence_placebo.py", "control"],
+                     "results/p117_persistence_placebo/", "results/p117_persistence_placebo/run_stdout_control.txt"),
+    "p117_analyze": ([PY, "experiments/p117_persistence_placebo.py", "analyze",
+                      "--plan-commit", "27d39ba417c884dc9605dc9ddf6c1756cf17f380"],
+                     "results/p117_persistence_placebo/", "results/p117_persistence_placebo/analyze_stdout.txt"),
+    "p117_posthoc_flat_days": ([PY, "experiments/p117_posthoc_flat_days.py"],
+                               "results/p117_persistence_placebo/posthoc_flat_days.csv", "results/p117_persistence_placebo/posthoc_flat_days_stdout.txt"),
+    # P118 goes here, before the ledger, once its run has finished and its document gives the commands (it was
+    # still running on 3 November 2026).
     "test_ledger": ([PY, "scripts/build_test_ledger.py"], "results/test_ledger.csv"),
     "number_trace": ([PY, "scripts/trace_numbers.py", "--quiet"], "results/number_trace/"),
 }
@@ -232,11 +247,12 @@ REGISTERED_RESULTS = {
     "P113_CONNECTEDNESS_SETTINGS": "p113_connectedness_settings",
     "P114_PERSISTENCE_FIXED_MODEL": "p114_persistence_fixed_model",
     "P116_BENCHMARK_AS_PRINTED": "p116_benchmark_as_printed",
+    "P117_PERSISTENCE_PLACEBO": "p117_persistence_placebo",
 }
 # Forward tests use data after 2 November 2026 and run with scripts/forward_test.py, not here.
 FORWARD_TESTS = ("FORWARD_TEST", "P112_FORWARD_MCSGARCH_FIXES")
 # Registered studies still running: their steps are added (above test_ledger) when they finish.
-PENDING = ("P117", "P118")
+PENDING = ("P118",)
 
 
 def study_steps() -> list[tuple[str, list[str], str, str | None]]:

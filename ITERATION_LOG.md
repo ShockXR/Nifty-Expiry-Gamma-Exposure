@@ -666,11 +666,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Both audits were done by AI agents. The full timed rerun of every step has not been done end to end (the steps were timed separately; stated total about 11.4 hours).
 * **NEXT ITERATION:** None planned before the meeting.
 
-## Iterations in progress (3 November 2026, about 18:00 IST)
+## Iteration 56: is the persistence fall larger than in windows without the expiry change? (registered plan, P117)
+
+* **OBJECTIVE:** Decide whether the paper's fall in intraday persistence is evidence that the expiry change made shocks die out faster.
+* **PROBLEM IDENTIFIED:** P114 found that the fall survives a better model on the inferred window, but also that this before window is the most persistent of 44 rolling Nifty windows. A fall that large could be an ordinary return from an unusually persistent period.
+* **HYPOTHESIS:** Registered before any placebo window, Fin Nifty model or test statistic was computed on real data (`docs/prereg/P117_PERSISTENCE_PLACEBO.md`, commit 27d39ba): the actual change in the log half-life of a 12:15 shock is lower (a larger fall) than the changes between placebo pairs of windows with the same lengths (64 and 59 days) and gap (258 trading days) that straddle neither Bank Nifty move; primary for Nifty under the reference mcsGARCH and P114's fixed model F, Holm over two; a decision rule (unusual, unclear, within the normal range, no verdict) fixed in advance; secondaries for Bank Nifty, other placebo sets, a conditional placebo and a difference-in-differences against Fin Nifty, whose expiry calendar did not change.
+* **CHANGES IMPLEMENTED:** `experiments/p117_persistence_placebo.py`, 1 post hoc descriptive script, synthetic tests. Run by an AI agent; results d584e4f, 76 minutes after the plan. Ledger adapter PERSPLAC; `scripts/reproduce_all.py` gained its six steps.
+* **EXPERIMENTS PERFORMED:** 10,524 window fits (5,404 for Nifty and 5,120 for Bank Nifty, both models) from 2018 to 2026, Fin Nifty fits with 400 bootstrap draws per key, 26 tests. About 61 minutes on one core.
+* **RESULTS:** (REAL DATA.) Verdict "the fall is within the normal range" under both models: for Nifty, 233 of 1,223 placebo pairs fall at least as far under the reference (359 to 72 minutes, p 0.191) and 128 under F (141 to 18 minutes, p 0.105), Holm 0.211; Bank Nifty the same (Holm 0.193). Under F the before window is at the 94.8th percentile of placebo before windows and the after window at the 19.4th. Given the before window, the after window is ordinary (S5) except for Bank Nifty under the reference model only. Fin Nifty fell as much (72 to 9 minutes under F), so no difference-in-differences row is "larger than the control's" (Holm 1.000). Post hoc: a flat-bar NSE outage day (24 February 2021) and pairs after March 2024 set much of Nifty's placebo range; Bank Nifty had falls as large in calendar-stable years. No row survives the project-wide correction.
+* **IMPROVEMENTS:** The documents now say that the persistence fall gives no evidence that the expiry change made shocks die out faster. Pitch, briefing, results summary, registry, paper, replication note and referee response updated. Ledger: 28,440 tests, 36 studies, 3,514 survive; trace 600 entries, 587 MATCH, no mismatch.
+* **REMAINING ISSUES:** Only three or four separate periods stand behind the placebo range, so the test has little power either way; one event; the reference model's half-life hits its bound in many windows.
+* **NEXT ITERATION:** None planned before the meeting.
+
+## Iterations in progress (3 November 2026, about 18:45 IST)
 
 * **Scoring the frozen forecast** for 3 November after the minute bars are published.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
-* **P117**, placebo windows for the persistence fall: does a window with no rule change show as large a fall? (plan 27d39ba, running)
 * **P118**, the identical hybrid built on mcsGARCH as the paper specifies it (plan 49d19ce, running).
+* **A timed rerun of every reproduce step** at commit 0de679b, in a separate copy of the repository (started 12:26 UTC).
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.

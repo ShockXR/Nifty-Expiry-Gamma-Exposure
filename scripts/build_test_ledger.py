@@ -187,6 +187,8 @@ STUDIES = {
                  "docs/P116_BENCHMARK_AS_PRINTED.md; docs/prereg/P116_BENCHMARK_AS_PRINTED.md"),
     "GAINSTRESS": ("P106's three claims stress-tested on Bank Nifty and Fin Nifty (P110)",
                    "docs/P110_GAIN_STRESS_TEST.md; docs/prereg/P110_GAIN_STRESS_TEST.md"),
+    "PERSPLAC": ("Is the paper's fall in intraday persistence larger than in placebo windows (P117)",
+                 "docs/P117_PERSISTENCE_PLACEBO.md; docs/prereg/P117_PERSISTENCE_PLACEBO.md"),
 }
 
 PREREG = {
@@ -205,6 +207,7 @@ PREREG = {
     "p114_persistence_fixed_model": ("docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md", "P114 registered plan"),
     "p116_benchmark_as_printed": ("docs/prereg/P116_BENCHMARK_AS_PRINTED.md", "P116 registered plan"),
     "p110_gain_stress_test": ("docs/prereg/P110_GAIN_STRESS_TEST.md", "P110 registered plan"),
+    "p117_persistence_placebo": ("docs/prereg/P117_PERSISTENCE_PLACEBO.md", "P117 registered plan"),
 }
 
 COLUMNS = [
@@ -2760,6 +2763,62 @@ def adapt_p110gainstress(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+P117_OUTCOME = ["tests.csv", "verdict.csv", "placebo_summary.csv", "placebo_pairs.csv", "windows_nifty.csv",
+                "windows_banknifty.csv", "did.csv", "control_fits.csv", "control_bootstrap_draws.csv"]
+
+
+def adapt_p117persplac(ctx: Ctx):
+    """P117: is the fall in intraday persistence larger than the changes between placebo windows
+    (docs/prereg/P117_PERSISTENCE_PLACEBO.md).
+
+    tests.csv: P (primary: Nifty, primary placebo set, reference mcsGARCH and the fixed model F, Holm over two),
+      S1 to S5 (secondary: Bank Nifty, the clean, literal and day-disjoint sets, the conditional placebo), D
+      (secondary: difference-in-differences against Fin Nifty) and E1 (exploratory: Fin Nifty's own change). The
+      placebo rows are one-sided rank p-values over placebo pairs of windows; the D and E1 rows are one-sided
+      bootstrap p-values. Every row is counted. The post hoc flat-day files add no p-value.
+    """
+    folder = "p117_persistence_placebo"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "PERSPLAC", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "PERSPLAC", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P117_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("PERSPLAC", f"P117 {tid}: {clean(r['hypothesis'])}", "change in the log half-life of a 12:15 "
+                "intraday volatility shock, before against after the expiry change, compared with placebo pairs of "
+                "windows or with Fin Nifty",
+                clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="share of placebo pairs at or below the actual, or bootstrap share (see p_method)",
+                statistic=r["statistic"], p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "PERSPLAC", folder, {
+        r"verdict\.csv|placebo_summary\.csv|placebo_pairs\.csv|windows_nifty\.csv|windows_banknifty\.csv|did\.csv|"
+        r"control_fits\.csv|control_bootstrap_draws\.csv|reproduction_p114_rolling\.csv|reproduction_p114_control\.csv":
+            "window fits, placebo pairs, the control fits and draws and the reproduction checks behind tests.csv; "
+            "no new p-value",
+        r"posthoc_.*\.csv": "post hoc descriptive tables (flat-bar days, bound windows, pairs by period); no p-value",
+    }, "run information, counts or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -4113,13 +4172,14 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET", "PERSFIX", "BENCHCPP", "GAINSTRESS"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET", "PERSFIX", "BENCHCPP", "GAINSTRESS",
+               "PERSPLAC"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
                  adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx,
                  adapt_p113connset, adapt_p114persfix, adapt_p116benchcpp,
-                 adapt_p110gainstress]
+                 adapt_p110gainstress, adapt_p117persplac]
 
 
 def headline18_check(ctx: Ctx):
@@ -4416,6 +4476,12 @@ RECON = [
              "hybrid beats mcsGARCH and is non-inferior to the full hybrid (primary F1 to F3, Holm).",
      [("F1 to F3, primary: two indices, 15 and 30 minutes", "GAINSTRESS", r"^tests\.csv\|F[123]_")],
      "Claim 1 survives on both indices; claim 2 is qualified (calendar adds a little); claim 3 partly survives."),
+    ("P117", "Nifty's fall in intraday persistence from the inferred before window to the after window is larger "
+             "than the changes between placebo pairs of windows that straddle neither Bank Nifty move (primary, "
+             "reference mcsGARCH and the fixed model F, Holm over two).",
+     [("P, primary: Nifty, primary placebo set, reference and F", "PERSPLAC", r"^tests\.csv\|P_")],
+     "Verdict 'the fall is within the normal range' under both models (placebo p 0.191 and 0.105, Holm 0.211); "
+     "Fin Nifty, whose expiry did not move, fell as much."),
 ]
 
 

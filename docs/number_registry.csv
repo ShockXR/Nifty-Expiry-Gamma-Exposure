@@ -43,7 +43,7 @@ PI63,PITCH_PANDEY.md,"(197 to 1,255 minutes)","1,255",,results/replication_nse/t
 PI64,PITCH_PANDEY.md,first-hour Nifty rows sum to 101,101,,results/replication_nse/paper_printed_checks.csv,csv:item=after nifty monthly_first_hour Nifty 50 row@value,
 PI65,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,223,,results/replication_nse/rekey_check.csv,csv:status=compared@#count,
 PI66,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,222,,results/replication_nse/rekey_check.csv,csv:match=yes@#count,
-PI67,PITCH_PANDEY.md,"Every one of the project's 28,414 hypothesis tests","28,414",,results/test_ledger.csv,csv:@#count,
+PI67,PITCH_PANDEY.md,"Every one of the project's 28,440 hypothesis tests","28,440",,results/test_ledger.csv,csv:@#count,
 PI68,PITCH_PANDEY.md,2 weeks |,2,,,UNTRACED,"a time estimate in the plan, not a result (the snippet covers both cells)"
 PI69,PITCH_PANDEY.md,Two independent searches of every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
 PI70,PITCH_PANDEY.md,a correction for having tried 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
@@ -281,11 +281,11 @@ PI92,PITCH_PANDEY.md,With 360 minutes a day,360,,,UNTRACED,"a setting of the rep
 PI93,PITCH_PANDEY.md,about 3 bp per 100 bp move,100,,,UNTRACED,"the size of the move the slope is scaled to, not a result"
 PI94,PITCH_PANDEY.md,closer to a 50-point strike,50,,,UNTRACED,"Nifty strike spacing, a contract term"
 PI95,PITCH_PANDEY.md,none of those results reaches 5% under,5,,,UNTRACED,"the significance level, not a result"
-PI96,PITCH_PANDEY.md,hypothesis tests (35 studies),35,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
-RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 28,414 hypothesis tests","28,414",,results/test_ledger.csv,csv:@#count,
-RD86,docs/REAL_DATA_RESULTS.md,hypothesis tests from 35 studies,35,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
+PI96,PITCH_PANDEY.md,hypothesis tests (36 studies),36,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
+RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 28,440 hypothesis tests","28,440",,results/test_ledger.csv,csv:@#count,
+RD86,docs/REAL_DATA_RESULTS.md,hypothesis tests from 36 studies,36,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
 RD87,docs/REAL_DATA_RESULTS.md,"3,514 survive","3,514",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
-BR25,docs/BRIEFING_PANDEY.md,"summarises all 28,414 statistical tests","28,414",,results/test_ledger.csv,csv:@#count,
+BR25,docs/BRIEFING_PANDEY.md,"summarises all 28,440 statistical tests","28,440",,results/test_ledger.csv,csv:@#count,
 PI97,PITCH_PANDEY.md,pay only about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 BR26,docs/BRIEFING_PANDEY.md,it is worth about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 RD88,docs/REAL_DATA_RESULTS.md,the hybrid beats mcsGARCH (one-sided p 8.1e-7),8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
@@ -360,8 +360,8 @@ PA70,PAPER,No GEX set helps under any sign rule (smallest Holm p 0.40),0.40,,res
 PA71,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",79,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 PA72,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",42,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Bank Nifty (P91 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 PA73,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",98,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@share_of_mcsgarch_squared_error,post hoc
-PA74,PAPER,"counts 28,414 tests across 35 studies","28,414",,results/test_ledger.csv,csv:@#count,ledger
-PA75,PAPER,"of which 8,276 have a raw p below 0.05","8,276",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
+PA74,PAPER,"counts 28,440 tests across 36 studies","28,440",,results/test_ledger.csv,csv:@#count,ledger
+PA75,PAPER,"of which 8,278 have a raw p below 0.05","8,278",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
 PA76,PAPER,"and 3,514 survive a Benjamini-Yekutieli correction","3,514",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,ledger
 PA77,PAPER,P104's primary tests survive (7.6e-10 and 1.1e-9),7.6e-10,,results/test_ledger.csv,csv:study=FNFC&role=primary@#min:p_by_project,"ledger, P104 H1, smaller of the two"
 PI105,PITCH_PANDEY.md,the gain over my version is 4.7% and 6.0%,4.7,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@pooled_change_pct,P107 P1
@@ -555,7 +555,7 @@ PI143,PITCH_PANDEY.md,with five sets of random seeds,five,,results/p110_gain_str
 PA140,PAPER,survive (3.5e-8 and 9.1e-14),3.5e-8,,results/test_ledger.csv,csv:test_id=BENCHCPP-0001@p_by_project,P116 H1 15 min BY
 PA141,PAPER,survive (3.5e-8 and 9.1e-14),9.1e-14,,results/test_ledger.csv,csv:test_id=BENCHCPP-0019@p_by_project,P116 H1 30 min BY
 PA142,PAPER,do not (0.18 and 0.73),0.18,,results/test_ledger.csv,csv:test_id=BENCHCPP-0002@p_by_project,P116 H2 15 min BY
-PA143,PAPER,do not (0.18 and 0.73),0.73,,results/test_ledger.csv,csv:test_id=BENCHCPP-0020@p_by_project,P116 H2 30 min BY
+PA143,PAPER,do not (0.18 and 0.74),0.74,,results/test_ledger.csv,csv:test_id=BENCHCPP-0020@p_by_project,P116 H2 30 min BY
 PA144,PAPER,the hybrid's gain is 4.43% and 6.64%,4.43,,results/p116_benchmark_as_printed/verdict.csv,csv:index=NIFTY@hybrid_gain_vs_mcs_cpp_pct_next15,P116
 PA145,PAPER,the hybrid's gain is 4.43% and 6.64%,6.64,,results/p116_benchmark_as_printed/verdict.csv,csv:index=NIFTY@hybrid_gain_vs_mcs_cpp_pct_next30,P116
 PI144,PITCH_PANDEY.md,using 41 inputs (recent realized volatility,41,,,,"UNTRACED: count of the hybrid inputs, P106 Section 2 (five groups cover all 41 inputs)"
@@ -574,3 +574,28 @@ PI156,PITCH_PANDEY.md,the Tuesday last hour from +43% to +63%,63,,results/refere
 PI157,PITCH_PANDEY.md,just misses 5% (p 0.054),5,,,,UNTRACED: the conventional 5% significance level
 PI158,PITCH_PANDEY.md,(about 2 hours 20 minutes on one core when it was timed),2,,,,"UNTRACED: wall-clock time of the timed full run, docs/REPRODUCIBILITY.md"
 PI159,PITCH_PANDEY.md,(about 2 hours 20 minutes on one core when it was timed),20,,,,"UNTRACED: wall-clock time of the timed full run, docs/REPRODUCIBILITY.md"
+PI160,PITCH_PANDEY.md,"Against 1,223 pairs of windows with the same lengths and the same gap","1,223",,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@n_pairs,P117 Nifty primary placebo pairs
+PI161,PITCH_PANDEY.md,"placebo p 0.19 under the model of your Table 2 and 0.11 under the fixed model, 0.21 after correcting for the two",0.19,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_ref@p_raw,"P117 primary, reference"
+PI162,PITCH_PANDEY.md,"placebo p 0.19 under the model of your Table 2 and 0.11 under the fixed model, 0.21 after correcting for the two",0.11,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_F@p_raw,"P117 primary, fixed model"
+PI163,PITCH_PANDEY.md,"placebo p 0.19 under the model of your Table 2 and 0.11 under the fixed model, 0.21 after correcting for the two",0.21,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_F@p_adjusted,"P117 primary, Holm over two"
+PI164,PITCH_PANDEY.md,(95th percentile of comparable windows under the fixed model),95,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@rank_before_actual_pct,P117 rank of the actual before window (94.8)
+BR41,docs/BRIEFING_PANDEY.md,"compared the fall with 1,223 pairs of windows","1,223",,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@n_pairs,P117 Nifty primary placebo pairs
+BR42,docs/BRIEFING_PANDEY.md,Nifty placebo p 0.19 under the paper's model,0.19,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_ref@p_raw,"P117 primary, reference"
+BR43,docs/BRIEFING_PANDEY.md,and 0.11 under the fixed one,0.11,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_F@p_raw,"P117 primary, fixed model"
+BR44,docs/BRIEFING_PANDEY.md,0.21 after correcting for the two,0.21,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_F@p_adjusted,"P117 primary, Holm over two"
+RD174,docs/REAL_DATA_RESULTS.md,"that straddles neither Bank Nifty move (1,223 pairs for Nifty)","1,223",,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@n_pairs,P117
+RD175,docs/REAL_DATA_RESULTS.md,the reference mcsGARCH (359 to 72 minutes,359,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=ref&set=primary@hl_before_actual,P117
+RD176,docs/REAL_DATA_RESULTS.md,the reference mcsGARCH (359 to 72 minutes,72,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=ref&set=primary@hl_after_actual,P117
+RD177,docs/REAL_DATA_RESULTS.md,"233 pairs fall at least as far, placebo p 0.191",233,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=ref&set=primary@k_at_or_below,P117
+RD178,docs/REAL_DATA_RESULTS.md,"233 pairs fall at least as far, placebo p 0.191",0.191,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_ref@p_raw,P117
+RD179,docs/REAL_DATA_RESULTS.md,"the fixed model (141 to 18 minutes, 128 pairs, p 0.105)",141,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@hl_before_actual,P117
+RD180,docs/REAL_DATA_RESULTS.md,"the fixed model (141 to 18 minutes, 128 pairs, p 0.105)",18,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@hl_after_actual,P117
+RD181,docs/REAL_DATA_RESULTS.md,"the fixed model (141 to 18 minutes, 128 pairs, p 0.105)",128,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@k_at_or_below,P117
+RD182,docs/REAL_DATA_RESULTS.md,"the fixed model (141 to 18 minutes, 128 pairs, p 0.105)",0.105,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_F@p_raw,P117
+RD183,docs/REAL_DATA_RESULTS.md,Holm 0.211 for both,0.211,,results/p117_persistence_placebo/tests.csv,csv:test_id=P_nifty_primary_ref@p_adjusted,P117
+RD184,docs/REAL_DATA_RESULTS.md,Bank Nifty the same (Holm 0.193),0.193,,results/p117_persistence_placebo/tests.csv,csv:test_id=S1_banknifty_primary_F@p_adjusted,P117
+RD185,docs/REAL_DATA_RESULTS.md,at the 94.8th percentile of placebo before windows,94.8,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@rank_before_actual_pct,P117
+RD186,docs/REAL_DATA_RESULTS.md,the after window at the 19.4th,19.4,,results/p117_persistence_placebo/placebo_summary.csv,csv:index=nifty&model=F&set=primary@rank_after_actual_pct,P117
+RD187,docs/REAL_DATA_RESULTS.md,(72 to 9 minutes under the fixed model),72,,results/p117_persistence_placebo/did.csv,csv:treated=nifty&model=F@hl_before_control,P117 Fin Nifty before
+RD188,docs/REAL_DATA_RESULTS.md,(72 to 9 minutes under the fixed model),9,,results/p117_persistence_placebo/did.csv,csv:treated=nifty&model=F@hl_after_control,P117 Fin Nifty after
+RD189,docs/REAL_DATA_RESULTS.md,"""not clearly larger than the control's"" (Holm 1.000)",1.000,,results/p117_persistence_placebo/tests.csv,csv:test_id=D_nifty_F_did@p_adjusted,P117 DiD Holm
