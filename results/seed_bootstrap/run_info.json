@@ -1,0 +1,243 @@
+{
+  "source": "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute Nifty bars validated against NSE daily values",
+  "study": "P99 seed bootstrap of hybrid_base (docs/prereg/P99_SEED_BOOTSTRAP.md)",
+  "plan_commit": "64c6151314bd532162a54219069d08a2e4597cb3",
+  "analysis_commit": "64c6151314bd532162a54219069d08a2e4597cb3",
+  "commands": [
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/seed_bootstrap.py run --raw data/raw --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/seed_bootstrap.py analyze"
+  ],
+  "headline_run": "results/pipeline_nse_v2",
+  "end": "2026-11-02",
+  "days": [
+    "2023-01-02",
+    "2026-11-02",
+    942
+  ],
+  "models_fitted": [
+    "mcsgarch",
+    "hybrid_base",
+    "(internal) mcsgarch_iv, for two hybrid features"
+  ],
+  "pipeline_settings": {
+    "source": "nse",
+    "symbol": "NIFTY",
+    "start": "2023-01-01",
+    "min_coverage": 0.95,
+    "rate": 0.065,
+    "oi_unit": "keep_units",
+    "lot_size": null,
+    "tune": false,
+    "tune_every": 3,
+    "n_seeds": 5,
+    "seed": 7,
+    "min_train": 150,
+    "block": 21,
+    "mcs_refit_every": 21,
+    "holdout_start": "2025-07-01"
+  },
+  "headline_seed": 7,
+  "new_base_seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120
+  ],
+  "lgbm_seeds": {
+    "7": [
+      7,
+      1007,
+      2007,
+      3007,
+      4007
+    ],
+    "101": [
+      101,
+      1101,
+      2101,
+      3101,
+      4101
+    ],
+    "102": [
+      102,
+      1102,
+      2102,
+      3102,
+      4102
+    ],
+    "103": [
+      103,
+      1103,
+      2103,
+      3103,
+      4103
+    ],
+    "104": [
+      104,
+      1104,
+      2104,
+      3104,
+      4104
+    ],
+    "105": [
+      105,
+      1105,
+      2105,
+      3105,
+      4105
+    ],
+    "106": [
+      106,
+      1106,
+      2106,
+      3106,
+      4106
+    ],
+    "107": [
+      107,
+      1107,
+      2107,
+      3107,
+      4107
+    ],
+    "108": [
+      108,
+      1108,
+      2108,
+      3108,
+      4108
+    ],
+    "109": [
+      109,
+      1109,
+      2109,
+      3109,
+      4109
+    ],
+    "110": [
+      110,
+      1110,
+      2110,
+      3110,
+      4110
+    ],
+    "111": [
+      111,
+      1111,
+      2111,
+      3111,
+      4111
+    ],
+    "112": [
+      112,
+      1112,
+      2112,
+      3112,
+      4112
+    ],
+    "113": [
+      113,
+      1113,
+      2113,
+      3113,
+      4113
+    ],
+    "114": [
+      114,
+      1114,
+      2114,
+      3114,
+      4114
+    ],
+    "115": [
+      115,
+      1115,
+      2115,
+      3115,
+      4115
+    ],
+    "116": [
+      116,
+      1116,
+      2116,
+      3116,
+      4116
+    ],
+    "117": [
+      117,
+      1117,
+      2117,
+      3117,
+      4117
+    ],
+    "118": [
+      118,
+      1118,
+      2118,
+      3118,
+      4118
+    ],
+    "119": [
+      119,
+      1119,
+      2119,
+      3119,
+      4119
+    ],
+    "120": [
+      120,
+      1120,
+      2120,
+      3120,
+      4120
+    ]
+  },
+  "seed_note": "the base seed also seeds the tuning pass that picks the number of boosting rounds",
+  "subsets": [
+    "all",
+    "expiry",
+    "pre_auction",
+    "holdout"
+  ],
+  "registered_subsets": [
+    "all",
+    "expiry"
+  ],
+  "alpha": 0.05,
+  "bootstrap": {
+    "reps": 10000,
+    "mean_block_days": 10.0,
+    "sensitivity_blocks": [
+      5.0,
+      20.0
+    ],
+    "rng": "numpy default_rng([99, target index, subset index, block index])",
+    "draw": "stationary bootstrap of days and one of the K ensembles drawn uniformly per draw"
+  },
+  "dm_test": "HAC (Newey-West) on daily average losses, Harvey-Leybourne-Newbold correction, Student t(n-1)",
+  "seconds_stage1_jobs": 8025.599999999999,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "lightgbm": "4.7.0",
+    "arch": "8.0.0",
+    "scipy": "1.18.1"
+  }
+}

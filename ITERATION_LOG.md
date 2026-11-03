@@ -498,9 +498,20 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The timed run predates the steps added for P96, P91 and the referee analyses (each was run on the same data when written). P99 seed bootstrap still running.
 * **NEXT ITERATION:** Refresh the ledger numbers in the private working paper and replication note; score the frozen 3 November forecast after the close.
 
+## Iteration 42: does the forecasting headline survive other LightGBM seeds? (registered plan, P99)
+
+* **OBJECTIVE:** Close the referee's estimation-noise item (`docs/REFEREE_RESPONSE_FORECAST.md`, M4.3) with the seed bootstrap that was only costed there, not run.
+* **PROBLEM IDENTIFIED:** The headline DM p-values treat one fitted hybrid as fixed; seed noise had been measured from three single-seed runs at 30 minutes only and added to the DM variance as an assumption.
+* **HYPOTHESIS:** The headline holds if every one of 20 new 5-seed ensembles beats mcsGARCH with one-sided DM p below 0.05 at 15 and 30 minutes on all days (registered rule); S1 to S3 secondary (a bootstrap over days and seeds, the last hour, expiry days).
+* **CHANGES IMPLEMENTED:** `experiments/seed_bootstrap.py` (reuses the pipeline's loader, `run_walkforward`, `diebold_mariano` and the SPA's stationary bootstrap; no pipeline default changed), `tests/test_seed_bootstrap.py` (12 tests, synthetic only). Plan committed and pushed first (`docs/prereg/P99_SEED_BOOTSTRAP.md`, commit 64c6151). Results in `results/seed_bootstrap/`, write-up `docs/SEED_BOOTSTRAP.md`.
+* **EXPERIMENTS PERFORMED:** 63 walk-forwards (base seeds 7 and 101 to 120, three targets; 71 minutes on 2 cores) on the v2 data; the headline seed reproduces the committed forecasts bit for bit and mcsGARCH is identical in all 21 runs.
+* **RESULTS:** (REAL DATA.) Holds. All 20 ensembles: 5.64% to 5.92% better at 15 minutes (largest p 1.1e-8), 7.76% to 8.11% at 30 minutes (largest p 1.8e-13); seed bootstrap p below 0.001 at both; the headline's 7.65% at 30 minutes is the smallest gain of all 21 seed sets. Last hour holds on all days (largest p 0.00043) but is weakened on expiry days (19 of 20 below 0.05, worst p 0.052, median 0.026; the headline's 0.0097 was the most favourable of 21; bootstrap p 0.023). Seed noise SD 0.075 to 0.244 points on all days, about a tenth of the DM standard error. No deviation from the plan; one post hoc comparison file (`m43_comparison.csv`).
+* **IMPROVEMENTS:** The 15- and 30-minute claim no longer rests on one set of seeds; the last-hour expiry p of 0.010 should be quoted as "0.015 to 0.052 across seeds".
+* **REMAINING ISSUES:** Refit dates, hyperparameters and the model choice are held fixed, so this is a lower bound on estimation noise.
+* **NEXT ITERATION:** Fold the seed range into the referee response (M4.3) and the working paper.
+
 ## Iterations in progress (3 November 2026, about 09:00 IST)
 
-* **P99, a seed bootstrap of the forecasting hybrid** (registered plan): 20 independent LightGBM seed ensembles, closing the referee's estimation-noise item.
 * **P103, the economic value of the forecasting gain** (registered plan): realized utility of a volatility-targeting investor (Bollerslev, Hood, Huss and Pedersen 2018) and a vol-targeted Nifty position after costs, with a Deflated Sharpe Ratio. A straddle rule was ruled out: NSE publishes no intraday option prices.
 * **P104, a third index** for the hybrid: first a check whether free one-minute bars for Fin Nifty or Midcap Select pass the same validation as Nifty's; Sensex is ruled out because BSE option chains cannot be downloaded here. Run under a registered plan only if the data pass.
 * **A clean-clone audit**: a fresh clone of a3a84c7 has no PDF, private draft or credential in the tree or the history, and its 512 tests give 508 passed and 4 skipped (raw Bank Nifty data absent).

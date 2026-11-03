@@ -260,3 +260,15 @@ def test_verdict_and_summary():
     r = s.loc[("next30", "all")]
     assert r["K"] == 20 and r["margin_max"] == 0.2 and r["dm_p_max"] == 0.7 and r["worst_seed_by_margin"] == 120
     assert r["n_p_below_alpha"] == 19 and r["headline_margin"] == -6.0 and r["headline_rank_among_new_by_margin"] == 1
+
+
+def test_m43_comparison_places_the_measured_spread_beside_the_assumptions():
+    summ = pd.DataFrame({"target": ["next15", "next30"], "subset": ["all", "expiry"], "days": [100, 20],
+                         "margin_sd": [0.1, 0.3]})
+    adj = pd.DataFrame({"target": ["next30", "next15"], "subset": ["expiry", "all"], "dm_se_pp": [3.0, 1.0],
+                        **{col: [0.5, 0.2] for col in sb.M43_SCENARIOS.values()}})
+    out = sb.m43_comparison(summ, adj).set_index(["target", "subset"])
+    assert out.loc[("next15", "all"), "measured_sd_20_reruns"] == 0.1
+    assert out.loc[("next15", "all"), "measured_sd_over_dm_se"] == pytest.approx(0.1)
+    assert out.loc[("next30", "expiry"), "measured_sd_over_dm_se"] == pytest.approx(0.1)
+    assert out.loc[("next30", "expiry"), "pessimistic_sd_scaled"] == 0.5

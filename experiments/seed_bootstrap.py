@@ -17,7 +17,8 @@ Two stages:
     PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/seed_bootstrap.py analyze \
         > results/seed_bootstrap/analyze_stdout.txt 2>&1
 
-``check`` compares the work files of the headline base seed (7) with the committed v2 forecasts and
+``context`` (POST HOC, added after the results were seen) writes m43_comparison.csv: the measured seed
+noise beside the values assumed in the referee response (no new loss). ``check`` compares the work files of the headline base seed (7) with the committed v2 forecasts and
 computes no loss (it was used before the plan was committed). Per-job forecasts go to --work
 (default data/processed/seed_bootstrap, git-ignored); a finished job is not rerun. The analysis
 writes results/seed_bootstrap/*.csv and run_info.json. Tests: tests/test_seed_bootstrap.py
@@ -511,10 +512,42 @@ def stage_analyze(a):
     print(f"\nwritten to {out} ({time.time() - t0:.0f}s)")
 
 
+# ---------------------------------------------------------------------------
+# Post hoc (added after the results): the measured seed noise beside the referee response's assumptions
+# ---------------------------------------------------------------------------
+
+M43_SCENARIOS = {"assumed_sd_5seed_average": "extra_sd_pp[seed SD next30 pooled, 5-seed average]",
+                 "assumed_sd_one_seed": "extra_sd_pp[seed SD next30 pooled, as one seed]",
+                 "pessimistic_sd_one_seed": "extra_sd_pp[seed SD next30 95% upper bound, as one seed]",
+                 "pessimistic_sd_scaled": "extra_sd_pp[next30 upper bound scaled by sqrt(anchors), as one seed]"}
+
+
+def m43_comparison(summary: pd.DataFrame, adjusted: pd.DataFrame) -> pd.DataFrame:
+    """POST HOC. The SD of the margin over the 20 reruns next to the headline's DM standard error and
+    the seed-noise values assumed in docs/REFEREE_RESPONSE_FORECAST.md M4.3 (seed_adjusted_dm.csv);
+    all in percentage points of mcsGARCH's QLIKE. No new loss is computed."""
+    a = adjusted.rename(columns={v: k for k, v in M43_SCENARIOS.items()})
+    out = summary[["target", "subset", "days", "margin_sd"]].rename(columns={"margin_sd": "measured_sd_20_reruns"})
+    out = out.merge(a[["target", "subset", "dm_se_pp", *M43_SCENARIOS]], on=["target", "subset"], how="left")
+    out["measured_sd_over_dm_se"] = out["measured_sd_20_reruns"] / out["dm_se_pp"]
+    return out
+
+
+def stage_context(a):
+    out = Path(a.out)
+    summ = pd.read_csv(out / "summary.csv")
+    adj = pd.read_csv(ROOT / "results" / "referee_forecast" / "seed_adjusted_dm.csv")
+    res = m43_comparison(summ, adj)
+    res.to_csv(out / "m43_comparison.csv", index=False)
+    print("[REAL DATA] POST HOC: measured seed noise (20 reruns) against the M4.3 assumptions, "
+          "points of mcsGARCH's QLIKE")
+    print(res.to_string(index=False))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="stage", required=True)
-    for name in ("run", "check", "analyze"):
+    for name in ("run", "check", "analyze", "context"):
         p = sub.add_parser(name)
         p.add_argument("--work", default=str(ROOT / "data" / "processed" / "seed_bootstrap"))
         p.add_argument("--targets", nargs="+", default=TARGETS)
@@ -523,8 +556,9 @@ def main(argv=None):
             p.add_argument("--end", default=END)
             p.add_argument("--seeds", nargs="+", type=int, default=[HEADLINE_SEED] + NEW_SEEDS)
             p.add_argument("--workers", type=int, default=2)
-        if name == "analyze":
+        if name in ("analyze", "context"):
             p.add_argument("--out", default=str(ROOT / "results" / "seed_bootstrap"))
+        if name == "analyze":
             p.add_argument("--reps", type=int, default=REPS)
             p.add_argument("--plan-commit", default=None)
     a = ap.parse_args(argv)
@@ -532,6 +566,8 @@ def main(argv=None):
         stage_run(a)
     elif a.stage == "check":
         stage_check(a)
+    elif a.stage == "context":
+        stage_context(a)
     else:
         stage_analyze(a)
 
