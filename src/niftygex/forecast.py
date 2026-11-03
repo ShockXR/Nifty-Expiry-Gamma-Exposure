@@ -24,6 +24,9 @@ Models (simplest first; each must beat the ones above it to earn its place):
                     sizes, re-tuned every ``tune_every`` blocks)
     hybrid_<set>    mcsGARCH x exp(LightGBM on the log residual)
     hybridiv_<set>  mcsgarch_iv x exp(LightGBM on the log residual)
+    hybridalt_<set> mcsgarch_alt x exp(LightGBM on the log residual), with log(mcsgarch_alt)
+                    in place of log_mcs among the inputs (study P118; needs cfg.alt_base)
+    mcsgarch_alt    a second mcsGARCH with the settings cfg.alt_base (study P118)
 
 Feature sets (the part after the first underscore):
 
@@ -55,13 +58,14 @@ import pandas as pd
 
 from .evaluation import qlike
 from .features import BASE_FEATURES, BASE_FEATURES_V1, GEX_FEATURES
-from .volatility import McsGarch, daily_egarch_variance
+from .volatility import McsGarch, arma11_mean_square_forecast, daily_egarch_variance
 
 ALL_MODELS = ["naive_last", "naive_prevday", "vix", "implied", "har", "mcsgarch", "mcsgarch_iv",
               "linear_base", "lgbm_base", "lgbm_gex", "hybrid_base", "hybrid_gex"]
 
 HAR_COLS = ["log_rv_back_h", "log_rv_back_60", "log_rv_today_pm", "log_rv_d1", "log_rv_w", "log_rv_m", "log_s_window"]
-LEARNED_KINDS = ("lgbm", "lgbmt", "hybrid", "hybridiv", "linear")
+# "hybridalt" (study P118) only matches names that start with "hybridalt_", so no existing name changes kind.
+LEARNED_KINDS = ("lgbm", "lgbmt", "hybrid", "hybridiv", "hybridalt", "linear")
 CATEGORICAL_LEVELS = {"regime": [1, 2], "weekday": [1, 2, 3, 4]}
 
 
@@ -94,6 +98,19 @@ class WalkForwardConfig:
     # set (with its extra columns) minus drop_sets[name], in the same order. Empty by default, so no
     # existing model or result changes.
     drop_sets: dict = field(default_factory=dict)
+    # Study P118 (docs/prereg/P118_HYBRID_ON_PAPER_MCSGARCH.md). The defaults ("zero", None) run exactly the
+    # committed code, so no existing model or result changes.
+    # mcs_mean: intraday mean of every McsGarch fitted here (mcsgarch, mcsgarch_iv, mcsgarch_r63). "zero" is the
+    #   committed choice; any other mean adds the model's expected squared conditional mean over the window
+    #   (volatility.arma11_mean_square_forecast) to each forecast, so the forecast is the model's expectation of y.
+    mcs_mean: str = "zero"
+    # alt_base: keyword arguments of a second McsGarch (for example the paper's specification, mean="arma11",
+    #   dist="t", expiry_diurnal=False, smooth=1), refitted on the same days and the same daily level h as
+    #   mcsgarch. Its forecast of y (variance part plus expected squared conditional mean) is the column
+    #   "mcsgarch_alt", and model "hybridalt_<set>" is hybrid_<set> with log(mcsgarch_alt) in place of log_mcs,
+    #   both as the multiplicative base and as the input in the same column position. Every other input
+    #   (log_s_window, log_mcs_iv, log_implied_window, ...) is unchanged.
+    alt_base: dict | None = None
 
 
 def parse_model(name: str):
@@ -280,44 +297,68 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
     out = []
     info = {"mcs_params": [], "mcs_iv_params": [], "mcs_slow_params": [], "hyper": [], "importance": [],
             "linear_coef": [], "timing": []}
-    mcs = mcs_iv = mcs_slow = None
+    mcs = mcs_iv = mcs_slow = mcs_alt = None
     h = h_slow = None
     last_refit = last_slow = -10**9
     want_slow = "mcsgarch_r63" in cfg.models
+    want_alt = cfg.alt_base is not None                   # study P118; False by default
+    if not want_alt and any(m == "mcsgarch_alt" or parse_model(m)[0] == "hybridalt" for m in cfg.models):
+        raise ValueError("mcsgarch_alt and hybridalt_<set> need cfg.alt_base")
+    mean_sq = cfg.mcs_mean != "zero"                      # study P118; False by default
+
+    def _mcs_forecast(model, filt_m, h_m, tt_, ii_, hh_):
+        """The model's forecast of y: the variance part, plus the expected squared conditional mean when the
+        mean is not zero (the committed models have a zero mean, so their forecasts are forecast_variance)."""
+        f = model.forecast_variance(filt_m, h_m, tt_, ii_, hh_)
+        if model.mean != "zero":
+            f = f + arma11_mean_square_forecast(model, R, filt_m, h_m, tt_, ii_, hh_)
+        return f
+
     tuned: dict = {}
     for b_idx, start in enumerate(range(cfg.min_train, T, cfg.block)):
         t_block = time.time()
         end = min(start + cfg.block, T)
         if start - last_refit >= cfg.mcs_refit_every or mcs is None:
             h, hinfo = daily_egarch_variance(daily, train_size=start)
-            mcs = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth)
+            mcs = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth, mean=cfg.mcs_mean)
             mcs.fit(R[:start], h[:start], is_exp[:start])
             info["mcs_params"].append({"start": start, "daily_method": hinfo["method"],
                                        **{k: v for k, v in mcs.params.items() if k != "tstats"}})
             if want_iv:
-                mcs_iv = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth)
+                mcs_iv = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth, mean=cfg.mcs_mean)
                 mcs_iv.fit(R[:start], h_iv[:start], is_exp[:start])
                 info["mcs_iv_params"].append({"start": start, **{k: v for k, v in mcs_iv.params.items() if k != "tstats"}})
+            if want_alt:
+                mcs_alt = McsGarch(**cfg.alt_base)
+                mcs_alt.fit(R[:start], h[:start], is_exp[:start])
+                info.setdefault("mcs_alt_params", []).append(
+                    {"start": start, **{k: v for k, v in mcs_alt.params.items() if k != "tstats"},
+                     **{f"mean_{k}": v for k, v in mcs_alt.mean_params.items()}})
             last_refit = start
         if want_slow and (start - last_slow >= cfg.mcs_slow_refit_every or mcs_slow is None):
             h_slow, _ = daily_egarch_variance(daily, train_size=start)
-            mcs_slow = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth)
+            mcs_slow = McsGarch(expiry_diurnal=cfg.expiry_diurnal, smooth=cfg.diurnal_smooth, mean=cfg.mcs_mean)
             mcs_slow.fit(R[:start], h_slow[:start], is_exp[:start])
             info["mcs_slow_params"].append({"start": start, **{k: v for k, v in mcs_slow.params.items() if k != "tstats"}})
             last_slow = start
         filt = mcs.filter(R, h, is_exp)
         d = data[data["t"] < end].copy()
         tt, ii, hh = d["t"].to_numpy(), d["minute"].to_numpy(), d["horizon"].to_numpy()
-        d["mcs"] = mcs.forecast_variance(filt, h, tt, ii, hh)
+        d["mcs"] = _mcs_forecast(mcs, filt, h, tt, ii, hh) if mean_sq else mcs.forecast_variance(filt, h, tt, ii, hh)
         S = filt["S"]
         cS = np.concatenate([np.zeros((T, 1)), np.cumsum(S, axis=1)], axis=1)
         d["log_s_window"] = np.log(cS[tt, ii + hh] - cS[tt, ii])
         d["s_share"] = (cS[tt, ii + hh] - cS[tt, ii]) / cS[tt, M]
         d["log_mcs"] = np.log(d["mcs"])
         extra_v2 = ["log_mcs", "log_s_window"]
+        if want_alt:
+            filt_alt = mcs_alt.filter(R, h, is_exp)
+            d["mcs_alt"] = _mcs_forecast(mcs_alt, filt_alt, h, tt, ii, hh)
+            d["log_mcs_alt"] = np.log(d["mcs_alt"])
         if want_iv:
             filt_iv = mcs_iv.filter(R, h_iv, is_exp)
-            d["mcs_iv"] = mcs_iv.forecast_variance(filt_iv, h_iv, tt, ii, hh)
+            d["mcs_iv"] = (_mcs_forecast(mcs_iv, filt_iv, h_iv, tt, ii, hh) if mean_sq
+                           else mcs_iv.forecast_variance(filt_iv, h_iv, tt, ii, hh))
             d["log_mcs_iv"] = np.log(d["mcs_iv"])
             d["log_implied_window"] = d["log_impvar_day"] + np.log(d["s_share"])
             extra_v2 = extra_v2 + ["log_mcs_iv", "log_implied_window"]
@@ -347,10 +388,16 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
         b, res = _ols(tr[HAR_COLS].to_numpy(), ly_tr)
         te["har"] = np.exp(np.column_stack([np.ones(len(te)), te[HAR_COLS].to_numpy()]) @ b) * _smear_fit(res)
         te["mcsgarch"] = te["mcs"]
+        if want_alt:
+            te["mcsgarch_alt"] = te["mcs_alt"]
         if want_slow:
             filt_s = mcs_slow.filter(R, h_slow, is_exp)
-            te["mcsgarch_r63"] = mcs_slow.forecast_variance(filt_s, h_slow, te["t"].to_numpy(), te["minute"].to_numpy(),
-                                                             te["horizon"].to_numpy())
+            if mean_sq:
+                te["mcsgarch_r63"] = _mcs_forecast(mcs_slow, filt_s, h_slow, te["t"].to_numpy(), te["minute"].to_numpy(),
+                                                   te["horizon"].to_numpy())
+            else:
+                te["mcsgarch_r63"] = mcs_slow.forecast_variance(filt_s, h_slow, te["t"].to_numpy(), te["minute"].to_numpy(),
+                                                                 te["horizon"].to_numpy())
 
         for name in cfg.models:
             kind, rest = parse_model(name)
@@ -360,7 +407,9 @@ def run_walkforward(market: dict, data: pd.DataFrame, cfg: WalkForwardConfig | N
                 continue
             cols = model_columns(rest, cfg, extra_v2 if want_iv else ["log_mcs", "log_s_window"], ["log_mcs", "log_s_window"])
             cols = [c for c in cols if c in d.columns]
-            offset = {"hybrid": "log_mcs", "hybridiv": "log_mcs_iv"}.get(kind)
+            if kind == "hybridalt":     # study P118: the second mcsGARCH's forecast replaces log_mcs, same position
+                cols = ["log_mcs_alt" if c == "log_mcs" else c for c in cols]
+            offset = {"hybrid": "log_mcs", "hybridiv": "log_mcs_iv", "hybridalt": "log_mcs_alt"}.get(kind)
             ytr = ly_tr - (tr[offset].to_numpy() if offset else 0)
             base = te[offset].to_numpy() if offset else 0
             if kind == "linear":
