@@ -1,0 +1,50 @@
+{
+  "day": "2026-11-03",
+  "label": "REAL DATA, live demonstration (n = 1, not evidence)",
+  "minute_bars": 375,
+  "rv_day": {
+    "realized": 3.59454843497292e-05,
+    "forecast": 5.551346767486438e-05,
+    "p10": 2.692228932784042e-05,
+    "p90": 8.59550232874337e-05,
+    "inside_80pct_interval": true,
+    "qlike": 0.08213144459222699
+  },
+  "rv_last_hour": {
+    "realized": 1.3565314018547276e-05,
+    "forecast": 1.3339395412852328e-05,
+    "p10": 4.680611985492719e-06,
+    "p90": 2.2222982139790883e-05,
+    "inside_80pct_interval": true,
+    "qlike": 0.00014181835287208067
+  },
+  "rule_1430": {
+    "forecast": 9.972830727247117e-06,
+    "p10": 4.206362532654395e-06,
+    "p90": 1.650827244532576e-05,
+    "rv_to_1430": 2.2380170331181925e-05,
+    "realized_last_hour": 1.3565314018547276e-05,
+    "inside_80pct_interval": true,
+    "qlike": 0.052575412955662815
+  },
+  "option_market": {
+    "expected_abs_move_points": 152.1,
+    "actual_abs_move_points": 460.84999999999854,
+    "measured_from": "the at-the-money strike of the frozen straddle",
+    "realized_close_to_close_variance": 0.0002453378807460247
+  },
+  "rule_r5": {
+    "rest_of_day_bp": 108.15503261441475,
+    "predicted_last30_bp": 1.0021254740311294,
+    "actual_last30_bp": 48.477620668999855,
+    "same_sign": true
+  },
+  "pinning": {
+    "official_close": 23810.85,
+    "nearest_50pt_strike": 23800,
+    "distance_points": 10.849999999998545,
+    "within_5_points": false,
+    "distance_to_max_oi_strike": 810.8499999999985,
+    "distance_to_max_pain": 560.8499999999985
+  }
+}
