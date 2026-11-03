@@ -1,0 +1,73 @@
+id,page,table,row,column,window,index,printed,value,decimals,role,note
+T1_B_N_mean,5,Table 1,Mean,Before / Nifty 50 Return,before,nifty,-0.000001,-0.000001,6,score,the paper prints the minus signs in the before columns as a typographic minus (U+2212); written here as an ASCII minus
+T1_B_N_sd,5,Table 1,StDev,Before / Nifty 50 Return,before,nifty,0.000360947,0.000360947,9,score,
+T1_B_N_min,5,Table 1,Minimum,Before / Nifty 50 Return,before,nifty,-0.008584649,-0.008584649,9,score,
+T1_B_N_max,5,Table 1,Maximum,Before / Nifty 50 Return,before,nifty,0.006221108,0.006221108,9,score,
+T1_B_N_skew,5,Table 1,Skewness,Before / Nifty 50 Return,before,nifty,-0.524960403,-0.524960403,9,score,formula (bias correction) not stated
+T1_B_N_kurt,5,Table 1,Kurtosis,Before / Nifty 50 Return,before,nifty,64.74526352,64.74526352,8,score,not stated whether excess or raw kurtosis
+T1_B_N_n,5,Table 1,N,Before / Nifty 50 Return,before,nifty,"23,039",23039,0,score,number of one-minute returns
+T1_B_N_ad,5,Table 1,Anderson-Darling,Before / Nifty 50 Return,before,nifty,649.191***,649.191,3,stage2,
+T1_B_N_adf,5,Table 1,ADF,Before / Nifty 50 Return,before,nifty,-23.05000***,-23.05,5,report,lag choice and deterministic terms not stated
+T1_B_B_mean,5,Table 1,Mean,Before / Nifty Bank Return,before,bank,-0.000002,-0.000002,6,score,
+T1_B_B_sd,5,Table 1,StDev,Before / Nifty Bank Return,before,bank,0.000522211,0.000522211,9,score,
+T1_B_B_min,5,Table 1,Minimum,Before / Nifty Bank Return,before,bank,-0.017256735,-0.017256735,9,score,
+T1_B_B_max,5,Table 1,Maximum,Before / Nifty Bank Return,before,bank,0.012023448,0.012023448,9,score,
+T1_B_B_skew,5,Table 1,Skewness,Before / Nifty Bank Return,before,bank,-1.357725832,-1.357725832,9,score,
+T1_B_B_kurt,5,Table 1,Kurtosis,Before / Nifty Bank Return,before,bank,125.1117068,125.1117068,7,score,
+T1_B_B_n,5,Table 1,N,Before / Nifty Bank Return,before,bank,"23,039",23039,0,score,
+T1_B_B_ad,5,Table 1,Anderson-Darling,Before / Nifty Bank Return,before,bank,790.061***,790.061,3,stage2,
+T1_B_B_adf,5,Table 1,ADF,Before / Nifty Bank Return,before,bank,-20.69261***,-20.69261,5,report,
+T1_B_corr,5,Table 1,Correlation,Before (spans both columns),before,both,0.854***,0.854,3,score,correlation of Nifty 50 and Nifty Bank returns
+T1_A_N_mean,5,Table 1,Mean,After / Nifty 50 Return,after,nifty,0.000001,0.000001,6,after_check,
+T1_A_N_sd,5,Table 1,StDev,After / Nifty 50 Return,after,nifty,0.000355,0.000355,6,after_check,
+T1_A_N_min,5,Table 1,Minimum,After / Nifty 50 Return,after,nifty,-0.007086,-0.007086,6,after_check,
+T1_A_N_max,5,Table 1,Maximum,After / Nifty 50 Return,after,nifty,0.009408,0.009408,6,after_check,
+T1_A_N_skew,5,Table 1,Skewness,After / Nifty 50 Return,after,nifty,0.53,0.53,2,after_check,
+T1_A_N_kurt,5,Table 1,Kurtosis,After / Nifty 50 Return,after,nifty,75.88,75.88,2,after_check,
+T1_A_N_n,5,Table 1,N,After / Nifty 50 Return,after,nifty,"21,239",21239,0,after_check,Tables 5 and 6 print 21463 and 21462 for the after window instead
+T1_A_N_ad,5,Table 1,Anderson-Darling,After / Nifty 50 Return,after,nifty,492.399***,492.399,3,after_check,
+T1_A_N_adf,5,Table 1,ADF,After / Nifty 50 Return,after,nifty,-29.626103***,-29.626103,6,report,
+T1_A_B_mean,5,Table 1,Mean,After / Nifty Bank Return,after,bank,0.000002,0.000002,6,after_check,
+T1_A_B_sd,5,Table 1,StDev,After / Nifty Bank Return,after,bank,0.000443,0.000443,6,after_check,
+T1_A_B_min,5,Table 1,Minimum,After / Nifty Bank Return,after,bank,-0.008699,-0.008699,6,after_check,
+T1_A_B_max,5,Table 1,Maximum,After / Nifty Bank Return,after,bank,0.009905,0.009905,6,after_check,
+T1_A_B_skew,5,Table 1,Skewness,After / Nifty Bank Return,after,bank,0.64,0.64,2,after_check,
+T1_A_B_kurt,5,Table 1,Kurtosis,After / Nifty Bank Return,after,bank,57.3,57.3,1,after_check,
+T1_A_B_n,5,Table 1,N,After / Nifty Bank Return,after,bank,"21,239",21239,0,after_check,
+T1_A_B_ad,5,Table 1,Anderson-Darling,After / Nifty Bank Return,after,bank,"466,153***",466.153,3,after_check,printed with a comma; read as 466.153 (a decimal point is assumed)
+T1_A_B_adf,5,Table 1,ADF,After / Nifty Bank Return,after,bank,-145.6132***,-145.6132,4,report,
+T1_A_corr,5,Table 1,Correlation,After (spans both columns),after,both,0.818***,0.818,3,after_check,
+T5_B_N_obs,12,Table 5,Change in volume before and after / Before,Nifty 50 Observation,before,nifty,"23,039",23039,0,report,
+T5_A_N_obs,12,Table 5,Change in volume before and after / After,Nifty 50 Observation,after,nifty,"21,463",21463,0,report,differs from Table 1 N (21239)
+T5_B_B_obs,12,Table 5,Change in volume before and after / Before,Nifty Bank Observation,before,bank,"23,039",23039,0,report,
+T5_A_B_obs,12,Table 5,Change in volume before and after / After,Nifty Bank Observation,after,bank,"21,463",21463,0,report,
+T5_B_N_wed,12,Table 5,Change in volume on Wednesday / Before,Nifty 50 Observation,before,nifty,4680,4680,0,report,13 days of 360 one-minute bars would give 4680
+T5_A_N_wed,12,Table 5,Change in volume on Wednesday / After,Nifty 50 Observation,after,nifty,4320,4320,0,report,
+T5_B_B_wed,12,Table 5,Change in volume on Wednesday / Before,Nifty Bank Observation,before,bank,4680,4680,0,report,
+T5_A_B_wed,12,Table 5,Change in volume on Wednesday / After,Nifty Bank Observation,after,bank,4320,4320,0,report,
+T5_B_N_thu,12,Table 5,Change in volume on Thursday / Before,Nifty 50 Observation,before,nifty,4680,4680,0,report,
+T5_A_N_thu,12,Table 5,Change in volume on Thursday / After,Nifty 50 Observation,after,nifty,4680,4680,0,report,
+T5_B_B_thu,12,Table 5,Change in volume on Thursday / Before,Nifty Bank Observation,before,bank,4680,4680,0,report,
+T5_A_B_thu,12,Table 5,Change in volume on Thursday / After,Nifty Bank Observation,after,bank,4680,4680,0,report,
+T6_B_N_obs,13,Table 6,Change in volatility before and after / Before,Nifty 50 Observation,before,nifty,"23,038",23038,0,report,
+T6_B_N_med,13,Table 6,Change in volatility before and after / Before,Nifty 50 Median,before,nifty,0.00024,0.00024,5,report,per-minute volatility (Rogers and Satchell 1994 according to the text)
+T6_A_N_obs,13,Table 6,Change in volatility before and after / After,Nifty 50 Observation,after,nifty,"21,462",21462,0,report,
+T6_A_N_med,13,Table 6,Change in volatility before and after / After,Nifty 50 Median,after,nifty,0.00026,0.00026,5,report,
+T6_B_B_obs,13,Table 6,Change in volatility before and after / Before,Nifty Bank Observation,before,bank,"23,038",23038,0,report,
+T6_B_B_med,13,Table 6,Change in volatility before and after / Before,Nifty Bank Median,before,bank,0.00034,0.00034,5,report,
+T6_A_B_obs,13,Table 6,Change in volatility before and after / After,Nifty Bank Observation,after,bank,"21,462",21462,0,report,
+T6_A_B_med,13,Table 6,Change in volatility before and after / After,Nifty Bank Median,after,bank,0.00034,0.00034,5,report,
+T6_B_N_wed_obs,13,Table 6,Change in volatility on Wednesday / Before,Nifty 50 Observation,before,nifty,4679,4679,0,report,
+T6_B_N_wed_med,13,Table 6,Change in volatility on Wednesday / Before,Nifty 50 Median,before,nifty,0.00023,0.00023,5,report,
+T6_B_B_wed_obs,13,Table 6,Change in volatility on Wednesday / Before,Nifty Bank Observation,before,bank,4680,4680,0,report,
+T6_B_B_wed_med,13,Table 6,Change in volatility on Wednesday / Before,Nifty Bank Median,before,bank,0.00033,0.00033,5,report,
+T6_B_N_thu_obs,13,Table 6,Change in volatility on Thursday / Before,Nifty 50 Observation,before,nifty,4679,4679,0,report,
+T6_B_N_thu_med,13,Table 6,Change in volatility on Thursday / Before,Nifty 50 Median,before,nifty,0.00024,0.00024,5,report,
+T6_B_B_thu_obs,13,Table 6,Change in volatility on Thursday / Before,Nifty Bank Observation,before,bank,4679,4679,0,report,
+T6_B_B_thu_med,13,Table 6,Change in volatility on Thursday / Before,Nifty Bank Median,before,bank,0.00034,0.00034,5,report,
+TXT_days,4,text,Section 1 paragraph 3,,both,both,90 days,90,0,report,the paper says it collected 90 days of 1-minute data in two time frames (paraphrased)
+TXT_full_period,5,text,Section 2.1 paragraph 1,,both,both,November 2023 to May 2024,,,report,stated data period (dates only)
+TXT_before_period,5,text,Section 2.1 paragraph 1,,before,both,November 2023 to Feb 2024,,,report,stated before period; no day of the month is given
+TXT_after_period,5,text,Section 2.1 paragraph 1,,after,both,March 2024 to May 2024,,,report,stated after period; no day of the month is given
+FIG1_before_ticks,9,Fig. 1,panels (a) (b) (c),x-axis labels,before,both,Dec / Jan / Feb,,,report,month labels only; read by eye from a small figure
+FIG1_after_ticks,9,Fig. 1,panels (d) (e) (f),x-axis labels,after,both,Mar 01 / Mar 15 / Apr 01 / Apr 15 / May 01 / May 15,,,report,read by eye
