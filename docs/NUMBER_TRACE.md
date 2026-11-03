@@ -170,7 +170,7 @@ clearly negative and the US and Client-mirror controls results stay null. They a
 purpose for now: a full reproduction is regenerating these files, and the table will be fixed against the
 new ones.
 
-No mismatch was found in the working paper's 28 registered numbers, in the pitch, the README, the briefing,
+No mismatch was found in the working paper's 33 registered numbers, in the pitch, the README, the briefing,
 or in any of the study documents other than REAL_DATA_RESULTS.md.
 
 ### Untraced numbers
