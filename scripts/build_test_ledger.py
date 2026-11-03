@@ -428,7 +428,7 @@ def adapt_r1(ctx: Ctx, study="R1", folder="pipeline_nse", pre_spec_ok=True):
                 role = "headline" if expiry else "secondary"
             else:
                 b = comp.split(" vs ")[1].strip()
-                hyp = f"{b} forecasts better than mcsGARCH (the paper's model)"
+                hyp = f"{b} forecasts better than mcsGARCH (our implementation of the paper's model)"
                 rule = ""
                 role = "headline" if (expiry and b.startswith(("hybrid", "lgbm"))) else "secondary"
             if pre_spec_ok and expiry and role == "headline":
@@ -465,7 +465,7 @@ V2_FAMILY = {"linear": "ridge log-HAR", "hybrid": "hybrid", "hybridiv": "hybrid 
 V2_FAMILY_SHORT = {**V2_FAMILY, "hybridiv": "implied-level hybrid"}
 V2_RULE_SHORT = {"us": "US", "participant": "Pro", "client": "client mirror", "gross": "gross"}
 V2_MODEL = {
-    "mcsgarch": "mcsGARCH refitted every 21 days, the paper's model",
+    "mcsgarch": "mcsGARCH refitted every 21 days, our implementation of the paper's model",
     "naive_last": "naive, last value", "naive_prevday": "naive, previous day", "vix": "India VIX model",
     "implied": "ATM straddle model", "har": "HAR", "mcsgarch_r63": "mcsGARCH refitted every 63 days",
     "mcsgarch_iv": "mcsGARCH with the straddle-implied daily level",
@@ -787,7 +787,7 @@ def adapt_r1v2_dev(ctx: Ctx, study="R1V2DEV", folder="pipeline_nse_v2/developmen
             pct = num(r["qlike_vs_mcsgarch_pct"])
             v1 = clean(r["run"]) == "baseline_v1"
             _, b, hyp = _v2_vs_mcsgarch(f"mcsgarch vs {clean(r['model'])}", pct, better_if_positive=False,
-                                        desc_a="mcsGARCH refitted every 63 days, the paper's model",
+                                        desc_a="mcsGARCH refitted every 63 days, our implementation of the paper's model",
                                         desc_b=f"the first run's {clean(r['model'])} (results/pipeline_nse)" if v1 else None)
             _keep(_v2_add(ctx, study, hyp, f"QLIKE loss of forecasts of {TARGETS.get(tbase, tbase)}",
                           f"development window, {v2_subset(r['group'])} (n = {_int(r['days'])} days), horizon {hz}; "
@@ -4533,7 +4533,7 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
         n_h = int((bn["pre_specified"] == PS_YES).sum()) if len(bn) else 0
         f2c = getattr(ctx, "ref_f2_counts", None)
         w("**Registered plans and referee responses.** " + ", ".join(f"{s_} {cnt[s_]}" for s_ in newst) + " tests. "
-          "Three studies have a registered analysis plan: **P91** (BNFC, the Nifty forecasting pipeline run unchanged on "
+          "Of these, three studies have a registered analysis plan: **P91** (BNFC, the Nifty forecasting pipeline run unchanged on "
           "Bank Nifty), **P92** (SWAP, the Nifty and Sensex expiry-weekday swap) and **P96** (SYNTH, a synthetic control "
           "of the November 2024 cut in weekly expiries). Their primary, secondary, placebo and robustness tests carry the "
           "plan's status and role, and only the tests whose direction the plan states keep a one-sided p. BNFC has the "
