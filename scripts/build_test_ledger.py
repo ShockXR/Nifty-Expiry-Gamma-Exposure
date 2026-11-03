@@ -175,6 +175,8 @@ STUDIES = {
     "P99SEED": ("Seed bootstrap of the forecasting hybrid (P99)", "docs/SEED_BOOTSTRAP.md; docs/prereg/P99_SEED_BOOTSTRAP.md"),
     "FNFC": ("Fin Nifty forecasting contest, third index (P104)", "docs/THIRD_INDEX_FORECAST.md; docs/prereg/P104_THIRD_INDEX_FORECAST.md"),
     "POOL3": ("Pooled three-index test of the forecasting hybrid (P107)", "docs/P107_POOLED_THREE_INDEX.md; docs/prereg/P107_POOLED_THREE_INDEX.md"),
+    "GAIN6": ("Where the forecasting hybrid's gain comes from: feature-group ablation and the November 2024 periods (P106)",
+              "docs/P106_GAIN_DECOMPOSITION.md; docs/prereg/P106_GAIN_DECOMPOSITION.md"),
 }
 
 PREREG = {
@@ -187,6 +189,7 @@ PREREG = {
     "seed_bootstrap": ("docs/prereg/P99_SEED_BOOTSTRAP.md", "P99 registered plan"),
     "pipeline_nse_finnifty": ("docs/prereg/P104_THIRD_INDEX_FORECAST.md", "P104 registered plan"),
     "p107_pooled_test": ("docs/prereg/P107_POOLED_THREE_INDEX.md", "P107 registered plan"),
+    "p106_gain_decomposition": ("docs/prereg/P106_GAIN_DECOMPOSITION.md", "P106 registered plan"),
 }
 
 COLUMNS = [
@@ -2419,6 +2422,66 @@ def adapt_p107pool(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+P106_OUTCOME = ["tests.csv", "tests_detail.csv", "contributions.csv", "shares.csv", "verdict.csv", "periods.csv",
+                "regimes.csv", "seed_repeats.csv", "daily_losses_*.csv"]
+
+
+def adapt_p106gain(ctx: Ctx):
+    """P106: where the hybrid's gain comes from (docs/prereg/P106_GAIN_DECOMPOSITION.md).
+
+    tests.csv: one row per test, with the study's role and sidedness. Counted: P1 (leave-one-group-out, primary),
+      P2 (period interaction, primary), S1 to S6 (secondary), R1 to R3 and R6 to R9 (robustness: other seeds,
+      samples or definitions, so other estimates), PL1 and PL2 (placebos, registered) and every exploratory row.
+      Not counted separately: R5, the stationary bootstrap of the same period differences as P2; its p goes in
+      the matching P2 row's alt_p.
+    """
+    folder = "p106_gain_decomposition"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "GAIN6", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "GAIN6", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P106_OUTCOME)
+    alts = {}
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        if tid.startswith("R5_"):
+            alts["P2_" + tid[3:]] = r["p_raw"]
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        if tid.startswith("R5_") and ("P2_" + tid[3:]) in set(d["test_id"].map(clean)):
+            continue
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness", "placebo")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        a = alt(stationary_bootstrap_p=alts[tid]) if tid in alts else ""
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary", "placebo") else float("nan")
+        ctx.add("GAIN6", f"P106 {tid}: {clean(r['hypothesis'])}", "QLIKE loss of the forecasting hybrid with a "
+                "feature group removed, or its change across the November 2024 cut", clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="test statistic (DM t or delta-method t, see p_method)", statistic=r["statistic"],
+                p_method=clean(r["p_method"]), alt_p=a,
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "GAIN6", folder, {
+        r"tests_detail\.csv|contributions\.csv|shares\.csv|verdict\.csv|periods\.csv|regimes\.csv|seed_repeats\.csv|"
+        r"other_index_ranking\.csv|reproduction_check\.csv|timing\.csv":
+            "estimates, shares, verdicts and checks behind tests.csv; no new p-value",
+        r"daily_losses_.*\.csv": "daily losses behind the tests; no p-value",
+    }, "run information, counts or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -3772,11 +3835,11 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC", "POOL3"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
-                 adapt_p99seed, adapt_fnfc, adapt_p107pool]
+                 adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain]
 
 
 def headline18_check(ctx: Ctx):
@@ -4044,6 +4107,12 @@ RECON = [
       ("S1b to S1e, secondary: equal gains, last hour, expiry days, edge over mcsgarch_iv", "POOL3", r"^tests\.csv\|S1[b-e]_")],
      "The primary test could not fail once the three single-index results were known (the plan shows the bound); "
      "the informative outputs are the effective number of indices and the edge over mcsgarch_iv."),
+    ("P106", "Feature-group ablation (registered plan): removing realized history or time of day raises the hybrid's "
+             "loss; removing the option-implied, VIX or calendar group does not; no group's value changed "
+             "significantly across the November 2024 cut (primary, Holm over 20).",
+     [("P1, primary: one group removed, 15 and 30 minutes", "GAIN6", r"^tests\.csv\|P1_"),
+      ("P2, primary: change across the November 2024 cut", "GAIN6", r"^tests\.csv\|P2_")],
+     "P2 rows are expected not to survive; the implied group at 30 minutes is the closest (Holm 0.051 in the study)."),
 ]
 
 

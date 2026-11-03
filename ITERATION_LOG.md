@@ -558,9 +558,20 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The exact days depend on whether the printed means or the printed higher moments are more trustworthy; only the authors can settle it. Analyses that use the inferred window use 14 November to 10 February; the two candidates share 58 of 64 days. No hypothesis tests, so nothing enters the test ledger.
 * **NEXT ITERATION:** Soften the window claim in the pitch, briefing, paper, replication note and deck; ask the authors which dates they used.
 
-## Iterations in progress (3 November 2026, about 11:45 IST)
+## Iteration 47: where the forecasting hybrid's gain comes from (registered plan, P106)
 
-* **P106, where the forecasting gain comes from** (registered plan): the hybrid refitted without each feature group (option-implied, VIX, time of day, calendar and regime, realized-variance history), and a test of what changed after the November 2024 cut.
+* **OBJECTIVE:** Say what the hybrid's 5.8% and 7.6% gain over mcsGARCH is made of, and why its edge over the information-matched mcsGARCH appears only after SEBI's November 2024 cut.
+* **PROBLEM IDENTIFIED:** The summaries said "much of the gain is extra information rather than a better method", from the fact that an mcsGARCH given the implied variance came close before November 2024. That is a comparison of two models, not a measurement of what the hybrid itself uses. LightGBM's split-gain importance ranked the option-implied inputs first, which does not show what the hybrid would lose without them.
+* **HYPOTHESIS:** Registered before any ablated loss was computed (`docs/prereg/P106_GAIN_DECOMPOSITION.md`, commit 71bb3b6): refitting the hybrid without each of five input groups (option-implied, VIX, time of day, calendar, realized history), with five seed sets on Nifty, raises its loss for the groups that matter (P1, Holm over 20 primary rows); P2 asks whether any group's contribution changed across the cut. Secondary: benchmark or hybrid as the source of the period change, blocks of groups, the last hour, Bank Nifty and Fin Nifty.
+* **CHANGES IMPLEMENTED:** `experiments/p106_gain_decomposition.py`, `WalkForwardConfig.drop_sets` in `src/niftygex/forecast.py` (empty by default; the headline forecasts reproduce bit for bit), `tests/test_p106_gain_decomposition.py` (synthetic). Results 149b358, 119 minutes after the plan. Ledger adapter GAIN6.
+* **EXPERIMENTS PERFORMED:** 22 Nifty refits plus Bank Nifty and Fin Nifty (about 1 hour 45 minutes on 2 cores); 189 tests.
+* **RESULTS:** (REAL DATA.) Realized history carries 34% and 38% of the gain at 15 and 30 minutes, time of day 23% and 25% (Holm below 0.01, five of five seed sets). The option-implied, VIX and calendar groups add nothing (calendar slightly hurts). A hybrid given only mcsGARCH's own inputs is 6.06% and 8.01% better than mcsGARCH. Same leaders on Bank Nifty and Fin Nifty; realized history carries 69% of the last-hour gain. Across the cut the hybrid's own gain was steady (p 0.45 and 0.29), while the information-matched mcsGARCH went from 4.98 and 6.06 points better than mcsGARCH to 1.06 and 0.64 worse (87% and 82% of the change in the edge; its own Holm p 0.135). No P2 row passes (implied group at 30 minutes, Holm 0.051; a seed-only placebo shows the period test can overstate). One deviation: the P99 reproduction check compared text with datetime dates; fixed, and every other output was byte-identical.
+* **IMPROVEMENTS:** "Mostly information" becomes "a learnt correction of mcsGARCH from its own kind of information". "The last-hour gain is mostly VIX information" is withdrawn: an mcsGARCH given VIX comes within 1.7% in the last hour, but the hybrid does not need VIX for its gain. The November 2024 edge is "the benchmark lost its advantage", not "the hybrid got better".
+* **REMAINING ISSUES:** Leave-one-out misses what groups share (the five shares sum to about half). Part 2 uses the data that motivated it. Dropping the calendar inputs would be a new model chosen after seeing these data.
+* **NEXT ITERATION:** Fold into the pitch, briefing, paper and deck.
+
+## Iterations in progress (3 November 2026, about 14:00 IST)
+
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey, built last from the final numbers.
 
