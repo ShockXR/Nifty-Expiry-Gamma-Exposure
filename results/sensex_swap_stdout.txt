@@ -1,0 +1,90 @@
+REAL DATA. P92: does the expiring index become the net transmitter on its expiry day? Pre-registration commit: 042d51095c4d62aed399cb7b6e76adabf3e56597 2026-11-03T00:25:04+00:00
+
+mcsGARCH fits (mcsgarch_fits.csv):
+                   use                   fit  index      first       last  days_fitted   alpha   beta  persistence    nu daily_variance_method
+                  main     single_weekly_thu  nifty 2024-11-21 2025-08-29          192 0.05906 0.9374       0.9965 5.139              egarch_t
+                  main     single_weekly_thu sensex 2024-11-21 2025-08-29          192 0.05726 0.9339       0.9911 5.061              egarch_t
+                  main     single_weekly_tue  nifty 2025-09-01 2026-11-02          288 0.04249 0.9501       0.9925  7.27              egarch_t
+                  main     single_weekly_tue sensex 2025-09-01 2026-11-02          288 0.04705 0.9433       0.9903 8.159              egarch_t
+robustness: single fit one fit, whole sample  nifty 2024-11-21 2026-11-02          480 0.05202 0.9412       0.9932  6.05              egarch_t
+robustness: single fit one fit, whole sample sensex 2024-11-21 2026-11-02          480 0.05307 0.9373       0.9904 6.347              egarch_t
+
+VAR lag by AIC on all sample days: 10. Check, per-day value vs replication.connectedness_segments: max diff 4.01e-12.
+
+Cell means (cell_means.csv):
+test       cell expected_status  n_days    mean     sd  median  mean_tot  mean_n2s  mean_s2n
+  P1 Thu before               N      33   4.202  4.205    3.85     93.11     48.65     44.45
+  P1 Tue before               S      34   3.601  3.846   2.755     92.05     47.83     44.23
+  P1  Tue after               N      56  -1.534   2.47  -1.214     93.76     46.11     47.64
+  P1  Thu after               S      56  -1.352  2.632  -1.257     91.35        45     46.35
+  S1 Thu before               N      33 0.05441  3.157  0.1247     94.17     47.11     47.06
+  S1 Tue before               S      34  -2.292  4.143 -0.7887     91.65     44.68     46.97
+  S1  Tue after               N      56 -0.6506   1.29 -0.4154     97.07     48.21     48.86
+  S1  Thu after               S      56 -0.8161 0.9978 -0.6579     96.63     47.91     48.72
+  S3 Fri before               S       7   3.641  2.597   4.805     91.37     47.51     43.86
+  S3 Tue before            none       6   3.268  2.199   3.003     94.42     48.84     45.58
+  S3  Tue after               S      34   3.601  3.846   2.755     92.05     47.83     44.23
+  S3  Fri after            none      31   3.166  3.278    3.07     93.51     48.34     45.17
+ PL1 Wed before            none      31   1.269  4.308   1.438     93.18     47.22     45.95
+ PL1 Mon before            none      32   4.514  3.542   3.656     93.25     48.88     44.37
+ PL1  Mon after            none      55  -1.378  4.027  -1.647     93.85     46.24     47.62
+ PL1  Wed after            none      54  0.3418  3.877  0.7911     92.58     46.46     46.12
+ PL2 Thu before               N      16   6.104  4.639    6.58     93.16     49.63     43.53
+ PL2 Tue before               S      17    3.22  4.652   2.464     93.67     48.45     45.23
+ PL2  Tue after               S      17   3.983  2.926    2.91     90.43     47.21     43.22
+ PL2  Thu after               N      17   2.413  2.858   2.415     93.06     47.74     45.32
+ PL3 Tue before               N      23  -2.069  2.488  -1.763     93.63     45.78     47.85
+ PL3 Thu before               S      21  -1.505  3.082 -0.9222     90.49     44.49        46
+ PL3  Tue after               N      21  -1.027  2.322 -0.5091     93.78     46.38     47.41
+ PL3  Thu after               S      22  -1.094  2.572  -1.338     92.02     45.47     46.56
+
+Tests (tests.csv):
+test    family outcome alternative  estimate  perm_p    hac_p  hac_ci95_lo  hac_ci95_hi  holm_p_secondary                                                  n_cells
+  P1   primary net_day     greater    0.4186  0.3305   0.3575       -1.828        2.665               NaN Thu before 33; Tue before 34; Tue after 56; Thu after 56
+  S1 secondary  net_lh     greater     2.512  0.0051 0.004148       0.6469        4.377            0.0153 Thu before 33; Tue before 34; Tue after 56; Thu after 56
+  S3 secondary net_day        less    0.8095  0.6031   0.6905       -2.382        4.001            0.6031   Fri before 7; Tue before 6; Tue after 34; Fri after 31
+ PL1   placebo net_day   two-sided    -4.965  0.0048 0.002501       -8.184       -1.746               NaN Wed before 31; Mon before 32; Mon after 55; Wed after 54
+ PL2   placebo net_day   two-sided     4.454  0.0377  0.01651       0.8128        8.096               NaN Thu before 16; Tue before 17; Tue after 17; Thu after 17
+ PL3   placebo net_day   two-sided    0.6308  0.5889   0.5204       -1.293        2.554               NaN Tue before 23; Thu before 21; Tue after 21; Thu after 22
+  S2 secondary tot_day   two-sided    -1.011     NaN   0.1987       -2.553       0.5306            0.3973                                                      NaN
+
+Robustness of the primary (robustness.csv; not decisive):
+                                                                                              check  estimate  perm_p     hac_p  n_days
+                                                                                 block of 1 week(s)    0.4186  0.3184    0.3575     179
+                                                                                 block of 2 week(s)    0.4186  0.3297    0.3575     179
+                                                                                 block of 8 week(s)    0.4186  0.3576    0.3575     179
+                        labels moved separately within each weekday (blocks of 4 same-weekday days)    0.4186  0.4082    0.3575     179
+                                      closing-auction days left out (after window ends 31 Jul 2026)    0.3246  0.3883    0.3916     154
+                                                       monthly expiry days of either index left out   0.09224  0.4697    0.4729     139
+                                                        input = intraday mcsGARCH part sqrt(q) only     4.713  0.0153  0.009948     179
+                                                                         VAR(10) by AIC, horizon 30     3.052  0.0077  0.003837     179
+                                                             one mcsGARCH fit over the whole sample    0.3746  0.3218    0.3562     179
+                                       week fixed effects (paired Tue minus Thu in weeks with both)    0.4109  0.3404       NaN     166
+                                                                     ranks of NET instead of values  0.000191  0.5026       NaN     179
+                                   Nifty to Sensex share alone (one half of NET; H1 implies a rise)     1.938  0.0014 0.0002226     179
+                                 Sensex to Nifty share alone (other half of NET; H1 implies a fall)      1.52  0.9675     0.964     179
+                                                                  total connectedness (descriptive)     3.458  0.0004 4.662e-05     179
+                                            pooled VAR per cell (CPP style), NET of the pooled fits   -0.6404  0.6318       NaN     179
+H2 descriptive: expiry minus other days without weekday effects (CPP-like; confounded with weekday)   -0.8502     NaN 2.051e-05     480
+
+Verdict (verdict.json):
+{
+  "verdict": "NOT SUPPORTED (effects as large as the pre-registered MDE are ruled out)",
+  "design_flags": [
+    "DESIGN CHECK FAILED: PL2 (a fake swap date) has p = 0.0377; the Tue minus Thu gap moves when nothing changes",
+    "PL1 (Mon minus Wed) moves in the opposite direction (p = 0.0048): a warning about the design"
+  ],
+  "primary_estimate": 0.4186314021743085,
+  "primary_perm_p": 0.3305,
+  "primary_hac_p": 0.357485546257987,
+  "pre_registered_mde_points": 4.9,
+  "observed_within_cell_sd_net": 3.1808276057255664,
+  "mde_implied_by_observed_sd (not decisive)": 2.4432312505851863,
+  "secondary_holm": {
+    "S1": 0.015300000000000001,
+    "S2": 0.39732134908263705,
+    "S3": 0.6031
+  }
+}
+
+Timing: 25.5 s

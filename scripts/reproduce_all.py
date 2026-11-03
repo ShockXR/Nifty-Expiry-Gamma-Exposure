@@ -72,6 +72,7 @@ OPTIONAL = {  # studies added later; run if the script exists
     "rekey_check": ([PY, "experiments/rekey_check.py"], "results/replication_nse/rekey_check.csv"),
     "pinning_mechanism": ([PY, "experiments/pinning_mechanism.py"], "results/pinning_mechanism/"),
     "f2_economics": ([PY, "experiments/f2_economics.py"], "results/f2_economics/"),
+    "sensex_swap": ([PY, "experiments/sensex_swap.py"], "results/sensex_swap/"),
 }
 
 

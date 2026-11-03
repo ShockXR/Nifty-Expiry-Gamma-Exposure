@@ -402,10 +402,22 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The live forecast of 3 November was frozen from the first run, so it is scored with that model.
 * **NEXT ITERATION:** Regenerate every result from the raw downloads with one command and compare with the committed outputs.
 
-## Iterations in progress (3 November 2026, about 05:30 IST)
+## Iteration 34: the Nifty and Sensex expiry-weekday swap as a natural experiment (pre-registered, P92)
+
+* **OBJECTIVE:** Use the one rule change that holds the weekday fixed: on 1 September 2025 Nifty moved its weekly expiry to Tuesday and Sensex to Thursday, the reverse of before.
+* **PROBLEM IDENTIFIED:** Every earlier expiry comparison mixes the expiry with weekday effects. Comparing the same weekday before and after the swap removes them.
+* **HYPOTHESIS:** On its own expiry day the expiring index becomes the net transmitter of minute-level volatility spillovers (Diebold-Yilmaz, the anchor paper's connectedness measure on a new pair).
+* **CHANGES IMPLEMENTED:** The design was committed to git (`docs/prereg/P92_SENSEX_SWAP.md`, commit 042d510) before any connectedness or volatility of this study was computed. `experiments/sensex_swap.py`, `tests/test_sensex_swap.py`, `docs/SENSEX_SWAP.md`, results in `results/sensex_swap/`.
+* **EXPERIMENTS PERFORMED:** A difference in differences of NET spillover (Tuesday minus Thursday, after minus before) with a block permutation over weeks as the decisive p-value; secondaries with Holm; placebos (Monday minus Wednesday, two fake swap dates); robustness checks.
+* **RESULTS:** (REAL DATA.) Whole day: +0.42 points, permutation p = 0.33, not supported; effects as large as the pre-registered detectable size (4.90) are ruled out. Last hour: +2.51, Holm p = 0.015, in the predicted direction. But the design check failed: a fake swap in May 2025 moved the measure by +4.45 (p = 0.038) and Monday minus Wednesday moved by -4.96 (p = 0.005), so weekday gaps in this measure drift by about the size of the effect sought. No deviations from the plan.
+* **IMPROVEMENTS:** The anchor paper's connectedness question asked on a new pair with the cleanest available design, and its weakness found by its own pre-stated placebos.
+* **REMAINING ISSUES:** The last-hour sign needs new data; the Sensex calendar and bars are not verified against BSE.
+* **NEXT ITERATION:** Regenerate everything from the raw files and rebuild the test ledger.
+
+## Iterations in progress (3 November 2026, about 06:00 IST)
 
 * **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
-* **Forward test:** a pre-registered test of the main claims on data after 2 November 2026, committed before those data exist.
+* **Bank Nifty replication of the forecasting result** and a **synthetic-control estimate of the November 2024 weekly-expiry cut**, both pre-registered in two phases.
 * **The test ledger** rebuilt to count the second forecasting contest test by test.
 * **Scoring the frozen forecast** for 3 November after the close.
 

@@ -9,6 +9,8 @@
 * **The other checks point the same way.** Nifty's last 30 minutes are more volatile on Sensex expiry days in all three Sensex periods. On the five Wednesdays when Sensex expired early because Thursday was a holiday, Nifty's last 30 minutes were much more volatile than on other Wednesdays (permutation p = 0.021; Bank Nifty p = 0.002). A regression that uses every calendar change at once puts the Sensex-day effect on Nifty's last 30 minutes at +0.33 log points (about 40% more variance, p < 0.001).
 * **The main NSE conclusions survive the Sensex control, and some get stronger.** The event study's primary null result does not change. Nifty's new Tuesday expiry premium after September 2025 gets larger (last 30 minutes +0.39 becomes +0.62). R2's expiry-day premia get somewhat larger too. What changes is the interpretation of weekday comparisons: Friday was not a clean control day until January 2025, and Thursday after September 2025 is a Sensex expiry day, which explains why Thursday "kept" an end-of-day premium after Nifty left it.
 
+**Follow-up (P92, 3 November 2026):** the 1 September 2025 swap of the Nifty and Sensex expiry weekdays, used as a pre-registered natural experiment for which index sends volatility to the other on its expiry day, is in [SENSEX_SWAP.md](SENSEX_SWAP.md).
+
 ## 1. The question, in plain words
 
 An **expiry day** is the day on which an options contract ends. On that day, traders who sold or bought options close or hedge their positions, and the contract is settled at an official closing value of the index. Until 3 August 2026 that value was an average over the last 30 minutes of trading, so trading in the last half hour can be unusual on expiry days.

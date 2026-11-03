@@ -7,7 +7,7 @@ These were written before the real-data run (2 November 2026) as directions kept
 | A1. Trading layer | Futures part done for the one robust pattern: not tradable after costs. Options part still blocked on intraday option prices. | [docs/F2_ECONOMICS.md](../docs/F2_ECONOMICS.md) |
 | A2. Sequence model | Still deferred: trees and mcsGARCH already capture the structure (R1). | [docs/REAL_DATA_RESULTS.md](../docs/REAL_DATA_RESULTS.md) |
 | A3. Intraday GEX snapshots | Partly answered: gamma at spot re-priced minute by minute from the previous evening's positions shows nothing. Real intraday positions still need forward collection. | [docs/INTRADAY_GAMMA.md](../docs/INTRADAY_GAMMA.md) |
-| A4. Connectedness by gamma regime | Done for Nifty and Bank Nifty: borderline and not robust. Nifty and Sensex open. | [docs/CONNECTEDNESS_GAMMA.md](../docs/CONNECTEDNESS_GAMMA.md) |
+| A4. Connectedness by gamma regime | Done for Nifty and Bank Nifty: borderline and not robust. For Nifty and Sensex, a pre-registered test of the September 2025 expiry-weekday swap found no whole-day shift in which index leads; a last-hour sign did not pass the design check. | [docs/CONNECTEDNESS_GAMMA.md](../docs/CONNECTEDNESS_GAMMA.md), [docs/SENSEX_SWAP.md](../docs/SENSEX_SWAP.md) |
 | A5. Momentum regression | Done (R5): Nifty reverses into the close, more after negative Pro GEX; survived falsification. | R5, [docs/FALSIFICATION.md](../docs/FALSIFICATION.md) |
 | A6. September 2023 Bank Nifty change | Done as event a of the event study. | [docs/EVENT_STUDY.md](../docs/EVENT_STUDY.md) |
 | A7. Pinning mechanism (new) | Done, pre-registered: none of six candidates explains when pinning appears. | [docs/PINNING_MECHANISM.md](../docs/PINNING_MECHANISM.md) |

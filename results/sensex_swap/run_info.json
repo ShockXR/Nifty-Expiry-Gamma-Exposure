@@ -1,0 +1,31 @@
+{
+  "data": "REAL DATA",
+  "prereg_commit": "042d51095c4d62aed399cb7b6e76adabf3e56597 2026-11-03T00:25:04+00:00",
+  "seed": 20261102,
+  "study": 92,
+  "seed_rule": "numpy.random.default_rng([20261102, 92, key]); keys in tests.csv / robustness.csv order: P1 1, S1 2, S3 3, PL1 4, PL2 5, PL3 6, blocks 11-13, within weekday 14, auction 15, monthly 16, intraday 17, AIC 18, single fit 19, pooled 20, week FE 21, ranks 22, n2s 23, s2n 24, total 25",
+  "n_perm": 9999,
+  "block_weeks": 4,
+  "var_p_main": 2,
+  "H_main": 10,
+  "var_p_aic": 10,
+  "H_sensitivity": 30,
+  "session_rule": "360_drop_last15",
+  "last_hour": [
+    "14:15",
+    "15:14"
+  ],
+  "min_last_hour": 50,
+  "sample_start": "2024-11-21",
+  "sample_end": "2026-11-02",
+  "n_days": 480,
+  "per_day_check_max_abs_diff": 4.007461029686965e-12,
+  "timing_s": 25.4,
+  "input_sha256_16": {
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b4",
+    "data/raw/sensex_1min.csv": "471a519e0300fbf0",
+    "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
+    "data/external/sensex_expiry_calendar.csv": "5d9329e40c8c75b2",
+    "results/connectedness_gamma/sample_days.csv": "f663478536e920a6"
+  }
+}
