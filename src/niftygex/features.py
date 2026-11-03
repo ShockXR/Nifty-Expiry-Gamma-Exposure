@@ -15,11 +15,12 @@ produce it):
               (expiry, strike, is_call, settle, close, oi, volume), for implied.py
     futures   (real data) per publish day: the index's futures traded value, OI, near settle
     other_index_expiries  (real data) expiry dates of the other big NSE index: Bank Nifty when
-              the index is Nifty, Nifty when it is Bank Nifty (feature ``bn_expiry_only``, whose
-              name is kept from the Nifty design: "the other index expires today, this one does not")
+              the index is Nifty, Nifty when it is Bank Nifty or Fin Nifty (feature ``bn_expiry_only``,
+              whose name is kept from the Nifty design: "the other index expires today, this one does not")
 
-The index is Nifty unless the market was built with symbol="BANKNIFTY"
-(scripts/run_pipeline.py --symbol, docs/prereg/P91_BANKNIFTY_FORECAST.md).
+The index is Nifty unless the market was built with symbol="BANKNIFTY" or symbol="FINNIFTY"
+(scripts/run_pipeline.py --symbol, docs/prereg/P91_BANKNIFTY_FORECAST.md and
+docs/prereg/P104_THIRD_INDEX_FORECAST.md).
 
 Timing rule: anything published at the close of day t-1 (bhavcopy, the
 participant file, VIX, and the option-implied panel built from the

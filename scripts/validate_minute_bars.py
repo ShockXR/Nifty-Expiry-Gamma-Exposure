@@ -18,7 +18,10 @@ official trading days, and days with fewer bars than a full session.
     python scripts/validate_minute_bars.py --raw data/raw --start 2023-01-01
 
 Writes results/data_validation/: one CSV per index with every day, and
-summary.csv.
+summary.csv. The Fin Nifty bars of P104 (scripts/fetch_finnifty_data.py) are
+checked against NSE's "Nifty Financial Services" values with
+
+    python scripts/validate_minute_bars.py --indices "Nifty Financial Services" --out results/data_validation_finnifty
 """
 
 from __future__ import annotations
@@ -29,7 +32,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-PAIRS = {"Nifty 50": "nifty_1min.csv", "Nifty Bank": "banknifty_1min.csv"}
+# index name in the official file -> (bar file, official daily file), both under --raw
+PAIRS = {"Nifty 50": ("nifty_1min.csv", "index_daily.csv"), "Nifty Bank": ("banknifty_1min.csv", "index_daily.csv"),
+         "Nifty Financial Services": ("finnifty_1min.csv", "finnifty/index_daily_finnifty.csv")}
+DEFAULT_INDICES = ["Nifty 50", "Nifty Bank"]
 
 
 def daily_from_bars(path: Path, start: str) -> pd.DataFrame:
@@ -48,12 +54,14 @@ def main():
     ap.add_argument("--start", default="2023-01-01")
     ap.add_argument("--out", default="results/data_validation")
     ap.add_argument("--tol-bp", type=float, default=5.0, help="tolerance in basis points for high/low/open")
+    ap.add_argument("--indices", nargs="+", default=DEFAULT_INDICES, choices=list(PAIRS))
     a = ap.parse_args()
     raw, out = Path(a.raw), Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    off = pd.read_csv(raw / "index_daily.csv", parse_dates=["date"])
     summary = []
-    for index, fname in PAIRS.items():
+    for index in a.indices:
+        fname, off_file = PAIRS[index]
+        off = pd.read_csv(raw / off_file, parse_dates=["date"])
         o = off[off["index"].str.lower() == index.lower()].set_index("date")[["open", "high", "low", "close"]]
         o = o[o.index >= pd.Timestamp(a.start)]
         bars = daily_from_bars(raw / fname, a.start)

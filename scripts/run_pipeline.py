@@ -3,10 +3,13 @@
     python scripts/run_pipeline.py --source synthetic --days 500 --kappa 0.5
     python scripts/run_pipeline.py --source nse --raw data/raw --out results/pipeline_nse_v2
     python scripts/run_pipeline.py --source nse --symbol BANKNIFTY --end 2026-04-22 --out results/pipeline_nse_banknifty
+    python scripts/run_pipeline.py --source nse --symbol FINNIFTY --end 2026-01-27 --out results/pipeline_nse_finnifty
 
 --symbol picks the index (default NIFTY, the index the design was chosen on). BANKNIFTY is the
 pre-registered out-of-sample replication (docs/prereg/P91_BANKNIFTY_FORECAST.md): the same models,
 features and settings, fed with Bank Nifty's own minute bars, option chains, futures and expiry calendar.
+FINNIFTY (Nifty Financial Services) is the third-index replication (docs/prereg/P104_THIRD_INDEX_FORECAST.md),
+wired the same way; its bhavcopies and official days are in their own files (scripts/fetch_finnifty_data.py).
 
 Outputs go to results/pipeline_<source>/ (or --out; results/pipeline_<source>_<symbol>/ for a symbol other than NIFTY):
     daily_market.csv             one row per day: labels, realized variance pieces, VIX
@@ -64,13 +67,20 @@ SIGNED = ["us", "participant", "client"]
 HEADLINE_KIND = "hybrid"
 
 # What changes with --symbol (nse source only). Everything else, the India VIX file and the
-# participant-wise OI file included, is shared: NSE publishes no Bank Nifty VIX, and the participant
-# file covers all index options together. "official" is the index name in index_daily.csv.
+# participant-wise OI file included, is shared: NSE publishes no Bank Nifty or Fin Nifty VIX, and the
+# participant file covers all index options together. "official" is the index name in the official
+# daily file ("official_file", default index_daily.csv); "bhavcopy" is the folder of F&O bhavcopies
+# (default bhavcopy/, which holds Nifty and Bank Nifty rows only). FINNIFTY is the pre-registered
+# third-index replication P104 (docs/prereg/P104_THIRD_INDEX_FORECAST.md); its files come from
+# scripts/fetch_finnifty_data.py.
 SYMBOLS = {
     "NIFTY": {"bars": "nifty_1min.csv", "futures_bars": "nifty_fut_1min.csv", "official": "nifty 50",
               "bars_label": "Nifty"},
     "BANKNIFTY": {"bars": "banknifty_1min.csv", "futures_bars": "banknifty_fut_1min.csv",
                   "official": "nifty bank", "bars_label": "Bank Nifty"},
+    "FINNIFTY": {"bars": "finnifty_1min.csv", "futures_bars": "finnifty_fut_1min.csv",
+                 "official": "nifty financial services", "bars_label": "Fin Nifty",
+                 "bhavcopy": "finnifty/bhavcopy", "official_file": "finnifty/index_daily_finnifty.csv"},
 }
 
 
@@ -84,10 +94,11 @@ def load_market(a):
     symbol = getattr(a, "symbol", "NIFTY")  # callers written before --symbol existed get Nifty
     spec = SYMBOLS[symbol]
     official = None
-    if (raw / "index_daily.csv").exists():  # NSE's own list of trading days (from download_nse.py)
-        idx = pd.read_csv(raw / "index_daily.csv", parse_dates=["date"])
+    official_file = raw / spec.get("official_file", "index_daily.csv")
+    if official_file.exists():  # NSE's own list of trading days (from download_nse.py)
+        idx = pd.read_csv(official_file, parse_dates=["date"])
         official = idx.loc[idx["index"].str.lower() == spec["official"], "date"]
-    return build_market_from_nse(raw / spec["bars"], raw / "bhavcopy",
+    return build_market_from_nse(raw / spec["bars"], raw / spec.get("bhavcopy", "bhavcopy"),
                                  raw / "participant_oi" if (raw / "participant_oi").exists() else None,
                                  raw / "india_vix.csv" if (raw / "india_vix.csv").exists() else None,
                                  raw / spec["futures_bars"] if (raw / spec["futures_bars"]).exists() else None,
@@ -185,7 +196,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", choices=["synthetic", "nse"], default="synthetic")
     ap.add_argument("--symbol", choices=list(SYMBOLS), default="NIFTY",
-                    help="index to forecast (nse source only); BANKNIFTY is the pre-registered replication P91")
+                    help="index to forecast (nse source only); BANKNIFTY is the pre-registered replication P91, "
+                         "FINNIFTY the third-index replication P104")
     ap.add_argument("--raw", default="data/raw")
     ap.add_argument("--days", type=int, default=500)
     ap.add_argument("--kappa", type=float, default=0.5)

@@ -336,11 +336,11 @@ def build_market_from_nse(
     """Assemble the market dict from raw NSE-layout files.
 
     * ``symbol``: the index whose options, futures and expiry calendar are
-      used (NIFTY or BANKNIFTY); ``bars_path`` must hold that index's bars.
+      used (NIFTY, BANKNIFTY or FINNIFTY); ``bars_path`` must hold that index's bars.
     * ``other_symbol``: the other big NSE index, whose expiry dates are
       returned as ``other_index_expiries`` (the calendar feature
       ``bn_expiry_only``). Default: BANKNIFTY for NIFTY (the original
-      design) and NIFTY for BANKNIFTY.
+      design), NIFTY for any other index (BANKNIFTY, P91; FINNIFTY, P104).
     * ``bars_path``: 1-minute index bars (CSV, see load_minute_bars).
     * ``bhavcopy_dir``: one bhavcopy CSV per trading day, any file name; the
       trade date is read from inside the file.
@@ -368,7 +368,7 @@ def build_market_from_nse(
     from .expiry_calendar import label_days
 
     if other_symbol is None:
-        other_symbol = "NIFTY" if symbol == "BANKNIFTY" else "BANKNIFTY"
+        other_symbol = "BANKNIFTY" if symbol == "NIFTY" else "NIFTY"
     bars = load_minute_bars(bars_path)
     if start is not None:
         bars = bars[bars.index >= pd.Timestamp(start)]
