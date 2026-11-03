@@ -554,7 +554,7 @@ PI142,PITCH_PANDEY.md,each worth less than 1% of mcsGARCH's loss,1,,,UNTRACED,"t
 PI143,PITCH_PANDEY.md,with five sets of random seeds,five,,results/p110_gain_stress_test/verdict.csv,csv:test_id=F1_BANKNIFTY_next15_realized@seed_sets,P110
 PA140,PAPER,survive (3.5e-8 and 9.1e-14),3.5e-8,,results/test_ledger.csv,csv:test_id=BENCHCPP-0001@p_by_project,P116 H1 15 min BY
 PA141,PAPER,survive (3.5e-8 and 9.1e-14),9.1e-14,,results/test_ledger.csv,csv:test_id=BENCHCPP-0019@p_by_project,P116 H1 30 min BY
-PA142,PAPER,do not (0.18 and 0.73),0.18,,results/test_ledger.csv,csv:test_id=BENCHCPP-0002@p_by_project,P116 H2 15 min BY
+PA142,PAPER,do not (0.18 and 0.74),0.18,,results/test_ledger.csv,csv:test_id=BENCHCPP-0002@p_by_project,P116 H2 15 min BY
 PA143,PAPER,do not (0.18 and 0.74),0.74,,results/test_ledger.csv,csv:test_id=BENCHCPP-0020@p_by_project,P116 H2 30 min BY
 PA144,PAPER,the hybrid's gain is 4.43% and 6.64%,4.43,,results/p116_benchmark_as_printed/verdict.csv,csv:index=NIFTY@hybrid_gain_vs_mcs_cpp_pct_next15,P116
 PA145,PAPER,the hybrid's gain is 4.43% and 6.64%,6.64,,results/p116_benchmark_as_printed/verdict.csv,csv:index=NIFTY@hybrid_gain_vs_mcs_cpp_pct_next30,P116
