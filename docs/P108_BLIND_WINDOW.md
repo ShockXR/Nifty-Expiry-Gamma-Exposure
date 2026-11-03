@@ -38,6 +38,12 @@ to about 20 February 2023.**
 * **The after window is as stated.** The same method finds that the paper's "after" numbers fit
   1 March to 31 May 2024 (POST HOC check in Section 5.6), matching the paper's text.
 
+* **Added in phase 3, after the blind answer was pushed:** the project's earlier, independent search
+  found the same year, length, return definition and explanations, but put the window about one
+  week earlier (14 November 2022 to 10 February 2023). Section 8 explains the difference: the printed
+  means favour this study's window, the printed higher moments favour the earlier one. The blind
+  answer above is unchanged.
+
 What this means for a beginner: the paper's before and after samples are not next to each other.
 The before data seem to be from the winter of 2022 to 2023, roughly fifteen months before the
 after data, not the four months just before the expiry change. Possibly the before data were taken
@@ -278,13 +284,119 @@ Files opened (read or loaded):
 * This study's own files: `docs/prereg/P108_BLIND_WINDOW.md`, `docs/P108_BLIND_WINDOW.md`,
   everything in `experiments/p108_blind_window/` and `results/p108_blind_window/`,
   `tests/test_p108_blind_window.py`, and scratch scripts in the agent's private scratch folder.
+* **Only after the phase 2 push (phase 3):** `docs/REPLICATION_NSE.md` (a keyword search of the whole
+  file for "before", "window" and "fingerprint", then Sections 2 to 4, lines 64 to 127, in full) and
+  `results/replication_nse/fingerprint_search.csv`. No other barred file was opened, and for the
+  final test run the agent ran the whole test suite, which executes the barred test files without
+  the agent reading them.
 
-## 8. How to reproduce
+## 8. Comparison with the earlier search (phase 3, written after the blind answer was pushed)
+
+Everything above was committed and pushed (commit `d904c8c58f9d68816a82d656f13be817df955f6e`,
+06:00 UTC) before the agent opened anything behind the barrier. Only then did it read
+`docs/REPLICATION_NSE.md` (its summary and Sections 3 and 4, on the before window) and
+`results/replication_nse/fingerprint_search.csv`. The blind answer in Sections 1 to 5 is unchanged.
+
+### 8.1 What the earlier search found
+
+The earlier search scored the 348 windows of exactly 64 trading days between July 2022 and February
+2024, under the 09:15 to 15:14 rule (which it chose from the after window), on how closely the SD,
+minimum, maximum and excess kurtosis match Table 1. Its best window is **14 November 2022 to
+10 February 2023** (score 0.045), and it notes that neighbours a few days earlier or later score
+almost as well.
+
+### 8.2 Where the two searches agree
+
+On almost everything, reached independently:
+
+* the before sample is **64 trading days in November 2022 to February 2023**, not November 2023 to
+  February 2024 (the earlier search ranks the best window starting in November 2023 or later 217th of 348;
+  here the stated window scores E = 0 under all 204 definitions);
+* the returns are **09:15 to 15:14 one-minute log returns, run straight through from one day to the next**;
+* both printed maxima are the same two minutes (30 January 2023 09:20 for Nifty 50, 3 February 2023
+  09:15 for Nifty Bank), matched to every printed decimal;
+* both printed minima are the 30 January 2023 opening gap, and both searches trace the small
+  mismatch to the same cause: the paper's day-end prices on 27 January 2023 equal our 15:15 opening
+  prices (17,612.50 and 40,365.45), a one-bar difference between data feeds;
+* the after window is 1 March to 31 May 2024 with 21,239 Nifty returns (and 21,233 for Nifty Bank in
+  our files);
+* Table 5's weekday counts do not fit (13 Wednesdays but 12 Thursdays in the window).
+
+Where the two searches computed the same statistic on the same window they agree to the digits
+shown (for example, for 14 November 2022 to 10 February 2023, Nifty 50 SD 0.0003578019 in both, and
+Anderson-Darling 660.5 and 822.5 there against 660.46 and 822.39 here).
+
+### 8.3 Where they disagree: the exact endpoints, by about one week
+
+| Window (64 trading days) | Earlier search rank (of 348) | This study, registered rank (of 132,126) | E | Both printed means reproduced? |
+|---|---|---|---|---|
+| 14 Nov 2022 to 10 Feb 2023 (earlier answer) | 1 | 9 | 5 | No: Nifty Bank mean is -0.00000055, which prints as -0.000001, not -0.000002 |
+| 22 Nov 2022 to 20 Feb 2023 (this answer) | 8 | 1 | 6 | Yes |
+| 23 Nov 2022 to 21 Feb 2023 | 9 | 2 | 6 | Yes |
+
+Both answers lie inside each other's near-ties, and inside this study's registered candidate set
+(start 11 to 24 November 2022, end 9 to 22 February 2023). The searches differ by six trading days
+because they listen to different printed numbers:
+
+* **This study** counts exact matches first, and the printed **means** are among them. A mean of
+  one-minute returns joined across days depends almost only on the window's first and last prices
+  (it is the total log change divided by N). The printed means (-0.000001 for Nifty 50, -0.000002 for
+  Nifty Bank) need Nifty 50 to fall between about 1.2% and 3.5% over the window and Nifty Bank between
+  about 3.5% and 5.8%. Among the 16 windows of 64 days that reproduce N and the four extremes, only
+  the windows starting 22 and 23 November do both. For 14 November to 10 February, Nifty Bank falls
+  only about 1.3%; it would need to fall about 2.2 percentage points more to print as -0.000002.
+* **The earlier search** scores SD, minimum, maximum and excess kurtosis, and leaves out the means.
+  These numbers are printed very precisely, but they are driven by a handful of large returns, and
+  the two data feeds are known to differ (Section 5.1); for example our Nifty Bank skewness is at
+  least 14% off for every one of the 16 feasible windows (14% to 30%), so some large Nifty Bank
+  returns must differ too.
+
+**POST HOC check (phase 3)** (`experiments/p108_blind_window/phase3_compare.py`,
+`results/p108_blind_window/phase3_feasible_windows_fixed_formulas.csv`). The registered search let each
+window choose its kurtosis formula, and it chose raw kurtosis (excess plus 3) for 22 November to
+20 February. The after window, and the earlier search, both indicate that the paper reports
+**excess** kurtosis (after window: our excess kurtosis 75.92 against printed 75.88; raw would be
+about 78.9). This was not used in the registered plan, which is a weakness of this study's score.
+Rescoring the 16 feasible windows with the formulas fixed (SD with N in the denominator, adjusted
+skewness, adjusted excess kurtosis) and ranking them by the distance alone:
+
+| Window (with the 27 Jan 2023 price corrected) | Distance, fixed formulas | Rank of 16 | Both means? | Nifty kurtosis error | Nifty Bank kurtosis error |
+|---|---|---|---|---|---|
+| 16 Nov 2022 to 14 Feb 2023 | 0.0440 | 1 | No | -1.6% | -0.2% |
+| 14 Nov 2022 to 10 Feb 2023 | 0.0568 | 7 | No | -0.9% | +0.8% |
+| 22 Nov 2022 to 20 Feb 2023 | 0.0647 | 9 | Yes | -3.8% | -3.9% |
+| 23 Nov 2022 to 21 Feb 2023 | 0.0684 | 11 | Yes | -5.0% | -5.8% |
+
+(Kurtosis errors are log ratios, roughly percentages.) So with excess kurtosis, the precise
+higher moments favour windows starting 14 to 17 November, as the earlier search found, while the
+means favour 22 or 23 November. With the registered ranking (exact matches first, then distance),
+fixing the kurtosis formula does not change the order of the top two, because neither reproduces
+the kurtosis exactly and the means still decide.
+
+### 8.4 Conclusion of the comparison
+
+* **The two independent searches agree** on the substance: the paper's before sample is a 64-day
+  window in late 2022 to early 2023, built from 09:15 to 15:14 log returns joined across days, and
+  the stated November 2023 to February 2024 window is ruled out.
+* **They disagree on the exact days, by about one week.** A fair joint statement is: the window
+  starts between 14 and 23 November 2022 and ends between 10 and 21 February 2023 (64 trading days).
+  Within that range, the means point to 22 November 2022 to 20 February 2023 (this study's blind
+  answer, kept unchanged) and the precise higher moments point to mid-November (the earlier answer).
+* Which is right depends on which printed numbers are more trustworthy. The means are printed with
+  one significant digit but cannot be moved by small feed differences; the higher moments are printed
+  with many digits but are moved by them. In the agent's judgement the means are the safer guide,
+  unless the paper's Mean row was computed on a different series. Only the authors' data or code can
+  settle it.
+* Practical consequence: for any re-analysis, results should be checked on both windows (they share
+  58 of their 64 days), as the earlier study already did with shifted windows.
+
+## 9. How to reproduce
 
 ```
 ln -s <path to raw data> data/raw
 OMP_NUM_THREADS=1 python experiments/p108_blind_window/search.py --raw data/raw --out results/p108_blind_window --plan-commit 6b289ca7b3f29803dfab0159377235eb7452761b
 OMP_NUM_THREADS=1 python experiments/p108_blind_window/posthoc.py --raw data/raw --out results/p108_blind_window
+OMP_NUM_THREADS=1 python experiments/p108_blind_window/phase3_compare.py --raw data/raw --out results/p108_blind_window
 PYTHONPATH=$PWD/src OMP_NUM_THREADS=1 python -m pytest -q tests/test_p108_blind_window.py
 ```
 
