@@ -336,6 +336,14 @@ def sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def rel_path(path: Path) -> str:
+    """Path relative to the repository root when it lies inside it (so that run_info.json has no machine paths)."""
+    try:
+        return str(Path(path).resolve().relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def common_dates(dirs: dict, targets=TARGETS) -> list:
     """Dates present in every index's forecast file, for every target (reads the date column only)."""
     sets = []
@@ -453,6 +461,16 @@ def git_head() -> str:
                               check=True).stdout.strip()
     except Exception:  # pragma: no cover
         return "unknown"
+
+
+def script_differs() -> bool | None:
+    """True if this script has uncommitted changes relative to HEAD."""
+    try:
+        r = subprocess.run(["git", "diff", "--quiet", "HEAD", "--", str(Path(__file__).resolve().relative_to(ROOT))],
+                           cwd=ROOT, capture_output=True)
+        return r.returncode != 0
+    except Exception:  # pragma: no cover
+        return None
 
 
 def dk_method(T: int, lag: int) -> str:
@@ -925,8 +943,10 @@ def run(dirs: dict, out: Path, label: str = "REAL DATA", draws: int = N_DRAWS, p
         "prereg_file": "docs/prereg/P107_POOLED_THREE_INDEX.md",
         "plan_commit": plan_commit,
         "code_commit_at_run": git_head() if label == "REAL DATA" else None,
+        "script_sha256": sha256(Path(__file__)),
+        "script_differs_from_code_commit": script_differs() if label == "REAL DATA" else None,
         "command": "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p107_pooled_test.py run",
-        "inputs": {f"{names[k]}/{t}": {"file": str(Path(dirs[k]) / f"forecasts_{t}.csv"),
+        "inputs": {f"{names[k]}/{t}": {"file": rel_path(Path(dirs[k]) / f"forecasts_{t}.csv"),
                                        "sha256": sha256(Path(dirs[k]) / f"forecasts_{t}.csv")}
                    for k in keys for t in TARGETS},
         "common_dates": {"n": T_all, "first": dates[0], "last": dates[-1]},

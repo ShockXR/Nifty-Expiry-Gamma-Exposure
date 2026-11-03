@@ -1,0 +1,291 @@
+data,target,benchmark,set,measure,value,ci95_lo,ci95_hi,n_indices
+REAL DATA,next15,mcsgarch,all three,kish,1.64574474286903,1.4775166069086683,1.8971371482996504,3
+REAL DATA,next15,mcsgarch,all three,participation,2.162519778712216,1.9114697836818517,2.4030124668326684,3
+REAL DATA,next15,mcsgarch,all three,nyholt,2.612729451294774,2.4305271128727246,2.751567025927675,3
+REAL DATA,next15,mcsgarch,all three,li_ji,3.0000000000000004,2.0,3.0000000001,3
+REAL DATA,next15,mcsgarch,all three,eigenvalue_1,1.8429089669720007,1.617446752789356,2.0432967182555055,3
+REAL DATA,next15,mcsgarch,all three,eigenvalue_2,0.797712526135622,0.6497044907197009,1.0134314917627538,3
+REAL DATA,next15,mcsgarch,all three,eigenvalue_3,0.35937850689237655,0.2624296844159026,0.4488186705155546,3
+REAL DATA,next15,mcsgarch,all three,design_lr,1.7884957052741859,1.5582377533728176,2.1010904686464116,3
+REAL DATA,next15,mcsgarch,all three,kish_lr,1.8086901756682405,1.53379440853807,2.140137647954839,3
+REAL DATA,next15,mcsgarch,all three,nifty_equiv_equal,1.6113356430350796,0.8818718417118094,2.613248568953343,3
+REAL DATA,next15,mcsgarch,all three,nifty_equiv_gls,2.051171304221095,1.5063545023406346,3.234810036338173,3
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,kish,1.6390167654557242,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,participation,1.9074735709391424,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,nyholt,1.9514926809626503,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,li_ji,2.0,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,eigenvalue_1,1.2202437718469008,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,eigenvalue_2,0.7797562281530992,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,design_lr,1.837107585340251,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,kish_lr,1.8363298332952447,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,nifty_equiv_equal,2.023732962541308,,,2
+REAL DATA,next15,mcsgarch,Nifty + Bank Nifty,nifty_equiv_gls,2.045004278048472,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,kish,1.4168347020883638,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,participation,1.7102607659022022,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,nyholt,1.830587685881367,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,eigenvalue_1,1.411597271758005,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,eigenvalue_2,0.5884027282419951,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,design_lr,1.431358206655796,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,kish_lr,1.4226218687765322,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,nifty_equiv_equal,1.138585221914517,,,2
+REAL DATA,next15,mcsgarch,Nifty + Fin Nifty,nifty_equiv_gls,1.198104642567629,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,kish,1.248062887531751,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,participation,1.4673662982190687,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,nyholt,1.6370138100981435,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,eigenvalue_1,1.6024833523856543,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,eigenvalue_2,0.3975166476143458,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,design_lr,1.3602553610783126,,,2
+REAL DATA,next15,mcsgarch,Bank Nifty + Fin Nifty,kish_lr,1.3395807891969145,,,2
+REAL DATA,next15,mcsgarch,added by Nifty to the other two,design_lr,0.4282403441958733,,,3
+REAL DATA,next15,mcsgarch,added by Nifty to the other two,kish,0.39768185533727896,,,3
+REAL DATA,next15,mcsgarch,added by Bank Nifty to the other two,design_lr,0.35713749861838995,,,3
+REAL DATA,next15,mcsgarch,added by Bank Nifty to the other two,kish,0.22891004078066612,,,3
+REAL DATA,next15,mcsgarch,added by Fin Nifty to the other two,design_lr,-0.048611880066065094,,,3
+REAL DATA,next15,mcsgarch,added by Fin Nifty to the other two,kish,0.006727977413305775,,,3
+REAL DATA,next15,mcsgarch,all three,design_bootstrap,1.7318403456211389,,,3
+REAL DATA,next15,mcsgarch,"all three, placebo shift",kish,3.075713841479162,,,3
+REAL DATA,next15,mcsgarch,"all three, placebo shift",participation,2.9973593784441523,,,3
+REAL DATA,next15,mcsgarch,"all three, placebo shift",design_lr,3.0676577972530836,,,3
+REAL DATA,next15,mcsgarch_iv,all three,kish,1.3465083385448433,,,3
+REAL DATA,next15,mcsgarch_iv,all three,participation,1.6979127416315853,,,3
+REAL DATA,next15,mcsgarch_iv,all three,nyholt,2.2331247499107687,,,3
+REAL DATA,next15,mcsgarch_iv,all three,li_ji,2.0,,,3
+REAL DATA,next15,mcsgarch_iv,all three,eigenvalue_1,2.2312781186583868,,,3
+REAL DATA,next15,mcsgarch_iv,all three,eigenvalue_2,0.49959340579520123,,,3
+REAL DATA,next15,mcsgarch_iv,all three,eigenvalue_3,0.2691284755464119,,,3
+REAL DATA,next15,mcsgarch_iv,all three,design_lr,1.493124628521709,,,3
+REAL DATA,next15,mcsgarch_iv,all three,kish_lr,1.4388595949893805,,,3
+REAL DATA,next15,mcsgarch_iv,all three,nifty_equiv_equal,2.421144064378399,,,3
+REAL DATA,next15,mcsgarch_iv,all three,nifty_equiv_gls,3.4296769851292415,,,3
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,kish,1.3329653233088201,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,participation,1.5994698754416818,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,nyholt,1.7495857029206536,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,li_ji,2.0,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,eigenvalue_1,1.5004141255793508,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,eigenvalue_2,0.49958587442064906,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,design_lr,1.4753554922722065,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,kish_lr,1.4083817481335041,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,nifty_equiv_equal,2.2607252190017895,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Bank Nifty,nifty_equiv_gls,3.3462072619976944,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,kish,1.196167339997481,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,participation,1.3777964582556208,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,nyholt,1.5484067780721917,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,eigenvalue_1,1.6720068615183987,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,eigenvalue_2,0.3279931384816013,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,design_lr,1.2461934109276132,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,kish_lr,1.2247587108494378,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,nifty_equiv_equal,1.6132989372838888,,,2
+REAL DATA,next15,mcsgarch_iv,Nifty + Fin Nifty,nifty_equiv_gls,1.8690833645797191,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,kish,1.1979232164450038,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,participation,1.3809242585063302,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,nyholt,1.551694643873307,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,eigenvalue_1,1.6695560888579035,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,eigenvalue_2,0.3304439111420963,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,design_lr,1.289386101484185,,,2
+REAL DATA,next15,mcsgarch_iv,Bank Nifty + Fin Nifty,kish_lr,1.270298928808947,,,2
+REAL DATA,next15,mcsgarch_iv,added by Nifty to the other two,design_lr,0.20373852703752404,,,3
+REAL DATA,next15,mcsgarch_iv,added by Nifty to the other two,kish,0.14858512209983954,,,3
+REAL DATA,next15,mcsgarch_iv,added by Bank Nifty to the other two,design_lr,0.24693121759409586,,,3
+REAL DATA,next15,mcsgarch_iv,added by Bank Nifty to the other two,kish,0.15034099854736227,,,3
+REAL DATA,next15,mcsgarch_iv,added by Fin Nifty to the other two,design_lr,0.017769136249502493,,,3
+REAL DATA,next15,mcsgarch_iv,added by Fin Nifty to the other two,kish,0.013543015236023193,,,3
+REAL DATA,next15,mcsgarch_iv,"all three, placebo shift",kish,3.0458350953930795,,,3
+REAL DATA,next15,mcsgarch_iv,"all three, placebo shift",participation,2.9989370837655995,,,3
+REAL DATA,next15,mcsgarch_iv,"all three, placebo shift",design_lr,3.2091951270217027,,,3
+REAL DATA,next30,mcsgarch,all three,kish,2.1790788078648844,1.4945877430126668,3.155947372589309,3
+REAL DATA,next30,mcsgarch,all three,participation,2.658541876186399,1.9381998637170215,2.883049514061606,3
+REAL DATA,next30,mcsgarch,all three,nyholt,2.871561878760618,2.4521719977907956,2.959435144825869,3
+REAL DATA,next30,mcsgarch,all three,li_ji,3.0,2.0,3.0000000001,3
+REAL DATA,next30,mcsgarch,all three,eigenvalue_1,1.4233983148913092,1.213984911419326,2.0223089557658507,3
+REAL DATA,next30,mcsgarch,all three,eigenvalue_2,1.0295633180234345,0.6790095666048552,1.1741723927890235,3
+REAL DATA,next30,mcsgarch,all three,eigenvalue_3,0.5470383670852565,0.24426800097768755,0.7517717905091015,3
+REAL DATA,next30,mcsgarch,all three,design_lr,2.409631495570048,1.603814218943143,3.562746924584688,3
+REAL DATA,next30,mcsgarch,all three,kish_lr,2.4066365629189144,1.612852191668971,3.4564904292188636,3
+REAL DATA,next30,mcsgarch,all three,nifty_equiv_equal,2.8912750344452065,1.1384139482558444,5.847755581504389,3
+REAL DATA,next30,mcsgarch,all three,nifty_equiv_gls,3.2717719203414997,1.6991889614075448,7.18901344702159,3
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,kish,2.0701668922786047,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,participation,1.9977049871576857,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,nyholt,1.9988511752951172,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,li_ji,2.0,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,eigenvalue_1,1.0338943167047623,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,eigenvalue_2,0.9661056832952377,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,design_lr,2.4013482216824786,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,kish_lr,2.415784162548825,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,nifty_equiv_equal,2.9746504236474443,,,2
+REAL DATA,next30,mcsgarch,Nifty + Bank Nifty,nifty_equiv_gls,3.159935019043799,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,kish,1.6371142719706528,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,participation,1.9063342453202177,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,nyholt,1.9508660378369016,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,eigenvalue_1,1.2216618193625108,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,eigenvalue_2,0.7783381806374893,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,design_lr,1.662343241925279,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,kish_lr,1.6618264418013209,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,nifty_equiv_equal,1.7631018386047885,,,2
+REAL DATA,next30,mcsgarch,Nifty + Fin Nifty,nifty_equiv_gls,1.7698839655486487,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,kish,1.4520897677849613,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,participation,1.7507395200463993,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,nyholt,1.8576256050089082,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,eigenvalue_1,1.3773253171880888,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,eigenvalue_2,0.6226746828119113,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,design_lr,1.5005195853333981,,,2
+REAL DATA,next30,mcsgarch,Bank Nifty + Fin Nifty,kish_lr,1.4942703990509374,,,2
+REAL DATA,next30,mcsgarch,added by Nifty to the other two,design_lr,0.9091119102366501,,,3
+REAL DATA,next30,mcsgarch,added by Nifty to the other two,kish,0.726989040079923,,,3
+REAL DATA,next30,mcsgarch,added by Bank Nifty to the other two,design_lr,0.7472882536447691,,,3
+REAL DATA,next30,mcsgarch,added by Bank Nifty to the other two,kish,0.5419645358942315,,,3
+REAL DATA,next30,mcsgarch,added by Fin Nifty to the other two,design_lr,0.008283273887569553,,,3
+REAL DATA,next30,mcsgarch,added by Fin Nifty to the other two,kish,0.10891191558627966,,,3
+REAL DATA,next30,mcsgarch,all three,design_bootstrap,2.4452980949409837,,,3
+REAL DATA,next30,mcsgarch,"all three, placebo shift",kish,3.0156868170759465,,,3
+REAL DATA,next30,mcsgarch,"all three, placebo shift",participation,2.9970206233994023,,,3
+REAL DATA,next30,mcsgarch,"all three, placebo shift",design_lr,3.0253022660347417,,,3
+REAL DATA,next30,mcsgarch_iv,all three,kish,1.4976395467225667,,,3
+REAL DATA,next30,mcsgarch_iv,all three,participation,1.9705933990080882,,,3
+REAL DATA,next30,mcsgarch_iv,all three,nyholt,2.477615929541797,,,3
+REAL DATA,next30,mcsgarch_iv,all three,li_ji,2.0,,,3
+REAL DATA,next30,mcsgarch_iv,all three,eigenvalue_1,2.0089820212452034,,,3
+REAL DATA,next30,mcsgarch_iv,all three,eigenvalue_2,0.6370807601873357,,,3
+REAL DATA,next30,mcsgarch_iv,all three,eigenvalue_3,0.3539372185674596,,,3
+REAL DATA,next30,mcsgarch_iv,all three,design_lr,1.5915420990053142,,,3
+REAL DATA,next30,mcsgarch_iv,all three,kish_lr,1.588751772739486,,,3
+REAL DATA,next30,mcsgarch_iv,all three,nifty_equiv_equal,1.7782733284568188,,,3
+REAL DATA,next30,mcsgarch_iv,all three,nifty_equiv_gls,1.8126866510707618,,,3
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,kish,1.46742291082096,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,participation,1.7672203208363997,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,nyholt,1.8682791973253061,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,li_ji,2.0,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,eigenvalue_1,1.3629336064278061,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,eigenvalue_2,0.6370663935721936,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,design_lr,1.5158838781098842,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,kish_lr,1.5135309069376315,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,nifty_equiv_equal,1.6868655914746455,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Bank Nifty,nifty_equiv_gls,1.7111073793354232,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,kish,1.2747486332749245,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,participation,1.5109288748881862,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,nyholt,1.6763109546450314,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,eigenvalue_1,1.5689367674486934,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,eigenvalue_2,0.4310632325513066,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,design_lr,1.3333848248781708,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,kish_lr,1.3325967606765898,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,nifty_equiv_equal,1.4127083512035898,,,2
+REAL DATA,next30,mcsgarch_iv,Nifty + Fin Nifty,nifty_equiv_gls,1.4194057284097545,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,kish,1.2715706273912972,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,participation,1.505835574777517,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,nyholt,1.6718337423423577,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,eigenvalue_1,1.5728579733735424,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,eigenvalue_2,0.4271420266264573,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,design_lr,1.324999381843491,,,2
+REAL DATA,next30,mcsgarch_iv,Bank Nifty + Fin Nifty,kish_lr,1.3243544111919372,,,2
+REAL DATA,next30,mcsgarch_iv,added by Nifty to the other two,design_lr,0.2665427171618231,,,3
+REAL DATA,next30,mcsgarch_iv,added by Nifty to the other two,kish,0.2260689193312695,,,3
+REAL DATA,next30,mcsgarch_iv,added by Bank Nifty to the other two,design_lr,0.2581572741271434,,,3
+REAL DATA,next30,mcsgarch_iv,added by Bank Nifty to the other two,kish,0.22289091344764222,,,3
+REAL DATA,next30,mcsgarch_iv,added by Fin Nifty to the other two,design_lr,0.07565822089542995,,,3
+REAL DATA,next30,mcsgarch_iv,added by Fin Nifty to the other two,kish,0.030216635901606725,,,3
+REAL DATA,next30,mcsgarch_iv,"all three, placebo shift",kish,2.985479838945834,,,3
+REAL DATA,next30,mcsgarch_iv,"all three, placebo shift",participation,2.999654258295097,,,3
+REAL DATA,next30,mcsgarch_iv,"all three, placebo shift",design_lr,3.218809708517043,,,3
+REAL DATA,last_hour,mcsgarch,all three,kish,2.220928494235068,1.7990085354331173,2.710529684130173,3
+REAL DATA,last_hour,mcsgarch,all three,participation,2.6419485943793406,2.3451809896892124,2.7779936137414767,3
+REAL DATA,last_hour,mcsgarch,all three,nyholt,2.864474499472699,2.720781032351844,2.9200839105027323,3
+REAL DATA,last_hour,mcsgarch,all three,li_ji,3.0,2.9999999999,3.0000000001,3
+REAL DATA,last_hour,mcsgarch,all three,eigenvalue_1,1.4536278353714915,1.3512368758826874,1.6967897137180352,3
+REAL DATA,last_hour,mcsgarch,all three,eigenvalue_2,0.994442926328362,0.8316948250945491,1.003840182721464,3
+REAL DATA,last_hour,mcsgarch,all three,eigenvalue_3,0.5519292383001471,0.39865684810273333,0.664082363448757,3
+REAL DATA,last_hour,mcsgarch,all three,design_lr,2.5988472060661745,1.8192936737583136,3.61309725736771,3
+REAL DATA,last_hour,mcsgarch,all three,kish_lr,2.362087615819989,1.8038306248213276,3.027470574944534,3
+REAL DATA,last_hour,mcsgarch,all three,nifty_equiv_equal,4.184174874716852,1.7421317605939446,7.4769501432305985,3
+REAL DATA,last_hour,mcsgarch,all three,nifty_equiv_gls,4.32627646995538,1.8547261949686675,9.35413083141795,3
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,kish,1.9570185159278322,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,participation,1.9990357414389717,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,nyholt,1.9995176381587183,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,li_ji,2.0,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,eigenvalue_1,1.0219627375634666,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,eigenvalue_2,0.9780372624365334,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,design_lr,2.2789226610254945,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,kish_lr,2.3078509996499093,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,nifty_equiv_equal,3.1851613715359712,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Bank Nifty,nifty_equiv_gls,3.7942941011871927,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,kish,1.8911235631532732,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,participation,1.9933927481522902,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,nyholt,1.9966854239568024,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,eigenvalue_1,1.0575723548519407,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,eigenvalue_2,0.9424276451480593,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,design_lr,2.008723872727428,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,kish_lr,2.0095054809787642,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,nifty_equiv_equal,2.804739614669057,,,2
+REAL DATA,last_hour,mcsgarch,Nifty + Fin Nifty,nifty_equiv_gls,3.3272521826890094,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,kish,1.3825096591060204,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,participation,1.6673734761395027,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,nyholt,1.800508687093528,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,eigenvalue_1,1.4466445039474594,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,eigenvalue_2,0.5533554960525406,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,design_lr,1.295994100057692,,,2
+REAL DATA,last_hour,mcsgarch,Bank Nifty + Fin Nifty,kish_lr,1.2959934864486982,,,2
+REAL DATA,last_hour,mcsgarch,added by Nifty to the other two,design_lr,1.3028531060084825,,,3
+REAL DATA,last_hour,mcsgarch,added by Nifty to the other two,kish,0.8384188351290478,,,3
+REAL DATA,last_hour,mcsgarch,added by Bank Nifty to the other two,design_lr,0.5901233333387466,,,3
+REAL DATA,last_hour,mcsgarch,added by Bank Nifty to the other two,kish,0.329804931081795,,,3
+REAL DATA,last_hour,mcsgarch,added by Fin Nifty to the other two,design_lr,0.31992454504068,,,3
+REAL DATA,last_hour,mcsgarch,added by Fin Nifty to the other two,kish,0.26390997830723606,,,3
+REAL DATA,last_hour,mcsgarch,"all three, placebo shift",kish,3.186110037626682,,,3
+REAL DATA,last_hour,mcsgarch,"all three, placebo shift",participation,2.985466602288244,,,3
+REAL DATA,last_hour,mcsgarch,"all three, placebo shift",design_lr,3.154530766125879,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,kish,1.5565899725696344,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,participation,1.9704002218818835,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,nyholt,2.4774666757118156,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,li_ji,3.0,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,eigenvalue_1,1.967613394867741,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,eigenvalue_2,0.8018385808163949,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,eigenvalue_3,0.2305480243158651,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,design_lr,1.5314617886395923,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,kish_lr,1.533973363919333,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,nifty_equiv_equal,1.3716815814610355,,,3
+REAL DATA,last_hour,mcsgarch_iv,all three,nifty_equiv_gls,1.541539256248546,,,3
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,kish,1.5714165546392187,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,participation,1.861529263172698,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,nyholt,1.925614525881103,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,li_ji,2.0,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,eigenvalue_1,1.2727370054079516,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,eigenvalue_2,0.7272629945920484,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,design_lr,1.505225279873447,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,kish_lr,1.5051225171342193,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,nifty_equiv_equal,1.5405818214959157,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Bank Nifty,nifty_equiv_gls,1.541535381416991,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,kish,1.47723830277571,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,participation,1.777415297846579,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,nyholt,1.8747705713892002,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,eigenvalue_1,1.3538777029014397,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,eigenvalue_2,0.6461222970985603,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,design_lr,1.468869000571506,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,kish_lr,1.4634646377446439,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,nifty_equiv_equal,1.2264311667040102,,,2
+REAL DATA,last_hour,mcsgarch_iv,Nifty + Fin Nifty,nifty_equiv_gls,1.2661101720105923,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,kish,1.133581200804173,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,participation,1.262478747322612,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,nyholt,1.4158149162974203,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,li_ji,2.0,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,eigenvalue_1,1.7643200139356419,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,eigenvalue_2,0.2356799860643582,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,design_lr,1.1594152902151893,,,2
+REAL DATA,last_hour,mcsgarch_iv,Bank Nifty + Fin Nifty,kish_lr,1.150653539587847,,,2
+REAL DATA,last_hour,mcsgarch_iv,added by Nifty to the other two,design_lr,0.37204649842440296,,,3
+REAL DATA,last_hour,mcsgarch_iv,added by Nifty to the other two,kish,0.42300877176546137,,,3
+REAL DATA,last_hour,mcsgarch_iv,added by Bank Nifty to the other two,design_lr,0.06259278806808632,,,3
+REAL DATA,last_hour,mcsgarch_iv,added by Bank Nifty to the other two,kish,0.07935166979392427,,,3
+REAL DATA,last_hour,mcsgarch_iv,added by Fin Nifty to the other two,design_lr,0.02623650876614536,,,3
+REAL DATA,last_hour,mcsgarch_iv,added by Fin Nifty to the other two,kish,-0.014826582069584315,,,3
+REAL DATA,last_hour,mcsgarch_iv,"all three, placebo shift",kish,2.917122872797377,,,3
+REAL DATA,last_hour,mcsgarch_iv,"all three, placebo shift",participation,2.998742186279977,,,3
+REAL DATA,last_hour,mcsgarch_iv,"all three, placebo shift",design_lr,2.704874595340536,,,3

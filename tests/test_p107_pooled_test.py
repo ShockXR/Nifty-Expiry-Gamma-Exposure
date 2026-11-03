@@ -301,6 +301,29 @@ def test_bounds_from_committed_table(tmp_path):
         assert tp >= min(ti) - 1e-12
 
 
+# ---------------------------------------------------------------- post hoc helpers (experiments/p107_posthoc.py)
+
+
+def test_posthoc_winsorize_and_drop_extreme():
+    _p = Path(__file__).resolve().parents[1] / "experiments" / "p107_posthoc.py"
+    _s = importlib.util.spec_from_file_location("p107_posthoc", _p)
+    ph = importlib.util.module_from_spec(_s)
+    _s.loader.exec_module(ph)
+    rng = np.random.default_rng(15)
+    D = rng.standard_normal((200, 3))
+    D[17] = [30.0, 0.0, 0.0]                       # one huge day in the first column
+    D[90] = [0.0, -12.0, 0.0]
+    assert ph.extreme_order(D)[:2].tolist() == [17, 90]
+    X = ph.drop_extreme(D, 2)
+    assert X.shape == (198, 3) and not np.any(np.isclose(X[:, 0], 30.0))
+    assert np.array_equal(X[:17], D[:17]) and np.array_equal(X[17:89], D[18:90])
+    W = ph.winsorize_columns(D)
+    assert W[17, 0] == np.quantile(D[:, 0], 0.99) and W[:, 0].max() <= np.quantile(D[:, 0], 0.99)
+    assert np.array_equal(ph.drop_extreme(D, 0), D)
+    row = ph.dependence_row(D, 3)
+    assert set(row) >= {"corr_nifty_banknifty", "kish", "design_lr", "nifty_equiv_equal"}
+
+
 # ---------------------------------------------------------------- end to end on synthetic forecast files
 
 
