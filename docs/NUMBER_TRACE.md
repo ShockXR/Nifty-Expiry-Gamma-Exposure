@@ -99,7 +99,7 @@ at most about ten words.
 
 ## Results (run of 3 November 2026, after the pitch was shortened)
 
-**281 registry entries: 270 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 6 UNTRACED.**
+**286 registry entries: 275 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 6 UNTRACED** (run with the private working paper, revision round 2).
 
 | Document | Entries | MATCH | MISMATCH | UNTRACED |
 | --- | --- | --- | --- | --- |
@@ -115,7 +115,7 @@ at most about ten words.
 | docs/SENSEX_SWAP.md | 7 | 7 | 0 | 0 |
 | docs/REPLICATION_NSE.md | 8 | 8 | 0 | 0 |
 | docs/DEALER_SIGN.md | 10 | 10 | 0 | 0 |
-| Working paper (private) | 28 | 28 | 0 | 0 |
+| Working paper (private) | 33 | 33 | 0 | 0 |
 
 **What changed since the first run (221 entries at 9634054).** The pitch, README, briefing,
 REAL_DATA_RESULTS.md and DEALER_SIGN.md were rewritten after three referee responses, which left 20 entries
@@ -142,13 +142,13 @@ clean-baseline Tuesday premia (63% in the last hour, 26% over the day, from
 `results/referee_expiry/two_day_raw_differences.csv`), the two printed after-change hour totals that lie
 below our intervals (66.44 and 70.97, from `results/replication_nse/tables34_connectedness.csv`) and four
 settings recorded as UNTRACED. The briefing was shortened the same way: BR05 and BR09 were removed, BR07,
-BR08 and BR15 re-quoted, and BR20 to BR24 added (63%, 3.9%, 5.0%, 4.5 points, p = 0.0006).
+BR08 and BR15 re-quoted, and BR20 to BR24 added (63%, 3.9%, 5.0%, 4.5 points, p = 0.0006). The working paper's two revision rounds had left 15 of its entries TEXT_MISSING: 13 were re-quoted to the new wording with the same source, PA13 ("169 degrees apart", withdrawn in round 1) was removed, PA28 now points to the clean-baseline 63% (the Sensex-control +63% is no longer printed), and PA29 to PA34 were added (26%, 190 degrees, the Bank Nifty 3.9% and 5.0%, and the Giacomini and White adjusted p 0.292 and 0.038).
 
 Every pitch number that is a result has a registry entry, and the pitch scan now leaves nothing uncovered.
 The four numbers that are not results are registered as UNTRACED: "360 minutes a day" (the sample design),
 "a 100 bp move" (the scale of an illustration), "a 50-point strike" (NSE's strike spacing) and "5%" (the
 significance level). The working paper's main text has many more
-numbers than the 28 registered here; its uncovered list was printed for the author and not saved.
+numbers than the 33 registered here; its uncovered list was printed for the author and not saved.
 
 ### Every mismatch
 
@@ -209,7 +209,7 @@ MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not register
 * The registry was written by hand by reading each results file. A wrong selector would show up as a
   MISMATCH or SOURCE_MISSING, not as a false MATCH, unless it happens to point at a different cell with the
   same rounded value; the notes say which row and column each entry uses so a reader can verify it.
-* 281 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
+* 286 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
   most of the working paper) are not registered; the pitch scan shows that every remaining pitch number is
   a design setting.
 * The check reads the worktree's committed results. If a full reproduction rewrites `results/`, rerun it.
@@ -217,7 +217,7 @@ MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not register
 ## Files
 
 * `scripts/trace_numbers.py`: the check.
-* `docs/number_registry.csv`: the registry (281 rows).
+* `docs/number_registry.csv`: the registry (286 rows).
 * `tests/test_trace_numbers.py`: 102 tests on small synthetic files (selectors, rounding, transforms,
   quantities in words, every status, the coverage scan and the rule that the paper's uncovered list never
   lands in the repository).

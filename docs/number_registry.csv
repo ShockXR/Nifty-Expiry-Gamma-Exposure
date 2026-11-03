@@ -240,19 +240,18 @@ DS07,docs/DEALER_SIGN.md,cannot reject a common direction (p 0.07 to 0.28;,0.07,
 DS08,docs/DEALER_SIGN.md,cannot reject a common direction (p 0.07 to 0.28;,0.28,,results/referee_f2/item6_angle_equality.csv,csv:sample=full sample@#max:md_p_chi2_2,
 DS09,docs/DEALER_SIGN.md,ignores this gives p 0.002 to 0.004),0.002,,results/referee_f2/item6_angle_equality.csv,csv:sample=full sample@#min:p_equal_basic_bootstrap,"angle bootstrap test, 10- and 60-day blocks"
 DS10,docs/DEALER_SIGN.md,ignores this gives p 0.002 to 0.004),0.004,,results/referee_f2/item6_angle_equality.csv,csv:sample=full sample@#max:p_equal_basic_bootstrap,
-PA01,PAPER,for 942 trading days (200 expiries),942,,results/pipeline_nse_v2/daily_market.csv,csv:@#count,
-PA02,PAPER,"lowers QLIKE loss by 5.8%, 7.6% and 6.4%",5.8,neg,results/pipeline_nse_v2/scoreboard_next15.csv,csv:group=all&model=hybrid_base@qlike_vs_mcsgarch_pct,
-PA03,PAPER,"lowers QLIKE loss by 5.8%, 7.6% and 6.4%",7.6,neg,results/pipeline_nse_v2/scoreboard_next30.csv,csv:group=all&model=hybrid_base@qlike_vs_mcsgarch_pct,
-PA04,PAPER,"lowers QLIKE loss by 5.8%, 7.6% and 6.4%",6.4,neg,results/pipeline_nse_v2/scoreboard_last_hour.csv,csv:group=all&model=hybrid_base@qlike_vs_mcsgarch_pct,
+PA01,PAPER,for 942 trading days (200 Nifty expiries),942,,results/pipeline_nse_v2/daily_market.csv,csv:@#count,
+PA02,PAPER,"against 5.8%, 7.6% and 6.4% on all days",5.8,neg,results/pipeline_nse_v2/scoreboard_next15.csv,csv:group=all&model=hybrid_base@qlike_vs_mcsgarch_pct,
+PA03,PAPER,"against 5.8%, 7.6% and 6.4% on all days",7.6,neg,results/pipeline_nse_v2/scoreboard_next30.csv,csv:group=all&model=hybrid_base@qlike_vs_mcsgarch_pct,
+PA04,PAPER,"against 5.8%, 7.6% and 6.4% on all days",6.4,neg,results/pipeline_nse_v2/scoreboard_last_hour.csv,csv:group=all&model=hybrid_base@qlike_vs_mcsgarch_pct,
 PA05,PAPER,"gives exactly 21,239 Nifty returns","21,239",,results/replication_nse/table1_descriptive.csv,csv:period=after&index=nifty&statistic=n@ours,
-PA06,PAPER,has 82 trading days rather than 64,82,,results/replication_nse/day_counts.csv,csv:period=before_stated@trading_days,
+PA06,PAPER,"has 82 trading days, not 64",82,,results/replication_nse/day_counts.csv,csv:period=before_stated@trading_days,
 PA07,PAPER,falls from 359 to 72 minutes for Nifty,359,,results/replication_nse/table2_persistence.csv,csv:period=before_inferred&index=nifty@half_life_min,
-PA08,PAPER,"(+1.14 log points, placebo p 0.005)",1.14,,results/event_study/event_tests.csv,csv:spec_id=a_BN_switch&measure=rv_last30&window=6 months@diff,
-PA09,PAPER,(Holm-adjusted p 0.016 among 78 tests,0.016,,results/falsification/t7_headline_adjusted.csv,"csv:finding=F2&rule=participant_pro&spec_detail=binary, all days@p_holm",
-PA10,PAPER,split-sample one-sided p 0.0059),0.0059,,results/falsification/t4_preregistered_f2.csv,csv:sample=full&rule=participant_pro@p_one_sided,
-PA11,PAPER,finds 4.15 bp per trade before costs,4.15,,results/f2_economics/metrics.csv,csv:sample=test&rule=P&costs=base@mean_gross_per_trade,
-PA12,PAPER,a loss of 0.89 bp after them,0.89,neg,results/f2_economics/metrics.csv,csv:sample=test&rule=P&costs=base@mean_net_per_trade,
-PA13,PAPER,are 169 degrees apart,169,diff,results/dealer_sign/direction_estimates.csv || results/dealer_sign/direction_estimates.csv,csv:sample=full sample&controls=base&family=participants&objective=b@angle_deg || csv:sample=full sample&controls=base&family=participants&objective=a@angle_deg,
+PA08,PAPER,rose by 1.14 log points,1.14,,results/event_study/event_tests.csv,csv:spec_id=a_BN_switch&measure=rv_last30&window=6 months@diff,
+PA09,PAPER,Its Holm-adjusted p is 0.016 among the 78 original GEX-term tests,0.016,,results/falsification/t7_headline_adjusted.csv,"csv:finding=F2&rule=participant_pro&spec_detail=binary, all days@p_holm",
+PA10,PAPER,a 2025-onward coefficient of -0.0739 (one-sided p 0.0059),0.0059,,results/falsification/t4_preregistered_f2.csv,csv:sample=full&rule=participant_pro@p_one_sided,
+PA11,PAPER,It earned +4.15 bp per trade before costs,4.15,,results/f2_economics/metrics.csv,csv:sample=test&rule=P&costs=base@mean_gross_per_trade,
+PA12,PAPER,-0.89 bp with the registered 1 bp per side,0.89,neg,results/f2_economics/metrics.csv,csv:sample=test&rule=P&costs=base@mean_net_per_trade,
 PA14,PAPER,-9.2 (<0.001) | -7.1 (<0.001),-9.2,,results/pipeline_nse_v2/scoreboard_next30.csv,csv:group=holdout&model=hybrid_base@qlike_vs_mcsgarch_pct,"Table 4, hold-out, next 30 minutes"
 PA15,PAPER,loss is lower | 71% | 74% | 54% |,71,x100,results/pipeline_nse_v2/forecasts_next15.csv,derived:daily_win_share?model=hybrid_base&bench=mcsgarch,
 PA16,PAPER,loss is lower | 71% | 74% | 54% |,74,x100,results/pipeline_nse_v2/forecasts_next30.csv,derived:daily_win_share?model=hybrid_base&bench=mcsgarch,
@@ -260,14 +259,20 @@ PA17,PAPER,loss is lower | 71% | 74% | 54% |,54,x100,results/pipeline_nse_v2/for
 PA18,PAPER,| Pro | -3.12 (0.0043) | 8.18 (0.0013),-3.12,,results/falsification/headline_in_sample.csv,csv:sample=full&measure=share&rule=participant_pro&term=gex_l1@coef,
 PA19,PAPER,| Pro | -3.12 (0.0043) | 8.18 (0.0013),8.18,,results/falsification/headline_in_sample.csv,csv:sample=full&measure=share&rule=participant_pro&term=gex_l1_x_exp@coef,
 PA20,PAPER,$0.0107 - 0.0682 = -0.057$,-0.057,sum,results/momentum_gex/regressions.csv,csv:spec=binary&rule=participant_pro&subset=all&term=r_rod@coef || csv:spec=binary&rule=participant_pro&subset=all&term=r_rod_x_neg@coef,
-PA21,PAPER,"a 2025-onward coefficient of -0.0739 (one-sided p 0.0059, 452 days)",-0.0739,,results/falsification/t4_preregistered_f2.csv,csv:sample=full&rule=participant_pro@coef_2025_onward,
-PA22,PAPER,slippage of at most 0.55 bp per side,0.55,,results/f2_economics/metrics.csv,csv:sample=test&rule=P&costs=base@breakeven_slip_per_side,
+PA21,PAPER,a 2025-onward coefficient of -0.0739 (one-sided p 0.0059),-0.0739,,results/falsification/t4_preregistered_f2.csv,csv:sample=full&rule=participant_pro@coef_2025_onward,
+PA22,PAPER,break-even slippage is about 0.55 bp per side,0.55,,results/f2_economics/metrics.csv,csv:sample=test&rule=P&costs=base@breakeven_slip_per_side,
 PA23,PAPER,| 41 | 8.30 | 12.82 | -4.52 (-6.86 to -2.12) | 0.0006 |,-4.52,,results/pinning/t1_clustering.csv,csv:symbol=NIFTY&sample=single_weekly_thu@diff_pts,
 PA24,PAPER,| -0.0682 | 0.0517 | 97% | 45% | 5.5 |,0.0517,,results/power_real/headline.csv,csv:test=R5&stat=hac_t@mde80_conservative,
 PA25,PAPER,| -0.0682 | 0.0517 | 97% | 45% | 5.5 |,5.5,,results/power_real/headline.csv,csv:test=R5&stat=hac_t@extra_years_half,
 PA26,PAPER,4.29 points more connected,4.29,,results/connectedness_gamma/tests.csv,csv:test=P0@estimate,
-PA27,PAPER,"+0.39 [-0.19, +1.03] (HAC p 0.157",0.39,,results/sensex_confound/all_tests.csv,csv:family=main@estimate,
-PA28,PAPER,goes from +43% to +63%,63,ratio_pct,results/sensex_confound/iii_r2_with_sensex_control.csv,csv:measure=rv_last_hour&regime=single_weekly_tue@ratio_exp_vs_week_sensex_control,
+PA27,PAPER,"(+0.39, HAC p 0.157, placebo p 0.088)",0.39,,results/sensex_confound/all_tests.csv,csv:family=main@estimate,
+PA28,PAPER,carries 26% more whole-day and 63% more last-hour variance,63,,results/referee_expiry/r2_clean_baseline.csv,"csv:baseline=no expiry of any index, NSE or BSE, at least 2 days&period=single_weekly_tue&measure=rv_last_hour@pct","clean baseline, Tuesday weekly (re-pointed in round 2: the Sensex-control +63% is no longer printed)"
+PA29,PAPER,carries 26% more whole-day and 63% more last-hour variance,26,,results/referee_expiry/r2_clean_baseline.csv,"csv:baseline=no expiry of any index, NSE or BSE, at least 2 days&period=single_weekly_tue&measure=rv_day@pct","clean baseline, Tuesday weekly"
+PA30,PAPER,"points strongly to the reverse of Pro (190 degrees, Wald p 4.3e-6",190,,results/dealer_sign/direction_estimates.csv,csv:sample=full sample&controls=base&family=participants&objective=b@angle_deg,"replaces PA13 (169 degrees apart, withdrawn in round 1)"
+PA31,PAPER,the hybrid lowers QLIKE against mcsGARCH by 3.9% and 5.0% at 15 and 30 minutes,3.9,neg,results/pipeline_nse_banknifty/p91/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,"P91, Section 6.2"
+PA32,PAPER,the hybrid lowers QLIKE against mcsGARCH by 3.9% and 5.0% at 15 and 30 minutes,5.0,neg,results/pipeline_nse_banknifty/p91/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,"P91, Section 6.2"
+PA33,PAPER,but not at 15 (0.292),0.292,,results/referee_forecast/gw_tests.csv,csv:target=next15&benchmark=best_matched_mcsgarch&test=unconditional@p_holm_main_family,"GW, Holm over 42"
+PA34,PAPER,holds at 30 minutes (adjusted p 0.038),0.038,,results/referee_forecast/gw_tests.csv,csv:target=next30&benchmark=best_matched_mcsgarch&test=unconditional@p_holm_main_family,"GW, Holm over 42"
 PI84,PITCH_PANDEY.md,(3.9% and 5.0% better on 660 test days),3.9,neg,results/pipeline_nse_banknifty/p91/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,"P91 registered H1, Bank Nifty, next 15 minutes"
 PI85,PITCH_PANDEY.md,(3.9% and 5.0% better on 660 test days),5.0,neg,results/pipeline_nse_banknifty/p91/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,"P91 registered H1, Bank Nifty, next 30 minutes"
 PI86,PITCH_PANDEY.md,(3.9% and 5.0% better on 660 test days),660,,results/pipeline_nse_banknifty/p91/hypotheses.csv,csv:hypothesis=H1&target=next15@days,Bank Nifty test days
