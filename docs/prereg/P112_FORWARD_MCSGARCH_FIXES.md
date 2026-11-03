@@ -5,6 +5,10 @@ project lead. No data from Wednesday 4 November 2026 or later existed when it wa
 **the commit that adds this file**; its git time stamp proves when the plan was fixed. The analysis must be run
 with the code at that commit ("the pinned commit"). Any later change is a deviation (section 8).
 
+**Amended once, before any forward data existed** (section 9, 3 November 2026 evening IST): a second benchmark,
+mcsGARCH as the paper specifies it (study P116), is added with its own primary test. Nothing in sections 1 to 8
+is changed; where section 7 speaks of "the paper's model", section 9 says how to read it.
+
 ## 1. Why
 
 Study P109 (`docs/P109_MCSGARCH_EXTENSIONS.md`, plan `ceec2ec`, results `7f0b5c7`) wrote down five fixes to the
@@ -100,3 +104,55 @@ still runs only at the stopping point.
 Any change to the code at the pinned commit, the models, the data rules or the test, and any look at the
 forward losses before the stopping point, is reported as a deviation with its reason and date, next to the
 result.
+
+## 9. Amendment 1: a second benchmark, mcsGARCH as the paper specifies it
+
+**When and why.** Written on Tuesday 3 November 2026, after the Nifty close and before any data from Wednesday
+4 November 2026 existed, by an AI agent (Claude) acting as the project lead. The registration of this amendment
+is the commit that adds this section. Study P116 (`docs/P116_BENCHMARK_AS_PRINTED.md`, plan `19c5486`, results
+`cf6c9d4`) found that the "mcsGARCH" of section 2, the project's own implementation, is not the paper's
+specification: it adds a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves and a
+zero mean, and on Nifty it forecasts slightly worse than the paper's specification (by 1.45 and 1.09 points at
+15 and 30 minutes, Holm p 0.005 and 0.014). So H1 alone can show only that the five fixes beat our version. To
+let the forward test say something about the paper's own model, this amendment adds that model as a second
+benchmark. Sections 1 to 8 are unchanged, and H1 keeps its own Holm family, so the amendment cannot make H1
+easier or harder to confirm.
+
+**Added model.**
+
+* **mcs_cpp**: P116's `mcs_cpp` exactly as coded at commit `cf6c9d4` (`experiments/p116_benchmark_as_printed.py`,
+  variant `mcs_cpp`: one time-of-day curve for all days, no smoothing, an ARMA(1,1) mean whose expected squared
+  value is added to the variance forecast, Student t errors; the same daily AR(1)-EGARCH(1,1) level, cross-day
+  recursion and refit schedule as the other models). It is refitted every 21 trading days on all data before the
+  refit day, with the walk-forward continued forward in time, like the models of section 2. The combination and
+  the hybrid are not changed: both remain built on our version, because no version built on the paper's
+  specification existed when this amendment was written.
+
+**Added primary test (H1b)**: on the forward test days of section 3, the combination's mean daily QLIKE is lower
+than mcs_cpp's, at 15 minutes and at 30 minutes.
+
+* Test, estimate (in points of mcs_cpp's QLIKE), Holm over the two horizons at 5%, and the verdicts confirmed,
+  not confirmed and contradicted: exactly as for H1 in section 4, with mcs_cpp in place of mcsGARCH. H1b is its
+  own Holm family; it is not pooled with H1.
+
+**Added secondary tests (outside both Holm families; cannot change a verdict)**:
+
+* S4: the hybrid against mcs_cpp, one-sided Diebold-Mariano at each horizon (the hybrid has lower loss).
+* S5: our version against mcs_cpp, two-sided Diebold-Mariano at each horizon (does P116's finding hold forward?).
+
+**Power (rough, before the data).** P116's in-sample statistics for the combination against mcs_cpp were t 4.82
+and 4.78 (5.48 and 7.25 points). Scaled to 250 days: about 4.82 x sqrt(250 / 792), roughly 2.7, at both horizons,
+which would confirm both if the forward days behave like the sample. A gain half that size would give about 1.4,
+with a chance of confirmation of roughly one half or less.
+
+**How to read the results (replaces the first bullet of section 7 for any statement about the paper's model).**
+
+* **H1b confirmed at both horizons**: the five fixes improve mcsGARCH as the paper specifies it, on data they
+  have never touched; only then may the combination be offered to the paper's authors as a better benchmark.
+* **H1 confirmed but H1b not confirmed**: the fixes improve our version only; say so, and make no claim about
+  the paper's model.
+* **H1b contradicted**: withdraw any suggestion that the fixes improve the paper's model.
+* Section 7's other bullets apply to H1 as written.
+
+**Run.** Once, at the stopping point of section 3, together with H1. The code for mcs_cpp is pinned at
+`cf6c9d4`; the code for the other models stays pinned at the commit that added this file.
