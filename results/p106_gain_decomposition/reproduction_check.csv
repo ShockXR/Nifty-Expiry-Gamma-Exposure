@@ -1,0 +1,16 @@
+check,rows_rerun,rows_committed,rows_matched,y_n_identical,y_max_abs_rel_diff,mcsgarch_n_identical,mcsgarch_max_abs_rel_diff,mcsgarch_iv_n_identical,mcsgarch_iv_max_abs_rel_diff,hybrid_base_n_identical,hybrid_base_max_abs_rel_diff,hybrid_base_daily_qlike_max_abs_rel_diff,mcsgarch_daily_qlike_max_abs_rel_diff
+NIFTY next15 seed 7 vs results/pipeline_nse_v2,19800,19800,19800,19800.0,0.0,19800,0.0,19800.0,0.0,19800,0.0,,
+NIFTY next15 seed 101 full hybrid daily QLIKE vs P99 daily_losses_next15.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next15 seed 102 full hybrid daily QLIKE vs P99 daily_losses_next15.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next15 seed 103 full hybrid daily QLIKE vs P99 daily_losses_next15.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next15 seed 104 full hybrid daily QLIKE vs P99 daily_losses_next15.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next30 seed 7 vs results/pipeline_nse_v2,19008,19008,19008,19008.0,0.0,19008,0.0,19008.0,0.0,19008,0.0,,
+NIFTY next30 seed 101 full hybrid daily QLIKE vs P99 daily_losses_next30.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next30 seed 102 full hybrid daily QLIKE vs P99 daily_losses_next30.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next30 seed 103 full hybrid daily QLIKE vs P99 daily_losses_next30.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY next30 seed 104 full hybrid daily QLIKE vs P99 daily_losses_next30.csv,792,792,792,,,792,,,,792,,0.0,0.0
+NIFTY last_hour seed 7 vs results/pipeline_nse_v2,792,792,792,792.0,0.0,792,0.0,792.0,0.0,792,0.0,,
+BANKNIFTY next15 seed 7 vs pipeline_nse_banknifty,16500,16500,16500,16500.0,0.0,16500,0.0,16500.0,0.0,16500,0.0,,
+BANKNIFTY next30 seed 7 vs pipeline_nse_banknifty,15840,15840,15840,15840.0,0.0,15840,0.0,15840.0,0.0,15840,0.0,,
+FINNIFTY next15 seed 7 vs pipeline_nse_finnifty,15100,15100,15100,15100.0,0.0,15100,0.0,15100.0,0.0,15100,0.0,,
+FINNIFTY next30 seed 7 vs pipeline_nse_finnifty,14496,14496,14496,14496.0,0.0,14496,0.0,14496.0,0.0,14496,0.0,,

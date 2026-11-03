@@ -1,0 +1,367 @@
+{
+  "source": "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",
+  "study": "P106 gain decomposition (docs/prereg/P106_GAIN_DECOMPOSITION.md)",
+  "plan_commit": "71bb3b6b922540021082a40556cf8d915a45f085",
+  "analysis_commit": "71bb3b6b922540021082a40556cf8d915a45f085",
+  "commands": [
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p106_gain_decomposition.py run --index NIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p106_gain_decomposition.py run --index BANKNIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p106_gain_decomposition.py run --index FINNIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p106_gain_decomposition.py analyze --plan-commit <plan commit>"
+  ],
+  "committed_runs": {
+    "NIFTY": "results/pipeline_nse_v2",
+    "BANKNIFTY": "results/pipeline_nse_banknifty",
+    "FINNIFTY": "results/pipeline_nse_finnifty"
+  },
+  "pipeline_settings": {
+    "source": "nse",
+    "start": "2023-01-01",
+    "min_coverage": 0.95,
+    "rate": 0.065,
+    "oi_unit": "keep_units",
+    "lot_size": null,
+    "tune": false,
+    "tune_every": 3,
+    "n_seeds": 5,
+    "seed": 7,
+    "min_train": 150,
+    "block": 21,
+    "mcs_refit_every": 21,
+    "holdout_start": "2025-07-01"
+  },
+  "synthetic_settings": null,
+  "groups": {
+    "implied": [
+      "log_impvar_day",
+      "log_impvar_to_exp",
+      "log_iv_m21",
+      "log_fwdvar_day",
+      "exp_premium",
+      "term_slope",
+      "skew_near",
+      "smile_near",
+      "skew_m21",
+      "log_pcr_oi_near",
+      "log_pcr_vol_near",
+      "log_pcr_oi_all",
+      "vrp_w",
+      "abs_ret_today_sd",
+      "log_mcs_iv",
+      "log_implied_window"
+    ],
+    "vix": [
+      "log_vix"
+    ],
+    "intraday": [
+      "minute_frac",
+      "mins_left",
+      "exp_x_minute",
+      "log_s_window"
+    ],
+    "calendar": [
+      "is_expiry",
+      "tdte",
+      "regime",
+      "weekday",
+      "is_monthly_expiry",
+      "day_before_expiry",
+      "bn_expiry_only",
+      "closing_auction"
+    ],
+    "realized": [
+      "log_rv_back_h",
+      "log_rv_back_15",
+      "log_rv_back_60",
+      "log_rv_today_pm",
+      "log_rv_d1",
+      "log_rv_w",
+      "log_rv_m",
+      "log_rv_prevday_same",
+      "jump_share_d1",
+      "log_vol15_rel",
+      "ofi15",
+      "log_mcs"
+    ]
+  },
+  "drop_sets": {
+    "implied": [
+      "log_impvar_day",
+      "log_impvar_to_exp",
+      "log_iv_m21",
+      "log_fwdvar_day",
+      "exp_premium",
+      "term_slope",
+      "skew_near",
+      "smile_near",
+      "skew_m21",
+      "log_pcr_oi_near",
+      "log_pcr_vol_near",
+      "log_pcr_oi_all",
+      "vrp_w",
+      "abs_ret_today_sd",
+      "log_mcs_iv",
+      "log_implied_window"
+    ],
+    "vix": [
+      "log_vix"
+    ],
+    "intraday": [
+      "minute_frac",
+      "mins_left",
+      "exp_x_minute",
+      "log_s_window"
+    ],
+    "calendar": [
+      "is_expiry",
+      "tdte",
+      "regime",
+      "weekday",
+      "is_monthly_expiry",
+      "day_before_expiry",
+      "bn_expiry_only",
+      "closing_auction"
+    ],
+    "realized": [
+      "log_rv_back_h",
+      "log_rv_back_15",
+      "log_rv_back_60",
+      "log_rv_today_pm",
+      "log_rv_d1",
+      "log_rv_w",
+      "log_rv_m",
+      "log_rv_prevday_same",
+      "jump_share_d1",
+      "log_vol15_rel",
+      "ofi15",
+      "log_mcs"
+    ],
+    "optionmkt": [
+      "log_impvar_day",
+      "log_impvar_to_exp",
+      "log_iv_m21",
+      "log_fwdvar_day",
+      "exp_premium",
+      "term_slope",
+      "skew_near",
+      "smile_near",
+      "skew_m21",
+      "log_pcr_oi_near",
+      "log_pcr_vol_near",
+      "log_pcr_oi_all",
+      "vrp_w",
+      "abs_ret_today_sd",
+      "log_mcs_iv",
+      "log_implied_window",
+      "log_vix"
+    ],
+    "mcsinfo": [
+      "log_impvar_day",
+      "log_impvar_to_exp",
+      "log_iv_m21",
+      "log_fwdvar_day",
+      "exp_premium",
+      "term_slope",
+      "skew_near",
+      "smile_near",
+      "skew_m21",
+      "log_pcr_oi_near",
+      "log_pcr_vol_near",
+      "log_pcr_oi_all",
+      "vrp_w",
+      "abs_ret_today_sd",
+      "log_mcs_iv",
+      "log_implied_window",
+      "log_vix",
+      "tdte",
+      "regime",
+      "weekday",
+      "is_monthly_expiry",
+      "day_before_expiry",
+      "bn_expiry_only",
+      "closing_auction"
+    ],
+    "implied_level": [
+      "log_impvar_day",
+      "log_impvar_to_exp",
+      "log_iv_m21",
+      "log_fwdvar_day",
+      "vrp_w",
+      "abs_ret_today_sd",
+      "log_mcs_iv",
+      "log_implied_window"
+    ],
+    "implied_shape": [
+      "exp_premium",
+      "term_slope",
+      "skew_near",
+      "smile_near",
+      "skew_m21",
+      "log_pcr_oi_near",
+      "log_pcr_vol_near",
+      "log_pcr_oi_all"
+    ]
+  },
+  "hybrid_columns": [
+    "is_expiry",
+    "tdte",
+    "regime",
+    "minute_frac",
+    "mins_left",
+    "log_rv_back_h",
+    "log_rv_back_15",
+    "log_rv_back_60",
+    "log_rv_today_pm",
+    "log_rv_d1",
+    "log_rv_w",
+    "log_rv_m",
+    "log_rv_prevday_same",
+    "jump_share_d1",
+    "log_vix",
+    "log_vol15_rel",
+    "ofi15",
+    "log_impvar_day",
+    "log_impvar_to_exp",
+    "log_iv_m21",
+    "log_fwdvar_day",
+    "exp_premium",
+    "term_slope",
+    "skew_near",
+    "smile_near",
+    "skew_m21",
+    "log_pcr_oi_near",
+    "log_pcr_vol_near",
+    "log_pcr_oi_all",
+    "vrp_w",
+    "abs_ret_today_sd",
+    "weekday",
+    "is_monthly_expiry",
+    "day_before_expiry",
+    "bn_expiry_only",
+    "exp_x_minute",
+    "closing_auction",
+    "log_mcs",
+    "log_s_window",
+    "log_mcs_iv",
+    "log_implied_window"
+  ],
+  "seeds": {
+    "headline_base_seed": 7,
+    "repeat_base_seeds": [
+      101,
+      102,
+      103,
+      104
+    ],
+    "lgbm_seeds": {
+      "7": [
+        7,
+        1007,
+        2007,
+        3007,
+        4007
+      ],
+      "101": [
+        101,
+        1101,
+        2101,
+        3101,
+        4101
+      ],
+      "102": [
+        102,
+        1102,
+        2102,
+        3102,
+        4102
+      ],
+      "103": [
+        103,
+        1103,
+        2103,
+        3103,
+        4103
+      ],
+      "104": [
+        104,
+        1104,
+        2104,
+        3104,
+        4104
+      ]
+    },
+    "note": "the base seed also seeds the tuning pass that picks the number of boosting rounds"
+  },
+  "period_split": "2024-11-20",
+  "bootstrap": {
+    "reps": 10000,
+    "mean_block_days": 10.0,
+    "seed": 106
+  },
+  "alpha": 0.05,
+  "input_sha256": {
+    "NIFTY": {
+      "nifty_1min.csv": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "bhavcopy/ (944 files)": "9361104c675e073f5d403e06d8e0b26a9bf123359c02c7521eecdb2acc3f52de",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1891,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    },
+    "BANKNIFTY": {
+      "banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "bhavcopy/ (944 files)": "9361104c675e073f5d403e06d8e0b26a9bf123359c02c7521eecdb2acc3f52de",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1891,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    },
+    "FINNIFTY": {
+      "finnifty_1min.csv": "1ab7112881f3b761051a2024f35e830719b6ba26931208fa2995bab50a12c1b9",
+      "finnifty/index_daily_finnifty.csv": "db240ce7784725b7fb0434dde38df5b9c2bbcd3f8cdfc76d078a31a1d08ea047",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "finnifty/bhavcopy/ (764 files)": "47e333ae9e8b437cc17d255b661085815426f15ec20a474a8a7d487201546be5",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1711,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    }
+  },
+  "seconds_stage1_jobs": 11703.5,
+  "stage1_wall_clock": {
+    "NIFTY": {
+      "start_utc": "2026-11-03T06:02:43Z",
+      "end_utc": "2026-11-03T07:28:53Z",
+      "minutes": 86.2
+    },
+    "BANKNIFTY": {
+      "start_utc": "2026-11-03T07:29:48Z",
+      "end_utc": "2026-11-03T07:38:18Z",
+      "minutes": 8.5
+    },
+    "FINNIFTY": {
+      "start_utc": "2026-11-03T07:39:24Z",
+      "end_utc": "2026-11-03T07:47:28Z",
+      "minutes": 8.1
+    }
+  },
+  "seconds_stage2": 30.4,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "lightgbm": "4.7.0",
+    "arch": "8.0.0",
+    "scipy": "1.18.1"
+  }
+}

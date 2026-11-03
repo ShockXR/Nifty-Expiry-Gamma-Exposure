@@ -414,6 +414,26 @@ def reproduction_check(wide: pd.DataFrame, committed: pd.DataFrame, label: str) 
     return out
 
 
+def p99_daily_check(d: pd.DataFrame, p99: pd.DataFrame, seed: int, label: str) -> dict:
+    """The full hybrid's daily QLIKE with a repeat seed set against P99's committed daily losses.
+    Both are aligned on the date written as YYYY-MM-DD text, whatever type each index has (fix after the
+    plan commit: the registered version aligned a text index with a datetime index and so matched no day)."""
+    def text_index(x):
+        return pd.Index(pd.to_datetime(x.index).strftime("%Y-%m-%d"))
+    a = d.set_axis(text_index(d))
+    b = p99.set_axis(text_index(p99))
+    x = a["full"].reindex(b.index).to_numpy(float)
+    y = b[f"qlike_hybrid_s{seed}"].to_numpy(float)
+    m = a["mcsgarch"].reindex(b.index).to_numpy(float)
+    my = b["qlike_mcsgarch"].to_numpy(float)
+    ok = np.isfinite(x)
+    return {"check": label, "rows_rerun": len(a), "rows_committed": len(b), "rows_matched": int(ok.sum()),
+            "hybrid_base_n_identical": int(np.sum(x[ok] == y[ok])),
+            "hybrid_base_daily_qlike_max_abs_rel_diff": float(np.max(np.abs(x[ok] / y[ok] - 1))) if ok.any() else np.nan,
+            "mcsgarch_n_identical": int(np.sum(m[ok] == my[ok])),
+            "mcsgarch_daily_qlike_max_abs_rel_diff": float(np.max(np.abs(m[ok] / my[ok] - 1))) if ok.any() else np.nan}
+
+
 def stage_check(a):
     work = Path(a.work)
     rows = []
@@ -608,15 +628,8 @@ def stage_analyze(a):
             if s != HEADLINE_SEED and not synth and (P99_DIR / f"daily_losses_{t}.csv").exists():
                 p99 = pd.read_csv(P99_DIR / f"daily_losses_{t}.csv", index_col="date", parse_dates=["date"],
                                   float_precision="round_trip")
-                col = f"qlike_hybrid_s{s}"
-                x = D[(t, s)]["full"].reindex(p99.index).to_numpy()
-                y = p99[col].to_numpy()
-                repro_rows.append({"check": f"NIFTY {t} seed {s} full hybrid daily QLIKE vs P99 daily_losses_{t}.csv",
-                                   "rows_rerun": len(D[(t, s)]), "rows_committed": len(p99),
-                                   "rows_matched": int(np.isfinite(x).sum()),
-                                   "hybrid_base_daily_qlike_max_abs_rel_diff": float(np.nanmax(np.abs(x / y - 1))),
-                                   "mcsgarch_daily_qlike_max_abs_rel_diff": float(np.nanmax(np.abs(
-                                       D[(t, s)]["mcsgarch"].reindex(p99.index).to_numpy() / p99["qlike_mcsgarch"].to_numpy() - 1)))})
+                repro_rows.append(p99_daily_check(D[(t, s)], p99, s,
+                                                  f"NIFTY {t} seed {s} full hybrid daily QLIKE vs P99 daily_losses_{t}.csv"))
     if (targets[0], HEADLINE_SEED) not in D:
         raise SystemExit("no finished headline-seed work files for the primary index")
     # period labels: the date split must equal the pipeline's regime labels
@@ -968,6 +981,18 @@ def stage_analyze(a):
         if p.exists():
             inputs[ix] = json.loads(p.read_text())
     timing = pd.read_csv(work / "timing.csv") if (work / "timing.csv").exists() else pd.DataFrame()
+    # stage-1 wall clock per index (added after the plan commit): from the input-hash file, written when a run
+    # starts, to the last work file written
+    wall = {}
+    for ix in ("NIFTY", "BANKNIFTY", "FINNIFTY", "SYNTH"):
+        files = list(work.glob(f"{ix}_*.csv"))
+        start_file = work / f"inputs_{ix}.json"
+        if files:
+            end = max(f.stat().st_mtime for f in files)
+            start = start_file.stat().st_mtime if start_file.exists() else None
+            wall[ix] = {"start_utc": (pd.Timestamp(start, unit="s").strftime("%Y-%m-%dT%H:%M:%SZ") if start else None),
+                        "end_utc": pd.Timestamp(end, unit="s").strftime("%Y-%m-%dT%H:%M:%SZ"),
+                        "minutes": round((end - start) / 60, 1) if start else None}
     json.dump({"source": label + ("" if synth else ": NSE bhavcopy, participant OI and India VIX; third-party 1-minute "
                                   "index bars validated against NSE daily values"),
                "study": "P106 gain decomposition (docs/prereg/P106_GAIN_DECOMPOSITION.md)",
@@ -985,6 +1010,7 @@ def stage_analyze(a):
                "period_split": PERIOD_SPLIT, "bootstrap": {"reps": reps, "mean_block_days": MEAN_BLOCK, "seed": BOOT_SEED},
                "alpha": ALPHA, "input_sha256": inputs,
                "seconds_stage1_jobs": float(timing["seconds"].sum()) if len(timing) else None,
+               "stage1_wall_clock": wall,
                "seconds_stage2": round(time.time() - t0, 1), "python": sys.version.split()[0],
                "versions": {"numpy": np.__version__, "pandas": pd.__version__, "lightgbm": lightgbm.__version__,
                             "arch": arch.__version__, "scipy": scipy.__version__}},

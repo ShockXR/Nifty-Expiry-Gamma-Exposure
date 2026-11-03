@@ -1,0 +1,8 @@
+[REAL DATA] P106 gain decomposition, stage 1, BANKNIFTY: 4 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a41b08da4db4e236b/data/processed/p106); workers 2
+market loaded: 810 days, 2023-01-02 00:00:00 to 2026-04-22 00:00:00 (53s)
+panels and datasets built (141s)
+  [1/4] BANKNIFTY next15 seed 7 full+implied+vix: 16500 forecasts, 256s (elapsed 6.6 min)
+  [2/4] BANKNIFTY next15 seed 7 intraday+calendar+realized: 16500 forecasts, 210s (elapsed 6.6 min)
+  [3/4] BANKNIFTY next30 seed 7 full+implied+vix: 15840 forecasts, 209s (elapsed 9.3 min)
+  [4/4] BANKNIFTY next30 seed 7 intraday+calendar+realized: 15840 forecasts, 166s (elapsed 9.4 min)
+stage 1 (BANKNIFTY) done in 9.4 min

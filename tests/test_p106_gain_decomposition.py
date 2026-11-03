@@ -180,6 +180,22 @@ def test_work_files_round_trip_and_reproduction(synth, tmp_path, monkeypatch):
     assert gd.period_mask(D).any() and (~gd.period_mask(D)).any()
 
 
+def test_p99_daily_check_aligns_text_and_datetime_dates():
+    """Added after the plan commit (a bug fix): the day frame has text dates, P99's file datetime dates."""
+    rng = np.random.default_rng(3)
+    dates = pd.bdate_range("2024-01-01", periods=40)
+    d = pd.DataFrame({"full": rng.uniform(0.2, 0.4, 40), "mcsgarch": rng.uniform(0.2, 0.4, 40)},
+                     index=pd.Index(dates.strftime("%Y-%m-%d"), name="date"))
+    p99 = pd.DataFrame({"qlike_mcsgarch": d["mcsgarch"].to_numpy(), "qlike_hybrid_s101": d["full"].to_numpy()},
+                       index=pd.DatetimeIndex(dates, name="date"))
+    r = gd.p99_daily_check(d, p99, 101, "synthetic")
+    assert r["rows_matched"] == 40 == r["hybrid_base_n_identical"] == r["mcsgarch_n_identical"]
+    assert r["hybrid_base_daily_qlike_max_abs_rel_diff"] == 0.0
+    p99.iloc[5, 1] *= 1.01
+    r = gd.p99_daily_check(d, p99, 101, "synthetic")
+    assert r["hybrid_base_n_identical"] == 39 and np.isclose(r["hybrid_base_daily_qlike_max_abs_rel_diff"], 1 - 1 / 1.01)
+
+
 # ---------------------------------------------------------------- statistics
 
 
