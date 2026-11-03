@@ -606,7 +606,19 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The grid is finite (other hour definitions, time-varying VARs and CPP's exact mcsGARCH estimates were not tried); each one-hour cell has 180 observations from three days.
 * **NEXT ITERATION:** None planned; the answer has to come from the authors.
 
-## Iterations in progress (3 November 2026, about 16:15 IST)
+## Iteration 51: an independent audit of the documents written for the professor
+
+* **OBJECTIVE:** Check, before the meeting, that the pitch, the briefing, the private working paper and the private replication note say nothing about the paper or its authors that the code and the results files do not support.
+* **PROBLEM IDENTIFIED:** Each document had been edited many times as studies landed, so wording could have drifted from the evidence.
+* **HYPOTHESIS:** None (a review, no tests).
+* **CHANGES IMPLEMENTED:** A separate AI agent read the four documents against the code, the results files and the paper's PDF and raised 14 points; the lead verified each against the code or the results before accepting it. The main ones: (1) our forecasting mcsGARCH is not exactly the paper's model (it adds a separate, smoothed diurnal curve for expiry days, `McsGarch(expiry_diurnal=True, smooth=5)` in `src/niftygex/forecast.py`, uses a zero intraday mean and has an EWMA fallback), so every "your model as printed" or "mcsGARCH as specified" now reads "our implementation of mcsGARCH", and the paper's Section 5.2 discloses the differences; (2) the edge over an mcsGARCH given VIX or implied variance is no longer called a gain over "the same information" (it is post hoc, concentrated since November 2024 and does not survive the project-wide correction); (3) the connectedness fall replicates only on the inferred window (on the stated window, all days -2.0, interval -5.8 to 1.5; `results/replication_nse/tables34_changes.csv`), which the pitch, the paper and the note now say; (4) P113's reach result is stated for normalised and Cholesky settings only, since unnormalised settings pass 100; (5) "mainly because the benchmark got worse" now says "mostly, on point estimates", since that change alone is not significant (Holm 0.135); (6) the HAR daily level is named as helping inside P109's combination; (7) P109's survival of the project-wide correction is caveated (its fixes were chosen after P106 on the same days); (8) the briefing's status and time stamp were stale and P113 was missing from its Done list; (9) the power claim in the briefing is labelled as a simulation and split into the GEX tests (5 to 11 years) and the Tuesday premia (0.8 to 4.1 years); and smaller points on attribution of the blind search to an AI agent, an ambiguous "it" and the paper's description of CPP's intended window (CPP, p. 5).
+* **EXPERIMENTS PERFORMED:** None new. The number trace and the ledger were rerun.
+* **RESULTS:** All 14 points accepted. Pitch, briefing, README, results summary, research strategy, paper, replication note, referee response and deck updated. Trace: 538 entries, 532 MATCH, 6 UNTRACED, no mismatch, every pitch number covered.
+* **IMPROVEMENTS:** The documents no longer attribute a weakness of our implementation to the paper's model, and no longer overstate two results (the information-matched edge and the connectedness fall).
+* **REMAINING ISSUES:** The audit was done by an AI agent, not a person; the professor's reading is the real test.
+* **NEXT ITERATION:** None planned.
+
+## Iterations in progress (3 November 2026, about 16:30 IST)
 
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
