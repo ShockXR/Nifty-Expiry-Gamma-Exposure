@@ -654,10 +654,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The studies run before this one (P106, P107, P109, P110, P114) use our implementation as the benchmark; against the paper's specification their Nifty gains over mcsGARCH would be about 1.0 to 1.4 points smaller.
 * **NEXT ITERATION:** None planned before the meeting.
 
-## Iterations in progress (3 November 2026, about 17:10 IST)
+## Iteration 55: a second independent audit, after P116
 
-* **Scoring the frozen forecast** for 3 November after the close.
+* **OBJECTIVE:** Check again, after P116 changed the headline benchmark, that nothing the professor will read says more than the code and the results files support.
+* **PROBLEM IDENTIFIED:** P116 showed that the "mcsGARCH" used by most studies is our implementation, not the paper's specification, and that it is slightly weaker on Nifty. Every sentence written before P116 that says "the paper's model" could now be wrong.
+* **HYPOTHESIS:** None (a review, no tests).
+* **CHANGES IMPLEMENTED:** A separate AI agent read the pitch, briefing, deck, README, results summaries, evidence documents, working paper, replication note and referee response against the code, the results files and the paper (26 numbered points: 7 high, 19 medium, plus wording). The lead checked each point before acting. The main fixes: (1) the private working paper no longer reads as if the professor had taken part in the analysis: it now says the work was done for an internship project the professor supervises, that they have not reviewed the draft or confirmed any finding, and that the replication is therefore not independent of the paper's authors; (2) every place that credits a result to "the paper's mcsGARCH" when it uses our version now says "our version", and the headline leads with the gain over the paper's specification (4.4% and 6.6%, P116); (3) P112's forward test was amended before any forward data existed (commit 76da563) to add `mcs_cpp` as a second benchmark with its own primary test (H1b), so the forward test can say something about the paper's model; (4) the claim that one command reruns every study was false, so `scripts/reproduce_all.py` now has a step for every registered study, a `--list` mode and a test that fails if a registered plan has neither a step nor a pending entry (7786930); (5) "both cross shares above one half" was a wrong necessity claim and is gone; (6) post hoc comparisons are labelled post hoc, "pinning is real" is stated with its correction, and the pitch now says that plain LightGBM is as good as the hybrid (p 0.32 to 0.97); (7) the one-day demo chart and pages label the benchmark "mcsGARCH (our version)" (6768b46); (8) evidence documents P103 to P110 carry a note saying which mcsGARCH they use (048ee5a). One point was not acted on in the repository: the repository is public and already states that the paper's window does not replicate. Changing that is the student's decision, so it is flagged to them, not changed.
+* **EXPERIMENTS PERFORMED:** None new. The trace, the ledger and the demo were rerun.
+* **RESULTS:** All high and medium points accepted except the visibility point (flagged). Pitch, briefing, README, results summary, evidence documents, paper, replication note, referee response, demo and deck (13 versions so far) updated. Trace: 575 entries, 562 MATCH, 13 UNTRACED, no mismatch, every pitch number covered. Ledger unchanged in size (28,414 tests, 35 studies, 3,514 survive).
+* **IMPROVEMENTS:** No document now credits a weakness or a strength of our implementation to the paper's model, and the only remaining claim about the paper's model (the 4.4% and 6.6% gain) is backed by P116's registered test.
+* **REMAINING ISSUES:** Both audits were done by AI agents. The full timed rerun of every step has not been done end to end (the steps were timed separately; stated total about 11.4 hours).
+* **NEXT ITERATION:** None planned before the meeting.
+
+## Iterations in progress (3 November 2026, about 18:00 IST)
+
+* **Scoring the frozen forecast** for 3 November after the minute bars are published.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
-* **P117**, placebo windows for the persistence fall: does a window with no rule change show as large a fall?
+* **P117**, placebo windows for the persistence fall: does a window with no rule change show as large a fall? (plan 27d39ba, running)
+* **P118**, the identical hybrid built on mcsGARCH as the paper specifies it (plan 49d19ce, running).
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.
