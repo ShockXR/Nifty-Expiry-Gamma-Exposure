@@ -42,6 +42,8 @@ DOWNLOAD = [
     ("fetch_minute_bars", [PY, "scripts/fetch_minute_bars.py", "--out", "data/raw", "--until", END,
                            "--nifty-ref", SOURCES["nifty"]["commit"], "--bank-ref", SOURCES["banknifty"]["commit"]]),
     ("fetch_sensex_bars", [PY, "experiments/sensex_confound.py", "--fetch-sensex", "--fetch-only", "--until", END]),
+    # NSE's full F&O bhavcopies and all-index closes for the synthetic control (P96), 2022 to 2026
+    ("fetch_nse_full", [PY, "experiments/synthetic_control.py", "fetch", "--out", "data/raw/nse_full"]),
 ]
 
 # name, command, outputs (for the log only)
@@ -73,13 +75,34 @@ OPTIONAL = {  # studies added later; run if the script exists
     "pinning_mechanism": ([PY, "experiments/pinning_mechanism.py"], "results/pinning_mechanism/"),
     "f2_economics": ([PY, "experiments/f2_economics.py"], "results/f2_economics/"),
     "sensex_swap": ([PY, "experiments/sensex_swap.py"], "results/sensex_swap/"),
+    # Added after 3 November 2026: the synthetic control (P96), the Bank Nifty forecasting replication (P91,
+    # about 80 minutes), the referee-response analyses (post hoc), the test ledger and the number trace.
+    "synthetic_control": ([PY, "experiments/synthetic_control.py", "analyse", "--phase2", "--full", "data/raw/nse_full"],
+                          "results/synthetic_control/"),
+    "banknifty_pipeline": ([PY, "scripts/run_pipeline.py", "--source", "nse", "--symbol", "BANKNIFTY", "--end", "2026-04-22",
+                            "--n-seeds", "5", "--seed-study", "3", "--verbose", "--out", "results/pipeline_nse_banknifty"],
+                           "results/pipeline_nse_banknifty/", "results/pipeline_nse_banknifty_stdout.txt"),
+    "p91_banknifty_summary": ([PY, "experiments/p91_banknifty_summary.py"], "results/pipeline_nse_banknifty/p91/"),
+    "referee_forecast": ([PY, "experiments/referee_forecast.py"], "results/referee_forecast/",
+                         "results/referee_forecast_stdout.txt"),
+    "referee_forecast_gw": ([PY, "experiments/referee_forecast_gw.py"], "results/referee_forecast/",
+                            "results/referee_forecast_gw_stdout.txt"),
+    "referee_f2": ([PY, "experiments/referee_f2.py"], "results/referee_f2/"),
+    "referee_f2_positions": ([PY, "experiments/referee_f2_positions.py"], "results/referee_f2/"),
+    "referee_expiry": ([PY, "experiments/referee_expiry.py"], "results/referee_expiry/"),
+    "test_ledger": ([PY, "scripts/build_test_ledger.py"], "results/test_ledger.csv"),
+    "number_trace": ([PY, "scripts/trace_numbers.py", "--quiet"], "results/number_trace/"),
 }
 
 
-def run(name: str, cmd: list[str], env: dict) -> dict:
+def run(name: str, cmd: list[str], env: dict, stdout_path: str | None = None) -> dict:
     t0 = time.time()
-    print(f"\n=== {name}: {' '.join(cmd)}", flush=True)
-    r = subprocess.run(cmd, env=env)
+    print(f"\n=== {name}: {' '.join(cmd)}" + (f" > {stdout_path}" if stdout_path else ""), flush=True)
+    if stdout_path:
+        with open(stdout_path, "w") as fh:
+            r = subprocess.run(cmd, env=env, stdout=fh, stderr=subprocess.STDOUT)
+    else:
+        r = subprocess.run(cmd, env=env)
     out = {"step": name, "command": " ".join(cmd), "exit_code": r.returncode, "seconds": round(time.time() - t0, 1)}
     print(f"=== {name}: exit {r.returncode} in {out['seconds']} s", flush=True)
     return out
@@ -103,11 +126,12 @@ def main() -> int:
             print("Data do not match data/MANIFEST.csv; stopping. Use --download, or --no-check to run anyway.")
             pd.DataFrame(log).to_csv("results/reproduce_log.csv", index=False)
             return 1
-    steps = list(STEPS) + [(k, c, o) for k, (c, o) in OPTIONAL.items() if Path(c[1]).exists()]
+    steps = [(n, c, o, None) for n, c, o in STEPS]
+    steps += [(k, v[0], v[1], v[2] if len(v) > 2 else None) for k, v in OPTIONAL.items() if Path(v[0][1]).exists()]
     if a.only:
         steps = [s for s in steps if s[0] in set(a.only)]
-    for name, cmd, outputs in steps:
-        res = run(name, cmd, env)
+    for name, cmd, outputs, stdout_path in steps:
+        res = run(name, cmd, env, stdout_path)
         res["outputs"] = outputs
         log.append(res)
     df = pd.DataFrame(log)

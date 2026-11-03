@@ -178,7 +178,8 @@ or in any of the study documents other than REAL_DATA_RESULTS.md.
 | Claim | Where | Printed | Why no source |
 | --- | --- | --- | --- |
 | PI68 | PITCH_PANDEY.md, "Two possible papers" table | 2 weeks | A time estimate in the plan, not a result. |
-| RM09 | README.md | 259 tests | The size of the test suite, not a results file. On this branch `OMP_NUM_THREADS=1 python -m pytest -q` collects 465 tests, 102 of them this check's own; the README's 259 looks out of date. |
+| RM09 | README.md | 488 tests | The size of the test suite, not a results file. The README said 259 until 3 November; it now gives the count that `pytest --collect-only` reports on this branch (488, 102 of them this check's own). |
+| PI92 to PI95 | PITCH_PANDEY.md | 360, 100, 50, 5 | Settings rather than results: minutes kept per day, the scale of an illustration, Nifty's strike spacing and the significance level. |
 
 Two numbers untraced in the first run now have a source. RM08, the README's "about 8 minutes on 4 cores"
 for the real-data pipeline, matches the first run's `results/pipeline_nse/run_info.json` (500 s, 8.3
