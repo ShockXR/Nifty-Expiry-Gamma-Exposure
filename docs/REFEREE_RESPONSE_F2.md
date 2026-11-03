@@ -6,13 +6,16 @@ option bhavcopies (`results/pipeline_nse_v2/`), and the validated 1-minute Nifty
 
 **Everything here is post hoc.** Every analysis was chosen after reading the referee report of 3 November 2026
 (`REFEREE_REPORT.md`, points M2.2, M2.4, M2.5, M3, M10 and M13) and after every F2 result in the repository had
-been seen. None of it is pre-registered. The script reports 598 p-values, and none of them is adjusted for
-that count, so a single p-value near 0.02 here is weak evidence.
+been seen. None of it is pre-registered. The script reports 598 p-values, and Section 8's script (referee
+point M1(a), added later) 381 more; none of the 979 is adjusted for that count, so a single p-value near 0.02
+here is weak evidence.
 
     OMP_NUM_THREADS=1 python experiments/referee_f2.py            # about 3 minutes on one core
     OMP_NUM_THREADS=1 python -m pytest -q tests/test_referee_f2.py
 
 * Script: `experiments/referee_f2.py`. Unit tests (synthetic data only): `tests/test_referee_f2.py`.
+  Section 8: `experiments/referee_f2_positions.py` and `tests/test_referee_f2_positions.py`, results in
+  `results/referee_f2/item8_*` and the log `results/referee_f2_positions_stdout.txt`.
 * Results: `results/referee_f2/` (one CSV per item, named below, plus `input_checks.csv` and `run_info.json`
   with the seed, the number of draws and the input file hashes) and the printed log
   `results/referee_f2_stdout.txt`.
@@ -460,6 +463,155 @@ the expiry-premium tables; this check only sizes the problem.
 
 ---
 
+## 8. Pro's raw positions instead of the GEX sign (M1(a))
+
+This item was added after the first seven had been run and read, so it is post hoc twice over. It has its own
+script, `experiments/referee_f2_positions.py` (tests: `tests/test_referee_f2_positions.py`), which reports 381
+further p-values, none adjusted.
+
+    PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/referee_f2_positions.py     # about 75 seconds
+
+**What the referee asked.** Estimate F2 directly on Pro's net call, put and index-futures positions, and the
+same for FII and Client, so readers see what the signal is. Does the gamma weighting add anything?
+
+**What we did.** From the participant file (`data/raw/participant_oi`, 944 files) we took each category's net
+position at each evening's close, as a share of all open contracts of that instrument: net index calls
+((long - short) / all open index calls), net index puts, net index futures, calls minus puts (a bullish option
+stance is long calls and short puts) and calls plus puts. We added calls plus puts ourselves: a category's GEX is
+w_call x C + w_put x P, and C and P are of similar size, so the sign of GEX should be close to the sign of
+w_call + w_put. The file pools all index options and futures (every index, every expiry), so these are not
+Nifty-only positions (the referee's M2.1). Each position entered F2 in place of N in two forms:
+
+* **sign**: 1 if the category is net short. F2's direction is a negative coefficient, as for N.
+* **level**: the position standardized over the regression sample. The coefficient is the change in the
+  r_rod slope per standard deviation more net long, so here F2's direction is a **positive** coefficient.
+
+Inference as in Section 3: Newey-West, wild cluster bootstraps by episode (runs of evenings with the same sign
+of that position) and by quarter, and the 60-day block permutation (t and coefficient). The "largest robust p"
+below is the largest of the four simulated p-values. Pro was run on all three samples, FII and Client on the
+full sample only. Then horse races (Pro, full sample): the GEX state and raw states in one regression, each
+with its own level and r_rod interaction. Their inference is Newey-West and wild cluster bootstraps by quarter
+and by joint episode (a new episode starts when any of the signs changes). For several raw states together we
+also give a joint Wald test, both the Newey-West version and a wild cluster bootstrap of the clustered Wald
+statistic. No permutation is given for the horse races: moving one state while holding the other fixed breaks
+their dependence and does not test that null. Input checks (`item8_input_checks.csv`): the call and put shares
+equal `experiments/dealer_sign.py` exactly, the Pro GEX sign equals the N of Sections 1 to 7 on all 932 days,
+and every raw position is available on all 932 days.
+
+**Result (REAL DATA, `results/referee_f2/item8_positions_describe.csv`, `item8_positions_f2.csv`,
+`item8_horse_race.csv`; log `results/referee_f2_positions_stdout.txt`).**
+
+What the Pro positions look like on the 932 F2 days (previous evening):
+
+| Pro position | Net short: 2023 / 2024 / 2025 / 2026 | Same sign as GEX | Correlation with GEX / gross |
+|---|---|---|---|
+| net index calls | 87.2% / 64.9% / 40.1% / 36.6% | 78.5% | 0.81 |
+| net index puts | 75.7% / 49.4% / 21.1% / 15.6% | 75.4% | 0.70 |
+| net index futures | 66.4% / 65.7% / 49.8% / 29.3% | 60.1% | 0.26 |
+| calls minus puts | 60.4% / 61.2% / 60.7% / 64.9% | 53.1% | 0.10 |
+| calls plus puts | 94.0% / 57.6% / 23.1% / 18.1% | 98.3% | 0.994 |
+| GEX / gross (the F2 state) | 94.9% / 59.2% / 23.9% / 19.0% | 100% | 1 |
+
+The GEX sign and the sign of calls plus puts differ on 16 of the 932 evenings.
+
+F2 with each Pro position, full sample:
+
+| Pro position | Form | F2 coefficient | Newey-West p | wild episode p | wild quarter p | block permutation p (t / coef) | Largest robust p |
+|---|---|---|---|---|---|---|---|
+| GEX (the published state) | sign | -0.0680 | 0.0002 | 0.0066 | 0.014 | 0.0008 / 0.0024 | 0.014 |
+| GEX (the published state) | level | +0.0389 | 0.00001 | 0.023 | 0.026 | 0.0014 / 0.0012 | 0.026 |
+| calls plus puts | sign | -0.0632 | 0.0008 | 0.0098 | 0.021 | 0.0052 / 0.0082 | 0.021 |
+| calls plus puts | level | +0.0398 | 0.00002 | 0.023 | 0.027 | 0.0008 / 0.0006 | 0.027 |
+| net index calls | sign | -0.0502 | 0.0060 | 0.017 | 0.074 | 0.027 / 0.049 | 0.074 |
+| net index calls | level | +0.0324 | 0.0003 | 0.0042 | 0.033 | 0.0026 / 0.0052 | 0.033 |
+| net index puts | sign | -0.0529 | 0.025 | 0.083 | 0.12 | 0.059 / 0.032 | 0.12 |
+| net index puts | level | +0.0335 | 0.0043 | 0.031 | 0.038 | 0.020 / 0.0044 | 0.038 |
+| net index futures | sign | -0.0517 | 0.023 | 0.022 | 0.036 | 0.053 / 0.032 | 0.053 |
+| net index futures | level | +0.0155 | 0.16 | 0.19 | 0.19 | 0.24 / 0.23 | 0.24 |
+| calls minus puts | sign | -0.0474 | 0.016 | 0.031 | 0.073 | 0.042 / 0.064 | 0.073 |
+| calls minus puts | level | +0.0072 | 0.43 | 0.46 | 0.43 | 0.49 / 0.58 | 0.58 |
+
+Pro by half (F2 coefficient, largest robust p):
+
+| Pro position | Form | 2023 to 2024 | 2025 onward |
+|---|---|---|---|
+| GEX | sign | -0.0644 (0.20) | -0.0739 (0.042) |
+| GEX | level | +0.0309 (0.29) | +0.0434 (0.0026) |
+| calls plus puts | sign | -0.0575 (0.24) | -0.0682 (0.063) |
+| calls plus puts | level | +0.0303 (0.30) | +0.0430 (0.0026) |
+| net index calls | sign | -0.0242 (0.65) | -0.0567 (0.076) |
+| net index calls | level | +0.0316 (0.25) | +0.0314 (0.046) |
+| net index puts | sign | -0.0263 (0.72) | -0.0766 (0.16) |
+| net index puts | level | +0.0175 (0.57) | +0.0357 (0.032) |
+| net index futures | sign | -0.0756 (0.072) | -0.0285 (0.44) |
+| net index futures | level | +0.0188 (0.39) | +0.0113 (0.73) |
+| calls minus puts | sign | -0.0715 (0.12) | -0.0282 (0.43) |
+| calls minus puts | level | +0.0165 (0.40) | -0.0016 (0.92) |
+
+(The GEX sign in 2025 onward has largest robust p 0.042 here and 0.038 in Section 3: the same regression with
+different random draws.)
+
+FII and Client, full sample (F2 coefficient; Newey-West p; largest robust p). For Client the coefficients have
+the opposite sign, as Client's positions roughly mirror Pro's and FII's:
+
+| Position | FII sign | FII level | Client sign | Client level |
+|---|---|---|---|---|
+| GEX | -0.0660; 0.0001; 0.29 | +0.0049; 0.51; 0.89 | +0.0731; 0.00003; 0.18 | -0.0127; 0.0015; 0.31 |
+| calls plus puts | -0.0654; 0.0001; 0.32 | +0.0046; 0.56; 0.88 | +0.0748; 0.00004; 0.21 | -0.0130; 0.0035; 0.30 |
+| net index calls | -0.0030; 0.90; 0.92 | +0.0022; 0.83; 0.87 | +0.0155; 0.50; 0.55 | -0.0128; 0.11; 0.33 |
+| net index puts | -0.0660; 0.0020; 0.49 | +0.0072; 0.45; 0.79 | +0.0888; 0.00001; 0.74 | -0.0166; 0.067; 0.46 |
+| net index futures | -0.0541; 0.047; 0.14 | -0.0009; 0.93; 0.95 | +0.0583; 0.022; 0.079 | -0.0026; 0.80; 0.85 |
+| calls minus puts | -0.0581; 0.032; 0.094 | -0.0053; 0.58; 0.69 | +0.0546; 0.0097; 0.091 | +0.0024; 0.80; 0.86 |
+
+FII is net short index puts on 1.9% of these days and Client on 96.7%, so those two signs mark a handful of
+unusual evenings; their small Newey-West p-values do not survive the robust methods.
+
+Horse races, Pro, full sample (coefficient; Newey-West p, wild joint-episode p, wild quarter p):
+
+| Regression | GEX state | Raw state(s) | Raw states jointly (Wald) |
+|---|---|---|---|
+| GEX sign + calls sign | -0.0650; 0.0013, 0.0032, 0.0066 | calls -0.0047; 0.79, 0.80, 0.80 | |
+| GEX sign + puts sign | -0.0555; 0.0043, 0.022, 0.010 | puts -0.0272; 0.28, 0.31, 0.37 | |
+| GEX sign + futures sign | -0.0589; 0.0005, 0.0022, 0.038 | futures -0.0385; 0.065, 0.044, 0.026 | |
+| GEX sign + calls minus puts sign | -0.0610; 0.0007, 0.0040, 0.013 | -0.0288; 0.13, 0.12, 0.20 | |
+| GEX sign + calls plus puts sign | -0.0735; 0.047, 0.060, 0.073 | +0.0063; 0.86, 0.88, 0.85 | |
+| GEX sign + call, put and futures signs | -0.0425; 0.065, 0.094, 0.010 | calls -0.0138, puts -0.0189, futures -0.0348 | 0.26, 0.32, 0.17 |
+| GEX sign + call, put and futures levels | -0.0161; 0.62, 0.66, 0.54 | calls +0.0233, puts +0.0161, futures +0.0109 | 0.21, 0.34, 0.23 |
+| GEX level + call, put and futures levels | +0.0436; 0.68, 0.80, 0.68 | calls -0.0045, puts -0.0049, futures +0.0098 | 0.81, 0.86, 0.61 |
+| GEX level + calls plus puts level | +0.0358; 0.58, 0.57, 0.57 | +0.0036; 0.96, 0.96, 0.96 | |
+
+**What it changes.**
+
+* **Which raw position carries F2.** Pro's total net index-option position, calls plus puts. Its sign gives
+  -0.0632 (largest robust p 0.021) and its level +0.0398 per standard deviation (0.027), against -0.0680
+  (0.014) and +0.0389 (0.026) for the GEX state. No single leg is the whole of it: net calls and net puts each
+  carry part of F2 as levels (largest robust p 0.033 and 0.038) but are weaker as signs (0.074 and 0.12).
+  Pro's directional option stance (calls minus puts) does not carry F2 as a level (p 0.43 to 0.58), and
+  neither does the level of its index futures (p 0.16 to 0.24). The futures sign is borderline alone
+  (largest robust p 0.053) and keeps part of its coefficient next to the GEX sign (-0.0385, p 0.026 to
+  0.065).
+* **Whether the gamma weighting adds anything.** Not measurably. The GEX state and calls plus puts have the
+  same sign on 916 of 932 evenings, and their levels correlate 0.994. When the two signs race, GEX keeps
+  -0.0735 and calls plus puts +0.0063. But that split comes from the 16 evenings on which they disagree, and
+  the GEX p-values are 0.047 to 0.073, so it is weak evidence. When the GEX sign races the levels of calls,
+  puts and futures, it falls to -0.0161 (p 0.54 to 0.66). The raw levels are then jointly insignificant too
+  (p 0.21 to 0.34): the two sets carry the same information, and these data cannot separate them. The GEX
+  sign beats each single raw sign (largest robust p 0.0066 to 0.038), which only says again that no single
+  leg is the whole signal.
+* **Halves.** As for the GEX state, nothing is robust in 2023 to 2024 (largest robust p 0.072 or more for
+  every position and form). From 2025 the levels carry F2 best: calls plus puts +0.0430 (largest robust p
+  0.0026, the same as the GEX level), net puts +0.0357 (0.032) and net calls +0.0314 (0.046).
+* **FII and Client.** No position of either survives the robust methods (largest robust p 0.079 or more), so
+  the raw positions confirm Section 4: the pattern belongs to Pro.
+
+In plain words: F2 is "the close reverses the day's move more after evenings on which Pro is, on balance, net
+short index options". Weighting Pro's calls and puts by the front chain's gamma changes that state on 16
+evenings in four years and adds nothing we can detect. This answers M1(a). It supports the referee's
+renaming request (M1(c)), for example "Pro net index-option position". Because the file pools all indices
+and expiries, the position is Pro's book across all index options, not its Nifty front-expiry position.
+
+---
+
 ## What changes in the claims, point by point
 
 | Referee point | Change |
@@ -471,18 +623,22 @@ the expiry-premium tables; this check only sizes the problem.
 | M3 (alternatives) | None of the 15:15 split, the first bar, month or quarter effects, a January-to-March interaction, SEBI phase dummies or Sensex days removes F2 (full-window coefficients -0.053 to -0.079 under these controls; the split puts -0.040 before 15:15 and -0.028 after). Square-off and close-benchmarked flows cannot be excluded with these data, only shown not to be the whole effect. |
 | M13 (angles) | "169 degrees apart" becomes "outcome (b) points to reverse Pro; outcome (a) is not identified, and a test that allows for that cannot reject a common direction (p 0.07 to 0.28)". |
 | M10 | Last-30-minute 1-minute returns on expiry days are negatively autocorrelated (-0.054, -0.082 from 2025), so one-minute end-of-day expiry premia carry noise; F2 does not. |
+| M1(a) | State F2 on Pro's raw net index-option position: the sign of net calls plus net puts gives -0.0632 (largest robust p 0.021) against -0.0680 for the GEX sign; the two agree on 916 of 932 evenings, and a horse race cannot separate them, so the gamma weighting adds nothing measurable. No single leg (calls, puts, futures, calls minus puts) is the whole signal, and no FII or Client position carries it. |
 
 ## Not done here
 
-* M1(a): F2 on Pro's raw net call, put and index-futures positions (rather than the GEX-weighted sign).
+* M1(a) on Nifty-only positions: not possible with these data, because the participant file pools all indices
+  and expiries.
 * M10: noise-robust realized variance for the expiry premia (only the noise diagnostic is here).
 * Verification of the SEBI and Sensex dates against primary documents (hosts blocked from this container).
 
 ## What F2 now means
 
 F2 is a real, persistent pattern in Nifty's last 30 minutes, but it is a statement about NSE's Pro category, not
-about dealer gamma. After evenings on which Pro's pooled net index-option position, weighted by the front
-chain's call and put gamma, is negative, the close reverses the day's move by about 7 bp more per 100 bp. The
+about dealer gamma. After evenings on which Pro is, on balance, net short index options (its net calls plus net
+puts across all indices are negative), the close reverses the day's move by about 7 bp more per 100 bp.
+Weighting those positions by the front chain's call and put gamma, as the GEX sign does, changes the state on
+16 of 932 evenings and adds nothing measurable (Section 8). The
 clean hedging test that needs no proxy (dealers short everything, so momentum) fails: there is no momentum, and
 more gamma brings none. The negative-Pro state is a slow regime (almost always on in 2023, about one evening in
 five from 2025), so the honest sample is a few dozen episodes, not 466 days. With inference that respects

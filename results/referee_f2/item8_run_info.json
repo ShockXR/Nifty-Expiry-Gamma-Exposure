@@ -1,0 +1,15 @@
+{
+  "seed": 20261103,
+  "n_perm": 4999,
+  "n_wild": 4999,
+  "perm_block": 60,
+  "seconds": 74.6,
+  "n_p_values_reported": 381,
+  "inputs_sha256_16": {
+    "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
+    "results/pipeline_nse_v2/daily_gex_panel.csv": "f0be1a255eb3fde0",
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b4"
+  },
+  "participant_files": 944,
+  "status": "post hoc, in response to referee point M1(a); not pre-registered"
+}
