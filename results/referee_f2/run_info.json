@@ -1,0 +1,20 @@
+{
+  "seed": 20261103,
+  "n_perm": 4999,
+  "n_boot": 9999,
+  "n_wild": 4999,
+  "n_fixedb": 20000,
+  "n_angle_boot": 4999,
+  "n_noise_boot": 1999,
+  "seconds": 150.2,
+  "n_p_values_reported": 598,
+  "inputs_sha256_16": {
+    "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
+    "results/pipeline_nse_v2/daily_gex_panel.csv": "f0be1a255eb3fde0",
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b4",
+    "data/external/sensex_expiry_calendar.csv": "5d9329e40c8c75b2",
+    "data/external/sebi_phases.csv": "ad30fa4bd23d3b4d"
+  },
+  "participant_files": 944,
+  "status": "post hoc, in response to the referee report; not pre-registered"
+}

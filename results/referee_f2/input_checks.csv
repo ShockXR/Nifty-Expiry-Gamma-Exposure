@@ -1,0 +1,13 @@
+check,value
+"r_rod equals experiments/momentum_gex.py (bp, max abs diff)",0.0
+"r_last equals experiments/momentum_gex.py (bp, max abs diff)",0.0
+"Pro rule rebuilt from C, P and the participant file vs panel net_gex_participant (max abs diff / gross)",2.4955287564439164e-17
+Client mirror rebuilt vs panel net_gex_client_mirror (max abs diff / gross),4.081272359660088e-17
+"split 14:59 to 15:15 plus 15:15 to 15:29 minus r_last (bp, max abs diff)",2.807531984672096e-12
+F2 days (r_rod and r_last present),932.0
+F2 days with a Pro sign,932.0
+F2 days with a negative Pro evening,466.0
+Sensex expiry days (rule) among F2 days,181.0
+days missing the 15:15 bar among F2 days,0.0
+days missing the 15:00 bar among F2 days,0.0
+Sensex days: rule here vs results/sensex_confound/sensex_expiry_days_used.csv (days in one only),0.0
