@@ -18,7 +18,7 @@ and says:
 | --- | --- | --- |
 | `claim_id` | a short name for the row | `PI13` |
 | `document` | where the number is printed (`PAPER` means the private working paper) | `PITCH_PANDEY.md` |
-| `quoted_text` | a short piece of the sentence around it | `the last hour 5.8%, 7.6% and 6.4% better ...` |
+| `quoted_text` | a short piece of the sentence around it | `forecasts the next 15 and 30 minutes 5.8% and 7.6% better` |
 | `value` | the number exactly as printed | `5.8` |
 | `rounding_or_tolerance` | how to compare (empty means "must round to the printed digits") | `neg` |
 | `results_file` | the file the number comes from | `results/pipeline_nse_v2/scoreboard_next15.csv` |
@@ -55,7 +55,9 @@ registry can ask for are `neg` (the files store "-5.8% loss" where the text says
 `one_minus`, `half`, `mul=X` and `divby=X`. Several cells can be combined with `sum`, `diff`, `div`, `mul`,
 `max` or `min`, for example "the largest of the three p-values is below 0.001". Other comparison modes are
 `lt` (for "p < 0.001"), `oom` (same power of ten, for "as small as 10^-256"), `date` (so "14 November
-2022" matches "2022-11-14"), `rel=X` (for "about 100") and `exact`.
+2022" matches "2022-11-14"), `rel=X` (for "about 100") and `exact`. A quantity written in words ("all",
+"four", "one in five") is read as an exact number (1, 4, 0.2), so where the text says "about one in five"
+the row gives an explicit tolerance (`abs=0.05`).
 
 **Three numbers are computed, not looked up.** Three numbers in the text are computed by the project's
 code only in passing and are not stored in any file: the share of days on which the hybrid beats mcsGARCH
@@ -95,16 +97,16 @@ the repository. It takes about a second and writes:
 To add a number, add a row to `docs/number_registry.csv` and rerun. The registry rows for the paper quote
 at most about ten words.
 
-## Results (run of 3 November 2026, committed results at 9634054)
+## Results (run of 3 November 2026, committed results at 3915e59)
 
-**221 registry entries: 210 MATCH, 7 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 4 UNTRACED.**
+**283 registry entries: 276 MATCH, 5 MISMATCH, 0 TEXT_MISSING, 0 SOURCE_MISSING, 2 UNTRACED.**
 
 | Document | Entries | MATCH | MISMATCH | UNTRACED |
 | --- | --- | --- | --- | --- |
-| PITCH_PANDEY.md | 69 | 66 | 2 | 1 |
-| README.md | 9 | 7 | 0 | 2 |
-| docs/BRIEFING_PANDEY.md | 10 | 10 | 0 | 0 |
-| docs/REAL_DATA_RESULTS.md | 43 | 37 | 5 | 1 |
+| PITCH_PANDEY.md | 74 | 73 | 0 | 1 |
+| README.md | 12 | 11 | 0 | 1 |
+| docs/BRIEFING_PANDEY.md | 19 | 19 | 0 | 0 |
+| docs/REAL_DATA_RESULTS.md | 84 | 79 | 5 | 0 |
 | docs/MODEL_ITERATIONS_REAL.md | 9 | 9 | 0 | 0 |
 | docs/FALSIFICATION.md | 10 | 10 | 0 | 0 |
 | docs/F2_ECONOMICS.md | 8 | 8 | 0 | 0 |
@@ -112,20 +114,34 @@ at most about ten words.
 | docs/PINNING_STUDY.md | 7 | 7 | 0 | 0 |
 | docs/SENSEX_SWAP.md | 7 | 7 | 0 | 0 |
 | docs/REPLICATION_NSE.md | 8 | 8 | 0 | 0 |
-| docs/DEALER_SIGN.md | 6 | 6 | 0 | 0 |
+| docs/DEALER_SIGN.md | 10 | 10 | 0 | 0 |
 | Working paper (private) | 28 | 28 | 0 | 0 |
 
-Every pitch number that is a result now has a registry entry. The pitch scan leaves three numbers
-uncovered, and none of them is a result: "360 minutes a day" (the sample design), "a 100 bp move" (the
-scale of an illustration) and "a 50-point strike" (NSE's strike spacing). The working paper's main text has
-many more numbers than the 28 registered here; its uncovered list was printed for the author and not saved.
+**What changed since the first run (221 entries at 9634054).** The pitch, README, briefing,
+REAL_DATA_RESULTS.md and DEALER_SIGN.md were rewritten after three referee responses, which left 20 entries
+TEXT_MISSING. Ten were re-quoted to the new wording with the same source (PI13 to PI16, PI35, PI36, PI42,
+BR03, BR04, DS03). Ten were removed because their numbers are no longer printed: PI17 to PI25 (the pitch's
+expiry-day, after-the-open and hold-out margins and its 54% daily win share) and RM06 (the README's 54%);
+their IDs are not reused. 72 entries were added for the new numbers, from `results/referee_forecast/` (the
+4.8% and 5.9% margins over the best mcsGARCH given VIX or implied variance, the 1.7% (p 0.23) in the last
+hour, the 31 challengers, Hansen's SPA and step-down p-values, plain LightGBM against the hybrid (p 0.32 to
+0.97), the ridge 3.7% and 3.9%, and the EWMA fallback check: 5.5% and 6.9%, 42 days, 5.9%, 7.9% and
+6.5%), from `results/referee_f2/` (the -0.029 unconditional slope, 95% and "about one in five" negative-Pro
+evenings, 466 days, the largest robust p 0.012 and 0.038, 916 of 932 evenings, and the angle tests p 0.07
+to 0.28 and 0.002 to 0.004), from `results/synthetic_control/` (+0.12, p 0.95, about 1.4 log points, 19
+donors, +0.28 against +0.19) and from `results/sensex_swap/` for the P92 summary in REAL_DATA_RESULTS.md.
+The pitch fixes for PI36 ("all of them with controls") and PI42 ("about 0.55 bp") now match. RM08 (about 8
+minutes) and RD43 (p 0.18) are now traced, see below.
+
+Every pitch number that is a result has a registry entry. The pitch scan leaves three numbers uncovered,
+and none of them is a result: "360 minutes a day" (the sample design), "a 100 bp move" (the scale of an
+illustration) and "a 50-point strike" (NSE's strike spacing). The working paper's main text has many more
+numbers than the 28 registered here; its uncovered list was printed for the author and not saved.
 
 ### Every mismatch
 
 | Claim | Where | Printed | File value | Source | My reading |
 | --- | --- | --- | --- | --- | --- |
-| PI36 | PITCH_PANDEY.md, point 4: "it beats 97% of them, 99.6% with controls" | 99.6% | 100% of the 288 usable random sign rules have a smaller \|t\| (one minus the placebo rank p 0.00346 gives 99.65%) | `results/falsification/t3_sign_rule_cloud_summary.csv`, row `t_x_neg_controls` | The file is right. 99.65 rounds to 99.7, not 99.6, and on the share reading used for the 97% it is 100%. Suggest "all 288 of them with controls" or "99.7%". |
-| PI42 | PITCH_PANDEY.md, point 4: "it breaks even at about 0.5 bp of slippage per side" | 0.5 | 0.5546 | `results/f2_economics/metrics.csv`, rule P, test, base costs | The file is right; 0.5546 rounds to 0.6, and F2_ECONOMICS.md and REAL_DATA_RESULTS.md print 0.55. Suggest "about 0.55 bp". Minor, since the sentence says "about". |
 | RD30 | REAL_DATA_RESULTS.md, R5 table, Pro row, regime-specific slopes | -0.069 | -0.0695 | `results/momentum_gex/regressions.csv` (929 days) | See the note under the table. The file named as the source gives -0.070. |
 | RD31 | same cell, p-value | 0.0006 | 0.00066 | same | The file gives 0.0007. |
 | RD33 | REAL_DATA_RESULTS.md, R5 table, US row, plain slope p-value | 0.59 | 0.584 | same | The file gives 0.58. |
@@ -136,28 +152,41 @@ many more numbers than the 28 registered here; its uncovered list was printed fo
 `results/momentum_gex/regressions.csv` as the source. Those five cells instead match the 932-day version of
 the same regressions that the falsification study reran from the original script
 (`results/falsification/t7_family_A_original_tests.csv`: -0.0694, p 0.00063, p 0.586, -0.0685, p 0.946,
-which round to exactly the printed values). So the table mixes two runs. The file named as the source is
-the one to follow, and updating the five cells to -0.070 (0.0007), 0.58, -0.068 and 0.94 changes no
-conclusion: the Pro interaction stays clearly negative and the US and Client-mirror controls results stay
-null.
+which round to exactly the printed values). So the table mixes two runs. Updating the five cells to the
+named file's -0.070 (0.0007), 0.58, -0.068 and 0.94 would change no conclusion: the Pro interaction stays
+clearly negative and the US and Client-mirror controls results stay null. They are left as MISMATCH on
+purpose for now: a full reproduction is regenerating these files, and the table will be fixed against the
+new ones.
 
-No mismatch was found in the working paper's 28 registered numbers, in the briefing, or in any of the
-study documents other than REAL_DATA_RESULTS.md.
+No mismatch was found in the working paper's 28 registered numbers, in the pitch, the README, the briefing,
+or in any of the study documents other than REAL_DATA_RESULTS.md.
 
 ### Untraced numbers
 
 | Claim | Where | Printed | Why no source |
 | --- | --- | --- | --- |
 | PI68 | PITCH_PANDEY.md, "Two possible papers" table | 2 weeks | A time estimate in the plan, not a result. |
-| RM08 | README.md, quick start | about 9 minutes on 4 cores | A run time. The first real-data run's `run_info.json` records 500 s (8.3 minutes) and the five-seed run behind the headline numbers records 5,962 s (99 minutes). No file records 9 minutes, so the README's figure is worth checking against the command it sits next to. |
-| RM09 | README.md | 259 tests | The size of the test suite, not a results file. On this branch `OMP_NUM_THREADS=1 python -m pytest -q` passes 397 tests, 92 of them this check's own, so the suite had 305 before it; the README's 259 looks out of date. |
-| RD43 | REAL_DATA_RESULTS.md, R1, MSE paragraph (and MODEL_ITERATIONS_REAL.md, finding 4) | p 0.13 to 0.18 | The lower end (0.134) matches the all-day MSE tests at 15 and 30 minutes, which run from 0.134 to 0.151. Only the hold-out HAR test at 15 minutes gives 0.180, so it is unclear which tests the upper end covers. Suggest "0.13 to 0.15" or naming the tests. |
+| RM09 | README.md | 259 tests | The size of the test suite, not a results file. On this branch `OMP_NUM_THREADS=1 python -m pytest -q` collects 465 tests, 102 of them this check's own; the README's 259 looks out of date. |
+
+Two numbers untraced in the first run now have a source. RM08, the README's "about 8 minutes on 4 cores"
+for the real-data pipeline, matches the first run's `results/pipeline_nse/run_info.json` (500 s, 8.3
+minutes), and the new "takes about 100" for the five-seed study matches `results/pipeline_nse_v2/run_info.json`
+(5,962 s, 99 minutes). RD43, the upper end of "p 0.13 to 0.18" for the MSE tests, is the range over every
+model's all-day MSE test against mcsGARCH at 15 and 30 minutes in `results/pipeline_nse_v2/tests_next15.csv`
+and `tests_next30.csv` (0.131 to 0.182), leaving out `mcsgarch_r63`, which is the benchmark itself refitted
+every 63 days (p 0.94 and 0.96); RD42 and RD43 now take the minimum and maximum over those rows.
+MODEL_ITERATIONS_REAL.md prints the same range in two places; it is not registered there.
 
 ### Other things noticed (not checked by the script)
 
-* PINNING_STUDY.md calls the follow-up "a pre-registered test of five market-structure explanations",
-  while PITCH_PANDEY.md and BRIEFING_PANDEY.md say "six". The registry checks numbers written as digits,
-  not as words, so this is only flagged here.
+* The first run flagged that PINNING_STUDY.md said "five market-structure explanations" where the pitch and
+  briefing said "six"; it now says "six (five tested by regression)", so the three agree.
+* "Largest p 0.012" and "0.038" for F2 under persistence-robust inference (pitch, REAL_DATA_RESULTS.md) are
+  the largest over the methods in `results/referee_f2/item3_f2_inference.csv` other than the within-block
+  shuffles, which REFEREE_RESPONSE_F2.md reports only for comparison (from 2025 the within-block shuffle of
+  the coefficient gives 0.055). The registry rows say so.
+* "About one in five" negative-Pro evenings from 2025 is 21.5% in the file; it is checked as 0.2 with a
+  tolerance of 0.05.
 * The R2 "+11% before November 2024" and the "about 100 weekly expiries since November 2024" (102 in the
   data) both check out; the latter is registered with a 5% tolerance because the text says "about".
 
@@ -168,7 +197,7 @@ study documents other than REAL_DATA_RESULTS.md.
 * The registry was written by hand by reading each results file. A wrong selector would show up as a
   MISMATCH or SOURCE_MISSING, not as a false MATCH, unless it happens to point at a different cell with the
   same rounded value; the notes say which row and column each entry uses so a reader can verify it.
-* 221 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
+* 283 entries cover the headline numbers. Secondary numbers (most table cells in the study documents, and
   most of the working paper) are not registered; the pitch scan shows that every remaining pitch number is
   a design setting.
 * The check reads the worktree's committed results. If a full reproduction rewrites `results/`, rerun it.
@@ -176,7 +205,8 @@ study documents other than REAL_DATA_RESULTS.md.
 ## Files
 
 * `scripts/trace_numbers.py`: the check.
-* `docs/number_registry.csv`: the registry (221 rows).
-* `tests/test_trace_numbers.py`: tests on small synthetic files (selectors, rounding, transforms, every
-  status, the coverage scan and the rule that the paper's uncovered list never lands in the repository).
+* `docs/number_registry.csv`: the registry (283 rows).
+* `tests/test_trace_numbers.py`: 102 tests on small synthetic files (selectors, rounding, transforms,
+  quantities in words, every status, the coverage scan and the rule that the paper's uncovered list never
+  lands in the repository).
 * `results/number_trace/trace.csv` and `results/number_trace/uncovered_pitch.csv`: the outputs.

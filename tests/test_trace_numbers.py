@@ -63,9 +63,32 @@ def test_parse_printed(text, value, place):
     assert p == place
 
 
-def test_parse_printed_rejects_words():
-    with pytest.raises(ValueError):
-        tn.parse_printed("six")
+@pytest.mark.parametrize("text,value", [
+    ("all", Decimal(1)),
+    ("none", Decimal(0)),
+    ("six", Decimal(6)),
+    ("one in five", Decimal("0.2")),
+    ("One  in five", Decimal("0.2")),
+    ("2 out of 8", Decimal("0.25")),
+])
+def test_parse_printed_words_are_exact(text, value):
+    v, p = tn.parse_printed(text)
+    assert v == value
+    assert p <= -12
+
+
+def test_parse_printed_rejects_other_words():
+    for bad in ("about", "n/a", "one in zero", "many in five"):
+        with pytest.raises(ValueError):
+            tn.parse_printed(bad)
+
+
+def test_word_values_compare_exactly_unless_a_tolerance_is_given():
+    assert tn.compare("all", 1.0, rule())[0] is True
+    assert tn.compare("all", 0.996, rule())[0] is False
+    assert tn.compare("one in five", 0.2146, rule())[0] is False
+    assert tn.compare("one in five", 0.2146, rule("abs=0.05"))[0] is True
+    assert tn.compare("one in five", 0.27, rule("abs=0.05"))[0] is False
 
 
 @pytest.mark.parametrize("printed,file_value,ok", [
@@ -334,6 +357,9 @@ def test_snippet_search_ignores_line_breaks():
     ("(+1.14 log points", "1.14", True),  # a printed "+" is optional
     ("as small as 10^-256;", "10^-256", True),
     ("from 14 November 2022 to", "14 November 2022", True),
+    ("and all of them with controls", "all", True),
+    ("a small share", "all", False),        # a word value must be a whole word
+    ("about one in five from", "one in five", True),
 ])
 def test_value_in_snippet(snippet, value, found):
     assert (tn.value_offset_in_snippet(snippet, value) is not None) is found

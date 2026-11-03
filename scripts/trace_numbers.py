@@ -56,6 +56,8 @@ Comparison rules (column ``rounding_or_tolerance``; tokens separated by ``;``):
   match 5.8), ``lt`` / ``le`` / ``gt`` (printed bounds such as "p < 0.001"), ``abs=X`` and ``rel=X``
   (explicit tolerance), ``exact``, ``oom`` (same power of ten, for "as small as 10^-256"), ``str``
   (text equality) and ``date`` (the same calendar date, so "14 November 2022" matches "2022-11-14").
+  A printed value may also be a quantity in words ("all", "none", "six", "one in five"); it is read
+  as an exact number, so a word that the text qualifies with "about" needs ``abs=X`` or ``rel=X``.
 * Transforms of the file value, applied left to right: ``x100`` (fraction to percent; used only where
   the registry says so), ``neg``, ``abs``, ``one_minus``, ``ratio_pct`` ((x - 1) x 100),
   ``expm1_pct`` ((e^x - 1) x 100), ``half``, ``mul=X`` and ``divby=X`` (for example ``divby=60`` for
@@ -114,13 +116,42 @@ def normalise_minus(s: str) -> str:
     return s.replace("\u2212", "-").replace("\u2013", "-").replace("\u2014", "-")
 
 
+_NUMBER_WORDS = {"none": 0, "zero": 0, "all": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+                 "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12}
+_WORD_RATIO = re.compile(r"^(\w+) (?:in|out of) (\w+)$")
+_WORD_PLACE = -12  # a quantity in words is exact
+
+
+def _word_number(word: str) -> Decimal | None:
+    if word in _NUMBER_WORDS:
+        return Decimal(_NUMBER_WORDS[word])
+    return Decimal(word) if word.isdigit() else None
+
+
+def parse_words(text: str) -> Decimal | None:
+    """A quantity written in words: "all" (1), "none" (0), "six" (6), "one in five" (0.2)."""
+    t = re.sub(r"\s+", " ", str(text).strip().lower())
+    m = _WORD_RATIO.match(t)
+    if m:
+        a, b = _word_number(m.group(1)), _word_number(m.group(2))
+        return a / b if a is not None and b else None
+    if t.isdigit():
+        return None
+    return _word_number(t)
+
+
 def parse_printed(text: str) -> tuple[Decimal, int]:
     """Value and precision of a printed number.
 
     Returns the value and the decimal exponent of its last printed digit, so that "5.8" gives
     (5.8, -1), "21,239" gives (21239, 0), "1.4e-12" gives (1.4e-12, -13) and "10^-256" gives
     (1e-256, -256). A trailing "%" is ignored (percent against fraction is a registry transform).
+    A quantity in words ("all", "none", "six", "one in five") is read as an exact number (1, 0, 6,
+    0.2), so "about one in five" needs an explicit ``abs=`` or ``rel=`` tolerance.
     """
+    w = parse_words(text)
+    if w is not None:
+        return w, _WORD_PLACE
     s = normalise_minus(str(text)).strip().replace(" ", "")
     s = s.rstrip("%")
     if s.startswith("<") or s.startswith(">"):
@@ -582,6 +613,8 @@ def value_offset_in_snippet(snippet: str, value: str) -> int | None:
             after = s[m.end()] if m.end() < len(s) else " "
             if before.isdigit() or before == "." or after.isdigit():
                 continue
+            if (c[:1].isalpha() and before.isalpha()) or (c[-1:].isalpha() and after.isalpha()):
+                continue  # a word value ("all") must be a whole word, not part of "small"
             if after == "." and m.end() + 1 < len(s) and s[m.end() + 1].isdigit():
                 continue
             return m.start()
