@@ -1,0 +1,5 @@
+[REAL DATA (third-party 1-minute bars validated against NSE official daily values)] rolling nifty: 2360 days, 44 windows of 64 days every 21
+  nifty done (36s)
+[REAL DATA (third-party 1-minute bars validated against NSE official daily values)] rolling banknifty: 2289 days, 38 windows of 64 days every 21
+  banknifty done (67s)
+rolling stage done in 1.1 min
