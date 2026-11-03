@@ -618,11 +618,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** The audit was done by an AI agent, not a person; the professor's reading is the real test.
 * **NEXT ITERATION:** None planned.
 
-## Iterations in progress (3 November 2026, about 16:30 IST)
+## Iteration 52: does the paper's fall in intraday persistence survive the fixed mcsGARCH? (registered plan, P114)
+
+* **OBJECTIVE:** Check whether the paper's finding that intraday volatility shocks die out faster after the expiry change is a property of the market or of mcsGARCH's form.
+* **PROBLEM IDENTIFIED:** P109 found that mcsGARCH's intraday GARCH has no moving level inside the day. Such a model can show alpha + beta near 1 because the day's level drifts, not because single shocks are long-lived; if the before window drifted more, part of the fall could be an artefact.
+* **HYPOTHESIS:** Registered before any extended model was estimated on these windows (`docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md`, commit 86e3866): under the model with P109's fixes X1 to X3, Nifty's persistence (the half-life of the impulse response to one shock at 12:15) still falls from the inferred before window to the after window, judged by the replication's day-block bootstrap (400 draws, one-sided).
+* **CHANGES IMPLEMENTED:** `experiments/p114_persistence_fixed_model.py`, impulse-response helpers in `src/niftygex/volatility.py` (defaults unchanged; Table 2 and the replication's bootstrap reproduce exactly), 18 synthetic tests, one post hoc descriptive script. Run by an AI agent; results 7c1fc13, 49 minutes after the plan. Ledger adapter PERSFIX.
+* **EXPERIMENTS PERFORMED:** Fits on the inferred, stated and P108 before windows and the after window, for Nifty and Bank Nifty; likelihood-ratio tests; 400 bootstrap draws; 44 rolling Nifty windows and 38 Bank Nifty windows. About 36 minutes on one core.
+* **RESULTS:** (REAL DATA.) Primary verdict "survives": for Nifty on the inferred window the half-life falls from 141 to 18 minutes (reference model 359 to 72), change in equivalent persistence -0.033 (interval -0.058 to -0.003, one-sided p 0.022), with a very uncertain kept share (1.29, interval -0.04 to 6.91). Not confirmed for Bank Nifty (p 0.105) or on P108's window; on the stated window no fall for Nifty (19.6 to 17.9 minutes) and a rise for Bank Nifty. The inferred before window is the most persistent of the 44 rolling Nifty windows (median 25 minutes). The primary test does not survive the project-wide correction (1.0).
+* **IMPROVEMENTS:** The persistence finding is now stated narrowly: Nifty, inferred window, cause open. Pitch, briefing, results summary, replication document, paper (6.1.2, contribution 1, 5.8, Tables B1 and C, Appendix B), replication note, referee response and deck updated. Ledger: 28,021 tests, 33 studies, 3,277 survive; trace 545 entries, 539 MATCH, no mismatch.
+* **REMAINING ISSUES:** Windows of 64 and 59 days; in-sample estimates; the fixes were chosen for forecasting, not for this question; telling an effect of the expiry change from a persistent late-2022 period needs comparison windows with no rule change.
+* **NEXT ITERATION:** None planned before the meeting.
+
+## Iterations in progress (3 November 2026, about 17:00 IST)
 
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
 * **P110**, a stress test of P106's three claims on Bank Nifty and Fin Nifty (plan 5128e53).
-* **P114**, whether the paper's fall in intraday persistence survives P109's fixed mcsGARCH (registered).
+* **P116**, how large the hybrid's gain is over mcsGARCH exactly as the paper specifies it (plan 19c5486).
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.

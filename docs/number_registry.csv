@@ -43,7 +43,7 @@ PI63,PITCH_PANDEY.md,"(197 to 1,255 minutes)","1,255",,results/replication_nse/t
 PI64,PITCH_PANDEY.md,first-hour Nifty rows sum to 101,101,,results/replication_nse/paper_printed_checks.csv,csv:item=after nifty monthly_first_hour Nifty 50 row@value,
 PI65,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,223,,results/replication_nse/rekey_check.csv,csv:status=compared@#count,
 PI66,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,222,,results/replication_nse/rekey_check.csv,csv:match=yes@#count,
-PI67,PITCH_PANDEY.md,"Every one of the project's 28,001 hypothesis tests","28,001",,results/test_ledger.csv,csv:@#count,
+PI67,PITCH_PANDEY.md,"Every one of the project's 28,021 hypothesis tests","28,021",,results/test_ledger.csv,csv:@#count,
 PI68,PITCH_PANDEY.md,2 weeks |,2,,,UNTRACED,"a time estimate in the plan, not a result (the snippet covers both cells)"
 PI69,PITCH_PANDEY.md,Two independent searches of every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
 PI70,PITCH_PANDEY.md,a correction for having tried 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
@@ -281,11 +281,11 @@ PI92,PITCH_PANDEY.md,With 360 minutes a day,360,,,UNTRACED,"a setting of the rep
 PI93,PITCH_PANDEY.md,about 3 bp per 100 bp move,100,,,UNTRACED,"the size of the move the slope is scaled to, not a result"
 PI94,PITCH_PANDEY.md,closer to a 50-point strike,50,,,UNTRACED,"Nifty strike spacing, a contract term"
 PI95,PITCH_PANDEY.md,none of those results reaches 5% under,5,,,UNTRACED,"the significance level, not a result"
-PI96,PITCH_PANDEY.md,hypothesis tests (32 studies),32,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
-RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 28,001 hypothesis tests","28,001",,results/test_ledger.csv,csv:@#count,
-RD86,docs/REAL_DATA_RESULTS.md,hypothesis tests from 32 studies,32,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
-RD87,docs/REAL_DATA_RESULTS.md,"3,271 survive","3,271",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
-BR25,docs/BRIEFING_PANDEY.md,"lists all 28,001 statistical tests","28,001",,results/test_ledger.csv,csv:@#count,
+PI96,PITCH_PANDEY.md,hypothesis tests (33 studies),33,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
+RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 28,021 hypothesis tests","28,021",,results/test_ledger.csv,csv:@#count,
+RD86,docs/REAL_DATA_RESULTS.md,hypothesis tests from 33 studies,33,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
+RD87,docs/REAL_DATA_RESULTS.md,"3,277 survive","3,277",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
+BR25,docs/BRIEFING_PANDEY.md,"lists all 28,021 statistical tests","28,021",,results/test_ledger.csv,csv:@#count,
 PI97,PITCH_PANDEY.md,pay only about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 BR26,docs/BRIEFING_PANDEY.md,it is worth about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
 RD88,docs/REAL_DATA_RESULTS.md,the hybrid beats mcsGARCH (one-sided p 8.1e-7),8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
@@ -360,9 +360,9 @@ PA70,PAPER,No GEX set helps under any sign rule (smallest Holm p 0.40),0.40,,res
 PA71,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",79,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Nifty (v2 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 PA72,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",42,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Bank Nifty (P91 forecasts)&target=next15@share_of_mcsgarch_squared_error,post hoc
 PA73,PAPER,"alone carries 79%, 42% and 98% of its 15-minute squared error",98,x100,results/pipeline_nse_finnifty/p104/june5_2024.csv,csv:index=Fin Nifty&target=next15@share_of_mcsgarch_squared_error,post hoc
-PA74,PAPER,"counts 28,001 tests across 32 studies","28,001",,results/test_ledger.csv,csv:@#count,ledger
-PA75,PAPER,"of which 7,981 have a raw p below 0.05","7,981",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
-PA76,PAPER,"and 3,271 survive a Benjamini-Yekutieli correction","3,271",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,ledger
+PA74,PAPER,"counts 28,021 tests across 33 studies","28,021",,results/test_ledger.csv,csv:@#count,ledger
+PA75,PAPER,"of which 7,989 have a raw p below 0.05","7,989",,results/test_ledger.csv,csv:p_raw<0.05@#count,ledger
+PA76,PAPER,"and 3,277 survive a Benjamini-Yekutieli correction","3,277",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,ledger
 PA77,PAPER,P104's primary tests survive (8.3e-10 and 1.2e-9),8.3e-10,,results/test_ledger.csv,csv:study=FNFC&role=primary@#min:p_by_project,"ledger, P104 H1, smaller of the two"
 PI105,PITCH_PANDEY.md,"Pooled in one registered test that allows for the three indices moving together, the gain is 4.7% and 6.0%",4.7,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next15@pooled_change_pct,P107 P1
 PI106,PITCH_PANDEY.md,"Pooled in one registered test that allows for the three indices moving together, the gain is 4.7% and 6.0%",6.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=P1_next30@pooled_change_pct,P107 P1
@@ -537,3 +537,10 @@ BR38,docs/BRIEFING_PANDEY.md,"could not be reproduced by any of 5,440 standard s
 PI131,PITCH_PANDEY.md,where the before total is 73.1 and no fall is detected,73.1,,results/replication_nse/tables34_connectedness.csv,csv:trim=360_drop_last15&period=before_stated&family=union&subsample=all_expiry@paper_scale_total,"stated before window, all expiry days"
 BR39,docs/BRIEFING_PANDEY.md,need 0.8 to 4.1 more years,0.8,,results/power_real/headline.csv,csv:test=R2_tue_last_hour&stat=wilcoxon@extra_years_half,Tuesday last-hour premium at half size
 BR40,docs/BRIEFING_PANDEY.md,need 0.8 to 4.1 more years,4.1,,results/power_real/headline.csv,csv:test=R2_tue_day&stat=wilcoxon@extra_years_half,Tuesday whole-day premium at half size (signed-rank test)
+PI132,PITCH_PANDEY.md,"the fall survives (141 to 18 minutes, bootstrap p 0.022)",141,,results/p114_persistence_fixed_model/persistence.csv,csv:window=before_inferred&index=nifty&model=F@hl_irf,"P114 fixed model, Nifty, inferred before window"
+PI133,PITCH_PANDEY.md,"the fall survives (141 to 18 minutes, bootstrap p 0.022)",18,,results/p114_persistence_fixed_model/persistence.csv,csv:window=after&index=nifty&model=F@hl_irf,"P114 fixed model, Nifty, after window"
+PI134,PITCH_PANDEY.md,"the fall survives (141 to 18 minutes, bootstrap p 0.022)",0.022,,results/p114_persistence_fixed_model/tests.csv,csv:test_id=P1_nifty_inferred_F_irf_boot@p_raw,P114 primary
+PI135,PITCH_PANDEY.md,across 44 rolling windows the late-2022 window,44,,results/p114_persistence_fixed_model/rolling.csv,csv:index=nifty&model=F@#count,P114 rolling Nifty windows
+PA137,PAPER,its likelihood-ratio rows for Nifty do (0.0053 and 0.0078),0.0053,,results/test_ledger.csv,csv:test_id=PERSFIX-0002@p_by_project,"P114 S1 LR, project BY"
+PA138,PAPER,its likelihood-ratio rows for Nifty do (0.0053 and 0.0078),0.0078,,results/test_ledger.csv,csv:test_id=PERSFIX-0004@p_by_project,"P114 S1 LR alpha+beta, project BY"
+PA139,PAPER,the half-life falls from 141 to 18 minutes and the change in equivalent persistence is -0.033,-0.033,,results/p114_persistence_fixed_model/tests.csv,csv:test_id=P1_nifty_inferred_F_irf_boot@estimate,P114 primary estimate

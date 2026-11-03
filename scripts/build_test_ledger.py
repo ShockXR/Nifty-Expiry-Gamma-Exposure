@@ -181,6 +181,8 @@ STUDIES = {
              "docs/P109_MCSGARCH_EXTENSIONS.md; docs/prereg/P109_MCSGARCH_EXTENSIONS.md"),
     "CONNSET": ("Which connectedness setting reproduces the paper's printed totals (P113)",
                 "docs/P113_CONNECTEDNESS_SETTINGS.md; docs/prereg/P113_CONNECTEDNESS_SETTINGS.md"),
+    "PERSFIX": ("Does the paper's fall in intraday persistence survive P109's fixes to mcsGARCH (P114)",
+                "docs/P114_PERSISTENCE_FIXED_MODEL.md; docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md"),
 }
 
 PREREG = {
@@ -196,6 +198,7 @@ PREREG = {
     "p106_gain_decomposition": ("docs/prereg/P106_GAIN_DECOMPOSITION.md", "P106 registered plan"),
     "p109_mcsgarch_extensions": ("docs/prereg/P109_MCSGARCH_EXTENSIONS.md", "P109 registered plan"),
     "p113_connectedness_settings": ("docs/prereg/P113_CONNECTEDNESS_SETTINGS.md", "P113 registered plan"),
+    "p114_persistence_fixed_model": ("docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md", "P114 registered plan"),
 }
 
 COLUMNS = [
@@ -2591,6 +2594,60 @@ def adapt_p113connset(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+P114_OUTCOME = ["tests.csv", "verdict.csv", "persistence.csv", "persistence_change.csv", "lr.csv", "fits.csv",
+                "bootstrap_draws.csv", "irf_curves.csv", "rolling.csv", "rolling_correlations.csv"]
+
+
+def adapt_p114persfix(ctx: Ctx):
+    """P114: does the fall in intraday persistence survive P109's fixes (docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md).
+
+    tests.csv: P1 (primary, Nifty, inferred window, fixed model, day-block bootstrap of the change in the
+      impulse-response persistence), S1 to S4 (secondary: other measures and tests, Bank Nifty, the stated window,
+      the model with leverage), R1 (robustness: P108's window) and E1 (exploratory rank correlations across
+      rolling windows). The likelihood-ratio rows are two-sided chi-square tests; the bootstrap rows are one-sided
+      in the paper's direction. Every row is counted.
+    """
+    folder = "p114_persistence_fixed_model"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "PERSFIX", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "PERSFIX", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P114_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("PERSFIX", f"P114 {tid}: {clean(r['hypothesis'])}", "intraday persistence (impulse-response "
+                "half-life or alpha + beta) of mcsGARCH with P109's fixes, before against after the expiry change",
+                clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="bootstrap share, likelihood-ratio chi-square or Spearman rho (see p_method)",
+                statistic=r["statistic"], p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "PERSFIX", folder, {
+        r"verdict\.csv|persistence\.csv|persistence_change\.csv|lr\.csv|fits\.csv|bootstrap_draws\.csv|"
+        r"irf_curves\.csv|rolling\.csv|rolling_correlations\.csv|posthoc_night_cap\.csv|"
+        r"reproduction_bootstrap_lr\.csv|reproduction_table2\.csv":
+            "fits, bootstrap draws, impulse responses, rolling windows and reproduction checks behind tests.csv; "
+            "no new p-value",
+    }, "run information, counts or log; no p-value")
+
+
 
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
@@ -3945,12 +4002,12 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET", "PERSFIX"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
                  adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx,
-                 adapt_p113connset]
+                 adapt_p113connset, adapt_p114persfix]
 
 
 def headline18_check(ctx: Ctx):
@@ -4232,6 +4289,11 @@ RECON = [
              "better than chance (primary P1; P2 and P3 have no p-value because no setting met their criteria).",
      [("P1, primary: best fit against shuffled totals", "CONNSET", r"^tests\.csv\|P1_")],
      "Verdict 'not reproduced': the best setting fits better than chance but misses the before last hour by 23 points."),
+    ("P114", "Under mcsGARCH with P109's fixes (X1 to X3), Nifty's intraday persistence still falls from the inferred "
+             "before window to the after window (primary, day-block bootstrap, one-sided).",
+     [("P1, primary: Nifty, inferred window, impulse-response persistence", "PERSFIX", r"^tests\.csv\|P1_")],
+     "Verdict 'survives' for Nifty on the inferred window only; Bank Nifty, the stated window and P108's window "
+     "are weakened or gone, and the size of the fall is very uncertain."),
 ]
 
 
