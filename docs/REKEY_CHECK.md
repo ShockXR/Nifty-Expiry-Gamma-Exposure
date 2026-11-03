@@ -1,6 +1,6 @@
-# Second-person check of the paper's printed numbers
+# Blind second transcription of the paper's printed numbers
 
-**Result in one line:** a second person typed all 223 printed numbers that our replication compares against again, blind, from the PDF. 222 matched the first typing exactly. The one difference is a typesetting slip in the paper itself, and the first typing had already read it correctly. Nothing in the replication changed.
+**Who did it:** a separate AI agent (Claude), working blind from the PDF; not a human. **Result in one line:** a second, blind transcription typed all 223 printed numbers that our replication compares against again, blind, from the PDF. 222 matched the first typing exactly. The one difference is a typesetting slip in the paper itself, and the first typing had already read it correctly. Nothing in the replication changed.
 
 ## Why this check was needed
 

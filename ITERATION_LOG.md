@@ -306,7 +306,7 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Positions during the day are not public. Intraday option-chain snapshots would be needed for a sharper test.
 * **NEXT ITERATION:** Merge the model study and rerun the pipeline.
 
-## Iteration 26: a second person re-typed every number taken from the paper
+## Iteration 26: a blind second transcription of every number taken from the paper (by a separate AI agent)
 
 * **OBJECTIVE:** Make sure the replication compares our numbers with what the paper actually printed.
 * **PROBLEM IDENTIFIED:** The 223 printed values in `experiments/replicate_paper.py` were typed by hand once. A typing slip could make the replication look worse, or make the paper look inconsistent when it is not, just before we raise inconsistencies with the authors.
@@ -359,7 +359,7 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **OBJECTIVE:** Explain why pinning appeared under the single Thursday weekly and not since the move to Tuesday.
 * **PROBLEM IDENTIFIED:** The pinning study (iteration 18) found the pattern but no cause, and dealer gamma did not explain it.
 * **HYPOTHESIS:** Six market-structure candidates written down in advance; the primary one is open interest near the money.
-* **CHANGES IMPLEMENTED:** The design was committed to git (`docs/prereg/P87_PINNING_MECHANISM.md`, commit e50a775) before any outcome data were used; a second agent then ran it. `experiments/pinning_mechanism.py`, `docs/PINNING_MECHANISM.md`, `data/external/other_weekly_expiries.csv`, results in `results/pinning_mechanism/`.
+* **CHANGES IMPLEMENTED:** The analysis plan was committed to git (`docs/prereg/P87_PINNING_MECHANISM.md`, commit e50a775) before this study's outcomes were computed, on the same data that had shown the pinning pattern; a second agent then ran it. `experiments/pinning_mechanism.py`, `docs/PINNING_MECHANISM.md`, `data/external/other_weekly_expiries.csv`, results in `results/pinning_mechanism/`.
 * **EXPERIMENTS PERFORMED:** The pre-registered regressions with week-clustered and permutation p-values, Holm across candidates, the planned placebos and a settlement-price check (322 of 322 match).
 * **RESULTS:** The primary candidate has the wrong sign (+0.0224 strike spacings per SD, p = 0.010), so it is ruled out. Open interest held into expiry rather than rolled matters day to day (Holm p = 0.0099) but explains none of the change between regimes. No candidate explains when pinning comes and goes. No deviations from the plan.
 * **IMPROVEMENTS:** The first result in the project whose order (design, then data) anyone can check from git.
@@ -371,7 +371,7 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **OBJECTIVE:** Measure whether the one robust GEX result (R5) is economically meaningful.
 * **PROBLEM IDENTIFIED:** A statistically robust effect can still be too small to matter.
 * **HYPOTHESIS:** A walk-forward trading rule fixed in advance earns more than realistic costs.
-* **CHANGES IMPLEMENTED:** The design was committed to git (`docs/prereg/P90_F2_ECONOMICS.md`, commit 236e3db) before any return data were loaded. `experiments/f2_economics.py`, `docs/F2_ECONOMICS.md`, results in `results/f2_economics/`.
+* **CHANGES IMPLEMENTED:** The analysis plan was committed to git (`docs/prereg/P90_F2_ECONOMICS.md`, commit 236e3db) before this study's returns were loaded; the test period had already been used to find R5, as the plan itself says. `experiments/f2_economics.py`, `docs/F2_ECONOMICS.md`, results in `results/f2_economics/`.
 * **EXPERIMENTS PERFORMED:** The pre-registered rule on 90 test trades from 2025 to July 2026, with gross and net returns, cost scenarios, the Deflated Sharpe Ratio and the planned robustness checks.
 * **RESULTS:** +4.15 bp per trade before costs, -0.89 bp after a base-case 5 bp round trip; the Deflated Sharpe Ratio is far below the 0.95 bar. By the pre-stated rule, not economically meaningful.
 * **IMPROVEMENTS:** R5 is now described as a statistical regularity, not a trading opportunity, everywhere it appears.

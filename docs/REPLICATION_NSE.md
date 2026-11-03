@@ -273,7 +273,7 @@ These are offered as careful questions. Each may have a simple answer that the p
 OMP_NUM_THREADS=1 python experiments/replicate_paper.py            # about 3 minutes on 4 cores
 OMP_NUM_THREADS=1 python experiments/replicate_paper.py --trim 375_full   # another session rule as the main one
 OMP_NUM_THREADS=1 python -m pytest -q tests/test_replication.py
-python experiments/rekey_check.py                                  # second-person check of the printed values (docs/REKEY_CHECK.md)
+python experiments/rekey_check.py                                  # blind second transcription of the printed values (docs/REKEY_CHECK.md)
 ```
 
 The script reads only `data/raw/` and writes `results/replication_nse/*.csv`, two figures (`fig_diurnal.png`, `fig_rolling_connectedness.png`) and `results/replication_nse_stdout.txt`. All random draws are seeded. New helper code is in `src/niftygex/replication.py`.
