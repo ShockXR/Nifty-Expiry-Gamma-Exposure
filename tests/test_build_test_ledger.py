@@ -632,3 +632,66 @@ def test_bnfc_on_a_copy_of_the_v2_layout(tmp_path):
     checks = {c["family"]: c["result"] for c in ctx.checks if c["study"] == "BNFC"}
     assert checks["H1: Holm over the next 15 and next 30 minutes"] == "match"
     assert "pipeline_nse_banknifty/daily_market.csv" in ctx.consumed
+
+
+# ---------------------------------------------------------------------------------------------------------
+# P104: the forecasting pipeline on a third index, Fin Nifty
+# ---------------------------------------------------------------------------------------------------------
+
+
+def test_fnfc_absent_folder_is_a_note_not_an_error(tmp_path):
+    ctx = btl.Ctx(tmp_path)
+    assert btl.adapt_fnfc(ctx) == 0
+    assert not ctx.rows and not ctx.warnings
+    assert len(ctx.not_counted) == 1 and "registered run not finished" in ctx.not_counted[0]["reason"]
+
+
+def test_fnfc_on_a_copy_of_the_v2_layout(tmp_path):
+    """As the BNFC test, under pipeline_nse_finnifty with p104/: the plan's hypotheses are labelled P104 and keep
+    their one-sided p; the other indices on the same dates are exploratory; Fin Nifty's own rows are not counted."""
+    v2 = _write_v2(tmp_path)
+    fn = tmp_path / "results" / "pipeline_nse_finnifty"
+    fn.mkdir(parents=True)
+    for f in v2.iterdir():
+        (fn / f.name).write_bytes(f.read_bytes())
+    t30 = _v2_tests().assign(mean_diff=lambda d: d["mean_diff"] * 1.1, stat=lambda d: d["stat"] * 1.1)
+    t30.loc[0, "p"] = 0.004
+    t30.loc[len(t30)] = ("multi_weekly_expiry", "qlike", "mcsgarch vs hybrid_base", 0.03, 2.0, 0.03, 60)
+    _write(fn / "tests_next30.csv", t30)
+    _write(fn / "p104" / "hypotheses.csv", pd.DataFrame({
+        "hypothesis": ["H1", "H1"], "target": ["next15", "next30"], "p_one_sided": [0.001, 0.004], "p_holm": [0.002, 0.004]}))
+    own_p = float(_v2_tests().loc[0, "p"])
+    _write(fn / "p104" / "other_indices_same_dates.csv", pd.DataFrame({
+        "index": ["Nifty (v2 forecasts, same dates)", "Bank Nifty (P91 forecasts, same dates)", "Fin Nifty"],
+        "target": ["next15"] * 3, "subset": ["all"] * 3, "days": [604] * 3, "anchors": [15100] * 3,
+        "qlike_mcsgarch": [0.2] * 3, "qlike_model": [0.19] * 3, "change_pct": [-5.0, -4.0, -3.0],
+        "dm_stat": [8.1, 6.6, 2.0], "p_one_sided": [1e-9, 2e-8, own_p]}))
+    _write(fn / "p104" / "exploratory.csv", pd.DataFrame({
+        "analysis": ["without 5 June 2024"] * 2, "target": ["next15"] * 2, "group": ["all test days except 5 June 2024"] * 2,
+        "first_day": ["2023-08-10"] * 2, "last_day": ["2026-01-27"] * 2, "loss": ["qlike", "mse"], "days": [603] * 2,
+        "anchors": [15075] * 2, "loss_mcsgarch": [0.25, 3e-11], "loss_hybrid_base": [0.24, 2.9e-11],
+        "change_pct": [-4.8, -4.5], "dm_stat": [6.5, 1.6], "p_one_sided": [7e-11, 0.058]}))
+    _write(fn / "p104" / "june5_2024.csv", pd.DataFrame({"index": ["Fin Nifty"], "mcsgarch_over_realized": [134.6]}))
+    _write(fn / "daily_market.csv", pd.DataFrame({"date": ["2024-01-01"]}))
+    _fake_repo(tmp_path, "P104 registered plan", doc="docs/prereg/P104_THIRD_INDEX_FORECAST.md")
+    ctx = btl.Ctx(tmp_path)
+    n = btl.adapt_fnfc(ctx)
+    new = [r for r in ctx.rows if r["study"] == "FNFC"]
+    assert n == len(new) == 5 + 6 + 7 + 1 + 2 + 2 and not ctx.warnings
+    expl = [r for r in new if r["source_file"].endswith("p104/exploratory.csv")]
+    assert len(expl) == 2 and all(r["role"] == "exploratory" and r["pre_specified"] == btl.PS_NO for r in expl)
+    assert sorted(r["p_raw"] for r in expl) == pytest.approx([1.4e-10, 0.116])  # one-sided p doubled (not planned)
+    assert "pipeline_nse_finnifty/p104/june5_2024.csv" in ctx.consumed
+    rows = {r["source_key"]: r for r in new}
+    for t, p, ph in (("next15", 0.001, 0.002), ("next30", 0.004, 0.004)):
+        h1 = rows[f"tests_{t}.csv|qlike|all|mcsgarch vs hybrid_base"]
+        assert h1["role"] == "primary" and h1["pre_specified"] == btl.PS_YES and h1["sidedness"] == btl.SIDE_ONE_PRE
+        assert h1["p_raw"] == pytest.approx(p) and h1["hypothesis"].startswith("P104 H1") and "Fin Nifty" in h1["hypothesis"]
+        assert h1["p_study_adjusted"] == pytest.approx(ph)
+    assert rows["tests_next30.csv|qlike|multi_weekly_expiry|mcsgarch vs hybrid_base"]["role"] == "exploratory"
+    others = [r for r in new if r["source_file"].endswith("other_indices_same_dates.csv")]
+    assert len(others) == 2 and all(r["role"] == "exploratory" and r["pre_specified"] == btl.PS_NO for r in others)
+    assert {r["hypothesis"].split(" on the")[0] for r in others} == {"Nifty", "Bank Nifty"}
+    assert not any(r["role"] == "headline" for r in new)
+    assert any("Fin Nifty's own rows" in c["what"] for c in ctx.not_counted if c["study"] == "FNFC")
+    assert "pipeline_nse_finnifty/daily_market.csv" in ctx.consumed

@@ -1,0 +1,39 @@
+{
+  "days": 754,
+  "first_day": "2023-01-02",
+  "last_day": "2026-01-27",
+  "run_info_days": [
+    "2023-01-02",
+    "2026-01-27",
+    754
+  ],
+  "last_training_day": "2023-08-09",
+  "first_test_day": "2023-08-10",
+  "test_days": 604,
+  "test_days_in_forecasts": {
+    "next15": 604,
+    "next30": 604,
+    "last_hour": 604
+  },
+  "forecasts_per_day": {
+    "next15": 25.0,
+    "next30": 24.0,
+    "last_hour": 1.0
+  },
+  "bhavcopy_missing_days": 0,
+  "vix_missing_days": 0,
+  "futures_value_missing_days": 0,
+  "test_days_by_regime": {
+    "multi_weekly": 312,
+    "single_weekly_thu": 192,
+    "single_weekly_tue": 100
+  },
+  "expiry_test_days": 82,
+  "monthly_expiry_test_days": 30,
+  "expiry_test_days_weekly_period": 67,
+  "expiry_test_days_monthly_only": 15,
+  "flip_participant_missing": 468,
+  "gex_panel_missing_other_columns": 6,
+  "development_days": 462,
+  "holdout_days": 142
+}

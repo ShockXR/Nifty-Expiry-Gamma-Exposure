@@ -50,4 +50,9 @@ SYNTH,secondaries Fin Nifty and Midcap Select (Holm),results/synthetic_control/d
 REFFC,Giacomini-White main family (Holm over all main-family tests),results/referee_forecast/gw_tests.csv,holm,42,42,0,3.0999508515705543e-15,match,
 REFEXP,"Tuesday against Thursday regime (Bonferroni over 18, as the study states)",results/referee_expiry/r2_tue_vs_thu_by_baseline.csv,bonferroni (m = 18),18,10,0,1.4988010832439613e-15,match,the file lists 10 of the 18 tests in the study's family
 P103ECON,S1 to S4 (Holm),results/p103_economic_value/utility_tests.csv,holm,4,4,0,0.0,match,
+FNFC,"Holm within each ablation family (165 families: one model family and one subset, placebo excluded)",results/pipeline_nse_finnifty/ablation_last_hour.csv,holm,435,435,0,3.3306690738754696e-16,match,"one-sided p-values, as the study uses them"
+FNFC,"Holm within each ablation family (198 families: one model family and one subset, placebo excluded)",results/pipeline_nse_finnifty/ablation_next15.csv,holm,522,522,0,3.3306690738754696e-16,match,"one-sided p-values, as the study uses them"
+FNFC,"Holm within each ablation family (198 families: one model family and one subset, placebo excluded)",results/pipeline_nse_finnifty/ablation_next30.csv,holm,522,522,0,3.3306690738754696e-16,match,"one-sided p-values, as the study uses them"
+FNFC,H1: Holm over the next 15 and next 30 minutes,results/pipeline_nse_finnifty/p104/hypotheses.csv,holm,2,2,0,0.0,match,
+FNFC,H3: Holm over the next 15 and next 30 minutes,results/pipeline_nse_finnifty/p104/hypotheses.csv,holm,2,2,0,0.0,match,
 FALS,"18 headline tests, recomputed from the current R3 and R5 files",results/falsification/t7_headline_adjusted.csv,holm,18,18,3,0.00015938215503170233,MISMATCH,the study's F2 rows used 932 days (older code); R5 now uses 929

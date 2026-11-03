@@ -33,9 +33,10 @@ Rules followed throughout:
   (``results/pipeline_nse_v2``) and R1V2DEV its development runs
   (``results/pipeline_nse_v2/development``). Different forecasts are different
   tests, so they are not deduplicated against each other. BNFC is the same
-  pipeline on Bank Nifty (P91, ``results/pipeline_nse_banknifty``).
+  pipeline on Bank Nifty (P91, ``results/pipeline_nse_banknifty``) and FNFC on
+  Fin Nifty (P104, ``results/pipeline_nse_finnifty``).
 * Pre-registered studies P92 (``sensex_swap``), P96 (``synthetic_control``) and
-  P91 (``pipeline_nse_banknifty``) and the post hoc referee responses
+  P91 (``pipeline_nse_banknifty``), P104 (``pipeline_nse_finnifty``) and the post hoc referee responses
   (``referee_f2``, ``referee_forecast``, ``referee_expiry``) have their own
   adapters; a referee row that repeats a test already in the ledger is not
   counted again.
@@ -172,6 +173,7 @@ STUDIES = {
     "REFF2": ("Referee response: F2 inference and positions (post hoc)", "docs/REFEREE_RESPONSE_F2.md"),
     "P103ECON": ("Economic value of the forecasting hybrid (P103)", "docs/P103_ECONOMIC_VALUE.md; docs/prereg/P103_ECONOMIC_VALUE.md"),
     "P99SEED": ("Seed bootstrap of the forecasting hybrid (P99)", "docs/SEED_BOOTSTRAP.md; docs/prereg/P99_SEED_BOOTSTRAP.md"),
+    "FNFC": ("Fin Nifty forecasting contest, third index (P104)", "docs/THIRD_INDEX_FORECAST.md; docs/prereg/P104_THIRD_INDEX_FORECAST.md"),
 }
 
 PREREG = {
@@ -182,6 +184,7 @@ PREREG = {
     "synthetic_control": ("docs/prereg/P96_SYNTHETIC_CONTROL.md", "P96 pre-registration"),
     "p103_economic_value": ("docs/prereg/P103_ECONOMIC_VALUE.md", "P103 registered plan"),
     "seed_bootstrap": ("docs/prereg/P99_SEED_BOOTSTRAP.md", "P99 registered plan"),
+    "pipeline_nse_finnifty": ("docs/prereg/P104_THIRD_INDEX_FORECAST.md", "P104 registered plan"),
 }
 
 COLUMNS = [
@@ -3475,6 +3478,187 @@ def adapt_bnfc(ctx: Ctx):
     return len(new) + len(kept)
 
 
+# ----------------------------------------------------------------------------
+# P104: the forecasting pipeline on a third index, Fin Nifty (same layout as pipeline_nse_v2)
+# ----------------------------------------------------------------------------
+
+FNFC_FOLDER = "pipeline_nse_finnifty"
+FNFC_OUTCOME = ["tests_*.csv", "ablation_*.csv", "p104/*.csv"]
+FNFC_PS_EXPL = "labelled exploratory in THIRD_INDEX_FORECAST.md (not in the plan)"
+
+
+def _fnfc_h(sk: str):
+    """(code, role, hypothesis) of a registered hypothesis row of the Fin Nifty contest (P104), from its source_key."""
+    h = _bnfc_h(sk)
+    if h is None:
+        return None
+    code, role, text = h
+    return code, role, text.replace("P91 ", "P104 ").replace("Bank Nifty", "Fin Nifty")
+
+
+def adapt_fnfc(ctx: Ctx):
+    """P104: the Nifty forecasting pipeline run unchanged on Fin Nifty (docs/prereg/P104_THIRD_INDEX_FORECAST.md;
+    write-up docs/THIRD_INDEX_FORECAST.md). A copy of adapt_bnfc (P91) with the study code, folder and summary
+    sub-folder changed: the same hypotheses H1 to H4 with the same roles, the same exploratory groups (the ablation
+    by anchor time and period, the regime split into expiry and other days) and the same treatment of the rest.
+    p104/other_indices_same_dates.csv holds Nifty v2 and Bank Nifty P91 forecasts on the Fin Nifty test dates
+    (counted as exploratory, as P91's Nifty rows) and Fin Nifty's own rows, which repeat tests_*.csv (cross-checked,
+    not counted). p104/exploratory.csv (experiments/p104_finnifty_exploratory.py, written after the results were
+    seen) is counted as exploratory. If the folder does not exist (run not finished), nothing is counted and a note
+    is written.
+    """
+    folder, st = FNFC_FOLDER, "FNFC"
+    if not ctx.res(folder).exists():
+        ctx.skip(st, f"{folder}/", "P104 Fin Nifty forecasting contest", 1,
+                 "registered run not finished: the folder does not exist yet; the adapter reads the plan's layout "
+                 "(as pipeline_nse_v2) when it appears")
+        return 0
+    if not sorted(ctx.res(folder).glob("tests_*.csv")):
+        ctx.skip(st, f"{folder}/", "P104 Fin Nifty forecasting contest", 1,
+                 "folder present but no tests_*.csv yet (run not finished?); nothing counted")
+        ctx.warn(f"{folder}: no tests_*.csv; nothing counted")
+        return 0
+    if not v2_shape_ok(ctx, folder):
+        adapt_generic(ctx, st, folder)
+        return 0
+    ps_status, ps_note = prereg_status(ctx, folder, FNFC_OUTCOME)
+    side_pre = SIDE_ONE_PRE if ps_status == PS_YES else SIDE_ONE_STATED
+    n0 = len(ctx.rows)
+    adapt_r1v2(ctx, study=st, folder=folder)
+    new = [r for r in ctx.rows[n0:] if r["study"] == st]
+    holm = {}
+    rel = f"{folder}/p104/hypotheses.csv"
+    if ctx.has(rel):
+        h = ctx.read(rel)
+        for code in ("H1", "H3"):
+            g = h[h["hypothesis"].map(clean) == code]
+            if len(g) and "p_holm" in g.columns:
+                rec = ctx.check(st, f"{code}: Holm over the next 15 and next 30 minutes", rel, "holm", g["p_one_sided"], g["p_holm"])
+                for (_, r), rc in zip(g.iterrows(), rec):
+                    holm[(code, clean(r["target"]))] = (num(r["p_one_sided"]), num(r["p_holm"]), rc)
+        ctx.skip(st, rel, "registered summary of H1 to H3", len(h), "repeats tests_*.csv (counted there); Holm values cross-checked")
+    for r in new:
+        h = _fnfc_h(r["source_key"])
+        if h:
+            code, role, text = h
+            r.update(role=role, hypothesis=text, pre_specified=ps_status, sidedness=side_pre, p_raw=r["p_reported"],
+                     pre_spec_note=f"{code} of the plan (Section 4); " + ps_note)
+            r["note"] = re.sub(r"(; )?" + re.escape(V2_P_IS_ONE), "", r["note"])
+            t = r["source_key"].split("|")[0].replace("tests_", "").replace(".csv", "")
+            if (code, t) in holm:
+                p1, ph, rc = holm[(code, t)]
+                if not _same_num(p1, r["p_reported"]):
+                    ctx.warn(f"{rel}: {code} {t} p differs from tests_{t}.csv")
+                r.update(p_study_adjusted=ph, p_study_adjusted_recomputed=rc,
+                         study_adjust_method=f"Holm over the two {code} tests (next 15 and next 30 minutes)")
+            continue
+        if r["sidedness"] in (SIDE_ONE_PRE, SIDE_ONE_STATED):
+            r["sidedness"] = SIDE_CONVERTED
+            r["p_raw"] = two_sided_from_one_sided(r["p_reported"])
+            if r["p_reported"] >= 1.0:
+                r["note"] = (r["note"] + "; " if r["note"] else "") + V2_P_IS_ONE
+        if _bnfc_exploratory(r["source_key"]):
+            r.update(role="exploratory", pre_specified=PS_NO, pre_spec_note=FNFC_PS_EXPL)
+        else:
+            r.update(role="secondary" if r["role"] == "headline" else r["role"], pre_specified=PS_NO, pre_spec_note=BNFC_PS_REPORT)
+    lookup = _v2_lookup(ctx, folder)
+    known = {round(num(r["p_reported"]), 12) for r in new}
+    rel = f"{folder}/p104/h4_ablation_hybrid.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        miss = int(sum(round(num(p), 12) not in known for p in d["p_one_sided"] if np.isfinite(num(p))))
+        if miss:
+            ctx.warn(f"{rel}: {miss} p-values not found in the ablation files")
+        ctx.skip(st, rel, "registered H4 table (hybrid ablation)", len(d), "repeats ablation_*.csv rows (counted there)")
+    rel = f"{folder}/p104/scoreboard_vs_mcsgarch.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        n, miss = 0, 0
+        for _, r in d.iterrows():
+            for loss, pc in (("qlike", "p_qlike"), ("mse", "p_mse")):
+                if np.isfinite(num(r[pc])):
+                    n += 1
+                    miss += not _same_num(lookup.get((clean(r["target"]), loss, clean(r["group"]), f"mcsgarch vs {clean(r['model'])}"),
+                                                     float("nan")), num(r[pc]))
+        if miss:
+            ctx.warn(f"{rel}: {miss} p-values not found in tests_*.csv")
+        ctx.skip(st, rel, "registered scoreboard against mcsGARCH (QLIKE and MSE p-values)", n, "repeats tests_*.csv (counted there)")
+    rows = []
+    rel = f"{folder}/p104/period_split.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        n_dup = 0
+        for _, r in d.iterrows():
+            t, sub = clean(r["target"]), clean(r["subset"])
+            if "p_one_sided" not in d.columns or not np.isfinite(num(r["p_one_sided"])):
+                continue
+            if any(_same_num(v, num(r["p_one_sided"])) for (tt, ll, _, cc), v in lookup.items()
+                   if tt == t and ll == "qlike" and cc == "mcsgarch vs hybrid_base"):
+                n_dup += 1
+                continue
+            expl = sub != "all"
+            _, b, hyp = _v2_vs_mcsgarch("mcsgarch vs hybrid_base", num(r["change_pct"]), better_if_positive=False)
+            row = _v2_add(ctx, st, hyp, f"QLIKE loss of forecasts of {TARGETS.get(t, t)}",
+                          f"{clean(r['period'])}, {'expiry days' if sub == 'expiry' else 'all test days'} (n = {_int(r['days'])} days), horizon {t}",
+                          r["p_one_sided"], SIDE_CONVERTED, role="exploratory" if expl else "robustness", pre_specified=PS_NO,
+                          pre_spec_note=FNFC_PS_EXPL if expl else BNFC_PS_REPORT, source_file=rel,
+                          source_key=key("period_split.csv", t, r["period"], sub), estimate=r["change_pct"],
+                          statistic_name="loss relative to mcsGARCH (%)", statistic=r["dm_stat"],
+                          p_method=V2_DM.format("model better than mcsGARCH"))
+            if row is not None:
+                rows.append(ctx.rows.pop())
+        ctx.skip(st, rel, "periods that are a pipeline group", n_dup, "same test as a tests_*.csv row (counted there)")
+    rel = f"{folder}/p104/other_indices_same_dates.csv"
+    if ctx.has(rel):
+        d = ctx.read(rel)
+        own = d[d["index"].map(clean) == "Fin Nifty"]
+        miss = int(sum(not any(_same_num(v, num(p)) for v in lookup.values()) for p in own["p_one_sided"]))
+        if miss:
+            ctx.warn(f"{rel}: {miss} Fin Nifty p-values not found in tests_*.csv")
+        ctx.skip(st, rel, "Fin Nifty's own rows (all days and expiry days)", len(own), "repeat tests_*.csv (counted there)")
+        for _, r in d[d["index"].map(clean) != "Fin Nifty"].iterrows():
+            t, sub, idx = clean(r["target"]), clean(r["subset"]), clean(r["index"])
+            name = idx.split(" (")[0]
+            _, b, hyp = _v2_vs_mcsgarch("mcsgarch vs hybrid_base", num(r["change_pct"]), better_if_positive=False)
+            row = _v2_add(ctx, st, f"{name} on the Fin Nifty test dates: " + hyp,
+                          f"QLIKE loss of {name} forecasts of {TARGETS.get(t, t)}",
+                          f"{sub} (n = {_int(r['days'])} days), horizon {t}", r["p_one_sided"], SIDE_CONVERTED, role="exploratory",
+                          pre_specified=PS_NO, pre_spec_note="the plan calls this a description, not a test (Section 7, item 5); "
+                          "counted because a p-value was reported", source_file=rel,
+                          source_key=key("other_indices_same_dates.csv", idx, t, sub),
+                          estimate=r["change_pct"], statistic_name="loss relative to mcsGARCH (%)", statistic=r["dm_stat"],
+                          p_method=V2_DM.format("model better than mcsGARCH"))
+            if row is not None:
+                rows.append(ctx.rows.pop())
+    rel = f"{folder}/p104/exploratory.csv"
+    if ctx.has(rel):
+        # experiments/p104_finnifty_exploratory.py, written after the registered results were seen: the split by
+        # mcsGARCH's daily-level fallback and the comparison without 5 June 2024 (QLIKE and MSE). All exploratory.
+        d = ctx.read(rel)
+        for _, r in d.iterrows():
+            t, loss = clean(r["target"]), clean(r["loss"])
+            _, b, hyp = _v2_vs_mcsgarch("mcsgarch vs hybrid_base", num(r["change_pct"]), better_if_positive=False)
+            row = _v2_add(ctx, st, hyp, f"{loss.upper()} loss of forecasts of {TARGETS.get(t, t)}",
+                          f"{clean(r['analysis'])}: {clean(r['group'])} (n = {_int(r['days'])} days), horizon {t}",
+                          r["p_one_sided"], SIDE_CONVERTED, role="exploratory", pre_specified=PS_NO,
+                          pre_spec_note=FNFC_PS_EXPL, source_file=rel,
+                          source_key=key("exploratory.csv", r["analysis"], t, r["group"], loss),
+                          estimate=r["change_pct"], statistic_name="loss relative to mcsGARCH (%)", statistic=r["dm_stat"],
+                          p_method=V2_DM.format("model better than mcsGARCH"))
+            if row is not None:
+                rows.append(ctx.rows.pop())
+    kept, dropped = dedup_exact(rows, cols=("p_reported", "statistic"))
+    ctx.rows.extend(kept)
+    ctx.skip(st, f"{folder}/p104/", "rows repeating another row (same p and DM statistic)", len(dropped), "same test (counted once)")
+    _consume_rest(ctx, st, folder, {
+        r"mcs_membership\.csv": "Model Confidence Set membership (set-level)",
+        r"(scoreboard|gain_by_anchor)_.*\.csv": "losses relative to mcsGARCH, no p-value (tests in tests_*.csv)",
+        r"june5_2024\.csv": "the 09:15 forecasts of 5 June 2024 on three indices (descriptive, no p-value)",
+    }, "forecasts, daily panels, hyperparameters, coefficients, feature importance, mcsGARCH parameters, figures, data checks "
+       "or run information; no p-value")
+    return len(new) + len(kept)
+
+
 EXCLUDED_TOP = {
     "pipeline_synthetic": "synthetic data (simulation of the pipeline)",
     "inference_checks": "simulation checks of inference methods",
@@ -3519,11 +3703,11 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED"]
+               "P103ECON", "P99SEED", "FNFC"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
-                 adapt_p99seed]
+                 adapt_p99seed, adapt_fnfc]
 
 
 def headline18_check(ctx: Ctx):
@@ -3775,6 +3959,15 @@ RECON = [
       ("secondary: last hour on all days, and expiry days", "P99SEED", r"^verdict\.csv\|(last_hour\|all|.*\|expiry)")],
      "The p of each row is the largest DM p over the 20 ensembles (an intersection-union test), so a row that "
      "survives means every ensemble's gain survives."),
+    ("P104", "Fin Nifty forecasting, the third index (registered plan): the Nifty hybrid, run with nothing changed, beats "
+             "mcsGARCH at 15 and 30 minutes (H1, Holm over two: replicated); the last hour (H2) and Fin Nifty expiry days "
+             "(H3) are not supported; H4 predicted that GEX does not help, and that prediction held.",
+     [("H1, primary: 15 and 30 minutes, all days", "FNFC", r"^tests_(next15|next30)\.csv\|qlike\|all\|mcsgarch vs hybrid_base$"),
+      ("H2 and H3, secondary: last hour all days, expiry days at 15 and 30 minutes", "FNFC",
+       r"^tests_(last_hour\.csv\|qlike\|all|(next15|next30)\.csv\|qlike\|expiry)\|mcsgarch vs hybrid_base$"),
+      ("H4: hybrid with each GEX set against the base hybrid, all days", "FNFC",
+       r"^ablation_(next15|next30|last_hour)\.csv\|hybrid: base vs base\+GEX\|(gross|us|participant|client)\|all\|")],
+     "H1 to H3 keep their one-sided p (stated in the plan). H4 is a null prediction, so not surviving is what it says."),
 ]
 
 
@@ -3835,8 +4028,8 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
       "run, judged from the commit times in the reflogs (`logs/HEAD` and `logs/refs/heads` of the repository; from a "
       "worktree, those of the main repository; no git command is run; confirm with git log). "
       "That holds for RESEARCH_STRATEGY_PANDEY.md (RQ1 and H1), which was in the repository before the first "
-      "real-data run, and for the P87, P90, P91, P92 and P96 pre-registrations in `docs/prereg/` when their commit is "
-      "older than the study's result files. For P91, P92 and P96 only the files that hold outcomes are compared, because "
+      "real-data run, and for the P87, P90, P91, P92, P96 and P104 pre-registrations in `docs/prereg/` when their commit is "
+      "older than the study's result files. For P91, P92, P96 and P104 only the files that hold outcomes are compared, because "
       "P92's coverage counts were committed together with its plan on purpose. "
       f"Studies with `yes` rows now: {', '.join(yes_st) if yes_st else 'none'}. "
       "Every other study was committed together with its results, so a claim that a test was fixed in advance "
@@ -3885,7 +4078,7 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
           "mean that a model is clearly worse than the one it is compared with; the hypothesis text says which way "
           "the difference went.")
         w("")
-    newst = [s_ for s_ in ("BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2") if (df["study"] == s_).any()]
+    newst = [s_ for s_ in ("BNFC", "FNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2") if (df["study"] == s_).any()]
     if newst:
         cnt = {s_: int((df["study"] == s_).sum()) for s_ in newst}
         bn = df[df["study"] == "BNFC"]
@@ -3903,6 +4096,14 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
           "(P92's total connectedness and H2 without weekday effects, P96's Nifty 50 Wednesday and its "
           "difference-in-differences cross-checks, P91's Nifty on the same dates) are counted as exploratory, because "
           "the p-values were reported and seen.")
+        if "FNFC" in cnt:
+            fn = df[df["study"] == "FNFC"]
+            w("")
+            w(f"**P104** (FNFC, {cnt['FNFC']} tests) runs the same pipeline a third time, on Fin Nifty, under its own "
+              "registered plan, and is counted exactly like BNFC: "
+              f"{int((fn['pre_specified'] == PS_YES).sum())} rows are the plan's hypotheses H1 to H4; Nifty's and Bank "
+              "Nifty's forecasts on the Fin Nifty test dates, and the two looks at the benchmark added after the results "
+              "were seen (mcsGARCH's EWMA fallback, and the comparison without 5 June 2024), are counted as exploratory.")
         w("")
         w("The three **referee responses** (REFFC forecasting, REFEXP expiry premia, REFF2 the F2 reversal) were all "
           "done after the referee report, so every row is exploratory and none is pre-specified. A referee row that "
@@ -3941,7 +4142,7 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
         ev_turn = ev[ev["hypothesis"].str.contains("turnover", case=False)]
         ev_plc = ev[ev["role"] == "placebo"]
         gex_studies = {"R3", "R5", "FALS", "DSIGN", "INTRA", "CONN", "REFF2"}
-        contest = {"R1", "R1V2", "R1V2DEV", "BNFC", "REFFC"}
+        contest = {"R1", "R1V2", "R1V2DEV", "BNFC", "FNFC", "REFFC"}
         gex_mask = (df["study"].isin(gex_studies) |
                     (df["study"].isin({"AUCTION", "PIN"}) & df["hypothesis"].str.contains("GEX|gamma", case=False, regex=True)) |
                     (df["study"].isin(contest) & df["hypothesis"].str.contains("GEX", regex=False)
@@ -4018,7 +4219,7 @@ def write_markdown(root: Path, df: pd.DataFrame, nc: pd.DataFrame, ck: pd.DataFr
     # reconciliation
     w("## 5. Reconciliation with the eight findings of REAL_DATA_RESULTS.md and the registered plans")
     w("")
-    w("For each finding, and for the primary test of each registered analysis plan added since (P91, P92, P96, P103): the "
+    w("For each finding, and for the primary test of each registered analysis plan added since (P91, P92, P96, P99, P103, P104): the "
       "ledger rows that carry it, and whether it survives BY across the whole project. Post hoc referee checks are "
       "listed under the finding they test. REAL_DATA_RESULTS.md itself is not changed here.")
     w("")

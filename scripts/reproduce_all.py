@@ -44,6 +44,8 @@ DOWNLOAD = [
     ("fetch_sensex_bars", [PY, "experiments/sensex_confound.py", "--fetch-sensex", "--fetch-only", "--until", END]),
     # NSE's full F&O bhavcopies and all-index closes for the synthetic control (P96), 2022 to 2026
     ("fetch_nse_full", [PY, "experiments/synthetic_control.py", "fetch", "--out", "data/raw/nse_full"]),
+    # Fin Nifty bars (pinned commit and SHA-256), official days and bhavcopies for P104; needs nse_full first
+    ("fetch_finnifty_data", [PY, "scripts/fetch_finnifty_data.py", "--raw", "data/raw"]),
 ]
 
 # name, command, outputs (for the log only)
@@ -76,13 +78,23 @@ OPTIONAL = {  # studies added later; run if the script exists
     "f2_economics": ([PY, "experiments/f2_economics.py"], "results/f2_economics/"),
     "sensex_swap": ([PY, "experiments/sensex_swap.py"], "results/sensex_swap/"),
     # Added after 3 November 2026: the synthetic control (P96), the Bank Nifty forecasting replication (P91,
-    # about 80 minutes), the referee-response analyses (post hoc), the test ledger and the number trace.
+    # about 80 minutes), the Fin Nifty replication (P104), the referee-response analyses (post hoc), the test
+    # ledger and the number trace.
     "synthetic_control": ([PY, "experiments/synthetic_control.py", "analyse", "--phase2", "--full", "data/raw/nse_full"],
                           "results/synthetic_control/"),
     "banknifty_pipeline": ([PY, "scripts/run_pipeline.py", "--source", "nse", "--symbol", "BANKNIFTY", "--end", "2026-04-22",
                             "--n-seeds", "5", "--seed-study", "3", "--verbose", "--out", "results/pipeline_nse_banknifty"],
                            "results/pipeline_nse_banknifty/", "results/pipeline_nse_banknifty_stdout.txt"),
     "p91_banknifty_summary": ([PY, "experiments/p91_banknifty_summary.py"], "results/pipeline_nse_banknifty/p91/"),
+    # The third-index replication on Fin Nifty (P104, about 70 minutes on one core).
+    "validate_finnifty_bars": ([PY, "scripts/validate_minute_bars.py", "--indices", "Nifty Financial Services",
+                                "--out", "results/data_validation_finnifty"], "results/data_validation_finnifty/"),
+    "finnifty_pipeline": ([PY, "scripts/run_pipeline.py", "--source", "nse", "--symbol", "FINNIFTY", "--end", "2026-01-27",
+                           "--n-seeds", "5", "--seed-study", "3", "--verbose", "--out", "results/pipeline_nse_finnifty"],
+                          "results/pipeline_nse_finnifty/", "results/pipeline_nse_finnifty_stdout.txt"),
+    "p104_finnifty_summary": ([PY, "experiments/p104_finnifty_summary.py"], "results/pipeline_nse_finnifty/p104/"),
+    "p104_finnifty_exploratory": ([PY, "experiments/p104_finnifty_exploratory.py"],
+                                  "results/pipeline_nse_finnifty/p104/exploratory.csv"),
     "referee_forecast": ([PY, "experiments/referee_forecast.py"], "results/referee_forecast/",
                          "results/referee_forecast_stdout.txt"),
     "referee_forecast_gw": ([PY, "experiments/referee_forecast_gw.py"], "results/referee_forecast/",

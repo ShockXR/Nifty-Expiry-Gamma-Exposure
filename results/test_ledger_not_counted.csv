@@ -250,6 +250,18 @@ P99SEED,results/seed_bootstrap/,"daily_losses_last_hour.csv, daily_losses_next15
 P99SEED,results/seed_bootstrap/ensembles.csv,ensembles.csv,1,each ensemble's own DM test: the same hypothesis under other seeds; carried by the verdict rows
 P99SEED,results/seed_bootstrap/m43_comparison.csv,m43_comparison.csv,1,"comparison with the referee response, added after the results; no p-value"
 P99SEED,results/seed_bootstrap/reproduction_check.csv,reproduction_check.csv,1,check that the headline seed reproduces the committed forecasts; no p-value
+FNFC,results/pipeline_nse_finnifty/seed_noise_next30.csv,single-seed scores,12,"a model's score for one seed, no p-value"
+FNFC,results/pipeline_nse_finnifty/mcs_*.csv,Model Confidence Set p-values (QLIKE and MSE),12,set-level p-values (already adjusted for the model set) that answer the same question as the DM tests
+FNFC,"results/pipeline_nse_finnifty/scoreboard_*.csv, gain_by_anchor_*.csv",scoreboards and gains by anchor time,6,"losses relative to mcsGARCH, no p-value; the DM tests behind them are in tests_*.csv"
+FNFC,results/pipeline_nse_finnifty/p104/hypotheses.csv,registered summary of H1 to H3,6,repeats tests_*.csv (counted there); Holm values cross-checked
+FNFC,results/pipeline_nse_finnifty/p104/h4_ablation_hybrid.csv,registered H4 table (hybrid ablation),36,repeats ablation_*.csv rows (counted there)
+FNFC,results/pipeline_nse_finnifty/p104/scoreboard_vs_mcsgarch.csv,registered scoreboard against mcsGARCH (QLIKE and MSE p-values),1736,repeats tests_*.csv (counted there)
+FNFC,results/pipeline_nse_finnifty/p104/period_split.csv,periods that are a pipeline group,8,same test as a tests_*.csv row (counted there)
+FNFC,results/pipeline_nse_finnifty/p104/other_indices_same_dates.csv,Fin Nifty's own rows (all days and expiry days),6,repeat tests_*.csv (counted there)
+FNFC,results/pipeline_nse_finnifty/,"daily_gex_panel.csv, daily_implied_panel.csv, daily_market.csv, feature_importance_last_hour.csv, feature_importance_next15.csv and 31 more",36,"forecasts, daily panels, hyperparameters, coefficients, feature importance, mcsGARCH parameters, figures, data checks or run information; no p-value"
+FNFC,results/pipeline_nse_finnifty/,"gain_by_anchor_last_hour.csv, gain_by_anchor_next15.csv, gain_by_anchor_next30.csv, scoreboard_last_hour.csv, scoreboard_next15.csv and 1 more",6,"losses relative to mcsGARCH, no p-value (tests in tests_*.csv)"
+FNFC,results/pipeline_nse_finnifty/p104/june5_2024.csv,p104/june5_2024.csv,1,"the 09:15 forecasts of 5 June 2024 on three indices (descriptive, no p-value)"
+FNFC,results/pipeline_nse_finnifty/p104/mcs_membership.csv,p104/mcs_membership.csv,1,Model Confidence Set membership (set-level)
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods
