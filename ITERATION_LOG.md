@@ -462,12 +462,21 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** BSE expiry dates are still reported, not verified; tick data would be needed to separate noise from efficient-price variance.
 * **NEXT ITERATION:** Fold all referee responses into the working paper and the replication note.
 
-## Iterations in progress (3 November 2026, about 07:00 IST)
+## Iteration 39: does the forecasting result replicate on Bank Nifty? (registered plan, P91)
+
+* **OBJECTIVE:** Test whether the Nifty forecasting hybrid, every choice of which was made on Nifty, also beats mcsGARCH on Bank Nifty with nothing changed.
+* **PROBLEM IDENTIFIED:** A model tuned on one index may fit that index's quirks; the anchor paper fits mcsGARCH to both indices, so Bank Nifty is the natural out-of-sample check.
+* **HYPOTHESIS:** H1, the hybrid beats a 21-day-refit mcsGARCH at 15 and 30 minutes after Holm over the two; H2 to H4 (last hour, expiry days, GEX adds nothing) secondary.
+* **CHANGES IMPLEMENTED:** `run_pipeline.py --symbol` and `build_market_from_nse(other_symbol=...)`; the Nifty run reproduces the committed v2 files byte for byte. Plan committed first (`docs/prereg/P91_BANKNIFTY_FORECAST.md`, commit 97eb0a1). Results in `results/pipeline_nse_banknifty/`, write-up `docs/BANKNIFTY_FORECAST.md`.
+* **EXPERIMENTS PERFORMED:** The registered command, run once (78 minutes), on 660 Bank Nifty test days from 10 August 2023 to 22 April 2026.
+* **RESULTS:** (REAL DATA.) Replicated: 3.9% and 5.0% better at 15 and 30 minutes (Holm p 5e-12 and 2e-11), about 70% of Nifty's gain over the same dates. Last hour 8.1% (p 3e-7). Expiry days 2.8% and 3.4% (Holm p 0.011). The GEX prediction failed: GEX features help by 0.6% to 0.8% at 15 minutes under every sign rule, the placebo does not, and all of it is at 09:15 (exploratory). No deviations from the plan.
+* **IMPROVEMENTS:** The forecasting result is no longer a single-index result.
+* **REMAINING ISSUES:** Bank Nifty is not independent of Nifty; the 09:15 GEX gain needs its own pre-registered test on new data.
+* **NEXT ITERATION:** Rebuild the test ledger with every study.
+
+## Iterations in progress (3 November 2026, about 08:30 IST)
 
 * **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
-* **Bank Nifty replication of the forecasting result** (P91) and a **synthetic-control estimate of the November 2024 weekly-expiry cut** (P96): both analysis plans are committed (`docs/prereg/P91_BANKNIFTY_FORECAST.md`, `docs/prereg/P96_SYNTHETIC_CONTROL.md`) and the registered analyses are running.
-* **Referee responses** on forecasting inference and on how expiry premia are identified.
-* **A number-tracing check** that compares every headline number in the write-ups with its results file.
 * **The test ledger** rebuilt to count every study test by test.
 * **Scoring the frozen forecast** for 3 November after the close.
 
