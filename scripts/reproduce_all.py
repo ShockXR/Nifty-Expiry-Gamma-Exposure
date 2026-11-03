@@ -70,6 +70,8 @@ OPTIONAL = {  # studies added later; run if the script exists
     "connectedness_gamma": ([PY, "experiments/connectedness_gamma.py"], "results/connectedness_gamma/"),
     "power_real": ([PY, "experiments/power_real.py"], "results/power_real/"),
     "rekey_check": ([PY, "experiments/rekey_check.py"], "results/replication_nse/rekey_check.csv"),
+    "pinning_mechanism": ([PY, "experiments/pinning_mechanism.py"], "results/pinning_mechanism/"),
+    "f2_economics": ([PY, "experiments/f2_economics.py"], "results/f2_economics/"),
 }
 
 

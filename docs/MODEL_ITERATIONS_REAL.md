@@ -497,6 +497,8 @@ Single-seed reruns of four LightGBM models at 30 minutes (`seed_noise_next30.csv
 * **QLIKE against MSE.** The conclusions are stated for QLIKE, the loss that ranks variance forecasts consistently and does not let a few huge windows dominate. Under MSE the ranking at 15 and 30 minutes is very different (Section 4.4), but the MSE differences are not significant and the MSE Model Confidence Set keeps almost every model, so MSE gives no reliable ranking in this sample. A user whose costs grow with the square of the error (for example, a hedger hurt mostly by the rare crash morning) should not read the QLIKE ranking as the answer to their question.
 * **Multiple comparisons.** Holm's adjustment is applied within each family of the ablation (one model family, one target, one subset). It is not applied across targets, subsets or families, so the raw count of "p below 0.05" cells overstates the evidence.
 * **Two protocols.** The development tables in Section 3 were made before the review changes of Iteration 10 (63-day mcsGARCH refit, normal-distribution p-values, a whole-sample order-flow scale, placebo days drawn from all days). Section 4 uses the final protocol throughout, including for the development window.
+* **The hold-out is not unseen data.** The first real-data run (`results/pipeline_nse/`), whose results were known before this study began, covered the hold-out days too. The development runs never computed those days and no design choice here was made on them, but the hold-out is a check on the design choices, not data nobody had looked at.
+* **EWMA fallback in two refits.** In 2 of the 38 refits (trained on the first 171 and 192 days; they forecast 42 test days from August to October 2023) the daily EGARCH inside mcsGARCH did not converge and `daily_egarch_variance` fell back to an EWMA daily variance (lambda 0.94), as designed. `mcsgarch_params.csv` records this in the column `daily_method`. It affects mcsGARCH and every model built on it in those weeks.
 * **One development/hold-out split.** The choices in Section 3 were made on data up to 30 June 2025 only, but a single split is still one draw. The headline family (`hybrid`) was chosen on development data, which makes the hold-out a fair check of that choice, not an independent replication of every number.
 * **Implied variance clock.** Implied variance is per trading day; weekends and holidays are not modelled separately, and the risk-free rate is a constant 6.5%. Settlement prices near expiry are noisy for strikes that barely traded.
 * **Minute bars have no volume.** The order-flow feature is therefore a signed-return proxy, and the volume feature is constant.
@@ -509,7 +511,8 @@ pip install -e ".[dev]"
 PYTHONPATH=$PWD/src OMP_NUM_THREADS=1 python -m pytest -q
 
 # the final run (99 minutes on one core; --verbose prints one line per walk-forward block)
-python scripts/run_pipeline.py --source nse --raw data/raw --out results/pipeline_nse_v2 --n-seeds 5 --seed-study 3 --verbose
+python scripts/run_pipeline.py --source nse --raw data/raw --end 2026-11-02 --out results/pipeline_nse_v2 --n-seeds 5 --seed-study 3 --verbose
+# (the run in this document was made without --end, when the data ended on 2 November 2026; scripts/reproduce_all.py passes --end 2026-11-02 so that later downloads do not change it)
 
 # the development tables (needs the development runs, made with the data cut at 30 June 2025)
 python experiments/v2_development_summary.py --dev-dir <dev runs> --baseline results/pipeline_nse --out results/pipeline_nse_v2/development
