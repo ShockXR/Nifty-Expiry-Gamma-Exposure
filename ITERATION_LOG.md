@@ -501,6 +501,9 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 ## Iterations in progress (3 November 2026, about 09:00 IST)
 
 * **P99, a seed bootstrap of the forecasting hybrid** (registered plan): 20 independent LightGBM seed ensembles, closing the referee's estimation-noise item.
+* **P103, the economic value of the forecasting gain** (registered plan): realized utility of a volatility-targeting investor (Bollerslev, Hood, Huss and Pedersen 2018) and a vol-targeted Nifty position after costs, with a Deflated Sharpe Ratio. A straddle rule was ruled out: NSE publishes no intraday option prices.
+* **P104, a third index** for the hybrid: first a check whether free one-minute bars for Fin Nifty or Midcap Select pass the same validation as Nifty's; Sensex is ruled out because BSE option chains cannot be downloaded here. Run under a registered plan only if the data pass.
+* **A clean-clone audit**: a fresh clone of a3a84c7 has no PDF, private draft or credential in the tree or the history, and its 512 tests give 508 passed and 4 skipped (raw Bank Nifty data absent).
 * **Scoring the frozen forecast** for 3 November after the close.
 
 Each will be written up in the same format when it finishes.
