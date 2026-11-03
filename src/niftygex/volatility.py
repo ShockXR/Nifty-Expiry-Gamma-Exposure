@@ -408,3 +408,270 @@ class McsGarch:
             q_next = q2[at[sel], i]
             out[sel] = h[at[sel]] * (qbar * St.sum(axis=1) + (St @ persist**k) * (q_next - qbar))
         return out
+
+
+# ---------------------------------------------------------------------------
+# Parametric extensions of mcsGARCH (study P109, docs/prereg/P109_MCSGARCH_EXTENSIONS.md)
+#
+# Nothing above this line was changed for P109. McsGarchExt with every flag off runs exactly the
+# code of McsGarch (it calls it), so every existing forecast stays bit-for-bit the same.
+# ---------------------------------------------------------------------------
+
+# E[1{z < 0} z^2] / E[z^2] for a symmetric error: the expected share of the leverage term,
+# used for the stationarity condition and the multi-step forecasts of the asymmetric recursion.
+KAPPA_NEG = 0.5
+
+from scipy.special import expit  # noqa: E402  (P109 code path only)
+
+
+def har_daily_variance(daily_rv, train_size: int | None = None, floor: float = 1e-12):
+    """One-step-ahead daily variance level from a log-HAR of daily realized variance (Corsi 2009).
+
+        log RV_t = b0 + b_d log RV_{t-1} + b_w log RV^w_t + b_m log RV^m_t + e_t,
+
+    with RV^w_t and RV^m_t the means of RV over days t-5..t-1 and t-22..t-1 (fewer at the start of the
+    sample, as in ``features.build_dataset``). Fitted by OLS on days 1 .. train_size - 1 (all days if
+    None); the fitted coefficients are then applied to every day, so h_t uses only days before t.
+    Day 0 has no history and gets day 1's value (day 0 is only ever a training day).
+
+    Inside mcsGARCH only the day-to-day variation of h matters: a constant factor in h is absorbed by
+    the diurnal curve (s_i = mean of eps^2 / h), so no smearing factor is applied.
+    Returns (h, info) with info["params"] = (b0, b_d, b_w, b_m).
+    """
+    rv = np.maximum(np.asarray(daily_rv, float), floor)
+    T = len(rv)
+    n = T if train_size is None else int(train_size)
+    c = np.concatenate([[0.0], np.cumsum(rv)])
+    t = np.arange(1, T)
+    lo_w = np.maximum(0, t - 5)
+    lo_m = np.maximum(0, t - 22)
+    w = (c[t] - c[lo_w]) / (t - lo_w)
+    m = (c[t] - c[lo_m]) / (t - lo_m)
+    X = np.column_stack([np.ones(T - 1), np.log(rv[t - 1]), np.log(w), np.log(m)])
+    y = np.log(rv[1:])
+    b, *_ = np.linalg.lstsq(X[: n - 1], y[: n - 1], rcond=None)
+    lh = np.empty(T)
+    lh[1:] = X @ b
+    lh[0] = lh[1]
+    return np.exp(lh), {"method": "har", "params": dict(zip(["b0", "b_d", "b_w", "b_m"], map(float, b)))}
+
+
+def _softmax(v):
+    e = np.exp(v - np.max(v))
+    return e / e.sum()
+
+
+def ext_q2(x2, negx2, z, omega, alpha, beta, gam_l, gam_x, delta, q_init, qbar):
+    """(days x minutes) one-step-ahead variance q2 of the extended intraday recursion.
+
+    Within a day (minute i >= 1):
+        q2[t, i] = omega + alpha x2[t, i-1] + gam_l negx2[t, i-1] + gam_x z[t, i-1] + beta q2[t, i-1]
+    Across the night, with carry = the same expression evaluated at the last minute of day t-1:
+        q2[t, 0] = qbar + delta (carry - qbar)
+    and q2[0, 0] = q_init. negx2 = x2 where the residual is negative (else 0); z is today's running
+    mean of x2. With gam_l = gam_x = 0 and delta = 1 this is the recursion of McsGarch (mathematically;
+    the order of floating-point operations differs). Vectorised: one filter along the minutes of all
+    days, then one filter across days for the opening values.
+    """
+    T, M = x2.shape
+    u = omega + alpha * x2 + gam_l * negx2 + gam_x * z      # drives q2 of the next minute
+    U = np.zeros((T, M))
+    U[:, 1:] = u[:, :-1]
+    P = lfilter([1.0], [1.0, -beta], U, axis=1)             # the part that does not depend on q2[t, 0]
+    carry = u[:, -1] + beta * P[:, -1]                      # plus beta^M q2[t, 0], handled by phi below
+    cvec = np.empty(T)
+    cvec[0] = q_init
+    cvec[1:] = (1.0 - delta) * qbar + delta * carry[:-1]
+    phi = delta * beta**M
+    q0 = lfilter([1.0], [1.0, -phi], cvec)
+    return q0[:, None] * (beta ** np.arange(M))[None, :] + P
+
+
+def _ext_inputs(X, neg):
+    x2 = X * X
+    negx2 = np.where(neg, x2, 0.0)
+    z = np.cumsum(x2, axis=1) / np.arange(1, X.shape[1] + 1)[None, :]
+    return x2, negx2, z
+
+
+def _ext_components(leverage: bool, garchx_today: bool) -> list:
+    return ["alpha"] + (["gam_l"] if leverage else []) + (["gam_x"] if garchx_today else [])
+
+
+def _ext_unpack(th, comps, dist, overnight_decay):
+    """Unconstrained theta -> parameters. Persistence pi = alpha + beta + KAPPA_NEG gam_l + gam_x < 1
+    is split among the components by a softmax with beta as the reference."""
+    omega = float(np.exp(th[0]))
+    pers = 0.99999 * float(expit(th[1]))
+    k = len(comps)
+    sh = _softmax(np.concatenate([[0.0], th[2:2 + k]])) * pers
+    p = {"omega": omega, "beta": float(sh[0]), "alpha": 0.0, "gam_l": 0.0, "gam_x": 0.0}
+    for name, v in zip(comps, sh[1:]):
+        p[name] = float(v / KAPPA_NEG) if name == "gam_l" else float(v)
+    j = 2 + k
+    p["nu"] = float(2.05 + np.exp(th[j])) if dist == "t" else np.inf
+    p["delta"] = float(expit(th[j + 1])) if overnight_decay else 1.0
+    p["persistence"] = float(pers)
+    p["qbar"] = omega / max(1e-12, 1.0 - pers)
+    return p
+
+
+def _ext_pack(p, comps, dist, overnight_decay):
+    pers = p["alpha"] + p["beta"] + KAPPA_NEG * p.get("gam_l", 0.0) + p.get("gam_x", 0.0)
+    th = [np.log(p["omega"]), np.log(pers / 0.99999 / (1 - pers / 0.99999))]
+    for name in comps:
+        v = KAPPA_NEG * p[name] if name == "gam_l" else p[name]
+        th.append(np.log(v / p["beta"]))
+    th.append(np.log(p["nu"] - 2.05) if dist == "t" else 0.0)
+    if overnight_decay:
+        th.append(np.log(p["delta"] / (1 - p["delta"])))
+    return np.array(th, float)
+
+
+# Two registered starting points for the extended likelihood (the higher maximum is kept).
+EXT_STARTS = (
+    {"alpha": 0.05, "beta": 0.935, "gam_l": 0.01, "gam_x": 0.005, "nu": 8.0, "delta": 0.5},
+    {"alpha": 0.05, "beta": 0.945, "gam_l": 0.0002, "gam_x": 0.0001, "nu": 8.0, "delta": 0.99},
+)
+
+
+def fit_garch_ext(X, neg, weights=None, overnight_decay=False, leverage=False, garchx_today=False,
+                  dist: str = "t", starts=EXT_STARTS):
+    """Maximum likelihood for the extended intraday recursion (``ext_q2``) on a (days x minutes) grid of
+    normalised residuals X = eps / sqrt(h s). ``neg`` marks negative residuals; ``weights`` (0/1) keeps
+    missing minutes in the recursion but out of the likelihood, as in ``fit_garch11``. Returns a dict with
+    omega, alpha, beta, gam_l, gam_x, delta, nu, persistence, qbar, loglik, nobs, converged, q0, start."""
+    X = np.asarray(X, float)
+    w = np.ones_like(X) if weights is None else np.asarray(weights, float)
+    x2, negx2, z = _ext_inputs(X, np.asarray(neg, bool))
+    q0 = float(np.average(x2, weights=w))
+    comps = _ext_components(leverage, garchx_today)
+    flat_w = w.ravel()
+    flat_x = X.ravel()
+
+    def nll(th):
+        p = _ext_unpack(th, comps, dist, overnight_decay)
+        q2 = ext_q2(x2, negx2, z, p["omega"], p["alpha"], p["beta"], p["gam_l"], p["gam_x"], p["delta"],
+                    q0, p["qbar"]).ravel()
+        if not np.all(q2 > 0):
+            return 1e300
+        ll = _t_loglik(flat_x, q2, p["nu"]) if dist == "t" else _norm_loglik(flat_x, q2)
+        val = -np.sum(flat_w * ll)
+        return val if np.isfinite(val) else 1e300
+
+    best = None
+    for k, s in enumerate(starts):
+        p0 = dict(s)
+        if not leverage:
+            p0["gam_l"] = 0.0
+        if not garchx_today:
+            p0["gam_x"] = 0.0
+        pers0 = p0["alpha"] + p0["beta"] + KAPPA_NEG * p0["gam_l"] + p0["gam_x"]
+        p0["omega"] = q0 * (1 - pers0)
+        if dist != "t":
+            p0["nu"] = np.inf
+        res = minimize(nll, _ext_pack(p0, comps, dist, overnight_decay), method="L-BFGS-B")
+        if best is None or res.fun < best[0].fun:
+            best = (res, k)
+    res, k = best
+    p = _ext_unpack(res.x, comps, dist, overnight_decay)
+    p.update({"loglik": float(-res.fun), "nobs": int(w.sum()), "converged": bool(res.success), "q0": q0,
+              "start": int(k)})
+    return p
+
+
+@dataclass
+class McsGarchExt(McsGarch):
+    """mcsGARCH with optional extensions of the intraday component (study P109).
+
+    overnight_decay : the intraday state decays toward its unconditional level qbar over the night,
+        q2[t, 0] = qbar + delta (carry - qbar), with delta estimated (McsGarch: delta = 1, no decay).
+    leverage : an asymmetric (GJR) term, gam_l x^2 1{eps < 0}, in the intraday recursion.
+    garchx_today : a GARCH-X term, gam_x z, with z today's running mean of x^2 (the day's realized
+        variance so far, in units of the model's own expected variance).
+
+    With every flag off, ``fit``, ``filter`` and ``forecast_variance`` are McsGarch's own, unchanged.
+    The daily component h and the diurnal curve are as in McsGarch (h is an input).
+    """
+
+    overnight_decay: bool = False
+    leverage: bool = False
+    garchx_today: bool = False
+
+    @property
+    def extended(self) -> bool:
+        return bool(self.overnight_decay or self.leverage or self.garchx_today)
+
+    def fit(self, R, h, expiry_mask=None, compute_tstats: bool = False):
+        if not self.extended:
+            return super().fit(R, h, expiry_mask, compute_tstats)
+        # the diurnal steps of McsGarch.fit, unchanged
+        R = np.asarray(R, float)
+        h = np.asarray(h, float)
+        T, M = R.shape
+        expiry_mask = np.zeros(T, bool) if expiry_mask is None else np.asarray(expiry_mask, bool)
+        valid = np.isfinite(R)
+        Rf = np.where(valid, R, 0.0)
+        if self.mean == "constant":
+            self.mean_params = {"c": float(Rf[valid].mean())}
+        elif self.mean == "arma11":
+            self.mean_params, _ = fit_arma11(Rf.ravel())
+        eps = self._residuals(Rf)
+        eps = np.where(valid, eps, 0.0)
+        ratio = eps**2 / h[:, None]
+        self.s = self._pattern(ratio, valid)
+        if self.expiry_diurnal and expiry_mask.any():
+            self.s_expiry = self._pattern(ratio[expiry_mask], valid[expiry_mask])
+        S = self.diurnal(expiry_mask)
+        X = np.where(valid, eps / np.sqrt(h[:, None] * S), 0.0)
+        self.params = fit_garch_ext(X, eps < 0, valid.astype(float), self.overnight_decay, self.leverage,
+                                    self.garchx_today, dist=self.dist)
+        return self
+
+    def filter(self, R, h, expiry_mask=None, q0: float | None = None):
+        if not self.extended:
+            return super().filter(R, h, expiry_mask, q0)
+        R = np.asarray(R, float)
+        h = np.asarray(h, float)
+        T, M = R.shape
+        expiry_mask = np.zeros(T, bool) if expiry_mask is None else np.asarray(expiry_mask, bool)
+        valid = np.isfinite(R)
+        eps = np.where(valid, self._residuals(np.where(valid, R, 0.0)), 0.0)
+        S = self.diurnal(expiry_mask)
+        x = eps / np.sqrt(h[:, None] * S)
+        x2, negx2, z = _ext_inputs(x, eps < 0)
+        p = self.params
+        q2 = ext_q2(x2, negx2, z, p["omega"], p["alpha"], p["beta"], p["gam_l"], p["gam_x"], p["delta"],
+                    p["qbar"] if q0 is None else q0, p["qbar"])
+        cum_x2 = np.concatenate([np.zeros((T, 1)), np.cumsum(x2, axis=1)], axis=1)
+        return {"eps": eps, "S": S, "x": x, "q2": q2, "cum_x2": cum_x2}
+
+    def forecast_variance(self, filt: dict, h, anchors_t, anchors_i, horizon):
+        """As McsGarch.forecast_variance, with the expected path of the extended recursion:
+        E[x2] = q2 for future minutes, E[1{eps < 0} x2] = KAPPA_NEG q2, and today's running mean z
+        updated with the expected x2. Windows that run past the close are truncated at the close."""
+        if not self.extended:
+            return super().forecast_variance(filt, h, anchors_t, anchors_i, horizon)
+        p = self.params
+        a_eff = p["alpha"] + p["beta"] + KAPPA_NEG * p["gam_l"]
+        S, q2, cx = filt["S"], filt["q2"], filt["cum_x2"]
+        T, M = S.shape
+        h = np.asarray(h, float)
+        at = np.asarray(anchors_t, int)
+        ai = np.asarray(anchors_i, int)
+        hz = np.broadcast_to(np.asarray(horizon, int), at.shape)
+        out = np.empty(len(at))
+        keys = ai.astype(np.int64) * (M + 1) + hz
+        for key in np.unique(keys):
+            sel = np.flatnonzero(keys == key)
+            i, hn = int(ai[sel[0]]), int(hz[sel[0]])
+            tt = at[sel]
+            qhat = q2[tt, i].copy()                # q2[t, i] is known at the end of minute i - 1
+            run = cx[tt, i].copy()                 # sum of x2 over minutes 0 .. i-1 of the day
+            tot = np.zeros(len(sel))
+            for j in range(i, min(i + hn, M)):
+                tot += S[tt, j] * qhat
+                run += qhat
+                qhat = p["omega"] + a_eff * qhat + p["gam_x"] * run / (j + 1)
+            out[sel] = h[tt] * tot
+        return out
