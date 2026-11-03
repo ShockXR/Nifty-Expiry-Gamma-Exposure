@@ -630,11 +630,34 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Windows of 64 and 59 days; in-sample estimates; the fixes were chosen for forecasting, not for this question; telling an effect of the expiry change from a persistent late-2022 period needs comparison windows with no rule change.
 * **NEXT ITERATION:** None planned before the meeting.
 
-## Iterations in progress (3 November 2026, about 17:00 IST)
+## Iteration 53: do P106's three claims about where the forecasting gain comes from hold on Bank Nifty and Fin Nifty? (registered plan, P110)
+
+* **OBJECTIVE:** Test P106's three claims (the gain comes from realized volatility and the time of day; the option-implied, VIX and calendar inputs add nothing; a hybrid that sees only mcsGARCH's kind of information gets the whole gain) on the two other indices, with more than one set of random seeds.
+* **PROBLEM IDENTIFIED:** On Bank Nifty and Fin Nifty P106 had used one seed set, never ran the `mcsinfo` hybrid, and supported "adds nothing" only with tests that failed to find an effect, which is not evidence of no effect.
+* **HYPOTHESIS:** Registered before any outcome was computed (`docs/prereg/P110_GAIN_STRESS_TEST.md`, commit 5128e53): with four new seed sets (101 to 104), claim 1 holds (Holm), each of the three other groups is equivalent to zero within 1 point of mcsGARCH's loss (two one-sided tests), and the `mcsinfo` hybrid beats mcsGARCH and is at most 1 point worse than the full hybrid.
+* **CHANGES IMPLEMENTED:** `experiments/p110_gain_stress_test.py` and 12 synthetic tests (`tests/test_p110_gain_stress_test.py`). Run by an AI agent; results f98077f, 167 minutes after the plan. Ledger adapter GAINSTRESS.
+* **EXPERIMENTS PERFORMED:** Bank Nifty (660 test days) and Fin Nifty (604) refitted with seven variants and five seed sets; 28 primary rows; pooled tests over three indices; robustness, placebo (seed sets against each other) and 28 post hoc period rows (added after outcomes were seen, so labelled post hoc). About 2.5 hours on one core.
+* **RESULTS:** (REAL DATA.) Claim 1 survives on both indices: removing realized history raises the loss by 1.73 to 2.16 points and removing the time of day by 1.16 to 1.50 (Holm below 0.001, all seed sets agree). Claim 2 is qualified: the option-implied and VIX groups are equivalent to zero within 1 point (the option-implied group at 30 minutes only just, Holm 0.035), but the calendar inputs help a little (0.27 points on Bank Nifty at 30 minutes, 0.14 on Fin Nifty at 15). Claim 3 partly survives: `mcsinfo` beats mcsGARCH everywhere (4.00% to 5.53%) but is shown non-inferior to the full hybrid only on Bank Nifty at 15 minutes; on Fin Nifty it trails by 0.65 and 0.50 points. Seed set 7 was the unluckiest of five on Bank Nifty. Project-wide, 22 of the 28 primary rows survive.
+* **IMPROVEMENTS:** "Option-market information adds nothing" is now stated as "worth less than about 1 point on every index"; "gets the whole gain" is kept for Nifty only. Pitch, briefing, README, results summary, paper (5.2, 5.8, Tables B1 and C, Appendix B) and referee response updated.
+* **REMAINING ISSUES:** No new days (only data after these test periods can confirm the results); the 1-point margin is a choice; the three indices are worth about two independent ones (P107).
+* **NEXT ITERATION:** None planned before the meeting.
+
+## Iteration 54: how large is the gain over mcsGARCH exactly as the paper specifies it? (registered plan, P116)
+
+* **OBJECTIVE:** Measure the hybrid's gain against mcsGARCH as Chhimwal, Pandey and Pandey specify it, not only against our implementation.
+* **PROBLEM IDENTIFIED:** The audit found that our mcsGARCH adds three choices the paper does not make (a separate time-of-day curve for expiry days, a 5-minute smoothing of the curves, a zero expected return). If these made our benchmark weaker, the headline 5.8% and 7.6% would overstate the gain over the paper's model.
+* **HYPOTHESIS:** Registered before any new benchmark forecast was made on real data (`docs/prereg/P116_BENCHMARK_AS_PRINTED.md`, commit 19c5486): H1, the hybrid beats `mcs_cpp` (one curve, no smoothing, ARMA(1,1) mean, Student t) at 15 and 30 minutes; H2, our implementation and `mcs_cpp` differ; Holm over four; a decision rule (understated, overstated, no material difference within 0.5 point, inconclusive) fixed in advance; every mix of the three choices (2 x 2 x 2) as a secondary.
+* **CHANGES IMPLEMENTED:** `experiments/p116_benchmark_as_printed.py`, ARMA(1,1) mean helpers at the end of `src/niftygex/volatility.py` (defaults unchanged), 10 synthetic tests, one post hoc descriptive script. Run by an AI agent; results cf6c9d4, 25 minutes after the plan. Ledger adapter BENCHCPP.
+* **EXPERIMENTS PERFORMED:** The same walk-forward, days, anchors and targets as the headline, on Nifty, Bank Nifty and Fin Nifty; 77 tests (4 primary, 16 secondary, 57 exploratory). About 8 minutes on two processes.
+* **RESULTS:** (REAL DATA.) Against `mcs_cpp` the hybrid is 4.43% better at 15 minutes and 6.64% at 30 (Holm below 0.001) and 6.16% in the last hour. Our implementation is worse than the paper's specification on Nifty (by 1.45 and 1.09 points, Holm 0.005 and 0.014), so the registered verdict is "headline overstated" (Delta -1.37 [-2.15, -0.58] and -1.00 [-1.77, -0.23]); the expiry-day curve and the smoothing share the blame and the ARMA mean changes nothing. On Bank Nifty the headline is understated (4.73% and 6.20% against `mcs_cpp`), on Fin Nifty the verdict is inconclusive. P109's combination is 5.48% and 7.25% better than `mcs_cpp`. Project-wide, H1 survives (3.5e-8 and 9.1e-14) but H2 does not (0.18 and 0.73).
+* **IMPROVEMENTS:** Every document now leads with the gain over the paper's specification (4.4% and 6.6%) and gives 5.8% and 7.6% as the gain over our own version. Pitch, briefing, README, results summary, paper (abstract, contribution 2, 5.2, 5.8, Tables B1 and C, Appendix B), referee response, deck and registry updated. Ledger with P110 and P116: 28,414 tests, 35 studies, 3,514 survive (cut-off about 5.7e-4), which moved every printed project-wide adjusted p by 5% to 10% (no verdict changed); trace 559 entries, 552 MATCH, no mismatch.
+* **REMAINING ISSUES:** The studies run before this one (P106, P107, P109, P110, P114) use our implementation as the benchmark; against the paper's specification their Nifty gains over mcsGARCH would be about 1.0 to 1.4 points smaller.
+* **NEXT ITERATION:** None planned before the meeting.
+
+## Iterations in progress (3 November 2026, about 17:10 IST)
 
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
-* **P110**, a stress test of P106's three claims on Bank Nifty and Fin Nifty (plan 5128e53).
-* **P116**, how large the hybrid's gain is over mcsGARCH exactly as the paper specifies it (plan 19c5486).
+* **P117**, placebo windows for the persistence fall: does a window with no rule change show as large a fall?
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.

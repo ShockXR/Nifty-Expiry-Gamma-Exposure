@@ -183,6 +183,10 @@ STUDIES = {
                 "docs/P113_CONNECTEDNESS_SETTINGS.md; docs/prereg/P113_CONNECTEDNESS_SETTINGS.md"),
     "PERSFIX": ("Does the paper's fall in intraday persistence survive P109's fixes to mcsGARCH (P114)",
                 "docs/P114_PERSISTENCE_FIXED_MODEL.md; docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md"),
+    "BENCHCPP": ("The forecasting hybrid against mcsGARCH as the paper specifies it (P116)",
+                 "docs/P116_BENCHMARK_AS_PRINTED.md; docs/prereg/P116_BENCHMARK_AS_PRINTED.md"),
+    "GAINSTRESS": ("P106's three claims stress-tested on Bank Nifty and Fin Nifty (P110)",
+                   "docs/P110_GAIN_STRESS_TEST.md; docs/prereg/P110_GAIN_STRESS_TEST.md"),
 }
 
 PREREG = {
@@ -199,6 +203,8 @@ PREREG = {
     "p109_mcsgarch_extensions": ("docs/prereg/P109_MCSGARCH_EXTENSIONS.md", "P109 registered plan"),
     "p113_connectedness_settings": ("docs/prereg/P113_CONNECTEDNESS_SETTINGS.md", "P113 registered plan"),
     "p114_persistence_fixed_model": ("docs/prereg/P114_PERSISTENCE_FIXED_MODEL.md", "P114 registered plan"),
+    "p116_benchmark_as_printed": ("docs/prereg/P116_BENCHMARK_AS_PRINTED.md", "P116 registered plan"),
+    "p110_gain_stress_test": ("docs/prereg/P110_GAIN_STRESS_TEST.md", "P110 registered plan"),
 }
 
 COLUMNS = [
@@ -2648,6 +2654,111 @@ def adapt_p114persfix(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+P116_OUTCOME = ["tests.csv", "tests_detail.csv", "losses.csv", "verdict.csv", "attribution.csv", "gain_by_anchor.csv",
+                "daily_losses_*.csv"]
+
+
+def adapt_p116benchcpp(ctx: Ctx):
+    """P116: the hybrid and our mcsGARCH against mcsGARCH as the paper specifies it (docs/prereg/P116_BENCHMARK_AS_PRINTED.md).
+
+    tests.csv: P (primary: the hybrid against mcs_cpp, one-sided; our mcsGARCH against mcs_cpp, two-sided; 15 and
+      30 minutes, Holm over four), S1 to S5 (secondary: last hour, expiry days, P109's combination, Bank Nifty,
+      Fin Nifty) and E1 to E5 (exploratory: single switches, anchors, non-expiry days). All are Diebold-Mariano
+      tests on daily mean QLIKE. Every row is counted.
+    """
+    folder = "p116_benchmark_as_printed"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "BENCHCPP", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "BENCHCPP", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P116_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("BENCHCPP", f"P116 {tid}: {clean(r['hypothesis'])}", "QLIKE loss of forecasts of realized variance: "
+                "the hybrid, our mcsGARCH or a variant against mcsGARCH as the paper specifies it",
+                clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="Diebold-Mariano t (HLN)", statistic=r["statistic"], p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "BENCHCPP", folder, {
+        r"tests_detail\.csv|losses\.csv|verdict\.csv|attribution\.csv|gain_by_anchor\.csv|params_by_refit\.csv|"
+        r"params_summary\.csv|reproduction_check\.csv|timing\.csv":
+            "losses, attributions, parameters and checks behind tests.csv; no new p-value",
+        r"daily_losses_.*\.csv": "daily losses behind the tests; no p-value",
+    }, "run information, counts or log; no p-value")
+
+
+
+P110_OUTCOME = ["tests.csv", "tests_detail.csv", "verdict.csv", "claims.csv", "contributions.csv", "shares.csv",
+                "equivalence_bounds.csv", "pooled.csv", "periods.csv", "seed_repeats.csv", "daily_losses_*.csv"]
+
+
+def adapt_p110gainstress(ctx: Ctx):
+    """P110: P106's three claims stress-tested on Bank Nifty and Fin Nifty (docs/prereg/P110_GAIN_STRESS_TEST.md).
+
+    tests.csv: F1 to F3 (primary: carriers of the gain, equivalence of the other groups within 1 point, the mcsinfo
+      hybrid against mcsGARCH and non-inferior to the full hybrid), S1 to S3 (secondary, including pooled tests),
+      R1 to R6 (robustness: single seed sets and other adjustments, so repeated estimates), PL (placebo: seed sets
+      against each other), E and PH (exploratory and post hoc period tests). Diebold-Mariano, equivalence (two
+      one-sided tests) and non-inferiority tests on daily mean QLIKE. Every row is counted.
+    """
+    folder = "p110_gain_stress_test"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "GAINSTRESS", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "GAINSTRESS", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P110_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness", "placebo")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd and "two one-sided" not in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("GAINSTRESS", f"P110 {tid}: {clean(r['hypothesis'])}", "QLIKE loss of the hybrid with or without "
+                "a group of inputs, or of the mcsinfo hybrid, against the full hybrid or mcsGARCH",
+                clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="test statistic (DM t, equivalence or non-inferiority t, see p_method)",
+                statistic=r["statistic"], p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "GAINSTRESS", folder, {
+        r"tests_detail\.csv|verdict\.csv|claims\.csv|contributions\.csv|shares\.csv|equivalence_bounds\.csv|"
+        r"pooled\.csv|periods\.csv|seed_repeats\.csv|other_index_ranking\.csv|reproduction_check\.csv|"
+        r"timing\.csv":
+            "estimates, bounds, verdicts and checks behind tests.csv; no new p-value",
+        r"daily_losses_.*\.csv": "daily losses behind the tests; no p-value",
+    }, "run information, counts or log; no p-value")
+
 
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
@@ -4002,12 +4113,13 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET", "PERSFIX"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET", "PERSFIX", "BENCHCPP", "GAINSTRESS"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
                  adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx,
-                 adapt_p113connset, adapt_p114persfix]
+                 adapt_p113connset, adapt_p114persfix, adapt_p116benchcpp,
+                 adapt_p110gainstress]
 
 
 def headline18_check(ctx: Ctx):
@@ -4294,6 +4406,16 @@ RECON = [
      [("P1, primary: Nifty, inferred window, impulse-response persistence", "PERSFIX", r"^tests\.csv\|P1_")],
      "Verdict 'survives' for Nifty on the inferred window only; Bank Nifty, the stated window and P108's window "
      "are weakened or gone, and the size of the fall is very uncertain."),
+    ("P116", "The hybrid beats mcsGARCH as the paper specifies it, and our mcsGARCH differs from it, at 15 and 30 "
+             "minutes on Nifty (primary, Holm over four).",
+     [("P, primary: hybrid and our mcsGARCH against mcs_cpp, 15 and 30 minutes", "BENCHCPP", r"^tests\.csv\|P_")],
+     "Verdict 'headline overstated': our extension made the Nifty benchmark worse, so the gain over the paper's "
+     "specification (4.43% and 6.64%) is smaller than the headline (5.80% and 7.65%)."),
+    ("P110", "P106's three claims hold on Bank Nifty and Fin Nifty: realized history and time of day carry the gain, "
+             "the option-implied, VIX and calendar groups are equivalent to zero within 1 point, and the mcsinfo "
+             "hybrid beats mcsGARCH and is non-inferior to the full hybrid (primary F1 to F3, Holm).",
+     [("F1 to F3, primary: two indices, 15 and 30 minutes", "GAINSTRESS", r"^tests\.csv\|F[123]_")],
+     "Claim 1 survives on both indices; claim 2 is qualified (calendar adds a little); claim 3 partly survives."),
 ]
 
 
