@@ -47,7 +47,7 @@ PI65,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 ma
 PI66,PITCH_PANDEY.md,re-typed all 223 printed numbers blind from the PDF; 222 matched,222,,results/replication_nse/rekey_check.csv,csv:match=yes@#count,
 PI67,PITCH_PANDEY.md,"Every one of the project's 27,709 hypothesis tests","27,709",,results/test_ledger.csv,csv:@#count,
 PI68,PITCH_PANDEY.md,2 weeks |,2,,,UNTRACED,"a time estimate in the plan, not a result (the snippet covers both cells)"
-PI69,PITCH_PANDEY.md,Scoring every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
+PI69,PITCH_PANDEY.md,Two independent searches of every 64-day window against Table 1,64,,results/replication_nse/day_counts.csv,csv:period=before_stated@paper_days,the paper's stated number of before days
 PI70,PITCH_PANDEY.md,a correction for having tried 31 models,31,,results/referee_forecast/spa_reality_check.csv,csv:target=next15&subset=all&mean_block=10@n_challengers,
 PI71,PITCH_PANDEY.md,"by 4.8% and 5.9%, although",4.8,neg,results/referee_forecast/fair_benchmarks.csv,csv:target=next15&subset=all&benchmark=best_matched_mcsgarch@hybrid_pct_vs_benchmark,against the best of the four mcsGARCH variants with VIX or implied variance (mcsgarch_iv at 15 minutes)
 PI73,PITCH_PANDEY.md,"by 4.8% and 5.9%, although",5.9,neg,results/referee_forecast/fair_benchmarks.csv,csv:target=next30&subset=all&benchmark=best_matched_mcsgarch@hybrid_pct_vs_benchmark,
@@ -285,35 +285,35 @@ PI92,PITCH_PANDEY.md,With 360 minutes a day,360,,,UNTRACED,"a setting of the rep
 PI93,PITCH_PANDEY.md,about 3 bp per 100 bp move,100,,,UNTRACED,"the size of the move the slope is scaled to, not a result"
 PI94,PITCH_PANDEY.md,closer to a 50-point strike,50,,,UNTRACED,"Nifty strike spacing, a contract term"
 PI95,PITCH_PANDEY.md,none of those results reaches 5% under,5,,,UNTRACED,"the significance level, not a result"
-PI96,PITCH_PANDEY.md,"hypothesis tests (29 studies)",29,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+PI96,PITCH_PANDEY.md,hypothesis tests (29 studies),29,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
 RD85,docs/REAL_DATA_RESULTS.md,"every one of the project's 27,709 hypothesis tests","27,709",,results/test_ledger.csv,csv:@#count,
-RD86,docs/REAL_DATA_RESULTS.md,"hypothesis tests from 29 studies",29,,docs/TEST_LEDGER.md,"regex:tests\*\* across (\d+) studies",
+RD86,docs/REAL_DATA_RESULTS.md,hypothesis tests from 29 studies,29,,docs/TEST_LEDGER.md,regex:tests\*\* across (\d+) studies,
 RD87,docs/REAL_DATA_RESULTS.md,"3,214 survive","3,214",,results/test_ledger.csv,csv:p_by_project<=0.05@#count,
 BR25,docs/BRIEFING_PANDEY.md,"lists all 27,709 statistical tests","27,709",,results/test_ledger.csv,csv:@#count,
-PI97,PITCH_PANDEY.md,"pay only about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
-BR26,docs/BRIEFING_PANDEY.md,"it is worth about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
-RD88,docs/REAL_DATA_RESULTS.md,"the hybrid beats mcsGARCH (one-sided p 8.1e-7)",8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
-RD89,docs/REAL_DATA_RESULTS.md,"the gain is worth about 0.04% of wealth a year",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
-RD90,docs/REAL_DATA_RESULTS.md,"not significant after Holm (p 0.096)",0.096,,results/p103_economic_value/utility_tests.csv,csv:test_id=S4@p_holm_secondary,
-PA35,PAPER,"(one-sided p 8.1e-7; better on 69% of days)",8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
-PA36,PAPER,"(one-sided p 8.1e-7; better on 69% of days)",69,x100,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@share_days_model_better,
-PA37,PAPER,"would pay only 0.041% of wealth a year to switch",0.041,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
-PA38,PAPER,"which closes 8.7% of the gap",8.7,x100,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@share_of_shortfall_closed,
-PA39,PAPER,"not significant after Holm (p 0.096)",0.096,,results/p103_economic_value/utility_tests.csv,csv:test_id=S4@p_holm_secondary,
-PA40,PAPER,"(net annualised Sharpe ratio -3.52 with the hybrid",-3.52,,results/p103_economic_value/trading_metrics.csv,csv:strategy=hybrid_base&base_case=True@sr_annual,
-PA41,PAPER,"Deflated Sharpe Ratio 6e-15 over 4 registered variants",6e-15,,results/p103_economic_value/dsr.csv,csv:strategy=hybrid_base&N=4&primary=True@dsr,
-PA42,PAPER,"track the risk target better than mcsGARCH (p 0.81)",0.81,,results/p103_economic_value/trading_tests.csv,csv:test_id=T1@p_one_sided,
-PA43,PAPER,"its 4.2% a year saving in costs",4.2,,results/p103_economic_value/trading_tests.csv,csv:test_id=T2@estimate,
+PI97,PITCH_PANDEY.md,pay only about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+BR26,docs/BRIEFING_PANDEY.md,it is worth about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+RD88,docs/REAL_DATA_RESULTS.md,the hybrid beats mcsGARCH (one-sided p 8.1e-7),8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
+RD89,docs/REAL_DATA_RESULTS.md,the gain is worth about 0.04% of wealth a year,0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+RD90,docs/REAL_DATA_RESULTS.md,not significant after Holm (p 0.096),0.096,,results/p103_economic_value/utility_tests.csv,csv:test_id=S4@p_holm_secondary,
+PA35,PAPER,(one-sided p 8.1e-7; better on 69% of days),8.1e-7,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@p_one_sided,
+PA36,PAPER,(one-sided p 8.1e-7; better on 69% of days),69,x100,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@share_days_model_better,
+PA37,PAPER,would pay only 0.041% of wealth a year to switch,0.041,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
+PA38,PAPER,which closes 8.7% of the gap,8.7,x100,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@share_of_shortfall_closed,
+PA39,PAPER,not significant after Holm (p 0.096),0.096,,results/p103_economic_value/utility_tests.csv,csv:test_id=S4@p_holm_secondary,
+PA40,PAPER,(net annualised Sharpe ratio -3.52 with the hybrid,-3.52,,results/p103_economic_value/trading_metrics.csv,csv:strategy=hybrid_base&base_case=True@sr_annual,
+PA41,PAPER,Deflated Sharpe Ratio 6e-15 over 4 registered variants,6e-15,,results/p103_economic_value/dsr.csv,csv:strategy=hybrid_base&N=4&primary=True@dsr,
+PA42,PAPER,track the risk target better than mcsGARCH (p 0.81),0.81,,results/p103_economic_value/trading_tests.csv,csv:test_id=T1@p_one_sided,
+PA43,PAPER,its 4.2% a year saving in costs,4.2,,results/p103_economic_value/trading_tests.csv,csv:test_id=T2@estimate,
 PA44,PAPER,"gain is worth about 0.04% of wealth a year, under a registered test",0.04,,results/p103_economic_value/utility_tests.csv,csv:test_id=H1@fee_pct_year,
-PI98,PITCH_PANDEY.md,"retraining with 20 new sets of random seeds",20,,results/seed_bootstrap/summary.csv,csv:target=next15&subset=all@K,
-BR27,docs/BRIEFING_PANDEY.md,"retrained with 20 new sets of random seeds",20,,results/seed_bootstrap/summary.csv,csv:target=next15&subset=all@K,
+PI98,PITCH_PANDEY.md,retraining with 20 new sets of random seeds,20,,results/seed_bootstrap/summary.csv,csv:target=next15&subset=all@K,
+BR27,docs/BRIEFING_PANDEY.md,retrained with 20 new sets of random seeds,20,,results/seed_bootstrap/summary.csv,csv:target=next15&subset=all@K,
 PA45,PAPER,"(largest p 1.1e-8, 1.8e-13 and 0.00043)",1.1e-8,,results/seed_bootstrap/summary.csv,csv:target=next15&subset=all@dm_p_max,
 PA46,PAPER,"(largest p 1.1e-8, 1.8e-13 and 0.00043)",1.8e-13,,results/seed_bootstrap/summary.csv,csv:target=next30&subset=all@dm_p_max,
 PA47,PAPER,"(largest p 1.1e-8, 1.8e-13 and 0.00043)",0.00043,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=all@dm_p_max,
-PA48,PAPER,"the headline's -7.65% at 30 minutes is the smallest gain",-7.65,,results/seed_bootstrap/summary.csv,csv:target=next30&subset=all@headline_margin,
-PA49,PAPER,"the 20 new p-values run from 0.015 to 0.052 (median 0.026)",0.015,,results/seed_bootstrap/ensembles.csv,csv:target=last_hour&subset=expiry&role=new@#min:dm_p,
-PA50,PAPER,"the 20 new p-values run from 0.015 to 0.052 (median 0.026)",0.052,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=expiry@dm_p_max,
-PA51,PAPER,"the 20 new p-values run from 0.015 to 0.052 (median 0.026)",0.026,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=expiry@dm_p_median,
+PA48,PAPER,the headline's -7.65% at 30 minutes is the smallest gain,-7.65,,results/seed_bootstrap/summary.csv,csv:target=next30&subset=all@headline_margin,
+PA49,PAPER,the 20 new p-values run from 0.015 to 0.052 (median 0.026),0.015,,results/seed_bootstrap/ensembles.csv,csv:target=last_hour&subset=expiry&role=new@#min:dm_p,
+PA50,PAPER,the 20 new p-values run from 0.015 to 0.052 (median 0.026),0.052,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=expiry@dm_p_max,
+PA51,PAPER,the 20 new p-values run from 0.015 to 0.052 (median 0.026),0.026,,results/seed_bootstrap/summary.csv,csv:target=last_hour&subset=expiry@dm_p_median,
 PI99,PITCH_PANDEY.md,gives 4.9% and 6.1% on 604 test days,4.9,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@change_pct,"P104 registered H1, Fin Nifty, next 15 minutes"
 PI100,PITCH_PANDEY.md,gives 4.9% and 6.1% on 604 test days,6.1,neg,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next30@change_pct,"P104 registered H1, Fin Nifty, next 30 minutes"
 PI101,PITCH_PANDEY.md,gives 4.9% and 6.1% on 604 test days,604,,results/pipeline_nse_finnifty/p104/hypotheses.csv,csv:hypothesis=H1&target=next15@days,Fin Nifty test days
@@ -397,3 +397,12 @@ PA84,PAPER,the edge over the mcsGARCH given the implied variance is 2.5% and 3.0
 PA85,PAPER,the edge over the mcsGARCH given the implied variance is 2.5% and 3.0% (Holm p 0.043 within the study),3.0,neg,results/p107_pooled_test/pooled_estimates.csv,csv:test_id=S1e_next30@pooled_change_pct,P107
 PA86,PAPER,the edge over the mcsGARCH given the implied variance is 2.5% and 3.0% (Holm p 0.043 within the study),0.043,,results/p107_pooled_test/tests.csv,csv:test_id=S1e_next30@p_adjusted,P107
 PA87,PAPER,"correlates 0.22 between Nifty and Bank Nifty, 0.41 between Nifty and Fin Nifty and 0.60 between Bank Nifty and Fin Nifty",0.60,,results/p107_pooled_test/correlations.csv,csv:target=next15&benchmark=mcsgarch&kind=pearson&index_a=Bank Nifty&index_b=Fin Nifty@value,P107
+RD125,docs/REAL_DATA_RESULTS.md,"It scored 132,126 windows under 204 return definitions","132,126",,results/p108_blind_window/stated_windows.csv,csv:definition=0915-1514|concat|log|all&stated_variant=stated_nov1_feb29@n_windows,P108 windows scored under the winning definition
+RD126,docs/REAL_DATA_RESULTS.md,"It scored 132,126 windows under 204 return definitions",204,,results/p108_blind_window/best_by_definition.csv,csv:@#count,P108 return definitions
+RD127,docs/REAL_DATA_RESULTS.md,"The stated window (November 2023 to February 2024) reproduces none under any definition and ranks 85,013th","85,013",,results/p108_blind_window/stated_windows.csv,csv:definition=0915-1514|concat|log|all&stated_variant=stated_nov1_feb29@rank,P108 stated window rank
+RD128,docs/REAL_DATA_RESULTS.md,"The best window is 22 November 2022 to 20 February 2023 (6 of 15 exact, including both printed means",6,,results/p108_blind_window/best_by_definition.csv,csv:def_rank=1@E,P108 exact matches of the best window
+RD129,docs/REAL_DATA_RESULTS.md,"The earlier answer, 14 November 2022 to 10 February 2023, ranks 9th: it misses the Bank Nifty mean (-0.00000055, which prints as -0.000001, not -0.000002)",9,,results/p108_blind_window/top_candidates.csv,csv:definition=0915-1514|concat|log|all&start=2022-11-14&end=2023-02-10@stage1_rank,P108 rank of the earlier answer
+RD130,docs/REAL_DATA_RESULTS.md,"The earlier answer, 14 November 2022 to 10 February 2023, ranks 9th: it misses the Bank Nifty mean (-0.00000055, which prints as -0.000001, not -0.000002)",-0.00000055,,results/p108_blind_window/top_candidates.csv,csv:definition=0915-1514|concat|log|all&start=2022-11-14&end=2023-02-10@bank_mean,"P108 Bank Nifty mean, earlier window"
+PA88,PAPER,"scored 132,126 windows under 204 return definitions","132,126",,results/p108_blind_window/stated_windows.csv,csv:definition=0915-1514|concat|log|all&stated_variant=stated_nov1_feb29@n_windows,P108
+PA89,PAPER,"scored 132,126 windows under 204 return definitions",204,,results/p108_blind_window/best_by_definition.csv,csv:@#count,P108
+PA90,PAPER,"over 14 November to 10 February the Bank Nifty mean is -0.00000055, which prints as -0.000001 rather than -0.000002",-0.00000055,,results/p108_blind_window/top_candidates.csv,csv:definition=0915-1514|concat|log|all&start=2022-11-14&end=2023-02-10@bank_mean,P108

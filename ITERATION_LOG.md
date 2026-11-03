@@ -546,10 +546,21 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Effective numbers are noisy and sensitive to a few extreme days (4 June 2024); equal weights are a choice.
 * **NEXT ITERATION:** Fold into the paper and the pitch.
 
+## Iteration 46: a blind re-derivation of the paper's "before" window (registered plan, P108)
+
+* **OBJECTIVE:** Check, independently, the project's most important single claim about the paper: that its "before" sample is not the stated November 2023 to February 2024 but a 64-day window starting in mid-November 2022.
+* **PROBLEM IDENTIFIED:** The earlier search (iteration 17) was designed by the same process that then believed its answer, and scored only four statistics. A finding that the professor will be asked about directly should survive a fresh attempt that cannot see it.
+* **HYPOTHESIS:** A separate AI agent, which types the printed numbers itself, writes new code and may not open the earlier search until its own answer is pushed, will land on the same window. The plan (`docs/prereg/P108_BLIND_WINDOW.md`, commit 6b289ca) fixes the candidate return definitions, the score (exact matches among 15 printed numbers first, then distance), and what counts as a strong or weak identification.
+* **CHANGES IMPLEMENTED:** `experiments/p108_blind_window/` (`printed_values.csv`, `search.py`, `posthoc.py`, `phase3_compare.py`), `tests/test_p108_blind_window.py` (synthetic only), write-up `docs/P108_BLIND_WINDOW.md`. Blind answer pushed at d904c8c, 21 minutes after the plan; comparison with the earlier search afterwards (73ca9d3).
+* **EXPERIMENTS PERFORMED:** 132,126 windows under 204 return definitions; POST HOC checks of the minima, the after window and fixed kurtosis formulas.
+* **RESULTS:** (REAL DATA.) The stated window reproduces none of the 15 printed numbers under any definition (rank 85,013). The blind best fit is 22 November 2022 to 20 February 2023, 6 of 15 exact (both N, both means, both maxima); the window one day later ties, so under the plan this is a weak identification of the exact days. Return definition, year, length and the minutes of both maxima agree with the earlier search; the minima mismatch has the same cause (the 27 January 2023 15:15 bar). The earlier answer, 14 November 2022 to 10 February 2023, ranks 9th: its Bank Nifty mean is -0.00000055 and prints as -0.000001, not -0.000002 (checked again by the lead from the raw bars: 22 November gives -0.0000018). The higher moments, with the kurtosis formula fixed, favour starts of 14 to 17 November.
+* **IMPROVEMENTS:** "The before window is 14 November 2022 to 10 February 2023" becomes "the before window starts between 14 and 23 November 2022 and ends between 10 and 21 February 2023", with the year confirmed by two independent searches.
+* **REMAINING ISSUES:** The exact days depend on whether the printed means or the printed higher moments are more trustworthy; only the authors can settle it. Analyses that use the inferred window use 14 November to 10 February; the two candidates share 58 of 64 days. No hypothesis tests, so nothing enters the test ledger.
+* **NEXT ITERATION:** Soften the window claim in the pitch, briefing, paper, replication note and deck; ask the authors which dates they used.
+
 ## Iterations in progress (3 November 2026, about 11:45 IST)
 
 * **P106, where the forecasting gain comes from** (registered plan): the hybrid refitted without each feature group (option-implied, VIX, time of day, calendar and regime, realized-variance history), and a test of what changed after the November 2024 cut.
-* **P108, a blind re-derivation of the paper's "before" window**: a separate AI agent, writing new code and transcribing the printed numbers itself, commits its answer before it may look at the earlier search.
 * **Scoring the frozen forecast** for 3 November after the close.
 * **A meeting deck** for Prof. Pandey, built last from the final numbers.
 
