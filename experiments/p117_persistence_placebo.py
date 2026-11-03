@@ -453,8 +453,9 @@ def stage_windows(a):
         old = pd.read_csv(path)
         done = set(zip(old["kind"], old["start_row"].astype(int)))
     todo = [j for j in jobs if j not in done]
+    counts = ", ".join(f"{s} {int(pairs['in_' + str(s)].sum())}" for s in ds["sets"])
     print(f"[{label}] P117 windows {k}: {len(days)} grid days, gap {act['gap']}, {len(pairs)} pairs enumerated "
-          f"({', '.join(f'{s} {int(pairs[f'in_{s}'].sum())}' for s in ds['sets'])}); {len(jobs)} windows needed, "
+          f"({counts}); {len(jobs)} windows needed, "
           f"{len(todo)} to fit", flush=True)
     buf = []
     for n, (kind, s) in enumerate(todo):
