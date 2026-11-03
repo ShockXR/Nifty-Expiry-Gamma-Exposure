@@ -1,0 +1,270 @@
+index,target,seed,kind,rows_job,rows_committed,check,column,n_identical,max_abs_rel_diff,ok
+NIFTY,next15,7,repro,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,7,repro,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,7,repro,19800,19800.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19800,0.0,True
+NIFTY,next15,7,repro,19800,19800.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19800,0.0,True
+NIFTY,next15,7,repro,19800,19800.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,19800,0.0,True
+NIFTY,next15,7,repro,19800,19800.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19800,0.0,True
+NIFTY,next15,7,cpp,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,7,cpp,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,7,cpp,19800,19800.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19800,0.0,True
+NIFTY,next15,7,cpp,19800,19800.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19800,0.0,True
+NIFTY,next15,7,cpp,19800,19800.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19800,0.0,True
+NIFTY,next15,7,cpp,19800,19800.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19800,0.0,True
+NIFTY,next15,7,cppall,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,7,cppall,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,7,cppall,19800,19800.0,mcsgarch vs mcsgarch_alt (mcs_cpp) of the seed-7 job,mcsgarch,19800,0.0,True
+NIFTY,next15,7,cppall,19800,19800.0,mcsgarch vs P116's mcs_cpp forecasts,mcsgarch,19800,0.0,True
+NIFTY,next15,101,cpp_base,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,101,cpp_base,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,101,cpp_base,19800,19800.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19800,0.0,True
+NIFTY,next15,101,cpp_base,19800,19800.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19800,0.0,True
+NIFTY,next15,101,cpp_base,19800,19800.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19800,0.0,True
+NIFTY,next15,101,cpp_base,19800,19800.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19800,0.0,True
+NIFTY,next15,102,cpp,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,102,cpp,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,102,cpp,19800,19800.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19800,0.0,True
+NIFTY,next15,102,cpp,19800,19800.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19800,0.0,True
+NIFTY,next15,102,cpp,19800,19800.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19800,0.0,True
+NIFTY,next15,102,cpp,19800,19800.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19800,0.0,True
+NIFTY,next15,103,cpp,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,103,cpp,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,103,cpp,19800,19800.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19800,0.0,True
+NIFTY,next15,103,cpp,19800,19800.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19800,0.0,True
+NIFTY,next15,103,cpp,19800,19800.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19800,0.0,True
+NIFTY,next15,103,cpp,19800,19800.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19800,0.0,True
+NIFTY,next15,104,cpp,19800,19800.0,"rows (t, minute, date) identical to the committed run's",rows,19800,0.0,True
+NIFTY,next15,104,cpp,19800,19800.0,y vs committed y,y,19800,0.0,True
+NIFTY,next15,104,cpp,19800,19800.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19800,0.0,True
+NIFTY,next15,104,cpp,19800,19800.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19800,0.0,True
+NIFTY,next15,104,cpp,19800,19800.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19800,0.0,True
+NIFTY,next15,104,cpp,19800,19800.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19800,0.0,True
+NIFTY,next30,7,repro,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,7,repro,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,7,repro,19008,19008.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19008,0.0,True
+NIFTY,next30,7,repro,19008,19008.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19008,0.0,True
+NIFTY,next30,7,repro,19008,19008.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,19008,0.0,True
+NIFTY,next30,7,repro,19008,19008.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19008,0.0,True
+NIFTY,next30,7,cpp,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,7,cpp,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,7,cpp,19008,19008.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19008,0.0,True
+NIFTY,next30,7,cpp,19008,19008.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19008,0.0,True
+NIFTY,next30,7,cpp,19008,19008.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19008,0.0,True
+NIFTY,next30,7,cpp,19008,19008.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19008,0.0,True
+NIFTY,next30,7,cppall,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,7,cppall,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,7,cppall,19008,19008.0,mcsgarch vs mcsgarch_alt (mcs_cpp) of the seed-7 job,mcsgarch,19008,0.0,True
+NIFTY,next30,7,cppall,19008,19008.0,mcsgarch vs P116's mcs_cpp forecasts,mcsgarch,19008,0.0,True
+NIFTY,next30,101,cpp,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,101,cpp,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,101,cpp,19008,19008.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19008,0.0,True
+NIFTY,next30,101,cpp,19008,19008.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19008,0.0,True
+NIFTY,next30,101,cpp,19008,19008.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19008,0.0,True
+NIFTY,next30,101,cpp,19008,19008.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19008,0.0,True
+NIFTY,next30,102,cpp,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,102,cpp,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,102,cpp,19008,19008.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19008,0.0,True
+NIFTY,next30,102,cpp,19008,19008.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19008,0.0,True
+NIFTY,next30,102,cpp,19008,19008.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19008,0.0,True
+NIFTY,next30,102,cpp,19008,19008.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19008,0.0,True
+NIFTY,next30,103,cpp,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,103,cpp,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,103,cpp,19008,19008.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19008,0.0,True
+NIFTY,next30,103,cpp,19008,19008.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19008,0.0,True
+NIFTY,next30,103,cpp,19008,19008.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19008,0.0,True
+NIFTY,next30,103,cpp,19008,19008.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19008,0.0,True
+NIFTY,next30,104,cpp,19008,19008.0,"rows (t, minute, date) identical to the committed run's",rows,19008,0.0,True
+NIFTY,next30,104,cpp,19008,19008.0,y vs committed y,y,19008,0.0,True
+NIFTY,next30,104,cpp,19008,19008.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,19008,0.0,True
+NIFTY,next30,104,cpp,19008,19008.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,19008,0.0,True
+NIFTY,next30,104,cpp,19008,19008.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,19008,0.0,True
+NIFTY,next30,104,cpp,19008,19008.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,19008,0.0,True
+NIFTY,last_hour,7,repro,792,792.0,"rows (t, minute, date) identical to the committed run's",rows,792,0.0,True
+NIFTY,last_hour,7,repro,792,792.0,y vs committed y,y,792,0.0,True
+NIFTY,last_hour,7,repro,792,792.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,792,0.0,True
+NIFTY,last_hour,7,repro,792,792.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,792,0.0,True
+NIFTY,last_hour,7,repro,792,792.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,792,0.0,True
+NIFTY,last_hour,7,repro,792,792.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,792,0.0,True
+NIFTY,last_hour,7,cpp,792,792.0,"rows (t, minute, date) identical to the committed run's",rows,792,0.0,True
+NIFTY,last_hour,7,cpp,792,792.0,y vs committed y,y,792,0.0,True
+NIFTY,last_hour,7,cpp,792,792.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,792,0.0,True
+NIFTY,last_hour,7,cpp,792,792.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,792,0.0,True
+NIFTY,last_hour,7,cpp,792,792.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,792,0.0,True
+NIFTY,last_hour,7,cpp,792,792.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,792,0.0,True
+NIFTY,last_hour,7,cppall,792,792.0,"rows (t, minute, date) identical to the committed run's",rows,792,0.0,True
+NIFTY,last_hour,7,cppall,792,792.0,y vs committed y,y,792,0.0,True
+NIFTY,last_hour,7,cppall,792,792.0,mcsgarch vs mcsgarch_alt (mcs_cpp) of the seed-7 job,mcsgarch,792,0.0,True
+NIFTY,last_hour,7,cppall,792,792.0,mcsgarch vs P116's mcs_cpp forecasts,mcsgarch,792,0.0,True
+BANKNIFTY,next15,7,cpp_base,16500,16500.0,"rows (t, minute, date) identical to the committed run's",rows,16500,0.0,True
+BANKNIFTY,next15,7,cpp_base,16500,16500.0,y vs committed y,y,16500,0.0,True
+BANKNIFTY,next15,7,cpp_base,16500,16500.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,16500,0.0,True
+BANKNIFTY,next15,7,cpp_base,16500,16500.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,16500,0.0,True
+BANKNIFTY,next15,7,cpp_base,16500,16500.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,16500,0.0,True
+BANKNIFTY,next15,7,cpp_base,16500,16500.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,101,cpp,16500,16500.0,"rows (t, minute, date) identical to the committed run's",rows,16500,0.0,True
+BANKNIFTY,next15,101,cpp,16500,16500.0,y vs committed y,y,16500,0.0,True
+BANKNIFTY,next15,101,cpp,16500,16500.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,16500,0.0,True
+BANKNIFTY,next15,101,cpp,16500,16500.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,16500,0.0,True
+BANKNIFTY,next15,101,cpp,16500,16500.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,101,cpp,16500,16500.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,102,cpp,16500,16500.0,"rows (t, minute, date) identical to the committed run's",rows,16500,0.0,True
+BANKNIFTY,next15,102,cpp,16500,16500.0,y vs committed y,y,16500,0.0,True
+BANKNIFTY,next15,102,cpp,16500,16500.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,16500,0.0,True
+BANKNIFTY,next15,102,cpp,16500,16500.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,16500,0.0,True
+BANKNIFTY,next15,102,cpp,16500,16500.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,102,cpp,16500,16500.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,103,cpp,16500,16500.0,"rows (t, minute, date) identical to the committed run's",rows,16500,0.0,True
+BANKNIFTY,next15,103,cpp,16500,16500.0,y vs committed y,y,16500,0.0,True
+BANKNIFTY,next15,103,cpp,16500,16500.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,16500,0.0,True
+BANKNIFTY,next15,103,cpp,16500,16500.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,16500,0.0,True
+BANKNIFTY,next15,103,cpp,16500,16500.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,103,cpp,16500,16500.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,104,cpp,16500,16500.0,"rows (t, minute, date) identical to the committed run's",rows,16500,0.0,True
+BANKNIFTY,next15,104,cpp,16500,16500.0,y vs committed y,y,16500,0.0,True
+BANKNIFTY,next15,104,cpp,16500,16500.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,16500,0.0,True
+BANKNIFTY,next15,104,cpp,16500,16500.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,16500,0.0,True
+BANKNIFTY,next15,104,cpp,16500,16500.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next15,104,cpp,16500,16500.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,16500,0.0,True
+BANKNIFTY,next30,7,cpp_base,15840,15840.0,"rows (t, minute, date) identical to the committed run's",rows,15840,0.0,True
+BANKNIFTY,next30,7,cpp_base,15840,15840.0,y vs committed y,y,15840,0.0,True
+BANKNIFTY,next30,7,cpp_base,15840,15840.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15840,0.0,True
+BANKNIFTY,next30,7,cpp_base,15840,15840.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15840,0.0,True
+BANKNIFTY,next30,7,cpp_base,15840,15840.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,15840,0.0,True
+BANKNIFTY,next30,7,cpp_base,15840,15840.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,101,cpp,15840,15840.0,"rows (t, minute, date) identical to the committed run's",rows,15840,0.0,True
+BANKNIFTY,next30,101,cpp,15840,15840.0,y vs committed y,y,15840,0.0,True
+BANKNIFTY,next30,101,cpp,15840,15840.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15840,0.0,True
+BANKNIFTY,next30,101,cpp,15840,15840.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15840,0.0,True
+BANKNIFTY,next30,101,cpp,15840,15840.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,101,cpp,15840,15840.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,102,cpp,15840,15840.0,"rows (t, minute, date) identical to the committed run's",rows,15840,0.0,True
+BANKNIFTY,next30,102,cpp,15840,15840.0,y vs committed y,y,15840,0.0,True
+BANKNIFTY,next30,102,cpp,15840,15840.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15840,0.0,True
+BANKNIFTY,next30,102,cpp,15840,15840.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15840,0.0,True
+BANKNIFTY,next30,102,cpp,15840,15840.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,102,cpp,15840,15840.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,103,cpp,15840,15840.0,"rows (t, minute, date) identical to the committed run's",rows,15840,0.0,True
+BANKNIFTY,next30,103,cpp,15840,15840.0,y vs committed y,y,15840,0.0,True
+BANKNIFTY,next30,103,cpp,15840,15840.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15840,0.0,True
+BANKNIFTY,next30,103,cpp,15840,15840.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15840,0.0,True
+BANKNIFTY,next30,103,cpp,15840,15840.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,103,cpp,15840,15840.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,104,cpp,15840,15840.0,"rows (t, minute, date) identical to the committed run's",rows,15840,0.0,True
+BANKNIFTY,next30,104,cpp,15840,15840.0,y vs committed y,y,15840,0.0,True
+BANKNIFTY,next30,104,cpp,15840,15840.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15840,0.0,True
+BANKNIFTY,next30,104,cpp,15840,15840.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15840,0.0,True
+BANKNIFTY,next30,104,cpp,15840,15840.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15840,0.0,True
+BANKNIFTY,next30,104,cpp,15840,15840.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15840,0.0,True
+FINNIFTY,next15,7,cpp_base,15100,15100.0,"rows (t, minute, date) identical to the committed run's",rows,15100,0.0,True
+FINNIFTY,next15,7,cpp_base,15100,15100.0,y vs committed y,y,15100,0.0,True
+FINNIFTY,next15,7,cpp_base,15100,15100.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15100,0.0,True
+FINNIFTY,next15,7,cpp_base,15100,15100.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15100,0.0,True
+FINNIFTY,next15,7,cpp_base,15100,15100.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,15100,0.0,True
+FINNIFTY,next15,7,cpp_base,15100,15100.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,101,cpp,15100,15100.0,"rows (t, minute, date) identical to the committed run's",rows,15100,0.0,True
+FINNIFTY,next15,101,cpp,15100,15100.0,y vs committed y,y,15100,0.0,True
+FINNIFTY,next15,101,cpp,15100,15100.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15100,0.0,True
+FINNIFTY,next15,101,cpp,15100,15100.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15100,0.0,True
+FINNIFTY,next15,101,cpp,15100,15100.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,101,cpp,15100,15100.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,102,cpp,15100,15100.0,"rows (t, minute, date) identical to the committed run's",rows,15100,0.0,True
+FINNIFTY,next15,102,cpp,15100,15100.0,y vs committed y,y,15100,0.0,True
+FINNIFTY,next15,102,cpp,15100,15100.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15100,0.0,True
+FINNIFTY,next15,102,cpp,15100,15100.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15100,0.0,True
+FINNIFTY,next15,102,cpp,15100,15100.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,102,cpp,15100,15100.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,103,cpp,15100,15100.0,"rows (t, minute, date) identical to the committed run's",rows,15100,0.0,True
+FINNIFTY,next15,103,cpp,15100,15100.0,y vs committed y,y,15100,0.0,True
+FINNIFTY,next15,103,cpp,15100,15100.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15100,0.0,True
+FINNIFTY,next15,103,cpp,15100,15100.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15100,0.0,True
+FINNIFTY,next15,103,cpp,15100,15100.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,103,cpp,15100,15100.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,104,cpp,15100,15100.0,"rows (t, minute, date) identical to the committed run's",rows,15100,0.0,True
+FINNIFTY,next15,104,cpp,15100,15100.0,y vs committed y,y,15100,0.0,True
+FINNIFTY,next15,104,cpp,15100,15100.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,15100,0.0,True
+FINNIFTY,next15,104,cpp,15100,15100.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,15100,0.0,True
+FINNIFTY,next15,104,cpp,15100,15100.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,15100,0.0,True
+FINNIFTY,next15,104,cpp,15100,15100.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,15100,0.0,True
+FINNIFTY,next30,7,cpp_base,14496,14496.0,"rows (t, minute, date) identical to the committed run's",rows,14496,0.0,True
+FINNIFTY,next30,7,cpp_base,14496,14496.0,y vs committed y,y,14496,0.0,True
+FINNIFTY,next30,7,cpp_base,14496,14496.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,14496,0.0,True
+FINNIFTY,next30,7,cpp_base,14496,14496.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,14496,0.0,True
+FINNIFTY,next30,7,cpp_base,14496,14496.0,hybrid_base vs committed hybrid_base (seed set 7),hybrid_base,14496,0.0,True
+FINNIFTY,next30,7,cpp_base,14496,14496.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,101,cpp,14496,14496.0,"rows (t, minute, date) identical to the committed run's",rows,14496,0.0,True
+FINNIFTY,next30,101,cpp,14496,14496.0,y vs committed y,y,14496,0.0,True
+FINNIFTY,next30,101,cpp,14496,14496.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,14496,0.0,True
+FINNIFTY,next30,101,cpp,14496,14496.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,14496,0.0,True
+FINNIFTY,next30,101,cpp,14496,14496.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,101,cpp,14496,14496.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,102,cpp,14496,14496.0,"rows (t, minute, date) identical to the committed run's",rows,14496,0.0,True
+FINNIFTY,next30,102,cpp,14496,14496.0,y vs committed y,y,14496,0.0,True
+FINNIFTY,next30,102,cpp,14496,14496.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,14496,0.0,True
+FINNIFTY,next30,102,cpp,14496,14496.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,14496,0.0,True
+FINNIFTY,next30,102,cpp,14496,14496.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,102,cpp,14496,14496.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,103,cpp,14496,14496.0,"rows (t, minute, date) identical to the committed run's",rows,14496,0.0,True
+FINNIFTY,next30,103,cpp,14496,14496.0,y vs committed y,y,14496,0.0,True
+FINNIFTY,next30,103,cpp,14496,14496.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,14496,0.0,True
+FINNIFTY,next30,103,cpp,14496,14496.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,14496,0.0,True
+FINNIFTY,next30,103,cpp,14496,14496.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,103,cpp,14496,14496.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,104,cpp,14496,14496.0,"rows (t, minute, date) identical to the committed run's",rows,14496,0.0,True
+FINNIFTY,next30,104,cpp,14496,14496.0,y vs committed y,y,14496,0.0,True
+FINNIFTY,next30,104,cpp,14496,14496.0,mcsgarch vs committed mcsgarch (mcs_ours),mcsgarch,14496,0.0,True
+FINNIFTY,next30,104,cpp,14496,14496.0,mcsgarch_iv vs committed mcsgarch_iv,mcsgarch_iv,14496,0.0,True
+FINNIFTY,next30,104,cpp,14496,14496.0,mcsgarch_alt vs P116's mcs_cpp forecasts,mcsgarch_alt,14496,0.0,True
+FINNIFTY,next30,104,cpp,14496,14496.0,mcsgarch_alt vs mcsgarch_alt of the seed-7 job (deterministic),mcsgarch_alt,14496,0.0,True
+NIFTY,next15,101,,792,,committed daily QLIKE of mcsGARCH (seed set 101 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next15,101,,792,,daily QLIKE of the committed hybrid rebuilt here (seed set 101) vs the committed file,,792,0.0,True
+NIFTY,next15,102,,792,,committed daily QLIKE of mcsGARCH (seed set 102 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next15,103,,792,,committed daily QLIKE of mcsGARCH (seed set 103 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next15,104,,792,,committed daily QLIKE of mcsGARCH (seed set 104 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next15,7,,792,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,792,0.0,True
+NIFTY,next15,7,,792,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,792,0.0,True
+NIFTY,next15,7,,792,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,792,0.0,True
+NIFTY,next15,7,,792,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,792,0.0,True
+NIFTY,next30,101,,792,,committed daily QLIKE of mcsGARCH (seed set 101 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next30,102,,792,,committed daily QLIKE of mcsGARCH (seed set 102 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next30,103,,792,,committed daily QLIKE of mcsGARCH (seed set 103 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next30,104,,792,,committed daily QLIKE of mcsGARCH (seed set 104 file) vs this study's mcs_ours,,792,0.0,True
+NIFTY,next30,7,,792,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,792,0.0,True
+NIFTY,next30,7,,792,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,792,0.0,True
+NIFTY,next30,7,,792,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,792,0.0,True
+NIFTY,next30,7,,792,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,792,0.0,True
+NIFTY,last_hour,7,,792,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,792,0.0,True
+NIFTY,last_hour,7,,792,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,792,0.0,True
+NIFTY,last_hour,7,,792,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,792,0.0,True
+NIFTY,last_hour,7,,792,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,792,0.0,True
+BANKNIFTY,next15,101,,660,,committed daily QLIKE of mcsGARCH (seed set 101 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next15,102,,660,,committed daily QLIKE of mcsGARCH (seed set 102 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next15,103,,660,,committed daily QLIKE of mcsGARCH (seed set 103 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next15,104,,660,,committed daily QLIKE of mcsGARCH (seed set 104 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next15,7,,660,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next15,7,,660,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,660,0.0,True
+BANKNIFTY,next15,7,,660,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,660,0.0,True
+BANKNIFTY,next15,7,,660,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,660,0.0,True
+BANKNIFTY,next30,101,,660,,committed daily QLIKE of mcsGARCH (seed set 101 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next30,102,,660,,committed daily QLIKE of mcsGARCH (seed set 102 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next30,103,,660,,committed daily QLIKE of mcsGARCH (seed set 103 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next30,104,,660,,committed daily QLIKE of mcsGARCH (seed set 104 file) vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next30,7,,660,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,660,0.0,True
+BANKNIFTY,next30,7,,660,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,660,0.0,True
+BANKNIFTY,next30,7,,660,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,660,0.0,True
+BANKNIFTY,next30,7,,660,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,660,0.0,True
+FINNIFTY,next15,101,,604,,committed daily QLIKE of mcsGARCH (seed set 101 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next15,102,,604,,committed daily QLIKE of mcsGARCH (seed set 102 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next15,103,,604,,committed daily QLIKE of mcsGARCH (seed set 103 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next15,104,,604,,committed daily QLIKE of mcsGARCH (seed set 104 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next15,7,,604,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next15,7,,604,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,604,0.0,True
+FINNIFTY,next15,7,,604,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,604,0.0,True
+FINNIFTY,next15,7,,604,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,604,0.0,True
+FINNIFTY,next30,101,,604,,committed daily QLIKE of mcsGARCH (seed set 101 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next30,102,,604,,committed daily QLIKE of mcsGARCH (seed set 102 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next30,103,,604,,committed daily QLIKE of mcsGARCH (seed set 103 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next30,104,,604,,committed daily QLIKE of mcsGARCH (seed set 104 file) vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next30,7,,604,,P116 committed daily QLIKE of mcs_ours vs this study's mcs_ours,,604,0.0,True
+FINNIFTY,next30,7,,604,,P116 committed daily QLIKE of mcs_cpp vs this study's mcs_cpp,,604,0.0,True
+FINNIFTY,next30,7,,604,,P116 committed daily QLIKE of hybrid vs this study's hybrid_s7,,604,0.0,True
+FINNIFTY,next30,7,,604,,P109 committed daily QLIKE of mcsGARCH vs this study's mcs_ours (for the combination),,604,0.0,True

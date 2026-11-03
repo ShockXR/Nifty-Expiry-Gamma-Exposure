@@ -1,0 +1,14 @@
+[REAL DATA] P118 hybrid on the paper's mcsGARCH, stage 1 (study), FINNIFTY: 10 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a979bc16298c9a096/data/processed/p118); workers 2
+market loaded: 754 days, 2023-01-02 00:00:00 to 2026-01-27 00:00:00 (58s)
+panels and datasets built (137s)
+  [1/10] FINNIFTY next15 seed 7 cpp_base: 15100 forecasts, 197s (elapsed 5.6 min)
+  [2/10] FINNIFTY next30 seed 7 cpp_base: 14496 forecasts, 161s (elapsed 5.6 min)
+  [3/10] FINNIFTY next15 seed 101 cpp: 15100 forecasts, 119s (elapsed 6.9 min)
+  [4/10] FINNIFTY next30 seed 101 cpp: 14496 forecasts, 102s (elapsed 7.3 min)
+  [5/10] FINNIFTY next15 seed 102 cpp: 15100 forecasts, 116s (elapsed 8.9 min)
+  [6/10] FINNIFTY next30 seed 102 cpp: 14496 forecasts, 104s (elapsed 9.0 min)
+  [7/10] FINNIFTY next15 seed 103 cpp: 15100 forecasts, 121s (elapsed 10.9 min)
+  [8/10] FINNIFTY next30 seed 103 cpp: 14496 forecasts, 103s (elapsed 10.9 min)
+  [9/10] FINNIFTY next15 seed 104 cpp: 15100 forecasts, 117s (elapsed 12.7 min)
+  [10/10] FINNIFTY next30 seed 104 cpp: 14496 forecasts, 107s (elapsed 12.7 min)
+stage 1 (FINNIFTY, study) done in 12.7 min

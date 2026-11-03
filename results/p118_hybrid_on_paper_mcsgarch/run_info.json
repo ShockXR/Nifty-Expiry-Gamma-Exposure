@@ -1,0 +1,227 @@
+{
+  "source": "REAL DATA: NSE 1-minute index bars as in the committed runs; the committed hybrid's forecasts (seed set 7) and daily losses (seed sets 101 to 104, P106 and P110) are the committed ones; mcs_cpp is refitted inside every job and checked against P116; P109's combination enters through its committed daily losses",
+  "study": "P118 hybrid on the paper's mcsGARCH (docs/prereg/P118_HYBRID_ON_PAPER_MCSGARCH.md)",
+  "plan_commit": "49d19ce2779451e13cbf868d325a651c4da6a1f4",
+  "analysis_commit": "49d19ce2779451e13cbf868d325a651c4da6a1f4",
+  "cpp_spec": {
+    "mean": "arma11",
+    "dist": "t",
+    "expiry_diurnal": false,
+    "smooth": 1
+  },
+  "kind_models": {
+    "repro": [
+      "mcsgarch",
+      "mcsgarch_iv",
+      "mcsgarch_alt",
+      "hybrid_base"
+    ],
+    "cpp": [
+      "mcsgarch",
+      "mcsgarch_iv",
+      "mcsgarch_alt",
+      "hybridalt_base"
+    ],
+    "cpp_base": [
+      "mcsgarch",
+      "mcsgarch_iv",
+      "mcsgarch_alt",
+      "hybrid_base",
+      "hybridalt_base"
+    ],
+    "cppall": [
+      "mcsgarch",
+      "mcsgarch_iv",
+      "hybrid_base"
+    ]
+  },
+  "kind_settings": {
+    "repro": {
+      "alt_base": {
+        "mean": "arma11",
+        "dist": "t",
+        "expiry_diurnal": false,
+        "smooth": 1
+      }
+    },
+    "cpp": {
+      "alt_base": {
+        "mean": "arma11",
+        "dist": "t",
+        "expiry_diurnal": false,
+        "smooth": 1
+      }
+    },
+    "cpp_base": {
+      "alt_base": {
+        "mean": "arma11",
+        "dist": "t",
+        "expiry_diurnal": false,
+        "smooth": 1
+      }
+    },
+    "cppall": {
+      "expiry_diurnal": false,
+      "diurnal_smooth": 1,
+      "mcs_mean": "arma11"
+    }
+  },
+  "pipeline_settings": {
+    "source": "nse",
+    "start": "2023-01-01",
+    "min_coverage": 0.95,
+    "rate": 0.065,
+    "oi_unit": "keep_units",
+    "lot_size": null,
+    "tune": false,
+    "tune_every": 3,
+    "n_seeds": 5,
+    "seed": 7,
+    "min_train": 150,
+    "block": 21,
+    "mcs_refit_every": 21,
+    "holdout_start": "2025-07-01"
+  },
+  "seeds": [
+    7,
+    101,
+    102,
+    103,
+    104
+  ],
+  "margin_points": 0.5,
+  "alpha": 0.05,
+  "seeds_used": {
+    "NIFTY_next15": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ],
+    "NIFTY_next30": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ],
+    "NIFTY_last_hour": [
+      7
+    ],
+    "BANKNIFTY_next15": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ],
+    "BANKNIFTY_next30": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ],
+    "FINNIFTY_next15": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ],
+    "FINNIFTY_next30": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ]
+  },
+  "synthetic_settings": null,
+  "bootstrap": {
+    "reps": 10000,
+    "mean_block_days": 10.0,
+    "seed": 118
+  },
+  "input_sha256": {
+    "NIFTY": {
+      "nifty_1min.csv": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "bhavcopy/ (944 files)": "9361104c675e073f5d403e06d8e0b26a9bf123359c02c7521eecdb2acc3f52de",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1891,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    },
+    "BANKNIFTY": {
+      "banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "bhavcopy/ (944 files)": "9361104c675e073f5d403e06d8e0b26a9bf123359c02c7521eecdb2acc3f52de",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1891,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    },
+    "FINNIFTY": {
+      "finnifty_1min.csv": "1ab7112881f3b761051a2024f35e830719b6ba26931208fa2995bab50a12c1b9",
+      "finnifty/index_daily_finnifty.csv": "db240ce7784725b7fb0434dde38df5b9c2bbcd3f8cdfc76d078a31a1d08ea047",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "finnifty/bhavcopy/ (764 files)": "47e333ae9e8b437cc17d255b661085815426f15ec20a474a8a7d487201546be5",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1711,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    }
+  },
+  "stage1": {
+    "BANKNIFTY": {
+      "jobs": 10,
+      "seconds_jobs_total": 1506.8,
+      "first_job_started_utc": "2026-11-03T12:50:33Z",
+      "last_job_ended_utc": "2026-11-03T13:03:14Z",
+      "by_kind_seconds": {
+        "cpp": 1075.2,
+        "cpp_base": 431.6
+      }
+    },
+    "FINNIFTY": {
+      "jobs": 10,
+      "seconds_jobs_total": 1247.5,
+      "first_job_started_utc": "2026-11-03T13:05:32Z",
+      "last_job_ended_utc": "2026-11-03T13:15:57Z",
+      "by_kind_seconds": {
+        "cpp": 889.6,
+        "cpp_base": 357.9
+      }
+    },
+    "NIFTY": {
+      "jobs": 17,
+      "seconds_jobs_total": 3577.2,
+      "first_job_started_utc": "2026-11-03T12:00:32Z",
+      "last_job_ended_utc": "2026-11-03T12:48:06Z",
+      "by_kind_seconds": {
+        "cpp": 1976.4,
+        "cpp_base": 502.7,
+        "cppall": 578.9,
+        "repro": 519.2
+      }
+    }
+  },
+  "seconds_stage2": 16.7,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "lightgbm": "4.7.0",
+    "scipy": "1.18.1"
+  }
+}
