@@ -189,6 +189,8 @@ STUDIES = {
                    "docs/P110_GAIN_STRESS_TEST.md; docs/prereg/P110_GAIN_STRESS_TEST.md"),
     "PERSPLAC": ("Is the paper's fall in intraday persistence larger than in placebo windows (P117)",
                  "docs/P117_PERSISTENCE_PLACEBO.md; docs/prereg/P117_PERSISTENCE_PLACEBO.md"),
+    "HYBCPP": ("The same hybrid built on mcsGARCH as the paper specifies it (P118)",
+               "docs/P118_HYBRID_ON_PAPER_MCSGARCH.md; docs/prereg/P118_HYBRID_ON_PAPER_MCSGARCH.md"),
 }
 
 PREREG = {
@@ -208,6 +210,7 @@ PREREG = {
     "p116_benchmark_as_printed": ("docs/prereg/P116_BENCHMARK_AS_PRINTED.md", "P116 registered plan"),
     "p110_gain_stress_test": ("docs/prereg/P110_GAIN_STRESS_TEST.md", "P110 registered plan"),
     "p117_persistence_placebo": ("docs/prereg/P117_PERSISTENCE_PLACEBO.md", "P117 registered plan"),
+    "p118_hybrid_on_paper_mcsgarch": ("docs/prereg/P118_HYBRID_ON_PAPER_MCSGARCH.md", "P118 registered plan"),
 }
 
 COLUMNS = [
@@ -2819,6 +2822,61 @@ def adapt_p117persplac(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+P118_OUTCOME = ["tests.csv", "tests_detail.csv", "verdict.csv", "losses.csv", "absorption.csv", "seed_repeats.csv",
+                "equivalence_bounds.csv", "gain_by_anchor.csv", "daily_losses_*.csv"]
+
+
+def adapt_p118hybcpp(ctx: Ctx):
+    """P118: the identical hybrid recipe built on mcsGARCH as the paper specifies it
+    (docs/prereg/P118_HYBRID_ON_PAPER_MCSGARCH.md).
+
+    tests.csv: P (primary: H1 hybrid_cpp beats mcs_cpp, one-sided DM; H2 hybrid_cpp and the committed hybrid are
+      equivalent within 0.5 point, two one-sided tests; 15 and 30 minutes, Holm over four), S0 to S5 (secondary:
+      the two-sided difference behind the decision rule, last hour, expiry days, P109's combination, Bank Nifty,
+      Fin Nifty), R (robustness: seed set 7 alone, delta-method TOST), PL (placebo: seed sets of one model against
+      each other) and E (exploratory). Diebold-Mariano and equivalence tests on daily mean QLIKE. Every row is
+      counted; equivalence rows are reported as they are (not directional).
+    """
+    folder = "p118_hybrid_on_paper_mcsgarch"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "HYBCPP", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "HYBCPP", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P118_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness", "placebo")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd and "two one-sided" not in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("HYBCPP", f"P118 {tid}: {clean(r['hypothesis'])}", "QLIKE loss of forecasts of realized variance: "
+                "the hybrid built on mcsGARCH as the paper specifies it, against that mcsGARCH or the committed hybrid",
+                clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="test statistic (DM t or equivalence t, see p_method)", statistic=r["statistic"],
+                p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "HYBCPP", folder, {
+        r"tests_detail\.csv|verdict\.csv|losses\.csv|absorption\.csv|seed_repeats\.csv|equivalence_bounds\.csv|"
+        r"gain_by_anchor\.csv|params_by_job\.csv|reproduction_check\.csv|timing\.csv":
+            "losses, absorbed shares, seed repeats, parameters and checks behind tests.csv; no new p-value",
+        r"daily_losses_.*\.csv": "daily losses behind the tests; no p-value",
+    }, "run information, counts or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -4173,13 +4231,13 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
                "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX", "CONNSET", "PERSFIX", "BENCHCPP", "GAINSTRESS",
-               "PERSPLAC"]
+               "PERSPLAC", "HYBCPP"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
                  adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx,
                  adapt_p113connset, adapt_p114persfix, adapt_p116benchcpp,
-                 adapt_p110gainstress, adapt_p117persplac]
+                 adapt_p110gainstress, adapt_p117persplac, adapt_p118hybcpp]
 
 
 def headline18_check(ctx: Ctx):
@@ -4482,6 +4540,13 @@ RECON = [
      [("P, primary: Nifty, primary placebo set, reference and F", "PERSPLAC", r"^tests\.csv\|P_")],
      "Verdict 'the fall is within the normal range' under both models (placebo p 0.191 and 0.105, Holm 0.211); "
      "Fin Nifty, whose expiry did not move, fell as much."),
+    ("P118", "The hybrid recipe built on mcsGARCH as the paper specifies it beats that mcsGARCH (H1), and it is "
+             "equivalent to the committed hybrid within 0.5 point (H2), at 15 and 30 minutes on Nifty (primary, "
+             "Holm over four).",
+     [("P, primary: hybrid_cpp against mcs_cpp, and TOST against the committed hybrid, 15 and 30 minutes", "HYBCPP",
+       r"^tests\.csv\|P_")],
+     "H1 holds (5.06% and 7.09%); H2 is not shown and no difference is shown either, so the registered verdict on "
+     "whether the base matters is 'inconclusive' at both horizons."),
 ]
 
 

@@ -14,7 +14,7 @@ Steps, in order:
    if anything is missing or different, unless --no-check is given.
 3. Run each study in turn, with fixed arguments, and log its run time and
    exit status to results/reproduce_log.csv. Each registered study (P87 to
-   P117) runs with the commands given in its document; the test ledger and the
+   P118) runs with the commands given in its document; the test ledger and the
    number trace run last, because they read every study's results.
 
 Every step runs from the repository root with OMP_NUM_THREADS=1, PYTHONHASHSEED=0
@@ -220,8 +220,16 @@ OPTIONAL = {  # studies added later; run if the script exists
                      "results/p117_persistence_placebo/", "results/p117_persistence_placebo/analyze_stdout.txt"),
     "p117_posthoc_flat_days": ([PY, "experiments/p117_posthoc_flat_days.py"],
                                "results/p117_persistence_placebo/posthoc_flat_days.csv", "results/p117_persistence_placebo/posthoc_flat_days_stdout.txt"),
-    # P118 goes here, before the ledger, once its run has finished and its document gives the commands (it was
-    # still running on 3 November 2026).
+    # P118 hybrid on mcsGARCH as the paper specifies it (docs/P118_HYBRID_ON_PAPER_MCSGARCH.md, Section 16): about
+    # 1 hour on 2 cores. Needs P116's block files in data/processed/p116_ref/ (written by the p116 steps above).
+    "p118_repro_nifty": ([PY, "experiments/p118_hybrid_on_paper_mcsgarch.py", "run", "--index", "NIFTY", "--phase", "repro", "--workers", "2"], "results/p118_hybrid_on_paper_mcsgarch/"),
+    "p118_run_nifty": ([PY, "experiments/p118_hybrid_on_paper_mcsgarch.py", "run", "--index", "NIFTY", "--workers", "2"], "results/p118_hybrid_on_paper_mcsgarch/", "results/p118_hybrid_on_paper_mcsgarch/run_stdout_nifty.txt"),
+    "p118_run_banknifty": ([PY, "experiments/p118_hybrid_on_paper_mcsgarch.py", "run", "--index", "BANKNIFTY", "--workers", "2"], "results/p118_hybrid_on_paper_mcsgarch/",
+                           "results/p118_hybrid_on_paper_mcsgarch/run_stdout_banknifty.txt"),
+    "p118_run_finnifty": ([PY, "experiments/p118_hybrid_on_paper_mcsgarch.py", "run", "--index", "FINNIFTY", "--workers", "2"], "results/p118_hybrid_on_paper_mcsgarch/",
+                          "results/p118_hybrid_on_paper_mcsgarch/run_stdout_finnifty.txt"),
+    "p118_analyze": ([PY, "experiments/p118_hybrid_on_paper_mcsgarch.py", "analyze", "--plan-commit", "49d19ce2779451e13cbf868d325a651c4da6a1f4"], "results/p118_hybrid_on_paper_mcsgarch/",
+                     "results/p118_hybrid_on_paper_mcsgarch/analyze_stdout.txt"),
     "test_ledger": ([PY, "scripts/build_test_ledger.py"], "results/test_ledger.csv"),
     "number_trace": ([PY, "scripts/trace_numbers.py", "--quiet"], "results/number_trace/"),
 }
@@ -248,11 +256,12 @@ REGISTERED_RESULTS = {
     "P114_PERSISTENCE_FIXED_MODEL": "p114_persistence_fixed_model",
     "P116_BENCHMARK_AS_PRINTED": "p116_benchmark_as_printed",
     "P117_PERSISTENCE_PLACEBO": "p117_persistence_placebo",
+    "P118_HYBRID_ON_PAPER_MCSGARCH": "p118_hybrid_on_paper_mcsgarch",
 }
 # Forward tests use data after 2 November 2026 and run with scripts/forward_test.py, not here.
 FORWARD_TESTS = ("FORWARD_TEST", "P112_FORWARD_MCSGARCH_FIXES")
-# Registered studies still running: their steps are added (above test_ledger) when they finish.
-PENDING = ("P118",)
+# Registered studies still running: their steps are added (above test_ledger) when they finish. None now.
+PENDING: tuple[str, ...] = ()
 
 
 def study_steps() -> list[tuple[str, list[str], str, str | None]]:

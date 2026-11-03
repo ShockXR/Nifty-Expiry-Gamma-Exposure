@@ -678,11 +678,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Only three or four separate periods stand behind the placebo range, so the test has little power either way; one event; the reference model's half-life hits its bound in many windows.
 * **NEXT ITERATION:** None planned before the meeting.
 
-## Iterations in progress (3 November 2026, about 18:45 IST)
+## Iteration 57: the same hybrid built on mcsGARCH as the paper specifies it (registered plan, P118)
+
+* **OBJECTIVE:** Give the professor a like-for-like figure (the paper's model plus the learnt correction against the paper's model alone) and find out whether the choice of base model matters once the correction is on top.
+* **PROBLEM IDENTIFIED:** P116 showed that the hybrid was built on our implementation of mcsGARCH, which is slightly worse than the paper's specification on Nifty. So the headline compared a hybrid built on one model with a benchmark that is another.
+* **HYPOTHESIS:** Registered before any forecast of the new hybrid was made on real data (`docs/prereg/P118_HYBRID_ON_PAPER_MCSGARCH.md`, commit 49d19ce): H1, the identical recipe built on `mcs_cpp` (`hybrid_cpp`) beats `mcs_cpp`; H2, `hybrid_cpp` and the committed hybrid are equivalent within 0.5 point of `mcs_cpp`'s QLIKE (two one-sided tests); 15 and 30 minutes, Holm over four, five seed sets averaged; a decision rule (the correction absorbs the base, the base matters either way, inconclusive) fixed in advance.
+* **CHANGES IMPLEMENTED:** `experiments/p118_hybrid_on_paper_mcsgarch.py`, optional `alt_base` and `mcs_mean` settings in the walk-forward configuration (defaults run the committed code, checked identical on every Nifty row), 13 synthetic tests. Run by an AI agent; results b0abf21. Ledger adapter HYBCPP; `scripts/reproduce_all.py` gained its five steps, so every registered study now has a step.
+* **EXPERIMENTS PERFORMED:** The hybrid refitted with 21-day walk-forward refits on Nifty (792 test days), Bank Nifty and Fin Nifty with five seed sets; 75 tests; 269 reproduction checks, all identical. About 1 hour on 2 cores.
+* **RESULTS:** (REAL DATA.) H1 holds: `hybrid_cpp` is 5.06% and 7.09% better than `mcs_cpp` (Holm below 0.001; 5.82% in the last hour). Registered verdict on the base "inconclusive": `hybrid_cpp` is 0.65 points better than the committed hybrid at 15 minutes (interval 0.05 to 1.24) and 0.25 at 30 (-0.30 to 0.81); neither equivalence (Holm 0.679 and 0.355) nor a difference (Holm 0.079 and 0.344) is shown. The correction absorbs 56% and 77% of the gap between the two bases; what remains is on the 169 expiry days (2.05 points at 15 minutes, Holm 0.028), where our separate expiry-day curve adds noise. `hybrid_cpp` does not beat P109's combination. On Bank Nifty it beats `mcs_cpp` by 5.01% and 6.16% and is equivalent to the committed hybrid at 15 minutes; on Fin Nifty by 4.47% and 5.69%, inconclusive.
+* **IMPROVEMENTS:** The pitch, briefing, README and results summary now give 5.1% and 7.1% as the like-for-like gain, alongside the committed hybrid's 4.4% and 6.6% over the paper's specification. Ledger: 28,515 tests, 37 studies, 3,544 survive (cut-off about 5.7e-4); trace 629 entries, 616 MATCH, no mismatch.
+* **REMAINING ISSUES:** The committed hybrid stays the project's model: switching to `hybrid_cpp` after seeing these results would be a choice made on the same 792 days. The equivalence margin of 0.5 point is a choice, and the seed-against-seed placebo shows the equivalence test has limited power.
+* **NEXT ITERATION:** None planned before the meeting.
+
+## Iterations in progress (3 November 2026, about 19:15 IST)
 
 * **Scoring the frozen forecast** for 3 November after the minute bars are published.
 * **A meeting deck** for Prof. Pandey (private artifact, 14 slides), refreshed last from the final numbers.
-* **P118**, the identical hybrid built on mcsGARCH as the paper specifies it (plan 49d19ce, running).
+* **A timed rerun of every reproduce step** at commit 0de679b (before P117 and P118 were added), in a separate copy of the repository (started 12:26 UTC).
 * **A timed rerun of every reproduce step** at commit 0de679b, in a separate copy of the repository (started 12:26 UTC).
 
 Each will be written up in the same format when it finishes. The clean-clone audit of a3a84c7 (512 tests: 508 passed, 4 skipped) is in `docs/REPRODUCIBILITY.md`; the methods references (22 with DOIs) are in `docs/LITERATURE_REVIEW.md`, section 8.
