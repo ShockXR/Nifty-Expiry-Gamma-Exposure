@@ -203,6 +203,29 @@ and taxes, fees and a modest allowance for slippage take all of that and a littl
 (90 trades), so "not meaningful" means "not shown to be meaningful"; the break-even cost and the stress grid
 measure the size directly, and they say the same thing.
 
+### Could the verdict have come out the other way? (POST HOC, added 3 November 2026)
+
+A referee asked how likely the DSR verdict was if the effect found in sample were real. With N = 824 trials,
+the DSR asks for more than a large Sharpe ratio: it asks for one clearly above the 5.38 (annualised) that the
+luckiest of 824 worthless trials would show. To pass (DSR above 0.95) over these 389 days, the estimated
+annualised Sharpe ratio would have had to exceed about 7.08 (`results/f2_economics/dsr_power_posthoc.csv`,
+code `experiments/f2_dsr_power.py`, the same normal approximation the DSR uses, with this period's skewness
+and kurtosis). Under that approximation:
+
+| If the true annualised Sharpe ratio were | Chance of DSR above 0.95 | Mean edge per trade it implies |
+| --- | --- | --- |
+| -0.32 (this period, net of registered costs) | 6e-20 | -0.90 bp |
+| 1.49 (this period, before any costs) | 4e-13 | 4.15 bp |
+| 2.98 (twice that) | 2e-7 | 8.3 bp |
+| 7.08 (needed for a 50% chance) | 50% | 19.7 bp |
+| 8.02 (needed for an 80% chance) | 80% | 22.4 bp |
+
+So the registered verdict was close to certain before the run: even with no trading costs at all, an edge the
+size of the one observed could not have passed, and passing needed a gross edge of about 20 bp per trade,
+about five times the observed 4.15 bp. "Not economically meaningful" is therefore not informative on its own.
+The informative results are the cost grid above (the edge disappears at about 0.55 bp of slippage per side)
+and the bootstrap interval of the Sharpe ratio. The chosen N of 824 is part of the plan and is not changed here.
+
 ## Deviations from the pre-registration
 
 **None in the rules, samples, costs, metrics, trial count, seeds or decision rule.** Points where the
@@ -248,3 +271,4 @@ arithmetic remark on V = 1/T under Table 4.
   `fig_cost_grid.png`, `run_info.json` (pre-registration commit, seeds, trial count, V, first 16 hex digits of
   the SHA-256 of each input file, package versions).
 * `results/f2_economics_stdout.txt`: the printed log.
+* `experiments/f2_dsr_power.py`, `tests/test_f2_dsr_power.py` (4 tests, synthetic numbers), `results/f2_economics/dsr_power_posthoc.csv` and `dsr_power_posthoc_stdout.txt`: the post hoc probability of the DSR verdict (added 3 November 2026; reads only the committed results).

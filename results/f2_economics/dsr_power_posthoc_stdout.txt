@@ -1,0 +1,9 @@
+POST HOC, REAL DATA inputs (results/f2_economics/dsr.csv, daily_pnl.csv)
+                                                     scenario  sr_true_annual  prob_dsr_above_0_95  edge_bp_per_trade_implied
+test period, net of registered costs (1 bp slippage per side)       -0.323687         5.723370e-20                  -0.902088
+                         test period, gross (no costs at all)        1.487684         4.440953e-13                   4.146048
+                     twice the test-period gross Sharpe ratio        2.975367         1.504460e-07                   8.292096
+                five times the test-period gross Sharpe ratio        7.438418         6.308299e-01                  20.730240
+         true Sharpe ratio needed for a 50% chance of passing        7.083032         5.000000e-01                  19.739811
+         true Sharpe ratio needed for a 80% chance of passing        8.020069         8.000000e-01                  22.351253
+cutoff: annualised Sharpe 7.08 (SR_0 5.38), T = 389
