@@ -416,7 +416,7 @@ For each finding, and for the primary test of each registered analysis plan adde
 
 No p-values: this is data validation (results/data_validation), not a hypothesis test. Nothing to correct.
 
-**Finding 2.** The paper's model can be beaten out of sample at 15 and 30 minutes, even when it is given the same information; most of the gain comes at the open: the hybrid (mcsGARCH corrected by LightGBM) is 5.8%, 7.6% and 6.4% better at 15 minutes, 30 minutes and the last hour on all days and 6.6%, 6.2% and 7.9% better on expiry days (QLIKE; one-sided DM p at most 0.010 in all six cells). Post hoc, the 15- and 30-minute gains survive Hansen's SPA and hold against an mcsGARCH given VIX or the implied variance (4.8%, p 0.005; 5.9%, p below 0.001). It replicates on Bank Nifty (P91, registered plan): 3.9% and 5.0% at 15 and 30 minutes (Holm p 5e-12 and 2e-11), 8.1% in the last hour.
+**Finding 2.** The paper's model can be beaten out of sample at 15 and 30 minutes, even against an mcsGARCH that is also given India VIX or the option-implied variance; most of the gain comes at the open: the hybrid (mcsGARCH corrected by LightGBM) is 5.8%, 7.6% and 6.4% better at 15 minutes, 30 minutes and the last hour on all days and 6.6%, 6.2% and 7.9% better on expiry days (QLIKE; one-sided DM p at most 0.010 in all six cells). Post hoc, the 15- and 30-minute gains survive Hansen's SPA and hold against an mcsGARCH given VIX or the implied variance (4.8%, p 0.005; 5.9%, p below 0.001). It replicates on Bank Nifty (P91, registered plan): 3.9% and 5.0% at 15 and 30 minutes (Holm p 5e-12 and 2e-11), 8.1% in the last hour.
 
 | test_id | role | hypothesis | rule | sample | raw p | Holm study | BY project |
 | --- | --- | --- | --- | --- | --- | --- | --- |

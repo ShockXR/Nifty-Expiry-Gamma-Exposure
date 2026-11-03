@@ -4378,7 +4378,7 @@ def _sel(df, study, pattern):
 RECON = [
     (1, "The data hold up.", [],
      "No p-values: this is data validation (results/data_validation), not a hypothesis test. Nothing to correct."),
-    (2, "The paper's model can be beaten out of sample at 15 and 30 minutes, even when it is given the same information; "
+    (2, "The paper's model can be beaten out of sample at 15 and 30 minutes, even against an mcsGARCH that is also given India VIX or the option-implied variance; "
         "most of the gain comes at the open: the hybrid (mcsGARCH corrected by LightGBM) "
         "is 5.8%, 7.6% and 6.4% better at 15 minutes, 30 minutes and the last hour on all days and 6.6%, 6.2% and 7.9% "
         "better on expiry days (QLIKE; one-sided DM p at most 0.010 in all six cells). Post hoc, the 15- and 30-minute gains "

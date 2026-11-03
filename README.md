@@ -27,7 +27,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Part | Module | Validated by |
 | --- | --- | --- |
 | Black-76 prices, greeks (delta, gamma, vega, vanna, charm) and IV solver | `niftygex.greeks` | parity, finite differences, IV round trip on 5,000 options including expiry-day ones |
-| GEX per strike and net, under five sign rules; gamma flip; OI walls; max pain | `niftygex.gex` | hand formula, finite-difference definition of GEX, bounds |
+| GEX per strike and net; five sign rules are coded (US convention, NSE Pro participants, mirror of NSE Clients, and the long-all and short-all bounds) and the studies report the first three; gamma flip; OI walls; max pain | `niftygex.gex` | hand formula, finite-difference definition of GEX, bounds |
 | Rogers-Satchell, realized variance, bipower variation, bulk volume classification | `niftygex.realized` | Brownian simulation |
 | mcsGARCH (the paper's model) with an optional expiry-day diurnal curve | `niftygex.volatility` | parameter recovery on simulated data, causality of forecasts |
 | Diebold-Yilmaz connectedness, block-bootstrap intervals | `niftygex.connectedness` | closed form, independent series, VAR recovery |
@@ -37,7 +37,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
 | Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-684 tests at the time of writing, run with `pytest` (also on every pull request through GitHub Actions); 7 of them check real Bank Nifty and Fin Nifty data and are skipped when `data/raw` is absent.
+715 tests at the time of writing, run with `pytest` (also on every pull request through GitHub Actions): 708 pass and 7 are skipped when `data/raw` is absent, because they check real Bank Nifty and Fin Nifty data (counts from `pytest --collect-only` and a full run at commit adbc553, 3 November 2026).
 
 ## Documents
 

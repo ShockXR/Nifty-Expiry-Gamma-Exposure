@@ -232,6 +232,7 @@ def main():
         ap.error("--symbol applies to --source nse only")
     # Figure titles and the default output folder name the index, except for Nifty (unchanged).
     mk = "" if a.symbol == "NIFTY" else f"{a.symbol}: "
+    data_label = "SYNTHETIC (simulated market, not real data)" if a.source == "synthetic" else "REAL DATA (NSE)"
 
     out = Path(a.out or (f"results/pipeline_{a.source}" if a.symbol == "NIFTY"
                          else f"results/pipeline_{a.source}_{a.symbol.lower()}"))
@@ -251,14 +252,15 @@ def main():
     implied.to_csv(out / "daily_implied_panel.csv")
     print(f"panels built ({time.time() - t0:.0f}s)", flush=True)
     plots.gex_timeseries(panel, out / "figures" / "gex_by_sign_rule.png",
-                         f"{mk}Net GEX / 20-day median gross GEX, by sign rule ({'synthetic' if a.source == 'synthetic' else 'NSE'})")
+                         f"{mk}Net GEX / {plots.GEX_SCALE_WINDOW}-day median gross GEX, by sign rule "
+                         f"({'synthetic' if a.source == 'synthetic' else 'NSE'})", data_label=data_label)
 
     # Full-sample mcsGARCH for the diurnal figure and a parameter table like the paper's Table 2
     is_exp = m["labels"]["is_expiry"].to_numpy()
     h, _ = daily_egarch_variance(m["R"].sum(axis=1))
     full = McsGarch(expiry_diurnal=True, smooth=5).fit(m["R"], h, is_exp, compute_tstats=True)
     plots.diurnal_curves(full.s, full.s_expiry, out / "figures" / "diurnal_curves.png",
-                         f"{mk}mcsGARCH diurnal variance curve (in-sample)")
+                         f"{mk}mcsGARCH diurnal variance curve (in-sample)", data_label=data_label)
     pd.DataFrame([{k: v for k, v in full.params.items() if k != "tstats"} |
                   {f"z_{k}": v for k, v in full.params["tstats"].items()}]).to_csv(out / "mcsgarch_full_sample.csv", index=False)
 
@@ -283,7 +285,7 @@ def main():
         sb.to_csv(out / f"scoreboard_{name}.csv", index=False)
         for g in ("all", "expiry"):
             plots.scoreboard_bars(sb, g, out / "figures" / f"scoreboard_{name}_{g}.png",
-                                  f"{mk}{name}, {g} days: out-of-sample QLIKE vs mcsGARCH")
+                                  f"{mk}{name}, {g} days: out-of-sample QLIKE vs mcsGARCH", data_label=data_label)
         tests = []
         for subset, mask in groups.items():
             sub = pred[mask]
@@ -320,7 +322,7 @@ def main():
         for kind in ("hybrid", "hybridiv", "linear"):
             plots.ablation_dots(abl, f"{kind}: base vs base+GEX", out / "figures" / f"ablation_{name}_{kind}.png",
                                 f"{mk}{name}: {kind} model, adding each GEX set (REAL DATA)" if a.source == "nse"
-                                else f"{name}: {kind} model, adding each GEX set (synthetic)")
+                                else f"{name}: {kind} model, adding each GEX set (synthetic)", data_label=data_label)
         if info["importance"]:
             imp = pd.concat(info["importance"], axis=1)
             fi = {}

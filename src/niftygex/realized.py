@@ -4,7 +4,11 @@ All inputs are per-minute arrays for one or more days. Returns are log returns.
 
 * Rogers-Satchell (1991) per-bar variance, which the 2025 paper uses for its
   volatility tests. It is unbiased for a driftless or drifting Brownian motion
-  within the bar and uses open, high, low and close.
+  within the bar that is observed continuously, and uses open, high, low and
+  close. With discretely sampled prices the observed high and low are inside
+  the true ones, so the estimate is biased DOWN: measured on simulated paths
+  (OUR CHECK, coordinator's measurement), the mean estimate is 0.79, 0.93 and
+  0.99 of the true variance at 60, 600 and 6,000 sub-steps per bar.
 * Realized variance at a chosen sampling interval (sum of squared returns).
 * Bipower variation (Barndorff-Nielsen and Shephard 2004), which is robust to
   jumps; RV minus BV estimates the jump part.
@@ -21,7 +25,11 @@ MU1 = np.sqrt(2.0 / np.pi)  # E|Z| for standard normal Z
 
 
 def rogers_satchell(o, h, l, c):
-    """Per-bar Rogers-Satchell variance: ln(H/C) ln(H/O) + ln(L/C) ln(L/O)."""
+    """Per-bar Rogers-Satchell variance: ln(H/C) ln(H/O) + ln(L/C) ln(L/O).
+
+    Unbiased only for continuously observed prices; biased down for discretely sampled high and low (see the
+    module docstring for the measured size).
+    """
     o, h, l, c = (np.asarray(a, float) for a in (o, h, l, c))
     return np.log(h / c) * np.log(h / o) + np.log(l / c) * np.log(l / o)
 

@@ -46,6 +46,8 @@ def diebold_mariano(l1, l2, lag: int | None = None, alternative: str = "two-side
     d = np.asarray(l1, float) - np.asarray(l2, float)
     d = d[np.isfinite(d)]
     n = d.size
+    if n == 0:  # nothing to test (audit A1-A-007: this used to raise ZeroDivisionError)
+        return {"mean_diff": float("nan"), "stat": float("nan"), "p": float("nan"), "n": 0}
     if lag is None:
         lag = int(np.floor(4 * (n / 100) ** (2 / 9)))
     dc = d - d.mean()
