@@ -474,10 +474,23 @@ Short glossary: **GEX** is dealer gamma exposure (how much hedging trading deale
 * **REMAINING ISSUES:** Bank Nifty is not independent of Nifty; the 09:15 GEX gain needs its own pre-registered test on new data.
 * **NEXT ITERATION:** Rebuild the test ledger with every study.
 
-## Iterations in progress (3 November 2026, about 08:30 IST)
+## Iteration 40: second revision round, number tracing and one command for everything
+
+* **OBJECTIVE:** Bring every summary document in line with the three referee responses and P91, and make the "one command reruns every study" claim true.
+* **PROBLEM IDENTIFIED:** The pitch (about 2,150 words) and briefing (about 1,800) had grown with each referee round; the working paper still said the Giacomini and White test "was not used" and "GEX adds nothing" without the Bank Nifty exception; `reproduce_all.py` did not run P96, P91, the referee analyses, the ledger or the number trace; P96's 1,456 raw files were not in the hash manifest; the demo notebook asked for a model (`lgbm_gex`) that the v2 contest no longer has, so the reproduction's notebook step failed; and nobody had asked whether P90's registered DSR verdict could have come out the other way.
+* **HYPOTHESIS:** None (housekeeping plus one post hoc calculation).
+* **CHANGES IMPLEMENTED:** Pitch shortened to about 1,750 words and briefing to about 1,400, both with every result number in the registry (pitch: nothing uncovered; settings marked UNTRACED). Working paper revision round 2 (private, project files only): P91 paragraph, Giacomini and White results, Figure D1 from the v2 panel, the DSR probability. `reproduce_all.py` now runs every real-data study; `data/MANIFEST.csv` covers 4,446 files. Notebook fixed and re-executed on real data. README test count 259 to 488 (full suite passes; 4 tests need raw Bank Nifty data). New `experiments/f2_dsr_power.py` with 4 tests.
+* **EXPERIMENTS PERFORMED:** Number trace with the private paper (286 entries); post hoc DSR power (normal approximation used by the DSR itself).
+* **RESULTS:** Trace: 275 MATCH, 6 UNTRACED, 5 MISMATCH (RD30 to RD36, the R5 table, waiting for the reproduction). DSR (POST HOC, REAL DATA inputs): passing needed an annualised Sharpe above about 7.08 over 389 days; an edge of the observed size with no costs passes with probability 4e-13, and a 50% chance needs about 20 bp per trade, five times the observed 4.15 bp. The registered verdict was close to certain; the cost grid is the informative result.
+* **IMPROVEMENTS:** Shorter, fully traced summaries; one command for every study; an honest reading of the P90 verdict.
+* **REMAINING ISSUES:** The R5 table cells (RD30 to RD36) wait for the reproduction; the seed bootstrap (P99) is running.
+* **NEXT ITERATION:** Compare the reproduction with the committed outputs.
+
+## Iterations in progress (3 November 2026, about 09:00 IST)
 
 * **Full one-command reproduction** (`scripts/reproduce_all.py`): every study rerun from the raw files on the v2 panels, compared file by file with the committed outputs.
 * **The test ledger** rebuilt to count every study test by test.
+* **P99, a seed bootstrap of the forecasting hybrid** (registered plan): 20 independent LightGBM seed ensembles, closing the referee's estimation-noise item.
 * **Scoring the frozen forecast** for 3 November after the close.
 
 Each will be written up in the same format when it finishes.
