@@ -16,6 +16,8 @@ Result: installation took about 27 seconds and all 34 tests passed in about 9 se
 
 The same tests run automatically on GitHub for Python 3.11, 3.12 and 3.13 on every push (`.github/workflows/tests.yml`).
 
+**Repeated on 3 November 2026** with a fresh clone of the pushed branch at commit a3a84c7: `pip install ".[download]" pytest` took 40 seconds and resolved numpy 2.5.4, pandas 3.1.0, scipy 1.18.1 and LightGBM 4.7.0 (the versions in `requirements-tested.txt`); the suite then gave 508 passed and 4 skipped in 82 seconds (the 4 skipped tests need the raw Bank Nifty data, which a fresh clone does not have). Neither the tree nor the git history contains a PDF, the private working paper or any credential. pandas 3.1 warns that `DatetimeIndex.weekday`, which the code uses in many places, will be removed in pandas 4, so `pyproject.toml` now asks for pandas below 4.
+
 ## Rebuilding the real-data results
 
 Raw data are not in the repository. `docs/DATA_ACQUISITION.md` lists the four commands that download them from free sources and rerun the pipeline (about 25 minutes of downloading plus the model runs). Every script that produces a result writes its configuration next to the output (for example `results/pipeline_nse/run_info.json`), and random seeds are fixed.
