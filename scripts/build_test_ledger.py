@@ -177,6 +177,8 @@ STUDIES = {
     "POOL3": ("Pooled three-index test of the forecasting hybrid (P107)", "docs/P107_POOLED_THREE_INDEX.md; docs/prereg/P107_POOLED_THREE_INDEX.md"),
     "GAIN6": ("Where the forecasting hybrid's gain comes from: feature-group ablation and the November 2024 periods (P106)",
               "docs/P106_GAIN_DECOMPOSITION.md; docs/prereg/P106_GAIN_DECOMPOSITION.md"),
+    "MCSX": ("Five parametric fixes to mcsGARCH against the forecasting hybrid (P109)",
+             "docs/P109_MCSGARCH_EXTENSIONS.md; docs/prereg/P109_MCSGARCH_EXTENSIONS.md"),
 }
 
 PREREG = {
@@ -190,6 +192,7 @@ PREREG = {
     "pipeline_nse_finnifty": ("docs/prereg/P104_THIRD_INDEX_FORECAST.md", "P104 registered plan"),
     "p107_pooled_test": ("docs/prereg/P107_POOLED_THREE_INDEX.md", "P107 registered plan"),
     "p106_gain_decomposition": ("docs/prereg/P106_GAIN_DECOMPOSITION.md", "P106 registered plan"),
+    "p109_mcsgarch_extensions": ("docs/prereg/P109_MCSGARCH_EXTENSIONS.md", "P109 registered plan"),
 }
 
 COLUMNS = [
@@ -2482,6 +2485,57 @@ def adapt_p106gain(ctx: Ctx):
     }, "run information, counts or log; no p-value")
 
 
+P109_OUTCOME = ["tests.csv", "tests_detail.csv", "gains.csv", "shares.csv", "verdict.csv", "gain_by_anchor.csv",
+                "params_by_refit.csv", "params_summary.csv", "calibration_factors.csv", "daily_losses_*.csv"]
+
+
+def adapt_p109mcsx(ctx: Ctx):
+    """P109: five pre-specified parametric extensions of mcsGARCH (docs/prereg/P109_MCSGARCH_EXTENSIONS.md).
+
+    tests.csv: one row per test, all Diebold-Mariano on daily mean QLIKE with the study's role and one-sided
+      direction. Every row is counted: P1 (primary, the combination against mcsGARCH), S1 to S6 (secondary),
+      R1 to R3 (robustness: other samples or the seed-averaged hybrid, so other estimates) and E1 to E6
+      (exploratory, including the leave-one-out of the combination).
+    """
+    folder = "p109_mcsgarch_extensions"
+    rel = f"{folder}/tests.csv"
+    if not ctx.has(rel):
+        if ctx.res(folder).exists():
+            adapt_generic(ctx, "MCSX", folder)
+        return
+    d = ctx.read(rel)
+    need = {"test_id", "hypothesis", "role", "sample", "estimate", "statistic", "p_raw", "sidedness", "p_method",
+            "p_adjusted", "adjust_method"}
+    if not need.issubset(d.columns):
+        adapt_generic(ctx, "MCSX", folder)
+        return
+    ps, psn = prereg_status(ctx, folder, P109_OUTCOME)
+    for _, r in d.iterrows():
+        tid = clean(r["test_id"])
+        role = clean(r["role"]) or "exploratory"
+        is_pre = role in ("primary", "secondary", "robustness")
+        sd = clean(r["sidedness"]).lower()
+        if "one-sided" in sd:
+            side = SIDE_ONE_PRE if (ps == PS_YES and is_pre) else SIDE_ONE_STATED
+        else:
+            side = SIDE_NONDIR
+        padj = num(r["p_adjusted"]) if role in ("primary", "secondary") else float("nan")
+        ctx.add("MCSX", f"P109 {tid}: {clean(r['hypothesis'])}", "QLIKE loss of forecasts of realized variance: "
+                "extended mcsGARCH, mcsGARCH or the hybrid", clean(r["sample"]), r["p_raw"],
+                role=role, pre_specified=ps if is_pre else PS_NO,
+                pre_spec_note=psn if is_pre else "exploratory in the plan or post hoc",
+                source_file=rel, source_key=key("tests.csv", tid), sidedness=side, estimate=r["estimate"],
+                statistic_name="Diebold-Mariano t (HLN)", statistic=r["statistic"],
+                p_method=clean(r["p_method"]),
+                p_study_adjusted=padj, study_adjust_method=clean(r["adjust_method"]) if np.isfinite(padj) else "")
+    _consume_rest(ctx, "MCSX", folder, {
+        r"tests_detail\.csv|gains\.csv|shares\.csv|verdict\.csv|gain_by_anchor\.csv|params_by_refit\.csv|"
+        r"params_summary\.csv|calibration_factors\.csv|extensions\.csv|reproduction_check\.csv|timing\.csv":
+            "estimates, shares, parameters and checks behind tests.csv; no new p-value",
+        r"daily_losses_.*\.csv": "daily losses behind the tests; no p-value",
+    }, "run information, counts or log; no p-value")
+
+
 def adapt_power_real(ctx: Ctx):
     """results/power_real/: simulations calibrated on real data. Excluded, unless a p-value in it is not
     already in the ledger (then it would be a new test of data and is flagged for review)."""
@@ -3835,11 +3889,11 @@ ADAPTERS = [adapt_r1, adapt_r1b, adapt_auction, adapt_r2, adapt_r3, adapt_r4, ad
 
 STUDY_ORDER = ["R1", "R1V2", "R1V2DEV", "R1b", "AUCTION", "R2", "R3", "R4", "R5", "REPL", "PIN", "EVENT", "FALS",
                "DSIGN", "INTRA", "CONN", "SENSEX", "F2ECON", "PINMECH", "BNFC", "SWAP", "SYNTH", "REFFC", "REFEXP", "REFF2",
-               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6"]
+               "P103ECON", "P99SEED", "FNFC", "POOL3", "GAIN6", "MCSX"]
 
 # Studies read after ADAPTERS and the later folders: the referee adapters compare with rows already counted.
 LATE_ADAPTERS = [adapt_bnfc, adapt_swap, adapt_synth, adapt_ref_forecast, adapt_ref_expiry, adapt_ref_f2, adapt_p103econ,
-                 adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain]
+                 adapt_p99seed, adapt_fnfc, adapt_p107pool, adapt_p106gain, adapt_p109mcsx]
 
 
 def headline18_check(ctx: Ctx):
@@ -4113,6 +4167,10 @@ RECON = [
      [("P1, primary: one group removed, 15 and 30 minutes", "GAIN6", r"^tests\.csv\|P1_"),
       ("P2, primary: change across the November 2024 cut", "GAIN6", r"^tests\.csv\|P2_")],
      "P2 rows are expected not to survive; the implied group at 30 minutes is the closest (Holm 0.051 in the study)."),
+    ("P109", "Five registered parametric fixes to mcsGARCH, combined, beat mcsGARCH at 15 and 30 minutes (primary, "
+             "Holm over two) and recover the hybrid's gain.",
+     [("P1, primary: the combination against mcsGARCH, 15 and 30 minutes", "MCSX", r"^tests\.csv\|P1_")],
+     "The extensions were chosen after P106 on the same days, so this explains the gain rather than confirming it."),
 ]
 
 

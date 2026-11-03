@@ -271,6 +271,9 @@ POOL3,results/p107_pooled_test/,"posthoc_extreme_days.csv, posthoc_influence.csv
 GAIN6,results/p106_gain_decomposition/,"analyze_stdout.txt, run_info.json, run_stdout_banknifty.txt, run_stdout_finnifty.txt, run_stdout_nifty.txt",5,"run information, counts or log; no p-value"
 GAIN6,results/p106_gain_decomposition/,"contributions.csv, other_index_ranking.csv, periods.csv, regimes.csv, reproduction_check.csv and 5 more",10,"estimates, shares, verdicts and checks behind tests.csv; no new p-value"
 GAIN6,results/p106_gain_decomposition/,"daily_losses_nifty_last_hour_s7.csv, daily_losses_nifty_next15_s101.csv, daily_losses_nifty_next15_s102.csv, daily_losses_nifty_next15_s103.csv, daily_losses_nifty_next15_s104.csv and 6 more",11,daily losses behind the tests; no p-value
+MCSX,results/p109_mcsgarch_extensions/,"analyze_stdout.txt, run_info.json, run_stdout_banknifty.txt, run_stdout_finnifty.txt, run_stdout_nifty.txt",5,"run information, counts or log; no p-value"
+MCSX,results/p109_mcsgarch_extensions/,"calibration_factors.csv, extensions.csv, gain_by_anchor.csv, gains.csv, params_by_refit.csv and 6 more",11,"estimates, shares, parameters and checks behind tests.csv; no new p-value"
+MCSX,results/p109_mcsgarch_extensions/,"daily_losses_banknifty_next15.csv, daily_losses_banknifty_next30.csv, daily_losses_finnifty_next15.csv, daily_losses_finnifty_next30.csv, daily_losses_nifty_last_hour.csv and 2 more",7,daily losses behind the tests; no p-value
 POWER,results/power_real/,power study calibrated on real data,1,simulation; estimates.csv re-reports p-values of tests already in the ledger (p_hac_t is an alternative standard error)
 EXCLUDED,results/pipeline_synthetic,pipeline_synthetic,1,synthetic data (simulation of the pipeline)
 EXCLUDED,results/inference_checks,inference_checks,1,simulation checks of inference methods
