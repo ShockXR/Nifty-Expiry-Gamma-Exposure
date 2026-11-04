@@ -83,7 +83,8 @@ python experiments/paper_checks.py
 python experiments/inference_checks.py
 python experiments/power_study.py --reps 8 --days 500
 
-# Real data (see docs/DATA_ACQUISITION.md)
+# Real data (see docs/DATA_ACQUISITION.md). The download scripts need the "requests" package, which is in the optional "download" group:
+pip install -e ".[download]"
 python scripts/download_nse.py --start 2023-01-01 --end 2026-11-02 --out data/raw
 python scripts/fetch_minute_bars.py
 python scripts/validate_minute_bars.py
