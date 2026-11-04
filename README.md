@@ -9,7 +9,7 @@
 
 Chhimwal, Pandey and Pandey ([2025, *Review of Derivatives Research*](https://doi.org/10.1007/s11147-025-09221-8)) studied how volatility, volume and connectedness changed when Nifty and Bank Nifty expiries were separated. This prototype turns their intraday volatility model, mcsGARCH, into a forecasting benchmark and adds estimates of dealer gamma exposure (GEX) from NSE options data. In the Nifty out-of-sample comparison, adding gamma features gave no reliable improvement under any of the three sign rules tested. Recent realized volatility and time of day explained more of the forecast improvement.
 
-Research prototype by Shreyan Thanki, November 2026, prepared for Prof. Piyush Pandey and built with extensive AI assistance ([how](#how-this-was-built)).
+Research prototype by Shreyan Thanki, Atharva Bhardwaj and Arjun Bino Nair, November 2026, prepared for Prof. Piyush Pandey and built with extensive AI assistance ([how](#how-this-was-built)).
 
 **What a forecast could know.** GEX is built each evening from NSE's end-of-day option chain (the F&O bhavcopy) and used the next day, so it never sees positions change intraday. Open interest gives the size of positions, but the direction of dealers' exposure must be inferred, so each sign rule assumes who the dealers are: the US convention (dealers long calls, short puts), NSE's "Pro" participants, or the mirror image of NSE's clients. Options data come from NSE's archive; the one-minute index bars that define realized volatility come from a public third-party dataset, checked against NSE's daily highs and lows.
 
@@ -52,7 +52,7 @@ flowchart LR
 
 **The paper replicates on public data, with one open question.** The post-change sample matches closely: exactly 21,239 Nifty one-minute returns, and mcsGARCH alpha 0.0498 and beta 0.9407 against the printed 0.0494 and 0.9410 ([docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md)).
 
-A question for Prof. Pandey: **could you confirm the dates used for the pre-change sample?** We could match the post-change tables closely, and the closest match for the earlier tables came from a different window ([docs/P108_BLIND_WINDOW.md](docs/P108_BLIND_WINDOW.md)).
+One question we would value your help with, Prof. Pandey: **could you confirm the dates you used for the pre-change sample?** We matched the post-change tables closely, but our closest match for the earlier tables came from a different window, and we would like to be sure we have read the paper correctly ([docs/P108_BLIND_WINDOW.md](docs/P108_BLIND_WINDOW.md)).
 
 ## See it run
 
@@ -93,7 +93,7 @@ The tests run on every pull request (GitHub Actions, Python 3.11 to 3.13 and pin
 
 ## How this was built
 
-Shreyan Thanki directed the project. The code, analyses and documents were produced with extensive AI assistance (Claude, by Anthropic). Every review in the repository, including the referee-style reports, was done by a separate AI agent, not by a person. "Registered" means the plan was committed to git before that study's results were computed; only the forward tests were committed before their data existed. The paywalled 2025 paper is not in this repository. Code: MIT license; data keep their sources' terms.
+The project is the joint work of Shreyan Thanki, Atharva Bhardwaj and Arjun Bino Nair. The code, analyses and documents were produced with extensive AI assistance (Claude, by Anthropic). Every review in the repository, including the referee-style reports, was done by a separate AI agent, not by a person. "Registered" means the plan was committed to git before that study's results were computed; only the forward tests were committed before their data existed. The paywalled 2025 paper is not in this repository. Code: MIT license; data keep their sources' terms.
 
 ## References
 
