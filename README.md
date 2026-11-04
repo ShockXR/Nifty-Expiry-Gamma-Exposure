@@ -1,136 +1,117 @@
 # Nifty Expiry Gamma Exposure
 
-**Does option positioning help forecast Nifty expiry-day volatility?** This project rebuilds the volatility model from Chhimwal, Pandey and Pandey (2025) as an out-of-sample forecasting baseline, adds dealer gamma exposure (GEX) built from NSE option data, and tests whether positioning carries information the baseline misses, especially in the last hour of expiry day.
+**A research prototype that builds on Chhimwal, Pandey and Pandey (2025, *Review of Derivatives Research*), the study of what happened to Nifty and Bank Nifty after NSE gave them separate expiry days.** It rebuilds the paper's analysis from public NSE files, turns the paper's intraday volatility model (mcsGARCH) into an out-of-sample forecaster, and tests one explanation the paper leaves open: option dealers' hedging, measured as gamma exposure (GEX: how much of the index dealers must buy or sell to stay hedged when it moves).
 
-> **Status (3 November 2026): running on REAL NSE data.** 942 trading days (January 2023 to 2 November 2026) of NSE F&O bhavcopies, participant-wise open interest and official index values including India VIX, from NSE's archive server, plus free third-party 1-minute Nifty, Bank Nifty and Fin Nifty bars that we checked day by day against NSE's official values. Simulation results (used to validate every engine first) are kept separate and labelled. Start with [docs/REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md).
+Research prototype by Shreyan Thanki, November 2026. Every result below comes from **real NSE data** (942 trading days from January 2023 to 2 November 2026, 200 Nifty expiries) unless it is marked [SYNTHETIC]. The work was built with extensive AI assistance; [How this was built](#how-this-was-built) says exactly how.
 
-**Real-data results so far** (details, caveats and the file behind every number are in the linked documents):
+## What this prototype demonstrates
 
-* **Forecasting (out of sample, 792 test days;** [docs/MODEL_ITERATIONS_REAL.md](docs/MODEL_ITERATIONS_REAL.md)**).** A hybrid that corrects mcsGARCH with a LightGBM model of its errors forecasts the next 15 minutes, the next 30 minutes and the last hour 4.4%, 6.6% and 6.2% better (QLIKE loss, p < 0.001) than mcsGARCH as the paper specifies it (one time-of-day curve, no smoothing, ARMA(1,1) mean, Student t; estimation details are ours; registered, [docs/P116_BENCHMARK_AS_PRINTED.md](docs/P116_BENCHMARK_AS_PRINTED.md)). The hybrid itself is built on our implementation of mcsGARCH, which adds a separate intraday curve for expiry days and smooths the curves and forecasts slightly worse than the paper's specification on Nifty; against it the gain is 5.8%, 7.6% and 6.4%, and the studies below use it as the benchmark. Rebuilt on the paper's specification with nothing else changed, the same recipe is 5.1% and 7.1% better than that specification (registered, five seed sets, [docs/P118_HYBRID_ON_PAPER_MCSGARCH.md](docs/P118_HYBRID_ON_PAPER_MCSGARCH.md)); whether it beats the hybrid built on our implementation is inconclusive. Plain LightGBM without mcsGARCH cannot be told apart from the hybrid (p 0.32 to 0.97). Against our implementation the gain also holds before NSE's closing auction began (3 August 2026) and on a later hold-out, survives a correction for trying 31 models, and at 15 and 30 minutes beats an mcsGARCH also given India VIX or option-implied variance (4.8% and 5.9%; post hoc, after an AI referee report; an edge that comes from the periods since November 2024 and does not survive the project-wide correction in [docs/TEST_LEDGER.md](docs/TEST_LEDGER.md)); in the last hour it does not (an mcsGARCH given India VIX comes within 1.7%; [docs/REFEREE_RESPONSE_FORECAST.md](docs/REFEREE_RESPONSE_FORECAST.md)). A registered ablation ([docs/P106_GAIN_DECOMPOSITION.md](docs/P106_GAIN_DECOMPOSITION.md)) finds the gain comes from recent realized volatility (34% and 38%) and the time of day (23% and 25%), not mainly from the option market: on Nifty, removing the option-implied or VIX inputs changes the loss by less than 1% of mcsGARCH's (both together by 0.6 points, not significant and not tested for equivalence) and removing the calendar inputs slightly improves it, and the edge over the mcsGARCH given the implied variance appears after November 2024 mostly, on point estimates, because that benchmark got worse. A registered stress test on Bank Nifty and Fin Nifty ([docs/P110_GAIN_STRESS_TEST.md](docs/P110_GAIN_STRESS_TEST.md)) finds the same two sources and shows option prices and VIX are each worth less than 1% of the loss; there the calendar inputs help a little. A second registered study ([docs/P109_MCSGARCH_EXTENSIONS.md](docs/P109_MCSGARCH_EXTENSIONS.md)) wrote down five fixes to our mcsGARCH before computing any result; together they recover 118% and 108% of the hybrid's gain over it at 15 and 30 minutes (intervals 85% to 167% and 80% to 132%), and the hybrid cannot be told apart from the fixed model, so the gain is not over a carefully fixed mcsGARCH; against the paper's specification the fixed model is 5.5% and 7.3% better. The fixes were chosen after seeing these days, so a one-time forward test on Nifty days from 4 November 2026 is registered, against our implementation and against the paper's specification ([docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md](docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md)). Run unchanged on Bank Nifty under a registered plan, the hybrid is 3.9% and 5.0% better at 15 and 30 minutes than our implementation (4.7% and 6.2% than the paper's specification; [docs/BANKNIFTY_FORECAST.md](docs/BANKNIFTY_FORECAST.md)), and on Fin Nifty, under a second registered plan, 4.9% and 6.1% better (4.0% and 5.2%; [docs/THIRD_INDEX_FORECAST.md](docs/THIRD_INDEX_FORECAST.md)); pooled with errors that allow for the indices moving together, the three count as about two independent replications ([docs/P107_POOLED_THREE_INDEX.md](docs/P107_POOLED_THREE_INDEX.md)). An earlier apparent last-hour edge for HAR came from the closing-auction days and was withdrawn. Adding dealer gamma (GEX) features does not improve Nifty forecasts under any of three sign rules (on Bank Nifty they helped slightly, only in the 09:15 forecast; on Fin Nifty they did not help).
-* **Dealer gamma, after falsification** ([docs/FALSIFICATION.md](docs/FALSIFICATION.md), [docs/DEALER_SIGN.md](docs/DEALER_SIGN.md)). One in-sample pattern survived most attempts to break it (not a correction over all 742 tests of that study): Nifty tends to reverse in the last 30 minutes, and only after evenings when GEX built from NSE's "Pro" participant positions was negative (the opposite of the US hedging-momentum story). The "higher GEX, calmer next day" link turned out to track the total amount of option gamma, not its sign, and the expiry-day sign flip is in-sample only. The proxy-free version of the hedging story (dealers short all options, so the close continues the day's move) fails: the close reverses instead ([docs/REFEREE_RESPONSE_F2.md](docs/REFEREE_RESPONSE_F2.md)). Estimating the dealer sign from the data, the end-of-day outcome points to the reverse of the Pro positions and the volatility outcome points nowhere clearly, so who the dealers are remains the open question.
-* **Expiry rules as natural experiments** ([docs/EVENT_STUDY.md](docs/EVENT_STUDY.md)). The whole-day expiry premium barely moves with NSE's rule changes; the end-of-day premium follows the expiry, although part of it is one-minute bid-ask noise and the placebo p-values rest on few independent windows ([docs/REFEREE_RESPONSE_EXPIRY.md](docs/REFEREE_RESPONSE_EXPIRY.md)).
-* **Replication of the 2025 paper** ([docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md)). The "after" sample reproduces the printed tables closely. The stated "before" window does not, while a 64-day window one year earlier reproduces the printed "before" numbers. Two independent searches put its start between 14 and 23 November 2022 and its end between 10 and 21 February 2023 ([docs/P108_BLIND_WINDOW.md](docs/P108_BLIND_WINDOW.md)); we will ask the authors which dates they used. The paper's hour-level connectedness totals are not reproduced by any of 5,440 settings in a registered search ([docs/P113_CONNECTEDNESS_SETTINGS.md](docs/P113_CONNECTEDNESS_SETTINGS.md)); the closest misses them by 5.3 points on average and the before last-hour total of 105.22 is out of reach.
-* **Pinning** ([docs/PINNING_STUDY.md](docs/PINNING_STUDY.md)). The expiry-day close sits closer to a strike only in some periods (Nifty from November 2024 to August 2025, Bank Nifty while it had weekly options), and our dealer-gamma proxies do not explain when.
+1. **The paper can be rebuilt from public NSE files.** The "after" sample matches closely: exactly the paper's 21,239 Nifty one-minute returns, and Nifty's mcsGARCH parameters close to the printed values (table below). For the "before" sample, the dates as printed give 82 trading days rather than 64. A 64-day window one year earlier, starting in mid November 2022, reproduces both printed "before" maxima to every decimal. Which dates were used is the first question for the authors.
+2. **The paper's model can be turned into a forecaster, and it can be beaten at short horizons.** The paper fits mcsGARCH but does not forecast with it. In an out-of-sample contest on 792 Nifty test days, a hybrid that corrects mcsGARCH with a machine-learning model has **4.4% and 6.6% lower forecast error for the next 15 and 30 minutes than mcsGARCH as the paper specifies it** (p below 0.001). The gain also holds on Bank Nifty and Fin Nifty.
+3. **The gain comes from using mcsGARCH's own information better, not from the option market.** Recent realized volatility carries about a third of it and the time of day about a quarter; removing option prices or India VIX changes the forecast error by less than 1%. Five plain fixes to mcsGARCH recover all of the gain. That makes it a result about the paper's own model. The fixes were registered before being tested but chosen after seeing the same days, so a forward test on Nifty days from 4 November 2026, registered in advance, has to confirm them.
+4. **Dealer gamma from public files does not improve forecasts, and who the dealers are is the real open question.** The one in-sample pattern that held up (Nifty reverses into the close after evenings when NSE's "Pro" participants, brokers trading their own money, were net short index options) is about positioning, not gamma. Identifying which participants act as dealers on NSE is where knowledge of the Indian market matters most.
+5. **The expiry effect sits at the end of the day.** Since Nifty's expiry moved to Tuesday (September 2025), Tuesday's last hour carries 63% more variance than days on which no index option expires. This comparison was made after looking at the data, so it is exploratory.
 
-## How this work was done
+![One test day: realized variance and the two forecasts](results/demo/deck_chart_2025-12-23.png)
 
-Shreyan directed the project; the code, analyses and documents were produced with extensive AI assistance (Claude, by Anthropic), and most commits list Claude as author. The checks described as independent (the referee-style review in `docs/INDEPENDENT_REVIEW.md`, the blind re-key in `docs/REKEY_CHECK.md` and later referee reports) were done by separate AI agents, not by people. Every number comes from code and data in this repository: `python scripts/reproduce_all.py` regenerates the main pipeline and the earlier studies, and each later registered study's document gives its own commands (see `docs/REPRODUCIBILITY.md`). "Pre-registered" or "registered" here means an analysis plan committed to git before that study's results were computed (no external registry); only the two forward tests (`docs/prereg/FORWARD_TEST.md` and `docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md`) were committed before their data existed.
+*One test day, picked by a fixed rule (the median Tuesday expiry since October 2025): realized variance in each 15-minute window (grey bars), our implementation of mcsGARCH (blue) and the hybrid (orange), each forecast made at the start of its window. The headline numbers average over all 792 test days.*
 
-## Why this question
+## Results at a glance
 
-Chhimwal, Pandey and Pandey (2025) show that after NSE gave Nifty and Bank Nifty different expiry days, each index became more volatile and more heavily traded on its own expiry day, and the two became less connected. They suggest unwinding and retail flows as causes but do not test them.
+**How to read the forecasting numbers.** Forecast error is measured with QLIKE, a standard score for volatility forecasts that punishes forecasts that are too low more than forecasts that are too high. "4.4% better" means the hybrid's average QLIKE is 4.4% below mcsGARCH's.
 
-A well-studied mechanism is option dealers' hedging. When dealers are net short gamma, hedging pushes the index further in the direction it is moving; when net long gamma, it pushes back (Ni, Pearson, Poteshman and White 2021; Baltussen, Da, Lammers and Martens 2021). Gamma is largest for near-the-money options close to expiry, so if the mechanism matters anywhere on Nifty, it should matter on expiry day. We found no peer-reviewed test of it on NSE options.
-
-## What is in the box
-
-| Part | Module | Validated by |
+| Question | What we found | Details |
 | --- | --- | --- |
-| Black-76 prices, greeks (delta, gamma, vega, vanna, charm) and IV solver | `niftygex.greeks` | parity, finite differences, IV round trip on 5,000 options including expiry-day ones |
-| GEX per strike and net; five sign rules are coded (US convention, NSE Pro participants, mirror of NSE Clients, and the long-all and short-all bounds) and the studies report the first three; gamma flip; OI walls; max pain | `niftygex.gex` | hand formula, finite-difference definition of GEX, bounds |
-| Rogers-Satchell, realized variance, bipower variation, bulk volume classification | `niftygex.realized` | Brownian simulation |
-| mcsGARCH (the paper's model) with an optional expiry-day diurnal curve | `niftygex.volatility` | parameter recovery on simulated data, causality of forecasts |
-| Diebold-Yilmaz connectedness, block-bootstrap intervals | `niftygex.connectedness` | closed form, independent series, VAR recovery |
-| Day-level, HAC and bootstrap before/after tests | `niftygex.inference` | experiment E2 |
-| Expiry calendar (Thursday, then Tuesday from 1 Sep 2025) and regimes | `niftygex.expiry_calendar` | known dates, holiday roll-back |
-| NSE loaders (bhavcopy legacy and UDiFF, participant OI, minute bars, VIX) | `niftygex.data` | round trip through files in NSE layouts |
-| Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
-| Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
+| Does the paper replicate on NSE data? | "After" sample: exactly 21,239 Nifty returns; mcsGARCH alpha 0.0498 and beta 0.9407 against the printed 0.0494 and 0.9410. "Before" sample: the stated dates do not match, while a 64-day window starting between 14 and 23 November 2022 does. | [REPLICATION_NSE.md](docs/REPLICATION_NSE.md), [P108_BLIND_WINDOW.md](docs/P108_BLIND_WINDOW.md) |
+| Can mcsGARCH be beaten out of sample? | Yes at 15 and 30 minutes: 4.4% and 6.6% better than the paper's specification. Built on that specification itself, like for like, the hybrid is 5.1% and 7.1% better. | [P116](docs/P116_BENCHMARK_AS_PRINTED.md), [P118](docs/P118_HYBRID_ON_PAPER_MCSGARCH.md) |
+| Does it hold on other indices? | Against our implementation of mcsGARCH: Bank Nifty 3.9% and 5.0% better (660 test days), Fin Nifty 4.9% and 6.1% better (604 test days). | [BANKNIFTY_FORECAST.md](docs/BANKNIFTY_FORECAST.md), [THIRD_INDEX_FORECAST.md](docs/THIRD_INDEX_FORECAST.md) |
+| Where does the gain come from? | Recent realized volatility (about a third) and the time of day (about a quarter). Option prices and India VIX are each worth less than 1% of mcsGARCH's forecast error. | [P106](docs/P106_GAIN_DECOMPOSITION.md), [P110](docs/P110_GAIN_STRESS_TEST.md) |
+| Can plain fixes to mcsGARCH match it? | Five fixes recover 118% and 108% of the hybrid's gain at 15 and 30 minutes, and the hybrid can no longer be told apart from the fixed model (p 0.82 and 0.73). A forward test on new days is registered. | [P109](docs/P109_MCSGARCH_EXTENSIONS.md), [P112](docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md) |
+| Does dealer gamma help forecasts? | No, on Nifty, under each of three rules for who is long and who is short. | [REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) |
+| Is there any dealer effect in sample? | Nifty reverses into the close (about 3 basis points per 100 basis point move), only after evenings when Pro participants were net short. It survives a correction over the 78 headline tests (p = 0.016), not over all 742 related tests. | [FALSIFICATION.md](docs/FALSIFICATION.md), [DEALER_SIGN.md](docs/DEALER_SIGN.md) |
+| Where does the expiry effect live? | In the last hour. When Bank Nifty's expiry moved from Thursday to Wednesday, its end-of-day variance moved with it (+0.90 log points in the last 30 minutes). | [EVENT_STUDY.md](docs/EVENT_STUDY.md), [REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) |
 
-840 tests at the time of writing, run with `pytest` (also on every pull request through GitHub Actions, including one job with the pinned versions): 830 pass, 7 are skipped when `data/raw` is absent (they check real Bank Nifty and Fin Nifty data; with the raw data present 834 pass and 3 are skipped) and 3 are expected failures that pin known defects listed in `reports/CODE_AUDIT.md` (a full run on 4 November 2026 after the second backtest round; 777 passed after the GEX input checks, 743 after the validation audit of 3 November and 708 before it).
+## What it does not show
 
-## Documents
+* **That the hybrid learned something mcsGARCH could not.** In simulated markets where mcsGARCH is the true model, the hybrid still "significantly" beats a fitted mcsGARCH in 4 of 10 worlds [SYNTHETIC]. A win over a fitted benchmark overstates the evidence of new information, which is why the five fixes matter.
+* **That the five fixes work on new data.** They were chosen after seeing the same test days. A one-time forward test on Nifty days from 4 November 2026 is registered to check them.
+* **That the headline is free of look-ahead.** One known issue is open: the model's choice between EGARCH and EWMA, and its EWMA floor, use the full sample. Its effect on the headline has not been measured yet.
+* **A last-hour or money result.** The last-hour gain fails on Fin Nifty (1.0%, p 0.30) and is kept out of the headline. In money terms the gain is small: about 0.04% of wealth a year for an investor who sizes positions by forecast volatility.
+* **Causality.** The expiry rule changes coincide with other market changes, and none of the event-study results reaches 5% under an honest small-sample test.
 
-| Document | What it is |
-| --- | --- |
-| [RESEARCH_STRATEGY_PANDEY.md](RESEARCH_STRATEGY_PANDEY.md) | Research questions, hypotheses, decision tree, risks |
-| [PITCH_PANDEY.md](PITCH_PANDEY.md) | One-page pitch for Prof. Pandey |
-| [docs/PAPER_DEEP_DIVE.md](docs/PAPER_DEEP_DIVE.md) | Close reading of the 2025 paper, with checks of its published numbers |
-| [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md) | 41 checked references (36 fully verified) and what each means for the design |
-| [docs/math/](docs/math/) | Derivations: greeks and GEX, mcsGARCH, connectedness, inference, forecast evaluation |
-| [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md) | Every experiment, its question, its result and its limits |
-| [ITERATION_LOG.md](ITERATION_LOG.md) | What went wrong during the build and what changed |
-| [docs/REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) | **Real data:** forecasting contest, expiry effects by regime, GEX regressions, end-of-day momentum (R0 to R5) |
-| [docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md) | **Real data:** the paper's Tables 1 to 6 rebuilt from NSE data, with robust versions of each test |
-| [docs/PINNING_STUDY.md](docs/PINNING_STUDY.md) | **Real data:** do Nifty and Bank Nifty close at option strikes on expiry day? |
-| [docs/EVENT_STUDY.md](docs/EVENT_STUDY.md) | **Real data:** expiry rule changes as natural experiments, with comparison indices and placebo dates |
-| [docs/FALSIFICATION.md](docs/FALSIFICATION.md) | **Real data:** seven families of tests that try to break the GEX findings |
-| [docs/DEALER_SIGN.md](docs/DEALER_SIGN.md) | **Real data:** estimating the dealer sign from the market's response (a negative result) |
-| [docs/INTRADAY_GAMMA.md](docs/INTRADAY_GAMMA.md) | **Real data:** expiry-day gamma re-priced minute by minute |
-| [docs/INDEPENDENT_REVIEW.md](docs/INDEPENDENT_REVIEW.md) | A referee-style review of the real-data results, and what changed because of it |
-| [docs/BACKTEST_EXTENDED.md](docs/BACKTEST_EXTENDED.md) | **Real data:** the hybrid's gain by regime, under other losses, against data snooping and on Bank Nifty and Fin Nifty |
-| [docs/NULL_WORLD_SIZE_TEST.md](docs/NULL_WORLD_SIZE_TEST.md) | **Synthetic:** does the walk-forward invent a gain over mcsGARCH when mcsGARCH is the true model? |
-| [reports/BACKTEST_ROUND2_SUMMARY.md](reports/BACKTEST_ROUND2_SUMMARY.md) | Summary of the second backtest and validation round, with links to each report |
-| [reports/BACKTEST_EXTENDED_REVIEW.md](reports/BACKTEST_EXTENDED_REVIEW.md) | Independent check of the extended backtest statistics |
-| [reports/REPRODUCTION_RERUN.md](reports/REPRODUCTION_RERUN.md) | Rerun of the quick reproduction steps against the committed outputs |
-| [reports/POST_MERGE_HEALTH.md](reports/POST_MERGE_HEALTH.md) | Repository health after the merge: tests, number trace, CI and raw-data integrity |
-| [reports/PR4_GEX_REVIEW.md](reports/PR4_GEX_REVIEW.md) | Review of the GEX engine's input checks on real option chains |
-| [reports/LIVE_DEMO_2026-11-04.md](reports/LIVE_DEMO_2026-11-04.md) | Live demonstration on 4 November 2026 and the forward-test guard check |
-| [results/live/](results/live/) | **Real data:** a forecast frozen before the 3 November 2026 expiry, scored after the close |
-| [notebooks/01_real_data_tour.ipynb](notebooks/01_real_data_tour.ipynb) | **Real data:** a guided tour with charts (option chain, GEX profile, an expiry day, the scoreboard) |
-| [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) | How the real data are downloaded and checked |
-| [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) | Exact commands, versions and run times to regenerate every result |
-| [alternatives/ALTERNATIVES.md](alternatives/ALTERNATIVES.md) | Trading layer, sequence model and other directions kept out of the main package |
+## Where this could go
 
-## Quick start
+These are proposals to discuss with Prof. Pandey, not finished work.
+
+* **Paper A: dealer positioning and the end-of-day reversal on NSE.** Why does Nifty reverse into the close, and why more after Pro participants are net short? The falsification suite and sign estimation exist; a cleaner dealer proxy is missing.
+* **Paper B: expiry rules as natural experiments.** The paper's design extended to five NSE expiry-rule changes since 2019, with comparison indices and placebo dates. Verified BSE Sensex expiry dates are missing.
+* **A short note on mcsGARCH.** Five fixes that match machine learning at 15 and 30 minutes, written up once the forward test reports.
+
+What would help most: the exact "before" sample dates; a view on whether NSE's "Pro" category is a fair proxy for dealers; and whether intraday option-chain snapshots are available, which would test the hedging story directly on expiry afternoons. The one-page version of this pitch is [PITCH_PANDEY.md](PITCH_PANDEY.md).
+
+## See it in five minutes
+
+Python 3.10 or newer (CI tests 3.11 to 3.13).
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
-pytest
 
-# One trading day of the real-data forecasts, as a self-contained web page (about a second; committed files only; see docs/DEMO.md)
+# Draw one real test day as a self-contained web page, from committed files only (a few seconds)
 python scripts/demo_forecast_day.py --date 2025-12-23
 
-# Full pipeline on a synthetic market (about 15 minutes on 4 cores)
-python scripts/run_pipeline.py --source synthetic --days 500 --kappa 0.5
-
-# Paper checks and simulation experiments
-python experiments/paper_checks.py
-python experiments/inference_checks.py
-python experiments/power_study.py --reps 8 --days 500
-
-# Real data (see docs/DATA_ACQUISITION.md). The download scripts need the "requests" package, which is in the optional "download" group:
-pip install -e ".[download]"
-python scripts/download_nse.py --start 2023-01-01 --end 2026-11-02 --out data/raw
-python scripts/fetch_minute_bars.py
-python scripts/validate_minute_bars.py
-python scripts/run_pipeline.py --source nse          # about 8 minutes on 4 cores (the five-seed model study, --n-seeds 5, takes about 100 to 115 minutes on one core)
-python experiments/real_day_level.py
-python experiments/momentum_gex.py
-python experiments/replicate_paper.py
-python experiments/pinning_study.py
+# Run the test suite (synthetic fixtures, no market data needed)
+pytest
 ```
 
-## Repository layout
+Ready-made pages for three test days are already in [results/demo/](results/demo/) (see [docs/DEMO.md](docs/DEMO.md)). To download the public NSE data and rerun everything, follow [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md); the full command list is in [README_FULL.md](README_FULL.md#quick-start).
 
-```
-.
-├── src/niftygex/      package code (see table above)
-├── scripts/           run_pipeline.py (one command, all outputs), download_nse.py, fetch_minute_bars.py, validation checks
-├── experiments/       simulation experiments (E1 to E7) and real-data studies (real_day_level, momentum_gex, replicate_paper, pinning_study)
-├── results/           outputs; real-data folders are pipeline_nse_v2 (pipeline_nse is the archived first run), real_day_level, momentum_gex, replication_nse, pinning, data_validation
-├── notebooks/         real-data demo notebook
-├── docs/              deep dive, literature review, math notes, experiment report, data guide
-├── alternatives/      directions deliberately kept out of the main package
-├── tests/             pytest suite
-└── data/              raw and processed data (git-ignored)
-```
+## Read more
 
-## Data policy
+| If you want | Read |
+| --- | --- |
+| The pitch, with every caveat | [PITCH_PANDEY.md](PITCH_PANDEY.md) |
+| Every result in detail, the module table and the full document list | [README_FULL.md](README_FULL.md) |
+| All real-data results | [docs/REAL_DATA_RESULTS.md](docs/REAL_DATA_RESULTS.md) |
+| The replication of the 2025 paper, table by table | [docs/REPLICATION_NSE.md](docs/REPLICATION_NSE.md) |
+| The forecasting study and how the model was chosen | [docs/MODEL_ITERATIONS_REAL.md](docs/MODEL_ITERATIONS_REAL.md) |
+| A close reading of the 2025 paper | [docs/PAPER_DEEP_DIVE.md](docs/PAPER_DEEP_DIVE.md) |
+| Every hypothesis test, with a correction for all of them at once | [docs/TEST_LEDGER.md](docs/TEST_LEDGER.md) |
+| The research plan, hypotheses and risks | [RESEARCH_STRATEGY_PANDEY.md](RESEARCH_STRATEGY_PANDEY.md) |
+| What went wrong during the build and what changed | [ITERATION_LOG.md](ITERATION_LOG.md) |
 
-Raw vendor and NSE files are not committed. The 2025 paper is paywalled and is not in this repository; it is cited by DOI. Derived outputs (GEX panels, forecasts, scores) can be shared.
+## What is in the repository
+
+* **A Python package, `niftygex`:** Black-76 option greeks, dealer gamma exposure under five rules for who is long and who is short, realized volatility measures, mcsGARCH, Diebold-Yilmaz connectedness, an NSE expiry calendar with its rule changes, loaders for NSE's public files, and a walk-forward forecasting and evaluation framework.
+* **Studies** in `experiments/` and `scripts/`, each writing its results to `results/` and described in `docs/`.
+* **Registered follow-up studies** in `docs/prereg/` and `docs/P1*.md`, each with its analysis plan committed to git before its results were computed.
+* **Alternatives** kept out of the main package (a trading layer, a sequence model) in [alternatives/](alternatives/).
+
+## How this was built
+
+Shreyan Thanki directed the project. The code, analyses and documents were produced with extensive AI assistance (Claude, by Anthropic), and most commits list Claude as an author. Every review mentioned in the repository, including the referee-style reports and the blind re-key of the paper's printed numbers, was done by a separate AI agent, not by a person.
+
+Three things keep the results checkable:
+
+* **Every hypothesis test is recorded.** All 28,515 tests from 37 studies are listed in `results/test_ledger.csv`, each with its raw p-value and a p-value corrected for all of them at once ([docs/TEST_LEDGER.md](docs/TEST_LEDGER.md)).
+* **Every printed number is traced.** `python scripts/trace_numbers.py` checks each number in the pitch and in this README against the results file it comes from ([docs/number_registry.csv](docs/number_registry.csv)).
+* **Plans come before results.** "Registered" here means the analysis plan was committed to git before that study's results were computed. There is no external registry, and only the two forward tests were committed before their data existed.
+
+The test suite runs on every pull request through GitHub Actions, on Python 3.11 to 3.13 and with the pinned versions that produced the committed results.
+
+## Data and license
+
+Raw NSE and vendor files are not committed; the download scripts fetch them from public sources and check each file against a SHA-256 hash ([docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md)). The 2025 paper is paywalled and is not in this repository; it is cited by DOI below. The code is released under the MIT license ([LICENSE](LICENSE)); the data keep their sources' terms.
 
 ## Key references
 
-Full list with verification status in [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md).
+The full list, with verification status, is in [docs/LITERATURE_REVIEW.md](docs/LITERATURE_REVIEW.md).
 
 - Chhimwal, B., Pandey, V. and Pandey, P. (2025). Effect of multiple index derivative expiry on volatility, volume, and connectedness: a tale of two stock indices in India. *Review of Derivatives Research*, 28(3), 14. doi:10.1007/s11147-025-09221-8
 - Engle, R. F. and Sokalska, M. E. (2012). Forecasting intraday volatility in the US equity market: multiplicative component GARCH. *Journal of Financial Econometrics*, 10(1), 54 to 83. doi:10.1093/jjfinec/nbr005
 - Ni, S. X., Pearson, N. D., Poteshman, A. M. and White, J. (2021). Does option trading have a pervasive impact on underlying stock prices? *Review of Financial Studies*, 34(4), 1952 to 1986. doi:10.1093/rfs/hhaa082
 - Baltussen, G., Da, Z., Lammers, S. and Martens, M. (2021). Hedging demand and market intraday momentum. *Journal of Financial Economics*, 142(1), 377 to 403. doi:10.1016/j.jfineco.2021.04.029
-- Dim, C., Eraker, B. and Vilkov, G. (2024). 0DTEs: Trading, gamma risk and volatility propagation. Working paper, SSRN 4692190.
 - Diebold, F. X. and Yilmaz, K. (2012). Better to give than to receive. *International Journal of Forecasting*, 28(1), 57 to 66. doi:10.1016/j.ijforecast.2011.02.006
 - Patton, A. J. (2011). Volatility forecast comparison using imperfect volatility proxies. *Journal of Econometrics*, 160(1), 246 to 256. doi:10.1016/j.jeconom.2010.03.034
 
