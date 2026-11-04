@@ -123,10 +123,15 @@ def test_implied_vol_clamps_at_the_search_bracket_edges_documented():
     assert float(hi) == pytest.approx(5.0, abs=1e-6) and float(lo) == pytest.approx(1e-4, abs=1e-9)
 
 
-def test_degenerate_option_inputs_give_nan_not_exceptions():
+def test_degenerate_option_inputs_raise_or_give_nan():
+    # Changed after the validation audit (A3-09, A3-13): T = 0 used to give NaN gamma and a net GEX of 0.0
+    # with only a RuntimeWarning; the GEX engine now refuses it. IV = 0 is treated as missing (NaN) with a
+    # GexInputWarning. The greeks functions themselves still return NaN.
     chain = pd.DataFrame({"strike": [95.0, 105.0], "is_call": [True, False], "oi": [10.0, 10.0], "iv": [0.2, 0.2]})
-    assert np.isnan(gex.strike_gex(chain, 100.0, 1.0, 0.0)["gex"]).all()
-    assert np.isnan(gex.strike_gex(chain.assign(iv=0.0), 100.0, 1.0, 0.02)["gex"]).all()
+    with pytest.raises(ValueError, match="T"):
+        gex.strike_gex(chain, 100.0, 1.0, 0.0)
+    with pytest.warns(gex.GexInputWarning, match="IV 0"):
+        assert np.isnan(gex.strike_gex(chain.assign(iv=0.0), 100.0, 1.0, 0.02)["gex"]).all()
     assert np.isnan(greeks.price(100.0, 100.0, 0.0, 0.0, 0.2, True))
 
 

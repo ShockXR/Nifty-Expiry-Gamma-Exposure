@@ -51,7 +51,7 @@ The 1-minute bars match the hashes in the manifest and show no duplicates or tim
 ## 6. Open items, most serious first
 
 1. EGARCH versus EWMA gate and the full-sample EWMA floor (A4-A-001, A1-A-002). Fix: filter and choose using data up to each block end only, then rerun the pipeline and report the change in the headline. Until then quote the authors' own sensitivity (margins without the 42 affected days).
-2. GEX engine accepts bad input silently (A4-A-002, A4-A-003). Not fixed because a fix could change GEX panels; document as a limitation, add input validation in the next round.
+2. GEX engine accepts bad input silently (A4-A-002, A4-A-003). Not fixed because a fix could change GEX panels; document as a limitation, add input validation in the next round. **Fixed on 4 November 2026** with input checks that change no committed GEX panel (`EXECUTION_SUMMARY.md`, follow-up).
 3. Last-hour result is not supported; keep it out of the pitch headline.
 4. A5 perturbation rerun and the full raw-data comparison are BLOCKED.
 5. `docs/TEST_LEDGER.md` does not regenerate exactly in a fresh checkout because one column depends on the original clone's git history (A1-A-013). Do not regenerate it.
