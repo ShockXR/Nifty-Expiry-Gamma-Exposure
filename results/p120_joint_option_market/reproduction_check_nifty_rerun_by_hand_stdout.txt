@@ -1,0 +1,3 @@
+{'check': "POST HOC (REAL DATA): NIFTY next15 seed 7 optionmkt rerun here, daily QLIKE vs P106's committed daily_losses_nifty_next15_s7.csv (P106's work file is not on this machine)", 'rows_here': 792, 'rows_reference': 792, 'same_days': True, 'mcsgarch_n_identical': 573, 'mcsgarch_max_abs_rel_diff': 4.440892098500626e-16, 'mcsgarch_iv_n_identical': 586, 'mcsgarch_iv_max_abs_rel_diff': 4.440892098500626e-16, 'optionmkt_n_identical': 579, 'optionmkt_max_abs_rel_diff': 4.440892098500626e-16, 'identical': False}
+written /home/user/nifty-expiry-gamma-exposure/results/p120_joint_option_market/reproduction_check_nifty_rerun_by_hand.csv
+CHECK EXIT 0

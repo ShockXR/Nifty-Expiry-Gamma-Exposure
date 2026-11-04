@@ -1,0 +1,227 @@
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] P120 joint option market, stage 2 (docs/prereg/P120_JOINT_OPTION_MARKET.md)
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:477: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  p99 = pd.read_csv(P99_DIR / "daily_losses_last_hour.csv", index_col="date", parse_dates=["date"],
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+/home/user/nifty-expiry-gamma-exposure/experiments/p120_joint_option_market.py:385: Pandas4Warning: The 'float_precision' argument is deprecated. Use the default float precision instead.
+  D = pd.read_csv(path, index_col="date", float_precision="round_trip")
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] verdicts:
+                test_id             family     index    target  estimate       se  ci90_low  ci90_high    p_raw   p_holm  seed_sets  seed_min  seed_max  seed_sd  within_seed_noise                   verdict sub_label  p_holm_worse  p_holm_better  seed_sets_inside_margin  seed_sets_above_margin  R1_holm  R2_holm  R3_holm  R4_holm  R5_holm R1_passes R2_passes R3_passes R4_passes R5_passes  seed_sets_same_sign
+        H1_NIFTY_next15                 H1     NIFTY    next15  0.359750 0.444545 -0.372781   1.092281 0.075227 0.075227          5  0.154881  0.597913 0.191346               True      not shown either way                1.000000       1.000000                      5.0                     0.0 0.251908 0.060855 0.068565 0.079236 0.000470     False     False     False     False      True                  NaN
+        S1_NIFTY_next15     S1_margin_half     NIFTY    next15  0.359750 0.444545 -0.372781   1.092281 0.376311 0.483971          5  0.154881  0.597913 0.191346               True                 not shown                     NaN            NaN                      4.0                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+        S2_NIFTY_next15       S2_two_sided     NIFTY    next15  0.359750      NaN       NaN        NaN 0.418906 1.000000          5  0.154881  0.597913 0.191346               True       no difference shown                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  5.0
+        H1_NIFTY_next30                 H1     NIFTY    next30  0.055723 0.375752 -0.563449   0.674896 0.006111 0.018333          5 -0.120596  0.355868 0.183804               True equivalent within 1 point                1.000000       1.000000                      5.0                     0.0 0.030826 0.021172 0.018110 0.015422 0.036054      True      True      True      True      True                  NaN
+        S1_NIFTY_next30     S1_margin_half     NIFTY    next30  0.055723 0.375752 -0.563449   0.674896 0.118856 0.475423          5 -0.120596  0.355868 0.183804               True                 not shown                     NaN            NaN                      5.0                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+        S2_NIFTY_next30       S2_two_sided     NIFTY    next30  0.055723      NaN       NaN        NaN 0.882219 1.000000          5 -0.120596  0.355868 0.183804               True       no difference shown                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  3.0
+    H1_BANKNIFTY_next15                 H1 BANKNIFTY    next15 -0.177447 0.300527 -0.672841   0.317946 0.003203 0.012813          5 -0.227135 -0.085720 0.061509              False equivalent within 1 point                1.000000       1.000000                      5.0                     0.0 0.014163 0.015206 0.012799 0.014773 0.003416      True      True      True      True      True                  NaN
+    S1_BANKNIFTY_next15     S1_margin_half BANKNIFTY    next15 -0.177447 0.300527 -0.672841   0.317946 0.141949 0.475423          5 -0.227135 -0.085720 0.061509              False                 not shown                     NaN            NaN                      5.0                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+    S2_BANKNIFTY_next15       S2_two_sided BANKNIFTY    next15 -0.177447      NaN       NaN        NaN 0.555388 1.000000          5 -0.227135 -0.085720 0.061509              False       no difference shown                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  5.0
+    H1_BANKNIFTY_next30                 H1 BANKNIFTY    next30 -0.203672 0.422809 -0.900638   0.493295 0.030138 0.060277          5 -0.402842  0.018159 0.155818               True      not shown either way                1.000000       1.000000                      5.0                     0.0 0.092165 0.060855 0.059719 0.079236 0.036054     False     False     False     False      True                  NaN
+    S1_BANKNIFTY_next30     S1_margin_half BANKNIFTY    next30 -0.203672 0.422809 -0.900638   0.493295 0.241986 0.483971          5 -0.402842  0.018159 0.155818               True                 not shown                     NaN            NaN                      5.0                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+    S2_BANKNIFTY_next30       S2_two_sided BANKNIFTY    next30 -0.203672      NaN       NaN        NaN 0.630431 1.000000          5 -0.402842  0.018159 0.155818               True       no difference shown                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  4.0
+S3a_BANKNIFTY_last_hour S3a_last_hour_tost BANKNIFTY last_hour -2.396808 1.028847 -4.092778  -0.700839 0.912316 0.912316          5 -2.809551 -1.986273 0.375576              False      not shown either way                0.999489       0.087684                      0.0                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+S3b_BANKNIFTY_last_hour   S3b_last_hour_dm BANKNIFTY last_hour -2.396808      NaN       NaN        NaN 0.020222 0.020222          5 -2.809551 -1.986273 0.375576              False       different from zero                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  5.0
+        E1_NIFTY_next15     E1_interaction     NIFTY    next15  0.251929      NaN       NaN        NaN 0.012479 0.012479          5 -0.262811  0.676057 0.336868               True  exploratory (no verdict)                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+        E1_NIFTY_next30     E1_interaction     NIFTY    next30  0.302951      NaN       NaN        NaN 0.021597 0.021597          5  0.149563  0.502564 0.133211              False  exploratory (no verdict)                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+    E1_BANKNIFTY_next15     E1_interaction BANKNIFTY    next15 -0.014307      NaN       NaN        NaN 0.892864 0.892864          5 -0.393389  0.363035 0.331187               True  exploratory (no verdict)                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+    E1_BANKNIFTY_next30     E1_interaction BANKNIFTY    next30 -0.004909      NaN       NaN        NaN 0.977371 0.977371          5 -0.221779  0.492598 0.292587               True  exploratory (no verdict)                     NaN            NaN                      NaN                     NaN      NaN      NaN      NaN      NaN      NaN       NaN       NaN       NaN       NaN       NaN                  NaN
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] equivalence bounds:
+                test_id     index    target            sample  margin  estimate_points  se_points  ci90_low  ci90_high  smallest_margin_that_passes  hybrid_gain_points  bound_as_share_of_gain   p_tost  p_margin_1  p_margin_0.5
+        H1_NIFTY_next15     NIFTY    next15 five-seed average     1.0         0.359750   0.444545 -0.372781   1.092281                     1.092281            5.786335                0.188769 0.075227    0.075227      0.376311
+        S1_NIFTY_next15     NIFTY    next15 five-seed average     0.5         0.359750   0.444545 -0.372781   1.092281                     1.092281            5.786335                0.188769 0.376311    0.075227      0.376311
+        H1_NIFTY_next30     NIFTY    next30 five-seed average     1.0         0.055723   0.375752 -0.563449   0.674896                     0.674896            7.836184                0.086126 0.006111    0.006111      0.118856
+        S1_NIFTY_next30     NIFTY    next30 five-seed average     0.5         0.055723   0.375752 -0.563449   0.674896                     0.674896            7.836184                0.086126 0.118856    0.006111      0.118856
+    H1_BANKNIFTY_next15 BANKNIFTY    next15 five-seed average     1.0        -0.177447   0.300527 -0.672841   0.317946                     0.672841            4.091845                0.164435 0.003203    0.003203      0.141949
+    S1_BANKNIFTY_next15 BANKNIFTY    next15 five-seed average     0.5        -0.177447   0.300527 -0.672841   0.317946                     0.672841            4.091845                0.164435 0.141949    0.003203      0.141949
+    H1_BANKNIFTY_next30 BANKNIFTY    next30 five-seed average     1.0        -0.203672   0.422809 -0.900638   0.493295                     0.900638            5.261330                0.171181 0.030138    0.030138      0.241986
+    S1_BANKNIFTY_next30 BANKNIFTY    next30 five-seed average     0.5        -0.203672   0.422809 -0.900638   0.493295                     0.900638            5.261330                0.171181 0.241986    0.030138      0.241986
+S3a_BANKNIFTY_last_hour BANKNIFTY last_hour five-seed average     1.0        -2.396808   1.028847 -4.092778  -0.700839                     4.092778            8.004982                0.511279 0.912316    0.912316      0.967055
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] contributions (points of mcsGARCH's QLIKE):
+    index    target            sample  days  J_optionmkt_points  hybrid_gain_points  optionmkt_gain_points  C_implied_points  C_vix_points  C_mcsinfo_points  interaction_points
+    NIFTY    next15 five-seed average   792            0.359750            5.786335               5.426585          0.118451     -0.010630         -0.280377            0.251929
+    NIFTY    next15  new-seed average   792            0.300209            5.783213               5.483004          0.120382      0.033930         -0.285406            0.145897
+    NIFTY    next15        seed set 7   792            0.597913            5.798820               5.200908          0.110725     -0.188870         -0.260260            0.676057
+    NIFTY    next15      seed set 101   792            0.154881            5.638919               5.484039          0.011082     -0.183431         -0.338493            0.327230
+    NIFTY    next15      seed set 102   792            0.488307            5.823811               5.335504          0.120610      0.067548         -0.273098            0.300149
+    NIFTY    next15      seed set 103   792            0.183601            5.787777               5.604176          0.052162     -0.087582         -0.322242            0.219021
+    NIFTY    next15      seed set 104   792            0.374048            5.882346               5.508298          0.297675      0.339184         -0.207792           -0.262811
+    NIFTY    next30 five-seed average   792            0.055723            7.836184               7.780461         -0.123854     -0.123374         -0.217170            0.302951
+    NIFTY    next30  new-seed average   792            0.085126            7.882909               7.797783         -0.081978     -0.085944         -0.182355            0.253048
+    NIFTY    next30        seed set 7   792           -0.061886            7.649283               7.711170         -0.291358     -0.273092         -0.356434            0.502564
+    NIFTY    next30      seed set 101   792            0.045207            7.817503               7.772296         -0.006005     -0.303864         -0.173265            0.355075
+    NIFTY    next30      seed set 102   792            0.355868            8.009018               7.653151          0.111453     -0.014601         -0.083034            0.259015
+    NIFTY    next30      seed set 103   792            0.060025            7.945872               7.885847         -0.112708      0.023170         -0.213879            0.149563
+    NIFTY    next30      seed set 104   792           -0.120596            7.759244               7.879840         -0.320653     -0.048481         -0.259240            0.248539
+BANKNIFTY    next15 five-seed average   660           -0.177447            4.091845               4.269292         -0.215371      0.052230          0.100954           -0.014307
+BANKNIFTY    next15  new-seed average   660           -0.165446            4.134790               4.300236         -0.216635      0.080933          0.130320           -0.029744
+BANKNIFTY    next15        seed set 7   660           -0.225453            3.920065               4.145518         -0.210316     -0.062579         -0.016507            0.047442
+BANKNIFTY    next15      seed set 101   660           -0.085720            4.088866               4.174585         -0.260577     -0.188179          0.118346            0.363035
+BANKNIFTY    next15      seed set 102   660           -0.143413            4.087235               4.230648         -0.324303     -0.045940          0.058683            0.226830
+BANKNIFTY    next15      seed set 103   660           -0.205517            4.205187               4.410705         -0.241346      0.351283          0.198730           -0.315453
+BANKNIFTY    next15      seed set 104   660           -0.227135            4.157871               4.385006         -0.040313      0.206566          0.145519           -0.393389
+BANKNIFTY    next30 five-seed average   660           -0.203672            5.261330               5.465001         -0.258789      0.060027          0.189682           -0.004909
+BANKNIFTY    next30  new-seed average   660           -0.197631            5.318524               5.516155         -0.204507      0.136162          0.228995           -0.129286
+BANKNIFTY    next30        seed set 7   660           -0.227834            5.032552               5.260386         -0.475918     -0.244514          0.032431            0.492598
+BANKNIFTY    next30      seed set 101   660           -0.141057            5.251281               5.392338         -0.304503      0.141889          0.191205            0.021558
+BANKNIFTY    next30      seed set 102   660           -0.264784            5.248927               5.513711         -0.274031      0.171278          0.174058           -0.162031
+BANKNIFTY    next30      seed set 103   660            0.018159            5.545703               5.527544          0.104640      0.135298          0.452584           -0.221779
+BANKNIFTY    next30      seed set 104   660           -0.402842            5.228186               5.631028         -0.344134      0.096185          0.098132           -0.154893
+BANKNIFTY last_hour five-seed average   660           -2.396808            8.004982              10.401790               NaN           NaN               NaN                 NaN
+BANKNIFTY last_hour  new-seed average   660           -2.377791            7.978597              10.356388               NaN           NaN               NaN                 NaN
+BANKNIFTY last_hour        seed set 7   660           -2.472877            8.110522              10.583399               NaN           NaN               NaN                 NaN
+BANKNIFTY last_hour      seed set 101   660           -1.986273            8.210652              10.196925               NaN           NaN               NaN                 NaN
+BANKNIFTY last_hour      seed set 102   660           -2.028670            7.974472              10.003142               NaN           NaN               NaN                 NaN
+BANKNIFTY last_hour      seed set 103   660           -2.686672            7.820845              10.507517               NaN           NaN               NaN                 NaN
+BANKNIFTY last_hour      seed set 104   660           -2.809551            7.908417              10.717968               NaN           NaN               NaN                 NaN
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] pooled:
+Empty DataFrame
+Columns: []
+Index: []
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] shares of the gain:
+    index    target            sample   variant  share_of_gain  share_ci_low  share_ci_high  reps
+    NIFTY    next15 five-seed average optionmkt       0.062172     -0.074905       0.188815 10000
+    NIFTY    next30 five-seed average optionmkt       0.007111     -0.092531       0.103634 10000
+BANKNIFTY    next15 five-seed average optionmkt      -0.043366     -0.204758       0.102081 10000
+BANKNIFTY    next30 five-seed average optionmkt      -0.038711     -0.212843       0.124095 10000
+BANKNIFTY last_hour five-seed average optionmkt      -0.299415     -0.743875      -0.045468 10000
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] reproduction checks:
+                                                                                                                        check identical  rows_here  rows_reference same_days  mcsgarch_n_identical  mcsgarch_max_abs_rel_diff  mcsgarch_iv_n_identical  mcsgarch_iv_max_abs_rel_diff  rows_rerun  rows_committed  rows_matched  y_n_identical  y_max_abs_rel_diff  hybrid_base_n_identical  hybrid_base_max_abs_rel_diff
+       NIFTY next15 seed 7: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next15 seed 101: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next15 seed 102: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next15 seed 103: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next15 seed 104: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+       NIFTY next30 seed 7: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next30 seed 101: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next30 seed 102: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next30 seed 103: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+     NIFTY next30 seed 104: P106 work files not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p106); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                                          NIFTY next15 seed 7 optionmkt rerun vs P106's work file: a file is missing; not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                  BANKNIFTY next15 seed 7: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next15_s7.csv     False      660.0           660.0      True                 489.0               4.440892e-16                    480.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+  BANKNIFTY next15 seed 7: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next15 seed 101: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next15_s101.csv     False      660.0           660.0      True                 489.0               4.440892e-16                    480.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next15 seed 101: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next15 seed 102: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next15_s102.csv     False      660.0           660.0      True                 489.0               4.440892e-16                    480.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next15 seed 102: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next15 seed 103: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next15_s103.csv     False      660.0           660.0      True                 489.0               4.440892e-16                    480.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next15 seed 103: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next15 seed 104: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next15_s104.csv     False      660.0           660.0      True                 489.0               4.440892e-16                    480.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next15 seed 104: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                  BANKNIFTY next30 seed 7: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next30_s7.csv     False      660.0           660.0      True                 404.0               5.551115e-16                    415.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+  BANKNIFTY next30 seed 7: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next30 seed 101: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next30_s101.csv     False      660.0           660.0      True                 404.0               5.551115e-16                    415.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next30 seed 101: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next30 seed 102: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next30_s102.csv     False      660.0           660.0      True                 404.0               5.551115e-16                    415.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next30 seed 102: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next30 seed 103: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next30_s103.csv     False      660.0           660.0      True                 404.0               5.551115e-16                    415.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next30 seed 103: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+              BANKNIFTY next30 seed 104: mcsGARCH daily QLIKE here vs P110's committed daily_losses_banknifty_next30_s104.csv     False      660.0           660.0      True                 404.0               5.551115e-16                    415.0                  4.440892e-16         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+BANKNIFTY next30 seed 104: P110's work file not on disk (/home/user/nifty-expiry-gamma-exposure/data/processed/p110); not run       NaN        NaN             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                                     BANKNIFTY last_hour seed 7 full hybrid vs pipeline_nse_banknifty/forecasts_last_hour.csv      True        NaN             NaN       NaN                 660.0               0.000000e+00                    660.0                  0.000000e+00       660.0           660.0         660.0          660.0                 0.0                    660.0                           0.0
+                                                              NIFTY next15: mcsGARCH daily QLIKE identical in all 5 seed sets      True      792.0             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                                                              NIFTY next30: mcsGARCH daily QLIKE identical in all 5 seed sets      True      792.0             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                                                          BANKNIFTY next15: mcsGARCH daily QLIKE identical in all 5 seed sets      True      660.0             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                                                          BANKNIFTY next30: mcsGARCH daily QLIKE identical in all 5 seed sets      True      660.0             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+                                                       BANKNIFTY last_hour: mcsGARCH daily QLIKE identical in all 5 seed sets      True      660.0             NaN       NaN                   NaN                        NaN                      NaN                           NaN         NaN             NaN           NaN            NaN                 NaN                      NaN                           NaN
+
+[REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values] every row (id, estimate, statistic, p, adjusted p):
+                 test_id  estimate  statistic    p_raw  p_adjusted
+         H1_NIFTY_next15  0.359750  -1.439328 0.075227    0.075227
+        H1w_NIFTY_next15  0.359750  -1.439328 0.924773    1.000000
+        H1b_NIFTY_next15  0.359750   3.056814 0.998844    1.000000
+         S1_NIFTY_next15  0.359750  -0.315292 0.376311    0.483971
+         S2_NIFTY_next15  0.359750   0.808743 0.418906    1.000000
+         R1_NIFTY_next15  0.597913  -0.668804 0.251908    0.251908
+         R2_NIFTY_next15  0.300209  -1.705426 0.044254    0.060855
+         R3_NIFTY_next15  0.359750  -1.488071 0.068565    0.068565
+         R4_NIFTY_next15  0.272932  -1.645388 0.050144    0.079236
+         R5_NIFTY_next15 -0.105706   3.695303 0.000117    0.000470
+         E1_NIFTY_next15  0.251929   2.504043 0.012479    0.012479
+         E2_NIFTY_next15  0.132153  -1.445758 0.075054    0.075054
+         H1_NIFTY_next30  0.055723  -2.511446 0.006111    0.018333
+        H1w_NIFTY_next30  0.055723  -2.511446 0.993889    1.000000
+        H1b_NIFTY_next30  0.055723   2.807856 0.997445    1.000000
+         S1_NIFTY_next30  0.055723  -1.181621 0.118856    0.475423
+         S2_NIFTY_next30  0.055723   0.148205 0.882219    1.000000
+         R1_NIFTY_next30 -0.061886   2.320805 0.010275    0.030826
+         R2_NIFTY_next30  0.085126  -2.459791 0.007057    0.021172
+         R3_NIFTY_next30  0.055723  -2.515788 0.006037    0.018110
+         R4_NIFTY_next30 -0.055641   2.572404 0.005141    0.015422
+         R5_NIFTY_next30 -0.207559   2.099929 0.018027    0.036054
+         E1_NIFTY_next30  0.302951   2.301953 0.021597    0.021597
+         E2_NIFTY_next30  0.877598  -0.161278 0.436034    0.436034
+     H1_BANKNIFTY_next15 -0.177447   2.734963 0.003203    0.012813
+    H1w_BANKNIFTY_next15 -0.177447  -3.914978 0.999950    1.000000
+    H1b_BANKNIFTY_next15 -0.177447   2.734963 0.996797    1.000000
+     S1_BANKNIFTY_next15 -0.177447   1.072478 0.141949    0.475423
+     S2_BANKNIFTY_next15 -0.177447  -0.590008 0.555388    1.000000
+     R1_BANKNIFTY_next15 -0.225453   2.701436 0.003541    0.014163
+     R2_BANKNIFTY_next15 -0.165446   2.677459 0.003802    0.015206
+     R3_BANKNIFTY_next15 -0.177447   2.735320 0.003200    0.012799
+     R4_BANKNIFTY_next15 -0.200020   2.687265 0.003693    0.014773
+     R5_BANKNIFTY_next15 -0.116726   3.063503 0.001139    0.003416
+     E1_BANKNIFTY_next15 -0.014307  -0.134733 0.892864    0.892864
+     E2_BANKNIFTY_next15 -0.410079   0.804445 0.211719    0.211719
+     H1_BANKNIFTY_next30 -0.203672   1.881996 0.030138    0.060277
+    H1w_BANKNIFTY_next30 -0.203672  -2.844687 0.997708    1.000000
+    H1b_BANKNIFTY_next30 -0.203672   1.881996 0.969862    1.000000
+     S1_BANKNIFTY_next30 -0.203672   0.700325 0.241986    0.483971
+     S2_BANKNIFTY_next30 -0.203672  -0.481346 0.630431    1.000000
+     R1_BANKNIFTY_next30 -0.227834   1.686540 0.046083    0.092165
+     R2_BANKNIFTY_next30 -0.197631   1.877766 0.030427    0.060855
+     R3_BANKNIFTY_next30 -0.203672   1.886113 0.029860    0.059719
+     R4_BANKNIFTY_next30 -0.258193   1.757868 0.039618    0.079236
+     R5_BANKNIFTY_next30 -0.156668   2.054037 0.020185    0.036054
+     E1_BANKNIFTY_next30 -0.004909  -0.028375 0.977371    0.977371
+     E2_BANKNIFTY_next30 -0.454488   0.587499 0.279232    0.279232
+ S3a_BANKNIFTY_last_hour -2.396808  -1.356616 0.912316    0.912316
+S3aw_BANKNIFTY_last_hour -2.396808  -3.299067 0.999489    0.999489
+S3ab_BANKNIFTY_last_hour -2.396808  -1.356616 0.087684    0.087684
+ S3b_BANKNIFTY_last_hour -2.396808  -2.327841 0.020222    0.020222
+
+written to /home/user/nifty-expiry-gamma-exposure/results/p120_joint_option_market (3s)
+EXIT 0

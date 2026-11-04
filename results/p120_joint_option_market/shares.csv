@@ -1,0 +1,6 @@
+data,index,target,sample,variant,share_of_gain,share_ci_low,share_ci_high,reps
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",NIFTY,next15,five-seed average,optionmkt,0.062172305174283245,-0.07490544129843012,0.18881496678951518,10000
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",NIFTY,next30,five-seed average,optionmkt,0.007111040307823665,-0.0925308838521549,0.10363391024681887,10000
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next15,five-seed average,optionmkt,-0.043366120407872695,-0.2047581212010715,0.10208083972912246,10000
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next30,five-seed average,optionmkt,-0.03871105168226875,-0.2128426848668088,0.12409527164048545,10000
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,last_hour,five-seed average,optionmkt,-0.29941460047919366,-0.7438748942683304,-0.045468151295504196,10000
