@@ -13,6 +13,25 @@ Research prototype by Shreyan Thanki, November 2026, prepared for Prof. Piyush P
 
 **What a forecast could know.** GEX is built each evening from NSE's end-of-day option chain (the F&O bhavcopy) and used the next day, so it never sees positions change intraday. Open interest gives the size of positions, but the direction of dealers' exposure must be inferred, so each sign rule assumes who the dealers are: the US convention (dealers long calls, short puts), NSE's "Pro" participants, or the mirror image of NSE's clients. Options data come from NSE's archive; the one-minute index bars that define realized volatility come from a public third-party dataset, checked against NSE's daily highs and lows.
 
+<details>
+<summary><b>What is compared, in one diagram</b></summary>
+
+```mermaid
+flowchart LR
+    B["NSE option chain<br/>(previous evening)"] --> G["GEX under each<br/>sign rule"]
+    P["NSE participant<br/>positions"] --> G
+    M["one-minute Nifty bars<br/>(up to the forecast)"] --> F["mcsGARCH forecast"]
+    F --> H["hybrid: mcsGARCH<br/>× LightGBM correction"]
+    O["India VIX, option prices,<br/>time of day"] --> H
+    H --> W["forecast without GEX"]
+    H --> X["forecast with GEX"]
+    G --> X
+    W --> L["QLIKE loss against<br/>realized volatility,<br/>792 test days"]
+    X --> L
+```
+
+</details>
+
 ## The gamma result
 
 **Change in out-of-sample QLIKE loss when GEX is added to the same Nifty forecaster.** All 792 test days; negative = lower loss.
