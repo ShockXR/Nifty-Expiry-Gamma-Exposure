@@ -155,11 +155,20 @@ def lot_history(bhav: pd.DataFrame, reported) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def load_all_bhavcopy(dirs) -> pd.DataFrame:
+def bhavcopy_files(dirs, end=None) -> list[Path]:
+    """Every fo_YYYYMMDD file in ``dirs``; with ``end``, only files dated on or before it, so that a
+    refreshed download (more days on disk) still reproduces a run made with the older snapshot."""
     files = []
     for d in dirs:
         files += sorted(Path(d).glob("fo_*.csv*"))
-    parts = [read_bhavcopy_file(f) for f in files]
+    if end is not None:
+        end = pd.Timestamp(end)
+        files = [f for f in files if pd.Timestamp(f.name[3:11]) <= end]
+    return files
+
+
+def load_all_bhavcopy(dirs, end=None) -> pd.DataFrame:
+    parts = [read_bhavcopy_file(f) for f in bhavcopy_files(dirs, end)]
     return pd.concat(parts, ignore_index=True)
 
 
@@ -219,8 +228,21 @@ def detect_schedule_changes(exp: pd.DataFrame, confirm: int = 3, stop_gap_days: 
         g = g.sort_values("expiry").reset_index(drop=True)
         wds = [d.weekday() for d in g["expiry"]]
         n = len(g)
+        # Starting regime. A holiday moves an expiry to the previous trading day, i.e. earlier in the
+        # week, so among the expiries before the first weekday confirmed by ``confirm`` consecutive
+        # expiries, the scheduled weekday is the latest one. This stops a sample that opens with
+        # holiday-shifted expiries (Bank Nifty monthlies of 25 Jan and 29 Mar 2023 on a Wednesday when
+        # the data start in January 2023) from seeding a false Wednesday regime and then a false change
+        # back to Thursday. When the sample opens with a confirmed run (the committed data: three
+        # Thursdays), this is the first weekday, as before. With no confirmed run at all, the mode of
+        # the first ``confirm`` expiries is used, as before.
         first = wds[: min(confirm, n)]
         cur = max(set(first), key=first.count)
+        for j in range(n - confirm + 1):
+            if len(set(wds[j: j + confirm])) == 1:
+                prefix = [w for w in wds[:j] if w < 5]
+                cur = max(prefix) if prefix else wds[j]
+                break
         sched = []
         i = 0
         while i < n:
@@ -659,10 +681,17 @@ def did_day_regression(daily_logs: dict, targets: dict, weeks_pre, weeks_post) -
 # ---------------------------------------------------------------------------
 
 
-def build_data(raw: Path):
+def build_data(raw: Path, end=None):
+    """Assemble daily measures, expiries and schedule changes. ``end`` (a date) cuts every raw input
+    at that date so that a refreshed download reproduces the committed run (which used data to
+    2 November 2026); None reads everything on disk."""
     t0 = time.time()
     lines = []
+    end = None if end is None else pd.Timestamp(end)
     idx = pd.read_csv(raw / "index_daily.csv", parse_dates=["date"])
+    if end is not None:
+        idx = idx[idx["date"] <= end]
+        lines.append(f"Raw inputs cut at --end {end.date()}.")
     official = set(idx.loc[idx["index"].str.lower() == "nifty 50", "date"])
     official_start = min(official)
     lines.append(f"Official NSE trading days in index_daily.csv: {len(official)} "
@@ -670,7 +699,7 @@ def build_data(raw: Path):
 
     # bhavcopy
     dirs = [raw / "extra_2022" / "bhavcopy", raw / "bhavcopy"]
-    bhav_raw = load_all_bhavcopy(dirs)
+    bhav_raw = load_all_bhavcopy(dirs, end)
     bhav = fill_legacy_lots(bhav_raw)
     lots = lot_history(bhav, bhav_raw["lot"].notna().to_numpy())
     bdays = set(bhav["date"])
@@ -692,6 +721,9 @@ def build_data(raw: Path):
     for k, fname in (("N", "nifty_1min.csv"), ("BN", "banknifty_1min.csv")):
         g = minute_grid(raw / fname)
         df, bk, rr = daily_from_grid(g)
+        if end is not None:
+            keep = np.asarray(df.index <= end)
+            df, bk, rr = df[keep], bk[keep], rr[keep]
         ok = valid_day_mask(df.index, df["n_bars"], df["flat_share"], official, official_start)
         dropped = df.index[~ok]
         lines.append(f"{NAMES[k]} minute bars: {len(df)} days {df.index.min().date()} to {df.index.max().date()}; "
@@ -1451,9 +1483,12 @@ def main():
     ap.add_argument("--raw", default=str(ROOT / "data" / "raw"))
     ap.add_argument("--out", default=str(ROOT / "results" / "event_study"))
     ap.add_argument("--boot", type=int, default=4999)
+    ap.add_argument("--end", default="2026-11-02", help="last raw-data date to read (the committed run's snapshot "
+                    "ended on 2026-11-02; a later download holds more days); 'none' reads everything on disk")
     a = ap.parse_args()
     t0 = time.time()
     raw, out = Path(a.raw), Path(a.out)
+    end = None if str(a.end).lower() == "none" else pd.Timestamp(a.end)
     out.mkdir(parents=True, exist_ok=True)
     np.random.seed(0)
 
@@ -1503,7 +1538,7 @@ def main():
                "log premia per part of the day (first hour, 10:15 to 14:30, last hour, last 30 minutes).")
     log_design("Added after seeing results (post hoc, labelled as such): the frequency diagnostics rv1/rv5 and "
                "RS/rv5, because the per-minute Rogers-Satchell premium differed from the 5-minute RV premium.")
-    D = build_data(raw)
+    D = build_data(raw, end)
     daily, expiries, changes = D["daily"], D["expiries"], D["changes"]
     lines = ["REAL DATA. Expiry-day event study, Nifty 50 and Bank Nifty.", ""] + D["lines"]
 

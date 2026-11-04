@@ -103,3 +103,49 @@ assigned 31 was skipped up front; the four timeouts and four failures are in the
   snapshot. Until it is, the bhavcopy-based studies (replicate_paper, pinning_study, intraday_gamma,
   dealer_sign, expiry_event_study, referee_expiry, pinning_mechanism, p113) cannot be reproduced to the
   committed numbers; nothing here shows that their code is at fault.
+
+## Fix: the expiry-schedule detector and an end date for the raw inputs (REAL DATA, AI agent)
+
+Cause, confirmed on `data/raw`: the `RuntimeError` in expiry_event_study and referee_expiry is not caused
+by the 3 November 2026 bhavcopy. The same error occurs with the bhavcopies cut at 2 November. It comes
+from the missing `data/raw/extra_2022/` folder: without the October to December 2022 files the Bank Nifty
+monthly series starts with 25 January 2023 (a Wednesday, 26 January was a holiday), 23 February
+(Thursday) and 29 March 2023 (Wednesday, 30 March was a holiday). `detect_schedule_changes` in
+`experiments/expiry_event_study.py` seeded the starting weekday with the mode of the first three expiries,
+which is Wednesday, and then reported a false Wednesday-to-Thursday change on 27 July 2023 in addition
+to the real one of 30 January 2025, so `define_events` found two. With the 2022 files (three October to
+December Thursdays first) the seed is Thursday and nothing goes wrong, which is why the committed run
+never hit it. The scripts also read every bhavcopy on disk and the full minute-bar files with no end
+date, so a refreshed download could never reproduce a committed run exactly: a reproducibility defect
+in itself.
+
+Change (smallest that works), in `experiments/expiry_event_study.py`:
+
+* `detect_schedule_changes`: the starting weekday is now the latest weekday among the expiries that
+  come before the first run of `confirm` consecutive expiries on one weekday (a holiday moves an expiry
+  to the previous trading day, so shifted expiries sit earlier in the week than the schedule). When the
+  sample opens with a confirmed run, as the committed data do, this is the first weekday, exactly as
+  before; with no confirmed run at all, the old mode rule applies. An isolated weekday was already a
+  shift and still is (23 November 2026 for Bank Nifty, if Tuesday 24 November is a holiday).
+* `build_data(raw, end)` and a new `--end` argument (default `2026-11-02`, the committed snapshot;
+  `none` reads everything on disk) that cut `index_daily.csv`, the bhavcopy file list
+  (`bhavcopy_files`) and the minute bars at that date. `experiments/referee_expiry.py` gets the same
+  `--end` and passes it through. No other file changed.
+* Test: `tests/test_expiry_calendar_holiday_shift.py` (6 SYNTHETIC cases: holiday-shifted opening, the
+  committed-style opening, an isolated Monday before a Tuesday holiday, a confirmed change still found
+  once, an early change to a later weekday, and the end-date file filter). With the existing
+  `tests/test_event_study.py`: 19 passed.
+
+Checks in the scratch copy, REAL DATA, `data/raw` as it is today (no `extra_2022`):
+
+| Check | Result |
+| --- | --- |
+| detector on the bhavcopies to 2 November and to 3 November | 7 changes, identical to `results/event_study/schedule_changes_detected.csv`; `define_events` returns a, b, c, c2, d |
+| `reproduce_all.py --only expiry_event_study` (default `--end 2026-11-02`) | finishes, exit 0 in 125 s; `schedule_changes_detected.csv`, `events.csv`, `event_b_paper_window_raw_vs_relative.csv` and `fig2_event_c_did.png` byte-identical to the committed files; the other 20 files differ because the 2022 quarter now comes from the Thursday rule instead of the bhavcopies (400 rule rows vs 380, 2 committed 2022 expiries absent, 0 kind or shift mismatches on the 722 common dates) and because `index_daily.csv` and `india_vix.csv` on disk differ from the manifest |
+| `expiry_event_study.py --end none` (full data, 3 November included) | finishes, exit 0 in 137 s |
+| `reproduce_all.py --only referee_expiry` (default `--end`) | finishes, exit 0 in 203 s |
+
+So the two steps run again on today's download, the regime detection on the committed snapshot is
+unchanged, and a full byte-level reproduction of `results/event_study/` still needs the `extra_2022`
+folder and the manifest's `index_daily.csv` and `india_vix.csv`. Status: VERIFIED for the fix (crash
+gone, detection identical), PARTIALLY VERIFIED for byte-level reproduction (data snapshot differs).
