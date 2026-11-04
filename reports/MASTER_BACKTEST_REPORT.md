@@ -1,6 +1,6 @@
 # Master validation report: Nifty expiry gamma exposure and volatility forecasting (niftygex)
 
-Date: 3 November 2026. Code state: PR #2 head (adbc553) plus the validation changes on this branch. All checks were run by AI agents (Sonnet), not by a human reviewer, and every claim below says where its evidence is. Nothing here is a trading result: the project forecasts intraday volatility, so it is judged on forecast accuracy, statistical tests, replication of a published paper and honest accounting of how many tests were run.
+Date: 3 November 2026. Code state: PR #2 head (adbc553) plus the validation changes on this branch (all three pull requests were merged into main on 4 November 2026, merge commit 7c6f5f7). All checks were run by AI agents (Sonnet), not by a human reviewer, and every claim below says where its evidence is. Nothing here is a trading result: the project forecasts intraday volatility, so it is judged on forecast accuracy, statistical tests, replication of a published paper and honest accounting of how many tests were run.
 
 ## 1. Summary in plain language
 
@@ -51,7 +51,7 @@ The 1-minute bars match the hashes in the manifest and show no duplicates or tim
 ## 6. Open items, most serious first
 
 1. EGARCH versus EWMA gate and the full-sample EWMA floor (A4-A-001, A1-A-002). Fix: filter and choose using data up to each block end only, then rerun the pipeline and report the change in the headline. Until then quote the authors' own sensitivity (margins without the 42 affected days).
-2. GEX engine accepts bad input silently (A4-A-002, A4-A-003). Not fixed because a fix could change GEX panels; document as a limitation, add input validation in the next round.
+2. GEX engine accepts bad input silently (A4-A-002, A4-A-003). Not fixed because a fix could change GEX panels; document as a limitation, add input validation in the next round. **Fixed on 4 November 2026** with input checks that change no committed GEX panel (`EXECUTION_SUMMARY.md`, follow-up).
 3. Last-hour result is not supported; keep it out of the pitch headline.
 4. A5 perturbation rerun and the full raw-data comparison are BLOCKED.
 5. `docs/TEST_LEDGER.md` does not regenerate exactly in a fresh checkout because one column depends on the original clone's git history (A1-A-013). Do not regenerate it.
