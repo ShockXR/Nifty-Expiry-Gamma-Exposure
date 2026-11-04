@@ -67,6 +67,9 @@ from . import greeks
 SIGN_RULES = ("us_convention", "participant", "client_mirror", "long_all", "short_all")
 REQUIRED_COLUMNS = ("strike", "is_call", "oi", "iv")
 STALE_IV = 0.01  # an annualised IV below 1 percent is not a real Nifty quote
+# Added in the 4 November 2026 review of PR #4: upper bound for an annualised IV (5.0 = 500 percent). It equals the top of
+# the bracket of greeks.implied_vol, so every IV that solver can return still passes.
+IV_MAX = 5.0
 
 
 class GexInputWarning(UserWarning):
@@ -149,6 +152,12 @@ def validate_chain(
         raise ValueError(f"{int((oi < 0).sum())} row(s) have negative open interest")
     if (iv < 0).any():
         raise ValueError(f"{int((iv < 0).sum())} row(s) have negative implied volatility")
+    # Added in the 4 November 2026 review of PR #4: infinite OI, and IV above IV_MAX (or infinite), used to give a silent NaN or a huge number
+    if np.isinf(oi).any():
+        raise ValueError(f"{int(np.isinf(oi).sum())} row(s) have infinite open interest")
+    if (iv > IV_MAX).any():
+        raise ValueError(f"{int((iv > IV_MAX).sum())} row(s) have implied volatility above {IV_MAX} "
+                         f"({IV_MAX:.0%} a year), the upper limit of the IV solver")
     if not (np.isfinite(k) & (k > 0)).all():
         raise ValueError("every strike must be a positive finite number")
     zero_iv = iv == 0
@@ -359,6 +368,19 @@ def max_pain(chain: pd.DataFrame) -> float:
     return float(strikes[int(np.argmin(payout))])
 
 
+def _check_coverage(clean: pd.DataFrame, spot: float) -> None:
+    """Added in the 4 November 2026 review of PR #4: warn about chains that are valid but cannot give a representative GEX."""
+    if len(clean) == 0:
+        return
+    n_calls = int(clean["is_call"].sum())
+    if n_calls in (0, len(clean)):
+        warnings.warn(f"chain holds only {'puts' if n_calls == 0 else 'calls'}: net GEX ignores the other side",
+                      GexInputWarning, stacklevel=3)
+    if not (np.abs(clean["strike"].to_numpy() / spot - 1) <= 0.02).any():
+        warnings.warn("no strike within 2% of spot: the near-the-money gamma that dominates GEX is missing",
+                      GexInputWarning, stacklevel=3)
+
+
 def daily_summary(
     chain: pd.DataFrame,
     spot: float,
@@ -376,13 +398,15 @@ def daily_summary(
     """
     row: dict = {"spot": spot, "T": T}
     clean = validate_chain(chain, spot, lot_size, T)
+    _check_coverage(clean, spot)  # Added in the 4 November 2026 review of PR #4
     _check_weights(participant)
     _check_weights(client_weights)
     empty = len(clean) == 0
     gross = _gex_table(chain, clean, spot, lot_size, T, r, carry, "long_all", None)
     row["gross_gex"] = float("nan") if empty else total(gross["gross_gex"])
     near = gross[np.abs(gross["strike"] / spot - 1) <= 0.01]
-    row["gross_gex_atm1pct"] = float("nan") if empty else float(near["gross_gex"].sum())
+    # Fix from the 4 November 2026 review of PR #4: total() (not .sum()) so an all-missing chain gives NaN here too, not 0.0
+    row["gross_gex_atm1pct"] = float("nan") if empty else total(near["gross_gex"])
     rules = [("us_convention", None)]
     if participant is not None:
         rules.append(("participant", participant))
