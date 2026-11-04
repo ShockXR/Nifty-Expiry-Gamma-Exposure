@@ -1,0 +1,8 @@
+symbol,kind,change,last_old_expiry,old_weekday,first_new_expiry,new_weekday
+BANKNIFTY,monthly,weekday,2024-02-29,Thu,2024-03-27,Wed
+BANKNIFTY,monthly,weekday,2024-12-24,Wed,2025-01-30,Thu
+BANKNIFTY,monthly,weekday,2025-08-28,Thu,2025-09-30,Tue
+BANKNIFTY,weekly,weekday,2023-08-24,Thu,2023-09-06,Wed
+BANKNIFTY,weekly,stopped,2024-11-13,Wed,,none
+NIFTY,monthly,weekday,2025-08-28,Thu,2025-09-30,Tue
+NIFTY,weekly,weekday,2025-08-21,Thu,2025-09-02,Tue

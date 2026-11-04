@@ -1,0 +1,15 @@
+[REAL DATA (third-party 1-minute bars validated against NSE official daily values)] P117 windows banknifty: 2289 grid days, gap 258, 1659 pairs enumerated (primary 1152, clean 723, literal 1279); 2560 windows needed, 2560 to fit
+  200 of 2560 windows (2.0 min, about 23 min left)
+  400 of 2560 windows (3.8 min, about 20 min left)
+  600 of 2560 windows (5.7 min, about 19 min left)
+  800 of 2560 windows (7.6 min, about 17 min left)
+  1000 of 2560 windows (9.4 min, about 15 min left)
+  1200 of 2560 windows (11.2 min, about 13 min left)
+  1400 of 2560 windows (13.0 min, about 11 min left)
+  1600 of 2560 windows (14.8 min, about 9 min left)
+  1800 of 2560 windows (16.6 min, about 7 min left)
+  2000 of 2560 windows (18.4 min, about 5 min left)
+  2200 of 2560 windows (20.4 min, about 3 min left)
+  2400 of 2560 windows (22.4 min, about 1 min left)
+  P114 rolling windows reproduced: 96 of 96 values identical (8 windows)
+windows stage banknifty done in 24.0 min

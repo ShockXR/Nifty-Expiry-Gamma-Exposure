@@ -1,0 +1,118 @@
+{
+  "data": "REAL DATA (third-party 1-minute bars validated against NSE official daily values)",
+  "plan_commit": "27d39ba417c884dc9605dc9ddf6c1756cf17f380",
+  "analysis_commit": "27d39ba417c884dc9605dc9ddf6c1756cf17f380",
+  "analysis_seconds": 32.0,
+  "windows": {
+    "nifty": {
+      "index": "nifty",
+      "grid_days": 2360,
+      "first_day": "2017-04-03",
+      "last_day": "2026-11-02",
+      "start_row": 1383,
+      "after_row": 1705,
+      "gap": 258,
+      "L_before": 64,
+      "L_after": 59,
+      "windows_needed": 2702,
+      "windows_fitted_this_run": 2702,
+      "seconds": 1489.0
+    },
+    "banknifty": {
+      "index": "banknifty",
+      "grid_days": 2289,
+      "first_day": "2017-01-02",
+      "last_day": "2026-04-22",
+      "start_row": 1444,
+      "after_row": 1766,
+      "gap": 258,
+      "L_before": 64,
+      "L_after": 59,
+      "windows_needed": 2560,
+      "windows_fitted_this_run": 2560,
+      "seconds": 1437.6
+    }
+  },
+  "control": {
+    "seconds": 640.1,
+    "finnifty_grid_days": 966,
+    "holes": [
+      [
+        "2022-01-28",
+        "2022-08-01"
+      ]
+    ]
+  },
+  "inputs": {
+    "nifty_1min.csv": {
+      "sha256": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "manifest": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "matches_manifest": true
+    },
+    "banknifty_1min.csv": {
+      "sha256": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "manifest": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "matches_manifest": true
+    },
+    "minute_bars_source.json": {
+      "sha256": "db96a03ba26721c8389e9f194df81728a97a537f9c3fd160b4160ea547b77ba8",
+      "manifest": "db96a03ba26721c8389e9f194df81728a97a537f9c3fd160b4160ea547b77ba8",
+      "matches_manifest": true
+    },
+    "finnifty_1min.csv": {
+      "sha256": "1ab7112881f3b761051a2024f35e830719b6ba26931208fa2995bab50a12c1b9",
+      "manifest": "1ab7112881f3b761051a2024f35e830719b6ba26931208fa2995bab50a12c1b9",
+      "matches_manifest": true
+    },
+    "finnifty_1min_source.json": {
+      "sha256": "f26c6557986c86f6bd4ce5cf6c06c459a05f2bbcee6fc7a34cd0cea0b00bd327",
+      "manifest": "f26c6557986c86f6bd4ce5cf6c06c459a05f2bbcee6fc7a34cd0cea0b00bd327",
+      "matches_manifest": true
+    }
+  },
+  "settings": {
+    "L_before": 64,
+    "L_after": 59,
+    "history_min": 250,
+    "changes": {
+      "nifty_weekly": "2019-03-04",
+      "a": "2023-08-25",
+      "b": "2024-03-01",
+      "c": "2024-11-14",
+      "c2": "2024-12-25",
+      "d": "2025-08-22",
+      "e": "2026-08-03"
+    },
+    "sets": {
+      "primary": [
+        "a",
+        "b"
+      ],
+      "clean": [
+        "nifty_weekly",
+        "a",
+        "b",
+        "c",
+        "c2",
+        "d",
+        "e"
+      ],
+      "literal": [
+        "b"
+      ]
+    },
+    "min_pairs": 200,
+    "min_disjoint": 8.0,
+    "thresholds": [
+      0.05,
+      0.1
+    ],
+    "hl_cap": 100000.0,
+    "n_boot": 400
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5"
+  }
+}

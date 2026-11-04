@@ -1,0 +1,31 @@
+sample,finding,regressor,spec,term,coef,t,p,n
+full,F1,log gross GEX (demeaned),F1 with regime controls,x_l1,-0.2040997235454408,-4.458528457649172,8.252424210616502e-06,937
+full,F1,log gross GEX (demeaned),F1 with regime controls,x_l1_x_exp,0.151086872189729,1.7696072924649602,0.07679258318926643,937
+full,F2,log gross GEX (demeaned),r_rod x 1[below median],r_rod_x_neg,0.006168904978718132,0.26698317976903335,0.7894821117765944,932
+full,F2,log gross GEX (demeaned),"r_rod x 1[below median], VIX and size controls",r_rod_x_neg,0.02079826822159518,1.0349098582168879,0.3007110103068711,931
+full,F2,log gross GEX (demeaned),r_rod x standardized value,r_rod_x_gex,0.008172057070847881,0.875301934191946,0.3814096419948855,932
+full,F1,gross GEX / 20-day median,F1 with regime controls,x_l1,-0.27130471236734865,-5.307694676108595,1.1102040511158968e-07,937
+full,F1,gross GEX / 20-day median,F1 with regime controls,x_l1_x_exp,0.004005000240459042,0.03471285033117067,0.9723087140210424,937
+full,F2,gross GEX / 20-day median,r_rod x 1[below median],r_rod_x_neg,-0.012368341332771557,-0.6075080261449406,0.543513817799359,932
+full,F2,gross GEX / 20-day median,"r_rod x 1[below median], VIX and size controls",r_rod_x_neg,0.011814612777112717,0.6286390210757983,0.5295854079796833,931
+full,F2,gross GEX / 20-day median,r_rod x standardized value,r_rod_x_gex,0.00896987478181223,0.9100799797392193,0.36278033191685655,929
+full,F1,log total OI (demeaned),F1 with regime controls,x_l1,-0.10988711198369781,-1.9317737392156793,0.05338743872954755,937
+full,F1,log total OI (demeaned),F1 with regime controls,x_l1_x_exp,0.34823305636557844,1.3896520386284115,0.16463456541715782,937
+full,F2,log total OI (demeaned),r_rod x 1[below median],r_rod_x_neg,-0.012655994738533296,-0.5236631881146075,0.6005128237204755,932
+full,F2,log total OI (demeaned),"r_rod x 1[below median], VIX and size controls",r_rod_x_neg,0.008959262953150166,0.4282644878556671,0.6684585704827068,931
+full,F2,log total OI (demeaned),r_rod x standardized value,r_rod_x_gex,0.00150752062863366,0.1530612049353614,0.8783500092945075,932
+pre_auction,F1,log gross GEX (demeaned),F1 with regime controls,x_l1,-0.21586349769156143,-4.588606699426276,4.462142180966669e-06,874
+pre_auction,F1,log gross GEX (demeaned),F1 with regime controls,x_l1_x_exp,0.13656964530132853,1.584783451975568,0.11301554344410995,874
+pre_auction,F2,log gross GEX (demeaned),r_rod x 1[below median],r_rod_x_neg,0.013698281317892694,0.570766689795449,0.5681578054511858,869
+pre_auction,F2,log gross GEX (demeaned),"r_rod x 1[below median], VIX and size controls",r_rod_x_neg,0.0295628091958229,1.4353101552613732,0.15119873519081253,868
+pre_auction,F2,log gross GEX (demeaned),r_rod x standardized value,r_rod_x_gex,0.006643122850922514,0.6809057392601237,0.4959311363077683,869
+pre_auction,F1,gross GEX / 20-day median,F1 with regime controls,x_l1,-0.28678507492085714,-5.581926597153768,2.3786877283978685e-08,874
+pre_auction,F1,gross GEX / 20-day median,F1 with regime controls,x_l1_x_exp,-0.0012178688148836159,-0.010234673879769137,0.9918340542885568,874
+pre_auction,F2,gross GEX / 20-day median,r_rod x 1[below median],r_rod_x_neg,-0.007206922789047668,-0.3431831882023353,0.7314606514158328,869
+pre_auction,F2,gross GEX / 20-day median,"r_rod x 1[below median], VIX and size controls",r_rod_x_neg,0.019189385379081658,0.9915431110917273,0.3214204522259029,868
+pre_auction,F2,gross GEX / 20-day median,r_rod x standardized value,r_rod_x_gex,0.008479361977832054,0.848794789666986,0.395995489929288,866
+pre_auction,F1,log total OI (demeaned),F1 with regime controls,x_l1,-0.1223760496628703,-2.0822251082542076,0.037321912882423584,874
+pre_auction,F1,log total OI (demeaned),F1 with regime controls,x_l1_x_exp,0.3341241984328178,1.286487899713025,0.1982728391146923,874
+pre_auction,F2,log total OI (demeaned),r_rod x 1[below median],r_rod_x_neg,-0.014263373377744628,-0.5594302217112829,0.5758681406582281,869
+pre_auction,F2,log total OI (demeaned),"r_rod x 1[below median], VIX and size controls",r_rod_x_neg,0.009049629007496014,0.41135547517555565,0.6808118972172643,868
+pre_auction,F2,log total OI (demeaned),r_rod x standardized value,r_rod_x_gex,-0.0006777985961774976,-0.06560279723047999,0.9476940620453809,869

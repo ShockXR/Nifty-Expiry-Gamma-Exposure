@@ -1,0 +1,137 @@
+REAL DATA. Nifty 50 end-of-day momentum conditioned on GEX known the evening before.
+Days: 932 (198 expiry). Returns in basis points.
+
+== key coefficients
+                          spec            rule     subset              term    coef     se_hac          p   n     r2  p_holm_family  p_bh_family  family_size
+                 momentum only            none        all             r_rod -0.0294 1.2132e-02 1.5323e-02 932 0.0163            NaN          NaN          NaN
+                 momentum only            none non_expiry             r_rod -0.0270 1.4466e-02 6.2065e-02 734 0.0151            NaN          NaN          NaN
+                 momentum only            none     expiry             r_rod -0.0374 1.5989e-02 1.9261e-02 198 0.0186            NaN          NaN          NaN
+                        binary   us_convention        all             r_rod -0.0311 1.3209e-02 1.8711e-02 929 0.0167            NaN          NaN          NaN
+                        binary   us_convention        all       r_rod_x_neg  0.0130 2.3806e-02 5.8411e-01 929 0.0167         1.0000       0.9143         36.0
+        binary + regime slopes   us_convention        all             r_rod -0.0426 1.8871e-02 2.3888e-02 929 0.0225            NaN          NaN          NaN
+        binary + regime slopes   us_convention        all       r_rod_x_neg  0.0015 2.4508e-02 9.5063e-01 929 0.0225         1.0000       0.9715         36.0
+binary + VIX and size controls   us_convention        all             r_rod  0.0166 1.2836e-02 1.9591e-01 929 0.0500            NaN          NaN          NaN
+binary + VIX and size controls   us_convention        all       r_rod_x_neg -0.0008 2.3333e-02 9.7151e-01 929 0.0500         1.0000       0.9715         36.0
+binary + VIX and size controls   us_convention        all      r_rod_x_lvix  0.0737 4.1878e-02 7.8461e-02 929 0.0500            NaN          NaN          NaN
+binary + VIX and size controls   us_convention        all r_rod_x_abs_r_rod -0.0003 6.2612e-05 2.7250e-06 929 0.0500            NaN          NaN          NaN
+                    continuous   us_convention        all             r_rod -0.0214 1.3114e-02 1.0272e-01 929 0.0215            NaN          NaN          NaN
+                    continuous   us_convention        all       r_rod_x_gex -0.0719 1.0530e-01 4.9496e-01 929 0.0215         1.0000       0.8485         36.0
+                        binary   us_convention non_expiry             r_rod -0.0300 1.5716e-02 5.6417e-02 732 0.0171            NaN          NaN          NaN
+                        binary   us_convention non_expiry       r_rod_x_neg  0.0161 2.7800e-02 5.6141e-01 732 0.0171         1.0000       0.9143         36.0
+        binary + regime slopes   us_convention non_expiry             r_rod -0.0398 2.2620e-02 7.8195e-02 732 0.0211            NaN          NaN          NaN
+        binary + regime slopes   us_convention non_expiry       r_rod_x_neg  0.0071 2.7966e-02 7.9873e-01 732 0.0211         1.0000       0.9703         36.0
+binary + VIX and size controls   us_convention non_expiry             r_rod  0.0236 1.4810e-02 1.1116e-01 732 0.0599            NaN          NaN          NaN
+binary + VIX and size controls   us_convention non_expiry       r_rod_x_neg  0.0039 2.8155e-02 8.9113e-01 732 0.0599         1.0000       0.9715         36.0
+binary + VIX and size controls   us_convention non_expiry      r_rod_x_lvix  0.0789 5.0404e-02 1.1730e-01 732 0.0599            NaN          NaN          NaN
+binary + VIX and size controls   us_convention non_expiry r_rod_x_abs_r_rod -0.0003 6.6437e-05 3.5443e-06 732 0.0599            NaN          NaN          NaN
+                    continuous   us_convention non_expiry             r_rod -0.0087 1.4799e-02 5.5461e-01 732 0.0228            NaN          NaN          NaN
+                    continuous   us_convention non_expiry       r_rod_x_gex -0.2440 1.6369e-01 1.3613e-01 732 0.0228         1.0000       0.2883         36.0
+                        binary   us_convention     expiry             r_rod -0.0336 1.6683e-02 4.3849e-02 197 0.0300            NaN          NaN          NaN
+                        binary   us_convention     expiry       r_rod_x_neg -0.0190 8.5331e-02 8.2422e-01 197 0.0300         1.0000       0.9703         36.0
+        binary + regime slopes   us_convention     expiry             r_rod -0.0507 2.5070e-02 4.3175e-02 197 0.0427            NaN          NaN          NaN
+        binary + regime slopes   us_convention     expiry       r_rod_x_neg -0.0370 8.6704e-02 6.6947e-01 197 0.0427         1.0000       0.9640         36.0
+binary + VIX and size controls   us_convention     expiry             r_rod  0.0313 3.8173e-02 4.1192e-01 197 0.0738            NaN          NaN          NaN
+binary + VIX and size controls   us_convention     expiry       r_rod_x_neg -0.0567 7.5934e-02 4.5534e-01 197 0.0738         1.0000       0.8196         36.0
+binary + VIX and size controls   us_convention     expiry      r_rod_x_lvix  0.1108 7.1103e-02 1.1900e-01 197 0.0738            NaN          NaN          NaN
+binary + VIX and size controls   us_convention     expiry r_rod_x_abs_r_rod -0.0006 2.1650e-04 9.0705e-03 197 0.0738            NaN          NaN          NaN
+                    continuous   us_convention     expiry             r_rod -0.0680 2.9360e-02 2.0536e-02 197 0.0630            NaN          NaN          NaN
+                    continuous   us_convention     expiry       r_rod_x_gex  0.2690 1.3722e-01 4.9981e-02 197 0.0630         1.0000       0.1200         36.0
+                        binary participant_pro        all             r_rod  0.0107 1.0121e-02 2.8939e-01 929 0.0397            NaN          NaN          NaN
+                        binary participant_pro        all       r_rod_x_neg -0.0682 1.8433e-02 2.1580e-04 929 0.0397         0.0073       0.0026         36.0
+        binary + regime slopes participant_pro        all             r_rod  0.0143 2.0895e-02 4.9403e-01 929 0.0413            NaN          NaN          NaN
+        binary + regime slopes participant_pro        all       r_rod_x_neg -0.0695 2.0420e-02 6.6382e-04 929 0.0413         0.0212       0.0047         36.0
+binary + VIX and size controls participant_pro        all             r_rod  0.0371 1.2536e-02 3.0464e-03 929 0.0619            NaN          NaN          NaN
+binary + VIX and size controls participant_pro        all       r_rod_x_neg -0.0498 1.6687e-02 2.8604e-03 929 0.0619         0.0772       0.0103         36.0
+binary + VIX and size controls participant_pro        all      r_rod_x_lvix  0.0762 4.0179e-02 5.8012e-02 929 0.0619            NaN          NaN          NaN
+binary + VIX and size controls participant_pro        all r_rod_x_abs_r_rod -0.0003 5.9847e-05 2.8707e-05 929 0.0619            NaN          NaN          NaN
+                    continuous participant_pro        all             r_rod -0.0278 1.0669e-02 9.1187e-03 929 0.0312            NaN          NaN          NaN
+                    continuous participant_pro        all       r_rod_x_gex  1.2068 4.5394e-01 7.8499e-03 929 0.0312         0.2041       0.0257         36.0
+                        binary participant_pro non_expiry             r_rod  0.0134 1.1865e-02 2.6027e-01 732 0.0422            NaN          NaN          NaN
+                        binary participant_pro non_expiry       r_rod_x_neg -0.0702 2.1158e-02 9.1174e-04 732 0.0422         0.0274       0.0047         36.0
+        binary + regime slopes participant_pro non_expiry             r_rod  0.0227 2.2846e-02 3.2031e-01 732 0.0436            NaN          NaN          NaN
+        binary + regime slopes participant_pro non_expiry       r_rod_x_neg -0.0752 2.2431e-02 7.9567e-04 732 0.0436         0.0247       0.0047         36.0
+binary + VIX and size controls participant_pro non_expiry             r_rod  0.0445 1.4460e-02 2.0741e-03 732 0.0713            NaN          NaN          NaN
+binary + VIX and size controls participant_pro non_expiry       r_rod_x_neg -0.0497 1.9202e-02 9.6469e-03 732 0.0713         0.2315       0.0267         36.0
+binary + VIX and size controls participant_pro non_expiry      r_rod_x_lvix  0.0848 4.7998e-02 7.7281e-02 732 0.0713            NaN          NaN          NaN
+binary + VIX and size controls participant_pro non_expiry r_rod_x_abs_r_rod -0.0003 6.2385e-05 1.6872e-05 732 0.0713            NaN          NaN          NaN
+                    continuous participant_pro non_expiry             r_rod -0.0257 1.1573e-02 2.6643e-02 732 0.0472            NaN          NaN          NaN
+                    continuous participant_pro non_expiry       r_rod_x_gex  2.1542 6.7523e-01 1.4214e-03 732 0.0472         0.0398       0.0057         36.0
+                        binary participant_pro     expiry             r_rod  0.0038 3.4224e-02 9.1245e-01 197 0.0334            NaN          NaN          NaN
+                        binary participant_pro     expiry       r_rod_x_neg -0.0636 3.8347e-02 9.7049e-02 197 0.0334         1.0000       0.2184         36.0
+        binary + regime slopes participant_pro     expiry             r_rod -0.0122 4.4855e-02 7.8544e-01 197 0.0409            NaN          NaN          NaN
+        binary + regime slopes participant_pro     expiry       r_rod_x_neg -0.0549 4.0036e-02 1.7012e-01 197 0.0409         1.0000       0.3402         36.0
+binary + VIX and size controls participant_pro     expiry             r_rod  0.0368 3.7052e-02 3.2100e-01 197 0.0664            NaN          NaN          NaN
+binary + VIX and size controls participant_pro     expiry       r_rod_x_neg -0.0398 3.9648e-02 3.1590e-01 197 0.0664         1.0000       0.5985         36.0
+binary + VIX and size controls participant_pro     expiry      r_rod_x_lvix  0.0836 6.9538e-02 2.2907e-01 197 0.0664            NaN          NaN          NaN
+binary + VIX and size controls participant_pro     expiry r_rod_x_abs_r_rod -0.0005 2.5401e-04 7.1941e-02 197 0.0664            NaN          NaN          NaN
+                    continuous participant_pro     expiry             r_rod -0.0367 1.6916e-02 2.9881e-02 197 0.0220            NaN          NaN          NaN
+                    continuous participant_pro     expiry       r_rod_x_gex -0.1890 5.7731e-01 7.4337e-01 197 0.0220         1.0000       0.9703         36.0
+                        binary   client_mirror        all             r_rod -0.0202 1.1260e-02 7.2757e-02 929 0.0315            NaN          NaN          NaN
+                        binary   client_mirror        all       r_rod_x_neg -0.0720 1.7276e-02 3.0963e-05 929 0.0315         0.0011       0.0006         36.0
+        binary + regime slopes   client_mirror        all             r_rod -0.0240 1.7214e-02 1.6295e-01 929 0.0347            NaN          NaN          NaN
+        binary + regime slopes   client_mirror        all       r_rod_x_neg -0.0683 2.1176e-02 1.2511e-03 929 0.0347         0.0363       0.0056         36.0
+binary + VIX and size controls   client_mirror        all             r_rod  0.0158 1.2608e-02 2.0920e-01 929 0.0517            NaN          NaN          NaN
+binary + VIX and size controls   client_mirror        all       r_rod_x_neg  0.0028 3.8567e-02 9.4137e-01 929 0.0517         1.0000       0.9715         36.0
+binary + VIX and size controls   client_mirror        all      r_rod_x_lvix  0.0700 4.2319e-02 9.8133e-02 929 0.0517            NaN          NaN          NaN
+binary + VIX and size controls   client_mirror        all r_rod_x_abs_r_rod -0.0003 8.8097e-05 1.0350e-03 929 0.0517            NaN          NaN          NaN
+                    continuous   client_mirror        all             r_rod -0.0483 1.2320e-02 8.8995e-05 929 0.0259            NaN          NaN          NaN
+                    continuous   client_mirror        all       r_rod_x_gex  0.5633 2.6068e-01 3.0691e-02 929 0.0259         0.7059       0.0789         36.0
+                        binary   client_mirror non_expiry             r_rod -0.0161 1.3255e-02 2.2433e-01 732 0.0347            NaN          NaN          NaN
+                        binary   client_mirror non_expiry       r_rod_x_neg -0.0767 1.8408e-02 3.0671e-05 732 0.0347         0.0011       0.0006         36.0
+        binary + regime slopes   client_mirror non_expiry             r_rod -0.0147 2.0048e-02 4.6334e-01 732 0.0363            NaN          NaN          NaN
+        binary + regime slopes   client_mirror non_expiry       r_rod_x_neg -0.0776 2.2609e-02 5.9938e-04 732 0.0363         0.0198       0.0047         36.0
+binary + VIX and size controls   client_mirror non_expiry             r_rod  0.0258 1.4879e-02 8.3115e-02 732 0.0601            NaN          NaN          NaN
+binary + VIX and size controls   client_mirror non_expiry       r_rod_x_neg  0.0121 4.1010e-02 7.6727e-01 732 0.0601         1.0000       0.9703         36.0
+binary + VIX and size controls   client_mirror non_expiry      r_rod_x_lvix  0.0764 4.7757e-02 1.0960e-01 732 0.0601            NaN          NaN          NaN
+binary + VIX and size controls   client_mirror non_expiry r_rod_x_abs_r_rod -0.0003 1.0394e-04 2.0814e-03 732 0.0601            NaN          NaN          NaN
+                    continuous   client_mirror non_expiry             r_rod -0.0536 1.0440e-02 2.9037e-07 732 0.0387            NaN          NaN          NaN
+                    continuous   client_mirror non_expiry       r_rod_x_gex  0.9849 3.7815e-01 9.1998e-03 732 0.0387         0.2300       0.0267         36.0
+                        binary   client_mirror     expiry             r_rod -0.0343 1.5910e-02 3.1115e-02 197 0.0234            NaN          NaN          NaN
+                        binary   client_mirror     expiry       r_rod_x_neg -0.0323 1.7663e-01 8.5483e-01 197 0.0234         1.0000       0.9703         36.0
+        binary + regime slopes   client_mirror     expiry             r_rod -0.0527 2.3944e-02 2.7613e-02 197 0.0381            NaN          NaN          NaN
+        binary + regime slopes   client_mirror     expiry       r_rod_x_neg -0.0297 1.7171e-01 8.6250e-01 197 0.0381         1.0000       0.9703         36.0
+binary + VIX and size controls   client_mirror     expiry             r_rod  0.0324 3.5669e-02 3.6415e-01 197 0.0633            NaN          NaN          NaN
+binary + VIX and size controls   client_mirror     expiry       r_rod_x_neg -0.0827 1.7513e-01 6.3689e-01 197 0.0633         1.0000       0.9553         36.0
+binary + VIX and size controls   client_mirror     expiry      r_rod_x_lvix  0.0875 7.0658e-02 2.1575e-01 197 0.0633            NaN          NaN          NaN
+binary + VIX and size controls   client_mirror     expiry r_rod_x_abs_r_rod -0.0006 2.1208e-04 5.7109e-03 197 0.0633            NaN          NaN          NaN
+                    continuous   client_mirror     expiry             r_rod -0.0242 3.3556e-02 4.7079e-01 197 0.0285            NaN          NaN          NaN
+                    continuous   client_mirror     expiry       r_rod_x_gex -0.1613 4.5673e-01 7.2395e-01 197 0.0285         1.0000       0.9703         36.0
+
+== gamma states (descriptive; 'follow payoff' = sign(rest-of-day return) x last-30-minute return, before costs, not a trading claim)
+           rule     subset    state  days  mean_follow_payoff_bp  t_stat  corr_rod_last
+  us_convention        all  GEX < 0   107                -1.0345 -0.5847        -0.0794
+  us_convention        all GEX >= 0   822                -0.3113 -0.4916        -0.1337
+  us_convention non_expiry  GEX < 0    82                 0.1597  0.0846        -0.0659
+  us_convention non_expiry GEX >= 0   650                -0.4652 -0.6721        -0.1348
+  us_convention     expiry  GEX < 0    25                -4.9512 -1.1388        -0.1808
+  us_convention     expiry GEX >= 0   172                 0.2703  0.1772        -0.1248
+participant_pro        all  GEX < 0   463                -2.0964 -2.3462        -0.2549
+participant_pro        all GEX >= 0   466                 1.2962  1.6561         0.0452
+participant_pro non_expiry  GEX < 0   357                -2.0845 -2.0079        -0.2509
+participant_pro non_expiry GEX >= 0   375                 1.2130  1.5418         0.0638
+participant_pro     expiry  GEX < 0   106                -2.1364 -1.2261        -0.2727
+participant_pro     expiry GEX >= 0    91                 1.6393  0.6922         0.0106
+  client_mirror        all  GEX < 0    38                -6.1645 -1.5520        -0.5333
+  client_mirror        all GEX >= 0   891                -0.1485 -0.2487        -0.0851
+  client_mirror non_expiry  GEX < 0    28                -5.8622 -1.3910        -0.6649
+  client_mirror non_expiry GEX >= 0   704                -0.1778 -0.2720        -0.0700
+  client_mirror     expiry  GEX < 0    10                -7.0110 -0.7112        -0.1276
+  client_mirror     expiry GEX >= 0   187                -0.0384 -0.0268        -0.1305
+
+== stability of the binary interaction
+           rule                     part  days  neg_days   r_rod  r_rod_x_neg      p
+  us_convention      regime multi_weekly   449        33 -0.0427      -0.0035 0.9640
+  us_convention regime single_weekly_thu   192        18 -0.0266      -0.0310 0.2388
+  us_convention regime single_weekly_tue   288        56 -0.0154       0.0149 0.6566
+  us_convention               first half   463        34 -0.0424      -0.0294 0.5632
+  us_convention              second half   466        73 -0.0210       0.0145 0.5668
+participant_pro      regime multi_weekly   449       349  0.0046      -0.0573 0.0653
+participant_pro regime single_weekly_thu   192        65  0.0250      -0.1139 0.0005
+participant_pro regime single_weekly_tue   288        49  0.0054      -0.0485 0.1722
+participant_pro               first half   463       356  0.0062      -0.0613 0.0353
+participant_pro              second half   466       107  0.0114      -0.0735 0.0105
+  client_mirror      regime multi_weekly   449        29 -0.0239      -0.0687 0.0021
+  client_mirror regime single_weekly_thu   192         9 -0.0270      -0.1050 0.0407
+  client_mirror regime single_weekly_tue   288         0     NaN          NaN    NaN
+  client_mirror               first half   463        29 -0.0266      -0.0660 0.0022
+  client_mirror              second half   466         9 -0.0166      -0.1155 0.0138

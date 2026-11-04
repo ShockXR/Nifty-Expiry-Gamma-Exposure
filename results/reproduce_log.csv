@@ -1,0 +1,23 @@
+step,command,exit_code,seconds,outputs
+data_manifest_check,/usr/local/bin/python scripts/data_manifest.py check,0,2.7,
+validate_minute_bars,/usr/local/bin/python scripts/validate_minute_bars.py,0,2.8,results/data_validation/
+check_oi_units,/usr/local/bin/python scripts/check_oi_units.py,0,16.0,results/data_validation/
+run_pipeline,/usr/local/bin/python scripts/run_pipeline.py --source nse --end 2026-11-02 --n-seeds 5 --seed-study 3 --out results/pipeline_nse_v2,0,6909.2,results/pipeline_nse_v2/
+forecast_diagnostics,/usr/local/bin/python experiments/forecast_diagnostics.py,0,1.4,results/forecast_diagnostics/
+real_day_level,/usr/local/bin/python experiments/real_day_level.py,0,2.3,results/real_day_level/
+momentum_gex,/usr/local/bin/python experiments/momentum_gex.py,0,2.8,results/momentum_gex/
+closing_auction_check,/usr/local/bin/python experiments/closing_auction_check.py,0,4.6,results/closing_auction/
+replicate_paper,/usr/local/bin/python experiments/replicate_paper.py,0,126.3,results/replication_nse/
+pinning_study,/usr/local/bin/python experiments/pinning_study.py,0,125.0,results/pinning/
+notebook,jupyter nbconvert --to notebook --execute --inplace notebooks/01_real_data_tour.ipynb,1,9.1,notebooks/01_real_data_tour.ipynb
+falsification,/usr/local/bin/python experiments/falsification.py,0,270.4,results/falsification/
+intraday_gamma,/usr/local/bin/python experiments/intraday_gamma.py,0,121.1,results/intraday_gamma/
+dealer_sign,/usr/local/bin/python experiments/dealer_sign.py,0,120.1,results/dealer_sign/
+expiry_event_study,/usr/local/bin/python experiments/expiry_event_study.py,0,116.0,results/event_study/
+sensex_confound,/usr/local/bin/python experiments/sensex_confound.py,0,57.7,results/sensex_confound/
+connectedness_gamma,/usr/local/bin/python experiments/connectedness_gamma.py,0,59.5,results/connectedness_gamma/
+power_real,/usr/local/bin/python experiments/power_real.py,0,354.5,results/power_real/
+rekey_check,/usr/local/bin/python experiments/rekey_check.py,0,1.5,results/replication_nse/rekey_check.csv
+pinning_mechanism,/usr/local/bin/python experiments/pinning_mechanism.py,0,187.6,results/pinning_mechanism/
+f2_economics,/usr/local/bin/python experiments/f2_economics.py,0,5.0,results/f2_economics/
+sensex_swap,/usr/local/bin/python experiments/sensex_swap.py,0,33.3,results/sensex_swap/

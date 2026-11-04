@@ -1,0 +1,41 @@
+profile,binning,decile,n,mean_rv15_x1e6,se_rv15_x1e6,mean_y_res,se_y_res
+real OI profile,raw,1,500,2.3035806860066192,0.10256638192641836,,
+real OI profile,raw,2,500,1.5376897948940318,0.09477295210765843,,
+real OI profile,raw,3,500,1.7981415676984416,0.2214841324819955,,
+real OI profile,raw,4,500,1.1074584369060478,0.04541078638235389,,
+real OI profile,raw,5,500,1.3628188701584198,0.08896078842607502,,
+real OI profile,raw,6,500,1.4288246696589364,0.13558080595912012,,
+real OI profile,raw,7,500,1.0608419740453876,0.057520109107184296,,
+real OI profile,raw,8,500,1.0593600271980714,0.07064850191051042,,
+real OI profile,raw,9,500,1.071366941621874,0.04870145257123266,,
+real OI profile,raw,10,500,0.9243549128021016,0.0375923031474963,,
+real OI profile,within day and time of day,1,500,,,-0.013180874998516468,0.03127642368946561
+real OI profile,within day and time of day,2,500,,,0.005170181355289511,0.026463920053735133
+real OI profile,within day and time of day,3,500,,,0.001029465351244511,0.02675072300462023
+real OI profile,within day and time of day,4,500,,,-0.05626490914577068,0.02459098967328016
+real OI profile,within day and time of day,5,500,,,-0.05822827827397745,0.029750083243565952
+real OI profile,within day and time of day,6,500,,,-0.062127262978653376,0.027321918055323163
+real OI profile,within day and time of day,7,500,,,-0.019051435762021143,0.027927381402120564
+real OI profile,within day and time of day,8,500,,,0.030297001388964448,0.025481653650339636
+real OI profile,within day and time of day,9,500,,,0.07145006743635993,0.02652809772215199
+real OI profile,within day and time of day,10,500,,,0.10090604562708072,0.031237142904156606
+placebo: profile shifted +25 points,raw,1,500,2.2588275107283304,0.10212837928623422,,
+placebo: profile shifted +25 points,raw,2,500,1.6898254163608328,0.1017382014852945,,
+placebo: profile shifted +25 points,raw,3,500,1.678549252227605,0.21912378823231524,,
+placebo: profile shifted +25 points,raw,4,500,1.1095654255627336,0.05169424824832591,,
+placebo: profile shifted +25 points,raw,5,500,1.310060180206894,0.05673953508997597,,
+placebo: profile shifted +25 points,raw,6,500,1.4749962501969123,0.14954850166868588,,
+placebo: profile shifted +25 points,raw,7,500,1.0258135485177786,0.055387155401433005,,
+placebo: profile shifted +25 points,raw,8,500,1.0632018805654848,0.07206914512260515,,
+placebo: profile shifted +25 points,raw,9,500,1.1504327899824904,0.05000317530744251,,
+placebo: profile shifted +25 points,raw,10,500,0.8931656266408676,0.036608993579134955,,
+placebo: profile shifted +25 points,within day and time of day,1,500,,,-0.019210432599630154,0.02998517108412052
+placebo: profile shifted +25 points,within day and time of day,2,500,,,0.03751987087711585,0.027902698365711374
+placebo: profile shifted +25 points,within day and time of day,3,500,,,-0.03066684972001218,0.02535860549269024
+placebo: profile shifted +25 points,within day and time of day,4,500,,,-0.001856277413816887,0.024527336154081508
+placebo: profile shifted +25 points,within day and time of day,5,500,,,-0.044611104813727924,0.02732480638112064
+placebo: profile shifted +25 points,within day and time of day,6,500,,,-0.08075121603421118,0.029956271952149473
+placebo: profile shifted +25 points,within day and time of day,7,500,,,-0.007899531120920185,0.028108846193260605
+placebo: profile shifted +25 points,within day and time of day,8,500,,,-0.01641157905855672,0.02498099942234022
+placebo: profile shifted +25 points,within day and time of day,9,500,,,0.053977672797939226,0.028094628735559388
+placebo: profile shifted +25 points,within day and time of day,10,500,,,0.10990944708582019,0.03115492377708915

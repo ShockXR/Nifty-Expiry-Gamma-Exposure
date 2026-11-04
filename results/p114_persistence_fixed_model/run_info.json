@@ -1,0 +1,167 @@
+{
+  "label": "REAL DATA (third-party 1-minute bars validated against NSE official daily values)",
+  "plan_commit": "86e386635284b24d876c32a7aecc63a1ecd23886",
+  "analysis_commit": "86e386635284b24d876c32a7aecc63a1ecd23886",
+  "python": "3.13.18 (main, Oct 26 2026, 14:08:19) [Clang 23.1.3 ]",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "seconds_analyze": 2.2,
+  "settings": {
+    "windows": {
+      "before_inferred": [
+        "2022-11-14",
+        "2023-02-10"
+      ],
+      "before_stated": [
+        "2023-11-01",
+        "2024-02-29"
+      ],
+      "after": [
+        "2024-03-01",
+        "2024-05-31"
+      ],
+      "before_p108": [
+        "2022-11-22",
+        "2023-02-20"
+      ]
+    },
+    "n_boot": 400,
+    "block_days": 5,
+    "chunks": 4,
+    "shock_minute": 180,
+    "other_shocks": {
+      "1015": 60,
+      "1415": 300
+    },
+    "models": {
+      "ref": [
+        "egarch",
+        false,
+        false,
+        false
+      ],
+      "F": [
+        "har",
+        true,
+        false,
+        true
+      ],
+      "F4": [
+        "har",
+        true,
+        true,
+        true
+      ],
+      "X1": [
+        "har",
+        false,
+        false,
+        false
+      ],
+      "X2": [
+        "egarch",
+        true,
+        false,
+        false
+      ],
+      "X3": [
+        "egarch",
+        false,
+        false,
+        true
+      ]
+    },
+    "roll": [
+      "2022-11-14",
+      64,
+      21,
+      4
+    ],
+    "hl_cap": 100000.0
+  },
+  "fit_info": {
+    "seconds": 24.8,
+    "grid_days": 1782,
+    "windows": {
+      "before_inferred": [
+        "2022-11-14",
+        "2023-02-10",
+        64
+      ],
+      "before_stated": [
+        "2023-11-01",
+        "2024-02-29",
+        82
+      ],
+      "after": [
+        "2024-03-01",
+        "2024-05-31",
+        59
+      ],
+      "before_p108": [
+        "2022-11-22",
+        "2023-02-20",
+        64
+      ]
+    }
+  },
+  "inputs": {
+    "nifty_1min.csv": {
+      "sha256": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "manifest": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "matches_manifest": true
+    },
+    "banknifty_1min.csv": {
+      "sha256": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "manifest": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "matches_manifest": true
+    },
+    "minute_bars_source.json": {
+      "sha256": "db96a03ba26721c8389e9f194df81728a97a537f9c3fd160b4160ea547b77ba8",
+      "manifest": "db96a03ba26721c8389e9f194df81728a97a537f9c3fd160b4160ea547b77ba8",
+      "matches_manifest": true
+    }
+  },
+  "boot_timing": [
+    {
+      "window": "before_inferred",
+      "index": "nifty",
+      "seconds": 342.5
+    },
+    {
+      "window": "after",
+      "index": "nifty",
+      "seconds": 297.8
+    },
+    {
+      "window": "before_inferred",
+      "index": "banknifty",
+      "seconds": 337.8
+    },
+    {
+      "window": "after",
+      "index": "banknifty",
+      "seconds": 302.9
+    },
+    {
+      "window": "before_stated",
+      "index": "nifty",
+      "seconds": 191.5
+    },
+    {
+      "window": "before_stated",
+      "index": "banknifty",
+      "seconds": 203.8
+    },
+    {
+      "window": "before_p108",
+      "index": "nifty",
+      "seconds": 151.9
+    },
+    {
+      "window": "before_p108",
+      "index": "banknifty",
+      "seconds": 168.0
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "day": "2026-11-03",
+  "information_set": "files published up to the close of 2026-11-02",
+  "frozen_at_utc": "2026-11-02 21:01:17",
+  "label": "REAL DATA, live demonstration (n = 1, not evidence)",
+  "previous_official_close": 23440.8,
+  "previous_vix": 15.5,
+  "day_ahead": {
+    "rv_day": {
+      "target": "rv_day",
+      "n_train": 920,
+      "r2": 0.4685521130535629,
+      "log_forecast": -9.949655379526948,
+      "forecast": 5.551346767486438e-05,
+      "median_forecast": 4.774408469105741e-05,
+      "p10": 2.692228932784042e-05,
+      "p90": 8.59550232874337e-05,
+      "coefficients": {
+        "const": -7.774610942688284,
+        "rv_day_l1": 0.3615689215255041,
+        "rv_day_m5": 0.1581921523300844,
+        "rv_day_m22": -0.015728847642614313,
+        "lvix_prev": 0.9545356019231703,
+        "expiry": 0.16921833066844383,
+        "tue": 0.013103395714380461,
+        "thu_single": 0.07506296023374404,
+        "auction": 0.045781978080785185,
+        "expiry_x_tue": 0.008570487757384893,
+        "expiry_x_thu_single": -0.19976772429514422
+      }
+    },
+    "rv_last_hour": {
+      "target": "rv_last_hour",
+      "n_train": 920,
+      "r2": 0.2542544618522742,
+      "log_forecast": -11.466116977011175,
+      "forecast": 1.3339395412852328e-05,
+      "median_forecast": 1.0479213003142213e-05,
+      "p10": 4.680611985492719e-06,
+      "p90": 2.2222982139790883e-05,
+      "coefficients": {
+        "const": -11.601452009232911,
+        "rv_last_hour_l1": 0.1709080643040075,
+        "rv_last_hour_m5": 0.17563228067483896,
+        "rv_last_hour_m22": -0.046081142871123554,
+        "lvix_prev": 1.1048311335331982,
+        "expiry": 0.1675591756252598,
+        "tue": 0.0361493672211361,
+        "thu_single": -0.1942466138435729,
+        "auction": 0.08111433992019529,
+        "expiry_x_tue": 0.20917934871664223,
+        "expiry_x_thu_single": -0.002346027816134466
+      }
+    }
+  },
+  "rule_1430": {
+    "coefficients": {
+      "const": -4.919029128236045,
+      "log_rv_to_1430": 0.5998373598904168,
+      "rv_last_hour_l1": 0.11424478143125735,
+      "lvix_prev": 0.10583752800012466,
+      "expiry": 0.12247681386581548,
+      "tue": 0.1410909015334432,
+      "auction": 0.1077788417286078,
+      "expiry_x_tue": 0.19358421834717487
+    },
+    "n_train": 941,
+    "r2": 0.4228256899826187,
+    "smearing": 1.2067178066559412,
+    "resid_q10": -0.675362082964778,
+    "resid_q90": 0.6919012648952858,
+    "predetermined_inputs": {
+      "rv_last_hour_l1": -10.651478935587244,
+      "lvix_prev": 2.740840023925201,
+      "expiry": 1.0,
+      "tue": 1.0,
+      "auction": 1.0,
+      "expiry_x_tue": 1.0
+    }
+  },
+  "option_market": {
+    "forward": 23329.394685822605,
+    "atm_strike": 23350.0,
+    "straddle_points": 152.1,
+    "expected_abs_move_points": 152.1,
+    "implied_close_to_close_variance": 6.676846070497486e-05,
+    "atm_call_iv_annualised": 0.12892932488902964,
+    "note": "Call plus put at the at-the-money strike, at the previous settlement, for the contract expiring on the day. It prices the expected absolute distance between the day's official close (the settlement price) and that strike. Since 3 Aug 2026 the index's official close comes from a closing auction while F&O settlement prices come from the last half hour of F&O trading, so the previous official index close can differ from the forward (our reading of the two procedures)."
+  },
+  "gex_previous_close": {
+    "gross_gex_crore_per_1pct": 128341.88109200225,
+    "net_gex_us_convention_crore_per_1pct": 2816.4839292203615,
+    "net_gex_participant_crore_per_1pct": 2382.3334489687445,
+    "net_gex_client_mirror_crore_per_1pct": 5926.138182595422,
+    "call_wall": 24000.0,
+    "put_wall": 23000.0,
+    "max_oi_strike": 23000.0,
+    "max_pain": 23250.0,
+    "flip_us_convention": 23320.13049392921,
+    "flip_participant": 23008.393154134686,
+    "spot": 23329.394685822605,
+    "implications": {
+      "R3 (in-sample, expiry days)": "Higher GEX the evening before went with a MORE volatile expiry day under the Pro and client-mirror rules; all three rules are positive tonight.",
+      "R5 (in-sample)": "End-of-day reversal was concentrated after negative Pro GEX; tonight Pro GEX is positive, so little follow-through either way is expected.",
+      "Pinning study": "No dealer-gamma proxy explained pinning; in the Tuesday regime there was no pinning on average."
+    }
+  },
+  "rule_r5": {
+    "state": "Pro GEX >= 0",
+    "intercept_bp": -0.1575644370190773,
+    "slope": 0.01072247756777658,
+    "n_train": 929,
+    "rule": "predicted last-30-minute return (bp) = intercept + slope x (rest-of-day return in bp)"
+  },
+  "pinning": {
+    "regime": "single_weekly_tue",
+    "expiries": 61,
+    "mean_distance_to_nearest_50pt_strike_expiry": 14.5516393442622,
+    "mean_distance_other_days": 13.37477678571424,
+    "share_within_5_points_expiry": 0.1147540983606557,
+    "share_within_5_points_other_days": 0.1964285714285714,
+    "no_clustering_mean": 12.5,
+    "no_clustering_share_within_5": 0.2,
+    "forecast": "No pinning: distance to the nearest 50-point strike drawn from the same distribution as other days (mean about 12.5 points, 20% chance of being within 5 points)."
+  }
+}

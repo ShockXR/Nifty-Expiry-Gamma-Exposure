@@ -1,0 +1,21 @@
+data,specification,reported_as,subsample,panel,before_total,after_total,change,printed_change,abs_diff,same_sign
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,all_expiry,Panel I,84.4296,76.4830,-7.9466,-7.6200,0.3266,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,all_expiry,Panel II,84.4296,74.4336,-9.9960,-10.9800,0.9840,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly,Panel I,82.1116,74.4913,-7.6203,-0.1200,7.5003,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly,Panel II,82.1116,74.9677,-7.1439,-1.9600,5.1839,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly_first_hour,Panel I,94.2426,88.7412,-5.5014,-19.2400,13.7386,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly_first_hour,Panel II,94.2426,91.8440,-2.3986,-28.4500,26.0514,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly_mid_hour,Panel I,66.6780,69.2360,2.5580,0.1700,2.3880,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly_mid_hour,Panel II,66.6780,66.2618,-0.4162,-2.1000,1.6838,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly_last_hour,Panel I,82.0753,73.2113,-8.8639,-38.7800,29.9161,True
+REAL DATA,GC|logvar|C|p=5|H=5,overall best,monthly_last_hour,Panel II,82.0753,75.7280,-6.3473,-30.7900,24.4427,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,all_expiry,Panel I,82.8825,74.2312,-8.6513,-7.6200,1.0313,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,all_expiry,Panel II,82.8825,66.7386,-16.1439,-10.9800,5.1639,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly,Panel I,80.6920,68.1200,-12.5720,-0.1200,12.4520,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly,Panel II,80.6920,69.9726,-10.7194,-1.9600,8.7594,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly_first_hour,Panel I,90.2842,66.6021,-23.6822,-19.2400,4.4422,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly_first_hour,Panel II,90.2842,80.1301,-10.1542,-28.4500,18.2958,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly_mid_hour,Panel I,74.4555,64.9046,-9.5509,0.1700,9.7209,False
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly_mid_hour,Panel II,74.4555,67.4446,-7.0109,-2.1000,4.9109,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly_last_hour,Panel I,87.1060,82.3006,-4.8054,-38.7800,33.9746,True
+REAL DATA,GR|cvol|S|p=10|H=100,best of the paper's written method,monthly_last_hour,Panel II,87.1060,80.7994,-6.3067,-30.7900,24.4833,True

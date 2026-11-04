@@ -1,0 +1,25 @@
+data,kind,variant,first_day,last_day,n_days,model,alpha,beta,hl_irf,at_bound_gt_50000,committed_hl_irf
+"REAL DATA (post hoc recheck, descriptive)",before,registered (with 24 Feb 2021),2021-01-11,2021-04-15,64,ref,0.09125616040144241,0.9087338385051538,69306.79341265281,True,69306.79341
+"REAL DATA (post hoc recheck, descriptive)",before,registered (with 24 Feb 2021),2021-01-11,2021-04-15,64,F,0.09188116379265535,0.9081088359295222,69313.05835137032,True,69313.05835
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, same dates",2021-01-11,2021-04-15,63,ref,0.044727301479693886,0.951987189275382,210.6242392557054,False,69306.79341
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, same dates",2021-01-11,2021-04-15,63,F,0.050036082879098526,0.928094835619512,40.0763226911192,False,69313.05835
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, extended by one day",2021-01-11,2021-04-16,64,ref,0.04397198918556322,0.9537381950374362,302.3620042404994,False,69306.79341
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, extended by one day",2021-01-11,2021-04-16,64,F,0.051197159223053935,0.9226115519262159,32.93179890359042,False,69313.05835
+"REAL DATA (post hoc recheck, descriptive)",before,registered (with 24 Feb 2021),2020-12-17,2021-03-19,64,ref,0.07555321220383979,0.9244364664525547,67156.33447958452,True,67156.33448
+"REAL DATA (post hoc recheck, descriptive)",before,registered (with 24 Feb 2021),2020-12-17,2021-03-19,64,F,0.07692305926658982,0.9230669381756288,178.35871974803504,False,178.3587197
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, same dates",2020-12-17,2021-03-19,63,ref,0.05777647503151569,0.9402705264506173,354.5676537817582,False,67156.33448
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, same dates",2020-12-17,2021-03-19,63,F,0.05464058323168582,0.9325468617850265,77.87970822077119,False,178.3587197
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, extended by one day",2020-12-17,2021-03-22,64,ref,0.05707951259472081,0.9413088988227581,429.75515208306143,False,67156.33448
+"REAL DATA (post hoc recheck, descriptive)",before,"without 24 Feb 2021, extended by one day",2020-12-17,2021-03-22,64,F,0.05546725495680266,0.9295938642575443,64.21014703381806,False,178.3587197
+"REAL DATA (post hoc recheck, descriptive)",after,registered (with 24 Feb 2021),2021-01-11,2021-04-07,59,ref,0.08315624129203938,0.9168337456938678,69224.28190763292,True,69224.28191
+"REAL DATA (post hoc recheck, descriptive)",after,registered (with 24 Feb 2021),2021-01-11,2021-04-07,59,F,0.08391380358335077,0.9160760726941732,68468.27926038686,True,68468.27926
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, same dates",2021-01-11,2021-04-07,58,ref,0.044931823243159204,0.951967430711173,223.19531411222127,False,69224.28191
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, same dates",2021-01-11,2021-04-07,58,F,0.0505076236735116,0.9287175318164973,42.98519405723633,False,68468.27926
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, extended by one day",2021-01-11,2021-04-08,59,ref,0.044696528803168455,0.9530713682383551,310.1887849235808,False,69224.28191
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, extended by one day",2021-01-11,2021-04-08,59,F,0.052104547231400095,0.9230485384483481,34.97406948770456,False,68468.27926
+"REAL DATA (post hoc recheck, descriptive)",after,registered (with 24 Feb 2021),2021-02-03,2021-05-03,59,ref,0.10400510417157313,0.8959848955915299,69312.72947634004,True,69312.72948
+"REAL DATA (post hoc recheck, descriptive)",after,registered (with 24 Feb 2021),2021-02-03,2021-05-03,59,F,0.10423208516175671,0.8957578845231585,69310.1062917287,True,69310.10629
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, same dates",2021-02-03,2021-05-03,58,ref,0.0409962536262547,0.955301253238626,186.86414145048113,False,69312.72948
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, same dates",2021-02-03,2021-05-03,58,F,0.04647742537810782,0.9271516415019088,32.77603638280806,False,69310.10629
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, extended by one day",2021-02-03,2021-05-04,59,ref,0.041163499406395174,0.9563772379449949,281.5049119258701,False,69312.72948
+"REAL DATA (post hoc recheck, descriptive)",after,"without 24 Feb 2021, extended by one day",2021-02-03,2021-05-04,59,F,0.0489220882329045,0.919112639633961,26.770496355484113,False,69310.10629

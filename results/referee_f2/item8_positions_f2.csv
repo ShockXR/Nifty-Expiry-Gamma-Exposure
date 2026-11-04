@@ -1,0 +1,301 @@
+category,position,form,sample,n,n_neg,n_neg_episodes,n_episodes,n_quarters,coef,same_direction_as_f2,method,se,stat,p,n_clusters,detail
+pro,call,dummy,full,932,538,115,230,16,-0.050230332071831384,True,newey_west_5,0.018289677446651706,-2.7463760483664004,0.00602576510131923,,"Bartlett, 5 lags"
+pro,call,dummy,full,932,538,115,230,16,-0.050230332071831384,True,wild_cluster_episode,,-2.7002297609955357,0.0168,230.0,"restricted, Webb weights, 4999 draws"
+pro,call,dummy,full,932,538,115,230,16,-0.050230332071831384,True,wild_cluster_quarter,,-2.28478225353941,0.074,16.0,"restricted, Webb weights, 4999 draws"
+pro,call,dummy,full,932,538,115,230,16,-0.050230332071831384,True,block_permutation_60_t,,-2.7463760483664004,0.0274,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0510 to 0.0495
+pro,call,dummy,full,932,538,115,230,16,-0.050230332071831384,True,block_permutation_60_coef,,-0.050230332071831384,0.0492,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0510 to 0.0495
+pro,call,level,full,932,538,115,230,16,0.03236822010778536,True,newey_west_5,0.008975285750946263,3.606372098445198,0.00031050779708625514,,"Bartlett, 5 lags"
+pro,call,level,full,932,538,115,230,16,0.03236822010778536,True,wild_cluster_episode,,3.6186490278008105,0.0042,230.0,"restricted, Webb weights, 4999 draws"
+pro,call,level,full,932,538,115,230,16,0.03236822010778536,True,wild_cluster_quarter,,3.453484439178796,0.0328,16.0,"restricted, Webb weights, 4999 draws"
+pro,call,level,full,932,538,115,230,16,0.03236822010778536,True,block_permutation_60_t,,3.606372098445198,0.0026,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0237 to 0.0238
+pro,call,level,full,932,538,115,230,16,0.03236822010778536,True,block_permutation_60_coef,,0.03236822010778536,0.0052,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0237 to 0.0238
+pro,put,dummy,full,932,383,99,197,16,-0.05285885590983998,True,newey_west_5,0.023541890013432373,-2.2453106305262716,0.02474819806896625,,"Bartlett, 5 lags"
+pro,put,dummy,full,932,383,99,197,16,-0.05285885590983998,True,wild_cluster_episode,,-2.3083604355621077,0.083,197.0,"restricted, Webb weights, 4999 draws"
+pro,put,dummy,full,932,383,99,197,16,-0.05285885590983998,True,wild_cluster_quarter,,-2.1523166840098518,0.1196,16.0,"restricted, Webb weights, 4999 draws"
+pro,put,dummy,full,932,383,99,197,16,-0.05285885590983998,True,block_permutation_60_t,,-2.2453106305262716,0.059,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0487 to 0.0494
+pro,put,dummy,full,932,383,99,197,16,-0.05285885590983998,True,block_permutation_60_coef,,-0.05285885590983998,0.032,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0487 to 0.0494
+pro,put,level,full,932,383,99,197,16,0.033534292802114486,True,newey_west_5,0.01175444474442601,2.8529031809874765,0.0043321818314648345,,"Bartlett, 5 lags"
+pro,put,level,full,932,383,99,197,16,0.033534292802114486,True,wild_cluster_episode,,2.8335435440733723,0.0306,197.0,"restricted, Webb weights, 4999 draws"
+pro,put,level,full,932,383,99,197,16,0.033534292802114486,True,wild_cluster_quarter,,2.7211523670455353,0.038,16.0,"restricted, Webb weights, 4999 draws"
+pro,put,level,full,932,383,99,197,16,0.033534292802114486,True,block_permutation_60_t,,2.8529031809874765,0.0198,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0231 to 0.0235
+pro,put,level,full,932,383,99,197,16,0.033534292802114486,True,block_permutation_60_coef,,0.033534292802114486,0.0044,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0231 to 0.0235
+pro,fut,dummy,full,932,500,58,116,16,-0.05174193132634123,True,newey_west_5,0.022826815866874618,-2.266716988830102,0.02340751992031746,,"Bartlett, 5 lags"
+pro,fut,dummy,full,932,500,58,116,16,-0.05174193132634123,True,wild_cluster_episode,,-2.620585389593937,0.0222,116.0,"restricted, Webb weights, 4999 draws"
+pro,fut,dummy,full,932,500,58,116,16,-0.05174193132634123,True,wild_cluster_quarter,,-2.576854891625469,0.0356,16.0,"restricted, Webb weights, 4999 draws"
+pro,fut,dummy,full,932,500,58,116,16,-0.05174193132634123,True,block_permutation_60_t,,-2.266716988830102,0.0534,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0472 to 0.0478
+pro,fut,dummy,full,932,500,58,116,16,-0.05174193132634123,True,block_permutation_60_coef,,-0.05174193132634123,0.0322,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0472 to 0.0478
+pro,fut,level,full,932,500,58,116,16,0.015547200326985013,True,newey_west_5,0.010992888113576155,1.4142962401103953,0.15727494045919083,,"Bartlett, 5 lags"
+pro,fut,level,full,932,500,58,116,16,0.015547200326985013,True,wild_cluster_episode,,1.558546748472775,0.1888,116.0,"restricted, Webb weights, 4999 draws"
+pro,fut,level,full,932,500,58,116,16,0.015547200326985013,True,wild_cluster_quarter,,1.6302170889906369,0.1878,16.0,"restricted, Webb weights, 4999 draws"
+pro,fut,level,full,932,500,58,116,16,0.015547200326985013,True,block_permutation_60_t,,1.4142962401103953,0.2392,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0236 to 0.0231
+pro,fut,level,full,932,500,58,116,16,0.015547200326985013,True,block_permutation_60_coef,,0.015547200326985013,0.225,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0236 to 0.0231
+pro,call_minus_put,dummy,full,932,575,129,259,16,-0.0474138285359043,True,newey_west_5,0.019670408292848468,-2.410414050894025,0.015934425286762356,,"Bartlett, 5 lags"
+pro,call_minus_put,dummy,full,932,575,129,259,16,-0.0474138285359043,True,wild_cluster_episode,,-2.439855825192206,0.031,259.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,dummy,full,932,575,129,259,16,-0.0474138285359043,True,wild_cluster_quarter,,-2.151088659402101,0.0734,16.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,dummy,full,932,575,129,259,16,-0.0474138285359043,True,block_permutation_60_t,,-2.410414050894025,0.042,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0493 to 0.0497
+pro,call_minus_put,dummy,full,932,575,129,259,16,-0.0474138285359043,True,block_permutation_60_coef,,-0.0474138285359043,0.064,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0493 to 0.0497
+pro,call_minus_put,level,full,932,575,129,259,16,0.007195596923787348,True,newey_west_5,0.009033035878747389,0.79658677551773,0.4256910603274249,,"Bartlett, 5 lags"
+pro,call_minus_put,level,full,932,575,129,259,16,0.007195596923787348,True,wild_cluster_episode,,0.7722790600879695,0.462,259.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,level,full,932,575,129,259,16,0.007195596923787348,True,wild_cluster_quarter,,0.8202862221172887,0.4268,16.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,level,full,932,575,129,259,16,0.007195596923787348,True,block_permutation_60_t,,0.79658677551773,0.4948,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0233 to 0.0233
+pro,call_minus_put,level,full,932,575,129,259,16,0.007195596923787348,True,block_permutation_60_coef,,0.007195596923787348,0.584,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0233 to 0.0233
+pro,call_plus_put,dummy,full,932,456,84,168,16,-0.06315228101453574,True,newey_west_5,0.018870411006706698,-3.3466298636574954,0.0008180035406220643,,"Bartlett, 5 lags"
+pro,call_plus_put,dummy,full,932,456,84,168,16,-0.06315228101453574,True,wild_cluster_episode,,-3.4726484339833146,0.0098,168.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,dummy,full,932,456,84,168,16,-0.06315228101453574,True,wild_cluster_quarter,,-3.119477529718328,0.0212,16.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,dummy,full,932,456,84,168,16,-0.06315228101453574,True,block_permutation_60_t,,-3.3466298636574954,0.0052,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0490 to 0.0487
+pro,call_plus_put,dummy,full,932,456,84,168,16,-0.06315228101453574,True,block_permutation_60_coef,,-0.06315228101453574,0.0082,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0490 to 0.0487
+pro,call_plus_put,level,full,932,456,84,168,16,0.039796830832674636,True,newey_west_5,0.009373546528001169,4.245653522259838,2.1795721259928604e-05,,"Bartlett, 5 lags"
+pro,call_plus_put,level,full,932,456,84,168,16,0.039796830832674636,True,wild_cluster_episode,,4.203792786664285,0.0232,168.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,level,full,932,456,84,168,16,0.039796830832674636,True,wild_cluster_quarter,,3.6899960433768237,0.027,16.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,level,full,932,456,84,168,16,0.039796830832674636,True,block_permutation_60_t,,4.245653522259838,0.0008,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0234 to 0.0244
+pro,call_plus_put,level,full,932,456,84,168,16,0.039796830832674636,True,block_permutation_60_coef,,0.039796830832674636,0.0006,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0234 to 0.0244
+pro,gex,dummy,full,932,466,85,170,16,-0.067950031566561,True,newey_west_5,0.018397552691420065,-3.693427745868089,0.00022125139571662185,,"Bartlett, 5 lags"
+pro,gex,dummy,full,932,466,85,170,16,-0.067950031566561,True,wild_cluster_episode,,-3.606372223584483,0.0066,170.0,"restricted, Webb weights, 4999 draws"
+pro,gex,dummy,full,932,466,85,170,16,-0.067950031566561,True,wild_cluster_quarter,,-3.4596444361780505,0.0136,16.0,"restricted, Webb weights, 4999 draws"
+pro,gex,dummy,full,932,466,85,170,16,-0.067950031566561,True,block_permutation_60_t,,-3.693427745868089,0.0008,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0486 to 0.0468
+pro,gex,dummy,full,932,466,85,170,16,-0.067950031566561,True,block_permutation_60_coef,,-0.067950031566561,0.0024,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0486 to 0.0468
+pro,gex,level,full,932,466,85,170,16,0.03891132837785329,True,newey_west_5,0.008810814436863811,4.416314593467217,1.003979375757639e-05,,"Bartlett, 5 lags"
+pro,gex,level,full,932,466,85,170,16,0.03891132837785329,True,wild_cluster_episode,,4.3951771928460035,0.0234,170.0,"restricted, Webb weights, 4999 draws"
+pro,gex,level,full,932,466,85,170,16,0.03891132837785329,True,wild_cluster_quarter,,3.8539929331539136,0.0264,16.0,"restricted, Webb weights, 4999 draws"
+pro,gex,level,full,932,466,85,170,16,0.03891132837785329,True,block_permutation_60_t,,4.416314593467217,0.0014,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0239 to 0.0237
+pro,gex,level,full,932,466,85,170,16,0.03891132837785329,True,block_permutation_60_coef,,0.03891132837785329,0.0012,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0239 to 0.0237
+pro,call,dummy,2023_2024,480,364,51,101,8,-0.024184704871923174,True,newey_west_5,0.033574473623606,-0.7203301276753021,0.47132175927504727,,"Bartlett, 5 lags"
+pro,call,dummy,2023_2024,480,364,51,101,8,-0.024184704871923174,True,wild_cluster_episode,,-0.6665396266660484,0.542,101.0,"restricted, Webb weights, 4999 draws"
+pro,call,dummy,2023_2024,480,364,51,101,8,-0.024184704871923174,True,wild_cluster_quarter,,-0.5077113110935171,0.645,8.0,"restricted, Webb weights, 4999 draws"
+pro,call,dummy,2023_2024,480,364,51,101,8,-0.024184704871923174,True,block_permutation_60_t,,-0.7203301276753021,0.6046,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0811 to 0.0734
+pro,call,dummy,2023_2024,480,364,51,101,8,-0.024184704871923174,True,block_permutation_60_coef,,-0.024184704871923174,0.609,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0811 to 0.0734
+pro,call,level,2023_2024,480,364,51,101,8,0.031648959686628585,True,newey_west_5,0.013171855392838409,2.402771571864982,0.016271347855784452,,"Bartlett, 5 lags"
+pro,call,level,2023_2024,480,364,51,101,8,0.031648959686628585,True,wild_cluster_episode,,2.212397746815026,0.1058,101.0,"restricted, Webb weights, 4999 draws"
+pro,call,level,2023_2024,480,364,51,101,8,0.031648959686628585,True,wild_cluster_quarter,,2.361477610639245,0.2502,8.0,"restricted, Webb weights, 4999 draws"
+pro,call,level,2023_2024,480,364,51,101,8,0.031648959686628585,True,block_permutation_60_t,,2.402771571864982,0.0782,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0332 to 0.0346
+pro,call,level,2023_2024,480,364,51,101,8,0.031648959686628585,True,block_permutation_60_coef,,0.031648959686628585,0.0736,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0332 to 0.0346
+pro,put,dummy,2023_2024,480,299,61,122,8,-0.026348401970708448,True,newey_west_5,0.033079968777455206,-0.7965062527104172,0.4257378426747396,,"Bartlett, 5 lags"
+pro,put,dummy,2023_2024,480,299,61,122,8,-0.026348401970708448,True,wild_cluster_episode,,-0.8092296477601936,0.546,122.0,"restricted, Webb weights, 4999 draws"
+pro,put,dummy,2023_2024,480,299,61,122,8,-0.026348401970708448,True,wild_cluster_quarter,,-0.706960425511751,0.723,8.0,"restricted, Webb weights, 4999 draws"
+pro,put,dummy,2023_2024,480,299,61,122,8,-0.026348401970708448,True,block_permutation_60_t,,-0.7965062527104172,0.589,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0746 to 0.0692
+pro,put,dummy,2023_2024,480,299,61,122,8,-0.026348401970708448,True,block_permutation_60_coef,,-0.026348401970708448,0.5632,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0746 to 0.0692
+pro,put,level,2023_2024,480,299,61,122,8,0.017462687198041164,True,newey_west_5,0.01785001275504932,0.9783011047485896,0.32792542368774513,,"Bartlett, 5 lags"
+pro,put,level,2023_2024,480,299,61,122,8,0.017462687198041164,True,wild_cluster_episode,,0.932212637561393,0.4148,122.0,"restricted, Webb weights, 4999 draws"
+pro,put,level,2023_2024,480,299,61,122,8,0.017462687198041164,True,wild_cluster_quarter,,0.8476744962830174,0.5682,8.0,"restricted, Webb weights, 4999 draws"
+pro,put,level,2023_2024,480,299,61,122,8,0.017462687198041164,True,block_permutation_60_t,,0.9783011047485896,0.4928,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0344 to 0.0345
+pro,put,level,2023_2024,480,299,61,122,8,0.017462687198041164,True,block_permutation_60_coef,,0.017462687198041164,0.3884,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0344 to 0.0345
+pro,fut,dummy,2023_2024,480,317,36,71,8,-0.07564281147538765,True,newey_west_5,0.02888206372994744,-2.619023771384958,0.008818180235117231,,"Bartlett, 5 lags"
+pro,fut,dummy,2023_2024,480,317,36,71,8,-0.07564281147538765,True,wild_cluster_episode,,-2.818302139924726,0.0204,71.0,"restricted, Webb weights, 4999 draws"
+pro,fut,dummy,2023_2024,480,317,36,71,8,-0.07564281147538765,True,wild_cluster_quarter,,-3.605110740605539,0.0178,8.0,"restricted, Webb weights, 4999 draws"
+pro,fut,dummy,2023_2024,480,317,36,71,8,-0.07564281147538765,True,block_permutation_60_t,,-2.619023771384958,0.0724,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0778 to 0.0741
+pro,fut,dummy,2023_2024,480,317,36,71,8,-0.07564281147538765,True,block_permutation_60_coef,,-0.07564281147538765,0.0512,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0778 to 0.0741
+pro,fut,level,2023_2024,480,317,36,71,8,0.01880512676361364,True,newey_west_5,0.014862942889569434,1.2652357546775452,0.20578682894614553,,"Bartlett, 5 lags"
+pro,fut,level,2023_2024,480,317,36,71,8,0.01880512676361364,True,wild_cluster_episode,,1.2712471594991623,0.2566,71.0,"restricted, Webb weights, 4999 draws"
+pro,fut,level,2023_2024,480,317,36,71,8,0.01880512676361364,True,wild_cluster_quarter,,1.4071550108981405,0.1378,8.0,"restricted, Webb weights, 4999 draws"
+pro,fut,level,2023_2024,480,317,36,71,8,0.01880512676361364,True,block_permutation_60_t,,1.2652357546775452,0.3864,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0336 to 0.0355
+pro,fut,level,2023_2024,480,317,36,71,8,0.01880512676361364,True,block_permutation_60_coef,,0.01880512676361364,0.353,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0336 to 0.0355
+pro,call_minus_put,dummy,2023_2024,480,292,69,138,8,-0.07153554804334386,True,newey_west_5,0.03337619346563508,-2.1433105640701227,0.0320881691245911,,"Bartlett, 5 lags"
+pro,call_minus_put,dummy,2023_2024,480,292,69,138,8,-0.07153554804334386,True,wild_cluster_episode,,-2.15643572109863,0.0492,138.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,dummy,2023_2024,480,292,69,138,8,-0.07153554804334386,True,wild_cluster_quarter,,-1.8897917832382167,0.1234,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,dummy,2023_2024,480,292,69,138,8,-0.07153554804334386,True,block_permutation_60_t,,-2.1433105640701227,0.106,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0704 to 0.0692
+pro,call_minus_put,dummy,2023_2024,480,292,69,138,8,-0.07153554804334386,True,block_permutation_60_coef,,-0.07153554804334386,0.044,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0704 to 0.0692
+pro,call_minus_put,level,2023_2024,480,292,69,138,8,0.016515575660860954,True,newey_west_5,0.013927811483463986,1.1857983345387273,0.23570194939544986,,"Bartlett, 5 lags"
+pro,call_minus_put,level,2023_2024,480,292,69,138,8,0.016515575660860954,True,wild_cluster_episode,,1.2382946780366135,0.2252,138.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,level,2023_2024,480,292,69,138,8,0.016515575660860954,True,wild_cluster_quarter,,1.261874227781103,0.27,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,level,2023_2024,480,292,69,138,8,0.016515575660860954,True,block_permutation_60_t,,1.1857983345387273,0.3946,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0329 to 0.0346
+pro,call_minus_put,level,2023_2024,480,292,69,138,8,0.016515575660860954,True,block_permutation_60_coef,,0.016515575660860954,0.4024,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0329 to 0.0346
+pro,call_plus_put,dummy,2023_2024,480,362,53,105,8,-0.05748787181525543,True,newey_west_5,0.028335553608864725,-2.0288247270125845,0.04247614579703027,,"Bartlett, 5 lags"
+pro,call_plus_put,dummy,2023_2024,480,362,53,105,8,-0.05748787181525543,True,wild_cluster_episode,,-1.8952369863863359,0.1078,105.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,dummy,2023_2024,480,362,53,105,8,-0.05748787181525543,True,wild_cluster_quarter,,-1.5276321377531537,0.2442,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,dummy,2023_2024,480,362,53,105,8,-0.05748787181525543,True,block_permutation_60_t,,-2.0288247270125845,0.155,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0863 to 0.0764
+pro,call_plus_put,dummy,2023_2024,480,362,53,105,8,-0.05748787181525543,True,block_permutation_60_coef,,-0.05748787181525543,0.1982,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0863 to 0.0764
+pro,call_plus_put,level,2023_2024,480,362,53,105,8,0.030264739411811625,True,newey_west_5,0.013897571288477392,2.177699886087608,0.02942838740665526,,"Bartlett, 5 lags"
+pro,call_plus_put,level,2023_2024,480,362,53,105,8,0.030264739411811625,True,wild_cluster_episode,,2.073599618166839,0.2318,105.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,level,2023_2024,480,362,53,105,8,0.030264739411811625,True,wild_cluster_quarter,,1.9697541425795884,0.3028,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,level,2023_2024,480,362,53,105,8,0.030264739411811625,True,block_permutation_60_t,,2.177699886087608,0.1308,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0354 to 0.0351
+pro,call_plus_put,level,2023_2024,480,362,53,105,8,0.030264739411811625,True,block_permutation_60_coef,,0.030264739411811625,0.1092,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0354 to 0.0351
+pro,gex,dummy,2023_2024,480,368,53,105,8,-0.06442889549461792,True,newey_west_5,0.027712711897836056,-2.324885984891606,0.020078057583531855,,"Bartlett, 5 lags"
+pro,gex,dummy,2023_2024,480,368,53,105,8,-0.06442889549461792,True,wild_cluster_episode,,-2.044275411681049,0.0892,105.0,"restricted, Webb weights, 4999 draws"
+pro,gex,dummy,2023_2024,480,368,53,105,8,-0.06442889549461792,True,wild_cluster_quarter,,-1.7683491038110235,0.1968,8.0,"restricted, Webb weights, 4999 draws"
+pro,gex,dummy,2023_2024,480,368,53,105,8,-0.06442889549461792,True,block_permutation_60_t,,-2.324885984891606,0.0996,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0851 to 0.0779
+pro,gex,dummy,2023_2024,480,368,53,105,8,-0.06442889549461792,True,block_permutation_60_coef,,-0.06442889549461792,0.1418,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0851 to 0.0779
+pro,gex,level,2023_2024,480,368,53,105,8,0.030917409887269275,True,newey_west_5,0.012963035057242873,2.385044069598092,0.017077075502540562,,"Bartlett, 5 lags"
+pro,gex,level,2023_2024,480,368,53,105,8,0.030917409887269275,True,wild_cluster_episode,,2.4073917148262756,0.197,105.0,"restricted, Webb weights, 4999 draws"
+pro,gex,level,2023_2024,480,368,53,105,8,0.030917409887269275,True,wild_cluster_quarter,,2.212208034346335,0.2862,8.0,"restricted, Webb weights, 4999 draws"
+pro,gex,level,2023_2024,480,368,53,105,8,0.030917409887269275,True,block_permutation_60_t,,2.385044069598092,0.1006,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0360 to 0.0360
+pro,gex,level,2023_2024,480,368,53,105,8,0.030917409887269275,True,block_permutation_60_coef,,0.030917409887269275,0.1082,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0360 to 0.0360
+pro,call,dummy,2025_onward,452,174,65,130,8,-0.056738857318042436,True,newey_west_5,0.025472516516071755,-2.2274539416725214,0.025916950763396913,,"Bartlett, 5 lags"
+pro,call,dummy,2025_onward,452,174,65,130,8,-0.056738857318042436,True,wild_cluster_episode,,-2.690934709830267,0.0108,130.0,"restricted, Webb weights, 4999 draws"
+pro,call,dummy,2025_onward,452,174,65,130,8,-0.056738857318042436,True,wild_cluster_quarter,,-3.0458666668218557,0.05,8.0,"restricted, Webb weights, 4999 draws"
+pro,call,dummy,2025_onward,452,174,65,130,8,-0.056738857318042436,True,block_permutation_60_t,,-2.2274539416725214,0.0448,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0621 to 0.0611
+pro,call,dummy,2025_onward,452,174,65,130,8,-0.056738857318042436,True,block_permutation_60_coef,,-0.056738857318042436,0.076,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0621 to 0.0611
+pro,call,level,2025_onward,452,174,65,130,8,0.03141459260854082,True,newey_west_5,0.013457326584615046,2.3343858388972474,0.019575527621804624,,"Bartlett, 5 lags"
+pro,call,level,2025_onward,452,174,65,130,8,0.03141459260854082,True,wild_cluster_episode,,3.157413671253177,0.0014,130.0,"restricted, Webb weights, 4999 draws"
+pro,call,level,2025_onward,452,174,65,130,8,0.03141459260854082,True,wild_cluster_quarter,,4.474475283426775,0.027,8.0,"restricted, Webb weights, 4999 draws"
+pro,call,level,2025_onward,452,174,65,130,8,0.03141459260854082,True,block_permutation_60_t,,2.3343858388972474,0.0344,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0307 to 0.0310
+pro,call,level,2025_onward,452,174,65,130,8,0.03141459260854082,True,block_permutation_60_coef,,0.03141459260854082,0.046,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0307 to 0.0310
+pro,put,dummy,2025_onward,452,84,38,76,8,-0.07657055234794795,True,newey_west_5,0.037565222794960045,-2.0383361697570197,0.04151632499889189,,"Bartlett, 5 lags"
+pro,put,dummy,2025_onward,452,84,38,76,8,-0.07657055234794795,True,wild_cluster_episode,,-2.5995723140640132,0.1214,76.0,"restricted, Webb weights, 4999 draws"
+pro,put,dummy,2025_onward,452,84,38,76,8,-0.07657055234794795,True,wild_cluster_quarter,,-2.7813357476225486,0.1616,8.0,"restricted, Webb weights, 4999 draws"
+pro,put,dummy,2025_onward,452,84,38,76,8,-0.07657055234794795,True,block_permutation_60_t,,-2.0383361697570197,0.0778,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0786 to 0.0749
+pro,put,dummy,2025_onward,452,84,38,76,8,-0.07657055234794795,True,block_permutation_60_coef,,-0.07657055234794795,0.0504,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0786 to 0.0749
+pro,put,level,2025_onward,452,84,38,76,8,0.03573606886858412,True,newey_west_5,0.013453577528639871,2.656250264474966,0.007901495124196899,,"Bartlett, 5 lags"
+pro,put,level,2025_onward,452,84,38,76,8,0.03573606886858412,True,wild_cluster_episode,,3.665033579685041,0.0316,76.0,"restricted, Webb weights, 4999 draws"
+pro,put,level,2025_onward,452,84,38,76,8,0.03573606886858412,True,wild_cluster_quarter,,5.546796936402724,0.0106,8.0,"restricted, Webb weights, 4999 draws"
+pro,put,level,2025_onward,452,84,38,76,8,0.03573606886858412,True,block_permutation_60_t,,2.656250264474966,0.0136,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0290 to 0.0296
+pro,put,level,2025_onward,452,84,38,76,8,0.03573606886858412,True,block_permutation_60_coef,,0.03573606886858412,0.015,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0290 to 0.0296
+pro,fut,dummy,2025_onward,452,183,23,46,8,-0.028524172910654514,True,newey_west_5,0.031969795771623795,-0.8922225563909422,0.37227365427682513,,"Bartlett, 5 lags"
+pro,fut,dummy,2025_onward,452,183,23,46,8,-0.028524172910654514,True,wild_cluster_episode,,-1.134656627858573,0.4416,46.0,"restricted, Webb weights, 4999 draws"
+pro,fut,dummy,2025_onward,452,183,23,46,8,-0.028524172910654514,True,wild_cluster_quarter,,-1.1361195090981746,0.364,8.0,"restricted, Webb weights, 4999 draws"
+pro,fut,dummy,2025_onward,452,183,23,46,8,-0.028524172910654514,True,block_permutation_60_t,,-0.8922225563909422,0.4402,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0621 to 0.0593
+pro,fut,dummy,2025_onward,452,183,23,46,8,-0.028524172910654514,True,block_permutation_60_coef,,-0.028524172910654514,0.4076,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0621 to 0.0593
+pro,fut,level,2025_onward,452,183,23,46,8,0.011326569495858323,True,newey_west_5,0.01609994350436535,0.7035161019532291,0.48173417568747734,,"Bartlett, 5 lags"
+pro,fut,level,2025_onward,452,183,23,46,8,0.011326569495858323,True,wild_cluster_episode,,0.7653985066555895,0.725,46.0,"restricted, Webb weights, 4999 draws"
+pro,fut,level,2025_onward,452,183,23,46,8,0.011326569495858323,True,wild_cluster_quarter,,0.8120787094064675,0.559,8.0,"restricted, Webb weights, 4999 draws"
+pro,fut,level,2025_onward,452,183,23,46,8,0.011326569495858323,True,block_permutation_60_t,,0.7035161019532291,0.5418,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0286 to 0.0302
+pro,fut,level,2025_onward,452,183,23,46,8,0.011326569495858323,True,block_permutation_60_coef,,0.011326569495858323,0.4836,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0286 to 0.0302
+pro,call_minus_put,dummy,2025_onward,452,283,61,122,8,-0.028154142056719265,True,newey_west_5,0.024951699143446294,-1.1283456847913347,0.2591739567457475,,"Bartlett, 5 lags"
+pro,call_minus_put,dummy,2025_onward,452,283,61,122,8,-0.028154142056719265,True,wild_cluster_episode,,-1.204762563142755,0.2484,122.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,dummy,2025_onward,452,283,61,122,8,-0.028154142056719265,True,wild_cluster_quarter,,-1.0071592980001713,0.3582,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,dummy,2025_onward,452,283,61,122,8,-0.028154142056719265,True,block_permutation_60_t,,-1.1283456847913347,0.34,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0635 to 0.0643
+pro,call_minus_put,dummy,2025_onward,452,283,61,122,8,-0.028154142056719265,True,block_permutation_60_coef,,-0.028154142056719265,0.4322,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0635 to 0.0643
+pro,call_minus_put,level,2025_onward,452,283,61,122,8,-0.0016112789244883549,False,newey_west_5,0.011870741828775564,-0.1357353186287393,0.8920305258704782,,"Bartlett, 5 lags"
+pro,call_minus_put,level,2025_onward,452,283,61,122,8,-0.0016112789244883549,False,wild_cluster_episode,,-0.13444982641954867,0.8976,122.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,level,2025_onward,452,283,61,122,8,-0.0016112789244883549,False,wild_cluster_quarter,,-0.14169991079790328,0.8818,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_minus_put,level,2025_onward,452,283,61,122,8,-0.0016112789244883549,False,block_permutation_60_t,,-0.1357353186287393,0.904,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0314 to 0.0312
+pro,call_minus_put,level,2025_onward,452,283,61,122,8,-0.0016112789244883549,False,block_permutation_60_coef,,-0.0016112789244883549,0.9172,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0314 to 0.0312
+pro,call_plus_put,dummy,2025_onward,452,94,32,64,8,-0.06815359598649147,True,newey_west_5,0.031064210080985744,-2.1939587650486554,0.028238374093115522,,"Bartlett, 5 lags"
+pro,call_plus_put,dummy,2025_onward,452,94,32,64,8,-0.06815359598649147,True,wild_cluster_episode,,-3.4870808109519644,0.0072,64.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,dummy,2025_onward,452,94,32,64,8,-0.06815359598649147,True,wild_cluster_quarter,,-3.8003380431670704,0.0306,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,dummy,2025_onward,452,94,32,64,8,-0.06815359598649147,True,block_permutation_60_t,,-2.1939587650486554,0.0474,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0749 to 0.0678
+pro,call_plus_put,dummy,2025_onward,452,94,32,64,8,-0.06815359598649147,True,block_permutation_60_coef,,-0.06815359598649147,0.0628,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0749 to 0.0678
+pro,call_plus_put,level,2025_onward,452,94,32,64,8,0.042994479632800967,True,newey_west_5,0.011913680895320272,3.6088325690920025,0.00030757803181036535,,"Bartlett, 5 lags"
+pro,call_plus_put,level,2025_onward,452,94,32,64,8,0.042994479632800967,True,wild_cluster_episode,,8.813869149382157,0.0002,64.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,level,2025_onward,452,94,32,64,8,0.042994479632800967,True,wild_cluster_quarter,,9.340108133330226,0.0026,8.0,"restricted, Webb weights, 4999 draws"
+pro,call_plus_put,level,2025_onward,452,94,32,64,8,0.042994479632800967,True,block_permutation_60_t,,3.6088325690920025,0.0004,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0282 to 0.0302
+pro,call_plus_put,level,2025_onward,452,94,32,64,8,0.042994479632800967,True,block_permutation_60_coef,,0.042994479632800967,0.002,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0282 to 0.0302
+pro,gex,dummy,2025_onward,452,98,33,66,8,-0.07389919320257467,True,newey_west_5,0.02931302380555154,-2.5210361678408297,0.01170098245515275,,"Bartlett, 5 lags"
+pro,gex,dummy,2025_onward,452,98,33,66,8,-0.07389919320257467,True,wild_cluster_episode,,-3.478300272488979,0.0034,66.0,"restricted, Webb weights, 4999 draws"
+pro,gex,dummy,2025_onward,452,98,33,66,8,-0.07389919320257467,True,wild_cluster_quarter,,-4.617350373366223,0.0238,8.0,"restricted, Webb weights, 4999 draws"
+pro,gex,dummy,2025_onward,452,98,33,66,8,-0.07389919320257467,True,block_permutation_60_t,,-2.5210361678408297,0.0234,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0731 to 0.0690
+pro,gex,dummy,2025_onward,452,98,33,66,8,-0.07389919320257467,True,block_permutation_60_coef,,-0.07389919320257467,0.042,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0731 to 0.0690
+pro,gex,level,2025_onward,452,98,33,66,8,0.043424627465312046,True,newey_west_5,0.012125448186020708,3.581280196749825,0.00034191472323983935,,"Bartlett, 5 lags"
+pro,gex,level,2025_onward,452,98,33,66,8,0.043424627465312046,True,wild_cluster_episode,,8.187098744500313,0.0002,66.0,"restricted, Webb weights, 4999 draws"
+pro,gex,level,2025_onward,452,98,33,66,8,0.043424627465312046,True,wild_cluster_quarter,,8.66278783639116,0.0026,8.0,"restricted, Webb weights, 4999 draws"
+pro,gex,level,2025_onward,452,98,33,66,8,0.043424627465312046,True,block_permutation_60_t,,3.581280196749825,0.0006,8.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0301 to 0.0291
+pro,gex,level,2025_onward,452,98,33,66,8,0.043424627465312046,True,block_permutation_60_coef,,0.043424627465312046,0.0026,8.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0301 to 0.0291
+fii,call,dummy,full,932,314,47,94,16,-0.0029874392162233332,True,newey_west_5,0.022882590168692755,-0.13055511610353684,0.8961272508853431,,"Bartlett, 5 lags"
+fii,call,dummy,full,932,314,47,94,16,-0.0029874392162233332,True,wild_cluster_episode,,-0.1332164712634125,0.9092,94.0,"restricted, Webb weights, 4999 draws"
+fii,call,dummy,full,932,314,47,94,16,-0.0029874392162233332,True,wild_cluster_quarter,,-0.1197747336724398,0.9188,16.0,"restricted, Webb weights, 4999 draws"
+fii,call,dummy,full,932,314,47,94,16,-0.0029874392162233332,True,block_permutation_60_t,,-0.13055511610353684,0.907,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0494 to 0.0499
+fii,call,dummy,full,932,314,47,94,16,-0.0029874392162233332,True,block_permutation_60_coef,,-0.0029874392162233332,0.9156,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0494 to 0.0499
+fii,call,level,full,932,314,47,94,16,0.0022277460716260437,True,newey_west_5,0.010354200953715132,0.21515383771132227,0.82964738021329,,"Bartlett, 5 lags"
+fii,call,level,full,932,314,47,94,16,0.0022277460716260437,True,wild_cluster_episode,,0.22596716588695956,0.8626,94.0,"restricted, Webb weights, 4999 draws"
+fii,call,level,full,932,314,47,94,16,0.0022277460716260437,True,wild_cluster_quarter,,0.21248866942550113,0.8664,16.0,"restricted, Webb weights, 4999 draws"
+fii,call,level,full,932,314,47,94,16,0.0022277460716260437,True,block_permutation_60_t,,0.21515383771132227,0.8468,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0239 to 0.0226
+fii,call,level,full,932,314,47,94,16,0.0022277460716260437,True,block_permutation_60_coef,,0.0022277460716260437,0.858,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0239 to 0.0226
+fii,put,dummy,full,932,18,11,23,16,-0.06595323944647585,True,newey_west_5,0.021327619937852624,-3.092386287764858,0.0019855428799427696,,"Bartlett, 5 lags"
+fii,put,dummy,full,932,18,11,23,16,-0.06595323944647585,True,wild_cluster_episode,,-5.1361082386972745,0.4168,23.0,"restricted, Webb weights, 4999 draws"
+fii,put,dummy,full,932,18,11,23,16,-0.06595323944647585,True,wild_cluster_quarter,,-3.67663509361685,0.4942,16.0,"restricted, Webb weights, 4999 draws"
+fii,put,dummy,full,932,18,11,23,16,-0.06595323944647585,True,block_permutation_60_t,,-3.092386287764858,0.0646,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1322 to 0.1659
+fii,put,dummy,full,932,18,11,23,16,-0.06595323944647585,True,block_permutation_60_coef,,-0.06595323944647585,0.3806,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1322 to 0.1659
+fii,put,level,full,932,18,11,23,16,0.007235811907673021,True,newey_west_5,0.009539844267645666,0.7584832314520312,0.4481617478202482,,"Bartlett, 5 lags"
+fii,put,level,full,932,18,11,23,16,0.007235811907673021,True,wild_cluster_episode,,0.7865572847346747,0.7794,23.0,"restricted, Webb weights, 4999 draws"
+fii,put,level,full,932,18,11,23,16,0.007235811907673021,True,wild_cluster_quarter,,0.7446090620023232,0.7852,16.0,"restricted, Webb weights, 4999 draws"
+fii,put,level,full,932,18,11,23,16,0.007235811907673021,True,block_permutation_60_t,,0.7584832314520312,0.5236,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0230 to 0.0241
+fii,put,level,full,932,18,11,23,16,0.007235811907673021,True,block_permutation_60_coef,,0.007235811907673021,0.5786,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0230 to 0.0241
+fii,fut,dummy,full,932,757,18,35,16,-0.054149841436010794,True,newey_west_5,0.02722229170073312,-1.9891727717601562,0.04668213618291561,,"Bartlett, 5 lags"
+fii,fut,dummy,full,932,757,18,35,16,-0.054149841436010794,True,wild_cluster_episode,,-1.9536244170991808,0.1426,35.0,"restricted, Webb weights, 4999 draws"
+fii,fut,dummy,full,932,757,18,35,16,-0.054149841436010794,True,wild_cluster_quarter,,-2.0275600602394137,0.1126,16.0,"restricted, Webb weights, 4999 draws"
+fii,fut,dummy,full,932,757,18,35,16,-0.054149841436010794,True,block_permutation_60_t,,-1.9891727717601562,0.1102,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0598 to 0.0546
+fii,fut,dummy,full,932,757,18,35,16,-0.054149841436010794,True,block_permutation_60_coef,,-0.054149841436010794,0.0662,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0598 to 0.0546
+fii,fut,level,full,932,757,18,35,16,-0.0008926728902568539,False,newey_west_5,0.009888407009260513,-0.09027469130476365,0.9280689314309212,,"Bartlett, 5 lags"
+fii,fut,level,full,932,757,18,35,16,-0.0008926728902568539,False,wild_cluster_episode,,-0.08441073894471958,0.947,35.0,"restricted, Webb weights, 4999 draws"
+fii,fut,level,full,932,757,18,35,16,-0.0008926728902568539,False,wild_cluster_quarter,,-0.09243811740266757,0.9334,16.0,"restricted, Webb weights, 4999 draws"
+fii,fut,level,full,932,757,18,35,16,-0.0008926728902568539,False,block_permutation_60_t,,-0.09027469130476365,0.9368,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0230 to 0.0232
+fii,fut,level,full,932,757,18,35,16,-0.0008926728902568539,False,block_permutation_60_coef,,-0.0008926728902568539,0.9446,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0230 to 0.0232
+fii,call_minus_put,dummy,full,932,813,40,79,16,-0.058069477818204485,True,newey_west_5,0.02714505352868931,-2.139228709084382,0.03241715016638311,,"Bartlett, 5 lags"
+fii,call_minus_put,dummy,full,932,813,40,79,16,-0.058069477818204485,True,wild_cluster_episode,,-2.1446033529926574,0.0666,79.0,"restricted, Webb weights, 4999 draws"
+fii,call_minus_put,dummy,full,932,813,40,79,16,-0.058069477818204485,True,wild_cluster_quarter,,-3.1293534159972536,0.0496,16.0,"restricted, Webb weights, 4999 draws"
+fii,call_minus_put,dummy,full,932,813,40,79,16,-0.058069477818204485,True,block_permutation_60_t,,-2.139228709084382,0.0936,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0679 to 0.0631
+fii,call_minus_put,dummy,full,932,813,40,79,16,-0.058069477818204485,True,block_permutation_60_coef,,-0.058069477818204485,0.0922,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0679 to 0.0631
+fii,call_minus_put,level,full,932,813,40,79,16,-0.005291523674542255,False,newey_west_5,0.009515883126827834,-0.5560727894633369,0.5781610957590056,,"Bartlett, 5 lags"
+fii,call_minus_put,level,full,932,813,40,79,16,-0.005291523674542255,False,wild_cluster_episode,,-0.8403022212140323,0.5132,79.0,"restricted, Webb weights, 4999 draws"
+fii,call_minus_put,level,full,932,813,40,79,16,-0.005291523674542255,False,wild_cluster_quarter,,-0.5876362488948215,0.6342,16.0,"restricted, Webb weights, 4999 draws"
+fii,call_minus_put,level,full,932,813,40,79,16,-0.005291523674542255,False,block_permutation_60_t,,-0.5560727894633369,0.6404,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0237 to 0.0227
+fii,call_minus_put,level,full,932,813,40,79,16,-0.005291523674542255,False,block_permutation_60_coef,,-0.005291523674542255,0.6864,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0237 to 0.0227
+fii,call_plus_put,dummy,full,932,23,12,25,16,-0.06538144627260635,True,newey_west_5,0.016590624257529597,-3.9408671583248718,8.118758036523587e-05,,"Bartlett, 5 lags"
+fii,call_plus_put,dummy,full,932,23,12,25,16,-0.06538144627260635,True,wild_cluster_episode,,-6.315785823090409,0.1702,25.0,"restricted, Webb weights, 4999 draws"
+fii,call_plus_put,dummy,full,932,23,12,25,16,-0.06538144627260635,True,wild_cluster_quarter,,-5.125213415616485,0.2284,16.0,"restricted, Webb weights, 4999 draws"
+fii,call_plus_put,dummy,full,932,23,12,25,16,-0.06538144627260635,True,block_permutation_60_t,,-3.9408671583248718,0.0212,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1185 to 0.1385
+fii,call_plus_put,dummy,full,932,23,12,25,16,-0.06538144627260635,True,block_permutation_60_coef,,-0.06538144627260635,0.3196,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1185 to 0.1385
+fii,call_plus_put,level,full,932,23,12,25,16,0.004574099970366831,True,newey_west_5,0.007897727794426674,0.5791665766949723,0.5624767808381861,,"Bartlett, 5 lags"
+fii,call_plus_put,level,full,932,23,12,25,16,0.004574099970366831,True,wild_cluster_episode,,0.6466233605446335,0.8844,25.0,"restricted, Webb weights, 4999 draws"
+fii,call_plus_put,level,full,932,23,12,25,16,0.004574099970366831,True,wild_cluster_quarter,,0.5645504433273889,0.82,16.0,"restricted, Webb weights, 4999 draws"
+fii,call_plus_put,level,full,932,23,12,25,16,0.004574099970366831,True,block_permutation_60_t,,0.5791665766949723,0.6258,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0234 to 0.0230
+fii,call_plus_put,level,full,932,23,12,25,16,0.004574099970366831,True,block_permutation_60_coef,,0.004574099970366831,0.7286,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0234 to 0.0230
+fii,gex,dummy,full,932,27,15,31,16,-0.06603056759241353,True,newey_west_5,0.016413029659936764,-4.023057836396302,5.7447381967655375e-05,,"Bartlett, 5 lags"
+fii,gex,dummy,full,932,27,15,31,16,-0.06603056759241353,True,wild_cluster_episode,,-6.460993811353058,0.1712,31.0,"restricted, Webb weights, 4999 draws"
+fii,gex,dummy,full,932,27,15,31,16,-0.06603056759241353,True,wild_cluster_quarter,,-5.008529749804007,0.2476,16.0,"restricted, Webb weights, 4999 draws"
+fii,gex,dummy,full,932,27,15,31,16,-0.06603056759241353,True,block_permutation_60_t,,-4.023057836396302,0.0192,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1144 to 0.1317
+fii,gex,dummy,full,932,27,15,31,16,-0.06603056759241353,True,block_permutation_60_coef,,-0.06603056759241353,0.2892,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1144 to 0.1317
+fii,gex,level,full,932,27,15,31,16,0.004937608917618063,True,newey_west_5,0.007549345552112646,0.6540446298999121,0.5130830526724952,,"Bartlett, 5 lags"
+fii,gex,level,full,932,27,15,31,16,0.004937608917618063,True,wild_cluster_episode,,0.7542839652679351,0.8934,31.0,"restricted, Webb weights, 4999 draws"
+fii,gex,level,full,932,27,15,31,16,0.004937608917618063,True,wild_cluster_quarter,,0.647754113955689,0.819,16.0,"restricted, Webb weights, 4999 draws"
+fii,gex,level,full,932,27,15,31,16,0.004937608917618063,True,block_permutation_60_t,,0.6540446298999121,0.5738,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0231 to 0.0230
+fii,gex,level,full,932,27,15,31,16,0.004937608917618063,True,block_permutation_60_coef,,0.004937608917618063,0.6944,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0231 to 0.0230
+client,call,dummy,full,932,524,105,210,16,0.015483994951387836,False,newey_west_5,0.022777716255798768,0.679786980288066,0.4966393517355848,,"Bartlett, 5 lags"
+client,call,dummy,full,932,524,105,210,16,0.015483994951387836,False,wild_cluster_episode,,0.7401256522842361,0.5182,210.0,"restricted, Webb weights, 4999 draws"
+client,call,dummy,full,932,524,105,210,16,0.015483994951387836,False,wild_cluster_quarter,,0.7140375610512966,0.4998,16.0,"restricted, Webb weights, 4999 draws"
+client,call,dummy,full,932,524,105,210,16,0.015483994951387836,False,block_permutation_60_t,,0.679786980288066,0.5346,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0486 to 0.0473
+client,call,dummy,full,932,524,105,210,16,0.015483994951387836,False,block_permutation_60_coef,,0.015483994951387836,0.5516,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0486 to 0.0473
+client,call,level,full,932,524,105,210,16,-0.012804233590742665,False,newey_west_5,0.008034856027434903,-1.5935859394397098,0.11102880579378603,,"Bartlett, 5 lags"
+client,call,level,full,932,524,105,210,16,-0.012804233590742665,False,wild_cluster_episode,,-1.7770986223185814,0.3266,210.0,"restricted, Webb weights, 4999 draws"
+client,call,level,full,932,524,105,210,16,-0.012804233590742665,False,wild_cluster_quarter,,-1.7223376959279442,0.2876,16.0,"restricted, Webb weights, 4999 draws"
+client,call,level,full,932,524,105,210,16,-0.012804233590742665,False,block_permutation_60_t,,-1.5935859394397098,0.1704,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0232 to 0.0231
+client,call,level,full,932,524,105,210,16,-0.012804233590742665,False,block_permutation_60_coef,,-0.012804233590742665,0.3052,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0232 to 0.0231
+client,put,dummy,full,932,901,23,45,16,0.08880978446297355,False,newey_west_5,0.020227122075999967,4.39062878689741,1.1302334960809723e-05,,"Bartlett, 5 lags"
+client,put,dummy,full,932,901,23,45,16,0.08880978446297355,False,wild_cluster_episode,,4.79190789277791,0.709,45.0,"restricted, Webb weights, 4999 draws"
+client,put,dummy,full,932,901,23,45,16,0.08880978446297355,False,wild_cluster_quarter,,4.17036724069284,0.7354,16.0,"restricted, Webb weights, 4999 draws"
+client,put,dummy,full,932,901,23,45,16,0.08880978446297355,False,block_permutation_60_t,,4.39062878689741,0.0088,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1220 to 0.1012
+client,put,dummy,full,932,901,23,45,16,0.08880978446297355,False,block_permutation_60_coef,,0.08880978446297355,0.1248,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1220 to 0.1012
+client,put,level,full,932,901,23,45,16,-0.01655571671592206,False,newey_west_5,0.00903525924132712,-1.8323455114820055,0.06689996054744157,,"Bartlett, 5 lags"
+client,put,level,full,932,901,23,45,16,-0.01655571671592206,False,wild_cluster_episode,,-1.6667820757708802,0.4558,45.0,"restricted, Webb weights, 4999 draws"
+client,put,level,full,932,901,23,45,16,-0.01655571671592206,False,wild_cluster_quarter,,-1.7091329056174887,0.3604,16.0,"restricted, Webb weights, 4999 draws"
+client,put,level,full,932,901,23,45,16,-0.01655571671592206,False,block_permutation_60_t,,-1.8323455114820055,0.122,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0233 to 0.0230
+client,put,level,full,932,901,23,45,16,-0.01655571671592206,False,block_permutation_60_coef,,-0.01655571671592206,0.1872,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0233 to 0.0230
+client,fut,dummy,full,932,153,14,29,16,0.05833766871674422,False,newey_west_5,0.02556532997964181,2.2819055636363657,0.022494916305535174,,"Bartlett, 5 lags"
+client,fut,dummy,full,932,153,14,29,16,0.05833766871674422,False,wild_cluster_episode,,2.1995092917213275,0.0792,29.0,"restricted, Webb weights, 4999 draws"
+client,fut,dummy,full,932,153,14,29,16,0.05833766871674422,False,wild_cluster_quarter,,2.3789530239811354,0.0552,16.0,"restricted, Webb weights, 4999 draws"
+client,fut,dummy,full,932,153,14,29,16,0.05833766871674422,False,block_permutation_60_t,,2.2819055636363657,0.0742,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0592 to 0.0624
+client,fut,dummy,full,932,153,14,29,16,0.05833766871674422,False,block_permutation_60_coef,,0.05833766871674422,0.0606,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0592 to 0.0624
+client,fut,level,full,932,153,14,29,16,-0.0025612728579786346,False,newey_west_5,0.009892024166846248,-0.2589230287733126,0.7956946295379432,,"Bartlett, 5 lags"
+client,fut,level,full,932,153,14,29,16,-0.0025612728579786346,False,wild_cluster_episode,,-0.22148740862459684,0.8526,29.0,"restricted, Webb weights, 4999 draws"
+client,fut,level,full,932,153,14,29,16,-0.0025612728579786346,False,wild_cluster_quarter,,-0.2747146289198949,0.8144,16.0,"restricted, Webb weights, 4999 draws"
+client,fut,level,full,932,153,14,29,16,-0.0025612728579786346,False,block_permutation_60_t,,-0.2589230287733126,0.8278,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0234 to 0.0229
+client,fut,level,full,932,153,14,29,16,-0.0025612728579786346,False,block_permutation_60_coef,,-0.0025612728579786346,0.8518,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0234 to 0.0229
+client,call_minus_put,dummy,full,932,151,64,129,16,0.05464668537646575,False,newey_west_5,0.02114288694893741,2.5846368808783775,0.009748160187950876,,"Bartlett, 5 lags"
+client,call_minus_put,dummy,full,932,151,64,129,16,0.05464668537646575,False,wild_cluster_episode,,2.6685815916056175,0.0396,129.0,"restricted, Webb weights, 4999 draws"
+client,call_minus_put,dummy,full,932,151,64,129,16,0.05464668537646575,False,wild_cluster_quarter,,2.668404027488456,0.0888,16.0,"restricted, Webb weights, 4999 draws"
+client,call_minus_put,dummy,full,932,151,64,129,16,0.05464668537646575,False,block_permutation_60_t,,2.5846368808783775,0.038,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0606 to 0.0615
+client,call_minus_put,dummy,full,932,151,64,129,16,0.05464668537646575,False,block_permutation_60_coef,,0.05464668537646575,0.0914,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0606 to 0.0615
+client,call_minus_put,level,full,932,151,64,129,16,0.0023776738259587795,True,newey_west_5,0.00952226038805311,0.24969636715058482,0.80282216782695,,"Bartlett, 5 lags"
+client,call_minus_put,level,full,932,151,64,129,16,0.0023776738259587795,True,wild_cluster_episode,,0.31648930568075195,0.7674,129.0,"restricted, Webb weights, 4999 draws"
+client,call_minus_put,level,full,932,151,64,129,16,0.0023776738259587795,True,wild_cluster_quarter,,0.24998817087449707,0.8316,16.0,"restricted, Webb weights, 4999 draws"
+client,call_minus_put,level,full,932,151,64,129,16,0.0023776738259587795,True,block_permutation_60_t,,0.24969636715058482,0.8316,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0237 to 0.0235
+client,call_minus_put,level,full,932,151,64,129,16,0.0023776738259587795,True,block_permutation_60_coef,,0.0023776738259587795,0.8618,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0237 to 0.0235
+client,call_plus_put,dummy,full,932,900,20,39,16,0.07476741420082095,False,newey_west_5,0.018318027407586302,4.081630217992602,4.472090984666699e-05,,"Bartlett, 5 lags"
+client,call_plus_put,dummy,full,932,900,20,39,16,0.07476741420082095,False,wild_cluster_episode,,4.997096421075448,0.126,39.0,"restricted, Webb weights, 4999 draws"
+client,call_plus_put,dummy,full,932,900,20,39,16,0.07476741420082095,False,wild_cluster_quarter,,6.058915656592324,0.0832,16.0,"restricted, Webb weights, 4999 draws"
+client,call_plus_put,dummy,full,932,900,20,39,16,0.07476741420082095,False,block_permutation_60_t,,4.081630217992602,0.0128,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1209 to 0.1051
+client,call_plus_put,dummy,full,932,900,20,39,16,0.07476741420082095,False,block_permutation_60_coef,,0.07476741420082095,0.2062,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1209 to 0.1051
+client,call_plus_put,level,full,932,900,20,39,16,-0.013049114629774355,False,newey_west_5,0.004468599151642327,-2.9201801698813066,0.0034982907273943317,,"Bartlett, 5 lags"
+client,call_plus_put,level,full,932,900,20,39,16,-0.013049114629774355,False,wild_cluster_episode,,-3.2952309450974395,0.27,39.0,"restricted, Webb weights, 4999 draws"
+client,call_plus_put,level,full,932,900,20,39,16,-0.013049114629774355,False,wild_cluster_quarter,,-3.1396062286253805,0.2694,16.0,"restricted, Webb weights, 4999 draws"
+client,call_plus_put,level,full,932,900,20,39,16,-0.013049114629774355,False,block_permutation_60_t,,-2.9201801698813066,0.0168,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0231 to 0.0238
+client,call_plus_put,level,full,932,900,20,39,16,-0.013049114629774355,False,block_permutation_60_coef,,-0.013049114629774355,0.3022,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0231 to 0.0238
+client,gex,dummy,full,932,893,25,49,16,0.07310210434445048,False,newey_west_5,0.017347006555930418,4.214104843320018,2.507707837598144e-05,,"Bartlett, 5 lags"
+client,gex,dummy,full,932,893,25,49,16,0.07310210434445048,False,wild_cluster_episode,,5.276529371528464,0.0964,49.0,"restricted, Webb weights, 4999 draws"
+client,gex,dummy,full,932,893,25,49,16,0.07310210434445048,False,wild_cluster_quarter,,6.167055435668408,0.0554,16.0,"restricted, Webb weights, 4999 draws"
+client,gex,dummy,full,932,893,25,49,16,0.07310210434445048,False,block_permutation_60_t,,4.214104843320018,0.0092,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1078 to 0.0946
+client,gex,dummy,full,932,893,25,49,16,0.07310210434445048,False,block_permutation_60_coef,,0.07310210434445048,0.181,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1078 to 0.0946
+client,gex,level,full,932,893,25,49,16,-0.012657297466190454,False,newey_west_5,0.0039795896831120725,-3.1805533922010625,0.001469940491290295,,"Bartlett, 5 lags"
+client,gex,level,full,932,893,25,49,16,-0.012657297466190454,False,wild_cluster_episode,,-3.656018525568478,0.257,49.0,"restricted, Webb weights, 4999 draws"
+client,gex,level,full,932,893,25,49,16,-0.012657297466190454,False,wild_cluster_quarter,,-3.649091173748644,0.2286,16.0,"restricted, Webb weights, 4999 draws"
+client,gex,level,full,932,893,25,49,16,-0.012657297466190454,False,block_permutation_60_t,,-3.1805533922010625,0.0098,16.0,4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0230 to 0.0243
+client,gex,level,full,932,893,25,49,16,-0.012657297466190454,False,block_permutation_60_coef,,-0.012657297466190454,0.3118,16.0,4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0230 to 0.0243

@@ -1,0 +1,15 @@
+eq,model,refits,share_refits_theory_sign,share_refits_set_to_zero
+a,us,22,0.0,1.0
+a,pro,22,1.0,0.0
+a,cmirror,22,1.0,0.0
+a,est_shares,22,0.0,1.0
+a,est_shares_frozen,22,0.0,1.0
+a,est_participants,22,0.0,1.0
+a,est_participants_frozen,22,0.0,1.0
+b,us,22,1.0,0.0
+b,pro,22,0.0,1.0
+b,cmirror,22,0.0,1.0
+b,est_shares,22,1.0,0.0
+b,est_shares_frozen,22,1.0,0.0
+b,est_participants,22,1.0,0.0
+b,est_participants_frozen,22,1.0,0.0

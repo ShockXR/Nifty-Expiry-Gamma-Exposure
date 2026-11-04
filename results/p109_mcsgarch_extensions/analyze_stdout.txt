@@ -1,0 +1,233 @@
+[REAL DATA] P109 mcsGARCH extensions, stage 2 (docs/prereg/P109_MCSGARCH_EXTENSIONS.md)
+
+[REAL DATA] verdict:
+                                                                                                     0
+study                                                                                             P109
+verdict                supported: recovers most of the gain (interval above one half at both horizons)
+beats_mcsgarch_next15                                                                             True
+beats_mcsgarch_next30                                                                             True
+share_next15                                                                                  1.177914
+share_next30                                                                                  1.078742
+share_low_next15                                                                              0.846454
+share_low_next30                                                                              0.799858
+share_high_next15                                                                             1.674768
+share_high_next30                                                                              1.32496
+
+[REAL DATA] tests (primary and secondary):
+                                test_id  estimate  statistic        p_raw   p_adjusted
+                  P1_next15_combination  6.830511   5.612045 1.383260e-08 2.766519e-08
+                       S1_next15_x1_har  1.122484   1.156233 1.239675e-01 4.958699e-01
+                 S1_next15_x2_overnight  0.683154   1.797838 3.629194e-02 1.814597e-01
+                   S1_next15_x3_todayrv  2.686713   4.496902 3.963552e-06 3.567197e-05
+                  S1_next15_x4_leverage -0.274894  -0.891420 8.135124e-01 1.000000e+00
+               S1_next15_x5_calibration  2.831381   4.886958 6.200133e-07 6.200133e-06
+        S2_next15_hybrid_vs_combination -1.031691  -0.926784 8.228392e-01 1.000000e+00
+                         S4_next15_0915 28.694339   2.641288 4.211089e-03 4.211089e-03
+                         S4_next15_rest  4.721982   5.987127 1.619040e-09 6.476160e-09
+                  R1_next15_combination  6.908868   5.484514 2.836554e-08 5.673109e-08
+                  R2_next15_combination  6.198001   4.835775 8.094867e-07 1.618973e-06
+R3_next15_seedavg_hybrid_vs_combination -1.063898  -0.950925 8.290336e-01 1.000000e+00
+                  P1_next30_combination  8.251606   5.006866 3.412177e-07 3.412177e-07
+                       S1_next30_x1_har  0.206350   0.165196 4.344161e-01 1.000000e+00
+                 S1_next30_x2_overnight  1.219661   2.812377 2.519747e-03 1.511848e-02
+                   S1_next30_x3_todayrv  3.662612   4.265850 1.116212e-05 8.929694e-05
+                  S1_next30_x4_leverage -0.393573  -1.115990 8.676173e-01 1.000000e+00
+               S1_next30_x5_calibration  2.950659   3.352275 4.197898e-04 2.938529e-03
+        S2_next30_hybrid_vs_combination -0.602323  -0.609918 7.289542e-01 1.000000e+00
+                         S4_next30_0915 34.371456   2.928071 1.754310e-03 3.508621e-03
+                         S4_next30_rest  5.537905   4.248828 1.202428e-05 3.607285e-05
+                  R1_next30_combination  8.341254   4.895296 6.013622e-07 6.013622e-07
+                  R2_next30_combination  6.842530   4.464759 4.643917e-06 4.643917e-06
+R3_next30_seedavg_hybrid_vs_combination -0.338834  -0.335763 6.314307e-01 1.000000e+00
+               S3_last_hour_combination  0.799272   0.211295 4.163559e-01 4.163559e-01
+     S3_last_hour_hybrid_vs_combination  5.563296   1.521604 6.425394e-02 1.285079e-01
+                  S5_next15_combination  4.972769   4.142577 1.940741e-05 7.762964e-05
+        S5_next15_hybrid_vs_combination -1.052704  -0.998529 8.408054e-01 1.000000e+00
+                  S5_next30_combination  6.829067   3.934209 4.616401e-05 1.384920e-04
+        S5_next30_hybrid_vs_combination -1.796515  -1.113495 8.670490e-01 1.000000e+00
+                  S6_next15_combination  4.732878   4.241920 1.282317e-05 5.129269e-05
+        S6_next15_hybrid_vs_combination  0.166018   0.127482 4.493009e-01 8.986018e-01
+                  S6_next30_combination  6.261470   3.969968 4.027524e-05 1.208257e-04
+        S6_next30_hybrid_vs_combination -0.169538  -0.104978 5.417858e-01 8.986018e-01
+
+[REAL DATA] shares of the hybrid's gain (all days):
+    index    target   subset          model      reference  reference_gain_points  model_gain_points     share    ci_low   ci_high
+    NIFTY    next15 all days         hybrid        mcsinfo               6.059081           5.798820  0.957046  0.849420  1.064585
+    NIFTY    next15 all days         hybrid hybrid_seedavg               5.766614           5.798820  1.005585  0.982346  1.025567
+    NIFTY    next15 all days         x1_har         hybrid               5.798820           1.122484  0.193571 -0.108487  0.576836
+    NIFTY    next15 all days         x1_har        mcsinfo               6.059081           1.122484  0.185256 -0.104042  0.574256
+    NIFTY    next15 all days         x1_har hybrid_seedavg               5.766614           1.122484  0.194652 -0.110246  0.593014
+    NIFTY    next15 all days   x2_overnight         hybrid               5.798820           0.683154  0.117809 -0.013121  0.291788
+    NIFTY    next15 all days   x2_overnight        mcsinfo               6.059081           0.683154  0.112749 -0.011330  0.275259
+    NIFTY    next15 all days   x2_overnight hybrid_seedavg               5.766614           0.683154  0.118467 -0.012825  0.299002
+    NIFTY    next15 all days     x3_todayrv         hybrid               5.798820           2.686713  0.463321  0.269932  0.715885
+    NIFTY    next15 all days     x3_todayrv        mcsinfo               6.059081           2.686713  0.443419  0.255852  0.688030
+    NIFTY    next15 all days     x3_todayrv hybrid_seedavg               5.766614           2.686713  0.465908  0.268795  0.715286
+    NIFTY    next15 all days    x4_leverage         hybrid               5.798820          -0.274894 -0.047405 -0.186666  0.048932
+    NIFTY    next15 all days    x4_leverage        mcsinfo               6.059081          -0.274894 -0.045369 -0.179872  0.048276
+    NIFTY    next15 all days    x4_leverage hybrid_seedavg               5.766614          -0.274894 -0.047670 -0.189151  0.049816
+    NIFTY    next15 all days x5_calibration         hybrid               5.798820           2.831381  0.488268  0.325604  0.670834
+    NIFTY    next15 all days x5_calibration        mcsinfo               6.059081           2.831381  0.467295  0.307680  0.655162
+    NIFTY    next15 all days x5_calibration hybrid_seedavg               5.766614           2.831381  0.490995  0.323974  0.670724
+    NIFTY    next15 all days    combination         hybrid               5.798820           6.830511  1.177914  0.846454  1.674768
+    NIFTY    next15 all days    combination        mcsinfo               6.059081           6.830511  1.127318  0.795992  1.668671
+    NIFTY    next15 all days    combination hybrid_seedavg               5.766614           6.830511  1.184493  0.848001  1.687222
+    NIFTY    next15 all days     comb_no_x1         hybrid               5.798820           4.989902  0.860503  0.641780  1.144371
+    NIFTY    next15 all days     comb_no_x1        mcsinfo               6.059081           4.989902  0.823541  0.608235  1.123894
+    NIFTY    next15 all days     comb_no_x1 hybrid_seedavg               5.766614           4.989902  0.865309  0.649024  1.149158
+    NIFTY    next15 all days     comb_no_x2         hybrid               5.798820           5.560103  0.958833  0.589648  1.476725
+    NIFTY    next15 all days     comb_no_x2        mcsinfo               6.059081           5.560103  0.917648  0.553052  1.429469
+    NIFTY    next15 all days     comb_no_x2 hybrid_seedavg               5.766614           5.560103  0.964189  0.589533  1.486094
+    NIFTY    next15 all days     comb_no_x3         hybrid               5.798820           5.805042  1.001073  0.685033  1.440748
+    NIFTY    next15 all days     comb_no_x3        mcsinfo               6.059081           5.805042  0.958073  0.648463  1.421529
+    NIFTY    next15 all days     comb_no_x3 hybrid_seedavg               5.766614           5.805042  1.006664  0.693288  1.456767
+    NIFTY    next15 all days     comb_no_x4         hybrid               5.798820           6.681164  1.152159  0.818237  1.628920
+    NIFTY    next15 all days     comb_no_x4        mcsinfo               6.059081           6.681164  1.102670  0.770099  1.628860
+    NIFTY    next15 all days     comb_no_x4 hybrid_seedavg               5.766614           6.681164  1.158594  0.818624  1.652009
+    NIFTY    next15 all days     comb_no_x5         hybrid               5.798820           5.146612  0.887527  0.544503  1.376998
+    NIFTY    next15 all days     comb_no_x5        mcsinfo               6.059081           5.146612  0.849405  0.523291  1.355290
+    NIFTY    next15 all days     comb_no_x5 hybrid_seedavg               5.766614           5.146612  0.892484  0.554312  1.404383
+    NIFTY    next15 all days        mcsinfo         hybrid               5.798820           6.059081  1.044882  0.936645  1.175083
+    NIFTY    next15 all days        mcsinfo hybrid_seedavg               5.766614           6.059081  1.050717  0.946571  1.172734
+    NIFTY    next15 all days hybrid_seedavg         hybrid               5.798820           5.766614  0.994446  0.975204  1.016912
+    NIFTY    next15 all days hybrid_seedavg        mcsinfo               6.059081           5.766614  0.951731  0.852774  1.054522
+    NIFTY    next30 all days         hybrid        mcsinfo               8.005717           7.649283  0.955478  0.863122  1.071799
+    NIFTY    next30 all days         hybrid hybrid_seedavg               7.912772           7.649283  0.966701  0.929191  1.008756
+    NIFTY    next30 all days         x1_har         hybrid               7.649283           0.206350  0.026976 -0.290752  0.348408
+    NIFTY    next30 all days         x1_har        mcsinfo               8.005717           0.206350  0.025775 -0.277177  0.370377
+    NIFTY    next30 all days         x1_har hybrid_seedavg               7.912772           0.206350  0.026078 -0.281454  0.359787
+    NIFTY    next30 all days   x2_overnight         hybrid               7.649283           1.219661  0.159448  0.036739  0.313485
+    NIFTY    next30 all days   x2_overnight        mcsinfo               8.005717           1.219661  0.152349  0.035829  0.293425
+    NIFTY    next30 all days   x2_overnight hybrid_seedavg               7.912772           1.219661  0.154138  0.037373  0.303969
+    NIFTY    next30 all days     x3_todayrv         hybrid               7.649283           3.662612  0.478818  0.284841  0.651796
+    NIFTY    next30 all days     x3_todayrv        mcsinfo               8.005717           3.662612  0.457500  0.272809  0.644070
+    NIFTY    next30 all days     x3_todayrv hybrid_seedavg               7.912772           3.662612  0.462874  0.275630  0.634422
+    NIFTY    next30 all days    x4_leverage         hybrid               7.649283          -0.393573 -0.051452 -0.147117  0.030942
+    NIFTY    next30 all days    x4_leverage        mcsinfo               8.005717          -0.393573 -0.049161 -0.148668  0.027017
+    NIFTY    next30 all days    x4_leverage hybrid_seedavg               7.912772          -0.393573 -0.049739 -0.147238  0.028747
+    NIFTY    next30 all days x5_calibration         hybrid               7.649283           2.950659  0.385743  0.200414  0.553392
+    NIFTY    next30 all days x5_calibration        mcsinfo               8.005717           2.950659  0.368569  0.193405  0.513577
+    NIFTY    next30 all days x5_calibration hybrid_seedavg               7.912772           2.950659  0.372898  0.195742  0.524237
+    NIFTY    next30 all days    combination         hybrid               7.649283           8.251606  1.078742  0.799858  1.324960
+    NIFTY    next30 all days    combination        mcsinfo               8.005717           8.251606  1.030714  0.762962  1.298770
+    NIFTY    next30 all days    combination hybrid_seedavg               7.912772           8.251606  1.042821  0.771579  1.293443
+    NIFTY    next30 all days     comb_no_x1         hybrid               7.649283           6.281722  0.821217  0.566857  1.062867
+    NIFTY    next30 all days     comb_no_x1        mcsinfo               8.005717           6.281722  0.784654  0.557274  0.997020
+    NIFTY    next30 all days     comb_no_x1 hybrid_seedavg               7.912772           6.281722  0.793871  0.555507  1.008107
+    NIFTY    next30 all days     comb_no_x2         hybrid               7.649283           6.385490  0.834783  0.494541  1.115232
+    NIFTY    next30 all days     comb_no_x2        mcsinfo               8.005717           6.385490  0.797616  0.469612  1.106714
+    NIFTY    next30 all days     comb_no_x2 hybrid_seedavg               7.912772           6.385490  0.806985  0.472200  1.100332
+    NIFTY    next30 all days     comb_no_x3         hybrid               7.649283           6.212057  0.812110  0.536195  1.063697
+    NIFTY    next30 all days     comb_no_x3        mcsinfo               8.005717           6.212057  0.775953  0.515383  1.057183
+    NIFTY    next30 all days     comb_no_x3 hybrid_seedavg               7.912772           6.212057  0.785067  0.515204  1.048911
+    NIFTY    next30 all days     comb_no_x4         hybrid               7.649283           8.093614  1.058088  0.777298  1.297392
+    NIFTY    next30 all days     comb_no_x4        mcsinfo               8.005717           8.093614  1.010979  0.745352  1.297337
+    NIFTY    next30 all days     comb_no_x4 hybrid_seedavg               7.912772           8.093614  1.022855  0.749823  1.278479
+    NIFTY    next30 all days     comb_no_x5         hybrid               7.649283           6.530194  0.853700  0.597277  1.120634
+    NIFTY    next30 all days     comb_no_x5        mcsinfo               8.005717           6.530194  0.815691  0.556240  1.124062
+    NIFTY    next30 all days     comb_no_x5 hybrid_seedavg               7.912772           6.530194  0.825273  0.570960  1.106870
+    NIFTY    next30 all days        mcsinfo         hybrid               7.649283           8.005717  1.046597  0.934209  1.157027
+    NIFTY    next30 all days        mcsinfo hybrid_seedavg               7.912772           8.005717  1.011746  0.920496  1.101485
+    NIFTY    next30 all days hybrid_seedavg         hybrid               7.649283           7.912772  1.034446  0.991329  1.075805
+    NIFTY    next30 all days hybrid_seedavg        mcsinfo               8.005717           7.912772  0.988390  0.908634  1.085625
+    NIFTY last_hour all days         hybrid        mcsinfo               5.074645           6.362568  1.253796  0.872739  1.903514
+    NIFTY last_hour all days         hybrid hybrid_seedavg               5.973655           6.362568  1.065105  0.942489  1.256850
+    NIFTY last_hour all days         x1_har         hybrid               6.362568           1.101813  0.173171 -0.926893  1.117722
+    NIFTY last_hour all days         x1_har        mcsinfo               5.074645           1.101813  0.217121 -1.345299  1.340591
+    NIFTY last_hour all days         x1_har hybrid_seedavg               5.973655           1.101813  0.184445 -1.068452  1.152002
+    NIFTY last_hour all days   x2_overnight         hybrid               6.362568          -5.155451 -0.810278 -1.685636 -0.225538
+    NIFTY last_hour all days   x2_overnight        mcsinfo               5.074645          -5.155451 -1.015923 -2.424247 -0.273710
+    NIFTY last_hour all days   x2_overnight hybrid_seedavg               5.973655          -5.155451 -0.863031 -2.064103 -0.210950
+    NIFTY last_hour all days     x3_todayrv         hybrid               6.362568           2.928302  0.460239 -0.358990  1.383692
+    NIFTY last_hour all days     x3_todayrv        mcsinfo               5.074645           2.928302  0.577046 -0.516809  1.596440
+    NIFTY last_hour all days     x3_todayrv hybrid_seedavg               5.973655           2.928302  0.490203 -0.358166  1.412074
+    NIFTY last_hour all days    x4_leverage         hybrid               6.362568           0.290494  0.045657 -0.234827  0.263214
+    NIFTY last_hour all days    x4_leverage        mcsinfo               5.074645           0.290494  0.057244 -0.273865  0.358647
+    NIFTY last_hour all days    x4_leverage hybrid_seedavg               5.973655           0.290494  0.048629 -0.227584  0.292007
+    NIFTY last_hour all days x5_calibration         hybrid               6.362568           2.101765  0.330333 -0.040921  0.759660
+    NIFTY last_hour all days x5_calibration        mcsinfo               5.074645           2.101765  0.414170 -0.059800  1.115897
+    NIFTY last_hour all days x5_calibration hybrid_seedavg               5.973655           2.101765  0.351839 -0.042238  0.924056
+    NIFTY last_hour all days    combination         hybrid               6.362568           0.799272  0.125621 -1.270559  1.110937
+    NIFTY last_hour all days    combination        mcsinfo               5.074645           0.799272  0.157503 -1.791061  1.344387
+    NIFTY last_hour all days    combination hybrid_seedavg               5.973655           0.799272  0.133799 -1.436375  1.146116
+    NIFTY last_hour all days     comb_no_x1         hybrid               6.362568           2.920813  0.459062 -0.394629  1.262670
+    NIFTY last_hour all days     comb_no_x1        mcsinfo               5.074645           2.920813  0.575570 -0.515387  1.482167
+    NIFTY last_hour all days     comb_no_x1 hybrid_seedavg               5.973655           2.920813  0.488949 -0.420183  1.286230
+    NIFTY last_hour all days     comb_no_x2         hybrid               6.362568           1.670155  0.262497 -1.117994  1.193527
+    NIFTY last_hour all days     comb_no_x2        mcsinfo               5.074645           1.670155  0.329117 -1.723589  1.453166
+    NIFTY last_hour all days     comb_no_x2 hybrid_seedavg               5.973655           1.670155  0.279587 -1.281384  1.234387
+    NIFTY last_hour all days     comb_no_x3         hybrid               6.362568          -0.355967 -0.055947 -1.241062  0.848215
+    NIFTY last_hour all days     comb_no_x3        mcsinfo               5.074645          -0.355967 -0.070146 -1.836257  1.070819
+    NIFTY last_hour all days     comb_no_x3 hybrid_seedavg               5.973655          -0.355967 -0.059589 -1.459229  0.864098
+    NIFTY last_hour all days     comb_no_x4         hybrid               6.362568           1.033035  0.162361 -1.149611  1.177464
+    NIFTY last_hour all days     comb_no_x4        mcsinfo               5.074645           1.033035  0.203568 -1.706952  1.448376
+    NIFTY last_hour all days     comb_no_x4 hybrid_seedavg               5.973655           1.033035  0.172932 -1.356703  1.195893
+    NIFTY last_hour all days     comb_no_x5         hybrid               6.362568          -0.966049 -0.151833 -1.702887  1.090472
+    NIFTY last_hour all days     comb_no_x5        mcsinfo               5.074645          -0.966049 -0.190368 -2.525847  1.323908
+    NIFTY last_hour all days     comb_no_x5 hybrid_seedavg               5.973655          -0.966049 -0.161718 -2.144511  1.096265
+    NIFTY last_hour all days        mcsinfo         hybrid               6.362568           5.074645  0.797578  0.516760  1.148545
+    NIFTY last_hour all days        mcsinfo hybrid_seedavg               5.973655           5.074645  0.849504  0.562406  1.219532
+    NIFTY last_hour all days hybrid_seedavg         hybrid               6.362568           5.973655  0.938875  0.797482  1.061124
+    NIFTY last_hour all days hybrid_seedavg        mcsinfo               5.074645           5.973655  1.177157  0.817026  1.770386
+BANKNIFTY    next15 all days         x1_har         hybrid               3.920065           1.237701  0.315735 -0.236905  0.978394
+BANKNIFTY    next15 all days   x2_overnight         hybrid               3.920065           2.307757  0.588704  0.342121  0.879641
+BANKNIFTY    next15 all days     x3_todayrv         hybrid               3.920065           1.135211  0.289590 -0.010116  0.609607
+BANKNIFTY    next15 all days    x4_leverage         hybrid               3.920065          -0.051225 -0.013067 -0.071310  0.042012
+BANKNIFTY    next15 all days x5_calibration         hybrid               3.920065           1.860792  0.474684  0.270995  0.733625
+BANKNIFTY    next15 all days    combination         hybrid               3.920065           4.972769  1.268542  0.773690  1.922588
+BANKNIFTY    next30 all days         x1_har         hybrid               5.032552           2.031684  0.403709 -0.251676  1.189244
+BANKNIFTY    next30 all days   x2_overnight         hybrid               5.032552           3.174875  0.630868  0.394273  0.938507
+BANKNIFTY    next30 all days     x3_todayrv         hybrid               5.032552           1.582257  0.314404 -0.083839  0.739745
+BANKNIFTY    next30 all days    x4_leverage         hybrid               5.032552          -0.190344 -0.037823 -0.101274  0.013576
+BANKNIFTY    next30 all days x5_calibration         hybrid               5.032552           1.929731  0.383450  0.200405  0.630673
+BANKNIFTY    next30 all days    combination         hybrid               5.032552           6.829067  1.356979  0.789224  2.212355
+ FINNIFTY    next15 all days         x1_har         hybrid               4.898896           1.082137  0.220894 -0.177191  0.805835
+ FINNIFTY    next15 all days   x2_overnight         hybrid               4.898896           1.611597  0.328971  0.207586  0.468891
+ FINNIFTY    next15 all days     x3_todayrv         hybrid               4.898896           0.926053  0.189033 -0.075188  0.539581
+ FINNIFTY    next15 all days    x4_leverage         hybrid               4.898896          -0.058186 -0.011877 -0.072577  0.030503
+ FINNIFTY    next15 all days x5_calibration         hybrid               4.898896           1.824829  0.372498  0.196617  0.559765
+ FINNIFTY    next15 all days    combination         hybrid               4.898896           4.732878  0.966111  0.584137  1.663647
+ FINNIFTY    next30 all days         x1_har         hybrid               6.091932           0.722299  0.118567 -0.379008  0.759800
+ FINNIFTY    next30 all days   x2_overnight         hybrid               6.091932           2.324101  0.381505  0.238450  0.539932
+ FINNIFTY    next30 all days     x3_todayrv         hybrid               6.091932           1.389241  0.228046 -0.142479  0.641573
+ FINNIFTY    next30 all days    x4_leverage         hybrid               6.091932          -0.302353 -0.049632 -0.128030  0.010109
+ FINNIFTY    next30 all days x5_calibration         hybrid               6.091932           2.000152  0.328328  0.111914  0.539599
+ FINNIFTY    next30 all days    combination         hybrid               6.091932           6.261470  1.027830  0.608460  1.726738
+
+[REAL DATA] extensions:
+                                                                                     0                                             1                                                                 2                                3                                  4
+extension                                                                       x1_har                                  x2_overnight                                                        x3_todayrv                      x4_leverage                     x5_calibration
+label                         X1 daily level from a log-HAR of daily realized variance  X2 overnight decay of the intraday component  X3 today's realized variance in the intraday recursion (GARCH-X)  X4 intraday leverage (GJR) term  X5 time-of-day calibration factor
+next15_gain_points                                                            1.122484                                      0.683154                                                          2.686713                        -0.274894                           2.831381
+next15_share_of_hybrid_gain                                                   0.193571                                      0.117809                                                          0.463321                        -0.047405                           0.488268
+next15_share_ci_low                                                          -0.108487                                     -0.013121                                                          0.269932                        -0.186666                           0.325604
+next15_share_ci_high                                                          0.576836                                      0.291788                                                          0.715885                         0.048932                           0.670834
+next15_S1_p_holm                                                               0.49587                                       0.18146                                                          0.000036                              1.0                           0.000006
+next15_loo_rise_points                                                        1.840609                                      1.270409                                                           1.02547                         0.149347                             1.6839
+next15_loo_p_raw                                                              0.035378                                      0.000258                                                          0.004528                         0.178834                           0.000159
+next30_gain_points                                                             0.20635                                      1.219661                                                          3.662612                        -0.393573                           2.950659
+next30_share_of_hybrid_gain                                                   0.026976                                      0.159448                                                          0.478818                        -0.051452                           0.385743
+next30_share_ci_low                                                          -0.290752                                      0.036739                                                          0.284841                        -0.147117                           0.200414
+next30_share_ci_high                                                          0.348408                                      0.313485                                                          0.651796                         0.030942                           0.553392
+next30_S1_p_holm                                                                   1.0                                      0.015118                                                          0.000089                              1.0                           0.002939
+next30_loo_rise_points                                                        1.969884                                      1.866116                                                          2.039549                         0.157991                           1.721412
+next30_loo_p_raw                                                              0.051056                                      0.000002                                                          0.000857                         0.159496                           0.011779
+beats_mcsgarch_both_horizons                                                     False                                         False                                                              True                            False                               True
+
+[REAL DATA] reproduction checks:
+                                                                  check  rows_committed  rows_rebuilt  y_n_identical  y_max_abs_rel_diff  mcsgarch_n_identical  mcsgarch_max_abs_rel_diff  mcsgarch_daily_max_abs_rel_diff  hybrid_daily_max_abs_rel_diff  seed_sets_averaged
+           NIFTY next15 vs results/pipeline_nse_v2/forecasts_next15.csv           19800         19800        19800.0                 0.0               19800.0                        0.0                              NaN                            NaN                 NaN
+           NIFTY next30 vs results/pipeline_nse_v2/forecasts_next30.csv           19008         19008        19008.0                 0.0               19008.0                        0.0                              NaN                            NaN                 NaN
+     NIFTY last_hour vs results/pipeline_nse_v2/forecasts_last_hour.csv             792           792          792.0                 0.0                 792.0                        0.0                              NaN                            NaN                 NaN
+BANKNIFTY next15 vs results/pipeline_nse_banknifty/forecasts_next15.csv           16500         16500        16500.0                 0.0               16500.0                        0.0                              NaN                            NaN                 NaN
+BANKNIFTY next30 vs results/pipeline_nse_banknifty/forecasts_next30.csv           15840         15840        15840.0                 0.0               15840.0                        0.0                              NaN                            NaN                 NaN
+  FINNIFTY next15 vs results/pipeline_nse_finnifty/forecasts_next15.csv           15100         15100        15100.0                 0.0               15100.0                        0.0                              NaN                            NaN                 NaN
+  FINNIFTY next30 vs results/pipeline_nse_finnifty/forecasts_next30.csv           14496         14496        14496.0                 0.0               14496.0                        0.0                              NaN                            NaN                 NaN
+             NIFTY next15: P106 daily QLIKE of mcsGARCH vs this study's             792           792            NaN                 NaN                   NaN                        NaN                              0.0                            NaN                 NaN
+     NIFTY next15: P99 seed-7 hybrid daily QLIKE vs this study's hybrid             792           792            NaN                 NaN                   NaN                        NaN                              NaN                            0.0                21.0
+             NIFTY next30: P106 daily QLIKE of mcsGARCH vs this study's             792           792            NaN                 NaN                   NaN                        NaN                              0.0                            NaN                 NaN
+     NIFTY next30: P99 seed-7 hybrid daily QLIKE vs this study's hybrid             792           792            NaN                 NaN                   NaN                        NaN                              NaN                            0.0                21.0
+          NIFTY last_hour: P106 daily QLIKE of mcsGARCH vs this study's             792           792            NaN                 NaN                   NaN                        NaN                              0.0                            NaN                 NaN
+  NIFTY last_hour: P99 seed-7 hybrid daily QLIKE vs this study's hybrid             792           792            NaN                 NaN                   NaN                        NaN                              NaN                            0.0                21.0
+
+written to /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-aa68f3a7b9a92c1a8/results/p109_mcsgarch_extensions (87s)

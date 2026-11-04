@@ -1,0 +1,8 @@
+check,kind,rule,K,worst_margin,max_dm_p,result,seed_bootstrap_p,seed_bootstrap_below_alpha
+"next15, all days",primary,every ensemble: margin < 0 and DM p < 0.05,20.0,-5.638919367636097,1.1178094682573994e-08,holds,9.999000099990002e-05,True
+"next15, expiry days",secondary,every ensemble: margin < 0 and DM p < 0.05,20.0,-6.1802896861570815,0.0012524011992893003,holds,0.0021997800219978004,True
+"next30, all days",primary,every ensemble: margin < 0 and DM p < 0.05,20.0,-7.759244460492387,1.804872812261962e-13,holds,9.999000099990002e-05,True
+"next30, expiry days",secondary,every ensemble: margin < 0 and DM p < 0.05,20.0,-6.262139838833303,0.0003971934748579176,holds,0.00039996000399960006,True
+"last_hour, all days",secondary,every ensemble: margin < 0 and DM p < 0.05,20.0,-5.598720677008773,0.0004261885415712003,holds,0.0005999400059994001,True
+"last_hour, expiry days",secondary,every ensemble: margin < 0 and DM p < 0.05,20.0,-6.372652617229802,0.05160718434163471,weakened,0.023297670232976703,True
+"PRIMARY VERDICT (next15 and next30, all days)",primary,,,,,HOLDS,,

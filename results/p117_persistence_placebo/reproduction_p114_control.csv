@@ -1,0 +1,169 @@
+check,window,index,model,draw,quantity,this_study,p114_committed,identical
+P114 point fit,before_inferred,nifty,ref,-1,alpha,0.024618088614128956,0.024618088614128956,True
+P114 point fit,before_inferred,nifty,ref,-1,beta,0.97345106312989005,0.97345106312989005,True
+P114 point fit,before_inferred,nifty,ref,-1,gam_x,0,0,True
+P114 point fit,before_inferred,nifty,ref,-1,delta,1,1,True
+P114 point fit,before_inferred,nifty,ref,-1,nu,8.992622192491158,8.992622192491158,True
+P114 point fit,before_inferred,nifty,ref,-1,hl_irf,358.63915346354901,358.63915346354901,True
+P114 point fit,before_inferred,nifty,F,-1,alpha,0.028191984558926773,0.028191984558926773,True
+P114 point fit,before_inferred,nifty,F,-1,beta,0.96428498508756189,0.96428498508756189,True
+P114 point fit,before_inferred,nifty,F,-1,gam_x,0.0048579539870972329,0.0048579539870972329,True
+P114 point fit,before_inferred,nifty,F,-1,delta,0.3848075312229457,0.3848075312229457,True
+P114 point fit,before_inferred,nifty,F,-1,nu,9.0939074882381767,9.0939074882381767,True
+P114 point fit,before_inferred,nifty,F,-1,hl_irf,141.05413112421704,141.05413112421704,True
+P114 point fit,before_inferred,banknifty,ref,-1,alpha,0.032147891265663808,0.032147891265663808,True
+P114 point fit,before_inferred,banknifty,ref,-1,beta,0.96358170091585726,0.96358170091585726,True
+P114 point fit,before_inferred,banknifty,ref,-1,gam_x,0,0,True
+P114 point fit,before_inferred,banknifty,ref,-1,delta,1,1,True
+P114 point fit,before_inferred,banknifty,ref,-1,nu,7.3330660264845093,7.3330660264845093,True
+P114 point fit,before_inferred,banknifty,ref,-1,hl_irf,161.96722743137059,161.96722743137059,True
+P114 point fit,before_inferred,banknifty,F,-1,alpha,0.038319424662628152,0.038319424662628152,True
+P114 point fit,before_inferred,banknifty,F,-1,beta,0.94724224614870212,0.94724224614870212,True
+P114 point fit,before_inferred,banknifty,F,-1,gam_x,0.0095646425466441292,0.0095646425466441292,True
+P114 point fit,before_inferred,banknifty,F,-1,delta,0.42142632549717124,0.42142632549717124,True
+P114 point fit,before_inferred,banknifty,F,-1,nu,7.4351535525108545,7.4351535525108545,True
+P114 point fit,before_inferred,banknifty,F,-1,hl_irf,62.663176219885145,62.663176219885145,True
+P114 point fit,after,nifty,ref,-1,alpha,0.049821901708969989,0.049821901708969989,True
+P114 point fit,after,nifty,ref,-1,beta,0.94065481819125174,0.94065481819125174,True
+P114 point fit,after,nifty,ref,-1,gam_x,0,0,True
+P114 point fit,after,nifty,ref,-1,delta,1,1,True
+P114 point fit,after,nifty,ref,-1,nu,7.0078829616220162,7.0078829616220162,True
+P114 point fit,after,nifty,ref,-1,hl_irf,72.437373702724642,72.437373702724642,True
+P114 point fit,after,nifty,F,-1,alpha,0.066290615283634252,0.066290615283634252,True
+P114 point fit,after,nifty,F,-1,beta,0.88886622128710135,0.88886622128710135,True
+P114 point fit,after,nifty,F,-1,gam_x,0.039488925630040722,0.039488925630040722,True
+P114 point fit,after,nifty,F,-1,delta,0.1383006626463075,0.1383006626463075,True
+P114 point fit,after,nifty,F,-1,nu,6.9092517604359314,6.9092517604359314,True
+P114 point fit,after,nifty,F,-1,hl_irf,17.910407690119765,17.910407690119765,True
+P114 point fit,after,banknifty,ref,-1,alpha,0.053802195591933305,0.053802195591933305,True
+P114 point fit,after,banknifty,ref,-1,beta,0.92810302889752494,0.92810302889752494,True
+P114 point fit,after,banknifty,ref,-1,gam_x,0,0,True
+P114 point fit,after,banknifty,ref,-1,delta,1,1,True
+P114 point fit,after,banknifty,ref,-1,nu,5.673351033670345,5.673351033670345,True
+P114 point fit,after,banknifty,ref,-1,hl_irf,37.958852994726541,37.958852994726541,True
+P114 point fit,after,banknifty,F,-1,alpha,0.082475743282758057,0.082475743282758057,True
+P114 point fit,after,banknifty,F,-1,beta,0.84589893031280416,0.84589893031280416,True
+P114 point fit,after,banknifty,F,-1,gam_x,0.058852267395784683,0.058852267395784683,True
+P114 point fit,after,banknifty,F,-1,delta,0.22917751841063166,0.22917751841063166,True
+P114 point fit,after,banknifty,F,-1,nu,5.5646076564911446,5.5646076564911446,True
+P114 point fit,after,banknifty,F,-1,hl_irf,10.474042253482477,10.474042253482477,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,0,alpha,0.026419667321459162,0.026419667321500001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,0,beta,0.96769550435100871,0.96769550435100005,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,0,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,0,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,0,hl_irf,117.43854021368513,117.438540214,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,0,alpha,0.029880955633026632,0.029880955633,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,0,beta,0.94868677722067729,0.94868677722100003,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,0,gam_x,0.012750460196006314,0.012750460195999999,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,0,delta,0.16393008333290082,0.16393008333299999,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,0,hl_irf,41.003594576400857,41.003594576399998,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,1,alpha,0.025900310692445392,0.025900310692400001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,1,beta,0.97238854795053131,0.97238854795100005,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,1,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,1,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,1,hl_irf,404.73218185088456,404.73218185100001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,1,alpha,0.026388221190605927,0.026388221190600001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,1,beta,0.96266840498953199,0.96266840498999995,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,1,gam_x,0.0084149102253887661,0.0084149102253899995,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,1,delta,0.28314880603477599,0.28314880603499998,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,1,hl_irf,103.54957815908566,103.54957815900001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,2,alpha,0.025427777934628033,0.0254277779346,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,2,beta,0.97268315806969707,0.97268315807000005,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,2,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,2,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,ref,2,hl_irf,366.5795738688546,366.579573869,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,2,alpha,0.026666584099974026,0.026666584100000001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,2,beta,0.96850255970276278,0.96850255970300003,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,2,gam_x,0.0034482525364662665,0.0034482525364700001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,2,delta,0.26514060042652349,0.26514060042699999,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,nifty,F,2,hl_irf,178.12833292850942,178.12833292900001,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,0,alpha,0.052993899470975145,0.052993899471,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,0,beta,0.933378295406876,0.93337829540700001,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,0,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,0,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,0,hl_irf,50.51534974775403,50.515349747800002,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,0,alpha,0.060833324032658176,0.060833324032699997,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,0,beta,0.90725907276958206,0.90725907276999995,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,0,gam_x,0.023676782537644839,0.0236767825376,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,0,delta,3.5078179937707946e-07,3.50781799377e-07,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,0,hl_irf,25.271089084107821,25.271089084100002,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,1,alpha,0.072982021310559725,0.072982021310599998,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,1,beta,0.90284665498276284,0.90284665498299999,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,1,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,1,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,1,hl_irf,28.328439287935886,28.3284392879,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,1,alpha,0.085371165135727997,0.085371165135700006,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,1,beta,0.86222133407776091,0.86222133407799995,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,1,gam_x,0.043108229156722827,0.043108229156699998,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,1,delta,0.00010140985241244848,0.000101409852412,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,1,hl_irf,14.58428194178637,14.5842819418,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,2,alpha,0.043935589639443211,0.043935589639400002,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,2,beta,0.95136142774723065,0.95136142774700005,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,2,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,2,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,ref,2,hl_irf,147.03774758374715,147.03774758399999,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,2,alpha,0.05048480674602833,0.050484806745999998,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,2,beta,0.92644399721778536,0.92644399721799997,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,2,gam_x,0.021476001278245144,0.021476001278199999,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,2,delta,0.12066235804520148,0.120662358045,True
+P114 bootstrap draw (committed file has 12 significant digits),after,nifty,F,2,hl_irf,39.619240589994433,39.619240589999997,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,0,alpha,0.037089698071888152,0.037089698071899997,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,0,beta,0.95576021203596129,0.95576021203600003,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,0,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,0,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,0,hl_irf,96.595454745613964,96.595454745599994,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,0,alpha,0.051669955056738277,0.051669955056700002,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,0,beta,0.89928741067136742,0.89928741067100004,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,0,gam_x,0.036321240497599223,0.036321240497600001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,0,delta,0.67578659509026795,0.67578659509000005,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,0,hl_irf,16.258339390784524,16.2583393908,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,1,alpha,0.035582979533571965,0.035582979533599998,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,1,beta,0.96098565901021393,0.96098565900999999,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,1,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,1,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,1,hl_irf,201.6567735151184,201.656773515,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,1,alpha,0.067022412994121927,0.0670224129941,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,1,beta,0.88033497083842738,0.88033497083800005,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,1,gam_x,0.036240951184787047,0.036240951184800002,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,1,delta,0.99990546793629376,0.99990546793599999,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,1,hl_irf,14.476887626255726,14.4768876263,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,2,alpha,0.033069750074078016,0.033069750074099999,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,2,beta,0.95668553904721043,0.95668553904700004,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,2,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,2,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,ref,2,hl_irf,67.311859636666995,67.311859636700007,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,2,alpha,0.047540589150103785,0.047540589150100003,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,2,beta,0.89131609585649829,0.89131609585600002,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,2,gam_x,0.04690746182463288,0.046907461824599997,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,2,delta,0.38035786838313745,0.38035786838300001,True
+P114 bootstrap draw (committed file has 12 significant digits),before_inferred,banknifty,F,2,hl_irf,13.090047635905423,13.0900476359,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,0,alpha,0.058053349335314593,0.0580533493353,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,0,beta,0.92609547949386495,0.92609547949399995,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,0,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,0,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,0,hl_irf,43.380955661070914,43.380955661100003,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,0,alpha,0.08513794637823878,0.085137946378200005,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,0,beta,0.85208119980206554,0.85208119980200003,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,0,gam_x,0.054596206742543146,0.0545962067425,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,0,delta,0.27189999559127159,0.27189999559099998,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,0,hl_irf,12.115423556582494,12.1154235566,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,1,alpha,0.066416277240219701,0.066416277240199995,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,1,beta,0.89864489405958581,0.89864489406000003,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,1,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,1,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,1,hl_irf,19.490250795111933,19.4902507951,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,1,alpha,0.11419793525884955,0.114197935259,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,1,beta,0.74319757784747242,0.74319757784700002,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,1,gam_x,0.11926001428198513,0.119260014282,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,1,delta,0.16973513233747067,0.16973513233699999,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,1,hl_irf,4.8702254408172925,4.8702254408199996,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,2,alpha,0.041309645766791907,0.041309645766799998,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,2,beta,0.9511821999626392,0.95118219996300002,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,2,gam_x,0,0,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,2,delta,1,1,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,ref,2,hl_irf,91.972242340041561,91.972242339999994,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,2,alpha,0.049448499247283048,0.0494484992473,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,2,beta,0.92761157003781525,0.92761157003799999,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,2,gam_x,0.021494879355289005,0.021494879355299999,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,2,delta,0.31489651974690597,0.314896519747,True
+P114 bootstrap draw (committed file has 12 significant digits),after,banknifty,F,2,hl_irf,40.153440465187572,40.153440465199999,True

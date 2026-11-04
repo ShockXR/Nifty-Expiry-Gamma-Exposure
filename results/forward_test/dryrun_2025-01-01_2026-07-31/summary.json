@@ -1,0 +1,279 @@
+{
+  "label": "DRY RUN ON PAST DATA: a software check, NOT the forward test. These days were already used to find the effects; nothing here is evidence.",
+  "is_forward_test": false,
+  "mode": "dry run on past data",
+  "preregistration": "docs/prereg/FORWARD_TEST.md",
+  "stopping_rules": {
+    "H1": "130 negative-GEX days or 2029-12-31",
+    "H2": "100 weeks, 2028-12-31, or an expiry-weekday change",
+    "applied": false
+  },
+  "window": {
+    "start": "2025-01-01",
+    "end": "2026-07-31",
+    "trading_days_in_window": 389,
+    "last_day_in_data": "2026-07-31"
+  },
+  "h1_stopping": {
+    "rule": "130 days with negative Pro GEX at the previous close, or 2029-12-31, whichever first",
+    "observations_so_far": 389,
+    "negative_gex_days_so_far": 90,
+    "other_days_so_far": 299,
+    "reached": true,
+    "stop_day": "2026-07-31",
+    "reason": "window end (dry run: past data, the count rule was not reached inside the window)"
+  },
+  "h1b": {
+    "outcome": "r_last_1515_bp",
+    "n": 389,
+    "negative_gex_days": 90,
+    "other_days": 299,
+    "estimated": true,
+    "coef_r_rod_x_neg": -0.03935182030888433,
+    "se_hac": 0.02202501947694143,
+    "z": -1.7866871968073754,
+    "p_predicted": 0.03699402977387841,
+    "p_opposite": 0.9630059702261216,
+    "p_two_sided_statsmodels": 0.07398805954775682,
+    "r2": 0.01522261191915475,
+    "coefficients": {
+      "const": -1.7367237410085248,
+      "r_rod": 0.007162961588095291,
+      "neg": -0.761004243150017,
+      "r_rod_x_neg": -0.03935182030888433
+    },
+    "classification": "supports (secondary, unadjusted; cannot change a verdict)"
+  },
+  "h1_descriptive": {
+    "momentum_only": {
+      "slope_r_rod": -0.019483716766296934,
+      "se_hac": 0.016509447948687455,
+      "p_two_sided": 0.2379383508461086,
+      "n": 389
+    }
+  },
+  "h1": {
+    "status": "evaluated",
+    "outcome": "r_last_bp",
+    "n": 389,
+    "negative_gex_days": 90,
+    "other_days": 299,
+    "estimated": true,
+    "coef_r_rod_x_neg": -0.0796468723181795,
+    "se_hac": 0.029486002331757435,
+    "z": -2.7011756772601587,
+    "p_predicted": 0.003454741574597592,
+    "p_opposite": 0.9965452584254024,
+    "p_two_sided_statsmodels": 0.006909483149195184,
+    "r2": 0.04532561514635014,
+    "coefficients": {
+      "const": -1.7554441876427327,
+      "r_rod": 0.015443134041970235,
+      "neg": 0.31463222249094713,
+      "r_rod_x_neg": -0.0796468723181795
+    }
+  },
+  "h2_stopping": {
+    "rule": "100 counting Tuesday-expiry weeks, or weeks ending by 2028-12-31, or a change of the expiry weekday, whichever first",
+    "counting_weeks_so_far": 48,
+    "expiry_rule_change_day": null,
+    "reached": true,
+    "stop_day": "2026-07-31",
+    "reason": "window end (dry run: past data, the count rule was not reached inside the window)"
+  },
+  "h2b": {
+    "weeks": 46,
+    "estimated": true,
+    "mean_rel": 0.48265709643941296,
+    "pct_premium": 62.037417766207234,
+    "median_rel": 0.5004716879454163,
+    "ci95_rel": [
+      0.30583420229638114,
+      0.6666491983872973
+    ],
+    "ci95_pct": [
+      35.77571748635857,
+      94.77000177894743
+    ],
+    "share_weeks_positive": 0.7608695652173914,
+    "p_predicted": 3.066452137545639e-06,
+    "p_opposite": 0.9999971275572221,
+    "p_two_sided": 6.132904275091278e-06,
+    "t_test_mean_p_greater": 1.583121196447993e-06,
+    "classification": "supports (secondary, unadjusted; cannot change a verdict)"
+  },
+  "h2_descriptive": {
+    "r2_original_last_hour_1430_1529": {
+      "weeks": 48,
+      "estimated": true,
+      "mean_rel": 0.35198495733069607,
+      "pct_premium": 42.18871345797499,
+      "median_rel": 0.38139315379360017,
+      "ci95_rel": [
+        0.20447432757403383,
+        0.4953711848983801
+      ],
+      "ci95_pct": [
+        22.687995845655063,
+        64.1107280255656
+      ],
+      "share_weeks_positive": 0.7291666666666666,
+      "p_predicted": 1.8827599141957307e-05,
+      "p_opposite": 0.9999821470205035,
+      "p_two_sided": 3.7655198283914615e-05,
+      "t_test_mean_p_greater": 1.3563248655118316e-05
+    }
+  },
+  "h2": {
+    "status": "evaluated",
+    "weeks": 48,
+    "estimated": true,
+    "mean_rel": 0.3424536724444794,
+    "pct_premium": 40.83991044631154,
+    "median_rel": 0.2896000657093962,
+    "ci95_rel": [
+      0.18790774066141602,
+      0.49066805436490024
+    ],
+    "ci95_pct": [
+      20.672217882369438,
+      63.340706026076155
+    ],
+    "share_weeks_positive": 0.7291666666666666,
+    "p_predicted": 3.1671266519595065e-05,
+    "p_opposite": 0.9999699061208993,
+    "p_two_sided": 6.334253303919013e-05,
+    "t_test_mean_p_greater": 2.839379636139834e-05
+  },
+  "decisions": {
+    "H1": {
+      "verdict": "confirm",
+      "holm_p": 0.003454741574597592
+    },
+    "H2": {
+      "verdict": "confirm",
+      "holm_p": 6.334253303919013e-05
+    }
+  },
+  "checks": {
+    "minute_bars_vs_nse_official": {
+      "checked": true,
+      "days_compared": 389,
+      "days_without_official_values": 0,
+      "high_or_low_off_by_more_than_5bp": 0,
+      "open_off_by_more_than_5bp": 0,
+      "share_bad": 0.0,
+      "bad_days": [],
+      "passes": true
+    },
+    "closing_auction_structure": {
+      "auction_days_in_window": 0
+    },
+    "r_rod_and_r_last_equal_momentum_gex_daily_returns_max_abs_diff_bp": 0.0,
+    "rv_last_hour_rebuilt_from_bars_vs_pipeline_max_rel_diff": 3.658406910744816e-12,
+    "lead_in_trading_days_before_start": 30,
+    "dry_run_reproduces_published_numbers": {
+      "applies": true,
+      "h1_vs_falsification_t4_pre_auction": {
+        "published_coef": -0.0796468723181795,
+        "here": -0.0796468723181795,
+        "published_p_one_sided": 0.0034547415745977,
+        "here_p": 0.003454741574597592,
+        "published_days": 389,
+        "here_days": 389,
+        "published_negative_days": 90,
+        "here_negative_days": 90,
+        "match": true
+      },
+      "h2_original_last_hour_vs_closing_auction_r2_split": {
+        "published_pct": 42.18871345797499,
+        "here_pct": 42.18871345797499,
+        "published_p_two_sided": 3.7655198283914615e-05,
+        "here_p_two_sided": 3.7655198283914615e-05,
+        "published_weeks": 48,
+        "here_weeks": 48,
+        "match": true
+      }
+    },
+    "rebuilt_panel_vs_committed_run": {
+      "committed_run": "results/pipeline_nse_v2",
+      "overlapping_days": 419,
+      "max_rel_diff_net_gex_participant": 2.220446049250313e-16,
+      "sign_mismatches_net_gex_participant": 0,
+      "expiry_label_mismatches": 0
+    }
+  },
+  "inputs": {
+    "source": "built from data/raw with scripts/run_pipeline.py load_market and niftygex.features.build_gex_panel",
+    "raw": "data/raw",
+    "sha256_nifty_1min": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+    "sha256_index_daily": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+    "bhavcopy": {
+      "files": 420,
+      "sha256": "3a54c8efb682261a224c8cdaef7fd4e7c98353e97ba4588c3332977ae0897992"
+    },
+    "participant_oi": {
+      "files": 420,
+      "sha256": "803a9f40fcd818385be3260c13245e85f61304966fe822368765f8acc66ed46b"
+    },
+    "minute_bars_source": {
+      "nifty": {
+        "repo": "technovusin/nifty50-historical-data",
+        "commit": "7f94ced8465c7b824d7c7b5f92f5a1151a8d04be",
+        "files": 20,
+        "rows": 886923,
+        "first": "2017-04-03 09:15:00",
+        "last": "2026-11-02 15:29:00",
+        "days": 2370
+      },
+      "banknifty": {
+        "repo": "sandeepkapri/BankNifty-Data",
+        "commit": "6bdda6e571dd5e345ef3441df528a1fdccdbb0e9",
+        "files": 1,
+        "rows": 860620,
+        "first": "2017-01-02 09:15:00",
+        "last": "2026-04-22 15:29:00",
+        "days": 2305
+      }
+    }
+  },
+  "code": {
+    "git_head": {
+      "ref": "refs/heads/claude/project-thread-rbrfe4",
+      "commit": "0ca4e5242957da7d8228294975b8f640f96885d3"
+    },
+    "sha256": {
+      "scripts/forward_test.py": "8fade570e4b0b3dba2398f9dbb8c6afcf935df652e61bc4c8fb439d8fd63f356",
+      "experiments/momentum_gex.py": "e60ec549f3dbf4f830511763d6e38d5422c06d11f47dbc292de00a5920ba3bd5",
+      "experiments/real_day_level.py": "8f701fcb63670307bba0a34cd70b62aa849e43746f07abc486a21391d9bb177e",
+      "experiments/sensex_confound.py": "6d790dcda99c813dfc8aea8234ca82a736d6a3e6ff4c842e50028662ef7c1580",
+      "experiments/expiry_event_study.py": "f7b6d357cf2ac066557799d5e775337d0a74013d4f7249007c2d034fe7757090",
+      "scripts/run_pipeline.py": "d9ab2cdf71d13c2bc97199d43837fa2a1ab34e2a1229b26b7eb11b03a5253937",
+      "data/external/sensex_expiry_calendar.csv": "5d9329e40c8c75b22a861b56b31233bd07a688611e5962e2562fa7dac4d96d1a",
+      "docs/prereg/FORWARD_TEST.md": "1cf50e34b2d0c0a3dbabd54b6d9898314a42921480ff70a483a533ffca955411",
+      "src/niftygex/__init__.py": "549cbfc906592ac8112fdbb94146153573e751be1766e8a0f70b7d2cd2afef23",
+      "src/niftygex/connectedness.py": "2f838f973061c87b67844e7f9b13f3fbbf0a2145805a89f77150433956bed626",
+      "src/niftygex/data.py": "660e57dafc817d12633182f5873241161d946f6dc8e76998f172cb69fc537644",
+      "src/niftygex/evaluation.py": "49378c692e06bf746913b7d7faf0b3dc96cad1a966ac0f17816fb2922a34a42a",
+      "src/niftygex/expiry_calendar.py": "7d101d09c2f2f1b37727729fd41346cb6666112a3dc99b1d3a8b1a9be086022d",
+      "src/niftygex/features.py": "f95c4d6127323ac5ed7a59934d1cfa076d47a193ce1dbcedcb8cd07463dfb129",
+      "src/niftygex/forecast.py": "93484b72e9a9b711297246d23c99e560a0bdc927b6e552a9245e186fd193cfbe",
+      "src/niftygex/gex.py": "d847a10b174bb9f46bf3084282b07e81fdf73c97039181ff6493a528070d18b9",
+      "src/niftygex/greeks.py": "316524a37f8cf3edfe0710cf95a880bf303eeb8ae46c4cdc71c8376079309296",
+      "src/niftygex/implied.py": "9e5813cf7add4553cd6c4b36a913a69584b9468deb7fd758d59528cee8d7f370",
+      "src/niftygex/inference.py": "2e76c68d79e77a3f4f7a7e468892f4f4d96e1ebfe4ad61f621eacabb50b10099",
+      "src/niftygex/plots.py": "ac6dce4b5366783fa9aa7e66ef9c40cc3f22e3f0daf9457bab45ca5ff93b8cfb",
+      "src/niftygex/realized.py": "183bacf3449f2ddfb9b7fba22d27be1ce0496f58a136fbda319a9f99854f1942",
+      "src/niftygex/replication.py": "ad68e2430a9ae475811ab18f23274dce800445ec9e5a9451e98cc72a7cafee73",
+      "src/niftygex/simulate.py": "1a826eea0242ab53004d398d720dc49744e4933a504e796019ba42865128935d",
+      "src/niftygex/volatility.py": "26a5ec42079ebe8e31bccd4c93dc5fc2bc741a91a7b9bd5c6c367163e3d6023e"
+    }
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  }
+}

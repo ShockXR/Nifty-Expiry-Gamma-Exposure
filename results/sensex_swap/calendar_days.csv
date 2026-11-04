@@ -1,0 +1,481 @@
+date,data,weekday,week,nifty_expiry,nifty_monthly,nifty_shifted,sensex_expiry,sensex_shifted,sensex_monthly_rule,status,either_expiry,nse_regime,sensex_period,auction_day,n_bars_nifty,n_bars_sensex,missing_minutes_nifty,missing_minutes_sensex,cell_P1,cell_S1,cell_S3,cell_PL1,cell_PL2,cell_PL3,cell_R_auction
+2024-11-21,REAL DATA,3,2024-11-18,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-11-22,REAL DATA,4,2024-11-18,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2024-11-25,REAL DATA,0,2024-11-25,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-11-26,REAL DATA,1,2024-11-25,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Tue before,,,,
+2024-11-27,REAL DATA,2,2024-11-25,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-11-28,REAL DATA,3,2024-11-25,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-11-29,REAL DATA,4,2024-11-25,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2024-12-02,REAL DATA,0,2024-12-02,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-03,REAL DATA,1,2024-12-02,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Tue before,,,,
+2024-12-04,REAL DATA,2,2024-12-02,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-05,REAL DATA,3,2024-12-02,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-06,REAL DATA,4,2024-12-02,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2024-12-09,REAL DATA,0,2024-12-09,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-10,REAL DATA,1,2024-12-09,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Tue before,,,,
+2024-12-11,REAL DATA,2,2024-12-09,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-12,REAL DATA,3,2024-12-09,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-13,REAL DATA,4,2024-12-09,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2024-12-16,REAL DATA,0,2024-12-16,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-17,REAL DATA,1,2024-12-16,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Tue before,,,,
+2024-12-18,REAL DATA,2,2024-12-16,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-19,REAL DATA,3,2024-12-16,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-20,REAL DATA,4,2024-12-16,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2024-12-23,REAL DATA,0,2024-12-23,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-24,REAL DATA,1,2024-12-23,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Tue before,,,,
+2024-12-26,REAL DATA,3,2024-12-23,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-27,REAL DATA,4,2024-12-23,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2024-12-30,REAL DATA,0,2024-12-30,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,,,,
+2024-12-31,REAL DATA,1,2024-12-30,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Tue before,,,,
+2025-01-01,REAL DATA,2,2024-12-30,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_fri,False,360,360,0,0,,,,Wed before,,,
+2025-01-02,REAL DATA,3,2024-12-30,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_fri,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-01-03,REAL DATA,4,2024-12-30,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_fri,False,360,360,0,0,,,Fri before,,,,
+2025-01-06,REAL DATA,0,2025-01-06,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-01-07,REAL DATA,1,2025-01-06,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-01-08,REAL DATA,2,2025-01-06,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-01-09,REAL DATA,3,2025-01-06,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-01-10,REAL DATA,4,2025-01-06,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-01-13,REAL DATA,0,2025-01-13,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-01-14,REAL DATA,1,2025-01-13,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-01-15,REAL DATA,2,2025-01-13,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-01-16,REAL DATA,3,2025-01-13,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-01-17,REAL DATA,4,2025-01-13,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-01-20,REAL DATA,0,2025-01-20,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-01-21,REAL DATA,1,2025-01-20,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-01-22,REAL DATA,2,2025-01-20,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-01-23,REAL DATA,3,2025-01-20,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-01-24,REAL DATA,4,2025-01-20,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-01-27,REAL DATA,0,2025-01-27,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-01-28,REAL DATA,1,2025-01-27,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-01-29,REAL DATA,2,2025-01-27,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-01-30,REAL DATA,3,2025-01-27,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-01-31,REAL DATA,4,2025-01-27,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-02-03,REAL DATA,0,2025-02-03,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-02-04,REAL DATA,1,2025-02-03,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-02-05,REAL DATA,2,2025-02-03,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-02-06,REAL DATA,3,2025-02-03,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-02-07,REAL DATA,4,2025-02-03,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-02-10,REAL DATA,0,2025-02-10,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-02-11,REAL DATA,1,2025-02-10,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-02-12,REAL DATA,2,2025-02-10,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-02-13,REAL DATA,3,2025-02-10,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-02-14,REAL DATA,4,2025-02-10,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-02-17,REAL DATA,0,2025-02-17,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-02-18,REAL DATA,1,2025-02-17,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-02-19,REAL DATA,2,2025-02-17,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-02-20,REAL DATA,3,2025-02-17,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-02-21,REAL DATA,4,2025-02-17,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-02-24,REAL DATA,0,2025-02-24,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-02-25,REAL DATA,1,2025-02-24,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-02-27,REAL DATA,3,2025-02-24,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-02-28,REAL DATA,4,2025-02-24,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-03-03,REAL DATA,0,2025-03-03,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-03-04,REAL DATA,1,2025-03-03,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-03-05,REAL DATA,2,2025-03-03,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-03-06,REAL DATA,3,2025-03-03,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-03-07,REAL DATA,4,2025-03-03,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-03-10,REAL DATA,0,2025-03-10,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-03-11,REAL DATA,1,2025-03-10,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-03-12,REAL DATA,2,2025-03-10,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-03-13,REAL DATA,3,2025-03-10,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-03-17,REAL DATA,0,2025-03-17,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-03-18,REAL DATA,1,2025-03-17,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-03-19,REAL DATA,2,2025-03-17,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-03-20,REAL DATA,3,2025-03-17,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-03-21,REAL DATA,4,2025-03-17,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-03-24,REAL DATA,0,2025-03-24,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-03-25,REAL DATA,1,2025-03-24,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-03-26,REAL DATA,2,2025-03-24,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-03-27,REAL DATA,3,2025-03-24,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-03-28,REAL DATA,4,2025-03-24,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-04-01,REAL DATA,1,2025-03-31,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-04-02,REAL DATA,2,2025-03-31,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-04-03,REAL DATA,3,2025-03-31,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-04-04,REAL DATA,4,2025-03-31,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-04-07,REAL DATA,0,2025-04-07,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-04-08,REAL DATA,1,2025-04-07,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-04-09,REAL DATA,2,2025-04-07,True,False,True,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,"excluded: status N, expected none",,,
+2025-04-11,REAL DATA,4,2025-04-07,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-04-15,REAL DATA,1,2025-04-14,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-04-16,REAL DATA,2,2025-04-14,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-04-17,REAL DATA,3,2025-04-14,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-04-21,REAL DATA,0,2025-04-21,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-04-22,REAL DATA,1,2025-04-21,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-04-23,REAL DATA,2,2025-04-21,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-04-24,REAL DATA,3,2025-04-21,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu before,,Thu before
+2025-04-25,REAL DATA,4,2025-04-21,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-04-28,REAL DATA,0,2025-04-28,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-04-29,REAL DATA,1,2025-04-28,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue before,,Tue before
+2025-04-30,REAL DATA,2,2025-04-28,True,False,True,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,"excluded: status N, expected none",,,
+2025-05-02,REAL DATA,4,2025-04-28,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-05-05,REAL DATA,0,2025-05-05,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-05-06,REAL DATA,1,2025-05-05,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-05-07,REAL DATA,2,2025-05-05,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-05-08,REAL DATA,3,2025-05-05,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-05-09,REAL DATA,4,2025-05-05,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-05-12,REAL DATA,0,2025-05-12,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-05-13,REAL DATA,1,2025-05-12,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-05-14,REAL DATA,2,2025-05-12,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-05-15,REAL DATA,3,2025-05-12,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-05-16,REAL DATA,4,2025-05-12,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-05-19,REAL DATA,0,2025-05-19,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-05-20,REAL DATA,1,2025-05-19,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-05-21,REAL DATA,2,2025-05-19,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-05-22,REAL DATA,3,2025-05-19,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-05-23,REAL DATA,4,2025-05-19,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-05-26,REAL DATA,0,2025-05-26,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-05-27,REAL DATA,1,2025-05-26,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-05-28,REAL DATA,2,2025-05-26,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-05-29,REAL DATA,3,2025-05-26,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-05-30,REAL DATA,4,2025-05-26,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-06-02,REAL DATA,0,2025-06-02,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-06-03,REAL DATA,1,2025-06-02,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-06-04,REAL DATA,2,2025-06-02,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-06-05,REAL DATA,3,2025-06-02,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-06-06,REAL DATA,4,2025-06-02,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-06-09,REAL DATA,0,2025-06-09,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-06-10,REAL DATA,1,2025-06-09,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-06-11,REAL DATA,2,2025-06-09,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-06-12,REAL DATA,3,2025-06-09,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-06-13,REAL DATA,4,2025-06-09,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-06-16,REAL DATA,0,2025-06-16,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-06-17,REAL DATA,1,2025-06-16,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-06-18,REAL DATA,2,2025-06-16,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-06-19,REAL DATA,3,2025-06-16,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-06-20,REAL DATA,4,2025-06-16,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-06-23,REAL DATA,0,2025-06-23,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-06-24,REAL DATA,1,2025-06-23,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-06-25,REAL DATA,2,2025-06-23,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-06-26,REAL DATA,3,2025-06-23,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-06-27,REAL DATA,4,2025-06-23,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-06-30,REAL DATA,0,2025-06-30,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-07-01,REAL DATA,1,2025-06-30,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-07-02,REAL DATA,2,2025-06-30,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-07-03,REAL DATA,3,2025-06-30,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-07-04,REAL DATA,4,2025-06-30,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-07-07,REAL DATA,0,2025-07-07,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-07-08,REAL DATA,1,2025-07-07,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-07-09,REAL DATA,2,2025-07-07,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-07-10,REAL DATA,3,2025-07-07,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-07-11,REAL DATA,4,2025-07-07,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-07-14,REAL DATA,0,2025-07-14,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-07-15,REAL DATA,1,2025-07-14,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-07-16,REAL DATA,2,2025-07-14,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-07-17,REAL DATA,3,2025-07-14,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-07-18,REAL DATA,4,2025-07-14,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-07-21,REAL DATA,0,2025-07-21,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-07-22,REAL DATA,1,2025-07-21,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-07-23,REAL DATA,2,2025-07-21,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-07-24,REAL DATA,3,2025-07-21,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-07-25,REAL DATA,4,2025-07-21,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-07-28,REAL DATA,0,2025-07-28,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-07-29,REAL DATA,1,2025-07-28,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-07-30,REAL DATA,2,2025-07-28,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-07-31,REAL DATA,3,2025-07-28,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-08-01,REAL DATA,4,2025-07-28,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-08-04,REAL DATA,0,2025-08-04,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-08-05,REAL DATA,1,2025-08-04,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-08-06,REAL DATA,2,2025-08-04,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-08-07,REAL DATA,3,2025-08-04,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-08-08,REAL DATA,4,2025-08-04,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-08-11,REAL DATA,0,2025-08-11,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-08-12,REAL DATA,1,2025-08-11,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-08-13,REAL DATA,2,2025-08-11,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-08-14,REAL DATA,3,2025-08-11,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-08-18,REAL DATA,0,2025-08-18,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-08-19,REAL DATA,1,2025-08-18,False,False,False,True,False,False,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-08-20,REAL DATA,2,2025-08-18,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Wed before,,,
+2025-08-21,REAL DATA,3,2025-08-18,True,False,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-08-22,REAL DATA,4,2025-08-18,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-08-25,REAL DATA,0,2025-08-25,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,,Mon before,,,
+2025-08-26,REAL DATA,1,2025-08-25,False,False,False,True,False,True,S,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Tue before,Tue before,Tue after,,Tue after,,Tue before
+2025-08-28,REAL DATA,3,2025-08-25,True,True,False,False,False,False,N,True,single_weekly_thu,sensex_tue,False,360,360,0,0,Thu before,Thu before,,,Thu after,,Thu before
+2025-08-29,REAL DATA,4,2025-08-25,False,False,False,False,False,False,none,False,single_weekly_thu,sensex_tue,False,360,360,0,0,,,Fri after,,,,
+2025-09-01,REAL DATA,0,2025-09-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-09-02,REAL DATA,1,2025-09-01,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-09-03,REAL DATA,2,2025-09-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-09-04,REAL DATA,3,2025-09-01,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-09-05,REAL DATA,4,2025-09-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-09-08,REAL DATA,0,2025-09-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-09-09,REAL DATA,1,2025-09-08,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-09-10,REAL DATA,2,2025-09-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-09-11,REAL DATA,3,2025-09-08,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-09-12,REAL DATA,4,2025-09-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-09-15,REAL DATA,0,2025-09-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-09-16,REAL DATA,1,2025-09-15,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-09-17,REAL DATA,2,2025-09-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-09-18,REAL DATA,3,2025-09-15,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-09-19,REAL DATA,4,2025-09-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-09-22,REAL DATA,0,2025-09-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-09-23,REAL DATA,1,2025-09-22,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-09-24,REAL DATA,2,2025-09-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-09-25,REAL DATA,3,2025-09-22,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-09-26,REAL DATA,4,2025-09-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-09-29,REAL DATA,0,2025-09-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-09-30,REAL DATA,1,2025-09-29,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-10-01,REAL DATA,2,2025-09-29,False,False,False,True,True,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status S, expected none",,,
+2025-10-03,REAL DATA,4,2025-09-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-10-06,REAL DATA,0,2025-10-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-10-07,REAL DATA,1,2025-10-06,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-10-08,REAL DATA,2,2025-10-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-10-09,REAL DATA,3,2025-10-06,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-10-10,REAL DATA,4,2025-10-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-10-13,REAL DATA,0,2025-10-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-10-14,REAL DATA,1,2025-10-13,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-10-15,REAL DATA,2,2025-10-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-10-16,REAL DATA,3,2025-10-13,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-10-17,REAL DATA,4,2025-10-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-10-20,REAL DATA,0,2025-10-20,True,False,True,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status N, expected none",,,
+2025-10-23,REAL DATA,3,2025-10-20,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-10-24,REAL DATA,4,2025-10-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-10-27,REAL DATA,0,2025-10-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-10-28,REAL DATA,1,2025-10-27,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-10-29,REAL DATA,2,2025-10-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-10-30,REAL DATA,3,2025-10-27,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-10-31,REAL DATA,4,2025-10-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-11-03,REAL DATA,0,2025-11-03,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-11-04,REAL DATA,1,2025-11-03,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-11-06,REAL DATA,3,2025-11-03,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-11-07,REAL DATA,4,2025-11-03,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-11-10,REAL DATA,0,2025-11-10,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-11-11,REAL DATA,1,2025-11-10,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-11-12,REAL DATA,2,2025-11-10,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-11-13,REAL DATA,3,2025-11-10,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-11-14,REAL DATA,4,2025-11-10,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-11-17,REAL DATA,0,2025-11-17,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-11-18,REAL DATA,1,2025-11-17,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-11-19,REAL DATA,2,2025-11-17,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-11-20,REAL DATA,3,2025-11-17,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-11-21,REAL DATA,4,2025-11-17,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-11-24,REAL DATA,0,2025-11-24,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-11-25,REAL DATA,1,2025-11-24,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-11-26,REAL DATA,2,2025-11-24,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-11-27,REAL DATA,3,2025-11-24,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-11-28,REAL DATA,4,2025-11-24,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-12-01,REAL DATA,0,2025-12-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-12-02,REAL DATA,1,2025-12-01,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-12-03,REAL DATA,2,2025-12-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-12-04,REAL DATA,3,2025-12-01,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-12-05,REAL DATA,4,2025-12-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-12-08,REAL DATA,0,2025-12-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-12-09,REAL DATA,1,2025-12-08,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-12-10,REAL DATA,2,2025-12-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-12-11,REAL DATA,3,2025-12-08,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-12-12,REAL DATA,4,2025-12-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-12-15,REAL DATA,0,2025-12-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-12-16,REAL DATA,1,2025-12-15,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-12-17,REAL DATA,2,2025-12-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2025-12-18,REAL DATA,3,2025-12-15,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2025-12-19,REAL DATA,4,2025-12-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-12-22,REAL DATA,0,2025-12-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-12-23,REAL DATA,1,2025-12-22,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-12-24,REAL DATA,2,2025-12-22,False,False,False,True,True,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status S, expected none",,,
+2025-12-26,REAL DATA,4,2025-12-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2025-12-29,REAL DATA,0,2025-12-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2025-12-30,REAL DATA,1,2025-12-29,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2025-12-31,REAL DATA,2,2025-12-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-01-01,REAL DATA,3,2025-12-29,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2026-01-02,REAL DATA,4,2025-12-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-01-05,REAL DATA,0,2026-01-05,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-01-06,REAL DATA,1,2026-01-05,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2026-01-07,REAL DATA,2,2026-01-05,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-01-08,REAL DATA,3,2026-01-05,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2026-01-09,REAL DATA,4,2026-01-05,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-01-12,REAL DATA,0,2026-01-12,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-01-13,REAL DATA,1,2026-01-12,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2026-01-14,REAL DATA,2,2026-01-12,False,False,False,True,True,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status S, expected none",,,
+2026-01-16,REAL DATA,4,2026-01-12,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-01-19,REAL DATA,0,2026-01-19,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-01-20,REAL DATA,1,2026-01-19,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2026-01-21,REAL DATA,2,2026-01-19,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-01-22,REAL DATA,3,2026-01-19,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2026-01-23,REAL DATA,4,2026-01-19,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-01-27,REAL DATA,1,2026-01-26,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2026-01-28,REAL DATA,2,2026-01-26,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-01-29,REAL DATA,3,2026-01-26,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2026-01-30,REAL DATA,4,2026-01-26,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-02-02,REAL DATA,0,2026-02-02,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-02-03,REAL DATA,1,2026-02-02,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2026-02-04,REAL DATA,2,2026-02-02,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-02-05,REAL DATA,3,2026-02-02,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2026-02-06,REAL DATA,4,2026-02-02,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-02-09,REAL DATA,0,2026-02-09,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-02-10,REAL DATA,1,2026-02-09,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue before,Tue after
+2026-02-11,REAL DATA,2,2026-02-09,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-02-12,REAL DATA,3,2026-02-09,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu before,Thu after
+2026-02-13,REAL DATA,4,2026-02-09,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-02-16,REAL DATA,0,2026-02-16,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-02-17,REAL DATA,1,2026-02-16,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-02-18,REAL DATA,2,2026-02-16,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-02-19,REAL DATA,3,2026-02-16,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-02-20,REAL DATA,4,2026-02-16,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-02-23,REAL DATA,0,2026-02-23,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-02-24,REAL DATA,1,2026-02-23,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-02-25,REAL DATA,2,2026-02-23,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-02-26,REAL DATA,3,2026-02-23,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-02-27,REAL DATA,4,2026-02-23,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-03-02,REAL DATA,0,2026-03-02,True,False,True,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status N, expected none",,,
+2026-03-04,REAL DATA,2,2026-03-02,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-03-05,REAL DATA,3,2026-03-02,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-03-06,REAL DATA,4,2026-03-02,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-03-09,REAL DATA,0,2026-03-09,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-03-10,REAL DATA,1,2026-03-09,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-03-11,REAL DATA,2,2026-03-09,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-03-12,REAL DATA,3,2026-03-09,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-03-13,REAL DATA,4,2026-03-09,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-03-16,REAL DATA,0,2026-03-16,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-03-17,REAL DATA,1,2026-03-16,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-03-18,REAL DATA,2,2026-03-16,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-03-19,REAL DATA,3,2026-03-16,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-03-20,REAL DATA,4,2026-03-16,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-03-23,REAL DATA,0,2026-03-23,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-03-24,REAL DATA,1,2026-03-23,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-03-25,REAL DATA,2,2026-03-23,False,False,False,True,True,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status S, expected none",,,
+2026-03-27,REAL DATA,4,2026-03-23,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-03-30,REAL DATA,0,2026-03-30,True,True,True,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status N, expected none",,,
+2026-04-01,REAL DATA,2,2026-03-30,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-04-02,REAL DATA,3,2026-03-30,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-04-06,REAL DATA,0,2026-04-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-04-07,REAL DATA,1,2026-04-06,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-04-08,REAL DATA,2,2026-04-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-04-09,REAL DATA,3,2026-04-06,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-04-10,REAL DATA,4,2026-04-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-04-13,REAL DATA,0,2026-04-13,True,False,True,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status N, expected none",,,
+2026-04-15,REAL DATA,2,2026-04-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-04-16,REAL DATA,3,2026-04-13,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-04-17,REAL DATA,4,2026-04-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-04-20,REAL DATA,0,2026-04-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-04-21,REAL DATA,1,2026-04-20,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-04-22,REAL DATA,2,2026-04-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-04-23,REAL DATA,3,2026-04-20,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-04-24,REAL DATA,4,2026-04-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-04-27,REAL DATA,0,2026-04-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-04-28,REAL DATA,1,2026-04-27,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-04-29,REAL DATA,2,2026-04-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-04-30,REAL DATA,3,2026-04-27,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-05-04,REAL DATA,0,2026-05-04,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-05-05,REAL DATA,1,2026-05-04,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-05-06,REAL DATA,2,2026-05-04,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-05-07,REAL DATA,3,2026-05-04,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-05-08,REAL DATA,4,2026-05-04,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-05-11,REAL DATA,0,2026-05-11,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-05-12,REAL DATA,1,2026-05-11,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-05-13,REAL DATA,2,2026-05-11,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-05-14,REAL DATA,3,2026-05-11,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-05-15,REAL DATA,4,2026-05-11,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-05-18,REAL DATA,0,2026-05-18,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-05-19,REAL DATA,1,2026-05-18,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-05-20,REAL DATA,2,2026-05-18,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-05-21,REAL DATA,3,2026-05-18,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-05-22,REAL DATA,4,2026-05-18,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-05-25,REAL DATA,0,2026-05-25,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-05-26,REAL DATA,1,2026-05-25,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-05-27,REAL DATA,2,2026-05-25,False,False,False,True,True,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,"excluded: status S, expected none",,,
+2026-05-29,REAL DATA,4,2026-05-25,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-06-01,REAL DATA,0,2026-06-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-06-02,REAL DATA,1,2026-06-01,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-06-03,REAL DATA,2,2026-06-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-06-04,REAL DATA,3,2026-06-01,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-06-05,REAL DATA,4,2026-06-01,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-06-08,REAL DATA,0,2026-06-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-06-09,REAL DATA,1,2026-06-08,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-06-10,REAL DATA,2,2026-06-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-06-11,REAL DATA,3,2026-06-08,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-06-12,REAL DATA,4,2026-06-08,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-06-15,REAL DATA,0,2026-06-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-06-16,REAL DATA,1,2026-06-15,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-06-17,REAL DATA,2,2026-06-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-06-18,REAL DATA,3,2026-06-15,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-06-19,REAL DATA,4,2026-06-15,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-06-22,REAL DATA,0,2026-06-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-06-23,REAL DATA,1,2026-06-22,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-06-24,REAL DATA,2,2026-06-22,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-06-25,REAL DATA,3,2026-06-22,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-06-29,REAL DATA,0,2026-06-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-06-30,REAL DATA,1,2026-06-29,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-07-01,REAL DATA,2,2026-06-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-07-02,REAL DATA,3,2026-06-29,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-07-03,REAL DATA,4,2026-06-29,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-07-06,REAL DATA,0,2026-07-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-07-07,REAL DATA,1,2026-07-06,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-07-08,REAL DATA,2,2026-07-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-07-09,REAL DATA,3,2026-07-06,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-07-10,REAL DATA,4,2026-07-06,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-07-13,REAL DATA,0,2026-07-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-07-14,REAL DATA,1,2026-07-13,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-07-15,REAL DATA,2,2026-07-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-07-16,REAL DATA,3,2026-07-13,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-07-17,REAL DATA,4,2026-07-13,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-07-20,REAL DATA,0,2026-07-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-07-21,REAL DATA,1,2026-07-20,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-07-22,REAL DATA,2,2026-07-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-07-23,REAL DATA,3,2026-07-20,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-07-24,REAL DATA,4,2026-07-20,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-07-27,REAL DATA,0,2026-07-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Mon after,,,
+2026-07-28,REAL DATA,1,2026-07-27,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Tue after,Tue after,,,,Tue after,Tue after
+2026-07-29,REAL DATA,2,2026-07-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,Wed after,,,
+2026-07-30,REAL DATA,3,2026-07-27,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,False,360,360,0,0,Thu after,Thu after,,,,Thu after,Thu after
+2026-07-31,REAL DATA,4,2026-07-27,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,False,360,360,0,0,,,,,,,
+2026-08-03,REAL DATA,0,2026-08-03,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-08-04,REAL DATA,1,2026-08-03,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-08-05,REAL DATA,2,2026-08-03,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-08-06,REAL DATA,3,2026-08-03,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-08-07,REAL DATA,4,2026-08-03,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-08-10,REAL DATA,0,2026-08-10,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-08-11,REAL DATA,1,2026-08-10,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-08-12,REAL DATA,2,2026-08-10,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-08-13,REAL DATA,3,2026-08-10,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-08-14,REAL DATA,4,2026-08-10,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-08-17,REAL DATA,0,2026-08-17,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-08-18,REAL DATA,1,2026-08-17,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-08-19,REAL DATA,2,2026-08-17,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-08-20,REAL DATA,3,2026-08-17,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-08-21,REAL DATA,4,2026-08-17,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-08-24,REAL DATA,0,2026-08-24,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-08-25,REAL DATA,1,2026-08-24,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-08-26,REAL DATA,2,2026-08-24,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-08-27,REAL DATA,3,2026-08-24,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-08-28,REAL DATA,4,2026-08-24,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-08-31,REAL DATA,0,2026-08-31,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-09-01,REAL DATA,1,2026-08-31,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-09-02,REAL DATA,2,2026-08-31,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-09-03,REAL DATA,3,2026-08-31,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-09-04,REAL DATA,4,2026-08-31,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-09-07,REAL DATA,0,2026-09-07,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-09-08,REAL DATA,1,2026-09-07,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-09-09,REAL DATA,2,2026-09-07,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-09-10,REAL DATA,3,2026-09-07,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-09-11,REAL DATA,4,2026-09-07,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-09-15,REAL DATA,1,2026-09-14,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-09-16,REAL DATA,2,2026-09-14,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-09-17,REAL DATA,3,2026-09-14,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-09-18,REAL DATA,4,2026-09-14,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-09-21,REAL DATA,0,2026-09-21,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-09-22,REAL DATA,1,2026-09-21,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-09-23,REAL DATA,2,2026-09-21,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-09-24,REAL DATA,3,2026-09-21,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-09-25,REAL DATA,4,2026-09-21,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-09-28,REAL DATA,0,2026-09-28,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-09-29,REAL DATA,1,2026-09-28,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-09-30,REAL DATA,2,2026-09-28,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-10-01,REAL DATA,3,2026-09-28,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-10-05,REAL DATA,0,2026-10-05,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-10-06,REAL DATA,1,2026-10-05,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-10-07,REAL DATA,2,2026-10-05,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-10-08,REAL DATA,3,2026-10-05,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-10-09,REAL DATA,4,2026-10-05,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-10-12,REAL DATA,0,2026-10-12,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-10-13,REAL DATA,1,2026-10-12,True,False,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-10-14,REAL DATA,2,2026-10-12,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-10-15,REAL DATA,3,2026-10-12,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-10-16,REAL DATA,4,2026-10-12,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-10-19,REAL DATA,0,2026-10-19,True,False,True,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,"excluded: status N, expected none",,,
+2026-10-21,REAL DATA,2,2026-10-19,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-10-22,REAL DATA,3,2026-10-19,False,False,False,True,False,False,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-10-23,REAL DATA,4,2026-10-19,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-10-26,REAL DATA,0,2026-10-26,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,
+2026-10-27,REAL DATA,1,2026-10-26,True,True,False,False,False,False,N,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Tue after,Tue after,,,,,
+2026-10-28,REAL DATA,2,2026-10-26,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Wed after,,,
+2026-10-29,REAL DATA,3,2026-10-26,False,False,False,True,False,True,S,True,single_weekly_tue,sensex_thu,True,360,360,0,0,Thu after,Thu after,,,,,
+2026-10-30,REAL DATA,4,2026-10-26,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,,,,
+2026-11-02,REAL DATA,0,2026-11-02,False,False,False,False,False,False,none,False,single_weekly_tue,sensex_thu,True,360,360,0,0,,,,Mon after,,,

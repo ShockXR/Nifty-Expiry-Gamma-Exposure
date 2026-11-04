@@ -1,0 +1,16 @@
+check,ok,detail
+origins_next15,True,"792 days, 25 origins each"
+forecasts_positive_next15,True,"32 model columns, min 1.197e-08"
+published_qlike_margin_next15,True,recomputed -5.7988203440% vs published -5.7988203440%
+origins_next30,True,"792 days, 24 origins each"
+forecasts_positive_next30,True,"32 model columns, min 6.797e-08"
+published_qlike_margin_next30,True,recomputed -7.6492830714% vs published -7.6492830714%
+origins_last_hour,True,"792 days, 1 origins each"
+forecasts_positive_last_hour,True,"32 model columns, min 4.398e-07"
+published_qlike_margin_last_hour,True,recomputed -6.3625679169% vs published -6.3625679169%
+no_overlap_next30_primary,True,origins 0 to 330
+no_overlap_next30_offset15,True,origins 15 to 345
+no_overlap_next30_no0915,True,origins 30 to 330
+no_overlap_next15_all,True,origins 0 to 360
+no_overlap_last_hour,True,origins 315 to 315
+y_rebuilt_from_bars,True,"9504 windows, largest relative difference 8.40e-13"

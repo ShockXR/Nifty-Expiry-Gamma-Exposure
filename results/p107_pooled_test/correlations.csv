@@ -1,0 +1,91 @@
+data,target,benchmark,kind,index_a,index_b,value,ci95_lo,ci95_hi
+REAL DATA,next15,mcsgarch,pearson,Nifty,Bank Nifty,0.22024377184690075,-0.013609190746553644,0.4162804594079592
+REAL DATA,next15,mcsgarch,pearson,Nifty,Fin Nifty,0.411597271758005,0.33551573160683734,0.49475431928695185
+REAL DATA,next15,mcsgarch,pearson,Bank Nifty,Fin Nifty,0.6024833523856543,0.42605588370358055,0.7264111148820146
+REAL DATA,next15,mcsgarch,spearman,Nifty,Bank Nifty,0.2951279942033579,,
+REAL DATA,next15,mcsgarch,spearman,Nifty,Fin Nifty,0.4379550444373829,,
+REAL DATA,next15,mcsgarch,spearman,Bank Nifty,Fin Nifty,0.565956599793436,,
+REAL DATA,next15,mcsgarch,long_run,Nifty,Bank Nifty,0.08912895915384306,-0.13103817226799133,0.340547558496932
+REAL DATA,next15,mcsgarch,long_run,Nifty,Fin Nifty,0.40585495267271404,0.2959155702760553,0.5306174124159567
+REAL DATA,next15,mcsgarch,long_run,Bank Nifty,Fin Nifty,0.4930043907236159,0.27254624598258365,0.6990588670441279
+REAL DATA,next15,mcsgarch,pearson_placebo_shift,Nifty,Bank Nifty,0.010429230089611006,,
+REAL DATA,next15,mcsgarch,pearson_placebo_shift,Nifty,Fin Nifty,-0.030440739814404354,,
+REAL DATA,next15,mcsgarch,pearson_placebo_shift,Bank Nifty,Fin Nifty,-0.016913499581054304,,
+REAL DATA,next15,mcsgarch,pearson_benchmark_loss_level,Nifty,Bank Nifty,0.6247394122257178,,
+REAL DATA,next15,mcsgarch,pearson_benchmark_loss_level,Nifty,Fin Nifty,0.6639445627120478,,
+REAL DATA,next15,mcsgarch,pearson_benchmark_loss_level,Bank Nifty,Fin Nifty,0.8808147276441329,,
+REAL DATA,next15,mcsgarch_iv,pearson,Nifty,Bank Nifty,0.5004141255793508,,
+REAL DATA,next15,mcsgarch_iv,pearson,Nifty,Fin Nifty,0.6720068615183988,,
+REAL DATA,next15,mcsgarch_iv,pearson,Bank Nifty,Fin Nifty,0.6695560888579035,,
+REAL DATA,next15,mcsgarch_iv,spearman,Nifty,Bank Nifty,0.3614491714161936,,
+REAL DATA,next15,mcsgarch_iv,spearman,Nifty,Fin Nifty,0.4019187625988061,,
+REAL DATA,next15,mcsgarch_iv,spearman,Bank Nifty,Fin Nifty,0.6351789843949754,,
+REAL DATA,next15,mcsgarch_iv,long_run,Nifty,Bank Nifty,0.4200695249356603,,
+REAL DATA,next15,mcsgarch_iv,long_run,Nifty,Fin Nifty,0.6329747094534965,,
+REAL DATA,next15,mcsgarch_iv,long_run,Bank Nifty,Fin Nifty,0.5744325643691068,,
+REAL DATA,next15,mcsgarch_iv,pearson_placebo_shift,Nifty,Bank Nifty,0.007031409361726829,,
+REAL DATA,next15,mcsgarch_iv,pearson_placebo_shift,Nifty,Fin Nifty,-0.01011136563427146,,
+REAL DATA,next15,mcsgarch_iv,pearson_placebo_shift,Bank Nifty,Fin Nifty,-0.01949271786651483,,
+REAL DATA,next15,mcsgarch_iv,pearson_benchmark_loss_level,Nifty,Bank Nifty,0.6636722074308462,,
+REAL DATA,next15,mcsgarch_iv,pearson_benchmark_loss_level,Nifty,Fin Nifty,0.5968548382387536,,
+REAL DATA,next15,mcsgarch_iv,pearson_benchmark_loss_level,Bank Nifty,Fin Nifty,0.8928410236730332,,
+REAL DATA,next30,mcsgarch,pearson,Nifty,Bank Nifty,-0.03389431670476229,-0.34847383040189217,0.34182777556414
+REAL DATA,next30,mcsgarch,pearson,Nifty,Fin Nifty,0.22166181936251073,-0.14076927409682416,0.6201416825531397
+REAL DATA,next30,mcsgarch,pearson,Bank Nifty,Fin Nifty,0.37732531718808876,-0.011538652801628777,0.7122285105720156
+REAL DATA,next30,mcsgarch,spearman,Nifty,Bank Nifty,0.23493141266466094,,
+REAL DATA,next30,mcsgarch,spearman,Nifty,Fin Nifty,0.4542022523799371,,
+REAL DATA,next30,mcsgarch,spearman,Bank Nifty,Fin Nifty,0.5060576380317231,,
+REAL DATA,next30,mcsgarch,long_run,Nifty,Bank Nifty,-0.172111469639797,-0.42561019496745645,0.21215598185242895
+REAL DATA,next30,mcsgarch,long_run,Nifty,Fin Nifty,0.20349511218037847,-0.10122732691947467,0.5775966117736081
+REAL DATA,next30,mcsgarch,long_run,Bank Nifty,Fin Nifty,0.33844584037150754,-0.014081498213570508,0.6572107074319935
+REAL DATA,next30,mcsgarch,pearson_placebo_shift,Nifty,Bank Nifty,0.026448169753795103,,
+REAL DATA,next30,mcsgarch,pearson_placebo_shift,Nifty,Fin Nifty,-0.006998553659563775,,
+REAL DATA,next30,mcsgarch,pearson_placebo_shift,Bank Nifty,Fin Nifty,-0.027252225264614197,,
+REAL DATA,next30,mcsgarch,pearson_benchmark_loss_level,Nifty,Bank Nifty,0.6813863490241662,,
+REAL DATA,next30,mcsgarch,pearson_benchmark_loss_level,Nifty,Fin Nifty,0.692391983530779,,
+REAL DATA,next30,mcsgarch,pearson_benchmark_loss_level,Bank Nifty,Fin Nifty,0.8866010090973011,,
+REAL DATA,next30,mcsgarch_iv,pearson,Nifty,Bank Nifty,0.36293360642780637,,
+REAL DATA,next30,mcsgarch_iv,pearson,Nifty,Fin Nifty,0.5689367674486933,,
+REAL DATA,next30,mcsgarch_iv,pearson,Bank Nifty,Fin Nifty,0.5728579733735426,,
+REAL DATA,next30,mcsgarch_iv,spearman,Nifty,Bank Nifty,0.3330989407404442,,
+REAL DATA,next30,mcsgarch_iv,spearman,Nifty,Fin Nifty,0.3996237410724278,,
+REAL DATA,next30,mcsgarch_iv,spearman,Bank Nifty,Fin Nifty,0.6116619028441613,,
+REAL DATA,next30,mcsgarch_iv,long_run,Nifty,Bank Nifty,0.32141338563521943,,
+REAL DATA,next30,mcsgarch_iv,long_run,Nifty,Fin Nifty,0.5008291022593767,,
+REAL DATA,next30,mcsgarch_iv,long_run,Bank Nifty,Fin Nifty,0.5101697726063923,,
+REAL DATA,next30,mcsgarch_iv,pearson_placebo_shift,Nifty,Bank Nifty,0.008939006257468305,,
+REAL DATA,next30,mcsgarch_iv,pearson_placebo_shift,Nifty,Fin Nifty,0.0059470254788219976,,
+REAL DATA,next30,mcsgarch_iv,pearson_placebo_shift,Bank Nifty,Fin Nifty,-0.007590641127007264,,
+REAL DATA,next30,mcsgarch_iv,pearson_benchmark_loss_level,Nifty,Bank Nifty,0.6809145171165357,,
+REAL DATA,next30,mcsgarch_iv,pearson_benchmark_loss_level,Nifty,Fin Nifty,0.6013553746726893,,
+REAL DATA,next30,mcsgarch_iv,pearson_benchmark_loss_level,Bank Nifty,Fin Nifty,0.896097123787322,,
+REAL DATA,last_hour,mcsgarch,pearson,Nifty,Bank Nifty,0.021962737563466485,-0.10680870057216464,0.20232847413026767
+REAL DATA,last_hour,mcsgarch,pearson,Nifty,Fin Nifty,0.057572354851940725,-0.1401203568066043,0.30387092522524195
+REAL DATA,last_hour,mcsgarch,pearson,Bank Nifty,Fin Nifty,0.44664450394745947,0.3318459229897125,0.5946159144073713
+REAL DATA,last_hour,mcsgarch,spearman,Nifty,Bank Nifty,0.08654543494012615,,
+REAL DATA,last_hour,mcsgarch,spearman,Nifty,Fin Nifty,0.20188592367373356,,
+REAL DATA,last_hour,mcsgarch,spearman,Bank Nifty,Fin Nifty,0.5817040896987342,,
+REAL DATA,last_hour,mcsgarch,long_run,Nifty,Bank Nifty,-0.13339292688159185,-0.31949536979046617,0.1755862082986922
+REAL DATA,last_hour,mcsgarch,long_run,Nifty,Fin Nifty,-0.004730258796873014,-0.19180366144079755,0.271274265751018
+REAL DATA,last_hour,mcsgarch,long_run,Bank Nifty,Fin Nifty,0.5432176325827315,0.3786562956357575,0.6562191353655837
+REAL DATA,last_hour,mcsgarch,pearson_placebo_shift,Nifty,Bank Nifty,-0.010589843471350445,,
+REAL DATA,last_hour,mcsgarch,pearson_placebo_shift,Nifty,Fin Nifty,-0.08446666864216273,,
+REAL DATA,last_hour,mcsgarch,pearson_placebo_shift,Bank Nifty,Fin Nifty,0.0074371100391355666,,
+REAL DATA,last_hour,mcsgarch,pearson_benchmark_loss_level,Nifty,Bank Nifty,0.4780772927105977,,
+REAL DATA,last_hour,mcsgarch,pearson_benchmark_loss_level,Nifty,Fin Nifty,0.6162237185451315,,
+REAL DATA,last_hour,mcsgarch,pearson_benchmark_loss_level,Bank Nifty,Fin Nifty,0.9196603197352381,,
+REAL DATA,last_hour,mcsgarch_iv,pearson,Nifty,Bank Nifty,0.2727370054079517,,
+REAL DATA,last_hour,mcsgarch_iv,pearson,Nifty,Fin Nifty,0.3538777029014397,,
+REAL DATA,last_hour,mcsgarch_iv,pearson,Bank Nifty,Fin Nifty,0.7643200139356419,,
+REAL DATA,last_hour,mcsgarch_iv,spearman,Nifty,Bank Nifty,0.36260648484358354,,
+REAL DATA,last_hour,mcsgarch_iv,spearman,Nifty,Fin Nifty,0.35552558481741586,,
+REAL DATA,last_hour,mcsgarch_iv,spearman,Bank Nifty,Fin Nifty,0.6396978492137855,,
+REAL DATA,last_hour,mcsgarch_iv,long_run,Nifty,Bank Nifty,0.32879548158513766,,
+REAL DATA,last_hour,mcsgarch_iv,long_run,Nifty,Fin Nifty,0.366619970457376,,
+REAL DATA,last_hour,mcsgarch_iv,long_run,Bank Nifty,Fin Nifty,0.7381426564910065,,
+REAL DATA,last_hour,mcsgarch_iv,pearson_placebo_shift,Nifty,Bank Nifty,0.014563366937347116,,
+REAL DATA,last_hour,mcsgarch_iv,pearson_placebo_shift,Nifty,Fin Nifty,0.017461932744707653,,
+REAL DATA,last_hour,mcsgarch_iv,pearson_placebo_shift,Bank Nifty,Fin Nifty,0.010590557182665425,,
+REAL DATA,last_hour,mcsgarch_iv,pearson_benchmark_loss_level,Nifty,Bank Nifty,0.36102007620077026,,
+REAL DATA,last_hour,mcsgarch_iv,pearson_benchmark_loss_level,Nifty,Fin Nifty,0.4253167269036586,,
+REAL DATA,last_hour,mcsgarch_iv,pearson_benchmark_loss_level,Bank Nifty,Fin Nifty,0.9071773440053765,,

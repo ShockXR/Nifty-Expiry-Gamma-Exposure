@@ -1,0 +1,802 @@
+REAL DATA. POST HOC analyses in response to the referee report (3 Nov 2026) on F2. Nothing here is pre-registered.
+Inputs: results/pipeline_nse_v2/daily_market.csv and daily_gex_panel.csv (v2 panels), data/raw/nifty_1min.csv, data/raw/participant_oi, data/external/sensex_expiry_calendar.csv, data/external/sebi_phases.csv.
+== input checks
+                                                                                                  check      value
+                                            r_rod equals experiments/momentum_gex.py (bp, max abs diff) 0.0000e+00
+                                           r_last equals experiments/momentum_gex.py (bp, max abs diff) 0.0000e+00
+Pro rule rebuilt from C, P and the participant file vs panel net_gex_participant (max abs diff / gross) 2.4955e-17
+                            Client mirror rebuilt vs panel net_gex_client_mirror (max abs diff / gross) 4.0813e-17
+                               split 14:59 to 15:15 plus 15:15 to 15:29 minus r_last (bp, max abs diff) 2.8075e-12
+                                                                     F2 days (r_rod and r_last present) 9.3200e+02
+                                                                                F2 days with a Pro sign 9.3200e+02
+                                                                    F2 days with a negative Pro evening 4.6600e+02
+                                                                Sensex expiry days (rule) among F2 days 1.8100e+02
+                                                               days missing the 15:15 bar among F2 days 0.0000e+00
+                                                               days missing the 15:00 bar among F2 days 0.0000e+00
+       Sensex days: rule here vs results/sensex_confound/sensex_expiry_days_used.csv (days in one only) 0.0000e+00
+
+SEBI dates used (data/external/sebi_phases.csv): sebi_feb2025 2025-02-01, sebi_apr2025 2025-04-01, sebi_jul2025 2025-07-03
+
+== ITEM 1. Unconditional slope of r_last on r_rod (bp per bp). Under short_all hedging theory predicts b > 0
+                                                                                    test          sample   n    coef                method     se    stat  p_two_sided  p_one_sided_momentum  ci95_lo  ci95_hi  n_clusters
+                                unconditional slope b (short_all: theory predicts b > 0)            full 932 -0.0294          newey_west_5 0.0121 -2.4246       0.0153                0.9923  -0.0532  -0.0056         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)            full 932 -0.0294        driscoll_kraay 0.0121 -2.4253       0.0153                0.9924      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)            full 932 -0.0294 newey_west_60_fixed_b 0.0112 -2.6214       0.0178                   NaN      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)            full 932 -0.0294         cluster_month 0.0109 -2.6869       0.0100                0.9950      NaN      NaN        47.0
+                                unconditional slope b (short_all: theory predicts b > 0)            full 932 -0.0294    wild_cluster_month    NaN -2.6869       0.0232                   NaN      NaN      NaN        47.0
+                                unconditional slope b (short_all: theory predicts b > 0)            full 932 -0.0294    block_bootstrap_60 0.0110 -2.6645       0.0094                0.9992  -0.0481  -0.0048         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     pre_auction 869 -0.0303          newey_west_5 0.0126 -2.3971       0.0165                0.9917  -0.0551  -0.0055         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     pre_auction 869 -0.0303        driscoll_kraay 0.0127 -2.3940       0.0167                0.9917      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     pre_auction 869 -0.0303 newey_west_60_fixed_b 0.0118 -2.5672       0.0227                   NaN      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     pre_auction 869 -0.0303         cluster_month 0.0114 -2.6521       0.0112                0.9944      NaN      NaN        43.0
+                                unconditional slope b (short_all: theory predicts b > 0)     pre_auction 869 -0.0303    wild_cluster_month    NaN -2.6521       0.0250                   NaN      NaN      NaN        43.0
+                                unconditional slope b (short_all: theory predicts b > 0)     pre_auction 869 -0.0303    block_bootstrap_60 0.0116 -2.6147       0.0184                0.9994  -0.0476  -0.0022         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)       2023_2024 480 -0.0412          newey_west_5 0.0177 -2.3294       0.0198                0.9901  -0.0759  -0.0065         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)       2023_2024 480 -0.0412        driscoll_kraay 0.0177 -2.3294       0.0198                0.9901      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)       2023_2024 480 -0.0412 newey_west_60_fixed_b 0.0174 -2.3632       0.0455                   NaN      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)       2023_2024 480 -0.0412         cluster_month 0.0164 -2.5076       0.0197                0.9902      NaN      NaN        24.0
+                                unconditional slope b (short_all: theory predicts b > 0)       2023_2024 480 -0.0412    wild_cluster_month    NaN -2.5076       0.0506                   NaN      NaN      NaN        24.0
+                                unconditional slope b (short_all: theory predicts b > 0)       2023_2024 480 -0.0412    block_bootstrap_60 0.0186 -2.2201       0.0530                0.9999  -0.0646   0.0062         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     2025_onward 452 -0.0193          newey_west_5 0.0151 -1.2732       0.2029                0.8985  -0.0489   0.0104         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     2025_onward 452 -0.0193        driscoll_kraay 0.0151 -1.2732       0.2029                0.8985      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     2025_onward 452 -0.0193 newey_west_60_fixed_b 0.0111 -1.7292       0.1359                   NaN      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     2025_onward 452 -0.0193         cluster_month 0.0136 -1.4217       0.1691                0.9154      NaN      NaN        23.0
+                                unconditional slope b (short_all: theory predicts b > 0)     2025_onward 452 -0.0193    wild_cluster_month    NaN -1.4217       0.2492                   NaN      NaN      NaN        23.0
+                                unconditional slope b (short_all: theory predicts b > 0)     2025_onward 452 -0.0193    block_bootstrap_60 0.0122 -1.5749       0.1150                0.9261  -0.0454   0.0026         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     expiry days 198 -0.0374          newey_west_5 0.0160 -2.3404       0.0193                0.9904  -0.0688  -0.0061         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     expiry days 198 -0.0374        driscoll_kraay 0.0163 -2.2972       0.0216                0.9892      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     expiry days 198 -0.0374 newey_west_60_fixed_b 0.0133 -2.8114       0.0546                   NaN      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0)     expiry days 198 -0.0374         cluster_month 0.0170 -2.2043       0.0327                0.9837      NaN      NaN        46.0
+                                unconditional slope b (short_all: theory predicts b > 0)     expiry days 198 -0.0374    wild_cluster_month    NaN -2.2043       0.0362                   NaN      NaN      NaN        46.0
+                                unconditional slope b (short_all: theory predicts b > 0)     expiry days 198 -0.0374    block_bootstrap_60 0.0125 -2.9957       0.0235                0.9766  -0.0745  -0.0259         NaN
+                                unconditional slope b (short_all: theory predicts b > 0) non-expiry days 734 -0.0270          newey_west_5 0.0145 -1.8658       0.0621                0.9690  -0.0553   0.0014         NaN
+                                unconditional slope b (short_all: theory predicts b > 0) non-expiry days 734 -0.0270        driscoll_kraay 0.0145 -1.8624       0.0626                0.9687      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0) non-expiry days 734 -0.0270 newey_west_60_fixed_b 0.0135 -1.9989       0.0709                   NaN      NaN      NaN         NaN
+                                unconditional slope b (short_all: theory predicts b > 0) non-expiry days 734 -0.0270         cluster_month 0.0139 -1.9453       0.0579                0.9711      NaN      NaN        47.0
+                                unconditional slope b (short_all: theory predicts b > 0) non-expiry days 734 -0.0270    wild_cluster_month    NaN -1.9453       0.1112                   NaN      NaN      NaN        47.0
+                                unconditional slope b (short_all: theory predicts b > 0) non-expiry days 734 -0.0270    block_bootstrap_60 0.0133 -2.0291       0.0602                0.9959  -0.0464   0.0055         NaN
+short_all size: slope change per 1 sd of gross GEX / 20-day median (theory predicts > 0)            full 929  0.0090          newey_west_5 0.0099  0.9101       0.3628                0.1814  -0.0103   0.0283         NaN
+short_all size: slope change per 1 sd of gross GEX / 20-day median (theory predicts > 0)            full 929  0.0090         cluster_month 0.0092  0.9732       0.3356                0.1678      NaN      NaN        47.0
+short_all size: slope change per 1 sd of gross GEX / 20-day median (theory predicts > 0)            full 929  0.0090    wild_cluster_month    NaN  0.9732       0.3894                   NaN      NaN      NaN        47.0
+short_all size: slope change per 1 sd of gross GEX / 20-day median (theory predicts > 0)     pre_auction 866  0.0085          newey_west_5 0.0100  0.8488       0.3960                0.1980  -0.0111   0.0281         NaN
+short_all size: slope change per 1 sd of gross GEX / 20-day median (theory predicts > 0)     pre_auction 866  0.0085         cluster_month 0.0095  0.8892       0.3790                0.1895      NaN      NaN        43.0
+short_all size: slope change per 1 sd of gross GEX / 20-day median (theory predicts > 0)     pre_auction 866  0.0085    wild_cluster_month    NaN  0.8892       0.4416                   NaN      NaN      NaN        43.0
+
+[24s] item 1 done
+== ITEM 2. Negative-GEX evenings by year (evening = publish date of the GEX used the next day)
+ year  client  client_mirror  dii    fii  fii_plus_pro    pro  us_convention
+ 2023  0.9755         0.0245  0.0 0.0000        0.0571 0.9469         0.0653
+ 2024  0.8898         0.1102  0.0 0.0857        0.1388 0.5918         0.0816
+ 2025  0.9757         0.0243  0.0 0.0243        0.0283 0.2348         0.1377
+ 2026  1.0000         0.0000  0.0 0.0000        0.0000 0.1902         0.1805
+
+== ITEM 2. Negative Pro evenings by quarter
+rule quarter  evenings  negative  share_negative
+ pro  2023Q1        62        61          0.9839
+ pro  2023Q2        60        58          0.9667
+ pro  2023Q3        63        55          0.8730
+ pro  2023Q4        60        58          0.9667
+ pro  2024Q1        60        26          0.4333
+ pro  2024Q2        60        31          0.5167
+ pro  2024Q3        64        42          0.6562
+ pro  2024Q4        61        46          0.7541
+ pro  2025Q1        61        30          0.4918
+ pro  2025Q2        61        17          0.2787
+ pro  2025Q3        64         1          0.0156
+ pro  2025Q4        61        10          0.1639
+ pro  2026Q1        59        30          0.5085
+ pro  2026Q2        60         1          0.0167
+ pro  2026Q3        65         7          0.1077
+ pro  2026Q4        21         1          0.0476
+
+== ITEM 2. Negative-GEX evenings by SEBI phase
+         rule              segment       from         to  evenings  negative  share_negative
+          pro    before 1 Feb 2025 2023-01-02 2025-01-31       513       392          0.7641
+          pro 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38        15          0.3947
+          pro  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63        17          0.2698
+          pro      from 3 Jul 2025 2025-07-03 2026-11-02       328        50          0.1524
+          fii    before 1 Feb 2025 2023-01-02 2025-01-31       513        22          0.0429
+          fii 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38         3          0.0789
+          fii  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63         2          0.0317
+          fii      from 3 Jul 2025 2025-07-03 2026-11-02       328         0          0.0000
+          dii    before 1 Feb 2025 2023-01-02 2025-01-31       513         0          0.0000
+          dii 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38         0          0.0000
+          dii  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63         0          0.0000
+          dii      from 3 Jul 2025 2025-07-03 2026-11-02       328         0          0.0000
+       client    before 1 Feb 2025 2023-01-02 2025-01-31       513       479          0.9337
+       client 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38        35          0.9211
+       client  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63        61          0.9683
+       client      from 3 Jul 2025 2025-07-03 2026-11-02       328       328          1.0000
+client_mirror    before 1 Feb 2025 2023-01-02 2025-01-31       513        34          0.0663
+client_mirror 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38         3          0.0789
+client_mirror  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63         2          0.0317
+client_mirror      from 3 Jul 2025 2025-07-03 2026-11-02       328         0          0.0000
+ fii_plus_pro    before 1 Feb 2025 2023-01-02 2025-01-31       513        50          0.0975
+ fii_plus_pro 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38         3          0.0789
+ fii_plus_pro  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63         2          0.0317
+ fii_plus_pro      from 3 Jul 2025 2025-07-03 2026-11-02       328         0          0.0000
+us_convention    before 1 Feb 2025 2023-01-02 2025-01-31       513        38          0.0741
+us_convention 1 Feb to 31 Mar 2025 2025-02-03 2025-03-28        38         3          0.0789
+us_convention  1 Apr to 2 Jul 2025 2025-04-01 2025-07-02        63         5          0.0794
+us_convention      from 3 Jul 2025 2025-07-03 2026-11-02       328        61          0.1860
+
+== ITEM 2. Runs, autocorrelation and effective numbers of episodes
+         rule       period  evenings  negative  share_negative  sign_switches  negative_runs  negative_runs_5plus  negative_runs_10plus  neg_run_mean  neg_run_median  neg_run_max  share_of_negatives_in_3_longest_runs   acf1  n_eff_ar1  iat_sokal  iat_window  n_eff_iat
+          pro all evenings       942       474          0.5032            171             86                   20                    14        5.5116             2.0           60                                0.3333 0.6365   209.2065    98.7767         494     9.5367
+          pro 2023 to 2024       490       377          0.7694            106             54                   16                    11        6.9815             2.0           60                                0.4191 0.3900   215.0279    25.7021         129    19.0646
+          pro  2025 onward       452        97          0.2146             65             33                    4                     3        2.9394             1.0           20                                0.4948 0.5715   123.2284    14.5160          74    31.1381
+          fii all evenings       942        27          0.0287             30             15                    1                     0        1.8000             1.0            5                                0.4444 0.4280   377.2972     7.3135          37   128.8037
+          fii 2023 to 2024       490        21          0.0429             24             12                    1                     0        1.7500             1.0            5                                0.4762 0.4029   208.5379     8.3758          42    58.5016
+          fii  2025 onward       452         6          0.0133              6              3                    0                     0        2.0000             1.0            4                                1.0000 0.4933   153.3875     2.9540          15   153.0132
+          dii all evenings       942         0          0.0000              0              0                    0                     0           NaN             NaN            0                                   NaN    NaN        NaN        NaN           0        NaN
+          dii 2023 to 2024       490         0          0.0000              0              0                    0                     0           NaN             NaN            0                                   NaN    NaN        NaN        NaN           0        NaN
+          dii  2025 onward       452         0          0.0000              0              0                    0                     0           NaN             NaN            0                                   NaN    NaN        NaN        NaN           0        NaN
+       client all evenings       942       903          0.9586             48             25                   14                     9       36.1200             7.0          373                                0.6811 0.3580   445.3263     9.3477          47   100.7733
+       client 2023 to 2024       490       457          0.9327             42             22                   11                     5       20.7727             4.5          123                                0.7352 0.3176   253.7857     7.0293          36    69.7083
+       client  2025 onward       452       446          0.9867              6              4                    4                     4      111.5000            29.0          373                                0.9664 0.4933   153.3875     2.6440          14   170.9548
+client_mirror all evenings       942        39          0.0414             48             24                    2                     0        1.6250             1.0            5                                0.3590 0.3580   445.3263     9.3477          47   100.7733
+client_mirror 2023 to 2024       490        33          0.0673             42             21                    2                     0        1.5714             1.0            5                                0.3636 0.3176   253.7857     7.0293          36    69.7083
+client_mirror  2025 onward       452         6          0.0133              6              3                    0                     0        2.0000             1.0            4                                1.0000 0.4933   153.3875     2.6440          14   170.9548
+ fii_plus_pro all evenings       942        55          0.0584             72             36                    2                     0        1.5278             1.0            9                                0.3273 0.3048   501.8746     9.3807          47   100.4187
+ fii_plus_pro 2023 to 2024       490        48          0.0980             64             32                    2                     0        1.5000             1.0            9                                0.3333 0.2608   287.3022     4.5858          23   106.8514
+ fii_plus_pro  2025 onward       452         7          0.0155              8              4                    0                     0        1.7500             1.0            4                                0.8571 0.4196   184.8160     3.6218          19   124.8009
+us_convention all evenings       942       107          0.1136            154             77                    0                     0        1.3896             1.0            3                                0.0841 0.1880   643.7949     1.6903           9   557.2854
+us_convention 2023 to 2024       490        36          0.0735             54             27                    0                     0        1.3333             1.0            3                                0.1944 0.1904   333.2545     1.0610           6   461.8303
+us_convention  2025 onward       452        71          0.1571            100             50                    0                     0        1.4200             1.0            3                                0.1268 0.1642   324.5018     1.5324           8   294.9546
+
+== ITEM 2. The 12 longest negative Pro runs
+rule     sign      start        end  evenings
+ pro negative 2023-01-06 2023-04-05        60
+ pro negative 2023-10-09 2024-01-03        59
+ pro negative 2023-04-10 2023-06-05        39
+ pro negative 2023-06-07 2023-07-06        21
+ pro negative 2025-03-24 2025-04-24        20
+ pro negative 2023-09-04 2023-09-28        18
+ pro negative 2024-05-24 2024-06-18        17
+ pro negative 2026-03-09 2026-03-30        15
+ pro negative 2024-10-11 2024-10-30        14
+ pro negative 2025-01-07 2025-01-23        13
+ pro negative 2024-07-29 2024-08-13        12
+ pro negative 2023-07-17 2023-07-31        11
+
+== ITEM 2. Raw position states by category and year (share of days)
+category  year  days  mean_net_call_share  mean_net_put_share  short calls, short puts  long calls, long puts  short calls, long puts  long calls, short puts  zero in one side
+     pro  2023   245          -2.3063e-02             -0.0144                   0.6367                 0.0082                  0.2367                  0.1184            0.0000
+     pro  2024   245          -7.9444e-03              0.0014                   0.2531                 0.1143                  0.3959                  0.2367            0.0000
+     pro  2025   247           8.1391e-03              0.0214                   0.1012                 0.4939                  0.2955                  0.1093            0.0000
+     pro  2026   205           9.7152e-03              0.0223                   0.0390                 0.5122                  0.3268                  0.1220            0.0000
+     fii  2023   245           3.7666e-02              0.0640                   0.0000                 0.9959                  0.0041                  0.0000            0.0000
+     fii  2024   245           2.3977e-02              0.0419                   0.0367                 0.8449                  0.1102                  0.0082            0.0000
+     fii  2025   247           1.4441e-02              0.0636                   0.0202                 0.6397                  0.3320                  0.0081            0.0000
+     fii  2026   205          -4.7371e-02              0.1113                   0.0000                 0.0683                  0.9317                  0.0000            0.0000
+     dii  2023   245           6.0672e-05              0.0116                   0.0000                 0.4898                  0.0000                  0.0000            0.5102
+     dii  2024   245           1.3358e-04              0.0224                   0.0000                 0.6367                  0.0000                  0.0000            0.3633
+     dii  2025   247           5.4577e-04              0.0099                   0.0000                 0.9838                  0.0000                  0.0000            0.0162
+     dii  2026   205           1.5033e-03              0.0113                   0.0000                 0.9122                  0.0585                  0.0000            0.0293
+  client  2023   245          -1.4664e-02             -0.0611                   0.6163                 0.0041                  0.0735                  0.3061            0.0000
+  client  2024   245          -1.6166e-02             -0.0657                   0.6816                 0.0122                  0.0204                  0.2857            0.0000
+  client  2025   247          -2.3126e-02             -0.0949                   0.6599                 0.0081                  0.0162                  0.3158            0.0000
+  client  2026   205           3.6153e-02             -0.1449                   0.1171                 0.0000                  0.0000                  0.8829            0.0000
+
+[24s] item 2 done
+== ITEM 3. F2 interaction (Pro rule) under inference for a persistent state
+     sample     spec   n  n_neg  n_neg_episodes    coef                        method     se    stat          p  n_clusters
+       full   binary 932    466              85 -0.0680                  newey_west_5 0.0184 -3.6934 2.2125e-04         NaN
+       full   binary 932    466              85 -0.0680                driscoll_kraay 0.0182 -3.7361 1.8690e-04         NaN
+       full   binary 932    466              85 -0.0680         newey_west_60_fixed_b 0.0170 -3.9920 6.4997e-04         NaN
+       full   binary 932    466              85 -0.0680                 cluster_month 0.0176 -3.8710 3.4035e-04        47.0
+       full   binary 932    466              85 -0.0680            wild_cluster_month    NaN -3.8710 1.0000e-03        47.0
+       full   binary 932    466              85 -0.0680               cluster_episode 0.0188 -3.6064 4.0849e-04       170.0
+       full   binary 932    466              85 -0.0680          wild_cluster_episode    NaN -3.6064 6.6000e-03       170.0
+       full   binary 932    466              85 -0.0680               cluster_quarter 0.0196 -3.4596 3.5018e-03        16.0
+       full   binary 932    466              85 -0.0680          wild_cluster_quarter    NaN -3.4596 1.2400e-02        16.0
+       full   binary 932    466              85 -0.0680        block_permutation_60_t    NaN -3.6934 1.0000e-03        16.0
+       full   binary 932    466              85 -0.0680     block_permutation_60_coef    NaN -0.0680 4.2000e-03        16.0
+       full   binary 932    466              85 -0.0680       block_permutation_120_t    NaN -3.6934 1.0000e-03         8.0
+       full   binary 932    466              85 -0.0680    block_permutation_120_coef    NaN -0.0680 2.0000e-03         8.0
+       full   binary 932    466              85 -0.0680     within_block_shuffle_60_t    NaN -3.6934 2.0000e-03        16.0
+       full   binary 932    466              85 -0.0680  within_block_shuffle_60_coef    NaN -0.0680 4.2000e-03        16.0
+       full   binary 932    466              85 -0.0680    within_block_shuffle_120_t    NaN -3.6934 1.4000e-03         8.0
+       full   binary 932    466              85 -0.0680 within_block_shuffle_120_coef    NaN -0.0680 2.0000e-03         8.0
+       full controls 932    466              85 -0.0496                  newey_west_5 0.0166 -2.9825 2.8595e-03         NaN
+       full controls 932    466              85 -0.0496                driscoll_kraay 0.0164 -3.0251 2.4854e-03         NaN
+       full controls 932    466              85 -0.0496         newey_west_60_fixed_b 0.0159 -3.1272 5.7497e-03         NaN
+       full controls 932    466              85 -0.0496                 cluster_month 0.0160 -3.0910 3.3822e-03        47.0
+       full controls 932    466              85 -0.0496            wild_cluster_month    NaN -3.0910 5.4000e-03        47.0
+       full controls 932    466              85 -0.0496               cluster_episode 0.0182 -2.7254 7.0991e-03       170.0
+       full controls 932    466              85 -0.0496          wild_cluster_episode    NaN -2.7254 2.6400e-02       170.0
+       full controls 932    466              85 -0.0496               cluster_quarter 0.0187 -2.6555 1.7992e-02        16.0
+       full controls 932    466              85 -0.0496          wild_cluster_quarter    NaN -2.6555 3.4800e-02        16.0
+       full controls 932    466              85 -0.0496        block_permutation_60_t    NaN -2.9825 6.2000e-03        16.0
+       full controls 932    466              85 -0.0496     block_permutation_60_coef    NaN -0.0496 1.1800e-02        16.0
+       full controls 932    466              85 -0.0496       block_permutation_120_t    NaN -2.9825 3.6000e-03         8.0
+       full controls 932    466              85 -0.0496    block_permutation_120_coef    NaN -0.0496 9.4000e-03         8.0
+       full controls 932    466              85 -0.0496     within_block_shuffle_60_t    NaN -2.9825 2.6000e-03        16.0
+       full controls 932    466              85 -0.0496  within_block_shuffle_60_coef    NaN -0.0496 1.0200e-02        16.0
+       full controls 932    466              85 -0.0496    within_block_shuffle_120_t    NaN -2.9825 2.8000e-03         8.0
+       full controls 932    466              85 -0.0496 within_block_shuffle_120_coef    NaN -0.0496 6.4000e-03         8.0
+  2023_2024   binary 480    368              53 -0.0644                  newey_west_5 0.0277 -2.3249 2.0078e-02         NaN
+  2023_2024   binary 480    368              53 -0.0644                driscoll_kraay 0.0277 -2.3249 2.0078e-02         NaN
+  2023_2024   binary 480    368              53 -0.0644         newey_west_60_fixed_b 0.0288 -2.2401 5.5847e-02         NaN
+  2023_2024   binary 480    368              53 -0.0644                 cluster_month 0.0279 -2.3076 3.0364e-02        24.0
+  2023_2024   binary 480    368              53 -0.0644            wild_cluster_month    NaN -2.3076 5.2400e-02        24.0
+  2023_2024   binary 480    368              53 -0.0644               cluster_episode 0.0315 -2.0443 4.3453e-02       105.0
+  2023_2024   binary 480    368              53 -0.0644          wild_cluster_episode    NaN -2.0443 9.4800e-02       105.0
+  2023_2024   binary 480    368              53 -0.0644               cluster_quarter 0.0364 -1.7683 1.2033e-01         8.0
+  2023_2024   binary 480    368              53 -0.0644          wild_cluster_quarter    NaN -1.7683 1.7560e-01         8.0
+  2023_2024   binary 480    368              53 -0.0644        block_permutation_60_t    NaN -2.3249 1.0060e-01         8.0
+  2023_2024   binary 480    368              53 -0.0644     block_permutation_60_coef    NaN -0.0644 1.4380e-01         8.0
+  2023_2024   binary 480    368              53 -0.0644       block_permutation_120_t    NaN -2.3249 9.9200e-02         4.0
+  2023_2024   binary 480    368              53 -0.0644    block_permutation_120_coef    NaN -0.0644 1.3780e-01         4.0
+  2023_2024   binary 480    368              53 -0.0644     within_block_shuffle_60_t    NaN -2.3249 5.3000e-02         8.0
+  2023_2024   binary 480    368              53 -0.0644  within_block_shuffle_60_coef    NaN -0.0644 9.0200e-02         8.0
+  2023_2024   binary 480    368              53 -0.0644    within_block_shuffle_120_t    NaN -2.3249 6.5000e-02         4.0
+  2023_2024   binary 480    368              53 -0.0644 within_block_shuffle_120_coef    NaN -0.0644 9.8200e-02         4.0
+  2023_2024 controls 480    368              53 -0.0404                  newey_west_5 0.0268 -1.5045 1.3244e-01         NaN
+  2023_2024 controls 480    368              53 -0.0404                driscoll_kraay 0.0268 -1.5045 1.3244e-01         NaN
+  2023_2024 controls 480    368              53 -0.0404         newey_west_60_fixed_b 0.0232 -1.7430 1.2229e-01         NaN
+  2023_2024 controls 480    368              53 -0.0404                 cluster_month 0.0258 -1.5654 1.3114e-01        24.0
+  2023_2024 controls 480    368              53 -0.0404            wild_cluster_month    NaN -1.5654 1.3820e-01        24.0
+  2023_2024 controls 480    368              53 -0.0404               cluster_episode 0.0316 -1.2766 2.0457e-01       105.0
+  2023_2024 controls 480    368              53 -0.0404          wild_cluster_episode    NaN -1.2766 2.6280e-01       105.0
+  2023_2024 controls 480    368              53 -0.0404               cluster_quarter 0.0286 -1.4136 2.0037e-01         8.0
+  2023_2024 controls 480    368              53 -0.0404          wild_cluster_quarter    NaN -1.4136 1.9260e-01         8.0
+  2023_2024 controls 480    368              53 -0.0404        block_permutation_60_t    NaN -1.5045 2.1680e-01         8.0
+  2023_2024 controls 480    368              53 -0.0404     block_permutation_60_coef    NaN -0.0404 3.0240e-01         8.0
+  2023_2024 controls 480    368              53 -0.0404       block_permutation_120_t    NaN -1.5045 2.0900e-01         4.0
+  2023_2024 controls 480    368              53 -0.0404    block_permutation_120_coef    NaN -0.0404 2.9160e-01         4.0
+  2023_2024 controls 480    368              53 -0.0404     within_block_shuffle_60_t    NaN -1.5045 1.5060e-01         8.0
+  2023_2024 controls 480    368              53 -0.0404  within_block_shuffle_60_coef    NaN -0.0404 2.0340e-01         8.0
+  2023_2024 controls 480    368              53 -0.0404    within_block_shuffle_120_t    NaN -1.5045 1.7340e-01         4.0
+  2023_2024 controls 480    368              53 -0.0404 within_block_shuffle_120_coef    NaN -0.0404 2.2720e-01         4.0
+2025_onward   binary 452     98              33 -0.0739                  newey_west_5 0.0293 -2.5210 1.1701e-02         NaN
+2025_onward   binary 452     98              33 -0.0739                driscoll_kraay 0.0293 -2.5210 1.1701e-02         NaN
+2025_onward   binary 452     98              33 -0.0739         newey_west_60_fixed_b 0.0186 -3.9745 3.3498e-03         NaN
+2025_onward   binary 452     98              33 -0.0739                 cluster_month 0.0221 -3.3428 2.9468e-03        23.0
+2025_onward   binary 452     98              33 -0.0739            wild_cluster_month    NaN -3.3428 4.8000e-03        23.0
+2025_onward   binary 452     98              33 -0.0739               cluster_episode 0.0212 -3.4783 9.0547e-04        66.0
+2025_onward   binary 452     98              33 -0.0739          wild_cluster_episode    NaN -3.4783 3.0000e-03        66.0
+2025_onward   binary 452     98              33 -0.0739               cluster_quarter 0.0160 -4.6174 2.4337e-03         8.0
+2025_onward   binary 452     98              33 -0.0739          wild_cluster_quarter    NaN -4.6174 2.2600e-02         8.0
+2025_onward   binary 452     98              33 -0.0739        block_permutation_60_t    NaN -2.5210 2.3400e-02         8.0
+2025_onward   binary 452     98              33 -0.0739     block_permutation_60_coef    NaN -0.0739 3.8000e-02         8.0
+2025_onward   binary 452     98              33 -0.0739       block_permutation_120_t    NaN -2.5210 1.8000e-02         4.0
+2025_onward   binary 452     98              33 -0.0739    block_permutation_120_coef    NaN -0.0739 2.9000e-02         4.0
+2025_onward   binary 452     98              33 -0.0739     within_block_shuffle_60_t    NaN -2.5210 2.6600e-02         8.0
+2025_onward   binary 452     98              33 -0.0739  within_block_shuffle_60_coef    NaN -0.0739 5.4800e-02         8.0
+2025_onward   binary 452     98              33 -0.0739    within_block_shuffle_120_t    NaN -2.5210 3.0200e-02         4.0
+2025_onward   binary 452     98              33 -0.0739 within_block_shuffle_120_coef    NaN -0.0739 3.9400e-02         4.0
+2025_onward controls 452     98              33 -0.0702                  newey_west_5 0.0193 -3.6417 2.7083e-04         NaN
+2025_onward controls 452     98              33 -0.0702                driscoll_kraay 0.0193 -3.6417 2.7083e-04         NaN
+2025_onward controls 452     98              33 -0.0702         newey_west_60_fixed_b 0.0109 -6.4707 4.9998e-05         NaN
+2025_onward controls 452     98              33 -0.0702                 cluster_month 0.0161 -4.3696 2.4460e-04        23.0
+2025_onward controls 452     98              33 -0.0702            wild_cluster_month    NaN -4.3696 8.4000e-03        23.0
+2025_onward controls 452     98              33 -0.0702               cluster_episode 0.0118 -5.9656 1.1097e-07        66.0
+2025_onward controls 452     98              33 -0.0702          wild_cluster_episode    NaN -5.9656 1.0000e-03        66.0
+2025_onward controls 452     98              33 -0.0702               cluster_quarter 0.0118 -5.9298 5.8178e-04         8.0
+2025_onward controls 452     98              33 -0.0702          wild_cluster_quarter    NaN -5.9298 2.9600e-02         8.0
+2025_onward controls 452     98              33 -0.0702        block_permutation_60_t    NaN -3.6417 1.6000e-03         8.0
+2025_onward controls 452     98              33 -0.0702     block_permutation_60_coef    NaN -0.0702 2.3200e-02         8.0
+2025_onward controls 452     98              33 -0.0702       block_permutation_120_t    NaN -3.6417 3.6000e-03         4.0
+2025_onward controls 452     98              33 -0.0702    block_permutation_120_coef    NaN -0.0702 2.1000e-02         4.0
+2025_onward controls 452     98              33 -0.0702     within_block_shuffle_60_t    NaN -3.6417 3.4000e-03         8.0
+2025_onward controls 452     98              33 -0.0702  within_block_shuffle_60_coef    NaN -0.0702 1.3000e-02         8.0
+2025_onward controls 452     98              33 -0.0702    within_block_shuffle_120_t    NaN -3.6417 3.6000e-03         4.0
+2025_onward controls 452     98              33 -0.0702 within_block_shuffle_120_coef    NaN -0.0702 1.6600e-02         4.0
+
+[46s] item 3 done
+== ITEM 4. F2 under other dealer proxies
+         rule      sample     spec   n  n_neg  n_neg_episodes    coef                    method    stat          p  n_clusters                                                                            detail
+          pro        full   binary 932    466              85 -0.0680              newey_west_5 -3.6934 2.2125e-04         NaN                                         Bartlett, 5 lags, normal p (as published)
+          pro        full   binary 932    466              85 -0.0680             cluster_month -3.8710 3.4035e-04        47.0                                                                 CR1, t with 46 df
+          pro        full   binary 932    466              85 -0.0680        wild_cluster_month -3.8710 1.4000e-03        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro        full   binary 932    466              85 -0.0680           cluster_episode -3.6064 4.0849e-04       170.0                                                                CR1, t with 169 df
+          pro        full   binary 932    466              85 -0.0680      wild_cluster_episode -3.6064 6.6000e-03       170.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro        full   binary 932    466              85 -0.0680    block_permutation_60_t -3.6934 1.4000e-03        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0506 to 0.0487
+          pro        full   binary 932    466              85 -0.0680 block_permutation_60_coef -0.0680 3.8000e-03        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0506 to 0.0487
+          pro        full controls 932    466              85 -0.0496              newey_west_5 -2.9825 2.8595e-03         NaN                                         Bartlett, 5 lags, normal p (as published)
+          pro        full controls 932    466              85 -0.0496             cluster_month -3.0910 3.3822e-03        47.0                                                                 CR1, t with 46 df
+          pro        full controls 932    466              85 -0.0496        wild_cluster_month -3.0910 6.6000e-03        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro        full controls 932    466              85 -0.0496           cluster_episode -2.7254 7.0991e-03       170.0                                                                CR1, t with 169 df
+          pro        full controls 932    466              85 -0.0496      wild_cluster_episode -2.7254 3.3800e-02       170.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro        full controls 932    466              85 -0.0496    block_permutation_60_t -2.9825 5.8000e-03        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0392 to 0.0402
+          pro        full controls 932    466              85 -0.0496 block_permutation_60_coef -0.0496 1.1000e-02        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0392 to 0.0402
+          pro   2023_2024   binary 480    368              53 -0.0644              newey_west_5 -2.3249 2.0078e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+          pro   2023_2024   binary 480    368              53 -0.0644             cluster_month -2.3076 3.0364e-02        24.0                                                                 CR1, t with 23 df
+          pro   2023_2024   binary 480    368              53 -0.0644        wild_cluster_month -2.3076 5.5600e-02        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro   2023_2024   binary 480    368              53 -0.0644           cluster_episode -2.0443 4.3453e-02       105.0                                                                CR1, t with 104 df
+          pro   2023_2024   binary 480    368              53 -0.0644      wild_cluster_episode -2.0443 9.3000e-02       105.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro   2023_2024   binary 480    368              53 -0.0644    block_permutation_60_t -2.3249 1.0100e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0855 to 0.0779
+          pro   2023_2024   binary 480    368              53 -0.0644 block_permutation_60_coef -0.0644 1.4720e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0855 to 0.0779
+          pro   2023_2024 controls 480    368              53 -0.0404              newey_west_5 -1.5045 1.3244e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+          pro   2023_2024 controls 480    368              53 -0.0404             cluster_month -1.5654 1.3114e-01        24.0                                                                 CR1, t with 23 df
+          pro   2023_2024 controls 480    368              53 -0.0404        wild_cluster_month -1.5654 1.2960e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro   2023_2024 controls 480    368              53 -0.0404           cluster_episode -1.2766 2.0457e-01       105.0                                                                CR1, t with 104 df
+          pro   2023_2024 controls 480    368              53 -0.0404      wild_cluster_episode -1.2766 2.5240e-01       105.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro   2023_2024 controls 480    368              53 -0.0404    block_permutation_60_t -1.5045 2.1940e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0731 to 0.0753
+          pro   2023_2024 controls 480    368              53 -0.0404 block_permutation_60_coef -0.0404 2.9560e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0731 to 0.0753
+          pro 2025_onward   binary 452     98              33 -0.0739              newey_west_5 -2.5210 1.1701e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+          pro 2025_onward   binary 452     98              33 -0.0739             cluster_month -3.3428 2.9468e-03        23.0                                                                 CR1, t with 22 df
+          pro 2025_onward   binary 452     98              33 -0.0739        wild_cluster_month -3.3428 5.4000e-03        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro 2025_onward   binary 452     98              33 -0.0739           cluster_episode -3.4783 9.0547e-04        66.0                                                                 CR1, t with 65 df
+          pro 2025_onward   binary 452     98              33 -0.0739      wild_cluster_episode -3.4783 2.4000e-03        66.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro 2025_onward   binary 452     98              33 -0.0739    block_permutation_60_t -2.5210 1.7600e-02         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0724 to 0.0673
+          pro 2025_onward   binary 452     98              33 -0.0739 block_permutation_60_coef -0.0739 3.4800e-02         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0724 to 0.0673
+          pro 2025_onward controls 452     98              33 -0.0702              newey_west_5 -3.6417 2.7083e-04         NaN                                         Bartlett, 5 lags, normal p (as published)
+          pro 2025_onward controls 452     98              33 -0.0702             cluster_month -4.3696 2.4460e-04        23.0                                                                 CR1, t with 22 df
+          pro 2025_onward controls 452     98              33 -0.0702        wild_cluster_month -4.3696 7.8000e-03        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro 2025_onward controls 452     98              33 -0.0702           cluster_episode -5.9656 1.1097e-07        66.0                                                                 CR1, t with 65 df
+          pro 2025_onward controls 452     98              33 -0.0702      wild_cluster_episode -5.9656 6.0000e-04        66.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          pro 2025_onward controls 452     98              33 -0.0702    block_permutation_60_t -3.6417 1.6000e-03         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0573 to 0.0625
+          pro 2025_onward controls 452     98              33 -0.0702 block_permutation_60_coef -0.0702 2.1600e-02         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0573 to 0.0625
+          fii        full   binary 932     27              15 -0.0660              newey_west_5 -4.0231 5.7447e-05         NaN                                         Bartlett, 5 lags, normal p (as published)
+          fii        full   binary 932     27              15 -0.0660             cluster_month -6.4945 5.2367e-08        47.0                                                                 CR1, t with 46 df
+          fii        full   binary 932     27              15 -0.0660        wild_cluster_month -6.4945 1.6400e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii        full   binary 932     27              15 -0.0660           cluster_episode -6.4610 3.8731e-07        31.0                                                                 CR1, t with 30 df
+          fii        full   binary 932     27              15 -0.0660      wild_cluster_episode -6.4610 1.7720e-01        31.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii        full   binary 932     27              15 -0.0660    block_permutation_60_t -4.0231 1.9800e-02        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1127 to 0.1310
+          fii        full   binary 932     27              15 -0.0660 block_permutation_60_coef -0.0660 3.0140e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1127 to 0.1310
+          fii        full controls 932     27              15  0.0287              newey_west_5  0.7520 4.5206e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+          fii        full controls 932     27              15  0.0287             cluster_month  0.8295 4.1110e-01        47.0                                                                 CR1, t with 46 df
+          fii        full controls 932     27              15  0.0287        wild_cluster_month  0.8295 5.1740e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii        full controls 932     27              15  0.0287           cluster_episode  0.8818 3.8491e-01        31.0                                                                 CR1, t with 30 df
+          fii        full controls 932     27              15  0.0287      wild_cluster_episode  0.8818 5.0160e-01        31.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii        full controls 932     27              15  0.0287    block_permutation_60_t  0.7520 5.6680e-01        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1169 to 0.1128
+          fii        full controls 932     27              15  0.0287 block_permutation_60_coef  0.0287 6.1380e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1169 to 0.1128
+          fii   2023_2024   binary 480     21              12 -0.0586              newey_west_5 -3.0193 2.5335e-03         NaN                                         Bartlett, 5 lags, normal p (as published)
+          fii   2023_2024   binary 480     21              12 -0.0586             cluster_month -3.7781 9.7444e-04        24.0                                                                 CR1, t with 23 df
+          fii   2023_2024   binary 480     21              12 -0.0586        wild_cluster_month -3.7781 2.4440e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii   2023_2024   binary 480     21              12 -0.0586           cluster_episode -5.7166 6.8667e-06        25.0                                                                 CR1, t with 24 df
+          fii   2023_2024   binary 480     21              12 -0.0586      wild_cluster_episode -5.7166 8.0000e-02        25.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii   2023_2024   binary 480     21              12 -0.0586    block_permutation_60_t -3.0193 7.8400e-02         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1380 to 0.1670
+          fii   2023_2024   binary 480     21              12 -0.0586 block_permutation_60_coef -0.0586 4.5600e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1380 to 0.1670
+          fii   2023_2024 controls 480     21              12  0.0804              newey_west_5  1.1199 2.6275e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+          fii   2023_2024 controls 480     21              12  0.0804             cluster_month  1.3653 1.8537e-01        24.0                                                                 CR1, t with 23 df
+          fii   2023_2024 controls 480     21              12  0.0804        wild_cluster_month  1.3653 2.3860e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii   2023_2024 controls 480     21              12  0.0804           cluster_episode  1.2510 2.2299e-01        25.0                                                                 CR1, t with 24 df
+          fii   2023_2024 controls 480     21              12  0.0804      wild_cluster_episode  1.2510 3.5560e-01        25.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii   2023_2024 controls 480     21              12  0.0804    block_permutation_60_t  1.1199 4.0700e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1608 to 0.1451
+          fii   2023_2024 controls 480     21              12  0.0804 block_permutation_60_coef  0.0804 2.6540e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1608 to 0.1451
+          fii 2025_onward   binary 452      6               3 -0.0921              newey_west_5 -2.3394 1.9313e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+          fii 2025_onward   binary 452      6               3 -0.0921             cluster_month -7.8597 7.9088e-08        23.0                                                                 CR1, t with 22 df
+          fii 2025_onward   binary 452      6               3 -0.0921        wild_cluster_month -7.8597 9.7200e-02        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii 2025_onward   binary 452      6               3 -0.0921           cluster_episode -4.4427 4.3634e-03         7.0                                                                  CR1, t with 6 df
+          fii 2025_onward   binary 452      6               3 -0.0921      wild_cluster_episode -4.4427 2.7560e-01         7.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii 2025_onward   binary 452      6               3 -0.0921    block_permutation_60_t -2.3394 3.2560e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.2643 to 0.3279
+          fii 2025_onward   binary 452      6               3 -0.0921 block_permutation_60_coef -0.0921 4.3880e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.2643 to 0.3279
+          fii 2025_onward controls 452      6               3 -0.0996              newey_west_5 -2.4451 1.4479e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+          fii 2025_onward controls 452      6               3 -0.0996             cluster_month -6.0994 3.8673e-06        23.0                                                                 CR1, t with 22 df
+          fii 2025_onward controls 452      6               3 -0.0996        wild_cluster_month -6.0994 1.8260e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii 2025_onward controls 452      6               3 -0.0996           cluster_episode -5.3876 1.6836e-03         7.0                                                                  CR1, t with 6 df
+          fii 2025_onward controls 452      6               3 -0.0996      wild_cluster_episode -5.3876 2.4300e-01         7.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+          fii 2025_onward controls 452      6               3 -0.0996    block_permutation_60_t -2.4451 2.5380e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.2801 to 0.2993
+          fii 2025_onward controls 452      6               3 -0.0996 block_permutation_60_coef -0.0996 3.7860e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.2801 to 0.2993
+ fii_plus_pro        full   binary 932     55              36 -0.0670              newey_west_5 -3.7955 1.4732e-04         NaN                                         Bartlett, 5 lags, normal p (as published)
+ fii_plus_pro        full   binary 932     55              36 -0.0670             cluster_month -5.3139 3.0448e-06        47.0                                                                 CR1, t with 46 df
+ fii_plus_pro        full   binary 932     55              36 -0.0670        wild_cluster_month -5.3139 1.2600e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro        full   binary 932     55              36 -0.0670           cluster_episode -4.7807 8.9881e-06        73.0                                                                 CR1, t with 72 df
+ fii_plus_pro        full   binary 932     55              36 -0.0670      wild_cluster_episode -4.7807 1.3520e-01        73.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro        full   binary 932     55              36 -0.0670    block_permutation_60_t -3.7955 9.0000e-03        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0818 to 0.0939
+ fii_plus_pro        full   binary 932     55              36 -0.0670 block_permutation_60_coef -0.0670 1.5380e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0818 to 0.0939
+ fii_plus_pro        full controls 932     55              36 -0.0004              newey_west_5 -0.0126 9.8992e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+ fii_plus_pro        full controls 932     55              36 -0.0004             cluster_month -0.0152 9.8796e-01        47.0                                                                 CR1, t with 46 df
+ fii_plus_pro        full controls 932     55              36 -0.0004        wild_cluster_month -0.0152 9.8880e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro        full controls 932     55              36 -0.0004           cluster_episode -0.0169 9.8653e-01        73.0                                                                 CR1, t with 72 df
+ fii_plus_pro        full controls 932     55              36 -0.0004      wild_cluster_episode -0.0169 9.8940e-01        73.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro        full controls 932     55              36 -0.0004    block_permutation_60_t -0.0126 9.9260e-01        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0830 to 0.0806
+ fii_plus_pro        full controls 932     55              36 -0.0004 block_permutation_60_coef -0.0004 9.9260e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0830 to 0.0806
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621              newey_west_5 -2.8231 4.7563e-03         NaN                                         Bartlett, 5 lags, normal p (as published)
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621             cluster_month -3.3572 2.7267e-03        24.0                                                                 CR1, t with 23 df
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621        wild_cluster_month -3.3572 2.1940e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621           cluster_episode -2.8522 5.8406e-03        65.0                                                                 CR1, t with 64 df
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621      wild_cluster_episode -2.8522 2.9780e-01        65.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621    block_permutation_60_t -2.8231 5.8000e-02         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0921 to 0.1103
+ fii_plus_pro   2023_2024   binary 480     48              32 -0.0621 block_permutation_60_coef -0.0621 2.8480e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0921 to 0.1103
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069              newey_west_5  0.1209 9.0377e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069             cluster_month  0.1468 8.8453e-01        24.0                                                                 CR1, t with 23 df
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069        wild_cluster_month  0.1468 8.8880e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069           cluster_episode  0.1276 8.9887e-01        65.0                                                                 CR1, t with 64 df
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069      wild_cluster_episode  0.1276 9.1060e-01        65.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069    block_permutation_60_t  0.1209 9.2320e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1054 to 0.0993
+ fii_plus_pro   2023_2024 controls 480     48              32  0.0069 block_permutation_60_coef  0.0069 8.9280e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1054 to 0.0993
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826              newey_west_5 -2.4064 1.6110e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826             cluster_month -3.6178 1.5248e-03        23.0                                                                 CR1, t with 22 df
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826        wild_cluster_month -3.6178 3.9020e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826           cluster_episode -2.9792 1.7623e-02         9.0                                                                  CR1, t with 8 df
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826      wild_cluster_episode -2.9792 4.3360e-01         9.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826    block_permutation_60_t -2.4064 2.5140e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.2056 to 0.2827
+ fii_plus_pro 2025_onward   binary 452      7               4 -0.0826 block_permutation_60_coef -0.0826 4.3420e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.2056 to 0.2827
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902              newey_west_5 -2.7794 5.4466e-03         NaN                                         Bartlett, 5 lags, normal p (as published)
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902             cluster_month -4.1086 4.6276e-04        23.0                                                                 CR1, t with 22 df
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902        wild_cluster_month -4.1086 2.2900e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902           cluster_episode -4.0363 3.7549e-03         9.0                                                                  CR1, t with 8 df
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902      wild_cluster_episode -4.0363 3.1060e-01         9.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902    block_permutation_60_t -2.7794 1.8240e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.2405 to 0.2671
+ fii_plus_pro 2025_onward controls 452      7               4 -0.0902 block_permutation_60_coef -0.0902 3.9380e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.2405 to 0.2671
+          dii        full   binary 932      0               0     NaN             not estimable     NaN        NaN         NaN                                               fewer than 5 days in one sign state
+          dii        full controls 932      0               0     NaN             not estimable     NaN        NaN         NaN                                               fewer than 5 days in one sign state
+          dii   2023_2024   binary 480      0               0     NaN             not estimable     NaN        NaN         NaN                                               fewer than 5 days in one sign state
+          dii   2023_2024 controls 480      0               0     NaN             not estimable     NaN        NaN         NaN                                               fewer than 5 days in one sign state
+          dii 2025_onward   binary 452      0               0     NaN             not estimable     NaN        NaN         NaN                                               fewer than 5 days in one sign state
+          dii 2025_onward controls 452      0               0     NaN             not estimable     NaN        NaN         NaN                                               fewer than 5 days in one sign state
+client_mirror        full   binary 932     39              24 -0.0731              newey_west_5 -4.2141 2.5077e-05         NaN                                         Bartlett, 5 lags, normal p (as published)
+client_mirror        full   binary 932     39              24 -0.0731             cluster_month -6.4431 6.2552e-08        47.0                                                                 CR1, t with 46 df
+client_mirror        full   binary 932     39              24 -0.0731        wild_cluster_month -6.4431 6.4000e-02        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror        full   binary 932     39              24 -0.0731           cluster_episode -5.2765 3.1243e-06        49.0                                                                 CR1, t with 48 df
+client_mirror        full   binary 932     39              24 -0.0731      wild_cluster_episode -5.2765 8.5800e-02        49.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror        full   binary 932     39              24 -0.0731    block_permutation_60_t -4.2141 8.6000e-03        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0996 to 0.1096
+client_mirror        full   binary 932     39              24 -0.0731 block_permutation_60_coef -0.0731 1.8940e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0996 to 0.1096
+client_mirror        full controls 932     39              24 -0.0007              newey_west_5 -0.0169 9.8654e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+client_mirror        full controls 932     39              24 -0.0007             cluster_month -0.0194 9.8462e-01        47.0                                                                 CR1, t with 46 df
+client_mirror        full controls 932     39              24 -0.0007        wild_cluster_month -0.0194 9.8440e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror        full controls 932     39              24 -0.0007           cluster_episode -0.0191 9.8482e-01        49.0                                                                 CR1, t with 48 df
+client_mirror        full controls 932     39              24 -0.0007      wild_cluster_episode -0.0191 9.8740e-01        49.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror        full controls 932     39              24 -0.0007    block_permutation_60_t -0.0169 9.9160e-01        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1021 to 0.0909
+client_mirror        full controls 932     39              24 -0.0007 block_permutation_60_coef -0.0007 9.9240e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1021 to 0.0909
+client_mirror   2023_2024   binary 480     33              21 -0.0668              newey_west_5 -3.1715 1.5167e-03         NaN                                         Bartlett, 5 lags, normal p (as published)
+client_mirror   2023_2024   binary 480     33              21 -0.0668             cluster_month -4.0191 5.3644e-04        24.0                                                                 CR1, t with 23 df
+client_mirror   2023_2024   binary 480     33              21 -0.0668        wild_cluster_month -4.0191 1.1120e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror   2023_2024   binary 480     33              21 -0.0668           cluster_episode -3.5390 9.9650e-04        43.0                                                                 CR1, t with 42 df
+client_mirror   2023_2024   binary 480     33              21 -0.0668      wild_cluster_episode -3.5390 1.5000e-01        43.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror   2023_2024   binary 480     33              21 -0.0668    block_permutation_60_t -3.1715 4.7600e-02         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1041 to 0.1352
+client_mirror   2023_2024   binary 480     33              21 -0.0668 block_permutation_60_coef -0.0668 2.9380e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1041 to 0.1352
+client_mirror   2023_2024 controls 480     33              21  0.0077              newey_west_5  0.1193 9.0507e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+client_mirror   2023_2024 controls 480     33              21  0.0077             cluster_month  0.1529 8.7980e-01        24.0                                                                 CR1, t with 23 df
+client_mirror   2023_2024 controls 480     33              21  0.0077        wild_cluster_month  0.1529 8.8960e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror   2023_2024 controls 480     33              21  0.0077           cluster_episode  0.1199 9.0516e-01        43.0                                                                 CR1, t with 42 df
+client_mirror   2023_2024 controls 480     33              21  0.0077      wild_cluster_episode  0.1199 9.2420e-01        43.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror   2023_2024 controls 480     33              21  0.0077    block_permutation_60_t  0.1193 9.2500e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1257 to 0.1109
+client_mirror   2023_2024 controls 480     33              21  0.0077 block_permutation_60_coef  0.0077 8.9860e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1257 to 0.1109
+client_mirror 2025_onward   binary 452      6               3 -0.1042              newey_west_5 -2.4456 1.4463e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+client_mirror 2025_onward   binary 452      6               3 -0.1042             cluster_month -5.6280 1.1687e-05        23.0                                                                 CR1, t with 22 df
+client_mirror 2025_onward   binary 452      6               3 -0.1042        wild_cluster_month -5.6280 1.7820e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror 2025_onward   binary 452      6               3 -0.1042           cluster_episode -3.9754 7.3212e-03         7.0                                                                  CR1, t with 6 df
+client_mirror 2025_onward   binary 452      6               3 -0.1042      wild_cluster_episode -3.9754 2.6320e-01         7.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror 2025_onward   binary 452      6               3 -0.1042    block_permutation_60_t -2.4456 2.8440e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.2538 to 0.3149
+client_mirror 2025_onward   binary 452      6               3 -0.1042 block_permutation_60_coef -0.1042 3.8620e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.2538 to 0.3149
+client_mirror 2025_onward controls 452      6               3 -0.1098              newey_west_5 -2.4998 1.2428e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+client_mirror 2025_onward controls 452      6               3 -0.1098             cluster_month -4.7882 8.8103e-05        23.0                                                                 CR1, t with 22 df
+client_mirror 2025_onward controls 452      6               3 -0.1098        wild_cluster_month -4.7882 1.9440e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror 2025_onward controls 452      6               3 -0.1098           cluster_episode -4.4955 4.1236e-03         7.0                                                                  CR1, t with 6 df
+client_mirror 2025_onward controls 452      6               3 -0.1098      wild_cluster_episode -4.4955 3.0240e-01         7.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+client_mirror 2025_onward controls 452      6               3 -0.1098    block_permutation_60_t -2.4998 2.5040e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.2870 to 0.3204
+client_mirror 2025_onward controls 452      6               3 -0.1098 block_permutation_60_coef -0.1098 3.2440e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.2870 to 0.3204
+       client        full   binary 932    893              25  0.0731              newey_west_5  4.2141 2.5077e-05         NaN                                         Bartlett, 5 lags, normal p (as published)
+       client        full   binary 932    893              25  0.0731             cluster_month  6.4431 6.2552e-08        47.0                                                                 CR1, t with 46 df
+       client        full   binary 932    893              25  0.0731        wild_cluster_month  6.4431 6.9200e-02        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client        full   binary 932    893              25  0.0731           cluster_episode  5.2765 3.1243e-06        49.0                                                                 CR1, t with 48 df
+       client        full   binary 932    893              25  0.0731      wild_cluster_episode  5.2765 9.3000e-02        49.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client        full   binary 932    893              25  0.0731    block_permutation_60_t  4.2141 8.8000e-03        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1065 to 0.0952
+       client        full   binary 932    893              25  0.0731 block_permutation_60_coef  0.0731 1.7500e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1065 to 0.0952
+       client        full controls 932    893              25  0.0007              newey_west_5  0.0169 9.8654e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+       client        full controls 932    893              25  0.0007             cluster_month  0.0194 9.8462e-01        47.0                                                                 CR1, t with 46 df
+       client        full controls 932    893              25  0.0007        wild_cluster_month  0.0194 9.8840e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client        full controls 932    893              25  0.0007           cluster_episode  0.0191 9.8482e-01        49.0                                                                 CR1, t with 48 df
+       client        full controls 932    893              25  0.0007      wild_cluster_episode  0.0191 9.8460e-01        49.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client        full controls 932    893              25  0.0007    block_permutation_60_t  0.0169 9.8740e-01        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0965 to 0.0954
+       client        full controls 932    893              25  0.0007 block_permutation_60_coef  0.0007 9.8820e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0965 to 0.0954
+       client   2023_2024   binary 480    447              22  0.0668              newey_west_5  3.1715 1.5167e-03         NaN                                         Bartlett, 5 lags, normal p (as published)
+       client   2023_2024   binary 480    447              22  0.0668             cluster_month  4.0191 5.3644e-04        24.0                                                                 CR1, t with 23 df
+       client   2023_2024   binary 480    447              22  0.0668        wild_cluster_month  4.0191 1.1060e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client   2023_2024   binary 480    447              22  0.0668           cluster_episode  3.5390 9.9650e-04        43.0                                                                 CR1, t with 42 df
+       client   2023_2024   binary 480    447              22  0.0668      wild_cluster_episode  3.5390 1.5340e-01        43.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client   2023_2024   binary 480    447              22  0.0668    block_permutation_60_t  3.1715 4.8800e-02         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1329 to 0.1106
+       client   2023_2024   binary 480    447              22  0.0668 block_permutation_60_coef  0.0668 3.1800e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1329 to 0.1106
+       client   2023_2024 controls 480    447              22 -0.0077              newey_west_5 -0.1193 9.0507e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+       client   2023_2024 controls 480    447              22 -0.0077             cluster_month -0.1529 8.7980e-01        24.0                                                                 CR1, t with 23 df
+       client   2023_2024 controls 480    447              22 -0.0077        wild_cluster_month -0.1529 8.8700e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client   2023_2024 controls 480    447              22 -0.0077           cluster_episode -0.1199 9.0516e-01        43.0                                                                 CR1, t with 42 df
+       client   2023_2024 controls 480    447              22 -0.0077      wild_cluster_episode -0.1199 9.2060e-01        43.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client   2023_2024 controls 480    447              22 -0.0077    block_permutation_60_t -0.1193 9.2760e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1182 to 0.1249
+       client   2023_2024 controls 480    447              22 -0.0077 block_permutation_60_coef -0.0077 9.0160e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1182 to 0.1249
+       client 2025_onward   binary 452    446               4  0.1042              newey_west_5  2.4456 1.4463e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+       client 2025_onward   binary 452    446               4  0.1042             cluster_month  5.6280 1.1687e-05        23.0                                                                 CR1, t with 22 df
+       client 2025_onward   binary 452    446               4  0.1042        wild_cluster_month  5.6280 1.8220e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client 2025_onward   binary 452    446               4  0.1042           cluster_episode  3.9754 7.3212e-03         7.0                                                                  CR1, t with 6 df
+       client 2025_onward   binary 452    446               4  0.1042      wild_cluster_episode  3.9754 2.7480e-01         7.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client 2025_onward   binary 452    446               4  0.1042    block_permutation_60_t  2.4456 2.8380e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.3317 to 0.2400
+       client 2025_onward   binary 452    446               4  0.1042 block_permutation_60_coef  0.1042 3.8740e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.3317 to 0.2400
+       client 2025_onward controls 452    446               4  0.1098              newey_west_5  2.4998 1.2428e-02         NaN                                         Bartlett, 5 lags, normal p (as published)
+       client 2025_onward controls 452    446               4  0.1098             cluster_month  4.7882 8.8103e-05        23.0                                                                 CR1, t with 22 df
+       client 2025_onward controls 452    446               4  0.1098        wild_cluster_month  4.7882 2.0880e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client 2025_onward controls 452    446               4  0.1098           cluster_episode  4.4955 4.1236e-03         7.0                                                                  CR1, t with 6 df
+       client 2025_onward controls 452    446               4  0.1098      wild_cluster_episode  4.4955 3.0040e-01         7.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+       client 2025_onward controls 452    446               4  0.1098    block_permutation_60_t  2.4998 2.5940e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.3113 to 0.2789
+       client 2025_onward controls 452    446               4  0.1098 block_permutation_60_coef  0.1098 3.2340e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.3113 to 0.2789
+us_convention        full   binary 932    107              77  0.0129              newey_west_5  0.5443 5.8627e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+us_convention        full   binary 932    107              77  0.0129             cluster_month  0.6778 5.0131e-01        47.0                                                                 CR1, t with 46 df
+us_convention        full   binary 932    107              77  0.0129        wild_cluster_month  0.6778 5.1280e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention        full   binary 932    107              77  0.0129           cluster_episode  0.5295 5.9726e-01       154.0                                                                CR1, t with 153 df
+us_convention        full   binary 932    107              77  0.0129      wild_cluster_episode  0.5295 6.0640e-01       154.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention        full   binary 932    107              77  0.0129    block_permutation_60_t  0.5443 6.7900e-01        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0709 to 0.0702
+us_convention        full   binary 932    107              77  0.0129 block_permutation_60_coef  0.0129 7.4800e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0709 to 0.0702
+us_convention        full controls 932    107              77 -0.0008              newey_west_5 -0.0358 9.7148e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+us_convention        full controls 932    107              77 -0.0008             cluster_month -0.0470 9.6271e-01        47.0                                                                 CR1, t with 46 df
+us_convention        full controls 932    107              77 -0.0008        wild_cluster_month -0.0470 9.6320e-01        47.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention        full controls 932    107              77 -0.0008           cluster_episode -0.0368 9.7067e-01       154.0                                                                CR1, t with 153 df
+us_convention        full controls 932    107              77 -0.0008      wild_cluster_episode -0.0368 9.6840e-01       154.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention        full controls 932    107              77 -0.0008    block_permutation_60_t -0.0358 9.7620e-01        16.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0597 to 0.0595
+us_convention        full controls 932    107              77 -0.0008 block_permutation_60_coef -0.0008 9.8020e-01        16.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0597 to 0.0595
+us_convention   2023_2024   binary 480     36              27 -0.0150              newey_west_5 -0.3178 7.5060e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+us_convention   2023_2024   binary 480     36              27 -0.0150             cluster_month -0.2987 7.6786e-01        24.0                                                                 CR1, t with 23 df
+us_convention   2023_2024   binary 480     36              27 -0.0150        wild_cluster_month -0.2987 7.7780e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention   2023_2024   binary 480     36              27 -0.0150           cluster_episode -0.3043 7.6204e-01        55.0                                                                 CR1, t with 54 df
+us_convention   2023_2024   binary 480     36              27 -0.0150      wild_cluster_episode -0.3043 7.7580e-01        55.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention   2023_2024   binary 480     36              27 -0.0150    block_permutation_60_t -0.3178 7.9500e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0939 to 0.1170
+us_convention   2023_2024   binary 480     36              27 -0.0150 block_permutation_60_coef -0.0150 7.9320e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0939 to 0.1170
+us_convention   2023_2024 controls 480     36              27 -0.0288              newey_west_5 -0.6494 5.1606e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+us_convention   2023_2024 controls 480     36              27 -0.0288             cluster_month -0.6199 5.4141e-01        24.0                                                                 CR1, t with 23 df
+us_convention   2023_2024 controls 480     36              27 -0.0288        wild_cluster_month -0.6199 5.6100e-01        24.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention   2023_2024 controls 480     36              27 -0.0288           cluster_episode -0.6159 5.4054e-01        55.0                                                                 CR1, t with 54 df
+us_convention   2023_2024 controls 480     36              27 -0.0288      wild_cluster_episode -0.6159 5.6360e-01        55.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention   2023_2024 controls 480     36              27 -0.0288    block_permutation_60_t -0.6494 5.5700e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.1002 to 0.1043
+us_convention   2023_2024 controls 480     36              27 -0.0288 block_permutation_60_coef -0.0288 5.5960e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.1002 to 0.1043
+us_convention 2025_onward   binary 452     71              50  0.0145              newey_west_5  0.5562 5.7808e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+us_convention 2025_onward   binary 452     71              50  0.0145             cluster_month  0.9028 3.7640e-01        23.0                                                                 CR1, t with 22 df
+us_convention 2025_onward   binary 452     71              50  0.0145        wild_cluster_month  0.9028 3.5620e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention 2025_onward   binary 452     71              50  0.0145           cluster_episode  0.5683 5.7112e-01       100.0                                                                 CR1, t with 99 df
+us_convention 2025_onward   binary 452     71              50  0.0145      wild_cluster_episode  0.5683 5.9700e-01       100.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention 2025_onward   binary 452     71              50  0.0145    block_permutation_60_t  0.5562 6.5000e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0871 to 0.0801
+us_convention 2025_onward   binary 452     71              50  0.0145 block_permutation_60_coef  0.0145 7.3640e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0871 to 0.0801
+us_convention 2025_onward controls 452     71              50  0.0090              newey_west_5  0.2984 7.6542e-01         NaN                                         Bartlett, 5 lags, normal p (as published)
+us_convention 2025_onward controls 452     71              50  0.0090             cluster_month  0.5086 6.1611e-01        23.0                                                                 CR1, t with 22 df
+us_convention 2025_onward controls 452     71              50  0.0090        wild_cluster_month  0.5086 6.2160e-01        23.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention 2025_onward controls 452     71              50  0.0090           cluster_episode  0.3275 7.4396e-01       100.0                                                                 CR1, t with 99 df
+us_convention 2025_onward controls 452     71              50  0.0090      wild_cluster_episode  0.3275 7.6020e-01       100.0                       restricted wild cluster bootstrap, Webb weights, 4999 draws
+us_convention 2025_onward controls 452     71              50  0.0090    block_permutation_60_t  0.2984 8.0000e-01         8.0 4999 valid draws; statistic |HAC t|; placebo coef 2.5 to 97.5%: -0.0678 to 0.0685
+us_convention 2025_onward controls 452     71              50  0.0090 block_permutation_60_coef  0.0090 8.1340e-01         8.0  4999 valid draws; statistic |coef|; placebo coef 2.5 to 97.5%: -0.0678 to 0.0685
+    short_all        full   binary 932    932               1     NaN             not estimable     NaN        NaN         NaN       net GEX < 0 on every evening: the interaction is not identified; see item 1
+    short_all        full controls 932    932               1     NaN             not estimable     NaN        NaN         NaN       net GEX < 0 on every evening: the interaction is not identified; see item 1
+    short_all   2023_2024   binary 480    480               1     NaN             not estimable     NaN        NaN         NaN       net GEX < 0 on every evening: the interaction is not identified; see item 1
+    short_all   2023_2024 controls 480    480               1     NaN             not estimable     NaN        NaN         NaN       net GEX < 0 on every evening: the interaction is not identified; see item 1
+    short_all 2025_onward   binary 452    452               1     NaN             not estimable     NaN        NaN         NaN       net GEX < 0 on every evening: the interaction is not identified; see item 1
+    short_all 2025_onward controls 452    452               1     NaN             not estimable     NaN        NaN         NaN       net GEX < 0 on every evening: the interaction is not identified; see item 1
+
+[85s] item 4 done
+== ITEM 5. Alternative explanations (Pro rule)
+                                                    case            term   n  n_neg    coef                    method    stat          p  n_clusters
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680              newey_west_5 -3.6934 2.2125e-04         NaN
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680             cluster_month -3.8710 3.4035e-04        47.0
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680        wild_cluster_month -3.8710 1.4000e-03        47.0
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680           cluster_episode -3.6064 4.0849e-04       170.0
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680      wild_cluster_episode -3.6064 6.6000e-03       170.0
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680    block_permutation_60_t -3.6934 1.0000e-03        16.0
+                        baseline r_last (14:59 to 15:29)       N_x_r_rod 932    466 -0.0680 block_permutation_60_coef -0.0680 2.4000e-03        16.0
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395              newey_west_5 -2.4554 1.4074e-02         NaN
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395             cluster_month -2.0411 4.7007e-02        47.0
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395        wild_cluster_month -2.0411 6.9600e-02        47.0
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395           cluster_episode -2.1675 3.1595e-02       170.0
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395      wild_cluster_episode -2.1675 6.9400e-02       170.0
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395    block_permutation_60_t -2.4554 4.2800e-02        16.0
+                                     14:59 to 15:15 only       N_x_r_rod 932    466 -0.0395 block_permutation_60_coef -0.0395 5.3000e-02        16.0
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285              newey_west_5 -3.0979 1.9491e-03         NaN
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285             cluster_month -3.4611 1.1722e-03        47.0
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285        wild_cluster_month -3.4611 4.8000e-03        47.0
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285           cluster_episode -3.7749 2.2133e-04       170.0
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285      wild_cluster_episode -3.7749 3.8000e-03       170.0
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285    block_permutation_60_t -3.0979 3.4000e-03        16.0
+                                     15:15 to 15:29 only       N_x_r_rod 932    466 -0.0285 block_permutation_60_coef -0.0285 7.8000e-03        16.0
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646              newey_west_5 -4.0140 5.9702e-05         NaN
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646             cluster_month -4.3472 7.5568e-05        47.0
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646        wild_cluster_month -4.3472 8.0000e-04        47.0
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646           cluster_episode -4.1705 4.8483e-05       170.0
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646      wild_cluster_episode -4.1705 1.2000e-03       170.0
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646    block_permutation_60_t -4.0140 2.0000e-04        16.0
+                       first bar dropped: 15:00 to 15:29       N_x_r_rod 932    466 -0.0646 block_permutation_60_coef -0.0646 1.2000e-03        16.0
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034              newey_west_5 -0.5111 6.0929e-01         NaN
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034             cluster_month -0.5531 5.8286e-01        47.0
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034        wild_cluster_month -0.5531 5.8100e-01        47.0
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034           cluster_episode -0.5323 5.9522e-01       170.0
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034      wild_cluster_episode -0.5323 6.1900e-01       170.0
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034    block_permutation_60_t -0.5111 6.1840e-01        16.0
+                          first bar only: 14:59 to 15:00       N_x_r_rod 932    466 -0.0034 block_permutation_60_coef -0.0034 6.0300e-01        16.0
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719              newey_west_5 -3.9494 7.8339e-05         NaN
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719             cluster_month -4.2630 1.1169e-04        43.0
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719        wild_cluster_month -4.2630 4.0000e-04        43.0
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719           cluster_episode -3.7510 2.4836e-04       156.0
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719      wild_cluster_episode -3.7510 5.4000e-03       156.0
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719    block_permutation_60_t -3.9494 1.6000e-03        15.0
+                            baseline r_last, pre-auction       N_x_r_rod 869    458 -0.0719 block_permutation_60_coef -0.0719 2.6000e-03        15.0
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453              newey_west_5 -2.6869 7.2112e-03         NaN
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453             cluster_month -2.2374 3.0624e-02        43.0
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453        wild_cluster_month -2.2374 4.3600e-02        43.0
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453           cluster_episode -2.4214 1.6614e-02       156.0
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453      wild_cluster_episode -2.4214 4.4200e-02       156.0
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453    block_permutation_60_t -2.6869 2.2800e-02        15.0
+                        14:59 to 15:15 only, pre-auction       N_x_r_rod 869    458 -0.0453 block_permutation_60_coef -0.0453 2.7200e-02        15.0
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266              newey_west_5 -3.0556 2.2461e-03         NaN
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266             cluster_month -3.2011 2.6091e-03        43.0
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266        wild_cluster_month -3.2011 7.4000e-03        43.0
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266           cluster_episode -3.3654 9.6346e-04       156.0
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266      wild_cluster_episode -3.3654 6.4000e-03       156.0
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266    block_permutation_60_t -3.0556 4.2000e-03        15.0
+                        15:15 to 15:29 only, pre-auction       N_x_r_rod 869    458 -0.0266 block_permutation_60_coef -0.0266 1.3000e-02        15.0
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673              newey_west_5 -4.2876 1.8061e-05         NaN
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673             cluster_month -4.8608 1.6706e-05        43.0
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673        wild_cluster_month -4.8608 4.0000e-04        43.0
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673           cluster_episode -4.3035 2.9672e-05       156.0
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673      wild_cluster_episode -4.3035 1.0000e-03       156.0
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673    block_permutation_60_t -4.2876 2.0000e-04        15.0
+          first bar dropped: 15:00 to 15:29, pre-auction       N_x_r_rod 869    458 -0.0673 block_permutation_60_coef -0.0673 1.0000e-03        15.0
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046              newey_west_5 -0.6460 5.1827e-01         NaN
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046             cluster_month -0.6977 4.8918e-01        43.0
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046        wild_cluster_month -0.6977 4.8520e-01        43.0
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046           cluster_episode -0.6846 4.9462e-01       156.0
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046      wild_cluster_episode -0.6846 5.1420e-01       156.0
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046    block_permutation_60_t -0.6460 5.2840e-01        15.0
+             first bar only: 14:59 to 15:00, pre-auction       N_x_r_rod 869    458 -0.0046 block_permutation_60_coef -0.0046 5.0380e-01        15.0
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496              newey_west_5 -2.9825 2.8595e-03         NaN
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496             cluster_month -3.0910 3.3822e-03        47.0
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496        wild_cluster_month -3.0910 4.8000e-03        47.0
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496           cluster_episode -2.7254 7.0991e-03       170.0
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496      wild_cluster_episode -2.7254 3.1800e-02       170.0
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496    block_permutation_60_t -2.9825 7.0000e-03        16.0
+                   VIX and move-size controls (as in R5)       N_x_r_rod 932    466 -0.0496 block_permutation_60_coef -0.0496 1.4000e-02        16.0
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690              newey_west_5 -3.8563 1.1511e-04         NaN
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690             cluster_month -4.0308 2.0695e-04        47.0
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690        wild_cluster_month -4.0308 1.2000e-03        47.0
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690           cluster_episode -3.6779 3.1574e-04       170.0
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690      wild_cluster_episode -3.6779 4.6000e-03       170.0
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690    block_permutation_60_t -3.8563 8.0000e-04        16.0
+                     year-quarter fixed effects (levels)       N_x_r_rod 932    466 -0.0690 block_permutation_60_coef -0.0690 1.8000e-03        16.0
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701              newey_west_5 -3.9139 9.0800e-05         NaN
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701             cluster_month -4.1600 1.3760e-04        47.0
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701        wild_cluster_month -4.1600 8.0000e-04        47.0
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701           cluster_episode -3.8577 1.6258e-04       170.0
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701      wild_cluster_episode -3.8577 4.0000e-03       170.0
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701    block_permutation_60_t -3.9139 1.0000e-03        16.0
+                       year-month fixed effects (levels)       N_x_r_rod 932    466 -0.0701 block_permutation_60_coef -0.0701 3.2000e-03        16.0
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679              newey_west_5 -3.7904 1.5040e-04         NaN
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679             cluster_month -3.8200 3.9824e-04        47.0
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679        wild_cluster_month -3.8200 3.2000e-03        47.0
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679           cluster_episode -3.6612 3.3542e-04       170.0
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679      wild_cluster_episode -3.6612 6.2000e-03       170.0
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679    block_permutation_60_t -3.7904 3.6000e-03        16.0
+                       quarter-of-year levels and slopes       N_x_r_rod 932    466 -0.0679 block_permutation_60_coef -0.0679 6.0000e-03        16.0
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712              newey_west_5 -3.8853 1.0221e-04         NaN
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712             cluster_month -4.3315 7.9507e-05        47.0
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712        wild_cluster_month -4.3315 8.0000e-04        47.0
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712           cluster_episode -4.2194 3.9885e-05       170.0
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712      wild_cluster_episode -4.2194 2.8000e-03       170.0
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712    block_permutation_60_t -3.8853 2.0000e-03        16.0
+                         month-of-year levels and slopes       N_x_r_rod 932    466 -0.0712 block_permutation_60_coef -0.0712 6.2000e-03        16.0
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790              newey_west_5 -4.1480 3.3537e-05         NaN
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790             cluster_month -4.6193 3.1146e-05        47.0
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790        wild_cluster_month -4.6193 6.0000e-04        47.0
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790           cluster_episode -5.3653 2.6291e-07       170.0
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790      wild_cluster_episode -5.3653 2.0000e-04       170.0
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790    block_permutation_60_t -4.1480 6.0000e-04        16.0
+ year-quarter levels and slopes (within-quarter F2 only)       N_x_r_rod 932    466 -0.0790 block_permutation_60_coef -0.0790 2.0000e-03        16.0
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607              newey_west_5 -2.5409 1.1057e-02         NaN
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607             cluster_month -2.5675 1.3559e-02        47.0
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607        wild_cluster_month -2.5675 6.2000e-02        47.0
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607           cluster_episode -2.3191 2.1585e-02       170.0
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607      wild_cluster_episode -2.3191 1.1760e-01       170.0
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607    block_permutation_60_t -2.5409 5.5000e-02        16.0
+                 January to March: F2 outside and inside N_x_r_rod_notJM 932    466 -0.0607 block_permutation_60_coef -0.0607 6.0200e-02        16.0
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890              newey_west_5 -2.8569 4.2787e-03         NaN
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890             cluster_month -3.0308 3.9959e-03        47.0
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890        wild_cluster_month -3.0308 6.0000e-03        47.0
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890           cluster_episode -3.0994 2.2716e-03       170.0
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890      wild_cluster_episode -3.0994 2.6000e-03       170.0
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890    block_permutation_60_t -2.8569 6.0000e-03        16.0
+                 January to March: F2 outside and inside    N_x_r_rod_JM 932    466 -0.0890 block_permutation_60_coef -0.0890 2.0000e-02        16.0
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283              newey_west_5 -0.7240 4.6909e-01         NaN
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283             cluster_month -0.7506 4.5671e-01        47.0
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283        wild_cluster_month -0.7506 4.7760e-01        47.0
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283           cluster_episode -0.7204 4.7229e-01       170.0
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283      wild_cluster_episode -0.7204 5.1780e-01       170.0
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283    block_permutation_60_t -0.7240 5.2920e-01        16.0
+       January to March: difference inside minus outside  N_x_r_rod_x_JM 932    466 -0.0283 block_permutation_60_coef -0.0283 6.0280e-01        16.0
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687              newey_west_5 -3.4858 4.9069e-04         NaN
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687             cluster_month -4.2299 1.1014e-04        47.0
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687        wild_cluster_month -4.2299 1.4000e-03        47.0
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687           cluster_episode -4.1616 5.0223e-05       170.0
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687      wild_cluster_episode -4.1616 6.0000e-04       170.0
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687    block_permutation_60_t -3.4858 3.2000e-03        16.0
+SEBI phases (1 Feb, 1 Apr, 3 Jul 2025) levels and slopes       N_x_r_rod 932    466 -0.0687 block_permutation_60_coef -0.0687 3.0000e-03        16.0
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711              newey_west_5 -3.7090 2.0806e-04         NaN
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711             cluster_month -4.7792 1.8366e-05        47.0
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711        wild_cluster_month -4.7792 4.0000e-04        47.0
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711           cluster_episode -4.4580 1.5022e-05       170.0
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711      wild_cluster_episode -4.4580 4.0000e-04       170.0
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711    block_permutation_60_t -3.7090 3.2000e-03        16.0
+        SEBI phases plus expiry-regime levels and slopes       N_x_r_rod 932    466 -0.0711 block_permutation_60_coef -0.0711 4.6000e-03        16.0
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688              newey_west_5 -3.7257 1.9477e-04         NaN
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688             cluster_month -3.9675 2.5227e-04        47.0
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688        wild_cluster_month -3.9675 8.0000e-04        47.0
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688           cluster_episode -3.6561 3.4170e-04       170.0
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688      wild_cluster_episode -3.6561 5.6000e-03       170.0
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688    block_permutation_60_t -3.7257 2.8000e-03        16.0
+                       Sensex expiry day level and slope       N_x_r_rod 932    466 -0.0688 block_permutation_60_coef -0.0688 3.8000e-03        16.0
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662              newey_west_5 -2.9483 3.1956e-03         NaN
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662             cluster_month -2.9511 4.9691e-03        47.0
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662        wild_cluster_month -2.9511 2.0400e-02        47.0
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662           cluster_episode -2.8140 5.5638e-03       148.0
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662      wild_cluster_episode -2.8140 4.1200e-02       148.0
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662    block_permutation_60_t -2.9483 2.6000e-02        13.0
+                              Sensex expiry days dropped       N_x_r_rod 751    395 -0.0662 block_permutation_60_coef -0.0662 2.8000e-02        13.0
+                                   all controls together       N_x_r_rod 932    466 -0.0530              newey_west_5 -3.0960 1.9618e-03         NaN
+                                   all controls together       N_x_r_rod 932    466 -0.0530             cluster_month -3.6305 7.0830e-04        47.0
+                                   all controls together       N_x_r_rod 932    466 -0.0530        wild_cluster_month -3.6305 8.0000e-04        47.0
+                                   all controls together       N_x_r_rod 932    466 -0.0530           cluster_episode -3.3384 1.0364e-03       170.0
+                                   all controls together       N_x_r_rod 932    466 -0.0530      wild_cluster_episode -3.3384 4.2000e-03       170.0
+                                   all controls together       N_x_r_rod 932    466 -0.0530    block_permutation_60_t -3.0960 1.2800e-02        16.0
+                                   all controls together       N_x_r_rod 932    466 -0.0530 block_permutation_60_coef -0.0530 2.9600e-02        16.0
+
+[134s] item 5 done
+== ITEM 6. Joint block bootstrap: are the dealer-sign angles of outcome (a) and outcome (b) equal?
+               sample  block_days  n_days_a  n_days_b  angle_a_grid  angle_b_grid  angle_a  angle_b  diff_a_minus_b  boot_draws  boot_sd_diff  diff_ci90_lo  diff_ci90_hi  diff_ci95_lo  diff_ci95_hi  zero_in_ci95  p_equal_basic_bootstrap  share_draws_same_side  share_draws_within_45deg  share_a_within_90_of_estimate  share_b_within_90_of_estimate   md_J  md_p_chi2_1  md_p_chi2_2  md_common_angle  wald_theta_a_zero_boot  wald_theta_a_zero_boot_p  max_abs_corr_theta_a_theta_b          theta_a         theta_b
+          full sample          10       913       850          21.0         190.0  21.4000 190.1696       -168.7696        4999       52.2742      108.3755      -82.2599       97.6275      -59.1424         False                   0.0018                 0.0938                    0.0106                         0.9474                         0.9854 3.2297       0.0723       0.1989            189.9                  3.2297                    0.1989                        0.4511 (-1.293, -0.507)  (1.340, 0.240)
+          full sample          60       913       850          21.0         190.0  21.4000 190.1696       -168.7696        4999       53.1513      102.3675      -90.4529       90.6861      -61.9531         False                   0.0036                 0.1102                    0.0172                         0.9018                         0.9670 2.5440       0.1107       0.2803            189.9                  2.5440                    0.2803                        0.6126 (-1.293, -0.507)  (1.340, 0.240)
+training 2023 to 2024          10       461       461          29.0         272.0  29.1954 271.7188        117.4765        4999       80.0575       -9.8712     -107.5828      -28.9124      -91.0376          True                   0.1526                 0.3749                    0.1750                         0.9854                         0.8364 1.9800       0.1594       0.3716              5.3                  5.4184                    0.0666                        0.4543 (-3.256, -1.819) (-0.021, 0.697)
+training 2023 to 2024          60       461       461          29.0         272.0  29.1954 271.7188        117.4765        4999       72.3815        3.1258     -121.8432      -16.5615     -106.0801          True                   0.1024                 0.3645                    0.1678                         0.9650                         0.9260 2.5238       0.1121       0.2831              5.2                  4.5838                    0.1011                        0.6094 (-3.256, -1.819) (-0.021, 0.697)
+
+[149s] item 6 done
+== ITEM 7. First-order autocorrelation of 1-minute Nifty returns
+                                window               grouping                    group           day_type  days    pairs  ac1_pooled     ci95_lo  ci95_hi  ac1_mean_of_days  noise_var_share_iid_model  log_rv_overstatement_iid_model  p_two_sided
+           14:59 to 15:29 (30 returns)   all pre-auction days                      all             expiry 187.0   5422.0     -0.0541 -1.0287e-01  -0.0036           -0.1031                     0.1083                          0.1146          NaN
+           14:59 to 15:29 (30 returns)   all pre-auction days                      all              other 692.0  20064.0      0.0108 -2.4558e-02   0.0495           -0.0375                     0.0000                          0.0000          NaN
+           14:59 to 15:29 (30 returns)   all pre-auction days                      all expiry minus other   NaN      NaN     -0.0649 -1.2402e-01  -0.0057               NaN                        NaN                             NaN       0.0335
+           14:59 to 15:29 (30 returns)                 regime             multi_weekly             expiry  98.0   2841.0     -0.0509 -1.2012e-01   0.0138           -0.0835                     0.1018                          0.1074          NaN
+           14:59 to 15:29 (30 returns)                 regime             multi_weekly              other 364.0  10552.0     -0.0066 -4.8374e-02   0.0399           -0.0594                     0.0132                          0.0133          NaN
+           14:59 to 15:29 (30 returns)                 regime             multi_weekly expiry minus other   NaN      NaN     -0.0443 -1.2872e-01   0.0345               NaN                        NaN                             NaN       0.2895
+           14:59 to 15:29 (30 returns)                 regime        single_weekly_thu             expiry  41.0   1189.0     -0.0432 -1.8741e-01   0.0680           -0.1309                     0.0865                          0.0905          NaN
+           14:59 to 15:29 (30 returns)                 regime        single_weekly_thu              other 151.0   4379.0      0.0072 -3.1307e-02   0.0446           -0.0158                     0.0000                          0.0000          NaN
+           14:59 to 15:29 (30 returns)                 regime        single_weekly_thu expiry minus other   NaN      NaN     -0.0505 -1.9474e-01   0.0650               NaN                        NaN                             NaN       0.4960
+           14:59 to 15:29 (30 returns)                 regime        single_weekly_tue             expiry  48.0   1392.0     -0.0674 -1.4526e-01   0.0096           -0.1192                     0.1347                          0.1447          NaN
+           14:59 to 15:29 (30 returns)                 regime        single_weekly_tue              other 177.0   5133.0      0.0476 -2.2471e-02   0.1347           -0.0110                     0.0000                          0.0000          NaN
+           14:59 to 15:29 (30 returns)                 regime        single_weekly_tue expiry minus other   NaN      NaN     -0.1149 -2.2709e-01  -0.0088               NaN                        NaN                             NaN       0.0380
+           14:59 to 15:29 (30 returns)                 regime          closing_auction             expiry  13.0    377.0     -0.0191 -9.1965e-02   0.0088           -0.0638                     0.0383                          0.0390          NaN
+           14:59 to 15:29 (30 returns)                 regime          closing_auction              other  50.0   1450.0      0.0059 -1.2347e-02   0.0267           -0.0207                     0.0000                          0.0000          NaN
+           14:59 to 15:29 (30 returns)                 regime          closing_auction expiry minus other   NaN      NaN     -0.0251 -9.6981e-02   0.0079               NaN                        NaN                             NaN       0.2430
+           14:59 to 15:29 (30 returns)                   half             2023 to 2024             expiry 104.0   3015.0     -0.0336 -1.0378e-01   0.0366           -0.0792                     0.0672                          0.0696          NaN
+           14:59 to 15:29 (30 returns)                   half             2023 to 2024              other 386.0  11190.0     -0.0070 -4.8505e-02   0.0373           -0.0597                     0.0139                          0.0140          NaN
+           14:59 to 15:29 (30 returns)                   half             2023 to 2024 expiry minus other   NaN      NaN     -0.0267 -1.1058e-01   0.0546               NaN                        NaN                             NaN       0.5365
+           14:59 to 15:29 (30 returns)                   half              2025 onward             expiry  83.0   2407.0     -0.0816 -1.4689e-01  -0.0173           -0.1330                     0.1631                          0.1781          NaN
+           14:59 to 15:29 (30 returns)                   half              2025 onward              other 306.0   8874.0      0.0361 -1.5902e-02   0.0988           -0.0095                     0.0000                          0.0000          NaN
+           14:59 to 15:29 (30 returns)                   half              2025 onward expiry minus other   NaN      NaN     -0.1177 -2.0739e-01  -0.0342               NaN                        NaN                             NaN       0.0055
+           14:59 to 15:29 (30 returns) Pro sign (pre-auction)     negative Pro evening             expiry 107.0   3102.0     -0.0444 -1.0488e-01   0.0188           -0.0870                     0.0887                          0.0929          NaN
+           14:59 to 15:29 (30 returns) Pro sign (pre-auction)     negative Pro evening              other 359.0  10408.0      0.0187 -2.0455e-02   0.0648           -0.0401                     0.0000                          0.0000          NaN
+           14:59 to 15:29 (30 returns) Pro sign (pre-auction)     negative Pro evening expiry minus other   NaN      NaN     -0.0630 -1.3870e-01   0.0125               NaN                        NaN                             NaN       0.1110
+           14:59 to 15:29 (30 returns) Pro sign (pre-auction) non-negative Pro evening             expiry  80.0   2320.0     -0.0644 -1.3634e-01   0.0057           -0.1246                     0.1288                          0.1379          NaN
+           14:59 to 15:29 (30 returns) Pro sign (pre-auction) non-negative Pro evening              other 332.0   9627.0     -0.0003 -5.0146e-02   0.0663           -0.0350                     0.0005                          0.0005          NaN
+           14:59 to 15:29 (30 returns) Pro sign (pre-auction) non-negative Pro evening expiry minus other   NaN      NaN     -0.0641 -1.5703e-01   0.0265               NaN                        NaN                             NaN       0.1770
+reference 09:15 to 14:59 (344 returns)   all pre-auction days                      all             expiry 187.0  64141.0      0.0201  7.4752e-03   0.0324            0.0072                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)   all pre-auction days                      all              other 692.0 237356.0      0.0248  1.8250e-02   0.0324            0.0216                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)   all pre-auction days                      all expiry minus other   NaN      NaN     -0.0047 -1.8990e-02   0.0102               NaN                        NaN                             NaN       0.5170
+reference 09:15 to 14:59 (344 returns)                 regime             multi_weekly             expiry  98.0  33614.0      0.0204  1.6833e-03   0.0374            0.0062                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime             multi_weekly              other 364.0 124852.0      0.0194  9.1320e-03   0.0295            0.0152                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime             multi_weekly expiry minus other   NaN      NaN      0.0010 -2.0067e-02   0.0214               NaN                        NaN                             NaN       0.9200
+reference 09:15 to 14:59 (344 returns)                 regime        single_weekly_thu             expiry  41.0  14063.0      0.0171 -1.1399e-02   0.0466           -0.0009                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime        single_weekly_thu              other 151.0  51793.0      0.0315  1.8010e-02   0.0449            0.0216                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime        single_weekly_thu expiry minus other   NaN      NaN     -0.0144 -4.6072e-02   0.0199               NaN                        NaN                             NaN       0.3805
+reference 09:15 to 14:59 (344 returns)                 regime        single_weekly_tue             expiry  48.0  16464.0      0.0220 -6.6090e-04   0.0444            0.0160                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime        single_weekly_tue              other 177.0  60711.0      0.0299  1.8224e-02   0.0418            0.0349                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime        single_weekly_tue expiry minus other   NaN      NaN     -0.0079 -3.3543e-02   0.0177               NaN                        NaN                             NaN       0.5490
+reference 09:15 to 14:59 (344 returns)                 regime          closing_auction             expiry  13.0   4459.0      0.0703 -1.2819e-02   0.1275            0.0282                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime          closing_auction              other  50.0  17150.0      0.0201 -2.3881e-03   0.0430            0.0247                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                 regime          closing_auction expiry minus other   NaN      NaN      0.0502 -3.5168e-02   0.1118               NaN                        NaN                             NaN       0.1790
+reference 09:15 to 14:59 (344 returns)                   half             2023 to 2024             expiry 104.0  35672.0      0.0196 -5.4283e-05   0.0373            0.0035                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                   half             2023 to 2024              other 386.0 132398.0      0.0197  1.0769e-02   0.0293            0.0160                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                   half             2023 to 2024 expiry minus other   NaN      NaN     -0.0001 -2.0789e-02   0.0196               NaN                        NaN                             NaN       0.9880
+reference 09:15 to 14:59 (344 returns)                   half              2025 onward             expiry  83.0  28469.0      0.0207  6.1452e-03   0.0372            0.0118                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                   half              2025 onward              other 306.0 104958.0      0.0314  2.1830e-02   0.0409            0.0288                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns)                   half              2025 onward expiry minus other   NaN      NaN     -0.0108 -2.8053e-02   0.0080               NaN                        NaN                             NaN       0.2430
+reference 09:15 to 14:59 (344 returns) Pro sign (pre-auction)     negative Pro evening             expiry 107.0  36701.0      0.0111 -3.9285e-03   0.0263            0.0016                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns) Pro sign (pre-auction)     negative Pro evening              other 359.0 123137.0      0.0288  1.8857e-02   0.0396            0.0252                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns) Pro sign (pre-auction)     negative Pro evening expiry minus other   NaN      NaN     -0.0176 -3.7037e-02   0.0004               NaN                        NaN                             NaN       0.0615
+reference 09:15 to 14:59 (344 returns) Pro sign (pre-auction) non-negative Pro evening             expiry  80.0  27440.0      0.0307  1.0275e-02   0.0509            0.0146                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns) Pro sign (pre-auction) non-negative Pro evening              other 332.0 113876.0      0.0193  1.0692e-02   0.0275            0.0179                     0.0000                          0.0000          NaN
+reference 09:15 to 14:59 (344 returns) Pro sign (pre-auction) non-negative Pro evening expiry minus other   NaN      NaN      0.0115 -1.0132e-02   0.0327               NaN                        NaN                             NaN       0.3145
+
+== ITEM 7. Correlation across the 14:59 junction
+                   days   n  corr_r(14:58 to 14:59 bar)_r(14:59 to 15:00 bar)      p
+   all pre-auction days 879                                            0.0233 0.4906
+pre-auction expiry days 187                                            0.1178 0.1084
+ pre-auction other days 692                                           -0.0037 0.9227
+   closing-auction days  63                                           -0.0814 0.5258
+
+[150s] item 7 done
+p-values reported by this script (all post hoc, none adjusted for this count): 598
+Done in 150s.

@@ -1,0 +1,5 @@
+{
+  "seconds": 143.5,
+  "refits": 38,
+  "note": "POST HOC, REAL DATA. mcsGARCH-X built in experiments/referee_forecast.py; pipeline code unchanged."
+}

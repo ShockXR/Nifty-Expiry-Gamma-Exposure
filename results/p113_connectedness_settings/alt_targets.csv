@@ -1,0 +1,2 @@
+data,window,targets,best_spec,MAD15,K2,OUT3,same_best_as_printed_targets,printed_targets_best_MAD15
+REAL DATA,A,"alternative (T4.I.3 = 78.17, T4.II.3 = 71.97)",GC|logvar|C|p=5|H=5,5.4118,8,23.1447,True,5.3445

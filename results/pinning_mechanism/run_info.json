@@ -1,0 +1,38 @@
+{
+  "label": "REAL DATA",
+  "prereg": "docs/prereg/P87_PINNING_MECHANISM.md",
+  "prereg_commit": "e50a77506692aaf9b53cfca6c3cff6010308d3f7",
+  "started_utc": "2026-11-03T03:07:25Z",
+  "run_seconds": 186.1,
+  "seeds": {
+    "primary": 8701,
+    "secondary": 8702,
+    "bootstrap": 8703,
+    "placebo": 8704
+  },
+  "n_permutations": 10000,
+  "n_bootstrap": 2000,
+  "python": "3.13.18",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "inputs_sha256": {
+    "data/raw/index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+    "data/raw/extra_2022/index_daily.csv": "73d1c8a95d01e8eed3914bbd7be1f8f8bb109af18b04e1ad49e17245245d06f2",
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+    "data/raw/banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+    "results/sensex_confound/sensex_expiry_days_used.csv": "b68ff3be16bf3b155e91f97c4722bcc2f97798c53b7a01053b998b482c85e746",
+    "data/external/sensex_expiry_calendar.csv": "5d9329e40c8c75b22a861b56b31233bd07a688611e5962e2562fa7dac4d96d1a",
+    "data/external/other_weekly_expiries.csv": "6587e27539ec0d8e8f24e1dcd3d0c10e6604192c4215971e60f098b1470df6a2",
+    "docs/prereg/P87_PINNING_MECHANISM.md": "9b0e1b81a2e9d2ddc9fe63cc7698fa14a72509411728d3eadc4324b0ea872206",
+    "experiments/pinning_mechanism.py": "2566c4249e1f83cd568f994e3fb989c865df52c01e7e892e034efc4fcb8dfc41",
+    "experiments/pinning_study.py": "9ff211b30f85ca69d4b1ff12f62ce65f88e097a9b116525428cb725df1bd80b8",
+    "data/raw/bhavcopy (directory)": {
+      "n_files": 944,
+      "sha256_of_name_hash_list": "907037a87a935c762250ad52b107e4ccc816c8ea5e71f3bebf947e858bc42753"
+    },
+    "data/raw/participant_oi (directory)": {
+      "n_files": 944,
+      "sha256_of_name_hash_list": "f52def01a0a977cd9b4d0ae1e189ba19b726edf4017e4fb1416335266bc3dad2"
+    }
+  }
+}

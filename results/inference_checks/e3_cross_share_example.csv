@@ -1,0 +1,7 @@
+case,cross_share_pct
+"no dynamics, rho=0.5",20.0
+"no dynamics, rho=0.85",41.94484760522496
+"no dynamics, rho=0.95",47.437582128777926
+"series 2 leads series 1 by 0.3, rho=0.85",44.62256869779913
+"series 2 leads series 1 by 0.6, rho=0.85",48.20011835611871
+"series 2 leads series 1 by 0.9, rho=0.85",50.94946015071336

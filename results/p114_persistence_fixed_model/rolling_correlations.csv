@@ -1,0 +1,5 @@
+data,index,model,y,n_windows,spearman_all_windows,n_non_overlapping,spearman_non_overlapping,p_non_overlapping
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,hl_ab,44,0.8345313601127554,11,0.881818181818182,0.0003301688021839006
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,hl_irf,44,0.5770260747004933,11,0.4909090909090909,0.12520440713849548
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,hl_ab,38,0.7347631031841558,10,0.49090909090909085,0.1496556734208368
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,hl_irf,38,0.32618448407922096,10,0.06666666666666665,0.8548130882487427

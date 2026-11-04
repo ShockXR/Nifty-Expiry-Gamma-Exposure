@@ -1,0 +1,7 @@
+family,rule,verdict,data
+P1 primary,both Holm p <= 0.05: confirmed; one: partly; none: not confirmed,pooled gain confirmed,REAL DATA
+S1a bootstrap,both Holm p <= 0.05: the bootstrap agrees,bootstrap agrees,REAL DATA
+S1b homogeneity,a Holm p <= 0.05 at a horizon: the gains differ there,no evidence that the gains differ (equality not rejected),REAL DATA
+S1c last hour,p <= 0.05: pooled last-hour gain supported,pooled last-hour gain supported,REAL DATA
+S1d,both Holm p <= 0.05: supported; one: partly; none: not supported,pooled expiry-day gain supported,REAL DATA
+S1e,both Holm p <= 0.05: supported; one: partly; none: not supported,pooled edge over mcsgarch_iv supported,REAL DATA

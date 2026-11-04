@@ -1,0 +1,19 @@
+baseline | seconds for one full pipeline run | 10.0 
+baseline | hybrid_base gain over mcsgarch, pct / DM stat / one-sided p (synthetic, real code path) | 4.86 / 4.65 / 3.08e-06 
+baseline | har gain over mcsgarch, pct / stat / p | 4.51 / 1.42 / 0.0792 
+baseline | linear_base gain over mcsgarch, pct / stat / p | 7.94 / 2.84 / 0.00253 
+baseline | lgbm_base gain over mcsgarch, pct / stat / p | 5.27 / 1.77 / 0.0391 
+alter-after-cut | share of the future part that was replaced (max relative diff of R after the cut) | 0.9807880366976742 
+alter-after-cut, repo code as committed | feature columns compared for rows with t < 170 / columns that differ | 75 / none VERIFIED
+alter-after-cut, repo code as committed | forecast rows with t < 170 compared / max relative forecast difference per model | 560 / {'naive_last': '0.0e+00', 'har': '1.8e-01', 'mcsgarch': '2.4e+00', 'linear_base': '2.9e-01', 'lgbm_base': '1.2e+00', 'hybrid_base': '1.7e+00'} FAILED
+alter-after-cut, repo code as committed | first test day whose forecast differs, per model | {'naive_last': None, 'har': 100, 'mcsgarch': 100, 'linear_base': 100, 'lgbm_base': 100, 'hybrid_base': 100} 
+alter-after-cut, repo code as committed | positive control: forecasts after the altered data DO change (max rel diff mcsgarch / hybrid_base) | 7.36 / 5.89 
+alter-after-cut, with proposed causal selection (probe-only patch) | feature columns compared for rows with t < 170 / columns that differ | 75 / none VERIFIED
+alter-after-cut, with proposed causal selection (probe-only patch) | forecast rows with t < 170 compared / max relative forecast difference per model | 560 / {'naive_last': '0.0e+00', 'har': '4.4e-01', 'mcsgarch': '5.7e+00', 'linear_base': '4.7e-01', 'lgbm_base': '1.0e+00', 'hybrid_base': '2.8e+00'} FAILED
+alter-after-cut, with proposed causal selection (probe-only patch) | first test day whose forecast differs, per model | {'naive_last': None, 'har': 100, 'mcsgarch': 100, 'linear_base': 100, 'lgbm_base': 100, 'hybrid_base': 100} 
+alter-after-cut, with proposed causal selection (probe-only patch) | positive control: forecasts after the altered data DO change (max rel diff mcsgarch / hybrid_base) | 14.31 / 7.50 
+label-shuffle placebo B1 (train and test labels shuffled) | hybrid_base gain over mcsgarch pct, per shuffle | [np.float64(32.6), np.float64(34.4), np.float64(29.9), np.float64(28.3), np.float64(33.3), np.float64(29.9), np.float64(27.0), np.float64(30.1), np.float64(27.6), np.float64(28.6)] 
+label-shuffle placebo B2 (train labels shuffled, scored on real labels) | hybrid_base gain over mcsgarch pct, per shuffle | [np.float64(-17.1), np.float64(-23.3), np.float64(-14.9), np.float64(-18.8), np.float64(-24.9), np.float64(-19.4), np.float64(-20.7), np.float64(-18.8), np.float64(-18.5), np.float64(-18.1)] 
+label-shuffle placebo B2 (train labels shuffled, scored on real labels) | mean over shuffles vs real gain | -19.45 vs 4.86 VERIFIED
+day-permutation control | permutation 0: hybrid_base gain over mcsgarch pct / stat / p | 4.71 / 3.73 / 0.000123 
+day-permutation control | permutation 0: har gain over mcsgarch pct | 2.14 

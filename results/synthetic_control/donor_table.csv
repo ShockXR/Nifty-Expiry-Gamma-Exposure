@@ -1,0 +1,149 @@
+key,name,days_present,days_with_prices,days_high_gt_low,days_open_close_in_range,present_all_days,complete,consistent,category,has_derivatives,overlap,donor
+india vix,India VIX,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty 10 yr benchmark g-sec,Nifty 10 yr Benchmark G-Sec,488,488,487,487,True,False,False,non-equity,False,False,False
+nifty 10 yr benchmark g-sec (clean price),Nifty 10 yr Benchmark G-Sec (Clean Price),488,488,486,486,True,False,False,non-equity,False,False,False
+nifty 100,Nifty 100,488,488,488,488,True,True,True,broad,False,False,False
+nifty 11-15 yr g-sec index,Nifty 11-15 yr G-Sec Index,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty 15 yr and above g-sec index,Nifty 15 yr and above G-Sec Index,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty 1d rate index,Nifty 1D Rate Index,488,0,0,0,True,False,False,non-equity,False,False,False
+nifty 200,Nifty 200,488,488,488,488,True,True,True,broad,False,False,False
+nifty 4-8 yr g-sec index,Nifty 4-8 yr G-Sec Index,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty 50,Nifty 50,488,488,488,488,True,True,True,broad,True,False,False
+nifty 50 arbitrage,Nifty 50 Arbitrage,488,0,0,0,True,False,False,non-equity,False,False,False
+nifty 50 futures index,Nifty 50 Futures Index,488,0,0,0,True,False,False,non-equity,False,False,False
+nifty 50 futures tr index,Nifty 50 Futures TR Index,488,0,0,0,True,False,False,non-equity,False,False,False
+nifty 500,Nifty 500,488,488,488,488,True,True,True,broad,False,False,False
+nifty 8-13 yr g-sec,Nifty 8-13 yr G-Sec,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty aditya birla group,Nifty Aditya Birla Group,157,0,0,0,False,False,False,sector/theme,False,False,False
+nifty alpha 50,Nifty Alpha 50,488,488,488,488,True,True,True,strategy,False,False,False
+nifty alpha low-volatility 30,NIFTY Alpha Low-Volatility 30,488,488,488,488,True,True,True,strategy,False,False,False
+nifty alpha quality low-volatility 30,NIFTY Alpha Quality Low-Volatility 30,488,175,175,175,True,False,False,strategy,False,False,False
+nifty alpha quality value low-volatility 30,NIFTY Alpha Quality Value Low-Volatility 30,488,175,175,175,True,False,False,strategy,False,False,False
+nifty auto,Nifty Auto,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty bank,Nifty Bank,488,488,488,488,True,True,True,sector/theme,True,True,False
+nifty bharat bond index - april 2025,Nifty BHARAT Bond Index - April 2025,59,59,59,59,False,False,False,non-equity,False,False,False
+nifty bharat bond index - april 2030,Nifty BHARAT Bond Index - April 2030,152,152,152,152,False,False,False,non-equity,False,False,False
+nifty bharat bond index - april 2031,Nifty BHARAT Bond Index - April 2031,152,152,152,152,False,False,False,non-equity,False,False,False
+nifty bharat bond index - april 2032,Nifty BHARAT Bond Index - April 2032,151,151,150,150,False,False,False,non-equity,False,False,False
+nifty bharat bond index - april 2033,Nifty BHARAT Bond Index - April 2033,151,151,148,148,False,False,False,non-equity,False,False,False
+nifty capital markets,Nifty Capital Markets,237,198,198,198,False,False,False,sector/theme,False,True,False
+nifty chemicals,Nifty Chemicals,116,0,0,0,False,False,False,sector/theme,False,False,False
+nifty commodities,Nifty Commodities,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty composite g-sec index,Nifty Composite G-sec Index,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty consumer durables,Nifty Consumer Durables,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty core housing,Nifty Core Housing,488,175,175,175,True,False,False,sector/theme,False,False,False
+nifty cpse,Nifty CPSE,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty dividend opportunities 50,Nifty Dividend Opportunities 50,488,488,488,488,True,True,True,strategy,False,False,False
+nifty energy,Nifty Energy,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty ev & new age automotive,Nifty EV & New Age Automotive,310,175,175,175,False,False,False,sector/theme,False,False,False
+nifty financial services,Nifty Financial Services,488,488,488,488,True,True,True,sector/theme,True,True,False
+nifty financial services 25/50,Nifty Financial Services 25/50,488,488,488,488,True,True,True,sector/theme,False,True,False
+nifty financial services ex-bank,Nifty Financial Services Ex-Bank,488,175,175,175,True,False,False,sector/theme,False,True,False
+nifty fmcg,Nifty FMCG,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty growth sectors 15,Nifty Growth Sectors 15,488,488,488,488,True,True,True,strategy,False,False,False
+nifty healthcare index,Nifty Healthcare Index,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty high beta 50,Nifty High Beta 50,488,175,175,175,True,False,False,strategy,False,False,False
+nifty housing,Nifty Housing,488,175,175,175,True,False,False,sector/theme,False,False,False
+nifty india consumption,Nifty India Consumption,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty india corporate group index - aditya birla group,Nifty India Corporate Group Index - Aditya Birla Group,331,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india corporate group index - mahindra group,Nifty India Corporate Group Index - Mahindra Group,331,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india corporate group index - tata group,Nifty India Corporate Group Index - Tata Group,331,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india corporate group index - tata group 25% cap,Nifty India Corporate Group Index - Tata Group 25% Cap,331,331,331,331,False,False,False,strategy,False,False,False
+nifty india defence,Nifty India Defence,488,198,198,198,True,False,False,sector/theme,False,False,False
+nifty india digital,Nifty India Digital,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty india fpi 150,Nifty India FPI 150,10,0,0,0,False,False,False,broad,False,False,False
+nifty india infrastructure & logistics,Nifty India Infrastructure & Logistics,60,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india internet,Nifty India Internet,83,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india internet & e-commerce,Nifty India Internet & E-Commerce,39,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india manufacturing,Nifty India Manufacturing,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty india new age consumption,Nifty India New Age Consumption,210,175,175,175,False,False,False,sector/theme,False,False,False
+nifty india railways psu,Nifty India Railways PSU,188,0,0,0,False,False,False,sector/theme,False,False,False
+nifty india select 5 corporate groups (maatr),Nifty India Select 5 Corporate Groups (MAATR),196,175,175,175,False,False,False,sector/theme,False,False,False
+nifty india tourism,Nifty India Tourism,297,198,198,198,False,False,False,sector/theme,False,False,False
+nifty infrastructure,Nifty Infrastructure,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty ipo,Nifty IPO,277,175,175,175,False,False,False,sector/theme,False,False,False
+nifty it,Nifty IT,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty largemidcap 250,NIFTY LargeMidcap 250,488,488,488,488,True,True,True,broad,False,True,False
+nifty low volatility 50,Nifty Low Volatility 50,488,175,175,175,True,False,False,strategy,False,False,False
+nifty mahindra group,Nifty Mahindra Group,157,0,0,0,False,False,False,sector/theme,False,False,False
+nifty media,Nifty Media,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty metal,Nifty Metal,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty microcap 250,Nifty Microcap 250,488,488,488,488,True,True,True,broad,False,False,False
+nifty midcap 100,NIFTY Midcap 100,488,488,488,488,True,True,True,broad,False,True,False
+nifty midcap 150,Nifty Midcap 150,488,488,488,488,True,True,True,broad,False,True,False
+nifty midcap 50,Nifty Midcap 50,488,488,488,488,True,True,True,broad,False,True,False
+nifty midcap liquid 15,Nifty Midcap Liquid 15,488,488,488,488,True,True,True,strategy,False,True,False
+nifty midcap select,Nifty Midcap Select,488,488,488,488,True,True,True,broad,True,True,False
+nifty midcap150 momentum 50,Nifty Midcap150 Momentum 50,488,404,404,404,True,False,False,broad,False,True,False
+nifty midcap150 quality 50,NIFTY Midcap150 Quality 50,488,488,488,488,True,True,True,broad,False,True,False
+nifty midsmall financial services,Nifty MidSmall Financial Services,488,175,175,175,True,False,False,sector/theme,False,True,False
+nifty midsmall healthcare,Nifty MidSmall Healthcare,488,344,344,344,True,False,False,sector/theme,False,True,False
+nifty midsmall india consumption,Nifty MidSmall India Consumption,488,175,175,175,True,False,False,sector/theme,False,True,False
+nifty midsmall it & telecom,Nifty MidSmall IT & Telecom,488,175,175,175,True,False,False,sector/theme,False,True,False
+nifty midsmallcap 400,Nifty MidSmallcap 400,488,488,488,488,True,True,True,broad,False,True,False
+nifty midsmallcap400 momentum quality 100,Nifty MidSmallcap400 Momentum Quality 100,381,198,198,198,False,False,False,broad,False,True,False
+nifty mnc,Nifty MNC,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty mobility,Nifty Mobility,488,175,175,175,True,False,False,sector/theme,False,False,False
+nifty next 50,Nifty Next 50,488,488,488,488,True,True,True,broad,True,False,False
+nifty non-cyclical consumer,Nifty Non-Cyclical Consumer,488,175,175,175,True,False,False,sector/theme,False,False,False
+nifty oil & gas,Nifty Oil & Gas,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty pharma,Nifty Pharma,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty private bank,Nifty Private Bank,488,488,488,488,True,True,True,sector/theme,False,True,False
+nifty pse,Nifty PSE,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty psu bank,Nifty PSU Bank,488,488,488,488,True,True,True,sector/theme,False,True,False
+nifty quality low-volatility 30,NIFTY Quality Low-Volatility 30,488,175,175,175,True,False,False,strategy,False,False,False
+nifty realty,Nifty Realty,488,488,488,488,True,True,True,sector/theme,False,False,True
+nifty reits & invits,Nifty REITs & InvITs,488,0,0,0,True,False,False,non-equity,False,False,False
+nifty rural,Nifty Rural,271,175,175,175,False,False,False,sector/theme,False,False,False
+nifty services sector,Nifty Services Sector,488,488,488,488,True,True,True,sector/theme,False,True,False
+nifty shariah 25,Nifty Shariah 25,488,175,175,175,True,False,False,strategy,False,False,False
+nifty smallcap 100,NIFTY Smallcap 100,488,488,488,488,True,True,True,broad,False,True,False
+nifty smallcap 250,Nifty Smallcap 250,488,488,488,488,True,True,True,broad,False,True,False
+nifty smallcap 50,Nifty Smallcap 50,488,488,488,488,True,True,True,broad,False,True,False
+nifty smallcap250 momentum quality 100,Nifty Smallcap250 Momentum Quality 100,415,198,198,198,False,False,False,broad,False,True,False
+nifty smallcap250 quality 50,Nifty Smallcap250 Quality 50,488,175,175,175,True,False,False,broad,False,True,False
+nifty sme emerge,NIFTY SME EMERGE,488,0,0,0,True,False,False,broad,False,False,False
+nifty tata group,Nifty Tata Group,157,0,0,0,False,False,False,sector/theme,False,False,False
+nifty tata group 25% cap,Nifty Tata Group 25% Cap,157,13,13,13,False,False,False,strategy,False,False,False
+nifty top 10 equal weight,Nifty Top 10 Equal Weight,292,198,198,198,False,False,False,strategy,False,False,False
+nifty top 15 equal weight,Nifty Top 15 Equal Weight,215,175,175,175,False,False,False,strategy,False,False,False
+nifty top 20 equal weight,Nifty Top 20 Equal Weight,210,175,175,175,False,False,False,strategy,False,False,False
+nifty total market,Nifty Total Market,488,488,488,488,True,True,True,broad,False,False,False
+nifty total market momentum quality 50,Nifty Total Market Momentum Quality 50,16,0,0,0,False,False,False,broad,False,False,False
+nifty transportation & logistics,Nifty Transportation & Logistics,488,175,175,175,True,False,False,sector/theme,False,False,False
+nifty waves,Nifty Waves,84,0,0,0,False,False,False,sector/theme,False,False,False
+nifty100 alpha 30,NIFTY100 Alpha 30,488,175,175,175,True,False,False,strategy,False,False,False
+nifty100 enhanced esg,NIFTY100 Enhanced ESG,488,175,175,175,True,False,False,strategy,False,False,False
+nifty100 equal weight,Nifty100 Equal Weight,488,488,488,488,True,True,True,strategy,False,False,False
+nifty100 esg,NIFTY100 ESG,488,488,488,488,True,True,True,strategy,False,False,False
+nifty100 esg sector leaders,Nifty100 ESG Sector Leaders,488,488,488,488,True,True,True,strategy,False,False,False
+nifty100 liquid 15,Nifty100 Liquid 15,488,488,488,488,True,True,True,strategy,False,False,False
+nifty100 low volatility 30,Nifty100 Low Volatility 30,488,488,488,488,True,True,True,strategy,False,False,False
+nifty100 quality 30,NIFTY100 Quality 30,488,488,488,488,True,True,True,strategy,False,False,False
+nifty200 alpha 30,Nifty200 Alpha 30,488,404,404,404,True,False,False,strategy,False,False,False
+nifty200 momentum 30,Nifty200 Momentum 30,488,488,488,488,True,True,True,strategy,False,False,False
+nifty200 quality 30,NIFTY200 Quality 30,488,488,488,488,True,True,True,strategy,False,False,False
+nifty200 value 30,Nifty200 Value 30,300,175,175,175,False,False,False,strategy,False,False,False
+nifty50 dividend points,Nifty50 Dividend Points,488,0,0,0,True,False,False,non-equity,False,False,False
+nifty50 equal weight,NIFTY50 Equal Weight,488,488,488,488,True,True,True,strategy,False,False,False
+nifty50 pr 1x inverse,Nifty50 PR 1x Inverse,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty50 pr 2x leverage,Nifty50 PR 2x Leverage,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty50 shariah,Nifty50 Shariah,488,175,175,175,True,False,False,strategy,False,False,False
+nifty50 tr 1x inverse,Nifty50 TR 1x Inverse,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty50 tr 2x leverage,Nifty50 TR 2x Leverage,488,488,488,488,True,True,True,non-equity,False,False,False
+nifty50 usd,Nifty50 USD,486,0,0,0,False,False,False,non-equity,False,False,False
+nifty50 value 20,Nifty50 Value 20,488,488,488,488,True,True,True,strategy,False,False,False
+nifty500 equal weight,Nifty500 Equal Weight,308,175,175,175,False,False,False,strategy,False,False,False
+nifty500 flexicap quality 30,Nifty500 Flexicap Quality 30,98,0,0,0,False,False,False,strategy,False,False,False
+nifty500 healthcare,Nifty500 Healthcare,41,0,0,0,False,False,False,sector/theme,False,False,False
+nifty500 largemidsmall equal-cap weighted,Nifty500 LargeMidSmall Equal-Cap Weighted,303,175,175,175,False,False,False,broad,False,True,False
+nifty500 low volatility 50,Nifty500 Low Volatility 50,171,113,113,113,False,False,False,strategy,False,False,False
+nifty500 momentum 50,Nifty500 Momentum 50,306,198,198,198,False,False,False,strategy,False,False,False
+nifty500 multicap 50:25:25,Nifty500 Multicap 50:25:25,488,488,488,488,True,True,True,broad,False,False,False
+nifty500 multicap india manufacturing 50:30:20,Nifty500 Multicap India Manufacturing 50:30:20,363,344,344,344,False,False,False,broad,False,False,False
+nifty500 multicap infrastructure 50:30:20,Nifty500 Multicap Infrastructure 50:30:20,363,344,344,344,False,False,False,broad,False,False,False
+nifty500 multicap momentum quality 50,Nifty500 Multicap Momentum Quality 50,243,175,175,175,False,False,False,broad,False,False,False
+nifty500 multifactor mqvlv 50,Nifty500 Multifactor MQVLv 50,137,113,113,113,False,False,False,strategy,False,False,False
+nifty500 quality 50,Nifty500 Quality 50,171,113,113,113,False,False,False,strategy,False,False,False
+nifty500 shariah,Nifty500 Shariah,488,175,175,175,True,False,False,strategy,False,False,False
+nifty500 value 50,NIFTY500 Value 50,488,175,175,175,True,False,False,strategy,False,False,False

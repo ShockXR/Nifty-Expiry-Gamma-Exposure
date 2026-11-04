@@ -1,0 +1,76 @@
+test_id,family,index,target,subset,kind,hyb,hcpp,seeds,days,margin,se,ci90_low,ci90_high,bound,seed_sets,seed_sets_agreeing,p_adjusted,row_verdict
+P_next15_h1,primary,NIFTY,next15,all days,h1,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,5,5.0,3.185648192779806e-10,supported
+P_next15_tost,primary,NIFTY,next15,all days,tost,hybrid,hybrid_cpp,7+101+102+103+104,792,0.5,0.3126787115915645,0.13000089603143528,1.1604791804233026,1.1604791804233026,5,0.0,0.678687179976518,not shown
+S0_next15_diff,S0_difference,NIFTY,next15,all days,diff,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,5,5.0,0.07901334256753281,no significant difference
+S2_next15_expiry_h1,S2_expiry_days,NIFTY,next15,expiry days,h1,hybrid,hybrid_cpp,7+101+102+103+104,169,,,,,,5,5.0,0.017497945709688573,supported
+S2_next15_expiry_tost,S2_expiry_days,NIFTY,next15,expiry days,tost,hybrid,hybrid_cpp,7+101+102+103+104,169,0.5,0.7500070652334309,0.8080475461267163,3.296405157567172,3.296405157567172,5,0.0,1.0,not shown
+S2_next15_expiry_diff,S2_expiry_days,NIFTY,next15,expiry days,diff,hybrid,hybrid_cpp,7+101+102+103+104,169,,,,,,5,5.0,0.028184374586026496,different
+E2_next15_nonexpiry_h1,E2_nonexpiry,NIFTY,next15,non-expiry days,h1,hybrid,hybrid_cpp,7+101+102+103+104,623,,,,,,5,5.0,1.1111854360010105e-15,supported
+E2_next15_nonexpiry_tost,E2_nonexpiry,NIFTY,next15,non-expiry days,tost,hybrid,hybrid_cpp,7+101+102+103+104,623,0.5,0.2869368392466268,-0.30408267155874696,0.6420231280634874,0.6420231280634874,5,5.0,0.12472966614513925,not shown
+E2_next15_nonexpiry_diff,E2_nonexpiry,NIFTY,next15,non-expiry days,diff,hybrid,hybrid_cpp,7+101+102+103+104,623,,,,,,5,5.0,0.5564752593056825,no significant difference
+S3_next15_vs_combination,S3_combination,NIFTY,next15,all days,vs_comb,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,0,,1.0,
+R1_next15_seed7_h1,R1_seed7,NIFTY,next15,all days,h1,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,6.398295400865101e-11,supported
+R1_next15_seed7_tost,R1_seed7,NIFTY,next15,all days,tost,hybrid_s7,hybrid_cpp_s7,7,792,0.5,0.2596052736970335,0.09097787766017096,0.9465449090602623,0.9465449090602623,0,,0.7463841344643709,not shown
+R1_next15_seed7_diff,R1_seed7,NIFTY,next15,all days,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.18466607864617765,no significant difference
+R2_next15_tost_delta,R2_delta_method,NIFTY,next15,all days,tost_delta,hybrid,hybrid_cpp,7+101+102+103+104,792,0.5,0.29454212444658884,0.1598867797085612,1.1305932967461767,1.1305932967461767,0,,0.6888522142371661,not shown
+PL1_next15_s101,PL1_seeds,NIFTY,next15,all days,tost,hybrid_cpp_s7,hybrid_cpp_s101,7+101,792,0.5,0.07948048726608208,-0.14818188543838007,0.113757649055952,0.14818188543838007,2,,7.912274182817508e-09,equivalent
+PL1_next15_s102,PL1_seeds,NIFTY,next15,all days,tost,hybrid_cpp_s7,hybrid_cpp_s102,7+102,792,0.5,0.12097823411971069,0.0714620892687089,0.47016349912766,0.47016349912766,2,,0.08803335268505472,not shown
+PL1_next15_s103,PL1_seeds,NIFTY,next15,all days,tost,hybrid_cpp_s7,hybrid_cpp_s103,7+103,792,0.5,0.10823206424202404,-0.09101522988884443,0.26567931867382844,0.26567931867382844,2,,0.0003737650240090784,equivalent
+PL1_next15_s104,PL1_seeds,NIFTY,next15,all days,tost,hybrid_cpp_s7,hybrid_cpp_s104,7+104,792,0.5,0.21177290887746028,-0.12083835345642224,0.5770901454488031,0.5770901454488031,2,,0.12791709664765552,not shown
+PL0_next15_s101,PL0_committed_seeds,NIFTY,next15,all days,tost,hybrid_s7,hybrid_s101,7+101,792,0.5,0.10208431762431595,-0.33044043685707963,0.005993316350369371,0.33044043685707963,2,,0.0029597392066921285,equivalent
+PL0_next15_s102,PL0_committed_seeds,NIFTY,next15,all days,tost,hybrid_s7,hybrid_s102,7+102,792,0.5,0.1240759605085126,-0.17910206572601758,0.22980835311342887,0.22980835311342887,2,,0.0005687038016794388,equivalent
+PL0_next15_s103,PL0_committed_seeds,NIFTY,next15,all days,tost,hybrid_s7,hybrid_s103,7+103,792,0.5,0.1286891499031786,-0.22326018205571257,0.20085367506321544,0.22326018205571257,2,,0.0005687038016794388,equivalent
+PL0_next15_s104,PL0_committed_seeds,NIFTY,next15,all days,tost,hybrid_s7,hybrid_s104,7+104,792,0.5,0.13807591648400788,-0.14278559539932095,0.31226371963090555,0.31226371963090555,2,,0.005468977957648069,equivalent
+E3_next15_0915_diff,E3_anchor,NIFTY,next15,09:15 anchor only,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.05545269776669283,no significant difference
+E3_next15_rest_diff,E3_anchor,NIFTY,next15,without the 09:15 anchor,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.27080103327384614,no significant difference
+E4_next15_vs_ours,E4_vs_ours,NIFTY,next15,all days,vs_ours,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,0,,8.5314240648217e-09,
+E1_next15_all_h1,E1_cpp_all,NIFTY,next15,all days,h1,hybrid,hybrid_cpp_all,7,792,,,,,,0,,1.655248743151725e-11,supported
+E1_next15_all_vs_hybrid_cpp,E1_cpp_all,NIFTY,next15,all days,diff,hybrid_cpp_s7,hybrid_cpp_all,7,792,,,,,,0,,0.0014151214231684812,different
+E1_next15_all_vs_hybrid,E1_cpp_all,NIFTY,next15,all days,diff,hybrid_s7,hybrid_cpp_all,7,792,,,,,,0,,0.0070068955867255865,different
+P_next30_h1,primary,NIFTY,next30,all days,h1,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,5,5.0,4.432322861082311e-19,supported
+P_next30_tost,primary,NIFTY,next30,all days,tost,hybrid,hybrid_cpp,7+101+102+103+104,792,0.5,0.2669047398903729,-0.1870537360429358,0.6925697505011639,0.6925697505011639,5,5.0,0.35486061314412654,not shown
+S0_next30_diff,S0_difference,NIFTY,next30,all days,diff,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,5,5.0,0.3442341113974008,no significant difference
+S2_next30_expiry_h1,S2_expiry_days,NIFTY,next30,expiry days,h1,hybrid,hybrid_cpp,7+101+102+103+104,169,,,,,,5,5.0,0.0007959057581282408,supported
+S2_next30_expiry_tost,S2_expiry_days,NIFTY,next30,expiry days,tost,hybrid,hybrid_cpp,7+101+102+103+104,169,0.5,0.7668633214252882,0.10078666422859772,2.6450696066955603,2.6450696066955603,5,0.0,1.0,not shown
+S2_next30_expiry_diff,S2_expiry_days,NIFTY,next30,expiry days,diff,hybrid,hybrid_cpp,7+101+102+103+104,169,,,,,,5,5.0,0.22819116407654103,no significant difference
+E2_next30_nonexpiry_h1,E2_nonexpiry,NIFTY,next30,non-expiry days,h1,hybrid,hybrid_cpp,7+101+102+103+104,623,,,,,,5,5.0,1.6060043042591305e-21,supported
+E2_next30_nonexpiry_tost,E2_nonexpiry,NIFTY,next30,non-expiry days,tost,hybrid,hybrid_cpp,7+101+102+103+104,623,0.5,0.23836656049510055,-0.5173347975938027,0.2686220907323449,0.5173347975938027,5,5.0,0.05792376294328923,not shown
+E2_next30_nonexpiry_diff,E2_nonexpiry,NIFTY,next30,non-expiry days,diff,hybrid,hybrid_cpp,7+101+102+103+104,623,,,,,,5,4.0,0.6023549706010094,no significant difference
+S3_next30_vs_combination,S3_combination,NIFTY,next30,all days,vs_comb,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,0,,1.0,
+R1_next30_seed7_h1,R1_seed7,NIFTY,next30,all days,h1,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,5.359363712763095e-19,supported
+R1_next30_seed7_tost,R1_seed7,NIFTY,next30,all days,tost,hybrid_s7,hybrid_cpp_s7,7,792,0.5,0.3104509605104252,-0.15304045920929132,0.8700959466758509,0.8700959466758509,0,,0.7463841344643709,not shown
+R1_next30_seed7_diff,R1_seed7,NIFTY,next30,all days,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.7463841344643709,no significant difference
+R2_next30_tost_delta,R2_delta_method,NIFTY,next30,all days,tost_delta,hybrid,hybrid_cpp,7+101+102+103+104,792,0.5,0.26784114472764325,-0.18859676538013453,0.6941127798383628,0.6941127798383628,0,,0.3565444510785685,not shown
+PL1_next30_s101,PL1_seeds,NIFTY,next30,all days,tost,hybrid_cpp_s7,hybrid_cpp_s101,7+101,792,0.5,0.1221792112036167,-0.08712230925660644,0.31553709569167454,0.31553709569167454,2,,0.003324635241684062,equivalent
+PL1_next30_s102,PL1_seeds,NIFTY,next30,all days,tost,hybrid_cpp_s7,hybrid_cpp_s102,7+102,792,0.5,0.11874897242125279,-0.18306638595096042,0.20828816694163566,0.20828816694163566,2,,0.00013573480212273934,equivalent
+PL1_next30_s103,PL1_seeds,NIFTY,next30,all days,tost,hybrid_cpp_s7,hybrid_cpp_s103,7+103,792,0.5,0.17312973104978716,-0.04929754341802298,0.5212767285600861,0.5212767285600861,2,,0.12791709664765552,not shown
+PL1_next30_s104,PL1_seeds,NIFTY,next30,all days,tost,hybrid_cpp_s7,hybrid_cpp_s104,7+104,792,0.5,0.09687171351907846,-0.10661392993597786,0.21264092641521315,0.21264092641521315,2,,1.6328326914370564e-05,equivalent
+PL0_next30_s101,PL0_committed_seeds,NIFTY,next30,all days,tost,hybrid_s7,hybrid_s101,7+101,792,0.5,0.20680128000263429,-0.17072242841189225,0.5108213426444609,0.5108213426444609,2,,0.16683932811011082,not shown
+PL0_next30_s102,PL0_committed_seeds,NIFTY,next30,all days,tost,hybrid_s7,hybrid_s102,7+102,792,0.5,0.2179462504016773,0.004511584148374215,0.7227852301551072,0.7227852301551072,2,,0.26600179957237896,not shown
+PL0_next30_s103,PL0_committed_seeds,NIFTY,next30,all days,tost,hybrid_s7,hybrid_s103,7+103,792,0.5,0.1671369104461448,0.024402682423658006,0.5752267403149944,0.5752267403149944,2,,0.23167452148711296,not shown
+PL0_next30_s104,PL0_committed_seeds,NIFTY,next30,all days,tost,hybrid_s7,hybrid_s104,7+104,792,0.5,0.12362775409287093,-0.09255916321582991,0.3148741260298143,0.3148741260298143,2,,0.0043324661633495866,equivalent
+E3_next30_0915_diff,E3_anchor,NIFTY,next30,09:15 anchor only,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.7148832877477312,no significant difference
+E3_next30_rest_diff,E3_anchor,NIFTY,next30,without the 09:15 anchor,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.0971962572059748,no significant difference
+E4_next30_vs_ours,E4_vs_ours,NIFTY,next30,all days,vs_ours,hybrid,hybrid_cpp,7+101+102+103+104,792,,,,,,0,,5.3220497584699875e-15,
+E1_next30_all_h1,E1_cpp_all,NIFTY,next30,all days,h1,hybrid,hybrid_cpp_all,7,792,,,,,,0,,3.2234829616686737e-21,supported
+E1_next30_all_vs_hybrid_cpp,E1_cpp_all,NIFTY,next30,all days,diff,hybrid_cpp_s7,hybrid_cpp_all,7,792,,,,,,0,,0.34317432891721866,no significant difference
+E1_next30_all_vs_hybrid,E1_cpp_all,NIFTY,next30,all days,diff,hybrid_s7,hybrid_cpp_all,7,792,,,,,,0,,0.1750800093783095,no significant difference
+S1_last_hour_h1,S1_last_hour,NIFTY,last_hour,all days,h1,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.0007290371196101191,supported
+S1_last_hour_tost,S1_last_hour,NIFTY,last_hour,all days,tost,hybrid_s7,hybrid_cpp_s7,7,792,0.5,0.6497817199323268,-1.4130947601586685,0.728355639764001,1.4130947601586685,0,,0.8085046946636476,not shown
+S1_last_hour_diff,S1_last_hour,NIFTY,last_hour,all days,diff,hybrid_s7,hybrid_cpp_s7,7,792,,,,,,0,,0.8085046946636476,no significant difference
+E4_last_hour_vs_ours,E4_vs_ours,NIFTY,last_hour,all days,vs_ours,hybrid,hybrid_cpp_s7,7,792,,,,,,0,,0.00045628075321430016,
+E1_last_hour_all_h1,E1_cpp_all,NIFTY,last_hour,all days,h1,hybrid,hybrid_cpp_all,7,792,,,,,,0,,0.0002025423747975622,supported
+E1_last_hour_all_vs_hybrid_cpp,E1_cpp_all,NIFTY,last_hour,all days,diff,hybrid_cpp_s7,hybrid_cpp_all,7,792,,,,,,0,,0.9267411958656602,no significant difference
+E1_last_hour_all_vs_hybrid,E1_cpp_all,NIFTY,last_hour,all days,diff,hybrid_s7,hybrid_cpp_all,7,792,,,,,,0,,0.6209540722912072,no significant difference
+S4_next15_h1,S4_banknifty,BANKNIFTY,next15,all days,h1,hybrid,hybrid_cpp,7+101+102+103+104,660,,,,,,5,5.0,1.0187672231187136e-15,supported
+S4_next15_tost,S4_banknifty,BANKNIFTY,next15,all days,tost,hybrid,hybrid_cpp,7+101+102+103+104,660,0.5,0.15693008097673433,-0.14553560065414559,0.37183727173500203,0.37183727173500203,5,5.0,0.028046769133956723,equivalent
+S4_next15_diff,S4_banknifty,BANKNIFTY,next15,all days,diff,hybrid,hybrid_cpp,7+101+102+103+104,660,,,,,,5,5.0,0.47148460339284515,no significant difference
+S4_next30_h1,S4_banknifty,BANKNIFTY,next30,all days,h1,hybrid,hybrid_cpp,7+101+102+103+104,660,,,,,,5,5.0,1.1597871610320636e-12,supported
+S4_next30_tost,S4_banknifty,BANKNIFTY,next30,all days,tost,hybrid,hybrid_cpp,7+101+102+103+104,660,0.5,0.2052147857712183,-0.59952340302204,0.07703626297927568,0.59952340302204,5,5.0,0.36814042262338215,not shown
+S4_next30_diff,S4_banknifty,BANKNIFTY,next30,all days,diff,hybrid,hybrid_cpp,7+101+102+103+104,660,,,,,,5,4.0,0.40760076423459707,no significant difference
+S5_next15_h1,S5_finnifty,FINNIFTY,next15,all days,h1,hybrid,hybrid_cpp,7+101+102+103+104,604,,,,,,5,5.0,1.5430219166382775e-10,supported
+S5_next15_tost,S5_finnifty,FINNIFTY,next15,all days,tost,hybrid,hybrid_cpp,7+101+102+103+104,604,0.5,0.20398585162009092,0.16524112759757204,0.8378844497550624,0.8378844497550624,5,2.0,1.0,not shown
+S5_next15_diff,S5_finnifty,FINNIFTY,next15,all days,diff,hybrid,hybrid_cpp,7+101+102+103+104,604,,,,,,5,5.0,0.057198735167264106,no significant difference
+S5_next30_h1,S5_finnifty,FINNIFTY,next30,all days,h1,hybrid,hybrid_cpp,7+101+102+103+104,604,,,,,,5,5.0,3.394536229614964e-12,supported
+S5_next30_tost,S5_finnifty,FINNIFTY,next30,all days,tost,hybrid,hybrid_cpp,7+101+102+103+104,604,0.5,0.27249692033747497,0.10484792852367641,1.0034064918639158,1.0034064918639158,5,1.0,1.0,not shown
+S5_next30_diff,S5_finnifty,FINNIFTY,next30,all days,diff,hybrid,hybrid_cpp,7+101+102+103+104,604,,,,,,5,5.0,0.12782528817654432,no significant difference

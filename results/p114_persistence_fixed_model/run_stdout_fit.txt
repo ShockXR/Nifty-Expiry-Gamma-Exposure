@@ -1,0 +1,11 @@
+[REAL DATA (third-party 1-minute bars validated against NSE official daily values)] P114 fit stage: 1782 days in the grid; windows: before_inferred 2022-11-14 to 2023-02-10 (64 days); before_stated 2023-11-01 to 2024-02-29 (82 days); after 2024-03-01 to 2024-05-31 (59 days); before_p108 2022-11-22 to 2023-02-20 (64 days)
+  before_inferred nifty: done (11s)
+  before_inferred banknifty: done (13s)
+  before_stated nifty: done (16s)
+  before_stated banknifty: done (18s)
+  after nifty: done (19s)
+  after banknifty: done (21s)
+  before_p108 nifty: done (23s)
+  before_p108 banknifty: done (25s)
+Table 2 reproduction: 36 of 36 values identical; largest absolute difference 0
+fit stage done in 25s

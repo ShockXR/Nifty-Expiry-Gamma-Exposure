@@ -1,0 +1,30 @@
+study,check,value
+final half hour,expiry days before the closing auction (sample days),187
+final half hour,first and last sample day,2023-01-05 to 2026-07-28
+final half hour,anchor rows (25 per day),4675
+final half hour,rows with zero or missing next-5-minute RV,0
+final half hour,rows with zero RV in the previous 5 minutes (lag dropped),0
+final half hour,missing 1-minute bars 15:00 to 15:29 on sample days (forward-filled),1
+final half hour,"share of zero 1-minute returns, 15:00 to 15:29",0.0037433155080213902
+final half hour,"share of zero 1-minute returns, 14:15 to 14:59",0.00392156862745098
+final half hour,minimum minutes to 15:30 at an anchor (15:24),6
+final half hour,"rows where the 1, 2 or 5 minute floor binds on the clock to 15:30",0
+final half hour,averaged settlement: variance-equivalent minutes left at 15:00,10.505555555555556
+final half hour,averaged settlement: variance-equivalent minutes left at 15:24,2.5277777777777777
+final half hour,averaged settlement: anchors per day where the 2-minute floor binds,0
+final half hour,averaged settlement: anchors per day where the 5-minute floor binds (from 15:17),8
+final half hour,rows with zero gross GEX at spot (clock to 15:30),0
+final half hour,"rows with zero gross GEX at spot (averaged settlement, floor 1)",0
+Bank Nifty,"BANKNIFTY expiry dates in the bhavcopies, 3 Jan 2023 to 19 Nov 2024",98
+Bank Nifty,sample days (expiry days with full 1-minute bars and a previous-day chain),98
+Bank Nifty,first and last sample day,2023-01-05 to 2024-11-13
+Bank Nifty,expiry dates left out (incomplete bars or no chain),none
+Bank Nifty,sample days by weekday,"{'Wednesday': 56, 'Thursday': 38, 'Tuesday': 4}"
+Bank Nifty,days whose chain is from the previous trading day,98
+Bank Nifty,days whose chain skipped a missing bhavcopy,0
+Bank Nifty,days with a holiday re-dated contract,1
+Bank Nifty,median strikes per chain (within +/-10%),77.0
+Bank Nifty,median strike spacing near the money (points),100.0
+Bank Nifty,anchor rows,6566
+Bank Nifty,rows with zero or missing next-15-minute RV,0
+Bank Nifty,rows with zero lagged 15-minute RV,0

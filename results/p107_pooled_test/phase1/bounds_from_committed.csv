@@ -1,0 +1,7 @@
+data,target,subset,t_nifty,t_banknifty,t_finnifty,min_t,pooled_t_if_perfectly_correlated,pooled_t_if_independent,approximate
+REAL DATA (arithmetic on the committed p104/other_indices_same_dates.csv; no new loss),next15,all,9.40012739782606,8.059939258382325,7.006681446632774,7.006681446632774,8.074009915335376,13.865240156811133,False
+REAL DATA (arithmetic on the committed p104/other_indices_same_dates.csv; no new loss),next15,expiry (own days),4.054772805018998,2.6065865229919143,1.5294671109917215,1.5294671109917215,2.254791114288759,3.3793896831394226,True
+REAL DATA (arithmetic on the committed p104/other_indices_same_dates.csv; no new loss),next30,all,7.605033070506871,7.272991993344921,7.066898020370608,7.066898020370608,7.323663574876001,12.621495351021444,False
+REAL DATA (arithmetic on the committed p104/other_indices_same_dates.csv; no new loss),next30,expiry (own days),2.836110605979929,2.364745431220117,1.7015503337902398,1.7015503337902398,2.0947426996870058,3.2142457607327772,True
+REAL DATA (arithmetic on the committed p104/other_indices_same_dates.csv; no new loss),last_hour,all,2.126521849219728,4.839598219187774,0.5225551221839413,0.5225551221839413,2.440422725373119,4.137026331564171,False
+REAL DATA (arithmetic on the committed p104/other_indices_same_dates.csv; no new loss),last_hour,expiry (own days),1.600371220198339,-0.7400368296195705,-0.8620132722483254,-0.8620132722483254,-0.04030156207522978,-0.06886106434175081,True

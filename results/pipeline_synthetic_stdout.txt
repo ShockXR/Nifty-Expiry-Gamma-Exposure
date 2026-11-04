@@ -1,0 +1,5 @@
+[SYNTHETIC (simulated market, not real data)] 500 days loaded
+next15: 8750 test anchors
+next30: 8400 test anchors
+last_hour: 350 test anchors
+done in 183s -> results/pipeline_synthetic

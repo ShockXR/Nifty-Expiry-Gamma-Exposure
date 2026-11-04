@@ -4,21 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "niftygex"
-version = "0.1.0"
-description = "Dealer gamma exposure on Nifty 50 expiry days"
+version = "0.2.0"
+description = "Forecasting Nifty expiry-day volatility with option positioning (dealer gamma exposure)"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "numpy",
-    "pandas",
-    "scipy",
-    "statsmodels",
-    "arch",
-    "matplotlib",
+    "numpy>=1.26",
+    "pandas>=2.1,<4",  # pandas 3.1 deprecates DatetimeIndex.weekday, which the code uses; pandas 4 will remove it
+    "scipy>=1.11",
+    "statsmodels>=0.14",
+    "arch>=7.0",
+    "lightgbm>=4.0",
+    "matplotlib>=3.8",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "jupyter"]
+dev = ["pytest>=8", "jupyter"]
+download = ["requests>=2.31"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,5 @@
+check,value
+net call and put shares here vs experiments/dealer_sign.py participant_nets (max abs diff),0.0
+F2 days whose Pro GEX sign here differs from neg_pro of experiments/referee_f2.py,0.0
+F2 days,932.0
+F2 days with every raw position,932.0

@@ -1,0 +1,25 @@
+check,window,index,quantity,this_study,committed,identical,abs_diff
+reference bootstrap percentile of alpha + beta,before_stated,nifty,persistence_boot_ci95_lo,0.99051139134837152,0.99051139134837152,True,0
+reference bootstrap percentile of alpha + beta,before_stated,nifty,persistence_boot_ci95_hi,0.99998929956390215,0.99998929956390215,True,0
+reference bootstrap percentile of alpha + beta,before_stated,banknifty,persistence_boot_ci95_lo,0.9695355774768083,0.9695355774768083,True,0
+reference bootstrap percentile of alpha + beta,before_stated,banknifty,persistence_boot_ci95_hi,0.99575907999618629,0.99575907999618629,True,0
+reference bootstrap percentile of alpha + beta,before_inferred,nifty,persistence_boot_ci95_lo,0.9933083535134819,0.9933083535134819,True,0
+reference bootstrap percentile of alpha + beta,before_inferred,nifty,persistence_boot_ci95_hi,0.99901136675181479,0.99901136675181479,True,0
+reference bootstrap percentile of alpha + beta,before_inferred,banknifty,persistence_boot_ci95_lo,0.98646867118935477,0.98646867118935477,True,0
+reference bootstrap percentile of alpha + beta,before_inferred,banknifty,persistence_boot_ci95_hi,0.99771043623567657,0.99771043623567657,True,0
+reference bootstrap percentile of alpha + beta,after,nifty,persistence_boot_ci95_lo,0.98123951915696217,0.98123951915696217,True,0
+reference bootstrap percentile of alpha + beta,after,nifty,persistence_boot_ci95_hi,0.99503632819777554,0.99503632819777554,True,0
+reference bootstrap percentile of alpha + beta,after,banknifty,persistence_boot_ci95_lo,0.93692710793847567,0.93692710793847567,True,0
+reference bootstrap percentile of alpha + beta,after,banknifty,persistence_boot_ci95_hi,0.99323215647935525,0.99323215647935525,True,0
+reference bootstrap interval of the change in alpha + beta,before_stated,nifty,diff_boot_ci95_lo,-0.016405694946804512,-0.016405694946804512,True,0
+reference bootstrap interval of the change in alpha + beta,before_stated,nifty,diff_boot_ci95_hi,0.0011326337462300158,0.0011326337462300158,True,0
+reference LR statistic of equal alpha + beta (this study's profile code),before_stated,nifty,lr_equal_persistence_stat,14.38190962022054,14.381910522817634,False,9.0259709395468235e-07
+reference bootstrap interval of the change in alpha + beta,before_stated,banknifty,diff_boot_ci95_lo,-0.05345651794232175,-0.05345651794232175,True,0
+reference bootstrap interval of the change in alpha + beta,before_stated,banknifty,diff_boot_ci95_hi,0.014976842981454798,0.014976842981454798,True,0
+reference LR statistic of equal alpha + beta (this study's profile code),before_stated,banknifty,lr_equal_persistence_stat,3.6290345634042751,3.629034915677039,False,3.5227276384830475e-07
+reference bootstrap interval of the change in alpha + beta,before_inferred,nifty,diff_boot_ci95_lo,-0.016340028100925896,-0.016340028100925896,True,0
+reference bootstrap interval of the change in alpha + beta,before_inferred,nifty,diff_boot_ci95_hi,-0.00057210192530662851,-0.00057210192530662851,True,0
+reference LR statistic of equal alpha + beta (this study's profile code),before_inferred,nifty,lr_equal_persistence_stat,16.229944554928807,16.229944651058759,False,9.6129951998591423e-08
+reference bootstrap interval of the change in alpha + beta,before_inferred,banknifty,diff_boot_ci95_lo,-0.059111984816555219,-0.059111984816555219,True,0
+reference bootstrap interval of the change in alpha + beta,before_inferred,banknifty,diff_boot_ci95_hi,0.0022618844381018179,0.0022618844381018179,True,0
+reference LR statistic of equal alpha + beta (this study's profile code),before_inferred,banknifty,lr_equal_persistence_stat,18.272162449065945,18.272192398348125,False,2.9949282179586589e-05

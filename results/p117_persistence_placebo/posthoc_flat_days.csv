@@ -1,0 +1,4 @@
+data,index,date,bars,flat_bars,flat_share
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,2017-07-10,360,167,0.4638888888888889
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,2021-02-24,360,288,0.8
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,2017-07-10,360,181,0.5027777777777778

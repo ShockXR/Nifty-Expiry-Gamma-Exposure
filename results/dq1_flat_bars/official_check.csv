@@ -1,0 +1,5 @@
+data,index,date,bars_0915_1529,bars_open,official_open,diff_open_bp,bars_high,official_high,diff_high_bp,bars_low,official_low,diff_low_bp,bars_close,official_close,diff_close_bp,high_low_within_5bp
+REAL DATA (third-party 1-minute bars; NSE official daily index values from the NSE archive),nifty,2017-07-10,375,9701.86,9719.3,-17.9,9782.15,9782.15,0.0,9646.6,9646.45,0.2,9763.1,9771.05,-8.1,True
+REAL DATA (third-party 1-minute bars; NSE official daily index values from the NSE archive),nifty,2021-02-24,375,14691.3,14729.15,-25.7,14836.4,15008.8,-114.9,14681.2,14723.05,-28.4,14781.3,14982.0,-134.0,False
+REAL DATA (third-party 1-minute bars; NSE official daily index values from the NSE archive),banknifty,2017-07-10,375,23449.15,23583.25,-56.9,23960.3,23964.8,-1.9,23449.15,23289.9,68.4,23644.45,23675.05,-12.9,False
+REAL DATA (third-party 1-minute bars; NSE official daily index values from the NSE archive),banknifty,2021-02-24,54,35205.4,35205.4,0.0,35637.2,36567.65,-254.4,35106.9,35060.65,13.2,35626.6,36452.3,-226.5,False

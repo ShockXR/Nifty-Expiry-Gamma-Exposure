@@ -1,0 +1,25 @@
+symbol,measure,rule_a,rule_b,share_same_sign
+NIFTY,g_near,us_convention,participant_pro,0.46
+NIFTY,g_near,us_convention,client_mirror,0.44
+NIFTY,g_near,participant_pro,client_mirror,0.57
+NIFTY,g_near,us_convention,(share positive),0.485
+NIFTY,g_near,participant_pro,(share positive),0.505
+NIFTY,g_near,client_mirror,(share positive),0.905
+NIFTY,g_day,us_convention,participant_pro,0.41
+NIFTY,g_day,us_convention,client_mirror,0.82
+NIFTY,g_day,participant_pro,client_mirror,0.5
+NIFTY,g_day,us_convention,(share positive),0.875
+NIFTY,g_day,participant_pro,(share positive),0.455
+NIFTY,g_day,client_mirror,(share positive),0.945
+BANKNIFTY,g_near,us_convention,participant_pro,0.5
+BANKNIFTY,g_near,us_convention,client_mirror,0.45081967213114754
+BANKNIFTY,g_near,participant_pro,client_mirror,0.3442622950819672
+BANKNIFTY,g_near,us_convention,(share positive),0.4672131147540984
+BANKNIFTY,g_near,participant_pro,(share positive),0.2459016393442623
+BANKNIFTY,g_near,client_mirror,(share positive),0.9016393442622951
+BANKNIFTY,g_day,us_convention,participant_pro,0.2540983606557377
+BANKNIFTY,g_day,us_convention,client_mirror,0.8032786885245902
+BANKNIFTY,g_day,participant_pro,client_mirror,0.30327868852459017
+BANKNIFTY,g_day,us_convention,(share positive),0.8770491803278688
+BANKNIFTY,g_day,participant_pro,(share positive),0.22950819672131148
+BANKNIFTY,g_day,client_mirror,(share positive),0.8934426229508197

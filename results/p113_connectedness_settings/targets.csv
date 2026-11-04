@@ -1,0 +1,16 @@
+cell,side,family,subsample,printed_total,printed_nifty_from_bn,printed_bn_from_nifty,printed_nifty_own,printed_bn_own,source,matches_P_T34,alt_target_total
+T3.1,before,union,all_expiry,84.0,42.71,41.29,57.29,58.71,results/replication_nse/rekey_blind.csv,True,84.0
+T3.2,before,union,monthly,74.7,36.73,37.97,63.27,62.03,results/replication_nse/rekey_blind.csv,True,74.7
+T3.3,before,union,monthly_first_hour,99.42,49.67,49.75,50.33,50.25,results/replication_nse/rekey_blind.csv,True,99.42
+T3.4,before,union,monthly_mid_hour,68.64,33.74,34.9,66.26,65.1,results/replication_nse/rekey_blind.csv,True,68.64
+T3.5,before,union,monthly_last_hour,105.22,52.79,52.43,47.21,47.57,results/replication_nse/rekey_blind.csv,True,105.22
+T4.I.1,after,nifty,all_expiry,76.38,38.43,37.95,61.57,62.05,results/replication_nse/rekey_blind.csv,True,76.38
+T4.I.2,after,nifty,monthly,74.58,36.79,37.79,63.21,62.21,results/replication_nse/rekey_blind.csv,True,74.58
+T4.I.3,after,nifty,monthly_first_hour,80.18,40.14,40.03,60.86,60.97,results/replication_nse/rekey_blind.csv,True,78.17
+T4.I.4,after,nifty,monthly_mid_hour,68.81,33.68,35.13,66.32,64.87,results/replication_nse/rekey_blind.csv,True,68.81
+T4.I.5,after,nifty,monthly_last_hour,66.44,29.17,37.27,70.83,62.73,results/replication_nse/rekey_blind.csv,True,66.44
+T4.II.1,after,bn,all_expiry,73.02,37.45,35.57,62.55,64.43,results/replication_nse/rekey_blind.csv,True,73.02
+T4.II.2,after,bn,monthly,72.74,37.13,35.61,62.87,64.39,results/replication_nse/rekey_blind.csv,True,72.74
+T4.II.3,after,bn,monthly_first_hour,70.97,37.56,34.41,62.44,65.59,results/replication_nse/rekey_blind.csv,True,71.97
+T4.II.4,after,bn,monthly_mid_hour,66.54,33.97,32.57,66.03,67.43,results/replication_nse/rekey_blind.csv,True,66.54
+T4.II.5,after,bn,monthly_last_hour,74.43,38.81,35.62,61.19,64.38,results/replication_nse/rekey_blind.csv,True,74.43

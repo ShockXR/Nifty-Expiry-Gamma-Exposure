@@ -1,0 +1,510 @@
+SIMULATIONS CALIBRATED ON REAL DATA (P71). Real regressors and real residuals, simulated outcomes.
+Replications per cell: 5000; cells: 278; workers: 4; master seed 712026.
+
+== Real-data estimates (estimates.csv)
+            test  n_units  n_expiries  estimate     se  ci95_low  ci95_high          p  matches_published
+      R2_tue_day       61          61    0.1917 0.0620    0.0786     0.3190 5.1469e-03               True
+R2_tue_last_hour       61          61    0.3564 0.0802    0.1955     0.5112 5.0204e-05               True
+      R2_thu_day       41          41   -0.1188 0.1000   -0.3031     0.0735 2.6264e-01               True
+    R2_multi_day       98          98    0.1085 0.0490    0.0099     0.2007 4.5463e-02               True
+             R3a      937         199   -3.1581 1.0864   -5.2875    -1.0287 3.6514e-03               True
+             R3b      937         199    8.2089 2.5460    3.2188    13.1990 1.2632e-03               True
+              R5      929         197   -0.0682 0.0184   -0.1043    -0.0321 2.1580e-04               True
+              FC      937         199    1.0000    NaN       NaN        NaN 9.8226e-01               True
+
+== Headline, real sample size, conservative of the two schemes (headline.csv)
+            test         stat  estimate     p_real  size_residual  size_wild  mde80_residual  mde80_wild  power_at_estimate_conservative  power_at_half_estimate_conservative  multiplier_needed_half  extra_expiries_half  extra_years_half
+      R2_tue_day     wilcoxon    0.1917 5.1469e-03         0.0764     0.0258          0.1837      0.1509                          0.8396                               0.2000                  4.5048             213.7903            4.0973
+      R2_tue_day   hac_t_mean    0.1917 5.1469e-03         0.0690     0.0596          0.1458      0.1532                          0.9480                               0.4132                  2.7539             106.9908            2.0505
+R2_tue_last_hour     wilcoxon    0.3564 5.0204e-05         0.0652     0.0504          0.2269      0.2308                          0.9922                               0.5720                  1.6545              39.9218            0.7651
+      R2_thu_day     wilcoxon   -0.1188 2.6264e-01         0.1782     0.1288          0.3439      0.3383                          0.2538                               0.1654                     NaN                  NaN               NaN
+    R2_multi_day     wilcoxon    0.1085 4.5463e-02         0.0908     0.0824          0.1571      0.1519                          0.5222                               0.1822                     NaN                  NaN               NaN
+             R3a        hac_t   -3.1581 3.6514e-03         0.0566     0.0502          3.0348      3.0080                          0.8314                               0.3134                  3.8682             570.7784           10.9389
+             R3b        hac_t    8.2089 1.2632e-03         0.0638     0.0572          6.9047      7.1169                          0.9008                               0.3732                  3.0945             416.8080            7.9881
+              R5        hac_t   -0.0682 2.1580e-04         0.0534     0.0614          0.0419      0.0517                          0.9720                               0.4458                  2.4377             283.2330            5.4793
+              FC dm_one_sided    1.0000 9.8226e-01         0.0268     0.0178          1.4571      1.4879                          0.5038                               0.1364                     NaN                  NaN               NaN
+
+== Size: rejection rate when the true effect is zero (size.csv), main cells
+            test         stat   scheme   m    future_days_from  rejection_rate  wilson95_low  wilson95_high
+      R2_tue_day     wilcoxon residual 1.0  none (real sample)          0.0764        0.0694         0.0841
+      R2_tue_day   hac_t_mean residual 1.0  none (real sample)          0.0690        0.0623         0.0764
+      R2_tue_day     wilcoxon residual 1.5         same regime          0.0954        0.0876         0.1039
+      R2_tue_day   hac_t_mean residual 1.5         same regime          0.0588        0.0526         0.0657
+      R2_tue_day     wilcoxon residual 2.0         same regime          0.1084        0.1001         0.1173
+      R2_tue_day   hac_t_mean residual 2.0         same regime          0.0434        0.0381         0.0494
+      R2_tue_day     wilcoxon residual 3.0         same regime          0.1648        0.1548         0.1753
+      R2_tue_day   hac_t_mean residual 3.0         same regime          0.0508        0.0451         0.0572
+R2_tue_last_hour     wilcoxon residual 1.0  none (real sample)          0.0652        0.0587         0.0724
+R2_tue_last_hour   hac_t_mean residual 1.0  none (real sample)          0.0752        0.0682         0.0828
+R2_tue_last_hour     wilcoxon residual 1.5         same regime          0.0672        0.0606         0.0745
+R2_tue_last_hour   hac_t_mean residual 1.5         same regime          0.0662        0.0596         0.0734
+R2_tue_last_hour     wilcoxon residual 2.0         same regime          0.0700        0.0633         0.0774
+R2_tue_last_hour   hac_t_mean residual 2.0         same regime          0.0632        0.0568         0.0703
+R2_tue_last_hour     wilcoxon residual 3.0         same regime          0.0668        0.0602         0.0741
+R2_tue_last_hour   hac_t_mean residual 3.0         same regime          0.0536        0.0477         0.0602
+      R2_thu_day     wilcoxon residual 1.0  none (real sample)          0.1782        0.1678         0.1891
+      R2_thu_day   hac_t_mean residual 1.0  none (real sample)          0.1628        0.1528         0.1733
+    R2_multi_day     wilcoxon residual 1.0  none (real sample)          0.0908        0.0831         0.0991
+    R2_multi_day   hac_t_mean residual 1.0  none (real sample)          0.0848        0.0774         0.0928
+             R3a        hac_t residual 1.0  none (real sample)          0.0566        0.0505         0.0634
+             R3a        hac_t residual 1.5            all days          0.0598        0.0536         0.0667
+             R3a        hac_t residual 1.5 Tuesday regime only          0.0584        0.0522         0.0652
+             R3a        hac_t residual 2.0            all days          0.0568        0.0507         0.0636
+             R3a        hac_t residual 2.0 Tuesday regime only          0.0554        0.0494         0.0621
+             R3a        hac_t residual 3.0            all days          0.0614        0.0551         0.0684
+             R3a        hac_t residual 3.0 Tuesday regime only          0.0590        0.0528         0.0659
+             R3b        hac_t residual 1.0  none (real sample)          0.0638        0.0574         0.0709
+             R3b        hac_t residual 1.5            all days          0.0606        0.0543         0.0676
+             R3b        hac_t residual 1.5 Tuesday regime only          0.0608        0.0545         0.0678
+             R3b        hac_t residual 2.0            all days          0.0570        0.0509         0.0638
+             R3b        hac_t residual 2.0 Tuesday regime only          0.0510        0.0452         0.0575
+             R3b        hac_t residual 3.0            all days          0.0608        0.0545         0.0678
+             R3b        hac_t residual 3.0 Tuesday regime only          0.0538        0.0479         0.0604
+              R5        hac_t residual 1.0  none (real sample)          0.0534        0.0475         0.0600
+              R5        hac_t residual 1.5            all days          0.0552        0.0492         0.0619
+              R5        hac_t residual 1.5 Tuesday regime only          0.0524        0.0466         0.0589
+              R5        hac_t residual 2.0            all days          0.0534        0.0475         0.0600
+              R5        hac_t residual 2.0 Tuesday regime only          0.0540        0.0481         0.0606
+              R5        hac_t residual 3.0            all days          0.0530        0.0471         0.0596
+              R5        hac_t residual 3.0 Tuesday regime only          0.0548        0.0488         0.0615
+              FC dm_one_sided residual 1.0  none (real sample)          0.0268        0.0227         0.0317
+              FC dm_one_sided residual 1.5            all days          0.0234        0.0196         0.0280
+              FC dm_one_sided residual 1.5 Tuesday regime only          0.0342        0.0295         0.0396
+              FC dm_one_sided residual 2.0            all days          0.0248        0.0208         0.0295
+              FC dm_one_sided residual 2.0 Tuesday regime only          0.0358        0.0310         0.0413
+              FC dm_one_sided residual 3.0            all days          0.0200        0.0165         0.0243
+              FC dm_one_sided residual 3.0 Tuesday regime only          0.0454        0.0400         0.0515
+      R2_tue_day     wilcoxon     wild 1.0  none (real sample)          0.0258        0.0218         0.0306
+      R2_tue_day   hac_t_mean     wild 1.0  none (real sample)          0.0596        0.0534         0.0665
+      R2_tue_day     wilcoxon     wild 1.5         same regime          0.0354        0.0306         0.0409
+      R2_tue_day   hac_t_mean     wild 1.5         same regime          0.0574        0.0513         0.0642
+      R2_tue_day     wilcoxon     wild 2.0         same regime          0.0300        0.0256         0.0351
+      R2_tue_day   hac_t_mean     wild 2.0         same regime          0.0460        0.0405         0.0522
+      R2_tue_day     wilcoxon     wild 3.0         same regime          0.0324        0.0278         0.0377
+      R2_tue_day   hac_t_mean     wild 3.0         same regime          0.0494        0.0437         0.0558
+R2_tue_last_hour     wilcoxon     wild 1.0  none (real sample)          0.0504        0.0447         0.0568
+R2_tue_last_hour   hac_t_mean     wild 1.0  none (real sample)          0.0748        0.0678         0.0824
+R2_tue_last_hour     wilcoxon     wild 1.5         same regime          0.0528        0.0469         0.0593
+R2_tue_last_hour   hac_t_mean     wild 1.5         same regime          0.0642        0.0577         0.0713
+R2_tue_last_hour     wilcoxon     wild 2.0         same regime          0.0522        0.0464         0.0587
+R2_tue_last_hour   hac_t_mean     wild 2.0         same regime          0.0618        0.0555         0.0688
+R2_tue_last_hour     wilcoxon     wild 3.0         same regime          0.0534        0.0475         0.0600
+R2_tue_last_hour   hac_t_mean     wild 3.0         same regime          0.0580        0.0519         0.0648
+      R2_thu_day     wilcoxon     wild 1.0  none (real sample)          0.1288        0.1198         0.1384
+      R2_thu_day   hac_t_mean     wild 1.0  none (real sample)          0.1276        0.1186         0.1371
+    R2_multi_day     wilcoxon     wild 1.0  none (real sample)          0.0824        0.0751         0.0903
+    R2_multi_day   hac_t_mean     wild 1.0  none (real sample)          0.0816        0.0743         0.0895
+             R3a        hac_t     wild 1.0  none (real sample)          0.0502        0.0445         0.0566
+             R3a        hac_t     wild 1.5            all days          0.0476        0.0420         0.0539
+             R3a        hac_t     wild 1.5 Tuesday regime only          0.0474        0.0418         0.0536
+             R3a        hac_t     wild 2.0            all days          0.0474        0.0418         0.0536
+             R3a        hac_t     wild 2.0 Tuesday regime only          0.0376        0.0327         0.0432
+             R3a        hac_t     wild 3.0            all days          0.0444        0.0390         0.0505
+             R3a        hac_t     wild 3.0 Tuesday regime only          0.0362        0.0314         0.0417
+             R3b        hac_t     wild 1.0  none (real sample)          0.0572        0.0511         0.0640
+             R3b        hac_t     wild 1.5            all days          0.0586        0.0524         0.0655
+             R3b        hac_t     wild 1.5 Tuesday regime only          0.0616        0.0553         0.0686
+             R3b        hac_t     wild 2.0            all days          0.0514        0.0456         0.0579
+             R3b        hac_t     wild 2.0 Tuesday regime only          0.0644        0.0579         0.0715
+             R3b        hac_t     wild 3.0            all days          0.0616        0.0553         0.0686
+             R3b        hac_t     wild 3.0 Tuesday regime only          0.0586        0.0524         0.0655
+              R5        hac_t     wild 1.0  none (real sample)          0.0614        0.0551         0.0684
+              R5        hac_t     wild 1.5            all days          0.0522        0.0464         0.0587
+              R5        hac_t     wild 1.5 Tuesday regime only          0.0500        0.0443         0.0564
+              R5        hac_t     wild 2.0            all days          0.0542        0.0483         0.0608
+              R5        hac_t     wild 2.0 Tuesday regime only          0.0404        0.0353         0.0462
+              R5        hac_t     wild 3.0            all days          0.0432        0.0379         0.0492
+              R5        hac_t     wild 3.0 Tuesday regime only          0.0378        0.0329         0.0435
+              FC dm_one_sided     wild 1.0  none (real sample)          0.0178        0.0145         0.0219
+              FC dm_one_sided     wild 1.5            all days          0.0132        0.0104         0.0168
+              FC dm_one_sided     wild 1.5 Tuesday regime only          0.0230        0.0192         0.0275
+              FC dm_one_sided     wild 2.0            all days          0.0132        0.0104         0.0168
+              FC dm_one_sided     wild 2.0 Tuesday regime only          0.0246        0.0207         0.0293
+              FC dm_one_sided     wild 3.0            all days          0.0170        0.0138         0.0210
+              FC dm_one_sided     wild 3.0 Tuesday regime only          0.0346        0.0299         0.0400
+
+== Minimum detectable effect at 80% power, real sample, primary scheme (mde.csv)
+            test         stat   scheme  estimate  mde80  mde80_lambda  mde80_mc_se  analytic_mde80_2p8_se  power_at_estimate  power_at_half_estimate  exaggeration_at_half_estimate
+      R2_tue_day     wilcoxon residual    0.1917 0.1837        0.9581       0.0011                 0.1737             0.8396                  0.2000                         1.6046
+      R2_tue_day   hac_t_mean residual    0.1917 0.1458        0.7606       0.0010                 0.1479             0.9658                  0.4402                         1.4607
+R2_tue_last_hour     wilcoxon residual    0.3564 0.2269        0.6367       0.0022                 0.2246             0.9922                  0.6372                         1.2385
+R2_tue_last_hour   hac_t_mean residual    0.3564 0.2069        0.5804       0.0014                 0.2115             0.9966                  0.6844                         1.2126
+      R2_thu_day     wilcoxon residual   -0.1188 0.3439        2.8951       0.0028                 0.2800             0.2912                  0.2080                         4.3701
+      R2_thu_day   hac_t_mean residual   -0.1188 0.3390        2.8541       0.0022                 0.3718             0.2562                  0.1842                         4.4199
+    R2_multi_day     wilcoxon residual    0.1085 0.1571        1.4484       0.0014                 0.1373             0.5222                  0.1822                         2.4637
+    R2_multi_day   hac_t_mean residual    0.1085 0.1509        1.3915       0.0010                 0.1625             0.5462                  0.2172                         2.3803
+             R3a        hac_t residual   -3.1581 3.0348        0.9609       0.0222                 3.0438             0.8314                  0.3264                         1.7614
+             R3b        hac_t residual    8.2089 6.9047        0.8411       0.0522                 7.1329             0.9094                  0.3940                         1.5832
+              R5        hac_t residual   -0.0682 0.0419        0.6138       0.0003                 0.0516             0.9932                  0.6362                         1.2575
+              FC dm_one_sided residual    1.0000 1.4571        1.4571       0.0152                    NaN             0.5202                  0.1580                            NaN
+      R2_tue_day     wilcoxon     wild    0.1917 0.1509        0.7871       0.0009                 0.1737             0.9556                  0.4220                         1.4405
+      R2_tue_day   hac_t_mean     wild    0.1917 0.1532        0.7992       0.0009                 0.1479             0.9480                  0.4132                         1.5181
+R2_tue_last_hour     wilcoxon     wild    0.3564 0.2308        0.6476       0.0018                 0.2246             0.9990                  0.5720                         1.2690
+R2_tue_last_hour   hac_t_mean     wild    0.3564 0.2077        0.5829       0.0013                 0.2115             0.9998                  0.6674                         1.2107
+      R2_thu_day     wilcoxon     wild   -0.1188 0.3383        2.8477       0.0024                 0.2800             0.2538                  0.1654                         4.1886
+      R2_thu_day   hac_t_mean     wild   -0.1188 0.3308        2.7848       0.0023                 0.3718             0.2364                  0.1540                         4.2268
+    R2_multi_day     wilcoxon     wild    0.1085 0.1519        1.4005       0.0014                 0.1373             0.5504                  0.2070                         2.3847
+    R2_multi_day   hac_t_mean     wild    0.1085 0.1509        1.3915       0.0010                 0.1625             0.5368                  0.2032                         2.3971
+             R3a        hac_t     wild   -3.1581 3.0080        0.9525       0.0222                 3.0438             0.8382                  0.3134                         1.7803
+             R3b        hac_t     wild    8.2089 7.1169        0.8670       0.0533                 7.1329             0.9008                  0.3732                         1.6284
+              R5        hac_t     wild   -0.0682 0.0517        0.7575       0.0003                 0.0516             0.9720                  0.4458                         1.4541
+              FC dm_one_sided     wild    1.0000 1.4879        1.4879       0.0149                    NaN             0.5038                  0.1364                            NaN
+
+== MDE by sample size, primary scheme (mde.csv)
+            test         stat   m    future_days_from  n_units  mde80  mde80_lambda  power_at_estimate  power_at_half_estimate
+      R2_tue_day     wilcoxon 1.0  none (real sample)       61 0.1837        0.9581             0.8396                  0.2000
+      R2_tue_day   hac_t_mean 1.0  none (real sample)       61 0.1458        0.7606             0.9658                  0.4402
+      R2_tue_day     wilcoxon 1.5         same regime       92 0.1553        0.8100             0.9598                  0.3076
+      R2_tue_day   hac_t_mean 1.5         same regime       92 0.1199        0.6253             0.9974                  0.5902
+      R2_tue_day     wilcoxon 2.0         same regime      122 0.1372        0.7156             0.9914                  0.4142
+      R2_tue_day   hac_t_mean 2.0         same regime      122 0.1047        0.5461             0.9996                  0.7272
+      R2_tue_day     wilcoxon 3.0         same regime      183 0.1175        0.6127             0.9992                  0.5790
+      R2_tue_day   hac_t_mean 3.0         same regime      183 0.0875        0.4563             1.0000                  0.8840
+R2_tue_last_hour     wilcoxon 1.0  none (real sample)       61 0.2269        0.6367             0.9922                  0.6372
+R2_tue_last_hour   hac_t_mean 1.0  none (real sample)       61 0.2069        0.5804             0.9966                  0.6844
+R2_tue_last_hour     wilcoxon 1.5         same regime       92 0.1776        0.4983             0.9996                  0.8032
+R2_tue_last_hour   hac_t_mean 1.5         same regime       92 0.1713        0.4808             0.9998                  0.8316
+R2_tue_last_hour     wilcoxon 2.0         same regime      122 0.1592        0.4466             1.0000                  0.8964
+R2_tue_last_hour   hac_t_mean 2.0         same regime      122 0.1487        0.4172             1.0000                  0.9158
+R2_tue_last_hour     wilcoxon 3.0         same regime      183 0.1276        0.3580             1.0000                  0.9758
+R2_tue_last_hour   hac_t_mean 3.0         same regime      183 0.1229        0.3448             1.0000                  0.9836
+      R2_thu_day     wilcoxon 1.0  none (real sample)       41 0.3439        2.8951             0.2912                  0.2080
+      R2_thu_day   hac_t_mean 1.0  none (real sample)       41 0.3390        2.8541             0.2562                  0.1842
+    R2_multi_day     wilcoxon 1.0  none (real sample)       98 0.1571        1.4484             0.5222                  0.1822
+    R2_multi_day   hac_t_mean 1.0  none (real sample)       98 0.1509        1.3915             0.5462                  0.2172
+             R3a        hac_t 1.0  none (real sample)      937 3.0348        0.9609             0.8314                  0.3264
+             R3a        hac_t 1.5            all days     1406 2.4863        0.7873             0.9454                  0.4530
+             R3a        hac_t 1.5 Tuesday regime only     1406 2.5865        0.8190             0.9262                  0.4164
+             R3a        hac_t 2.0            all days     1874 2.1941        0.6948             0.9802                  0.5246
+             R3a        hac_t 2.0 Tuesday regime only     1874 2.2847        0.7235             0.9724                  0.5084
+             R3a        hac_t 3.0            all days     2811 1.7930        0.5678             0.9980                  0.7092
+             R3a        hac_t 3.0 Tuesday regime only     2811 1.8949        0.6000             0.9966                  0.6634
+             R3b        hac_t 1.0  none (real sample)      937 6.9047        0.8411             0.9094                  0.3940
+             R3b        hac_t 1.5            all days     1406 5.7001        0.6944             0.9806                  0.5386
+             R3b        hac_t 1.5 Tuesday regime only     1406 6.0654        0.7389             0.9602                  0.4802
+             R3b        hac_t 2.0            all days     1874 4.9378        0.6015             0.9944                  0.6476
+             R3b        hac_t 2.0 Tuesday regime only     1874 5.4807        0.6677             0.9854                  0.5668
+             R3b        hac_t 3.0            all days     2811 3.9886        0.4859             1.0000                  0.8252
+             R3b        hac_t 3.0 Tuesday regime only     2811 4.7186        0.5748             0.9984                  0.6966
+              R5        hac_t 1.0  none (real sample)      929 0.0419        0.6138             0.9932                  0.6362
+              R5        hac_t 1.5            all days     1394 0.0340        0.4987             0.9996                  0.8024
+              R5        hac_t 1.5 Tuesday regime only     1394 0.0333        0.4888             0.9994                  0.8212
+              R5        hac_t 2.0            all days     1858 0.0303        0.4446             0.9998                  0.8896
+              R5        hac_t 2.0 Tuesday regime only     1858 0.0290        0.4247             1.0000                  0.9132
+              R5        hac_t 3.0            all days     2787 0.0250        0.3667             1.0000                  0.9722
+              R5        hac_t 3.0 Tuesday regime only     2787 0.0242        0.3542             1.0000                  0.9804
+              FC dm_one_sided 1.0  none (real sample)      937 1.4571        1.4571             0.5202                  0.1580
+              FC dm_one_sided 1.5            all days     1406 1.2804        1.2804             0.6250                  0.1968
+              FC dm_one_sided 1.5 Tuesday regime only     1406 1.2374        1.2374             0.6446                  0.2060
+              FC dm_one_sided 2.0            all days     1874 1.1781        1.1781             0.6810                  0.2216
+              FC dm_one_sided 2.0 Tuesday regime only     1874 1.1611        1.1611             0.6956                  0.2496
+              FC dm_one_sided 3.0            all days     2811 1.1048        1.1048             0.7324                  0.2628
+              FC dm_one_sided 3.0 Tuesday regime only     2811 1.0927        1.0927             0.7480                  0.2924
+
+== Block length sensitivity (mde.csv, purpose 'block length')
+      test         stat  block  size_at_zero  mde80_lambda  power_at_estimate
+       R3a        hac_t      5        0.0580        0.9612             0.8326
+       R3a        hac_t     30        0.0680        0.9665             0.8270
+       R3b        hac_t      5        0.0620        0.8267             0.9158
+       R3b        hac_t     30        0.0632        0.8371             0.9132
+        R5        hac_t      5        0.0590        0.6209             0.9924
+        R5        hac_t     30        0.0548        0.6126             0.9940
+        FC dm_one_sided      5        0.0232        1.4470             0.5226
+        FC dm_one_sided     30        0.0292        1.4710             0.5190
+R2_tue_day     wilcoxon      2        0.0876        0.9713             0.8282
+R2_tue_day   hac_t_mean      2        0.0726        0.7902             0.9542
+R2_tue_day     wilcoxon      8        0.0458        0.9491             0.8518
+R2_tue_day   hac_t_mean      8        0.0546        0.7383             0.9846
+
+== Sample needed for 80% power (sample_needed.csv)
+            test   scheme    future_days_from                 target  target_delta  power_at_1x  power_at_3x  multiplier_needed  expiries_needed  extra_expiries  extra_years                                     method
+      R2_tue_day residual         same regime               estimate        0.1917       0.8396       0.9992             0.9179          55.9895          0.0000       0.0000     current sample is enough (scaled down)
+      R2_tue_day residual         same regime      half the estimate        0.0959       0.2000       0.5790             4.5048         274.7903        213.7903       4.0973 extrapolated beyond 3x (1/sqrt(n) scaling)
+      R2_tue_day residual         same regime 95% bound nearest zero        0.0786       0.1056       0.3142             6.6977         408.5570        347.5570       6.6609 extrapolated beyond 3x (1/sqrt(n) scaling)
+      R2_tue_day     wild         same regime               estimate        0.1917       0.9556       1.0000             0.6196          37.7955          0.0000       0.0000     current sample is enough (scaled down)
+      R2_tue_day     wild         same regime      half the estimate        0.0959       0.4220       0.9130             2.2653         138.1821         77.1821       1.4792                   simulated (interpolated)
+      R2_tue_day     wild         same regime 95% bound nearest zero        0.0786       0.2916       0.7734             3.2559         198.6122        137.6122       2.6373 extrapolated beyond 3x (1/sqrt(n) scaling)
+      R2_tue_day residual         same regime               estimate        0.1917       0.9658       1.0000             0.5786          35.2919          0.0000       0.0000     current sample is enough (scaled down)
+      R2_tue_day residual         same regime      half the estimate        0.0959       0.4402       0.8840             2.4643         150.3214         89.3214       1.7118                   simulated (interpolated)
+      R2_tue_day residual         same regime 95% bound nearest zero        0.0786       0.3096       0.7109             3.7154         226.6424        165.6424       3.1745 extrapolated beyond 3x (1/sqrt(n) scaling)
+      R2_tue_day     wild         same regime               estimate        0.1917       0.9480       1.0000             0.6387          38.9628          0.0000       0.0000     current sample is enough (scaled down)
+      R2_tue_day     wild         same regime      half the estimate        0.0959       0.4132       0.8374             2.7539         167.9908        106.9908       2.0505                   simulated (interpolated)
+      R2_tue_day     wild         same regime 95% bound nearest zero        0.0786       0.3053       0.6705             4.1081         250.5946        189.5946       3.6336 extrapolated beyond 3x (1/sqrt(n) scaling)
+R2_tue_last_hour residual         same regime               estimate        0.3564       0.9922       1.0000             0.4054          24.7282          0.0000       0.0000     current sample is enough (scaled down)
+R2_tue_last_hour residual         same regime      half the estimate        0.1782       0.6372       0.9758             1.4904          90.9120         29.9120       0.5733                   simulated (interpolated)
+R2_tue_last_hour residual         same regime 95% bound nearest zero        0.1955       0.6998       0.9856             1.3264          80.9120         19.9120       0.3816                   simulated (interpolated)
+R2_tue_last_hour     wild         same regime               estimate        0.3564       0.9990       1.0000             0.4193          25.5793          0.0000       0.0000     current sample is enough (scaled down)
+R2_tue_last_hour     wild         same regime      half the estimate        0.1782       0.5720       0.9706             1.6545         100.9218         39.9218       0.7651                   simulated (interpolated)
+R2_tue_last_hour     wild         same regime 95% bound nearest zero        0.1955       0.6573       0.9839             1.3911          84.8577         23.8577       0.4572                   simulated (interpolated)
+R2_tue_last_hour residual         same regime               estimate        0.3564       0.9966       1.0000             0.3369          20.5480          0.0000       0.0000     current sample is enough (scaled down)
+R2_tue_last_hour residual         same regime      half the estimate        0.1782       0.6844       0.9836             1.3927          84.9524         23.9524       0.4590                   simulated (interpolated)
+R2_tue_last_hour residual         same regime 95% bound nearest zero        0.1955       0.7544       0.9904             1.1814          72.0679         11.0679       0.2121                   simulated (interpolated)
+R2_tue_last_hour     wild         same regime               estimate        0.3564       0.9998       1.0000             0.3397          20.7243          0.0000       0.0000     current sample is enough (scaled down)
+R2_tue_last_hour     wild         same regime      half the estimate        0.1782       0.6674       0.9880             1.3704          83.5939         22.5939       0.4330                   simulated (interpolated)
+R2_tue_last_hour     wild         same regime 95% bound nearest zero        0.1955       0.7452       0.9934             1.1818          72.0926         11.0926       0.2126                   simulated (interpolated)
+             R3a residual            all days               estimate       -3.1581       0.8314       0.9980             0.9234         183.7597          0.0000       0.0000     current sample is enough (scaled down)
+             R3a residual            all days      half the estimate       -1.5790       0.3264       0.7092             3.8682         769.7784        570.7784      10.9389 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a residual            all days 95% bound nearest zero       -1.0287       0.1782       0.3932             9.1144        1813.7654       1614.7654      30.9469 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a residual Tuesday regime only               estimate       -3.1581       0.8314       0.9966             0.9234         183.7597          0.0000       0.0000     current sample is enough (scaled down)
+             R3a residual Tuesday regime only      half the estimate       -1.5790       0.3264       0.6634             4.3200         859.6800        660.6800      12.6619 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a residual Tuesday regime only 95% bound nearest zero       -1.0287       0.1782       0.3501            10.1789        2025.5931       1826.5931      35.0066 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a     wild            all days               estimate       -3.1581       0.8382       0.9988             0.9072         180.5393          0.0000       0.0000     current sample is enough (scaled down)
+             R3a     wild            all days      half the estimate       -1.5790       0.3134       0.6986             3.8341         762.9867        563.9867      10.8088 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a     wild            all days 95% bound nearest zero       -1.0287       0.1655       0.3657             9.0340        1797.7626       1598.7626      30.6402 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a     wild Tuesday regime only               estimate       -3.1581       0.8382       0.9994             0.9072         180.5393          0.0000       0.0000     current sample is enough (scaled down)
+             R3a     wild Tuesday regime only      half the estimate       -1.5790       0.3134       0.7374             3.5507         706.5930        507.5930       9.7280 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3a     wild Tuesday regime only 95% bound nearest zero       -1.0287       0.1655       0.3906             8.3663        1664.8868       1465.8868      28.0937 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b residual            all days               estimate        8.2089       0.9094       1.0000             0.7075         140.7903          0.0000       0.0000     current sample is enough (scaled down)
+             R3b residual            all days      half the estimate        4.1044       0.3940       0.8252             2.8581         568.7635        369.7635       7.0865                   simulated (interpolated)
+             R3b residual            all days 95% bound nearest zero        3.2188       0.2736       0.6295             4.6066         916.7230        717.7230      13.7551 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b residual Tuesday regime only               estimate        8.2089       0.9094       0.9984             0.7075         140.7903          0.0000       0.0000     current sample is enough (scaled down)
+             R3b residual Tuesday regime only      half the estimate        4.1044       0.3940       0.6966             3.9650         789.0358        590.0358      11.3080 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b residual Tuesday regime only 95% bound nearest zero        3.2188       0.2736       0.4975             6.4472        1282.9926       1083.9926      20.7747 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b     wild            all days               estimate        8.2089       0.9008       1.0000             0.7516         149.5766          0.0000       0.0000     current sample is enough (scaled down)
+             R3b     wild            all days      half the estimate        4.1044       0.3732       0.7902             3.0945         615.8080        416.8080       7.9881 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b     wild            all days 95% bound nearest zero        3.2188       0.2596       0.5940             5.0318        1001.3198        802.3198      15.3764 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b     wild Tuesday regime only               estimate        8.2089       0.9008       0.9842             0.7516         149.5766          0.0000       0.0000     current sample is enough (scaled down)
+             R3b     wild Tuesday regime only      half the estimate        4.1044       0.3732       0.5646             5.4419        1082.9375        883.9375      16.9406 extrapolated beyond 3x (1/sqrt(n) scaling)
+             R3b     wild Tuesday regime only 95% bound nearest zero        3.2188       0.2596       0.3946             8.8487        1760.8844       1561.8844      29.9334 extrapolated beyond 3x (1/sqrt(n) scaling)
+              R5 residual            all days               estimate       -0.0682       0.9932       1.0000             0.3767          74.2121          0.0000       0.0000     current sample is enough (scaled down)
+              R5 residual            all days      half the estimate       -0.0341       0.6362       0.9722             1.4928         294.0776         97.0776       1.8780                   simulated (interpolated)
+              R5 residual            all days 95% bound nearest zero       -0.0321       0.5833       0.9427             1.7821         351.0650        154.0650       2.9805                   simulated (interpolated)
+              R5 residual Tuesday regime only               estimate       -0.0682       0.9932       1.0000             0.3767          74.2121          0.0000       0.0000     current sample is enough (scaled down)
+              R5 residual Tuesday regime only      half the estimate       -0.0341       0.6362       0.9804             1.4427         284.2124         87.2124       1.6872                   simulated (interpolated)
+              R5 residual Tuesday regime only 95% bound nearest zero       -0.0321       0.5833       0.9551             1.6700         328.9956        131.9956       2.5535                   simulated (interpolated)
+              R5     wild            all days               estimate       -0.0682       0.9720       1.0000             0.5738         113.0447          0.0000       0.0000     current sample is enough (scaled down)
+              R5     wild            all days      half the estimate       -0.0341       0.4458       0.8912             2.4377         480.2330        283.2330       5.4793                   simulated (interpolated)
+              R5     wild            all days 95% bound nearest zero       -0.0321       0.4058       0.8379             2.7740         546.4699        349.4699       6.7607                   simulated (interpolated)
+              R5     wild Tuesday regime only               estimate       -0.0682       0.9720       1.0000             0.5738         113.0447          0.0000       0.0000     current sample is enough (scaled down)
+              R5     wild Tuesday regime only      half the estimate       -0.0341       0.4458       0.8386             2.7282         537.4493        340.4493       6.5862                   simulated (interpolated)
+              R5     wild Tuesday regime only 95% bound nearest zero       -0.0321       0.4058       0.7797             3.1323         617.0662        420.0662       8.1264 extrapolated beyond 3x (1/sqrt(n) scaling)
+              FC residual            all days               estimate        1.0000       0.5202       0.7324                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC residual            all days      half the estimate        0.5000       0.1580       0.2628                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC residual Tuesday regime only               estimate        1.0000       0.5202       0.7480                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC residual Tuesday regime only      half the estimate        0.5000       0.1580       0.2924                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC     wild            all days               estimate        1.0000       0.5038       0.6824                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC     wild            all days      half the estimate        0.5000       0.1364       0.2134                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC     wild Tuesday regime only               estimate        1.0000       0.5038       0.7046                NaN              NaN             NaN          NaN     not reached within the simulated range
+              FC     wild Tuesday regime only      half the estimate        0.5000       0.1364       0.2478                NaN              NaN             NaN          NaN     not reached within the simulated range
+
+== Sign-error anchors (sign_disagreement_anchors.csv)
+                                                     source                           pair                                             period  days  share_days_different_sign  used_in_simulation                                  anchor_label  share_rounded_for_simulation
+                          daily_gex_panel.csv (fixed rules)           US convention vs Pro                                        full sample   942                     0.5510                True            US convention vs Pro (full sample)                         0.551
+                          daily_gex_panel.csv (fixed rules)           US convention vs Pro                                       2023 to 2024   490                     0.7531               False           US convention vs Pro (2023 to 2024)                         0.753
+                          daily_gex_panel.csv (fixed rules)           US convention vs Pro                                        2025 onward   452                     0.3319               False            US convention vs Pro (2025 onward)                         0.332
+                          daily_gex_panel.csv (fixed rules) US convention vs Client mirror                                        full sample   942                     0.1486                True  US convention vs Client mirror (full sample)                         0.149
+                          daily_gex_panel.csv (fixed rules) US convention vs Client mirror                                       2023 to 2024   490                     0.1286               False US convention vs Client mirror (2023 to 2024)                         0.129
+                          daily_gex_panel.csv (fixed rules) US convention vs Client mirror                                        2025 onward   452                     0.1704               False  US convention vs Client mirror (2025 onward)                         0.170
+                          daily_gex_panel.csv (fixed rules)           Pro vs Client mirror                                        full sample   942                     0.4703                True            Pro vs Client mirror (full sample)                         0.470
+                          daily_gex_panel.csv (fixed rules)           Pro vs Client mirror                                       2023 to 2024   490                     0.7102               False           Pro vs Client mirror (2023 to 2024)                         0.710
+                          daily_gex_panel.csv (fixed rules)           Pro vs Client mirror                                        2025 onward   452                     0.2102               False            Pro vs Client mirror (2025 onward)                         0.210
+dealer_sign/sign_agreement.csv (estimated participant sign)                estimated vs us training 2023 to 2024 (direction from that period)   461                     0.8677               False                estimated vs us (2023 to 2024)                         0.868
+dealer_sign/sign_agreement.csv (estimated participant sign)                estimated vs us                             test, expanding refits   452                     0.8031               False                     estimated vs us (2025 on)                         0.803
+dealer_sign/sign_agreement.csv (estimated participant sign)               estimated vs pro training 2023 to 2024 (direction from that period)   461                     0.3037                True          estimated sign vs Pro (2023 to 2024)                         0.304
+dealer_sign/sign_agreement.csv (estimated participant sign)               estimated vs pro                             test, expanding refits   452                     0.8407                True               estimated sign vs Pro (2025 on)                         0.841
+dealer_sign/sign_agreement.csv (estimated participant sign)           estimated vs cmirror training 2023 to 2024 (direction from that period)   461                     1.0000               False           estimated vs cmirror (2023 to 2024)                         1.000
+dealer_sign/sign_agreement.csv (estimated participant sign)           estimated vs cmirror                             test, expanding refits   452                     0.9469               False                estimated vs cmirror (2025 on)                         0.947
+
+== Sign errors (sign_error.csv), real sample
+test sign_error_pattern  wrong_sign_share  size_at_zero  power_at_estimate  power_right_sign_at_estimate  power_at_twice_estimate  mde80_lambda
+  FC                iid             0.100        0.0324             0.5562                        0.5562                   0.9844        1.3502
+  FC                iid             0.149        0.0228             0.5250                        0.5250                   0.9750        1.3878
+  FC                iid             0.250        0.0262             0.3550                        0.3550                   0.8694        1.8036
+  FC                iid             0.304        0.0228             0.2436                        0.2436                   0.7194        2.3095
+  FC                iid             0.400        0.0152             0.0716                        0.0716                   0.2436        7.6343
+  FC                iid             0.470        0.0144             0.0216                        0.0216                   0.0412           NaN
+  FC                iid             0.551        0.0154             0.0332                        0.0332                   0.0818           NaN
+  FC                iid             0.841        0.0254             0.4952                        0.4952                   0.9668        1.4413
+  FC               none             0.000        0.0268             0.5202                        0.5202                   0.9552        1.4571
+  FC           smallest             0.100        0.0216             0.5202                        0.5202                   0.9628        1.4283
+  FC           smallest             0.149        0.0268             0.5264                        0.5264                   0.9630        1.4452
+  FC           smallest             0.250        0.0248             0.5268                        0.5268                   0.9638        1.4186
+  FC           smallest             0.304        0.0284             0.5484                        0.5484                   0.9660        1.3981
+  FC           smallest             0.400        0.0256             0.5718                        0.5718                   0.9802        1.3434
+  FC           smallest             0.470        0.0272             0.5758                        0.5758                   0.9882        1.3027
+  FC           smallest             0.551        0.0314             0.5610                        0.5610                   0.9856        1.3189
+  FC           smallest             0.841        0.0258             0.0360                        0.0360                   0.0432           NaN
+  FC             spells             0.100        0.0286             0.4992                        0.4992                   0.9048        1.5607
+  FC             spells             0.149        0.0246             0.4468                        0.4468                   0.8562        1.7307
+  FC             spells             0.250        0.0302             0.3070                        0.3070                   0.6674        3.5779
+  FC             spells             0.304        0.0244             0.2192                        0.2192                   0.5150           NaN
+  FC             spells             0.400        0.0226             0.1028                        0.1028                   0.2544           NaN
+  FC             spells             0.470        0.0198             0.0528                        0.0528                   0.1270           NaN
+  FC             spells             0.551        0.0198             0.0546                        0.0546                   0.1350           NaN
+  FC             spells             0.841        0.0276             0.4856                        0.4856                   0.9498        1.4925
+ R3a                iid             0.100        0.0566             0.5564                        0.5564                   0.9804        1.3608
+ R3a                iid             0.149        0.0552             0.4282                        0.4278                   0.9226        1.6360
+ R3a                iid             0.250        0.0552             0.2336                        0.2324                   0.6378        2.5051
+ R3a                iid             0.304        0.0534             0.1576                        0.1564                   0.4362        3.5750
+ R3a                iid             0.400        0.0566             0.0796                        0.0718                   0.1488           NaN
+ R3a                iid             0.470        0.0484             0.0530                        0.0350                   0.0610           NaN
+ R3a                iid             0.551        0.0568             0.0622                        0.0164                   0.0820           NaN
+ R3a                iid             0.841        0.0658             0.4066                        0.0002                   0.9048        1.6900
+ R3a               none             0.000        0.0566             0.8314                        0.8314                   1.0000        0.9609
+ R3a           smallest             0.100        0.0624             0.8258                        0.8258                   1.0000        0.9671
+ R3a           smallest             0.149        0.0650             0.8196                        0.8196                   1.0000        0.9747
+ R3a           smallest             0.250        0.0624             0.7932                        0.7932                   0.9996        1.0111
+ R3a           smallest             0.304        0.0648             0.7840                        0.7840                   1.0000        1.0264
+ R3a           smallest             0.400        0.0598             0.7358                        0.7358                   0.9986        1.0963
+ R3a           smallest             0.470        0.0608             0.6652                        0.6652                   0.9946        1.1854
+ R3a           smallest             0.551        0.0568             0.5548                        0.5548                   0.9854        1.3479
+ R3a           smallest             0.841        0.0608             0.0790                        0.0688                   0.1336           NaN
+ R3a             spells             0.100        0.0608             0.5660                        0.5658                   0.9258        1.4389
+ R3a             spells             0.149        0.0586             0.4530                        0.4526                   0.8464        1.8109
+ R3a             spells             0.250        0.0510             0.2616                        0.2586                   0.5920        3.7363
+ R3a             spells             0.304        0.0698             0.2028                        0.1982                   0.4454           NaN
+ R3a             spells             0.400        0.0590             0.1086                        0.0950                   0.2100           NaN
+ R3a             spells             0.470        0.0638             0.0836                        0.0552                   0.1328           NaN
+ R3a             spells             0.551        0.0586             0.0770                        0.0212                   0.1268           NaN
+ R3a             spells             0.841        0.0626             0.4192                        0.0004                   0.8738        1.7588
+ R3b                iid             0.100        0.0632             0.6382                        0.6382                   0.9816        1.2513
+ R3b                iid             0.149        0.0622             0.4996                        0.4994                   0.9288        1.5421
+ R3b                iid             0.250        0.0562             0.2688                        0.2682                   0.6560        2.6271
+ R3b                iid             0.304        0.0570             0.1766                        0.1742                   0.4412        4.9649
+ R3b                iid             0.400        0.0574             0.0880                        0.0804                   0.1570           NaN
+ R3b                iid             0.470        0.0570             0.0566                        0.0378                   0.0646           NaN
+ R3b                iid             0.551        0.0624             0.0676                        0.0186                   0.0820           NaN
+ R3b                iid             0.841        0.0602             0.4746                        0.0002                   0.9096        1.6216
+ R3b               none             0.000        0.0638             0.9094                        0.9094                   1.0000        0.8411
+ R3b           smallest             0.100        0.0700             0.9054                        0.9054                   1.0000        0.8455
+ R3b           smallest             0.149        0.0640             0.8988                        0.8988                   1.0000        0.8556
+ R3b           smallest             0.250        0.0628             0.8856                        0.8856                   1.0000        0.8742
+ R3b           smallest             0.304        0.0608             0.8738                        0.8738                   1.0000        0.9019
+ R3b           smallest             0.400        0.0616             0.8202                        0.8202                   0.9998        0.9764
+ R3b           smallest             0.470        0.0574             0.7392                        0.7392                   0.9990        1.0962
+ R3b           smallest             0.551        0.0580             0.6234                        0.6234                   0.9912        1.2690
+ R3b           smallest             0.841        0.0586             0.0528                        0.0364                   0.0320           NaN
+ R3b             spells             0.100        0.0646             0.6466                        0.6462                   0.9424        1.2859
+ R3b             spells             0.149        0.0542             0.5216                        0.5216                   0.8656        1.6720
+ R3b             spells             0.250        0.0626             0.3068                        0.3040                   0.6264        3.6615
+ R3b             spells             0.304        0.0626             0.2148                        0.2096                   0.4492           NaN
+ R3b             spells             0.400        0.0594             0.1152                        0.1024                   0.2204           NaN
+ R3b             spells             0.470        0.0582             0.0816                        0.0522                   0.1268           NaN
+ R3b             spells             0.551        0.0596             0.0806                        0.0198                   0.1248           NaN
+ R3b             spells             0.841        0.0580             0.4808                        0.0002                   0.8962        1.6467
+  R5                iid             0.100        0.0562             0.9284                        0.9284                   0.9994        0.7990
+  R5                iid             0.149        0.0566             0.8560                        0.8560                   0.9966        0.9157
+  R5                iid             0.250        0.0576             0.5862                        0.5860                   0.9338        1.3864
+  R5                iid             0.304        0.0550             0.3984                        0.3980                   0.7734        2.1817
+  R5                iid             0.400        0.0574             0.1478                        0.1446                   0.3282           NaN
+  R5                iid             0.470        0.0562             0.0758                        0.0582                   0.0972           NaN
+  R5                iid             0.551        0.0520             0.0862                        0.0112                   0.1426           NaN
+  R5                iid             0.841        0.0602             0.8352                        0.0000                   0.9948        0.9510
+  R5               none             0.000        0.0534             0.9932                        0.9932                   1.0000        0.6138
+  R5           smallest             0.100        0.0550             0.9508                        0.9508                   1.0000        0.7598
+  R5           smallest             0.149        0.0526             0.9086                        0.9086                   1.0000        0.8585
+  R5           smallest             0.250        0.0592             0.6634                        0.6634                   0.9892        1.2073
+  R5           smallest             0.304        0.0556             0.5008                        0.5008                   0.9374        1.5512
+  R5           smallest             0.400        0.0586             0.1320                        0.1308                   0.2530           NaN
+  R5           smallest             0.470        0.0614             0.0342                        0.0218                   0.0074           NaN
+  R5           smallest             0.551        0.0584             0.0950                        0.0020                   0.1466           NaN
+  R5           smallest             0.841        0.0546             0.7170                        0.0000                   0.9856        1.1402
+  R5             spells             0.100        0.0584             0.8884                        0.8884                   0.9854        0.8142
+  R5             spells             0.149        0.0536             0.7982                        0.7982                   0.9508        1.0050
+  R5             spells             0.250        0.0508             0.5550                        0.5546                   0.7848        2.2123
+  R5             spells             0.304        0.0550             0.4012                        0.4004                   0.6324           NaN
+  R5             spells             0.400        0.0546             0.1950                        0.1814                   0.3374           NaN
+  R5             spells             0.470        0.0568             0.1254                        0.0908                   0.2002           NaN
+  R5             spells             0.551        0.0444             0.1174                        0.0194                   0.2024           NaN
+  R5             spells             0.841        0.0590             0.8142                        0.0002                   0.9830        0.9777
+
+== Sign errors at larger samples, random days (sign_error.csv)
+test  wrong_sign_share   m  power_at_estimate  power_right_sign_at_estimate  mde80_lambda
+  FC             0.100 1.5             0.6306                        0.6306        1.2349
+  FC             0.149 1.5             0.5820                        0.5820        1.3172
+  FC             0.250 1.5             0.3756                        0.3756        1.7185
+  FC             0.304 1.5             0.2600                        0.2600        2.2298
+  FC             0.400 1.5             0.0602                        0.0602        5.7468
+  FC             0.470 1.5             0.0164                        0.0164           NaN
+  FC             0.551 1.5             0.0298                        0.0298           NaN
+  FC             0.841 1.5             0.5598                        0.5598        1.3442
+  FC             0.100 2.0             0.6620                        0.6620        1.1880
+  FC             0.149 2.0             0.6206                        0.6206        1.2535
+  FC             0.250 2.0             0.4172                        0.4172        1.6451
+  FC             0.304 2.0             0.2752                        0.2752        2.1019
+  FC             0.400 2.0             0.0682                        0.0682        5.2880
+  FC             0.470 2.0             0.0156                        0.0156           NaN
+  FC             0.551 2.0             0.0250                        0.0250           NaN
+  FC             0.841 2.0             0.6070                        0.6070        1.2768
+  FC             0.100 3.0             0.7212                        0.7212        1.1159
+  FC             0.149 3.0             0.6720                        0.6720        1.1951
+  FC             0.250 3.0             0.4682                        0.4682        1.5806
+  FC             0.304 3.0             0.3158                        0.3158        1.9857
+  FC             0.400 3.0             0.0784                        0.0784        4.6348
+  FC             0.470 3.0             0.0120                        0.0120           NaN
+  FC             0.551 3.0             0.0248                        0.0248           NaN
+  FC             0.841 3.0             0.6642                        0.6642        1.2049
+ R3a             0.100 1.5             0.7306                        0.7306        1.1076
+ R3a             0.149 1.5             0.5828                        0.5828        1.3215
+ R3a             0.250 1.5             0.3070                        0.3064        2.0585
+ R3a             0.304 1.5             0.2092                        0.2076        2.7447
+ R3a             0.400 1.5             0.0912                        0.0826           NaN
+ R3a             0.470 1.5             0.0620                        0.0408           NaN
+ R3a             0.551 1.5             0.0576                        0.0114           NaN
+ R3a             0.841 1.5             0.5572                        0.0000        1.3649
+ R3a             0.100 2.0             0.8400                        0.8400        0.9513
+ R3a             0.149 2.0             0.6942                        0.6942        1.1501
+ R3a             0.250 2.0             0.3926                        0.3920        1.7388
+ R3a             0.304 2.0             0.2520                        0.2518        2.3258
+ R3a             0.400 2.0             0.0986                        0.0938        6.1342
+ R3a             0.470 2.0             0.0610                        0.0434           NaN
+ R3a             0.551 2.0             0.0662                        0.0114           NaN
+ R3a             0.841 2.0             0.6774                        0.0000        1.1754
+ R3a             0.100 3.0             0.9458                        0.9458        0.7826
+ R3a             0.149 3.0             0.8580                        0.8580        0.9239
+ R3a             0.250 3.0             0.5412                        0.5412        1.3764
+ R3a             0.304 3.0             0.3472                        0.3472        1.8715
+ R3a             0.400 3.0             0.1272                        0.1238        4.3470
+ R3a             0.470 3.0             0.0550                        0.0374           NaN
+ R3a             0.551 3.0             0.0822                        0.0108           NaN
+ R3a             0.841 3.0             0.8390                        0.0000        0.9466
+ R3b             0.100 1.5             0.7992                        0.7992        1.0014
+ R3b             0.149 1.5             0.6672                        0.6672        1.2044
+ R3b             0.250 1.5             0.3644                        0.3644        1.9877
+ R3b             0.304 1.5             0.2346                        0.2334        3.1114
+ R3b             0.400 1.5             0.1038                        0.0992           NaN
+ R3b             0.470 1.5             0.0622                        0.0438           NaN
+ R3b             0.551 1.5             0.0588                        0.0118           NaN
+ R3b             0.841 1.5             0.6276                        0.0000        1.2705
+ R3b             0.100 2.0             0.8938                        0.8938        0.8634
+ R3b             0.149 2.0             0.7762                        0.7762        1.0452
+ R3b             0.250 2.0             0.4610                        0.4610        1.6603
+ R3b             0.304 2.0             0.2982                        0.2978        2.4101
+ R3b             0.400 2.0             0.1098                        0.1046           NaN
+ R3b             0.470 2.0             0.0630                        0.0440           NaN
+ R3b             0.551 2.0             0.0680                        0.0106           NaN
+ R3b             0.841 2.0             0.7446                        0.0000        1.0937
+ R3b             0.100 3.0             0.9794                        0.9794        0.6951
+ R3b             0.149 3.0             0.9104                        0.9104        0.8417
+ R3b             0.250 3.0             0.6170                        0.6170        1.2973
+ R3b             0.304 3.0             0.4086                        0.4084        1.8134
+ R3b             0.400 3.0             0.1392                        0.1358           NaN
+ R3b             0.470 3.0             0.0592                        0.0436           NaN
+ R3b             0.551 3.0             0.0744                        0.0092           NaN
+ R3b             0.841 3.0             0.8940                        0.0000        0.8652
+  R5             0.100 1.5             0.9848                        0.9848        0.6483
+  R5             0.149 1.5             0.9500                        0.9500        0.7495
+  R5             0.250 1.5             0.7280                        0.7280        1.1321
+  R5             0.304 1.5             0.5290                        0.5290        1.5786
+  R5             0.400 1.5             0.1882                        0.1862           NaN
+  R5             0.470 1.5             0.0644                        0.0528           NaN
+  R5             0.551 1.5             0.0946                        0.0086           NaN
+  R5             0.841 1.5             0.9386                        0.0000        0.7692
+  R5             0.100 2.0             0.9974                        0.9974        0.5570
+  R5             0.149 2.0             0.9836                        0.9836        0.6428
+  R5             0.250 2.0             0.8392                        0.8392        0.9393
+  R5             0.304 2.0             0.6382                        0.6382        1.2959
+  R5             0.400 2.0             0.2188                        0.2178           NaN
+  R5             0.470 2.0             0.0654                        0.0534           NaN
+  R5             0.551 2.0             0.0950                        0.0048           NaN
+  R5             0.841 2.0             0.9816                        0.0000        0.6593
+  R5             0.100 3.0             0.9996                        0.9996        0.4570
+  R5             0.149 3.0             0.9988                        0.9988        0.5274
+  R5             0.250 3.0             0.9448                        0.9448        0.7622
+  R5             0.304 3.0             0.7970                        0.7970        1.0060
+  R5             0.400 3.0             0.3118                        0.3112        2.8624
+  R5             0.470 3.0             0.0766                        0.0644           NaN
+  R5             0.551 3.0             0.1138                        0.0048           NaN
+  R5             0.841 3.0             0.9990                        0.0000        0.5485
+
+Run time: 353 seconds (349 in the simulation) on 4 workers.

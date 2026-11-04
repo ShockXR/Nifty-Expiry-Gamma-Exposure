@@ -1,0 +1,14 @@
+[REAL DATA] POST HOC: measured seed noise (20 reruns) against the M4.3 assumptions, points of mcsGARCH's QLIKE
+   target      subset  days  measured_sd_20_reruns  dm_se_pp  assumed_sd_5seed_average  assumed_sd_one_seed  pessimistic_sd_one_seed  pessimistic_sd_scaled  measured_sd_over_dm_se
+   next15         all   792               0.074998  0.970816                  0.072891              0.16299                 0.278878               0.273244                0.077252
+   next15      expiry   169               0.187710  2.122913                  0.072891              0.16299                 0.278878               0.591521                0.088421
+   next15 pre_auction   729               0.111894  0.582024                  0.072891              0.16299                 0.278878               0.284806                0.192250
+   next15     holdout   330               0.126846  2.040985                  0.072891              0.16299                 0.278878               0.423308                0.062150
+   next30         all   792               0.111873  0.963883                  0.072891              0.16299                 0.278878               0.278878                0.116065
+   next30      expiry   169               0.183554  1.734338                  0.072891              0.16299                 0.278878               0.603718                0.105835
+   next30 pre_auction   729               0.109851  0.837349                  0.072891              0.16299                 0.278878               0.290679                0.131189
+   next30     holdout   330               0.201975  1.809390                  0.072891              0.16299                 0.278878               0.432037                0.111626
+last_hour         all   792               0.243751  1.706486                  0.072891              0.16299                 0.278878               1.366220                0.142838
+last_hour      expiry   169               0.487830  3.351507                  0.072891              0.16299                 0.278878               2.957603                0.145555
+last_hour pre_auction   729               0.194619  2.378633                  0.072891              0.16299                 0.278878               1.424031                0.081820
+last_hour     holdout   330               0.408427  1.833452                  0.072891              0.16299                 0.278878               2.116539                0.222764

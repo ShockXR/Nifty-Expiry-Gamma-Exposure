@@ -1,0 +1,227 @@
+{
+  "source": "REAL DATA: NSE 1-minute index bars as in the committed runs; the hybrid's forecasts are the committed ones; P109's combination enters through its committed daily losses",
+  "study": "P116 benchmark as printed (docs/prereg/P116_BENCHMARK_AS_PRINTED.md)",
+  "plan_commit": "19c5486cd39e9944764ac9a1ea7c3ab3bbb7b63b",
+  "analysis_commit": "19c5486cd39e9944764ac9a1ea7c3ab3bbb7b63b",
+  "commands": [
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p116_benchmark_as_printed.py run --index NIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p116_benchmark_as_printed.py run --index BANKNIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p116_benchmark_as_printed.py run --index FINNIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p116_benchmark_as_printed.py analyze --plan-commit <plan commit>"
+  ],
+  "specs": {
+    "mcs_ours": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false
+    },
+    "mcs_cpp": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": false,
+      "smooth": 1,
+      "mean": "arma11",
+      "mean_sq": true
+    },
+    "mcs_cpp_varonly": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": false,
+      "smooth": 1,
+      "mean": "arma11",
+      "mean_sq": false
+    },
+    "ours_no_expiry": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": false,
+      "smooth": 5,
+      "mean": "zero",
+      "mean_sq": false
+    },
+    "ours_no_smooth": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": true,
+      "smooth": 1,
+      "mean": "zero",
+      "mean_sq": false
+    },
+    "ours_arma": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": true,
+      "smooth": 5,
+      "mean": "arma11",
+      "mean_sq": true
+    },
+    "cpp_expiry": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": true,
+      "smooth": 1,
+      "mean": "arma11",
+      "mean_sq": true
+    },
+    "cpp_smooth": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": false,
+      "smooth": 5,
+      "mean": "arma11",
+      "mean_sq": true
+    },
+    "cpp_zero_mean": {
+      "daily": "egarch",
+      "decay": false,
+      "lev": false,
+      "todayrv": false,
+      "cal": false,
+      "expiry_diurnal": false,
+      "smooth": 1,
+      "mean": "zero",
+      "mean_sq": false
+    }
+  },
+  "factorial": {
+    "mcs_ours": [
+      1,
+      1,
+      1
+    ],
+    "ours_no_expiry": [
+      0,
+      1,
+      1
+    ],
+    "ours_no_smooth": [
+      1,
+      0,
+      1
+    ],
+    "ours_arma": [
+      1,
+      1,
+      0
+    ],
+    "cpp_expiry": [
+      1,
+      0,
+      0
+    ],
+    "cpp_smooth": [
+      0,
+      1,
+      0
+    ],
+    "cpp_zero_mean": [
+      0,
+      0,
+      1
+    ],
+    "mcs_cpp": [
+      0,
+      0,
+      0
+    ]
+  },
+  "min_train": 150,
+  "block": 21,
+  "margin_points": 0.5,
+  "alpha": 0.05,
+  "synthetic_settings": null,
+  "bootstrap": {
+    "reps": 10000,
+    "mean_block_days": 10.0,
+    "seed": 116
+  },
+  "input_sha256": {
+    "NIFTY": {
+      "nifty_1min.csv": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+      "index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "bhavcopy/ (944 files)": "9361104c675e073f5d403e06d8e0b26a9bf123359c02c7521eecdb2acc3f52de",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1891,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    },
+    "BANKNIFTY": {
+      "banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "index_daily.csv": "cec68df87b590d45dc0afe71ba7065067759471e5cf7a64074a257109d74c290",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "bhavcopy/ (944 files)": "9361104c675e073f5d403e06d8e0b26a9bf123359c02c7521eecdb2acc3f52de",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1891,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    },
+    "FINNIFTY": {
+      "finnifty_1min.csv": "1ab7112881f3b761051a2024f35e830719b6ba26931208fa2995bab50a12c1b9",
+      "finnifty/index_daily_finnifty.csv": "db240ce7784725b7fb0434dde38df5b9c2bbcd3f8cdfc76d078a31a1d08ea047",
+      "india_vix.csv": "2c438728b92769ec9f70aba18f8a2d006dd4cff9be88832d39a7023eaabcb894",
+      "finnifty/bhavcopy/ (764 files)": "47e333ae9e8b437cc17d255b661085815426f15ec20a474a8a7d487201546be5",
+      "participant_oi/ (944 files)": "ed6da22350fffdd2b0517345cd3cbe7dce99da3f50a54ad8c7f40a19afe223cb",
+      "manifest_check": {
+        "files_matching_manifest": 1711,
+        "files_differing": 0,
+        "files_not_in_manifest": 0
+      }
+    }
+  },
+  "stage1": {
+    "NIFTY": {
+      "blocks": 38,
+      "seconds_jobs_total": 226.10000000000002,
+      "first_block_written_utc": "2026-11-03T10:59:03Z",
+      "last_block_written_utc": "2026-11-03T11:00:58Z"
+    },
+    "BANKNIFTY": {
+      "blocks": 32,
+      "seconds_jobs_total": 175.2,
+      "first_block_written_utc": "2026-11-03T11:01:56Z",
+      "last_block_written_utc": "2026-11-03T11:03:24Z"
+    },
+    "FINNIFTY": {
+      "blocks": 29,
+      "seconds_jobs_total": 151.1,
+      "first_block_written_utc": "2026-11-03T11:04:23Z",
+      "last_block_written_utc": "2026-11-03T11:05:40Z"
+    }
+  },
+  "seconds_stage2": 8.4,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "arch": "8.0.0",
+    "scipy": "1.18.1"
+  }
+}

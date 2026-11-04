@@ -1,0 +1,25 @@
+test_id,index,set,model,estimate,p_raw,p_adjusted,meets_minimum,label
+P_nifty_primary_ref,nifty,primary,ref,-1.6018219919260268,0.19117647058823528,0.2107843137254902,True,the fall is within the normal range
+P_nifty_primary_F,nifty,primary,F,-2.063566241324424,0.1053921568627451,0.2107843137254902,True,the fall is within the normal range
+S1_banknifty_primary_ref,banknifty,primary,ref,-1.4699113312959824,0.11274934952298352,0.19254119687771032,True,the fall is within the normal range
+S1_banknifty_primary_F,banknifty,primary,F,-1.7812666944168623,0.09627059843885516,0.19254119687771032,True,the fall is within the normal range
+S2_nifty_clean_ref,nifty,clean,ref,-1.6018219919260268,0.09517241379310344,0.27348066298342544,False,no verdict: too few separate placebo periods
+S2_nifty_clean_F,nifty,clean,F,-2.063566241324424,0.05655172413793103,0.22620689655172413,False,no verdict: too few separate placebo periods
+S2_banknifty_clean_ref,banknifty,clean,ref,-1.4699113312959824,0.09116022099447514,0.27348066298342544,False,no verdict: too few separate placebo periods
+S2_banknifty_clean_F,banknifty,clean,F,-1.7812666944168623,0.12016574585635359,0.27348066298342544,False,no verdict: too few separate placebo periods
+S3_nifty_literal_ref,nifty,literal,ref,-1.6018219919260268,0.17320503330866024,0.40266469282013323,True,the fall is within the normal range
+S3_nifty_literal_F,nifty,literal,F,-2.063566241324424,0.10066617320503331,0.40266469282013323,True,the fall is within the normal range
+S3_banknifty_literal_ref,banknifty,literal,ref,-1.4699113312959824,0.128125,0.40266469282013323,True,the fall is within the normal range
+S3_banknifty_literal_F,banknifty,literal,F,-1.7812666944168623,0.14609375,0.40266469282013323,True,the fall is within the normal range
+S4_nifty_primary_ref_disjoint,nifty,primary,ref,-1.6018219919260268,0.394643348777207,0.5830358617760192,True,the fall is within the normal range
+S5_nifty_primary_ref_conditional,nifty,primary,ref,-0.9491722481742491,0.14215686274509803,0.4264705882352941,True,the fall is within the normal range
+S4_nifty_primary_F_disjoint,nifty,primary,F,-2.063566241324424,0.16026802375227575,0.5830358617760192,True,the fall is within the normal range
+S5_nifty_primary_F_conditional,nifty,primary,F,-0.7121241889186098,0.2042483660130719,0.4264705882352941,True,the fall is within the normal range
+S4_banknifty_primary_ref_disjoint,banknifty,primary,ref,-1.4699113312959824,0.23308008701709484,0.5830358617760192,True,the fall is within the normal range
+S5_banknifty_primary_ref_conditional,banknifty,primary,ref,-1.3562859958753055,0.012142237640936688,0.04856895056374675,True,the fall is unusual
+S4_banknifty_primary_F_disjoint,banknifty,primary,F,-1.7812666944168623,0.1457589654440048,0.5830358617760192,True,the fall is within the normal range
+S5_banknifty_primary_F_conditional,banknifty,primary,F,-0.21210009088277104,0.3113616652211622,0.4264705882352941,True,the fall is within the normal range
+D_nifty_ref_did,nifty,actual windows,ref,-0.20848944891139753,0.43640897755610975,1.0,True,the fall is not clearly larger than the control's
+D_nifty_F_did,nifty,actual windows,F,-0.010454677890845865,0.5910224438902744,1.0,True,the fall is not clearly larger than the control's
+D_banknifty_ref_did,banknifty,actual windows,ref,-0.05978634486948975,0.3940149625935162,1.0,True,the fall is not clearly larger than the control's
+D_banknifty_F_did,banknifty,actual windows,F,0.2644331244025162,0.6783042394014963,1.0,True,the fall is not clearly larger than the control's

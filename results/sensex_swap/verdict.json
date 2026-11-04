@@ -1,0 +1,18 @@
+{
+  "verdict": "NOT SUPPORTED (effects as large as the pre-registered MDE are ruled out)",
+  "design_flags": [
+    "DESIGN CHECK FAILED: PL2 (a fake swap date) has p = 0.0377; the Tue minus Thu gap moves when nothing changes",
+    "PL1 (Mon minus Wed) moves in the opposite direction (p = 0.0048): a warning about the design"
+  ],
+  "primary_estimate": 0.4186314021743085,
+  "primary_perm_p": 0.3305,
+  "primary_hac_p": 0.357485546257987,
+  "pre_registered_mde_points": 4.9,
+  "observed_within_cell_sd_net": 3.1808276057255664,
+  "mde_implied_by_observed_sd (not decisive)": 2.4432312505851863,
+  "secondary_holm": {
+    "S1": 0.015300000000000001,
+    "S2": 0.39732134908263705,
+    "S3": 0.6031
+  }
+}

@@ -1,0 +1,247 @@
+REAL DATA. POST HOC analyses in response to the referee report (M4, M5, minor 15). Inputs: committed files in results/pipeline_nse_v2; outputs in results/referee_forecast. 32 models, benchmark mcsgarch, headline hybrid_base.
+
+== 1. SPA test and Reality Check: does the best of the 31 challengers beat mcsGARCH? (daily average QLIKE; REAL DATA; post hoc)
+mean block 10 days, 10000 stationary-bootstrap replications, 31 challengers
+target     subset        days best (by t)              vs mcsGARCH   SPA_c   SPA_l   SPA_u      RC
+next15     all            792 hybrid_v1gex                   -5.6%  <0.001  <0.001  <0.001   0.662
+next15     expiry         169 hybrid_v1                      -5.8%   0.006   0.006   0.006   0.762
+next15     pre_auction    729 hybrid_gex_us                  -5.8%  <0.001  <0.001  <0.001   0.677
+next30     all            792 hybrid_v1gex                   -8.1%  <0.001  <0.001  <0.001   0.534
+next30     expiry         169 hybrid_gex_participant         -7.0%  <0.001  <0.001  <0.001   0.672
+next30     pre_auction    729 hybrid_gex_client              -6.9%  <0.001  <0.001  <0.001   0.561
+last_hour  all            792 hybrid_gex_placebo             -5.8%   0.003   0.003   0.004   0.757
+last_hour  expiry         169 hybrid_gex_gross               -7.5%   0.040   0.034   0.050   0.821
+last_hour  pre_auction    729 hybrid_gex_placebo             -7.1%   0.006   0.005   0.006   0.655
+block-length sensitivity (SPA_c / RC):
+  next15     all          b=5: <0.001/0.668  b=10: <0.001/0.662  b=20: <0.001/0.690
+  next15     expiry       b=5: 0.007/0.774  b=10: 0.006/0.762  b=20: 0.002/0.737
+  next15     pre_auction  b=5: <0.001/0.671  b=10: <0.001/0.677  b=20: <0.001/0.689
+  next30     all          b=5: <0.001/0.522  b=10: <0.001/0.534  b=20: <0.001/0.545
+  next30     expiry       b=5: 0.002/0.678  b=10: <0.001/0.672  b=20: <0.001/0.652
+  next30     pre_auction  b=5: <0.001/0.553  b=10: <0.001/0.561  b=20: <0.001/0.572
+  last_hour  all          b=5: 0.003/0.736  b=10: 0.003/0.757  b=20: 0.003/0.773
+  last_hour  expiry       b=5: 0.057/0.844  b=10: 0.040/0.821  b=20: 0.039/0.760
+  last_hour  pre_auction  b=5: 0.008/0.661  b=10: 0.006/0.655  b=20: 0.004/0.644
+hybrid_base: raw DM p, then max-t adjusted p over the 31 challengers (single step, step-down):
+  next15     all            -5.8%  DM <0.001  single <0.001  step-down <0.001
+  next15     expiry         -6.6%  DM 0.001  single 0.007  step-down 0.007
+  next15     pre_auction    -5.5%  DM <0.001  single <0.001  step-down <0.001
+  next30     all            -7.6%  DM <0.001  single <0.001  step-down <0.001
+  next30     expiry         -6.2%  DM <0.001  single 0.001  step-down 0.001
+  next30     pre_auction    -6.9%  DM <0.001  single <0.001  step-down <0.001
+  last_hour  all            -6.4%  DM <0.001  single 0.005  step-down 0.005
+  last_hour  expiry         -7.9%  DM 0.010  single 0.063  step-down 0.062
+  last_hour  pre_auction    -7.0%  DM 0.002  single 0.011  step-down 0.010
+challengers that beat mcsGARCH at 5% after the step-down adjustment: next15/all: 15, next15/expiry: 16, next15/pre_auction: 15, next30/all: 18, next30/expiry: 17, next30/pre_auction: 14, last_hour/all: 10, last_hour/expiry: 0, last_hour/pre_auction: 8
+
+== 2. mcsGARCH-X: the paper's model with India VIX (and the straddle) in its daily EGARCH (REAL DATA; post hoc)
+returns rebuilt: 942 days; max relative difference of daily RV against daily_market.csv 7.5e-13
+  block 150: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 0.0, delta 0.00; VIX+IV-X egarchx_t, LR 1.7; 1.9s
+  block 171: paper daily ewma (real-time rule: egarch_t (EWMA from day 189)); VIX-X egarchx_t, LR -0.0, delta -0.00; VIX+IV-X egarchx_t, LR 0.0; 1.6s
+  block 192: paper daily ewma (real-time rule: egarch_t); VIX-X egarchx_t, LR -0.0, delta 0.00; VIX+IV-X egarchx_t, LR 0.0; 2.2s
+  block 213: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR -0.0, delta 0.00; VIX+IV-X egarchx_t, LR 0.0; 2.6s
+  block 234: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t (paper from day 251), LR 4.9, delta -0.01; VIX+IV-X egarchx_t, LR 0.6; 2.9s
+  block 255: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t (paper from day 266), LR 9.0, delta 0.14; VIX+IV-X egarchx_t (paper from day 267), LR 16.0; 2.7s
+  block 276: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 7.3, delta 1.54; VIX+IV-X egarchx_t, LR 12.7; 2.1s
+  block 297: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 10.4, delta 0.26; VIX+IV-X egarchx_t, LR 17.4; 3.0s
+  block 318: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 10.4, delta 0.41; VIX+IV-X egarchx_t, LR 14.9; 2.6s
+  block 339: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 5.2, delta 0.31; VIX+IV-X egarchx_t, LR 14.0; 2.7s
+  block 360: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 8.0, delta 0.30; VIX+IV-X egarchx_t, LR 20.8; 2.7s
+  block 381: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 9.4, delta 0.28; VIX+IV-X egarchx_t, LR 21.7; 3.2s
+  block 402: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 8.0, delta 0.25; VIX+IV-X egarchx_t, LR 20.9; 2.8s
+  block 423: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 7.1, delta 0.25; VIX+IV-X egarchx_t, LR 21.5; 3.3s
+  block 444: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 7.0, delta 0.26; VIX+IV-X egarchx_t, LR 20.6; 2.9s
+  block 465: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 8.9, delta 0.29; VIX+IV-X egarchx_t, LR 25.3; 3.6s
+  block 486: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 9.6, delta 0.28; VIX+IV-X egarchx_t, LR 24.4; 3.3s
+  block 507: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 8.7, delta 0.27; VIX+IV-X egarchx_t, LR 28.7; 5.1s
+  block 528: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 10.3, delta 0.29; VIX+IV-X egarchx_t, LR 31.0; 3.8s
+  block 549: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 10.3, delta 0.37; VIX+IV-X egarchx_t, LR 32.5; 5.0s
+  block 570: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 10.6, delta 0.36; VIX+IV-X egarchx_t, LR 31.5; 4.5s
+  block 591: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 11.8, delta 0.36; VIX+IV-X egarchx_t, LR 28.0; 3.6s
+  block 612: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 12.4, delta 0.36; VIX+IV-X egarchx_t, LR 29.1; 3.5s
+  block 633: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 13.6, delta 0.36; VIX+IV-X egarchx_t, LR 30.3; 4.0s
+  block 654: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 14.6, delta 0.36; VIX+IV-X egarchx_t, LR 32.3; 3.9s
+  block 675: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 17.3, delta 0.38; VIX+IV-X egarchx_t, LR 35.0; 3.7s
+  block 696: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 16.6, delta 0.38; VIX+IV-X egarchx_t, LR 35.4; 4.3s
+  block 717: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 18.3, delta 0.40; VIX+IV-X egarchx_t, LR 37.3; 4.1s
+  block 738: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 20.1, delta 0.41; VIX+IV-X egarchx_t, LR 39.0; 4.7s
+  block 759: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 17.9, delta 0.39; VIX+IV-X egarchx_t, LR 41.4; 4.4s
+  block 780: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 17.5, delta 0.40; VIX+IV-X egarchx_t, LR 38.9; 4.7s
+  block 801: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 23.3, delta 0.39; VIX+IV-X egarchx_t, LR 42.7; 4.8s
+  block 822: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 21.5, delta 0.37; VIX+IV-X egarchx_t, LR 39.4; 5.3s
+  block 843: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 22.8, delta 0.37; VIX+IV-X egarchx_t, LR 41.1; 5.0s
+  block 864: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 22.7, delta 0.37; VIX+IV-X egarchx_t, LR 40.1; 5.0s
+  block 885: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 22.9, delta 0.36; VIX+IV-X egarchx_t, LR 39.0; 5.3s
+  block 906: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 21.5, delta 0.38; VIX+IV-X egarchx_t, LR 36.1; 5.7s
+  block 927: paper daily egarch_t (real-time rule: egarch_t); VIX-X egarchx_t, LR 20.4, delta 0.36; VIX+IV-X egarchx_t, LR 37.1; 5.7s
+  next15: rebuilt mcsGARCH vs committed, max relative difference 7.6e-13; mcsgarch_iv 3.2e-05
+  next30: rebuilt mcsGARCH vs committed, max relative difference 6.1e-13; mcsgarch_iv 3.1e-05
+  last_hour: rebuilt mcsGARCH vs committed, max relative difference 5.6e-13; mcsgarch_iv 2.7e-05
+mcsGARCH-X walk-forward done in 144s (38 refits; per refit up to 6 mcsGARCH fits and 5 daily EGARCH fits; mcsGARCH fits 69s in all, 0.36s each)
+
+== 3. The hybrid against information-matched benchmarks (QLIKE; one-sided DM p that the hybrid is better; REAL DATA; post hoc)
+refits with the EWMA fallback start at days [171, 192]; 42 test days are left out in 'no_ewma_fallback'
+benchmark against mcsGARCH (QLIKE %, one-sided p that it beats mcsGARCH):
+  next15     all          mcsgarch_realtime: +5.5% (0.846)  mcsgarch_iv: -1.0% (0.250)  mcsgarch_vix: -0.6% (0.159)  mcsgarchx_vix: +0.5% (0.725)  mcsgarchx_vix_iv: -0.5% (0.347)  linear_base: -2.2% (0.104)
+  next15     expiry       mcsgarch_realtime: +0.1% (0.932)  mcsgarch_iv: +1.4% (0.671)  mcsgarch_vix: -0.5% (0.177)  mcsgarchx_vix: +1.0% (0.816)  mcsgarchx_vix_iv: -0.7% (0.371)  linear_base: -1.0% (0.401)
+  next15     pre_auction  mcsgarch_realtime: +6.4% (0.846)  mcsgarch_iv: -0.7% (0.341)  mcsgarch_vix: -0.9% (0.087)  mcsgarchx_vix: +0.4% (0.673)  mcsgarchx_vix_iv: -0.2% (0.452)  linear_base: -0.9% (0.309)
+  next30     all          mcsgarch_realtime: +6.9% (0.845)  mcsgarch_iv: -1.9% (0.142)  mcsgarch_vix: -1.2% (0.036)  mcsgarchx_vix: +0.7% (0.738)  mcsgarchx_vix_iv: -0.7% (0.355)  linear_base: -3.9% (0.013)
+  next30     expiry       mcsgarch_realtime: +0.1% (0.902)  mcsgarch_iv: +0.2% (0.521)  mcsgarch_vix: -0.5% (0.258)  mcsgarchx_vix: +1.4% (0.872)  mcsgarchx_vix_iv: -1.7% (0.308)  linear_base: -1.7% (0.295)
+  next30     pre_auction  mcsgarch_realtime: +7.9% (0.845)  mcsgarch_iv: -1.8% (0.184)  mcsgarch_vix: -1.4% (0.033)  mcsgarchx_vix: +0.8% (0.745)  mcsgarchx_vix_iv: -0.3% (0.443)  linear_base: -3.0% (0.049)
+  last_hour  all          mcsgarch_realtime: -0.1% (0.149)  mcsgarch_iv: -1.2% (0.345)  mcsgarch_vix: -4.8% (0.031)  mcsgarchx_vix: -2.7% (0.146)  mcsgarchx_vix_iv: +0.5% (0.547)  linear_base: -7.0% (0.011)
+  last_hour  expiry       mcsgarch_realtime: +0.0% (0.572)  mcsgarch_iv: +5.1% (0.711)  mcsgarch_vix: -8.8% (0.051)  mcsgarchx_vix: -6.5% (0.131)  mcsgarchx_vix_iv: +6.1% (0.785)  linear_base: -6.4% (0.171)
+  last_hour  pre_auction  mcsgarch_realtime: -0.2% (0.149)  mcsgarch_iv: +0.2% (0.519)  mcsgarch_vix: -6.1% (0.060)  mcsgarchx_vix: -1.1% (0.386)  mcsgarchx_vix_iv: +8.2% (0.975)  linear_base: -7.6% (0.035)
+hybrid against each benchmark (QLIKE %, one-sided p):
+  next15     all          mcsgarch: -5.8% (<0.001)  mcsgarch_realtime: -10.7% (0.018)  mcsgarch_iv: -4.8% (0.005)  mcsgarch_vix: -5.3% (<0.001)  mcsgarchx_vix: -6.3% (<0.001)  mcsgarchx_vix_iv: -5.3% (<0.001)  linear_base: -3.7% (0.016)  best_matched_mcsgarch: -4.8% (0.005)  [best matched = mcsgarch_iv]
+  next15     expiry       mcsgarch: -6.6% (0.001)  mcsgarch_realtime: -6.7% (<0.001)  mcsgarch_iv: -8.0% (0.035)  mcsgarch_vix: -6.1% (0.004)  mcsgarchx_vix: -7.6% (0.004)  mcsgarchx_vix_iv: -6.0% (0.040)  linear_base: -5.7% (0.079)  best_matched_mcsgarch: -6.0% (0.040)  [best matched = mcsgarchx_vix_iv]
+  next15     pre_auction  mcsgarch: -5.5% (<0.001)  mcsgarch_realtime: -11.2% (0.029)  mcsgarch_iv: -4.8% (0.008)  mcsgarch_vix: -4.7% (<0.001)  mcsgarchx_vix: -5.9% (<0.001)  mcsgarchx_vix_iv: -5.3% (<0.001)  linear_base: -4.7% (0.008)  best_matched_mcsgarch: -4.7% (<0.001)  [best matched = mcsgarch_vix]
+  next15     development  mcsgarch: -5.3% (<0.001)  mcsgarch_realtime: -13.7% (0.056)  mcsgarch_iv: -3.1% (0.097)  mcsgarch_vix: -4.3% (<0.001)  mcsgarchx_vix: -5.7% (<0.001)  mcsgarchx_vix_iv: -4.6% (0.023)  linear_base: -4.2% (0.034)  best_matched_mcsgarch: -3.1% (0.097)  [best matched = mcsgarch_iv]
+  next15     holdout      mcsgarch: -6.4% (<0.001)  mcsgarch_realtime: -6.4% (<0.001)  mcsgarch_iv: -7.0% (0.010)  mcsgarch_vix: -6.5% (0.002)  mcsgarchx_vix: -6.9% (0.003)  mcsgarchx_vix_iv: -6.2% (0.003)  linear_base: -3.0% (0.112)  best_matched_mcsgarch: -6.2% (0.003)  [best matched = mcsgarchx_vix_iv]
+  next15     no_ewma_fallback mcsgarch: -5.9% (<0.001)  mcsgarch_realtime: -5.9% (<0.001)  mcsgarch_iv: -4.9% (0.006)  mcsgarch_vix: -5.4% (<0.001)  mcsgarchx_vix: -6.2% (<0.001)  mcsgarchx_vix_iv: -5.2% (0.001)  linear_base: -3.7% (0.019)  best_matched_mcsgarch: -4.9% (0.006)  [best matched = mcsgarch_iv]
+  next30     all          mcsgarch: -7.6% (<0.001)  mcsgarch_realtime: -13.6% (0.016)  mcsgarch_iv: -5.9% (<0.001)  mcsgarch_vix: -6.5% (<0.001)  mcsgarchx_vix: -8.3% (<0.001)  mcsgarchx_vix_iv: -7.0% (<0.001)  linear_base: -3.9% (0.006)  best_matched_mcsgarch: -5.9% (<0.001)  [best matched = mcsgarch_iv]
+  next30     expiry       mcsgarch: -6.2% (<0.001)  mcsgarch_realtime: -6.3% (<0.001)  mcsgarch_iv: -6.4% (0.053)  mcsgarch_vix: -5.8% (<0.001)  mcsgarchx_vix: -7.5% (<0.001)  mcsgarchx_vix_iv: -4.7% (0.098)  linear_base: -4.6% (0.084)  best_matched_mcsgarch: -4.7% (0.098)  [best matched = mcsgarchx_vix_iv]
+  next30     pre_auction  mcsgarch: -6.9% (<0.001)  mcsgarch_realtime: -13.7% (0.028)  mcsgarch_iv: -5.2% (0.004)  mcsgarch_vix: -5.6% (<0.001)  mcsgarchx_vix: -7.6% (<0.001)  mcsgarchx_vix_iv: -6.6% (<0.001)  linear_base: -4.0% (0.010)  best_matched_mcsgarch: -5.2% (0.004)  [best matched = mcsgarch_iv]
+  next30     development  mcsgarch: -6.6% (<0.001)  mcsgarch_realtime: -16.2% (0.054)  mcsgarch_iv: -3.5% (0.066)  mcsgarch_vix: -5.2% (<0.001)  mcsgarchx_vix: -7.8% (<0.001)  mcsgarchx_vix_iv: -6.2% (0.004)  linear_base: -3.8% (0.035)  best_matched_mcsgarch: -3.5% (0.066)  [best matched = mcsgarch_iv]
+  next30     holdout      mcsgarch: -9.2% (<0.001)  mcsgarch_realtime: -9.2% (<0.001)  mcsgarch_iv: -9.4% (<0.001)  mcsgarch_vix: -8.6% (<0.001)  mcsgarchx_vix: -9.0% (<0.001)  mcsgarchx_vix_iv: -8.3% (<0.001)  linear_base: -4.0% (0.024)  best_matched_mcsgarch: -8.3% (<0.001)  [best matched = mcsgarchx_vix_iv]
+  next30     no_ewma_fallback mcsgarch: -7.9% (<0.001)  mcsgarch_realtime: -7.9% (<0.001)  mcsgarch_iv: -6.0% (<0.001)  mcsgarch_vix: -6.7% (<0.001)  mcsgarchx_vix: -8.2% (<0.001)  mcsgarchx_vix_iv: -6.9% (<0.001)  linear_base: -4.0% (0.005)  best_matched_mcsgarch: -6.0% (<0.001)  [best matched = mcsgarch_iv]
+  last_hour  all          mcsgarch: -6.4% (<0.001)  mcsgarch_realtime: -6.2% (<0.001)  mcsgarch_iv: -5.2% (0.016)  mcsgarch_vix: -1.7% (0.227)  mcsgarchx_vix: -3.8% (0.045)  mcsgarchx_vix_iv: -6.8% (0.016)  linear_base: +0.6% (0.623)  best_matched_mcsgarch: -1.7% (0.227)  [best matched = mcsgarch_vix]
+  last_hour  expiry       mcsgarch: -7.9% (0.010)  mcsgarch_realtime: -7.9% (0.009)  mcsgarch_iv: -12.4% (0.049)  mcsgarch_vix: +1.0% (0.557)  mcsgarchx_vix: -1.5% (0.423)  mcsgarchx_vix_iv: -13.2% (0.018)  linear_base: -1.6% (0.391)  best_matched_mcsgarch: +1.0% (0.557)  [best matched = mcsgarch_vix]
+  last_hour  pre_auction  mcsgarch: -7.0% (0.002)  mcsgarch_realtime: -6.8% (0.002)  mcsgarch_iv: -7.2% (0.021)  mcsgarch_vix: -0.9% (0.392)  mcsgarchx_vix: -6.0% (0.034)  mcsgarchx_vix_iv: -14.1% (<0.001)  linear_base: +0.7% (0.594)  best_matched_mcsgarch: -0.9% (0.392)  [best matched = mcsgarch_vix]
+  last_hour  development  mcsgarch: -5.3% (0.048)  mcsgarch_realtime: -5.0% (0.059)  mcsgarch_iv: -9.5% (0.026)  mcsgarch_vix: +2.6% (0.704)  mcsgarchx_vix: -6.0% (0.099)  mcsgarchx_vix_iv: -19.5% (<0.001)  linear_base: -1.1% (0.391)  best_matched_mcsgarch: +2.6% (0.704)  [best matched = mcsgarch_vix]
+  last_hour  holdout      mcsgarch: -7.1% (<0.001)  mcsgarch_realtime: -7.1% (<0.001)  mcsgarch_iv: -2.0% (0.183)  mcsgarch_vix: -4.4% (0.006)  mcsgarchx_vix: -2.2% (0.102)  mcsgarchx_vix_iv: +4.6% (0.849)  linear_base: +1.9% (0.816)  best_matched_mcsgarch: +4.6% (0.849)  [best matched = mcsgarchx_vix_iv]
+  last_hour  no_ewma_fallback mcsgarch: -6.5% (<0.001)  mcsgarch_realtime: -6.5% (<0.001)  mcsgarch_iv: -5.3% (0.015)  mcsgarch_vix: -1.7% (0.222)  mcsgarchx_vix: -3.9% (0.046)  mcsgarchx_vix_iv: -6.9% (0.016)  linear_base: +0.7% (0.639)  best_matched_mcsgarch: -1.7% (0.222)  [best matched = mcsgarch_vix]
+
+== 4. Estimator noise (seeds and refits) and the DM p-values (REAL DATA; post hoc)
+seed noise at 30 minutes, all days (seed_noise_next30.csv, single seeds 7, 8, 9): hybrid_base margins -7.46, -7.83, -7.63% (SD 0.19 points); pooled over the 4 models SD 0.16 points (8 df, 95% upper bound 0.28)
+target     subset        margin  DM SE    DM p  p+seed5  p+seed1    p+UB  p+UBscl   p+var  b/e 5%  b/e 1%
+next15     all            -5.8%   0.97  <0.001   <0.001   <0.001  <0.001   <0.001  <0.001    3.38    2.29
+next15     expiry         -6.6%   2.12   0.001    0.001    0.001   0.001    0.001   0.001    3.41    1.87
+next15     pre_auction    -5.5%   0.58  <0.001   <0.001   <0.001  <0.001   <0.001  <0.001    3.30    2.30
+next15     holdout        -6.4%   2.04  <0.001   <0.001   <0.001   0.001    0.001  <0.001    3.29    1.81
+next30     all            -7.6%   0.96  <0.001   <0.001   <0.001  <0.001   <0.001  <0.001    4.54    3.14
+next30     expiry         -6.2%   1.73  <0.001   <0.001   <0.001  <0.001   <0.001  <0.001    3.35    2.01
+next30     pre_auction    -6.9%   0.84  <0.001   <0.001   <0.001  <0.001   <0.001  <0.001    4.08    2.82
+next30     holdout        -9.2%   1.81  <0.001   <0.001   <0.001  <0.001   <0.001  <0.001    5.30    3.51
+last_hour  all            -6.4%   1.71  <0.001   <0.001   <0.001  <0.001    0.002  <0.001    3.47    2.13
+last_hour  expiry         -7.9%   3.35   0.010    0.010    0.010   0.010    0.039   0.010    3.41    0.34
+last_hour  pre_auction    -7.0%   2.38   0.002    0.002    0.002   0.002    0.006   0.002    3.53    1.84
+last_hour  holdout        -7.1%   1.83  <0.001   <0.001   <0.001  <0.001    0.006  <0.001    3.90    2.42
+(margin and SDs in points of mcsGARCH's QLIKE; b/e = extra estimator-noise SD at which p reaches 5% or 1%)
+hybrid variants (base and 5 GEX/placebo blocks): margin range and largest DM p
+  next15     all          -6.0% to -5.6%, SD 0.14, largest p <0.001
+  next15     expiry       -6.8% to -5.9%, SD 0.32, largest p 0.002
+  next15     pre_auction  -5.9% to -5.2%, SD 0.23, largest p <0.001
+  next15     holdout      -6.7% to -6.2%, SD 0.17, largest p 0.002
+  next30     all          -8.0% to -7.6%, SD 0.20, largest p <0.001
+  next30     expiry       -7.0% to -5.9%, SD 0.38, largest p <0.001
+  next30     pre_auction  -7.1% to -6.5%, SD 0.20, largest p <0.001
+  next30     holdout      -10.2% to -9.2%, SD 0.35, largest p <0.001
+  last_hour  all          -6.4% to -4.9%, SD 0.51, largest p 0.006
+  last_hour  expiry       -7.9% to -6.4%, SD 0.54, largest p 0.037
+  last_hour  pre_auction  -7.1% to -6.3%, SD 0.29, largest p 0.003
+  last_hour  holdout      -7.1% to -4.6%, SD 0.88, largest p 0.028
+cost of rerunning hybrid_base (upper bounds from run_info.json and hyperparameters_*.csv):
+  next15     one 5-seed hybrid run <= 117s, one single-seed run <= 40s (hybrid = 5.7% of the run's LightGBM work; target took 2048s); lgbm_base <= 107s, lgbmt_base <= 156s; mcsGARCH refits 27s
+  next30     one 5-seed hybrid run <= 101s, one single-seed run <= 35s (hybrid = 5.5% of the run's LightGBM work; target took 1832s); lgbm_base <= 95s, lgbmt_base <= 144s; mcsGARCH refits 27s
+  last_hour  one 5-seed hybrid run <= 70s, one single-seed run <= 25s (hybrid = 4.9% of the run's LightGBM work; target took 1418s); lgbm_base <= 80s, lgbmt_base <= 158s; mcsGARCH refits 27s
+  20 seed configurations x 3 targets x (hybrid, lgbm_base, lgbmt_base): <= 6.3 hours on one core (data preparation <= 664s; mcsGARCH fit measured at 0.36s); hybrid alone <= 2.2 hours
+
+== 5. Model Confidence Set, 10% level, daily QLIKE (REAL DATA; committed files, then recomputed)
+  next15 all: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  next15 expiry: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  next15 pre_auction: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  next30 all: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  next30 expiry: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  next30 pre_auction: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  last_hour all: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  last_hour expiry: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  last_hour pre_auction: recomputed with the pipeline's settings, max |p - committed p| = 0.0e+00
+  next15     all          committed (1,000 reps, block 5)    keeps 18/32; top hybrid_gex_us            hybrid_base p 0.902 rank 4 (ties 2); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next15     expiry       committed (1,000 reps, block 5)    keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.956 rank 2 (ties 2); mcsGARCH out (p 0.046), HAR out (p 0.008), VIX out (p 0.000)
+  next15     pre_auction  committed (1,000 reps, block 5)    keeps 15/32; top hybrid_gex_participant   hybrid_base p 0.489 rank 11 (ties 11); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     all          committed (1,000 reps, block 5)    keeps 18/32; top hybrid_v1gex             hybrid_base p 0.595 rank 15 (ties 15); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     expiry       committed (1,000 reps, block 5)    keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.843 rank 11 (ties 11); mcsGARCH out (p 0.024), HAR out (p 0.000), VIX out (p 0.000)
+  next30     pre_auction  committed (1,000 reps, block 5)    keeps 18/32; top hybrid_v1gex             hybrid_base p 0.948 rank 11 (ties 8); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  last_hour  all          committed (1,000 reps, block 5)    keeps 27/32; top linear_v1                hybrid_base p 0.966 rank 9 (ties 9); mcsGARCH out (p 0.021), HAR in (p 0.102), VIX in (p 0.229)
+  last_hour  expiry       committed (1,000 reps, block 5)    keeps 28/32; top linear_v1                hybrid_base p 0.996 rank 2 (ties 2); mcsGARCH in (p 0.439), HAR in (p 0.184), VIX in (p 0.416)
+  last_hour  pre_auction  committed (1,000 reps, block 5)    keeps 24/32; top linear_gex_us            hybrid_base p 0.936 rank 4 (ties 2); mcsGARCH out (p 0.083), HAR out (p 0.084), VIX out (p 0.000)
+  next15     all          recomputed (1,000 reps, block 5)   keeps 18/32; top hybrid_gex_us            hybrid_base p 0.902 rank 4 (ties 2); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next15     all          recomputed (10,000 reps, block 5)  keeps 18/32; top hybrid_gex_us            hybrid_base p 0.902 rank 4 (ties 4); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next15     all          recomputed (10,000 reps, block 10) keeps 18/32; top hybrid_gex_us            hybrid_base p 0.902 rank 4 (ties 4); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next15     expiry       recomputed (1,000 reps, block 5)   keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.956 rank 2 (ties 2); mcsGARCH out (p 0.046), HAR out (p 0.008), VIX out (p 0.000)
+  next15     expiry       recomputed (10,000 reps, block 5)  keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.960 rank 2 (ties 2); mcsGARCH out (p 0.043), HAR out (p 0.005), VIX out (p 0.000)
+  next15     expiry       recomputed (10,000 reps, block 10) keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.947 rank 2 (ties 2); mcsGARCH out (p 0.031), HAR out (p 0.004), VIX out (p 0.001)
+  next15     pre_auction  recomputed (1,000 reps, block 5)   keeps 15/32; top hybrid_gex_participant   hybrid_base p 0.489 rank 11 (ties 11); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next15     pre_auction  recomputed (10,000 reps, block 5)  keeps 15/32; top hybrid_gex_participant   hybrid_base p 0.486 rank 12 (ties 11); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next15     pre_auction  recomputed (10,000 reps, block 10) keeps 15/32; top hybrid_gex_participant   hybrid_base p 0.452 rank 12 (ties 12); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     all          recomputed (1,000 reps, block 5)   keeps 18/32; top hybrid_v1gex             hybrid_base p 0.595 rank 15 (ties 15); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     all          recomputed (10,000 reps, block 5)  keeps 18/32; top hybrid_v1gex             hybrid_base p 0.544 rank 15 (ties 15); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     all          recomputed (10,000 reps, block 10) keeps 18/32; top hybrid_v1gex             hybrid_base p 0.605 rank 15 (ties 15); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     expiry       recomputed (1,000 reps, block 5)   keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.843 rank 11 (ties 11); mcsGARCH out (p 0.024), HAR out (p 0.000), VIX out (p 0.000)
+  next30     expiry       recomputed (10,000 reps, block 5)  keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.832 rank 11 (ties 11); mcsGARCH out (p 0.018), HAR out (p 0.000), VIX out (p 0.000)
+  next30     expiry       recomputed (10,000 reps, block 10) keeps 25/32; top hybrid_gex_participant   hybrid_base p 0.763 rank 11 (ties 10); mcsGARCH out (p 0.007), HAR out (p 0.000), VIX out (p 0.001)
+  next30     pre_auction  recomputed (1,000 reps, block 5)   keeps 18/32; top hybrid_v1gex             hybrid_base p 0.948 rank 11 (ties 8); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     pre_auction  recomputed (10,000 reps, block 5)  keeps 18/32; top hybrid_v1gex             hybrid_base p 0.946 rank 12 (ties 11); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  next30     pre_auction  recomputed (10,000 reps, block 10) keeps 18/32; top hybrid_v1gex             hybrid_base p 0.954 rank 12 (ties 6); mcsGARCH out (p 0.000), HAR out (p 0.000), VIX out (p 0.000)
+  last_hour  all          recomputed (1,000 reps, block 5)   keeps 27/32; top linear_v1                hybrid_base p 0.966 rank 9 (ties 9); mcsGARCH out (p 0.021), HAR in (p 0.102), VIX in (p 0.229)
+  last_hour  all          recomputed (10,000 reps, block 5)  keeps 26/32; top linear_v1                hybrid_base p 0.973 rank 9 (ties 9); mcsGARCH out (p 0.023), HAR out (p 0.088), VIX in (p 0.274)
+  last_hour  all          recomputed (10,000 reps, block 10) keeps 27/32; top linear_v1                hybrid_base p 0.971 rank 9 (ties 9); mcsGARCH out (p 0.031), HAR in (p 0.115), VIX in (p 0.375)
+  last_hour  expiry       recomputed (1,000 reps, block 5)   keeps 28/32; top linear_v1                hybrid_base p 0.996 rank 2 (ties 2); mcsGARCH in (p 0.439), HAR in (p 0.184), VIX in (p 0.416)
+  last_hour  expiry       recomputed (10,000 reps, block 5)  keeps 29/32; top linear_v1                hybrid_base p 0.996 rank 2 (ties 2); mcsGARCH in (p 0.439), HAR in (p 0.182), VIX in (p 0.437)
+  last_hour  expiry       recomputed (10,000 reps, block 10) keeps 28/32; top linear_v1                hybrid_base p 0.994 rank 2 (ties 2); mcsGARCH in (p 0.390), HAR in (p 0.101), VIX in (p 0.424)
+  last_hour  pre_auction  recomputed (1,000 reps, block 5)   keeps 24/32; top linear_gex_us            hybrid_base p 0.936 rank 4 (ties 2); mcsGARCH out (p 0.083), HAR out (p 0.084), VIX out (p 0.000)
+  last_hour  pre_auction  recomputed (10,000 reps, block 5)  keeps 26/32; top linear_gex_us            hybrid_base p 0.925 rank 4 (ties 2); mcsGARCH in (p 0.102), HAR in (p 0.115), VIX out (p 0.000)
+  last_hour  pre_auction  recomputed (10,000 reps, block 10) keeps 26/32; top linear_gex_us            hybrid_base p 0.924 rank 4 (ties 2); mcsGARCH out (p 0.092), HAR in (p 0.142), VIX out (p 0.000)
+rank by mean daily QLIKE (1 = lowest):
+  next15     all          lowest: hybrid_gex_us            hybrid_base 3/32, mcsGARCH 26/32
+  next15     expiry       lowest: hybrid_gex_participant   hybrid_base 2/32, mcsGARCH 23/32
+  next15     pre_auction  lowest: hybrid_gex_participant   hybrid_base 6/32, mcsGARCH 25/32
+  next30     all          lowest: hybrid_v1gex             hybrid_base 7/32, mcsGARCH 26/32
+  next30     expiry       lowest: hybrid_gex_participant   hybrid_base 7/32, mcsGARCH 24/32
+  next30     pre_auction  lowest: hybrid_v1gex             hybrid_base 6/32, mcsGARCH 26/32
+  last_hour  all          lowest: linear_v1                hybrid_base 9/32, mcsGARCH 26/32
+  last_hour  expiry       lowest: linear_v1                hybrid_base 2/32, mcsGARCH 19/32
+  last_hour  pre_auction  lowest: linear_gex_us            hybrid_base 8/32, mcsGARCH 25/32
+
+== 6. Development window and hold-out (QLIKE vs mcsGARCH; DM; REAL DATA)
+  next15     development          lgbm_base: -0.4% (0.459)  lgbmt_base: -2.7% (0.041)  hybrid_base: -5.3% (<0.001)  linear_base: -1.2% (0.304)
+  next15     holdout              lgbm_base: -7.7% (0.001)  lgbmt_base: -8.1% (<0.001)  hybrid_base: -6.4% (<0.001)  linear_base: -3.5% (0.087)
+  next15     holdout_pre_auction  lgbm_base: -5.9% (<0.001)  lgbmt_base: -6.3% (<0.001)  hybrid_base: -5.9% (<0.001)  linear_base: -0.3% (0.449)
+  next30     development          lgbm_base: +1.1% (0.562)  lgbmt_base: -3.0% (0.184)  hybrid_base: -6.6% (<0.001)  linear_base: -2.9% (0.116)
+  next30     holdout              lgbm_base: -10.4% (<0.001)  lgbmt_base: -10.5% (<0.001)  hybrid_base: -9.2% (<0.001)  linear_base: -5.5% (0.009)
+  next30     holdout_pre_auction  lgbm_base: -7.8% (<0.001)  lgbmt_base: -8.0% (<0.001)  hybrid_base: -7.4% (<0.001)  linear_base: -3.2% (0.043)
+  last_hour  development          lgbm_base: +3.7% (0.670)  lgbmt_base: +0.9% (0.552)  hybrid_base: -5.3% (0.048)  linear_base: -4.2% (0.241)
+  last_hour  holdout              lgbm_base: -12.9% (0.007)  lgbmt_base: -12.6% (0.006)  hybrid_base: -7.1% (<0.001)  linear_base: -8.8% (0.001)
+  last_hour  holdout_pre_auction  lgbm_base: -9.7% (0.002)  lgbmt_base: -11.9% (0.010)  hybrid_base: -10.1% (0.002)  linear_base: -13.6% (0.003)
+LightGBM against the hybrid (negative = LightGBM lower loss; two-sided DM p):
+  next15     development          lgbm_base    +5.2%  p 0.202
+  next15     development          lgbmt_base   +2.8%  p 0.047
+  next15     holdout              lgbm_base    -1.4%  p 0.065
+  next15     holdout              lgbmt_base   -1.8%  p 0.022
+  next15     holdout_pre_auction  lgbm_base    -0.1%  p 0.891
+  next15     holdout_pre_auction  lgbmt_base   -0.5%  p 0.412
+  next15     all                  lgbm_base    +2.3%  p 0.323
+  next15     all                  lgbmt_base   +0.8%  p 0.384
+  next30     development          lgbm_base    +8.2%  p 0.301
+  next30     development          lgbmt_base   +3.9%  p 0.337
+  next30     holdout              lgbm_base    -1.3%  p 0.180
+  next30     holdout              lgbmt_base   -1.4%  p 0.153
+  next30     holdout_pre_auction  lgbm_base    -0.4%  p 0.556
+  next30     holdout_pre_auction  lgbmt_base   -0.6%  p 0.498
+  next30     all                  lgbm_base    +4.5%  p 0.354
+  next30     all                  lgbmt_base   +1.8%  p 0.463
+  last_hour  development          lgbm_base    +9.4%  p 0.206
+  last_hour  development          lgbmt_base   +6.5%  p 0.250
+  last_hour  holdout              lgbm_base    -6.2%  p 0.171
+  last_hour  holdout              lgbmt_base   -6.0%  p 0.146
+  last_hour  holdout_pre_auction  lgbm_base    +0.4%  p 0.848
+  last_hour  holdout_pre_auction  lgbmt_base   -2.0%  p 0.476
+  last_hour  all                  lgbm_base    +0.2%  p 0.969
+  last_hour  all                  lgbmt_base   -0.9%  p 0.792
+
+== 7. The ranking under MSE (committed scoreboards, tests and MCS files; REAL DATA)
+  next15     all days: MSE MCS keeps 31/32; har: rank 10 (-85.0%, p 0.149)  vix: rank 13 (-84.5%, p 0.149)  mcsgarch_iv: rank 20 (-75.9%, p 0.180)  linear_base: rank 3 (-86.0%, p 0.149)  lgbm_base: rank 11 (-84.9%, p 0.148)  lgbmt_base: rank 8 (-85.3%, p 0.148)  hybrid_base: rank 24 (-33.2%, p 0.134)  mcsgarch: rank 31 (+0.0%, p n/a)
+  next30     all days: MSE MCS keeps 31/32; har: rank 9 (-86.0%, p 0.150)  vix: rank 13 (-85.0%, p 0.151)  mcsgarch_iv: rank 20 (-77.7%, p 0.182)  linear_base: rank 3 (-87.9%, p 0.150)  lgbm_base: rank 10 (-85.8%, p 0.149)  lgbmt_base: rank 8 (-86.2%, p 0.149)  hybrid_base: rank 30 (-26.9%, p 0.134)  mcsgarch: rank 31 (+0.0%, p n/a)
+  last_hour  all days: MSE MCS keeps 31/32; har: rank 26 (+17.2%, p 0.639)  vix: rank 30 (+53.6%, p 0.795)  mcsgarch_iv: rank 24 (+3.6%, p 0.776)  linear_base: rank 2 (-22.9%, p 0.127)  lgbm_base: rank 28 (+26.9%, p 0.673)  lgbmt_base: rank 27 (+21.8%, p 0.654)  hybrid_base: rank 15 (-18.3%, p 0.053)  mcsgarch: rank 22 (+0.0%, p n/a)
+
+done in 193s -> results/referee_forecast

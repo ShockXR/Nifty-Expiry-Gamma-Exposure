@@ -1,0 +1,13 @@
+data,index,model,set,delta_actual,n_pairs_registered,p_registered,n_pairs_with_flat_day,n_pairs_without,k_at_or_below_without,share_at_or_below_without,p_without_flat_day_pairs,windows_at_bound_in_set_pairs
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,primary,-1.6018219919260268,1223,0.1911764705882352,123,1100,169,0.15363636363636363,0.15440508628519528,246
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,clean,-1.6018219919260268,724,0.0951724137931034,123,601,4,0.0066555740432612314,0.008305647840531562,123
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,literal,-1.6018219919260268,1350,0.1732050333086602,123,1227,169,0.13773431132844335,0.13843648208469056,246
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,primary,-2.063566241324424,1223,0.1053921568627451,123,1100,88,0.08,0.08083560399636694,80
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,clean,-2.063566241324424,724,0.056551724137931,123,601,0,0.0,0.0016611295681063123,80
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,literal,-2.063566241324424,1350,0.1006661732050333,123,1227,95,0.07742461287693561,0.0781758957654723,80
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,primary,-1.4699113312959824,1152,0.1127493495229835,0,1152,129,0.11197916666666667,0.11274934952298352,56
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,clean,-1.4699113312959824,723,0.0911602209944751,0,723,65,0.08990318118948824,0.09116022099447514,0
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,literal,-1.4699113312959824,1279,0.128125,0,1279,163,0.127443315089914,0.128125,56
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,primary,-1.7812666944168625,1152,0.0962705984388551,0,1152,110,0.0954861111111111,0.09627059843885516,0
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,clean,-1.7812666944168625,723,0.1201657458563535,0,723,86,0.11894882434301521,0.12016574585635359,0
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,literal,-1.7812666944168625,1279,0.14609375,0,1279,186,0.145426114151681,0.14609375,0

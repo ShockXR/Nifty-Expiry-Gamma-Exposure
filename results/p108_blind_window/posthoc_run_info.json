@@ -1,0 +1,22 @@
+{
+  "label": "REAL DATA, POST HOC",
+  "definition": "0915-1514|concat|log|all",
+  "patch": [
+    {
+      "index": "nifty",
+      "day": "2023-01-27",
+      "bar": "15:14",
+      "old_close": 17611.6,
+      "new_close_from_15:15_open": 17612.5
+    },
+    {
+      "index": "bank",
+      "day": "2023-01-27",
+      "bar": "15:14",
+      "old_close": 40360.55,
+      "new_close_from_15:15_open": 40365.45
+    }
+  ],
+  "run_started_utc": "2026-11-03T05:51:59Z",
+  "run_seconds": 40.2
+}

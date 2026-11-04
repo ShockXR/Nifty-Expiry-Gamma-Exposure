@@ -1,0 +1,42 @@
+case,observed,exception,warnings
+control: clean chain,net_gex=-4.002e+10 gross=4.42e+11 n_nan_gex=0 n_inf=0 flip=23650.8 max_pain=23950,,
+all open interest zero,"net_gex=0 gross=0 n_nan_gex=0 n_inf=0 flip=nan walls={'call_wall': 21600.0, 'put_wall': 21600.0, 'max_oi_strike': 21600.0} max_pain=21600.0",,
+14 percent of rows with negative open interest,net_gex=2.766e+10 gross=2.921e+11 n_nan_gex=0 n_inf=0,,
+20 percent of rows with NaN open interest,net_gex=-7.503e+09 gross=3.62e+11 n_nan_gex=39 n_inf=0 | engine net via sum: -7.503e+09 vs clean -4.002e+10,,
+all open interest NaN (empty download),net_gex=0 gross=0 n_nan_gex=194 n_inf=0 | summary row: 0.0,,
+all implied volatilities NaN (IV solver failed everywhere),net_gex=0 gross=0 n_nan_gex=194 n_inf=0,,
+25 percent IV NaN (solver failures),net_gex=-1.58e+11 gross=3.24e+11 n_nan_gex=49 n_inf=0 clean=-4.002e+10,,
+empty chain,net_gex=0 gross=0 n_nan_gex=0 n_inf=0,,
+expired options T = 0,net_gex=0 gross=0 n_nan_gex=194 n_inf=0,,RuntimeWarning: divide by zero encountered in divide | RuntimeWarning: invalid value encountered in divide
+negative time to expiry T = -1 day,net_gex=0 gross=0 n_nan_gex=194 n_inf=0,,RuntimeWarning: invalid value encountered in sqrt
+T = 1 minute (3e-6 years),net_gex=-2.382e+12 gross=2.864e+12 n_nan_gex=0 n_inf=0,,
+T = 1 second,net_gex=-1.845e+13 gross=2.219e+13 n_nan_gex=0 n_inf=0,,
+IV = 0 everywhere,net_gex=0 gross=0 n_nan_gex=194 n_inf=0,,RuntimeWarning: divide by zero encountered in divide | RuntimeWarning: invalid value encountered in divide
+IV negative,net_gex=1.825e+10 gross=-3.972e+11 n_nan_gex=0 n_inf=0,,
+IV 500 percent,net_gex=8.662e+08 gross=4.026e+10 n_nan_gex=0 n_inf=0,,
+IV 0.0001 (stale quote),net_gex=-5.07e+13 gross=6.097e+13 n_nan_gex=0 n_inf=0,,
+spot = 0,net_gex=0 gross=0 n_nan_gex=194 n_inf=0,,RuntimeWarning: divide by zero encountered in log | RuntimeWarning: invalid value encountered in divide
+spot negative,net_gex=0 gross=0 n_nan_gex=194 n_inf=0,,RuntimeWarning: invalid value encountered in log
+lot size 0,net_gex=0 gross=0 n_nan_gex=0 n_inf=0,,
+lot size negative,net_gex=4.002e+10 gross=-4.42e+11 n_nan_gex=0 n_inf=0,,
+open interest in shares instead of contracts (x75),net GEX with OI in shares (x75) / contracts = 75.000; engine cannot tell the unit,,
+lot size 1 instead of 75,ratio vs correct = 0.0133,,
+very wide strike range 50 percent to 150 percent of spot,net_gex=-1.145e+10 gross=2.835e+10 n_nan_gex=0 n_inf=0 flip=23467.977874673757,,
+only deep OTM strikes (5 percent above spot),net_gex=4.493e+05 gross=1.156e+07 n_nan_gex=0 n_inf=0 flip=nan,,
+missing strikes: no strikes within 2 percent of spot,net_gex=2.808e+09 gross=3.304e+10 n_nan_gex=0 n_inf=0 vs clean -4.002e+10 flip=23217.6 clean_flip=23650.8,,
+all puts missing (calls only),net_gex=2.01e+11 gross=2.01e+11 n_nan_gex=0 n_inf=0 vs clean -4.002e+10,,
+20 duplicated rows near the money (double counted open interest),net_gex=-1.046e+11 gross=7.319e+11 n_nan_gex=0 n_inf=0 vs clean -4.002e+10,,
+option type given as strings CE/PE instead of booleans,net with string option type = 4.42e+11 vs correct -4.002e+10,,
+option type given as 1/0 integers,net with 1/0 = -4.002e+10 vs correct -4.002e+10,,
+unknown sign rule,,"ValueError: unknown sign rule 'foo'; choose from ('us_convention', 'participant', 'client_mirror', 'long_all', '",
+participant rule without weights,,ValueError: rule 'participant' needs ParticipantWeights,
+"participant weights outside [-1, 1] (2, -3)",8.02211252502199,,
+missing column iv,,KeyError: 'iv',
+column oi renamed OI,,KeyError: 'oi',
+strike given as string,-40020811232.27722,,
+flip search with all-calls chain (no sign change),nan,,
+daily_summary on zero chain,"{'spot': 24000.0, 'T': 0.00821917808219178, 'gross_gex': 0.0, 'gross_gex_atm1pct': 0.0, 'net_gex_us_convention': 0.0, 'flip_us_convention': nan, 'call_wall': 21600.0, 'put_wall': 21600.0, 'max_oi_strike': 21600.0, 'max_pain': 21600.0}",,
+oi_walls on empty chain,"{'call_wall': nan, 'put_wall': nan, 'max_oi_strike': nan}",,
+max_pain on empty chain,,ValueError: attempt to get argmin of an empty sequence,
+"IV solver round trip, +-25 percent moneyness, 1 hour to 30 days","n=20000 NaN=4557 (price<=0.05: 985, price>0.05: 3572); NaN among OTM options with price>0.05: 0 of 4541 (ITM options: 3572 of 9956; ITM time value is below float resolution); IV error>1e-4 among solved: 206 (of which price>0.05: 205); max relative PRICE error ",,
+IV solver on impossible prices,"{'below intrinsic': nan, 'zero': nan, 'above forward': nan, 'NaN': nan, 'inf': nan, 'T=0': nan, 'deep ITM at intrinsic': 4.99999999992724}",,RuntimeWarning: invalid value encountered in scalar divide

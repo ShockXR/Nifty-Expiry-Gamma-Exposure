@@ -1,0 +1,430 @@
+Replication of Chhimwal, Pandey and Pandey (2025) on REAL DATA (third-party 1-minute bars validated against NSE official daily values).
+Numbers labelled paper_printed are the paper's printed values, typed in by hand as comparison targets and re-keyed blind by a separate AI agent (docs/REKEY_CHECK.md).
+Primary session rule: 360_drop_last15 ('09:15', '15:14'); bootstrap draws: persistence 400, connectedness 300, medians 2000.
+
+====================================================================================================
+1. Data and validation
+====================================================================================================
+Minute bars: data/raw/nifty_1min.csv and banknifty_1min.csv (third-party, provenance in minute_bars_source.json).
+Official NSE daily index values: 2982 index-days loaded. Bhavcopy: 420 files read, 0 in the newer layout skipped.
+           span     index  official_days  days_compared  open_median_abs_bps  high_median_abs_bps  low_median_abs_bps  close_median_abs_bps  high_max_abs_bps  low_max_abs_bps                                                                                                                  days_open_high_low_off_by_more_than_5bps
+    whole_range     nifty            415            414                    0             0.215798            0.268711               4.05318           10.3403          6.82444                                                                                                               2022-12-29;2023-10-13;2024-03-13;2024-04-15
+    whole_range banknifty            415            414                    0                    0                   0               5.40762           31.4037          8.79479 2022-11-03;2022-12-23;2022-12-29;2023-01-20;2023-01-25;2023-01-27;2023-03-03;2023-03-10;2023-03-31;2023-04-11;2023-04-24;2023-05-11;2023-05-29;2023-06-12
+  before_stated     nifty             82             82                    0             0.296654            0.325407               3.31089            3.6288          3.15548                                                                                                                                                          
+  before_stated banknifty             82             82                    0                    0                   0               4.89601          0.142175                0                                                                                                                                                          
+before_inferred     nifty             64             64                    0             0.248193            0.303893               4.83886           10.3403          1.74338                                                                                                                                                2022-12-29
+before_inferred banknifty             64             64                    0             0.501056             0.48298               5.87378           31.4037          7.58861                                                                                                    2022-12-23;2022-12-29;2023-01-20;2023-01-25;2023-01-27
+          after     nifty             59             59                    0                    0                   0               4.85028           4.03967          1.63649                                                                                                                                     2024-03-13;2024-04-15
+          after banknifty             59             59                    0                    0                   0               6.54515                 0                0                                                                                                                                                          
+
+====================================================================================================
+2. Expiry calendar from the bhavcopy (an expiry = last trading day of a contract; monthly = futures expiry)
+====================================================================================================
+nifty     before_stated    expiries 18 (monthly 4): 02 Nov 23 Thu, 09 Nov 23 Thu, 16 Nov 23 Thu, 23 Nov 23 Thu, 30 Nov 23 Thu*, 07 Dec 23 Thu, 14 Dec 23 Thu, 21 Dec 23 Thu, 28 Dec 23 Thu*, 04 Jan 24 Thu, 11 Jan 24 Thu, 18 Jan 24 Thu, 25 Jan 24 Thu*, 01 Feb 24 Thu, 08 Feb 24 Thu, 15 Feb 24 Thu, 22 Feb 24 Thu, 29 Feb 24 Thu*
+nifty     before_inferred  expiries 13 (monthly 3): 17 Nov 22 Thu, 24 Nov 22 Thu*, 01 Dec 22 Thu, 08 Dec 22 Thu, 15 Dec 22 Thu, 22 Dec 22 Thu, 29 Dec 22 Thu*, 05 Jan 23 Thu, 12 Jan 23 Thu, 19 Jan 23 Thu, 25 Jan 23 Wed*, 02 Feb 23 Thu, 09 Feb 23 Thu
+nifty     after            expiries 13 (monthly 3): 07 Mar 24 Thu, 14 Mar 24 Thu, 21 Mar 24 Thu, 28 Mar 24 Thu*, 04 Apr 24 Thu, 10 Apr 24 Wed, 18 Apr 24 Thu, 25 Apr 24 Thu*, 02 May 24 Thu, 09 May 24 Thu, 16 May 24 Thu, 23 May 24 Thu, 30 May 24 Thu*
+banknifty before_stated    expiries 18 (monthly 4): 01 Nov 23 Wed, 08 Nov 23 Wed, 15 Nov 23 Wed, 22 Nov 23 Wed, 30 Nov 23 Thu*, 06 Dec 23 Wed, 13 Dec 23 Wed, 20 Dec 23 Wed, 28 Dec 23 Thu*, 03 Jan 24 Wed, 10 Jan 24 Wed, 17 Jan 24 Wed, 25 Jan 24 Thu*, 31 Jan 24 Wed, 07 Feb 24 Wed, 14 Feb 24 Wed, 21 Feb 24 Wed, 29 Feb 24 Thu*
+banknifty before_inferred  expiries 13 (monthly 3): 17 Nov 22 Thu, 24 Nov 22 Thu*, 01 Dec 22 Thu, 08 Dec 22 Thu, 15 Dec 22 Thu, 22 Dec 22 Thu, 29 Dec 22 Thu*, 05 Jan 23 Thu, 12 Jan 23 Thu, 19 Jan 23 Thu, 25 Jan 23 Wed*, 02 Feb 23 Thu, 09 Feb 23 Thu
+banknifty after            expiries 13 (monthly 3): 06 Mar 24 Wed, 13 Mar 24 Wed, 20 Mar 24 Wed, 27 Mar 24 Wed*, 03 Apr 24 Wed, 10 Apr 24 Wed, 16 Apr 24 Tue, 24 Apr 24 Wed*, 30 Apr 24 Tue, 08 May 24 Wed, 15 May 24 Wed, 22 May 24 Wed, 29 May 24 Wed*
+(* = monthly)
+
+====================================================================================================
+3. Windows and day counts (paper: 64 days before, 59 after; 13 and 12 Wednesdays, 13 and 13 Thursdays)
+====================================================================================================
+Fingerprint search over all 348 windows of 64 consecutive trading days from 2022-07-01 to 2024-02-29,
+scored on SD, minimum, maximum and excess kurtosis of both indices against Table 1's 'before' column. Best windows:
+ rank      start        end     score    nifty_sd   nifty_min  nifty_max  nifty_excess_kurtosis  banknifty_sd  banknifty_min  banknifty_max  banknifty_excess_kurtosis
+    1 2022-11-14 2023-02-10 0.0447236 0.000357802 -0.00853355 0.00622111                63.8746   0.000518715     -0.0171353      0.0120234                    124.759
+    2 2022-11-15 2023-02-13 0.0473316 0.000357966 -0.00853355 0.00622111                63.7038   0.000518458     -0.0171353      0.0120234                    124.767
+    3 2022-11-11 2023-02-09 0.0543705 0.000358028 -0.00853355 0.00622111                63.6845   0.000519981     -0.0171353      0.0120234                    123.535
+    4 2022-11-16 2023-02-14 0.0562484 0.000359074 -0.00853355 0.00622111                63.4223   0.000519812     -0.0171353      0.0120234                    123.483
+    5 2022-11-18 2023-02-16 0.0602294 0.000359882 -0.00853355 0.00622111                63.4606   0.000521091     -0.0171353      0.0120234                    122.322
+    6 2022-11-17 2023-02-15 0.0605177 0.000359197 -0.00853355 0.00622111                63.3285   0.000520371     -0.0171353      0.0120234                    122.953
+    7 2022-11-21 2023-02-17 0.0822495 0.000360217 -0.00853355 0.00622111                62.7777   0.000523172     -0.0171353      0.0120234                    120.732
+    8 2022-11-22 2023-02-20  0.110535 0.000361331 -0.00853355 0.00622111                62.0126   0.000525051     -0.0171353      0.0120234                        119
+Best window that starts on or after 2023-11-01: rank 217, 2023-11-29 to 2024-02-29, score 6.207 (best overall 0.045).
+         period      start        end  trading_days  paper_days  wednesdays  paper_wednesdays  thursdays  paper_thursdays  nifty_expiry_days  bn_expiry_days  nifty_monthly_expiries  bn_monthly_expiries  n_returns_nifty  n_returns_banknifty  paper_n_returns
+  before_stated 2023-11-01 2024-02-29            82          64          18                13         18               13                 18              18                       4                    4            29519                29519            23039
+before_inferred 2022-11-14 2023-02-10            64          64          13                13         12               13                 13              13                       3                    3            23039                23039            23039
+          after 2024-03-01 2024-05-31            59          59          11                12         12               13                 13              13                       3                    3            21239                21233            21239
+
+====================================================================================================
+4. Which 360 minutes? Table 1 statistics under each session rule and return definition
+====================================================================================================
+Fingerprint score (lower = closer to the paper's Table 1; sum over the four statistics) by rule:
+period                                         after        before_inferred        before_stated       
+index                                      banknifty  nifty       banknifty  nifty     banknifty  nifty
+trim             overnight_in_first_minute                                                             
+360_drop_first15 False                         1.814  1.962           1.543  1.922         2.647  2.472
+                 True                          0.283  0.704           0.514  0.726         3.198  5.591
+360_drop_last15  False                         1.808  1.948           1.423  1.368         2.645  2.316
+                 True                          0.012  0.001           0.017  0.028         3.044  3.551
+375_full         False                         1.813  1.955           1.433  1.377         2.619  2.322
+                 True                          0.588  0.943           0.064  0.235         3.103  3.715
+
+====================================================================================================
+Table 1. Descriptive statistics of 1-minute log returns
+====================================================================================================
+period           before_stated                      before_inferred                             after                     
+index                    nifty   banknifty     both           nifty    banknifty     both       nifty   banknifty     both
+statistic                                                                                                                 
+n                        29519       29519      NaN           23039        23039      NaN       21239       21233      NaN
+mean               4.89204e-06 2.63323e-06      NaN    -1.21392e-06 -5.47817e-07      NaN 8.57083e-07  2.4456e-06      NaN
+sd                 0.000355246 0.000514703      NaN     0.000357802  0.000518715      NaN 0.000355214 0.000444722      NaN
+min                 -0.0115416  -0.0276043      NaN     -0.00853355   -0.0171353      NaN -0.00708607 -0.00869898      NaN
+max                   0.013509   0.0159015      NaN      0.00622111    0.0120234      NaN  0.00940825  0.00990472      NaN
+skew                   3.18947    -2.67903      NaN       -0.567591     -1.11069      NaN    0.532249    0.626637      NaN
+excess_kurtosis        195.458     388.735      NaN         63.8746      124.759      NaN     75.9008     56.8624      NaN
+anderson_darling        1004.8     1133.18      NaN         660.521      822.452      NaN     492.974     469.522      NaN
+adf                   -44.5607    -49.7235      NaN        -23.1171     -20.8723      NaN    -29.6187    -145.904      NaN
+correlation                NaN         NaN 0.836512             NaN          NaN 0.852735         NaN         NaN 0.817593
+paper (printed):
+period           before_inferred                       after                
+index                      nifty   banknifty  both     nifty banknifty  both
+statistic                                                                   
+n                          23039       23039   NaN     21239     21239   NaN
+mean                      -1e-06      -2e-06   NaN     1e-06     2e-06   NaN
+sd                   0.000360947 0.000522211   NaN  0.000355  0.000443   NaN
+min                  -0.00858465  -0.0172567   NaN -0.007086 -0.008699   NaN
+max                   0.00622111   0.0120234   NaN  0.009408  0.009905   NaN
+skew                    -0.52496    -1.35773   NaN      0.53      0.64   NaN
+excess_kurtosis          64.7453     125.112   NaN     75.88      57.3   NaN
+anderson_darling         649.191     790.061   NaN   492.399   466.153   NaN
+adf                       -23.05    -20.6926   NaN  -29.6261  -145.613   NaN
+correlation                  NaN         NaN 0.854       NaN       NaN 0.818
+
+Which price does the overnight gap start from? Table 1 extremes with four reference prices for the first minute:
+reference_for_overnight_gap          period     index         min           min_at  paper_printed_min  min_equals_printed_to_printed_digits        max           max_at  paper_printed_max  max_equals_printed_to_printed_digits  fingerprint_score
+      last_bar_close (main) before_inferred     nifty -0.00853355 2023-01-30 09:15        -0.00858465                                 False 0.00622111 2023-01-30 09:20         0.00622111                                  True          0.0281523
+      last_bar_close (main)           after     nifty -0.00708607 2024-04-19 09:15          -0.007086                                  True 0.00940825 2024-04-01 09:15           0.009408                                  True        0.000912646
+         nse_official_close before_inferred     nifty  -0.0081218 2023-01-30 09:15        -0.00858465                                 False 0.00706079 2023-02-01 09:15         0.00622111                                 False           0.268632
+         nse_official_close           after     nifty    -0.00846 2024-04-19 09:15          -0.007086                                 False 0.00758366 2024-03-21 09:15           0.009408                                 False           0.468661
+             bar_1529_close before_inferred     nifty -0.00832344 2023-01-30 09:15        -0.00858465                                 False 0.00651105 2023-02-03 09:15         0.00622111                                 False           0.229395
+             bar_1529_close           after     nifty   -0.010726 2024-04-19 09:15          -0.007086                                 False  0.0068513 2024-03-21 09:15           0.009408                                 False             0.9391
+              bar_1515_open before_inferred     nifty -0.00858465 2023-01-30 09:15        -0.00858465                                  True 0.00622111 2023-01-30 09:20         0.00622111                                  True          0.0136715
+              bar_1515_open           after     nifty -0.00710428 2024-04-19 09:15          -0.007086                                 False 0.00934987 2024-04-01 09:15           0.009408                                 False          0.0112408
+      last_bar_close (main) before_inferred banknifty  -0.0171353 2023-01-30 09:15         -0.0172567                                 False  0.0120234 2023-02-03 09:15          0.0120234                                  True          0.0165713
+      last_bar_close (main)           after banknifty -0.00869898 2024-04-16 09:15          -0.008699                                  True 0.00990472 2024-04-01 09:15           0.009905                                  True          0.0115477
+         nse_official_close before_inferred banknifty  -0.0167574 2023-01-30 09:15         -0.0172567                                 False  0.0116632 2023-02-01 14:52          0.0120234                                 False           0.110239
+         nse_official_close           after banknifty -0.00920208 2024-04-19 09:15          -0.008699                                 False 0.00911278 2024-03-21 09:15           0.009905                                 False           0.170679
+             bar_1529_close before_inferred banknifty   -0.017253 2023-01-30 09:15         -0.0172567                                 False  0.0116632 2023-02-01 14:52          0.0120234                                 False          0.0596381
+             bar_1529_close           after banknifty  -0.0105258 2024-04-19 09:15          -0.008699                                 False 0.00783313 2024-03-21 09:15           0.009905                                 False           0.561536
+              bar_1515_open before_inferred banknifty  -0.0172567 2023-01-30 09:15         -0.0172567                                  True  0.0120985 2023-02-03 09:15          0.0120234                                 False          0.0252889
+              bar_1515_open           after banknifty -0.00874608 2024-04-16 09:15          -0.008699                                 False  0.0098707 2024-04-01 09:15           0.009905                                 False          0.0227675
+For each extreme that sits in a first minute: the previous-day reference price that reproduces the printed value exactly,
+and how far it is (in index points) from each candidate price in our data:
+         period     index statistic              bar  implied_previous_reference  implied_reference_precision_points  implied_minus_last_bar_close  implied_minus_nse_official_close  implied_minus_bar_1529_close  implied_minus_bar_1515_open
+before_inferred     nifty       min 2023-01-30 09:15                     17612.5                         8.73098e-06                      0.899996                              8.15                           4.6                 -3.53521e-06
+          after     nifty       min 2024-04-19 09:15                     21965.6                           0.0109053                   -0.00157797                          -30.2016                      -80.1016                    -0.401578
+          after     nifty       max 2024-04-01 09:15                     22268.9                           0.0112397                     0.0055234                          -57.9945                      -74.1945                     -1.29448
+before_inferred banknifty       min 2023-01-30 09:15                     40365.4                         1.98374e-05                       4.89999                             20.15                      0.149985                 -1.49298e-05
+before_inferred banknifty       max 2023-02-03 09:15                     40645.6                         2.05686e-05                   7.26897e-07                             -23.7                         -76.8                         3.05
+          after banknifty       min 2024-04-16 09:15                     47770.2                           0.0236782                   0.000758344                          -3.04924                       12.8508                     -2.24924
+          after banknifty       max 2024-04-01 09:15                     47036.7                           0.0237525                    -0.0133797                          -87.9134                      -110.063                     -1.61338
+
+====================================================================================================
+Table 2. ARMA(1,1)-mcsGARCH(1,1)-t on 1-minute returns (daily variance from AR(1)-EGARCH(1,1)-t)
+====================================================================================================
+period                      before_stated             before_inferred                    after            
+index                               nifty   banknifty           nifty    banknifty       nifty   banknifty
+parameter                                                                                                 
+constant                      6.51039e-06 6.84288e-07    -5.55442e-07 -8.25192e-07 1.19594e-06 1.88238e-06
+phi_ar1                          -0.33106    0.738922        0.538303    -0.550563    -0.39793    0.229891
+theta_ma1                        0.344921   -0.750704       -0.513731     0.533824    0.418675   -0.231781
+omega                          0.00384447   0.0130484      0.00211959   0.00459405   0.0102929   0.0194957
+alpha                           0.0481331   0.0586314       0.0246181    0.0321479   0.0498219   0.0538022
+beta                              0.95006    0.931358        0.973451     0.963582    0.940655    0.928103
+shape_nu                          6.37132     5.07397         8.99262      7.33307     7.00788     5.67335
+phi_plus_theta                  0.0138608   -0.011782       0.0245721   -0.0167395   0.0207457 -0.00188972
+persistence_alpha_plus_beta      0.998193    0.989989        0.998069      0.99573    0.990477    0.981905
+half_life_minutes                  383.25     68.8919         358.639      161.967     72.4374     37.9589
+unconditional_q                   2.12758     1.30341         1.09775      1.07579     1.08081     1.07742
+loglik_returns_scale               204745      194326          158900       151238      145058      139620
+aic_per_obs                      -13.8716    -13.1657        -13.7934     -13.1283     -13.659    -13.1506
+n_obs                               29519       29519           23039        23039       21239       21233
+our z statistics (GARCH part: numerical Hessian; ARMA part: robust sandwich):
+period    before_stated           before_inferred             after          
+index             nifty banknifty           nifty banknifty   nifty banknifty
+parameter                                                                    
+constant           1.73      0.73           -0.47     -0.16    0.34      0.14
+phi_ar1           -0.67      3.23            1.51     -0.62   -1.14      0.04
+theta_ma1          0.70     -3.37           -1.42      0.59    1.21     -0.04
+omega              5.28      5.96            3.58      4.73    6.10      5.06
+alpha             15.90     12.22           11.58     11.71   12.76      9.61
+beta             296.42    150.57          404.40    292.86  190.71    107.27
+shape_nu          28.40     33.88           18.84     21.98   22.58     26.27
+paper (printed):
+period                      before_inferred               after          
+index                                 nifty banknifty     nifty banknifty
+parameter                                                                
+phi_ar1                           -0.054778  0.619437 -0.627945  0.750097
+theta_ma1                          0.078178 -0.642318  0.638569 -0.792505
+omega                              0.002319  0.004263  0.010345  0.018692
+alpha                              0.026481  0.032328  0.049363  0.053195
+beta                               0.971477  0.963935  0.941048   0.92968
+shape_nu                            8.86463   6.70796   6.98373   5.48372
+phi_plus_theta                       0.0234 -0.022881  0.010624 -0.042408
+persistence_alpha_plus_beta        0.997958  0.996263  0.990411  0.982875
+half_life_minutes                   339.099   185.135   71.9385   40.1282
+unconditional_q                     1.13565   1.14075   1.07884    1.0915
+loglik_returns_scale                 158616    148500    145063    139758
+aic_per_obs                         -13.769   -13.095   -13.659    -13.16
+n_obs                                 23039     23039     21239     21239
+
+Intraday persistence (alpha + beta) and half-life in minutes, with uncertainty:
+         period     index  persistence  se_persistence_delta  half_life_min  se_half_life_delta  half_life_profile_ci95_lo  half_life_profile_ci95_hi  half_life_boot_ci95_lo  half_life_boot_ci95_hi  paper_printed_half_life_min
+  before_stated     nifty     0.998193            0.00104329         383.25             221.477                     177.06                       6000                 72.7033                 64777.1                      339.099
+  before_stated banknifty     0.989989            0.00227539        68.8919             15.7375                    46.3023                    115.722                 22.4043                 163.096                      185.135
+before_inferred     nifty     0.998069           0.000751256        358.639             139.674                     196.99                    1255.23                 103.237                  700.77                      339.099
+before_inferred banknifty      0.99573            0.00116182        161.967             44.1596                    102.671                    318.498                  50.878                 302.395                      185.135
+          after     nifty     0.990477            0.00194753        72.4374             14.8847                    50.6021                    114.743                 36.5995                 139.297                      71.9385
+          after banknifty     0.981905            0.00391891        37.9589             8.29652                    25.2865                    59.7081                 10.6393                 102.071                      40.1282
+
+Did persistence fall after the change? (bootstrap of the difference; likelihood-ratio test of equal persistence)
+         before     index  half_life_before  half_life_after  diff_persistence_after_minus_before  diff_boot_ci95_lo  diff_boot_ci95_hi  lr_equal_persistence_stat  lr_p_value
+  before_stated     nifty            383.25          72.4374                          -0.00771631         -0.0164057         0.00113263                    14.3819 0.000149229
+  before_stated banknifty           68.8919          37.9589                          -0.00808384         -0.0534565          0.0149768                    3.62903   0.0567797
+before_inferred     nifty           358.639          72.4374                          -0.00759243           -0.01634       -0.000572102                    16.2299 5.61003e-05
+before_inferred banknifty           161.967          37.9589                           -0.0138244          -0.059112         0.00226188                    18.2722 1.91482e-05
+
+How much does the 'before' half-life move if the 64-day window shifts by a few days? (top fingerprint windows)
+ fingerprint_rank      start        end     index     alpha     beta  shape_nu  half_life_min  paper_printed_half_life_min
+                1 2022-11-14 2023-02-10     nifty 0.0246181 0.973451   8.99262        358.639                      339.099
+                1 2022-11-14 2023-02-10 banknifty 0.0321479 0.963582   7.33307        161.967                      185.135
+                2 2022-11-15 2023-02-13     nifty  0.025862 0.972001   9.01932        323.978                      339.099
+                2 2022-11-15 2023-02-13 banknifty 0.0330963 0.962357   7.24826        152.117                      185.135
+                3 2022-11-11 2023-02-09     nifty 0.0245407 0.973587   8.82519        369.825                      339.099
+                3 2022-11-11 2023-02-09 banknifty 0.0314065 0.964416   7.41539        165.566                      185.135
+                4 2022-11-16 2023-02-14     nifty 0.0257891 0.972131   8.88734        332.937                      339.099
+                4 2022-11-16 2023-02-14 banknifty 0.0333115  0.96205    7.0708        149.091                      185.135
+                5 2022-11-18 2023-02-16     nifty 0.0260059 0.971814   8.86544        317.583                      339.099
+                5 2022-11-18 2023-02-16 banknifty 0.0341408 0.960866   6.85886        138.461                      185.135
+                6 2022-11-17 2023-02-15     nifty 0.0258389 0.972016   8.82173        322.819                      339.099
+                6 2022-11-17 2023-02-15 banknifty 0.0338844 0.961268   6.98494        142.652                      185.135
+
+====================================================================================================
+Tables 3 and 4. Diebold-Yilmaz connectedness on sub-samples
+====================================================================================================
+Primary configuration: input cond_vol, VAR(2), horizon 10; VAR lags never cross a day or hour boundary.
+Totals are on the paper's scale (sum of the two cross shares); the standard DY index is half of this.
+Intervals: bootstrap resampling whole days (or whole hours for the one-hour sub-samples).
+         period   family          subsample  n_days  n_obs  nifty_from_bn  bn_from_nifty  paper_scale_total  boot_ci95_lo  boot_ci95_hi  paper_printed_nifty_from_bn  paper_printed_bn_from_nifty  paper_printed_total
+  before_stated all_days           all_days      82  29519        37.3622        38.7189             76.081       73.3288        78.682                          NaN                          NaN                  NaN
+  before_stated    union         all_expiry      32  11519        36.1978        36.9481             73.146       68.2151       77.1365                        42.71                        41.29                   84
+  before_stated    union            monthly       4   1440        36.2547           39.2            75.4547       67.0228       79.8284                        36.73                        37.97                 74.7
+  before_stated    union monthly_first_hour       4    240        31.9687        32.9047            64.8734       26.3648       70.1663                        49.67                        49.75                99.42
+  before_stated    union   monthly_mid_hour       4    240        32.0105        41.5455             73.556       41.1068       76.5355                        33.74                         34.9                68.64
+  before_stated    union  monthly_last_hour       4    240        39.3033        42.4443            81.7476       67.4931       88.7601                        52.79                        52.43               105.22
+  before_stated    nifty         all_expiry      18   6480        38.0888        39.2628            77.3516       74.6182       80.1946                          NaN                          NaN                  NaN
+  before_stated    nifty            monthly       4   1440        36.2547           39.2            75.4547       67.0228       79.8284                          NaN                          NaN                  NaN
+  before_stated    nifty monthly_first_hour       4    240        31.9687        32.9047            64.8734       26.3648       69.9206                          NaN                          NaN                  NaN
+  before_stated    nifty   monthly_mid_hour       4    240        32.0105        41.5455             73.556       42.8018       76.9826                          NaN                          NaN                  NaN
+  before_stated    nifty  monthly_last_hour       4    240        39.3033        42.4443            81.7476       67.5446       88.4819                          NaN                          NaN                  NaN
+  before_stated       bn         all_expiry      18   6479        34.3551        35.2884            69.6436       64.9971       75.5303                          NaN                          NaN                  NaN
+  before_stated       bn            monthly       4   1440        36.2547           39.2            75.4547       67.0228       81.2802                          NaN                          NaN                  NaN
+  before_stated       bn monthly_first_hour       4    240        31.9687        32.9047            64.8734       26.3648       69.9206                          NaN                          NaN                  NaN
+  before_stated       bn   monthly_mid_hour       4    240        32.0105        41.5455             73.556       42.1079        77.387                          NaN                          NaN                  NaN
+  before_stated       bn  monthly_last_hour       4    240        39.3033        42.4443            81.7476       67.5446       88.4819                          NaN                          NaN                  NaN
+before_inferred all_days           all_days      64  23039        48.2993        37.1246             85.424       82.7318       87.7072                          NaN                          NaN                  NaN
+before_inferred    union         all_expiry      13   4680        49.0071        38.9371            87.9442       81.1299       90.8884                        42.71                        41.29                   84
+before_inferred    union            monthly       3   1080        45.2843        35.8024            81.0867       69.9424       88.5564                        36.73                        37.97                 74.7
+before_inferred    union monthly_first_hour       3    180        47.2753        34.3128            81.5881       70.0185       87.4503                        49.67                        49.75                99.42
+before_inferred    union   monthly_mid_hour       3    180        35.3099        43.5011            78.8111       42.6973       86.1206                        33.74                         34.9                68.64
+before_inferred    union  monthly_last_hour       3    180        43.6901        41.0393            84.7293       77.3031       89.6279                        52.79                        52.43               105.22
+          after all_days           all_days      59  21233        37.6303        36.4566            74.0868       71.8902       76.3155                          NaN                          NaN                  NaN
+          after    nifty         all_expiry      13   4680        36.1613        38.7313            74.8926       70.1272        79.055                        38.43                        37.95                76.38
+          after    nifty            monthly       3   1080        33.5016        34.1629            67.6645       62.9099        79.621                        36.79                        37.79                74.58
+          after    nifty monthly_first_hour       3    180        38.7901        28.8006            67.5907         50.57       81.5728                        40.14                        40.03                80.18
+          after    nifty   monthly_mid_hour       3    180        25.8892        24.3183            50.2075       45.9359       85.9334                        33.68                        35.13                68.81
+          after    nifty  monthly_last_hour       3    180        36.3808        41.0622             77.443        74.801         92.27                        29.17                        37.27                66.44
+          after       bn         all_expiry      13   4680        35.7814        33.1395             68.921       64.8464       74.1419                        37.45                        35.57                73.02
+          after       bn            monthly       3   1080        38.7354        35.3977            74.1331          69.2       76.8563                        37.13                        35.61                72.74
+          after       bn monthly_first_hour       3    180        41.6939        39.3137            81.0076       78.3581       83.6903                        37.56                        34.41                70.97
+          after       bn   monthly_mid_hour       3    180        29.2156        29.2095            58.4251       53.6629       66.4624                        33.97                        32.57                66.54
+          after       bn  monthly_last_hour       3    180        42.7016        37.6263             80.328       70.8082       87.6853                        38.81                        35.62                74.43
+(before_inferred: Nifty and Bank Nifty expired on the same days, so the union, Nifty and Bank Nifty rows coincide.)
+
+Change in total connectedness, after minus before (paper scale), with whole-day (or whole-hour) bootstrap 95% intervals:
+         before before_family after_family          subsample  total_before  total_after  diff_after_minus_before  diff_boot_ci95_lo  diff_boot_ci95_hi  paper_printed_diff
+  before_stated      all_days     all_days           all_days        76.081      74.0868                  -1.9942           -5.81499            1.47281                 NaN
+  before_stated         union        nifty         all_expiry        73.146      74.8926                  1.74666           -4.17283             7.7906               -7.62
+  before_stated         nifty        nifty         all_expiry       77.3516      74.8926                 -2.45895            -8.6967            2.87587                 NaN
+  before_stated         union           bn         all_expiry        73.146       68.921                   -4.225           -10.3041            2.62704              -10.98
+  before_stated            bn           bn         all_expiry       69.6436       68.921                 -0.72261           -7.91033            6.72429                 NaN
+  before_stated         union        nifty            monthly       75.4547      67.6645                 -7.79019           -13.2527            4.88399               -0.12
+  before_stated         union           bn            monthly       75.4547      74.1331                  -1.3216           -7.14713            7.63376               -1.96
+  before_stated         union        nifty monthly_first_hour       64.8734      67.5907                  2.71734           -15.5347            41.3788              -19.24
+  before_stated         union           bn monthly_first_hour       64.8734      81.0076                  16.1342            9.87095            55.0161              -28.45
+  before_stated         union        nifty   monthly_mid_hour        73.556      50.2075                 -23.3485           -29.0167            14.5186                0.17
+  before_stated         union           bn   monthly_mid_hour        73.556      58.4251                 -15.1309           -20.7983            16.6437                -2.1
+  before_stated         union        nifty  monthly_last_hour       81.7476       77.443                 -4.30461           -10.8248            14.4706              -38.78
+  before_stated         union           bn  monthly_last_hour       81.7476       80.328                 -1.41963           -12.9911            18.5141              -30.79
+before_inferred      all_days     all_days           all_days        85.424      74.0868                 -11.3371            -14.236           -7.71643                 NaN
+before_inferred         union        nifty         all_expiry       87.9442      74.8926                 -13.0515           -19.1211           -4.59963               -7.62
+before_inferred         union           bn         all_expiry       87.9442       68.921                 -19.0232            -24.395           -10.2254              -10.98
+before_inferred         union        nifty            monthly       81.0867      67.6645                 -13.4221           -23.7788            2.78091               -0.12
+before_inferred         union           bn            monthly       81.0867      74.1331                 -6.95356           -16.8808            3.52625               -1.96
+before_inferred         union        nifty monthly_first_hour       81.5881      67.5907                 -13.9974           -34.9525            3.58209              -19.24
+before_inferred         union           bn monthly_first_hour       81.5881      81.0076                -0.580538           -8.65979            10.9891              -28.45
+before_inferred         union        nifty   monthly_mid_hour       78.8111      50.2075                 -28.6035           -39.0971            11.5018                0.17
+before_inferred         union           bn   monthly_mid_hour       78.8111      58.4251                  -20.386           -30.6236            13.6135                -2.1
+before_inferred         union        nifty  monthly_last_hour       84.7293       77.443                 -7.28636           -14.4394            6.22722              -38.78
+before_inferred         union           bn  monthly_last_hour       84.7293       80.328                 -4.40138           -15.0248            8.22892              -30.79
+
+Sensitivity grid (5 input series x VAR lags 1, 2, 5, AIC x horizons 10, 30): range of the paper-scale total,
+the configuration closest to the printed value, and the primary total without the first (overnight) minute:
+         period family          subsample  grid_min  grid_max  grid_max_cross_share  primary_total  primary_total_without_first_minute  paper_printed_total  closest_total              closest_config
+  before_stated  union         all_expiry   55.0257   83.5375               41.8289         73.146                             66.5372                   84        83.5375     cond_vol, p=1 (1), H=10
+  before_stated  union            monthly   53.0173   84.7971               42.6172        75.4547                             70.9664                 74.7        75.4547     cond_vol, p=2 (2), H=10
+  before_stated  union monthly_first_hour   47.7243   78.5679               56.8992        64.8734                             61.6858                99.42        78.5679     cond_vol, p=1 (1), H=30
+  before_stated  union   monthly_mid_hour   47.4387   81.9389               52.0811         73.556                              73.556                68.64        69.9199     cond_vol, p=5 (5), H=30
+  before_stated  union  monthly_last_hour   54.9699   82.4107               44.9912        81.7476                             81.7476               105.22        82.4107     cond_vol, p=2 (2), H=30
+before_inferred  union         all_expiry   70.2664   91.8322               49.9966        87.9442                             86.0615                   84        84.6564      returns, p=1 (1), H=10
+before_inferred  union            monthly   67.1082   87.1061               46.4783        81.0867                             81.0428                 74.7        75.6479     cond_vol, p=5 (5), H=10
+before_inferred  union monthly_first_hour   55.3088   98.9401               51.4767        81.5881                             79.3936                99.42        98.9401 intraday_vol, p=5 (5), H=30
+before_inferred  union   monthly_mid_hour   57.0848   84.5763               49.7602        78.8111                             78.8111                68.64        68.5709  abs_returns, p=5 (5), H=10
+before_inferred  union  monthly_last_hour   44.0928   86.5178                51.531        84.7293                             84.7293               105.22        86.5178  cond_vol, p=10 (aic), H=30
+          after  nifty         all_expiry    68.023   81.1108               40.5713        74.8926                             73.7466                76.38        75.0438     cond_vol, p=2 (2), H=30
+          after  nifty            monthly   61.3347   79.5224               39.8168        67.6645                             66.6749                74.58        72.9593     cond_vol, p=1 (1), H=10
+          after  nifty monthly_first_hour   54.2635   73.7108                44.048        67.5907                             67.1928                80.18        73.7108      returns, p=5 (5), H=30
+          after  nifty   monthly_mid_hour   50.0866   81.2911               43.4287        50.2075                             50.2075                68.81        73.3332 intraday_vol, p=5 (5), H=30
+          after  nifty  monthly_last_hour   60.4347   85.7791               51.5655         77.443                              77.443                66.44        66.5645  abs_returns, p=2 (2), H=10
+          after     bn         all_expiry   50.6831   76.6282               39.0005         68.921                             67.1998                73.02        71.4377      returns, p=5 (5), H=30
+          after     bn            monthly   47.9814   78.6114               39.7922        74.1331                             74.0565                72.74        72.9429      returns, p=1 (1), H=10
+          after     bn monthly_first_hour   28.8063   85.7813               46.6785        81.0076                             81.9134                70.97        71.3424      returns, p=2 (2), H=30
+          after     bn   monthly_mid_hour   48.6464     79.54               44.8997        58.4251                             58.4251                66.54        67.1198 intraday_vol, p=2 (2), H=10
+          after     bn  monthly_last_hour   16.7371   82.9106               44.9841         80.328                              80.328                74.43        79.5735     cond_vol, p=5 (5), H=30
+
+====================================================================================================
+Table 5 (replacement). Volume: the paper's per-minute volume is not available; day-level measures instead
+====================================================================================================
+         before     index                         measure    subsample  n_days_before  n_days_after  pct_change_median   day_mwu_p       hac_p  boot_p  weekrel_diff  weekrel_p_mwu  paper_printed_pct_change_from_medians  paper_printed_p
+  before_stated     nifty index_constituent_volume_shares          all             82            59            10.9044   0.0165352   0.0603788   0.143           NaN            NaN                                 32.636                0
+  before_stated     nifty index_constituent_volume_shares          wed             18            11           -3.76317    0.804748    0.703792   0.833     -0.078316       0.290856                                19.2547                0
+  before_stated     nifty index_constituent_volume_shares          thu             18            12             15.925   0.0167643  0.00551122  0.0795      0.088835       0.280364                                 65.032                0
+  before_stated     nifty index_constituent_volume_shares nifty_expiry             18            13            12.7894   0.0355811   0.0105133  0.1365     0.0736774       0.346832                                    NaN              NaN
+  before_stated     nifty index_constituent_volume_shares    bn_expiry             18            13           -13.7873     0.45894    0.757234  0.0795     -0.220329     0.00873902                                    NaN              NaN
+  before_stated     nifty     options_premium_turnover_cr          all             82            59           -9.70625    0.605746    0.724063  0.1185           NaN            NaN                                 32.636                0
+  before_stated     nifty     options_premium_turnover_cr          wed             18            11           -15.3272    0.356838    0.538457  0.1515     -0.133221        0.14408                                19.2547                0
+  before_stated     nifty     options_premium_turnover_cr          thu             18            12            41.7897   0.0167643     0.03585  0.0095      0.284966       0.014926                                 65.032                0
+  before_stated     nifty     options_premium_turnover_cr nifty_expiry             18            13            40.3012   0.0572337    0.114068   0.014      0.222323      0.0475256                                    NaN              NaN
+  before_stated     nifty     options_premium_turnover_cr    bn_expiry             18            13           -18.7682     0.12326      0.2769  0.0545     -0.230195      0.0322165                                    NaN              NaN
+  before_stated     nifty    futures_notional_turnover_cr          all             82            59            20.5378   0.0191524   0.0997148  0.0125           NaN            NaN                                 32.636                0
+  before_stated     nifty    futures_notional_turnover_cr          wed             18            11             18.153    0.839714    0.889243  0.5065     -0.165843        0.14408                                19.2547                0
+  before_stated     nifty    futures_notional_turnover_cr          thu             18            12            47.9417   0.0864366   0.0903194   0.112      0.176047       0.168873                                 65.032                0
+  before_stated     nifty    futures_notional_turnover_cr nifty_expiry             18            13             44.683    0.179897    0.189386   0.157      0.108836       0.346832                                    NaN              NaN
+  before_stated     nifty    futures_notional_turnover_cr    bn_expiry             18            13             18.153    0.952117    0.907736   0.412     -0.229712      0.0816146                                    NaN              NaN
+  before_stated banknifty index_constituent_volume_shares          all             82            59            3.17647    0.905186    0.933026    0.67           NaN            NaN                               -13.4396                0
+  before_stated banknifty index_constituent_volume_shares          wed             18            11            22.0559     0.38078    0.879904   0.305     0.0514856       0.405684                                9.62963                0
+  before_stated banknifty index_constituent_volume_shares          thu             18            12            5.81329    0.815891    0.858563   0.784     0.0231071       0.750864                               -3.29412           0.0011
+  before_stated banknifty index_constituent_volume_shares nifty_expiry             18            13            5.92159    0.794703    0.824053   0.822     0.0316546       0.616793                                    NaN              NaN
+  before_stated banknifty index_constituent_volume_shares    bn_expiry             18            13               1.52    0.794703     0.37198  0.9615     -0.150396       0.645252                                    NaN              NaN
+  before_stated banknifty     options_premium_turnover_cr          all             82            59           -14.6863   0.0149125   0.0871097   0.019           NaN            NaN                               -13.4396                0
+  before_stated banknifty     options_premium_turnover_cr          wed             18            11           -3.49913    0.251737    0.306187  0.8245     0.0452858       0.458318                                9.62963                0
+  before_stated banknifty     options_premium_turnover_cr          thu             18            12           -18.2404   0.0400562   0.0429342   0.111     -0.168523       0.156142                               -3.29412           0.0011
+  before_stated banknifty     options_premium_turnover_cr nifty_expiry             18            13           -17.8784   0.0685373   0.0837963   0.131     -0.108227       0.307341                                    NaN              NaN
+  before_stated banknifty     options_premium_turnover_cr    bn_expiry             18            13          -0.262347    0.307341    0.291066   0.984     0.0355774        0.67424                                    NaN              NaN
+  before_stated banknifty    futures_notional_turnover_cr          all             82            59            6.72968    0.597018    0.800963   0.354           NaN            NaN                               -13.4396                0
+  before_stated banknifty    futures_notional_turnover_cr          wed             18            11            8.67592     0.98207    0.866342   0.667    -0.0290572       0.910533                                9.62963                0
+  before_stated banknifty    futures_notional_turnover_cr          thu             18            12           -13.2231     0.56766    0.800413  0.4705     -0.104988       0.280364                               -3.29412           0.0011
+  before_stated banknifty    futures_notional_turnover_cr nifty_expiry             18            13           -15.2124    0.483577    0.679382   0.409    -0.0938745       0.288759                                    NaN              NaN
+  before_stated banknifty    futures_notional_turnover_cr    bn_expiry             18            13            8.67592    0.763994     0.61329   0.698    -0.0851386       0.703719                                    NaN              NaN
+before_inferred     nifty index_constituent_volume_shares          all             64            59            41.2512 2.14551e-09 0.000112006       0           NaN            NaN                                 32.636                0
+before_inferred     nifty index_constituent_volume_shares          wed             13            11            23.4661   0.0276944   0.0507215   0.023    -0.0718945       0.246566                                19.2547                0
+before_inferred     nifty index_constituent_volume_shares          thu             12            12            67.7075 0.000592042  1.7758e-08       0      0.203955      0.0165749                                 65.032                0
+before_inferred     nifty index_constituent_volume_shares nifty_expiry             13            13            59.7186 0.000402466 5.58985e-09       0      0.196533      0.0138343                                    NaN              NaN
+before_inferred     nifty index_constituent_volume_shares    bn_expiry             13            13            30.1948   0.0138343   0.0108922  0.0055     -0.089617       0.238204                                    NaN              NaN
+before_inferred     nifty     options_premium_turnover_cr          all             64            59            32.3321 2.38816e-07 1.07511e-07       0           NaN            NaN                                 32.636                0
+before_inferred     nifty     options_premium_turnover_cr          wed             13            11            35.1088   0.0425828   0.0605373   0.023     -0.178366      0.0929262                                19.2547                0
+before_inferred     nifty     options_premium_turnover_cr          thu             12            12            179.495 3.65846e-05 1.91134e-20       0      0.739272    3.65846e-05                                 65.032                0
+before_inferred     nifty     options_premium_turnover_cr nifty_expiry             13            13             170.07 5.09378e-05 1.02297e-19       0      0.669617     0.00014772                                    NaN              NaN
+before_inferred     nifty     options_premium_turnover_cr    bn_expiry             13            13            11.8705    0.281515    0.240861   0.204     -0.328988     0.00346591                                    NaN              NaN
+before_inferred     nifty    futures_notional_turnover_cr          all             64            59            20.2311    0.040582    0.101147  0.0315           NaN            NaN                                 32.636                0
+before_inferred     nifty    futures_notional_turnover_cr          wed             13            11             24.734    0.953799    0.887242   0.404     -0.177502       0.223731                                19.2547                0
+before_inferred     nifty    futures_notional_turnover_cr          thu             12            12            67.2543   0.0350891 7.40908e-06   0.022      0.306372      0.0689643                                 65.032                0
+before_inferred     nifty    futures_notional_turnover_cr nifty_expiry             13            13            56.0278    0.151032   0.0128888  0.0925      0.206832       0.199825                                    NaN              NaN
+before_inferred     nifty    futures_notional_turnover_cr    bn_expiry             13            13            4.09005    0.837472    0.646336   0.821     -0.227495       0.123936                                    NaN              NaN
+before_inferred banknifty index_constituent_volume_shares          all             64            59           -10.9584   0.0463614    0.111486   0.175           NaN            NaN                               -13.4396                0
+before_inferred banknifty index_constituent_volume_shares          wed             13            11            7.17306    0.862015    0.765966  0.7435      0.138658      0.0821938                                9.62963                0
+before_inferred banknifty index_constituent_volume_shares          thu             12            12           -6.96765    0.707454     0.71923   0.817      0.090255        0.54437                               -3.29412           0.0011
+before_inferred banknifty index_constituent_volume_shares nifty_expiry             13            13           -9.91534    0.719614    0.726096   0.729     0.0928574       0.472789                                    NaN              NaN
+before_inferred banknifty index_constituent_volume_shares    bn_expiry             13            13           0.986272    0.918309    0.897099  0.9125      0.131016       0.182422                                    NaN              NaN
+before_inferred banknifty     options_premium_turnover_cr          all             64            59           -13.2982    0.188942    0.487873  0.0615           NaN            NaN                               -13.4396                0
+before_inferred banknifty     options_premium_turnover_cr          wed             13            11            35.2694     0.11775    0.136691  0.0865      0.397088    0.000630237                                9.62963                0
+before_inferred banknifty     options_premium_turnover_cr          thu             12            12            -34.437 6.00576e-05 7.31536e-06  0.0145     -0.610077    3.65846e-05                               -3.29412           0.0011
+before_inferred banknifty     options_premium_turnover_cr nifty_expiry             13            13           -35.8771 7.85709e-05 9.89619e-06   0.005     -0.569144     0.00018141                                    NaN              NaN
+before_inferred banknifty     options_premium_turnover_cr    bn_expiry             13            13            24.7781    0.411924    0.423592  0.1645      0.215247     0.00346591                                    NaN              NaN
+before_inferred banknifty    futures_notional_turnover_cr          all             64            59           -4.70427    0.164634    0.302542   0.475           NaN            NaN                               -13.4396                0
+before_inferred banknifty    futures_notional_turnover_cr          wed             13            11            17.1778    0.772059    0.563946  0.5695     0.0327083       0.728126                                9.62963                0
+before_inferred banknifty    futures_notional_turnover_cr          thu             12            12            -10.652    0.126022   0.0510139   0.381     -0.148729       0.214494                               -3.29412           0.0011
+before_inferred banknifty    futures_notional_turnover_cr nifty_expiry             13            13           -13.7204   0.0455003   0.0201264  0.3115     -0.171181       0.136967                                    NaN              NaN
+before_inferred banknifty    futures_notional_turnover_cr    bn_expiry             13            13            6.86705    0.411924    0.315444   0.699   -0.00724402       0.959101                                    NaN              NaN
+
+====================================================================================================
+Table 6. Rogers-Satchell volatility per minute (square root), before vs after
+====================================================================================================
+         before     index    subsample  n_min_before  n_min_after  median_before  median_after  pct_change_median  minute_mwu_p   day_mwu_p       hac_p  boot_p  weekrel_diff  weekrel_p_mwu  paper_printed_median_before  paper_printed_median_after  paper_printed_p
+  before_stated     nifty          all         29520        21240    0.000176814   0.000198408            12.2129  6.62518e-126   0.0103456  0.00430136  0.0095           NaN            NaN                      0.00024                     0.00026                0
+  before_stated     nifty          wed          6480         3960     0.00017519   0.000188851            7.79785   8.63836e-14    0.486007    0.352059   0.442     0.0131652       0.804748                      0.00023                     0.00023            0.061
+  before_stated     nifty          thu          6480         4320    0.000196221   0.000245098            24.9095   2.77332e-86    0.144152  0.00423682  0.0115      0.113597       0.144152                      0.00024                     0.00027                0
+  before_stated     nifty nifty_expiry          6480         4680    0.000196221   0.000236129            20.3387   6.68059e-62    0.253906   0.0253918   0.051     0.0904267       0.237625                          NaN                         NaN              NaN
+  before_stated     nifty    bn_expiry          6480         4680    0.000182237   0.000186577            2.38137   0.000954811    0.794703    0.641603  0.7665    -0.0759419       0.222095                          NaN                         NaN              NaN
+  before_stated banknifty          all         29520        21234    0.000259422   0.000292454            12.7329  5.06386e-125  0.00672146  0.00433576  0.0025           NaN            NaN                      0.00034                     0.00034            0.087
+  before_stated banknifty          wed          6480         3960    0.000267172   0.000291724            9.18944   1.07782e-19    0.311873    0.261282    0.31     0.0129803       0.839714                      0.00033                     0.00036                0
+  before_stated banknifty          thu          6480         4320    0.000278299   0.000322297            15.8095   8.22526e-36     0.56766    0.086454   0.067     0.0101815              1                      0.00034                     0.00034            0.079
+  before_stated banknifty nifty_expiry          6480         4680    0.000278299    0.00031762             14.129   1.13128e-30    0.588899    0.122048  0.1295     0.0152332       0.920281                          NaN                         NaN              NaN
+  before_stated banknifty    bn_expiry          6480         4680    0.000278565   0.000292178            4.88658   2.37035e-11    0.483577     0.36807   0.575    -0.0460319       0.616793                          NaN                         NaN              NaN
+before_inferred     nifty          all         23040        21240    0.000165728   0.000198408            19.7194  2.88696e-256 0.000315829 0.000293943       0           NaN            NaN                      0.00024                     0.00026                0
+before_inferred     nifty          wed          4680         3960    0.000155954   0.000188851            21.0945   7.02286e-53    0.182683    0.124558  0.0825     0.0502824       0.862015                      0.00023                     0.00023            0.061
+before_inferred     nifty          thu          4320         4320     0.00016421   0.000245098            49.2591  1.37774e-199   0.0101931 4.84531e-05   0.002      0.222472     0.00510791                      0.00024                     0.00027                0
+before_inferred     nifty nifty_expiry          4680         4680    0.000168097   0.000236129            40.4723  1.31316e-167   0.0138343 0.000470912  0.0015      0.198806     0.00766076                          NaN                         NaN              NaN
+before_inferred     nifty    bn_expiry          4680         4680    0.000168097   0.000186577            10.9938   1.67744e-19    0.355967    0.381782  0.3455    -0.0828314       0.329878                          NaN                         NaN              NaN
+before_inferred banknifty          all         23040        21234    0.000254728   0.000292454            14.8103  5.58782e-149  0.00165331  0.00831494  0.0005           NaN            NaN                      0.00034                     0.00034            0.087
+before_inferred banknifty          wed          4680         3960    0.000250696   0.000291724            16.3655   4.28242e-45    0.147501    0.128757   0.089      0.058194       0.297014                      0.00033                     0.00036                0
+before_inferred banknifty          thu          4320         4320    0.000256821   0.000322297            25.4945   3.91682e-65   0.0689643   0.0469149   0.017      0.056027       0.470486                      0.00034                     0.00034            0.079
+before_inferred banknifty nifty_expiry          4680         4680    0.000261512    0.00031762            21.4552   1.32436e-52   0.0648699   0.0857018   0.029     0.0540976       0.441756                          NaN                         NaN              NaN
+before_inferred banknifty    bn_expiry          4680         4680    0.000261512   0.000292178            11.7262   2.28258e-23    0.355967    0.341383  0.2785    -0.0215191       0.877731                          NaN                         NaN              NaN
+
+====================================================================================================
+Sensitivity: session rule and the overnight return (core numbers only)
+====================================================================================================
+Intraday half-life (minutes) by session rule and treatment of the overnight return:
+period                                         after       before_inferred        before_stated       
+index                                      banknifty nifty       banknifty  nifty     banknifty  nifty
+trim             overnight_in_first_minute                                                            
+360_drop_first15 False                          34.2  68.4           132.9  269.2          73.4  401.8
+                 True                           34.0  67.8           129.3  264.2          73.9  374.0
+360_drop_last15  False                          39.0  73.2           163.0  361.3          70.9  409.6
+                 True                           38.0  72.4           162.0  358.6          68.9  383.3
+375_full         False                          37.0  71.1           137.2  272.3          71.8  345.8
+                 True                           36.7  70.6           134.6  268.9          70.3  325.0
+
+====================================================================================================
+Checks on the paper's printed numbers (arithmetic only)
+====================================================================================================
+                                                               check                                          item   value  compare_with
+          Table 2: N implied by printed LL and AIC (N = -2 LL / AIC)                              before banknifty 22680.4         23039
+                             Tables 3 and 4: printed row sums to 100   after nifty monthly_first_hour Nifty 50 row     101           100
+                             Tables 3 and 4: printed row sums to 100 after nifty monthly_first_hour Bank Nifty row     101           100
+    Tables 3 and 4: printed total equals sum of the two cross shares                   after bn monthly_first_hour   71.97         70.97
+Table 5: % change implied by printed medians vs % quoted in the text                                     thu nifty  65.032            61
+
+Tables 5 and 6: is the printed statistic possible and does it give the printed p-value? (consistent, by reading)
+and does the implied direction agree with the printed medians? (direction_matches_medians; a soft check only)
+                      consistent          direction_matches_medians         
+reading                        U rank_sum                         U rank_sum
+table   item                                                                
+Table 5 all banknifty      False     True                      True     True
+        all nifty           True     True                     False     True
+        thu banknifty      False     True                      True    False
+        thu nifty           True     True                     False     True
+        wed banknifty      False     True                     False    False
+        wed nifty           True     True                     False     True
+Table 6 all banknifty      False    False                      True     True
+        all nifty           True     True                     False     True
+        thu banknifty      False    False                      True     True
+        thu nifty          False    False                     False    False
+        wed banknifty      False    False                     False    False
+        wed nifty          False    False                      True     True
+
+Wrote 24 CSV files and 2 figures to results/replication_nse/.

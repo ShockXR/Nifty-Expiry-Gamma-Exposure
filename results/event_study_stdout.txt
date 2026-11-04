@@ -1,0 +1,271 @@
+REAL DATA. Expiry-day event study, Nifty 50 and Bank Nifty.
+
+Official NSE trading days in index_daily.csv: 944 (2023-01-02 to 2026-11-02).
+Bhavcopy files read: 994 trade dates, 2022-10-20 to 2026-11-02, 2,773,733 NIFTY/BANKNIFTY rows.
+Official days without a bhavcopy: []; bhavcopy days not official: []
+Rows with trades but no lot size after inference: 0
+Option lot size (daily median over traded contracts; runs):
+   symbol  lot       from         to  trade_dates                                 source
+BANKNIFTY   25 2022-10-20 2023-07-06          176 inferred from turnover (legacy layout)
+BANKNIFTY   15 2023-07-07 2024-07-05          244 inferred from turnover (legacy layout)
+BANKNIFTY   15 2024-07-08 2025-01-07          126                printed in file (UDiFF)
+BANKNIFTY   30 2025-01-08 2025-06-26          115                printed in file (UDiFF)
+BANKNIFTY   35 2025-06-27 2025-12-30          127                printed in file (UDiFF)
+BANKNIFTY   30 2025-12-31 2026-11-02          206                printed in file (UDiFF)
+    NIFTY   50 2022-10-20 2024-04-25          372 inferred from turnover (legacy layout)
+    NIFTY   25 2024-04-26 2024-07-05           48 inferred from turnover (legacy layout)
+    NIFTY   25 2024-07-08 2024-12-26          118                printed in file (UDiFF)
+    NIFTY   75 2024-12-27 2025-12-22          245                printed in file (UDiFF)
+    NIFTY   65 2025-12-23 2026-11-02          211                printed in file (UDiFF)
+Nifty 50 minute bars: 2368 days 2017-04-03 to 2026-11-02; dropped 10 (weekend sessions, <370 bars, >20% flat bars or not an official day): ['2017-07-10', '2020-02-01', '2021-02-24', '2021-11-04', '2024-01-20', '2024-03-02', '2024-05-18', '2025-02-01', '2025-10-21', '2026-02-01']
+Bank Nifty minute bars: 2297 days 2017-01-02 to 2026-04-22; dropped 14 (weekend sessions, <370 bars, >20% flat bars or not an official day): ['2017-02-21', '2017-07-10', '2019-09-23', '2020-02-01', '2021-02-24', '2022-03-07', '2023-06-14', '2024-01-20', '2024-03-02', '2024-04-23', '2024-05-18', '2025-02-01', '2025-10-21', '2026-02-01']
+Rule check NIFTY 2022-10-20 to 2025-08-31: rule 150 expiries, bhavcopy 150; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
+Rule check BANKNIFTY 2022-10-20 to 2023-08-31: rule 46 expiries, bhavcopy 46; identical dates: True; rule-only []; bhavcopy-only []; monthly labels identical: True (differences: [])
+Closing auction detected in the Nifty bars from 2026-08-03 (63 days, every one with >= 8 flat bars in the last 20 minutes; 0 valid days before it had that many).
+Data assembled in 26.3s.
+
+== Schedule changes detected from the bhavcopies
+   symbol    kind  change last_old_expiry old_weekday first_new_expiry new_weekday
+BANKNIFTY monthly weekday      2024-02-29         Thu       2024-03-27         Wed
+BANKNIFTY monthly weekday      2024-12-24         Wed       2025-01-30         Thu
+BANKNIFTY monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+BANKNIFTY  weekly weekday      2023-08-24         Thu       2023-09-06         Wed
+BANKNIFTY  weekly stopped      2024-11-13         Wed              NaT        none
+    NIFTY monthly weekday      2025-08-28         Thu       2025-09-30         Tue
+    NIFTY  weekly weekday      2025-08-21         Thu       2025-09-02         Tue
+
+== Events used (event_week = Monday of the first treated week)
+event                                                                                                     description last_old_expiry first_new_expiry event_week
+    a                                                            Bank Nifty weekly expiry moves Thursday to Wednesday      2023-08-24       2023-09-06 2023-09-04
+    b                                           Bank Nifty monthly expiry moves Thursday to Wednesday (paper's event)      2024-02-29       2024-03-27 2024-03-04
+    c                             Bank Nifty weekly options stop (SEBI measures of 20 Nov 2024); Nifty keeps weeklies      2024-11-13              NaT 2024-11-18
+   c2                                                      Bank Nifty monthly expiry moves Wednesday to last Thursday      2024-12-24       2025-01-30 2025-01-27
+    d                            Nifty weekly expiry moves Thursday to Tuesday (monthlies of both indices to Tuesday)      2025-08-21       2025-09-02 2025-09-01
+    e Closing auction sets the official close (frozen index before 15:29; found in the minute bars, not the bhavcopy)             NaT              NaT 2026-08-03
+
+== Premium by regime (primary measure, own/former expiry weekday, clean weekly weeks)
+index target                                  regime  n_weeks       mean  boot_lo  boot_hi     hac_p  ratio
+    N    own              R0 both Thu (2019-03 to a)      172 -1.628e-01   -0.241   -0.084 1.161e-04  0.850
+    N    own         R0v both Thu, bhavcopy-verified       34  5.481e-02   -0.085    0.205 4.372e-01  1.056
+    N    own               R1 BN Wed, N Thu (a to c)       42 -7.915e-03   -0.227    0.206 9.421e-01  0.992
+    N    own         R2 BN no weekly, N Thu (c to d)       29 -1.533e-01   -0.495    0.154 3.980e-01  0.858
+    N    own         R3 N Tue, BN no weekly (d to e)       34  6.171e-02   -0.076    0.204 3.506e-01  1.064
+    N    own R3+ after d, incl. closing-auction days       43  5.100e-02   -0.068    0.171 3.655e-01  1.052
+    N    own       R4 closing auction only (after e)        9  1.052e-02   -0.314    0.298 9.442e-01  1.011
+    N    Mon              R0 both Thu (2019-03 to a)      162  8.131e-02   -0.009    0.175 8.280e-02  1.085
+    N    Mon         R0v both Thu, bhavcopy-verified       33  8.014e-02   -0.132    0.307 4.851e-01  1.083
+    N    Mon               R1 BN Wed, N Thu (a to c)       39 -4.410e-02   -0.172    0.088 4.450e-01  0.957
+    N    Mon         R2 BN no weekly, N Thu (c to d)       27  3.623e-02   -0.133    0.201 6.478e-01  1.037
+    N    Mon         R3 N Tue, BN no weekly (d to e)       34 -2.884e-02   -0.224    0.166 7.895e-01  0.972
+    N    Mon R3+ after d, incl. closing-auction days       42 -1.954e-02   -0.196    0.149 8.238e-01  0.981
+    N    Mon       R4 closing auction only (after e)        8  1.996e-02   -0.411    0.397 9.139e-01  1.020
+    N    Tue              R0 both Thu (2019-03 to a)      160 -1.910e-02   -0.094    0.061 6.303e-01  0.981
+    N    Tue         R0v both Thu, bhavcopy-verified       30 -1.839e-01   -0.303   -0.064 2.953e-03  0.832
+    N    Tue               R1 BN Wed, N Thu (a to c)       40  6.082e-03   -0.194    0.206 9.489e-01  1.006
+    N    Tue         R2 BN no weekly, N Thu (c to d)       29 -6.291e-02   -0.257    0.157 5.541e-01  0.939
+    N    Tue         R3 N Tue, BN no weekly (d to e)       34  6.171e-02   -0.078    0.206 3.506e-01  1.064
+    N    Tue R3+ after d, incl. closing-auction days       43  5.100e-02   -0.070    0.174 3.655e-01  1.052
+    N    Tue       R4 closing auction only (after e)        9  1.052e-02   -0.313    0.295 9.442e-01  1.011
+    N    Wed              R0 both Thu (2019-03 to a)      163 -2.731e-04   -0.080    0.080 9.949e-01  1.000
+    N    Wed         R0v both Thu, bhavcopy-verified       34 -8.109e-02   -0.213    0.047 2.693e-01  0.922
+    N    Wed               R1 BN Wed, N Thu (a to c)       42  1.455e-01    0.016    0.283 2.667e-02  1.157
+    N    Wed         R2 BN no weekly, N Thu (c to d)       28 -2.189e-01   -0.390   -0.056 6.811e-03  0.803
+    N    Wed         R3 N Tue, BN no weekly (d to e)       33 -2.050e-02   -0.231    0.186 8.617e-01  0.980
+    N    Wed R3+ after d, incl. closing-auction days       42  1.136e-02   -0.166    0.184 9.071e-01  1.011
+    N    Wed       R4 closing auction only (after e)        9  1.282e-01   -0.073    0.325 1.214e-01  1.137
+    N    Thu              R0 both Thu (2019-03 to a)      172 -1.628e-01   -0.242   -0.082 1.161e-04  0.850
+    N    Thu         R0v both Thu, bhavcopy-verified       34  5.481e-02   -0.083    0.200 4.372e-01  1.056
+    N    Thu               R1 BN Wed, N Thu (a to c)       42 -7.915e-03   -0.224    0.207 9.421e-01  0.992
+    N    Thu         R2 BN no weekly, N Thu (c to d)       29 -1.533e-01   -0.499    0.163 3.980e-01  0.858
+    N    Thu         R3 N Tue, BN no weekly (d to e)       31  1.097e-02   -0.073    0.097 7.620e-01  1.011
+    N    Thu R3+ after d, incl. closing-auction days       40  8.366e-03   -0.082    0.098 8.402e-01  1.008
+    N    Thu       R4 closing auction only (after e)        9 -6.185e-04   -0.310    0.272 9.968e-01  0.999
+    N    Fri              R0 both Thu (2019-03 to a)      160  1.121e-01    0.019    0.206 1.861e-02  1.119
+    N    Fri         R0v both Thu, bhavcopy-verified       32  1.177e-01   -0.072    0.280 2.233e-01  1.125
+    N    Fri               R1 BN Wed, N Thu (a to c)       40 -1.075e-01   -0.314    0.122 3.200e-01  0.898
+    N    Fri         R2 BN no weekly, N Thu (c to d)       26  4.392e-01    0.273    0.610 1.499e-08  1.551
+    N    Fri         R3 N Tue, BN no weekly (d to e)       33 -2.367e-02   -0.170    0.140 7.699e-01  0.977
+    N    Fri R3+ after d, incl. closing-auction days       42 -5.199e-02   -0.181    0.094 4.512e-01  0.949
+    N    Fri       R4 closing auction only (after e)        9 -1.558e-01   -0.421    0.119 3.600e-01  0.856
+   BN    own              R0 both Thu (2019-03 to a)      172 -1.063e-01   -0.188   -0.028 9.660e-03  0.899
+   BN    own         R0v both Thu, bhavcopy-verified       34  8.548e-02   -0.060    0.234 1.912e-01  1.089
+   BN    own               R1 BN Wed, N Thu (a to c)       42  4.008e-02   -0.120    0.214 6.358e-01  1.041
+   BN    Mon              R0 both Thu (2019-03 to a)      161  6.996e-02   -0.023    0.167 1.589e-01  1.072
+   BN    Mon         R0v both Thu, bhavcopy-verified       33  8.934e-03   -0.204    0.232 9.346e-01  1.009
+   BN    Mon               R1 BN Wed, N Thu (a to c)       39 -1.357e-02   -0.167    0.139 8.450e-01  0.987
+   BN    Mon         R2 BN no weekly, N Thu (c to d)       27 -4.270e-03   -0.163    0.167 9.592e-01  0.996
+   BN    Mon         R3 N Tue, BN no weekly (d to e)       24  1.955e-01   -0.013    0.415 8.074e-02  1.216
+   BN    Mon R3+ after d, incl. closing-auction days       24  1.955e-01   -0.007    0.422 8.074e-02  1.216
+   BN    Tue              R0 both Thu (2019-03 to a)      160 -3.090e-02   -0.105    0.048 4.260e-01  0.970
+   BN    Tue         R0v both Thu, bhavcopy-verified       30 -1.576e-01   -0.309   -0.003 4.722e-02  0.854
+   BN    Tue               R1 BN Wed, N Thu (a to c)       40 -2.386e-02   -0.211    0.170 7.884e-01  0.976
+   BN    Tue         R2 BN no weekly, N Thu (c to d)       29 -1.056e-01   -0.307    0.081 3.222e-01  0.900
+   BN    Tue         R3 N Tue, BN no weekly (d to e)       24 -2.475e-03   -0.167    0.205 9.799e-01  0.998
+   BN    Tue R3+ after d, incl. closing-auction days       24 -2.475e-03   -0.165    0.215 9.799e-01  0.998
+   BN    Wed              R0 both Thu (2019-03 to a)      162 -3.555e-02   -0.115    0.044 3.983e-01  0.965
+   BN    Wed         R0v both Thu, bhavcopy-verified       33 -6.303e-02   -0.246    0.115 5.253e-01  0.939
+   BN    Wed               R1 BN Wed, N Thu (a to c)       42  4.008e-02   -0.119    0.209 6.358e-01  1.041
+   BN    Wed         R2 BN no weekly, N Thu (c to d)       28 -1.258e-01   -0.299    0.054 1.566e-01  0.882
+   BN    Wed         R3 N Tue, BN no weekly (d to e)       23 -1.830e-01   -0.419    0.019 1.561e-01  0.833
+   BN    Wed R3+ after d, incl. closing-auction days       23 -1.830e-01   -0.417    0.020 1.561e-01  0.833
+   BN    Thu              R0 both Thu (2019-03 to a)      172 -1.063e-01   -0.188   -0.026 9.660e-03  0.899
+   BN    Thu         R0v both Thu, bhavcopy-verified       34  8.548e-02   -0.058    0.230 1.912e-01  1.089
+   BN    Thu               R1 BN Wed, N Thu (a to c)       42  1.816e-02   -0.117    0.163 7.897e-01  1.018
+   BN    Thu         R2 BN no weekly, N Thu (c to d)       29 -1.081e-01   -0.335    0.132 3.468e-01  0.898
+   BN    Thu         R3 N Tue, BN no weekly (d to e)       20 -8.530e-02   -0.242    0.065 2.497e-01  0.918
+   BN    Thu R3+ after d, incl. closing-auction days       20 -8.530e-02   -0.240    0.068 2.497e-01  0.918
+   BN    Fri              R0 both Thu (2019-03 to a)      160  1.108e-01    0.025    0.204 1.164e-02  1.117
+   BN    Fri         R0v both Thu, bhavcopy-verified       32  1.127e-01   -0.083    0.280 2.275e-01  1.119
+   BN    Fri               R1 BN Wed, N Thu (a to c)       40 -2.405e-02   -0.179    0.124 7.321e-01  0.976
+   BN    Fri         R2 BN no weekly, N Thu (c to d)       26  3.782e-01    0.210    0.574 7.228e-05  1.460
+   BN    Fri         R3 N Tue, BN no weekly (d to e)       23  5.574e-02   -0.140    0.271 5.923e-01  1.057
+   BN    Fri R3+ after d, incl. closing-auction days       23  5.574e-02   -0.135    0.277 5.923e-01  1.057
+
+== Event tests, primary measure, 6-month windows
+                spec_id  n_pre  n_post  mean_pre  mean_post   diff  boot_lo  boot_hi     hac_p  mwu_p  ri_p  ri_n_placebo  pretrend_p
+               a_BN_own     20      20     0.110     -0.030 -0.139   -0.417    0.159 3.545e-01  0.490 0.470           184   5.028e-01
+               a_BN_Wed     19      20    -0.201     -0.030  0.172   -0.079    0.457 2.562e-01  0.347 0.573           184   1.708e-03
+               a_BN_Thu     20      20     0.110      0.129  0.019   -0.214    0.266 8.695e-01  0.946 0.919           184   5.028e-01
+                a_N_Thu     20      20     0.118      0.022 -0.096   -0.396    0.200 5.399e-01  0.695 0.508           184   9.194e-02
+                a_N_Wed     20      20    -0.193      0.152  0.345    0.119    0.600 7.526e-03  0.014 0.032           184   2.350e-01
+              a_DiD_Wed     19      20    -0.021     -0.181 -0.161   -0.306   -0.008 5.638e-02  0.164 0.114           184   5.063e-02
+            a_BN_switch     19      20    -0.279     -0.158  0.120   -0.234    0.487 4.783e-01  0.391 0.459           184   3.110e-01
+                a_N_Fri     18      20     0.238     -0.176 -0.414   -0.613   -0.194 1.684e-04  0.017 0.005           184   1.563e-02
+               a_BN_Fri     18      20     0.210      0.006 -0.204   -0.406    0.008 2.279e-02  0.492 0.146           184   1.513e-01
+             b_BN_Wed_m      6       7     0.364     -0.436 -0.800   -1.512   -0.054 6.310e-03  0.035 0.164           151         NaN
+             b_BN_Thu_m      6       7     0.366      0.212 -0.154   -1.009    0.647 6.339e-01  1.000 0.710           161         NaN
+              b_N_Thu_m      6       7     0.312      0.478  0.165   -0.775    1.033 5.219e-01  0.836 0.716           161         NaN
+              b_N_Wed_m      6       7     0.254     -0.502 -0.756   -1.316   -0.120 6.817e-03  0.101 0.033           151         NaN
+            b_N_Thu_all     26      21     0.089      0.234  0.145   -0.287    0.595 5.613e-01  0.692 0.514           184   2.768e-01
+            b_N_Wed_all     26      21     0.175     -0.052 -0.227   -0.569    0.091 1.691e-01  0.410 0.346           184   1.619e-01
+           b_BN_Wed_all     26      21     0.061      0.016 -0.045   -0.459    0.317 8.303e-01  0.692 0.924           184   3.780e-02
+           b_BN_Thu_all     26      21     0.184      0.075 -0.109   -0.431    0.226 5.443e-01  0.789 0.573           184   1.487e-01
+               c_BN_Wed     16      17     0.151     -0.014 -0.165   -0.504    0.168 3.647e-01  0.340 0.681           184   4.114e-05
+                c_N_Thu     16      18    -0.194     -0.350 -0.156   -0.672    0.378 5.835e-01  0.361 0.508           184   2.658e-01
+             c_DiD_main     16      17     0.345      0.334 -0.011   -0.605    0.554 9.710e-01  0.928 0.962           184   3.727e-01
+          c_DiD_sameday     16      17     0.019      0.078  0.059   -0.175    0.333 6.717e-01  0.900 0.670           184   2.443e-03
+                c_N_Wed     16      17     0.132     -0.092 -0.224   -0.416   -0.033 2.634e-02  0.214 0.297           184   1.731e-01
+               c_BN_Thu     16      18    -0.198     -0.158  0.039   -0.341    0.489 8.473e-01  0.959 0.870           184   8.647e-01
+              c_DiD_Fri     15      16    -0.115     -0.104  0.011   -0.288    0.300 9.319e-01  0.678 0.995           184   6.464e-01
+                d_N_Thu     18      17     0.097      0.008 -0.089   -0.362    0.183 5.117e-01  0.564 0.535           184   5.042e-01
+                d_N_Tue     18      19    -0.153      0.110  0.263    0.002    0.523 5.075e-02  0.176 0.222           184   3.786e-01
+             d_N_switch     18      17    -0.250      0.068  0.318   -0.096    0.727 1.266e-01  0.299 0.297           184   9.944e-01
+               d_BN_Thu     18      17    -0.066     -0.098 -0.032   -0.253    0.205 7.784e-01  0.908 0.854           184   2.048e-02
+               d_BN_Tue     18      19    -0.066     -0.007  0.059   -0.179    0.345 6.830e-01  0.727 0.784           184   4.118e-01
+              d_DiD_Thu     18      17     0.163      0.105 -0.057   -0.277    0.147 5.943e-01  0.656 0.762           184   3.609e-01
+                d_N_Fri     15      19     0.337      0.036 -0.301   -0.589    0.009 1.746e-02  0.145 0.103           184   6.411e-01
+   d_N_Tue_incl_auction     18      19    -0.153      0.110  0.263    0.020    0.522 5.075e-02  0.176 0.222           184   3.786e-01
+   d_N_Thu_incl_auction     18      17     0.097      0.008 -0.089   -0.364    0.184 5.117e-01  0.564 0.535           184   5.042e-01
+d_N_switch_incl_auction     18      17    -0.250      0.068  0.318   -0.100    0.753 1.266e-01  0.299 0.297           184   9.944e-01
+
+== Day-level DiD regressions (index-by-week FE, SE clustered by week), primary measure
+      spec_id measure    window        did    se     p  n_days  n_weeks
+   c_DiD_main     rv5  3 months  1.237e-01 0.565 0.827     178       18
+   c_DiD_main     rv5  6 months  1.081e-04 0.382 1.000     316       33
+   c_DiD_main     rv5 12 months -1.228e-01 0.289 0.671     592       61
+c_DiD_sameday     rv5  3 months  9.877e-02 0.223 0.658     178       18
+c_DiD_sameday     rv5  6 months  6.472e-02 0.171 0.704     316       33
+c_DiD_sameday     rv5 12 months  1.635e-01 0.115 0.155     592       61
+    a_DiD_Wed     rv5  3 months -2.085e-01 0.166 0.208     182       19
+    a_DiD_Wed     rv5  6 months -1.626e-01 0.121 0.179     372       39
+    a_DiD_Wed     rv5 12 months -7.157e-02 0.104 0.492     684       71
+    d_DiD_Thu     rv5  3 months -2.513e-02 0.168 0.881     186       19
+    d_DiD_Thu     rv5  6 months -6.073e-02 0.119 0.609     338       35
+    d_DiD_Thu     rv5 12 months  1.342e-01 0.127 0.290     476       49
+
+== Robustness, event c, primary measure
+                          series                                                                 variant    window  n_pre  n_post   diff  boot_lo    boot_hi  hac_p  mwu_p
+DiD main: BN Wed minus Nifty Thu                                                                    main  6 months     16      17 -0.011   -0.618  5.421e-01  0.971  0.928
+DiD main: BN Wed minus Nifty Thu                                                                    main 12 months     33      28 -0.129   -0.661  4.245e-01  0.644  0.520
+                          BN Wed                                                                    main  6 months     16      17 -0.165   -0.503  1.714e-01  0.365  0.340
+                          BN Wed                                                                    main 12 months     33      28 -0.257   -0.503 -6.248e-04  0.029  0.089
+                       Nifty Thu                                                                    main  6 months     16      18 -0.156   -0.668  3.804e-01  0.584  0.361
+                       Nifty Thu                                                                    main 12 months     33      29 -0.136   -0.566  2.825e-01  0.554  0.455
+DiD main: BN Wed minus Nifty Thu                         baseline excludes the other index's expiry days  6 months     16      16  0.037   -0.528  5.476e-01  0.889  0.955
+DiD main: BN Wed minus Nifty Thu                         baseline excludes the other index's expiry days 12 months     33      27 -0.115   -0.617  3.956e-01  0.658  0.613
+                          BN Wed                         baseline excludes the other index's expiry days  6 months     16      16 -0.203   -0.570  1.634e-01  0.319  0.235
+                          BN Wed                         baseline excludes the other index's expiry days 12 months     33      27 -0.327   -0.567 -7.445e-02  0.008  0.032
+                       Nifty Thu                         baseline excludes the other index's expiry days  6 months     16      18 -0.185   -0.713  3.482e-01  0.524  0.361
+                       Nifty Thu                         baseline excludes the other index's expiry days 12 months     33      29 -0.192   -0.629  2.134e-01  0.408  0.236
+DiD main: BN Wed minus Nifty Thu                                weeks with at least 3 other trading days  6 months     16      16  0.050   -0.576  6.193e-01  0.868  0.985
+DiD main: BN Wed minus Nifty Thu                                weeks with at least 3 other trading days 12 months     33      27 -0.104   -0.666  4.580e-01  0.715  0.603
+                          BN Wed                                weeks with at least 3 other trading days  6 months     16      16 -0.163   -0.505  1.925e-01  0.384  0.356
+                          BN Wed                                weeks with at least 3 other trading days 12 months     33      27 -0.259   -0.510 -3.535e-03  0.033  0.093
+                       Nifty Thu                                weeks with at least 3 other trading days  6 months     16      17 -0.211   -0.738  3.225e-01  0.450  0.242
+                       Nifty Thu                                weeks with at least 3 other trading days 12 months     33      28 -0.163   -0.607  2.555e-01  0.481  0.358
+DiD main: BN Wed minus Nifty Thu                        weekly values winsorized at 2.5 and 97.5 percent  6 months     16      17  0.060   -0.506  5.980e-01  0.827  0.928
+DiD main: BN Wed minus Nifty Thu                        weekly values winsorized at 2.5 and 97.5 percent 12 months     33      28 -0.130   -0.617  3.765e-01  0.616  0.501
+                          BN Wed                        weekly values winsorized at 2.5 and 97.5 percent  6 months     16      17 -0.179   -0.474  1.068e-01  0.268  0.349
+                          BN Wed                        weekly values winsorized at 2.5 and 97.5 percent 12 months     33      28 -0.239   -0.460 -2.061e-02  0.025  0.092
+                       Nifty Thu                        weekly values winsorized at 2.5 and 97.5 percent  6 months     16      18 -0.202   -0.640  2.415e-01  0.405  0.334
+                       Nifty Thu                        weekly values winsorized at 2.5 and 97.5 percent 12 months     33      29 -0.142   -0.518  2.306e-01  0.493  0.438
+DiD main: BN Wed minus Nifty Thu                                             bootstrap blocks of 2 weeks  6 months     16      17 -0.011   -0.639  5.644e-01  0.971  0.928
+DiD main: BN Wed minus Nifty Thu                                             bootstrap blocks of 2 weeks 12 months     33      28 -0.129   -0.620  3.479e-01  0.644  0.520
+                          BN Wed                                             bootstrap blocks of 2 weeks  6 months     16      17 -0.165   -0.531  2.107e-01  0.365  0.340
+                          BN Wed                                             bootstrap blocks of 2 weeks 12 months     33      28 -0.257   -0.537  8.903e-03  0.029  0.089
+                       Nifty Thu                                             bootstrap blocks of 2 weeks  6 months     16      18 -0.156   -0.635  3.434e-01  0.584  0.361
+                       Nifty Thu                                             bootstrap blocks of 2 weeks 12 months     33      29 -0.136   -0.512  2.449e-01  0.554  0.455
+DiD main: BN Wed minus Nifty Thu                                             bootstrap blocks of 8 weeks  6 months     16      17 -0.011   -0.649  5.456e-01  0.971  0.928
+DiD main: BN Wed minus Nifty Thu                                             bootstrap blocks of 8 weeks 12 months     33      28 -0.129   -0.649  4.213e-01  0.644  0.520
+                          BN Wed                                             bootstrap blocks of 8 weeks  6 months     16      17 -0.165   -0.514  1.688e-01  0.365  0.340
+                          BN Wed                                             bootstrap blocks of 8 weeks 12 months     33      28 -0.257   -0.491 -1.912e-02  0.029  0.089
+                       Nifty Thu                                             bootstrap blocks of 8 weeks  6 months     16      18 -0.156   -0.682  3.624e-01  0.584  0.361
+                       Nifty Thu                                             bootstrap blocks of 8 weeks 12 months     33      29 -0.136   -0.595  2.955e-01  0.554  0.455
+DiD main: BN Wed minus Nifty Thu                                                         HAC with 8 lags  6 months     16      17 -0.011   -0.629  5.459e-01  0.964  0.928
+DiD main: BN Wed minus Nifty Thu                                                         HAC with 8 lags 12 months     33      28 -0.129   -0.665  3.934e-01  0.640  0.520
+                          BN Wed                                                         HAC with 8 lags  6 months     16      17 -0.165   -0.504  1.490e-01  0.331  0.340
+                          BN Wed                                                         HAC with 8 lags 12 months     33      28 -0.257   -0.508 -2.040e-02  0.021  0.089
+                       Nifty Thu                                                         HAC with 8 lags  6 months     16      18 -0.156   -0.678  3.859e-01  0.531  0.361
+                       Nifty Thu                                                         HAC with 8 lags 12 months     33      29 -0.136   -0.576  2.571e-01  0.557  0.455
+DiD main: BN Wed minus Nifty Thu monthly-expiry weeks included (post-c weeks with any BN expiry dropped)  6 months     23      17  0.192   -0.464  8.120e-01  0.552  0.584
+DiD main: BN Wed minus Nifty Thu monthly-expiry weeks included (post-c weeks with any BN expiry dropped) 12 months     46      28  0.068   -0.506  6.705e-01  0.829  0.933
+                          BN Wed monthly-expiry weeks included (post-c weeks with any BN expiry dropped)  6 months     23      17 -0.065   -0.365  2.170e-01  0.681  0.848
+                          BN Wed monthly-expiry weeks included (post-c weeks with any BN expiry dropped) 12 months     46      28 -0.164   -0.421  1.119e-01  0.228  0.222
+                       Nifty Thu monthly-expiry weeks included (post-c weeks with any BN expiry dropped)  6 months     23      18 -0.259   -0.817  2.929e-01  0.375  0.276
+                       Nifty Thu monthly-expiry weeks included (post-c weeks with any BN expiry dropped) 12 months     46      29 -0.240   -0.686  1.855e-01  0.306  0.201
+
+== Negative-control calibration (share of rows rejecting at 5%)
+   window                        group            measures  rows  share_hac_p_below_0.05  share_mwu_p_below_0.05  share_boot_ci_excludes_0  rows_with_placebo_p  share_placebo_p_below_0.05
+ 3 months    negative control (Friday) minute-bar measures    35                   0.200                   0.029                     0.143                   35                       0.057
+ 3 months    negative control (Friday)   turnover measures    12                   0.583                   0.500                     0.583                   12                       0.500
+ 3 months treated or spillover weekday minute-bar measures   267                   0.307                   0.090                     0.217                  231                       0.130
+ 3 months treated or spillover weekday   turnover measures    90                   0.711                   0.467                     0.656                   78                       0.526
+ 6 months    negative control (Friday) minute-bar measures    35                   0.343                   0.057                     0.257                   35                       0.086
+ 6 months    negative control (Friday)   turnover measures    12                   0.583                   0.583                     0.583                    0                         NaN
+ 6 months treated or spillover weekday minute-bar measures   267                   0.243                   0.116                     0.206                  267                       0.139
+ 6 months treated or spillover weekday   turnover measures    90                   0.744                   0.667                     0.733                    0                         NaN
+12 months    negative control (Friday) minute-bar measures    35                   0.457                   0.257                     0.400                    0                         NaN
+12 months    negative control (Friday)   turnover measures    12                   0.667                   0.667                     0.750                    0                         NaN
+12 months treated or spillover weekday minute-bar measures   267                   0.202                   0.154                     0.187                    0                         NaN
+12 months treated or spillover weekday   turnover measures    90                   0.700                   0.733                     0.711                    0                         NaN
+
+== Volume descriptives
+index                            regime  days  expiry_days  median_opt_premium_cr_expiry  median_opt_premium_cr_other  median_share_0dte_on_expiry
+    N   R0v both Thu, bhavcopy-verified   215           46                     18338.319                    13861.161                        0.770
+    N         R1 BN Wed, N Thu (a to c)   294           63                     32204.886                    16272.936                        0.837
+    N   R2 BN no weekly, N Thu (c to d)   194           41                     42723.619                    31704.233                        0.813
+    N   R3 N Tue, BN no weekly (d to e)   225           48                     66772.045                    40527.366                        0.862
+    N R4 closing auction only (after e)    63           13                     63538.737                    35269.934                        0.881
+   BN   R0v both Thu, bhavcopy-verified   214           46                     40318.954                    28156.496                        0.873
+   BN         R1 BN Wed, N Thu (a to c)   293           63                     41576.608                    24141.068                        0.888
+   BN   R2 BN no weekly, N Thu (c to d)   194           10                     15523.928                     6830.283                        0.872
+   BN   R3 N Tue, BN no weekly (d to e)   156            7                     15954.179                     3688.873                        0.896
+   BN R4 closing auction only (after e)     0            0                           NaN                          NaN                          NaN
+
+== Design log
+- Primary outcome fixed before any result was seen: whole-day realized variance from 5-minute returns (rv5), 6-month windows, the DiD at event c. Everything else is secondary.
+- Expiry dates come from the bhavcopies (an expiry happened on d if options expiring on d trade on d; monthly if an index future also expires on d). Before the first bhavcopy (20 Oct 2022) a Thursday rule with holiday roll-back is used; it reproduces every bhavcopy expiry date on the overlap (see stdout).
+- Changed: the rule first labelled the last expiry *date* of a month as monthly, which mislabels a 1st-of-month Thursday holiday rolled back into the previous month (found by the overlap check, e.g. 30 Apr 2025). The rule now uses the last *scheduled* Thursday of the month.
+- Long sample starts 4 Mar 2019 because Nifty weekly options are generally reported to start in February 2019 (not verifiable from our files). Pre-Oct-2022 data are used only for event a's 12-month pre-window (Sep to Oct 2022), placebo dates and the regime R0 description.
+- Weeks with a monthly expiry of either index are excluded from the main samples: event b changes only monthly weeks (analysed separately), and after event c Bank Nifty still has a monthly expiry, which would put a Bank Nifty expiry inside the 'no weekly' weeks. Weeks where any expiry was moved by a holiday are also excluded (target weekday is then a holiday or a double expiry day).
+- Volume is measured as turnover in rupees (premium and notional), not contracts, because lot sizes changed several times (read from the UDiFF files; inferred for the legacy layout).
+- Changed: the moving-block bootstrap under-weights the first and last weeks of a window; with 15 to 20 weeks per side this visibly shifted intervals (e.g. a difference of -0.01 had an interval of -0.26 to 0.67 in a trial run). Replaced by the circular block bootstrap (blocks of 4 weeks).
+- Changed: with very few weeks (event b's monthly weeks: 3 to 7 per side) a 4-week block equals the whole sample, so every circular draw had the same mean and the interval collapsed to a point. The block length is now capped at a quarter of the sample (iid resampling for 7 weeks or fewer).
+- Changed: randomization inference over placebo dates uses the Welch t statistic (studentized, so periods with different noise are comparable) and is reported only when the placebo windows contain at least 3 non-overlapping windows. With 12-month windows only about 2 fit in the 2019 to 2023 quiet period and the placebo t statistics had a standard deviation near 0.6 (too narrow), which made p-values look far too small.
+- Friday was planned as a negative-control weekday because no NSE rule change in this study targets it. It turned out not to be clean: Friday premia moved at events a and d about as much as treated weekdays, and BSE's Sensex weekly options are reported to have expired on Fridays in 2023 and 2024 (BSE files are not in this repository, so this is unverified). The calibration table reports how often each test rejects for Friday; we use it to judge which tests are too liberal.
+- Added (data fact from the coordinator, checked in the bars): from 3 Aug 2026 NSE sets the official close in a closing auction, so the Nifty minute index is frozen for about 13 minutes before 15:28 to 15:29 and then jumps. The script detects this (every day from then on has >= 8 flat bars in the last 20 minutes) and treats it as event e: regime R3 and event d's windows stop at e, and the auction days are reported separately (R4) and in 'kept' variants. Bank Nifty bars end in April 2026, before e.
+- The daily return correlation is one number per day, so it is not used in DiDs that compare the same weekday of both indices (it would cancel exactly).
+- Changed: a table splitting the extra variance into first-hour and last-hour shares was dropped because the whole-day excess is close to zero, so the shares were ratios of noise. Replaced by log premia per part of the day (first hour, 10:15 to 14:30, last hour, last 30 minutes).
+- Added after seeing results (post hoc, labelled as such): the frequency diagnostics rv1/rv5 and RS/rv5, because the per-minute Rogers-Satchell premium differed from the 5-minute RV premium.
+
+Total run time 115s.

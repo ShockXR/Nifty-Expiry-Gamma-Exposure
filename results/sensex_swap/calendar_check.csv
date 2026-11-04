@@ -1,0 +1,4 @@
+check,from,to,n_here,n_other,n_both,here_only,other_only
+Sensex rule here vs results/sensex_confound/sensex_expiry_days_used.csv,2024-11-21,2026-10-29,102.0,102,102,,
+Nifty expiries from bhavcopies (daily_market.csv) vs weekday rule with holiday roll-back,2024-11-21,2026-11-02,102.0,103,102,,2026-11-02
+individually reported Sensex dates (calendar file) found among the rule dates,2024-11-21,2026-11-02,,29,29,n/a,

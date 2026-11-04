@@ -1,0 +1,224 @@
+table,page,row_label,column_label,printed_value,note
+Table 1,5,Mean,Before: Nifty 50 Return,-0.000001,
+Table 1,5,StDev,Before: Nifty 50 Return,0.000360947,
+Table 1,5,Minimum,Before: Nifty 50 Return,-0.008584649,
+Table 1,5,Maximum,Before: Nifty 50 Return,0.006221108,
+Table 1,5,Skewness,Before: Nifty 50 Return,-0.524960403,
+Table 1,5,Kurtosis,Before: Nifty 50 Return,64.74526352,row is labelled Kurtosis; the paper does not say whether it is excess kurtosis
+Table 1,5,N,Before: Nifty 50 Return,"23,039",
+Table 1,5,Anderson-Darling,Before: Nifty 50 Return,649.191***,
+Table 1,5,ADF,Before: Nifty 50 Return,-23.05000***,
+Table 1,5,Mean,Before: Nifty Bank Return,-0.000002,
+Table 1,5,StDev,Before: Nifty Bank Return,0.000522211,
+Table 1,5,Minimum,Before: Nifty Bank Return,-0.017256735,
+Table 1,5,Maximum,Before: Nifty Bank Return,0.012023448,
+Table 1,5,Skewness,Before: Nifty Bank Return,-1.357725832,
+Table 1,5,Kurtosis,Before: Nifty Bank Return,125.1117068,row is labelled Kurtosis; the paper does not say whether it is excess kurtosis
+Table 1,5,N,Before: Nifty Bank Return,"23,039",
+Table 1,5,Anderson-Darling,Before: Nifty Bank Return,790.061***,
+Table 1,5,ADF,Before: Nifty Bank Return,-20.69261***,
+Table 1,5,Mean,After: Nifty 50 Return,0.000001,
+Table 1,5,StDev,After: Nifty 50 Return,0.000355,
+Table 1,5,Minimum,After: Nifty 50 Return,-0.007086,"After columns print a plain hyphen as the minus sign, Before columns a typographic minus"
+Table 1,5,Maximum,After: Nifty 50 Return,0.009408,
+Table 1,5,Skewness,After: Nifty 50 Return,0.53,
+Table 1,5,Kurtosis,After: Nifty 50 Return,75.88,row is labelled Kurtosis; the paper does not say whether it is excess kurtosis
+Table 1,5,N,After: Nifty 50 Return,"21,239",
+Table 1,5,Anderson-Darling,After: Nifty 50 Return,492.399***,
+Table 1,5,ADF,After: Nifty 50 Return,-29.626103***,"After columns print a plain hyphen as the minus sign, Before columns a typographic minus"
+Table 1,5,Mean,After: Nifty Bank Return,0.000002,
+Table 1,5,StDev,After: Nifty Bank Return,0.000443,
+Table 1,5,Minimum,After: Nifty Bank Return,-0.008699,"After columns print a plain hyphen as the minus sign, Before columns a typographic minus"
+Table 1,5,Maximum,After: Nifty Bank Return,0.009905,
+Table 1,5,Skewness,After: Nifty Bank Return,0.64,
+Table 1,5,Kurtosis,After: Nifty Bank Return,57.3,row is labelled Kurtosis; the paper does not say whether it is excess kurtosis
+Table 1,5,N,After: Nifty Bank Return,"21,239",
+Table 1,5,Anderson-Darling,After: Nifty Bank Return,"466,153***","printed with a comma, not a decimal point (466,153); the other three cells use a decimal point"
+Table 1,5,ADF,After: Nifty Bank Return,-145.6132***,"After columns print a plain hyphen as the minus sign, Before columns a typographic minus"
+Table 1,5,Correlation,Before,0.854***,"printed under the Before: Nifty 50 Return column, one value for the pair"
+Table 1,5,Correlation,After,0.818***,"printed under the After: Nifty 50 Return column, one value for the pair"
+Table 2,7,AR(1),Pre-announcement: Nifty 50,-0.054778**,
+Table 2,7,MA(1),Pre-announcement: Nifty 50,0.078178**,
+Table 2,7,omega,Pre-announcement: Nifty 50,0.002319***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,alpha,Pre-announcement: Nifty 50,0.026481***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,beta,Pre-announcement: Nifty 50,0.971477***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,Shape,Pre-announcement: Nifty 50,8.864628***,
+Table 2,7,LL,Pre-announcement: Nifty 50,"158,616.4",
+Table 2,7,AIC,Pre-announcement: Nifty 50,-13.769,
+Table 2,7,AR(1),Pre-announcement: Nifty Bank,0.619437***,
+Table 2,7,MA(1),Pre-announcement: Nifty Bank,-0.642318***,
+Table 2,7,omega,Pre-announcement: Nifty Bank,0.004263***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,alpha,Pre-announcement: Nifty Bank,0.032328***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,beta,Pre-announcement: Nifty Bank,0.963935***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,Shape,Pre-announcement: Nifty Bank,6.70796***,
+Table 2,7,LL,Pre-announcement: Nifty Bank,"148,500",
+Table 2,7,AIC,Pre-announcement: Nifty Bank,-13.095,
+Table 2,7,AR(1),Post announcement: Nifty 50,-0.627945***,
+Table 2,7,MA(1),Post announcement: Nifty 50,0.638569***,
+Table 2,7,omega,Post announcement: Nifty 50,0.010345***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,alpha,Post announcement: Nifty 50,0.049363***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,beta,Post announcement: Nifty 50,0.941048***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,Shape,Post announcement: Nifty 50,6.983731***,
+Table 2,7,LL,Post announcement: Nifty 50,"145,063",
+Table 2,7,AIC,Post announcement: Nifty 50,-13.659,
+Table 2,7,AR(1),Post announcement: Nifty Bank,0.750097***,
+Table 2,7,MA(1),Post announcement: Nifty Bank,-0.792505***,
+Table 2,7,omega,Post announcement: Nifty Bank,0.018692***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,alpha,Post announcement: Nifty Bank,0.053195***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,beta,Post announcement: Nifty Bank,0.929680***,"Greek letter printed in the paper (omega, alpha, beta)"
+Table 2,7,Shape,Post announcement: Nifty Bank,5.483723***,
+Table 2,7,LL,Post announcement: Nifty Bank,"139,758.5",
+Table 2,7,AIC,Post announcement: Nifty Bank,-13.160,
+Table 3,10,Weekly and monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Nifty 50,57.29,
+Table 3,10,Weekly and monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Bank Nifty,42.71,
+Table 3,10,Weekly and monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Nifty 50,41.29,
+Table 3,10,Weekly and monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Bank Nifty,58.71,
+Table 3,10,Weekly and monthly expiry of Nifty 50/ Bank Nifty | To,From,84.00,total connectedness: bottom-right cell of the block
+Table 3,10,Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Nifty 50,63.27,
+Table 3,10,Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Bank Nifty,36.73,
+Table 3,10,Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Nifty 50,37.97,
+Table 3,10,Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Bank Nifty,62.03,
+Table 3,10,Monthly expiry of Nifty 50/ Bank Nifty | To,From,74.70,total connectedness: bottom-right cell of the block
+Table 3,10,1st trading hour Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Nifty 50,50.33,
+Table 3,10,1st trading hour Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Bank Nifty,49.67,
+Table 3,10,1st trading hour Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Nifty 50,49.75,
+Table 3,10,1st trading hour Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Bank Nifty,50.25,
+Table 3,10,1st trading hour Monthly expiry of Nifty 50/ Bank Nifty | To,From,99.42,total connectedness: bottom-right cell of the block
+Table 3,10,Mid trading hour Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Nifty 50,66.26,
+Table 3,10,Mid trading hour Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Bank Nifty,33.74,
+Table 3,10,Mid trading hour Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Nifty 50,34.90,
+Table 3,10,Mid trading hour Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Bank Nifty,65.10,
+Table 3,10,Mid trading hour Monthly expiry of Nifty 50/ Bank Nifty | To,From,68.64,total connectedness: bottom-right cell of the block
+Table 3,10,Last trading hour Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Nifty 50,47.21,
+Table 3,10,Last trading hour Monthly expiry of Nifty 50/ Bank Nifty | Nifty 50,Bank Nifty,52.79,
+Table 3,10,Last trading hour Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Nifty 50,52.43,
+Table 3,10,Last trading hour Monthly expiry of Nifty 50/ Bank Nifty | Bank Nifty,Bank Nifty,47.57,
+Table 3,10,Last trading hour Monthly expiry of Nifty 50/ Bank Nifty | To,From,105.22,total connectedness: bottom-right cell of the block
+Table 4,11,Weekly and monthly expiry of Nifty 50 | Nifty 50,Panel I: Nifty 50,61.57,
+Table 4,11,Weekly and monthly expiry of Nifty 50 | Nifty 50,Panel I: Bank Nifty,38.43,
+Table 4,11,Weekly and monthly expiry of Nifty 50 | Bank Nifty,Panel I: Nifty 50,37.95,
+Table 4,11,Weekly and monthly expiry of Nifty 50 | Bank Nifty,Panel I: Bank Nifty,62.05,
+Table 4,11,Weekly and monthly expiry of Nifty 50 | To,Panel I: From,76.38,total connectedness: bottom-right cell of the block
+Table 4,11,Monthly expiry of Nifty 50 | Nifty 50,Panel I: Nifty 50,63.21,
+Table 4,11,Monthly expiry of Nifty 50 | Nifty 50,Panel I: Bank Nifty,36.79,
+Table 4,11,Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Nifty 50,37.79,
+Table 4,11,Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Bank Nifty,62.21,
+Table 4,11,Monthly expiry of Nifty 50 | To,Panel I: From,74.58,total connectedness: bottom-right cell of the block
+Table 4,11,1st trading hour Monthly expiry of Nifty 50 | Nifty 50,Panel I: Nifty 50,60.86,
+Table 4,11,1st trading hour Monthly expiry of Nifty 50 | Nifty 50,Panel I: Bank Nifty,40.14,
+Table 4,11,1st trading hour Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Nifty 50,40.03,
+Table 4,11,1st trading hour Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Bank Nifty,60.97,
+Table 4,11,1st trading hour Monthly expiry of Nifty 50 | To,Panel I: From,80.18,total connectedness: bottom-right cell of the block
+Table 4,11,Mid-trading hour Monthly expiry of Nifty 50 | Nifty 50,Panel I: Nifty 50,66.32,
+Table 4,11,Mid-trading hour Monthly expiry of Nifty 50 | Nifty 50,Panel I: Bank Nifty,33.68,
+Table 4,11,Mid-trading hour Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Nifty 50,35.13,
+Table 4,11,Mid-trading hour Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Bank Nifty,64.87,
+Table 4,11,Mid-trading hour Monthly expiry of Nifty 50 | To,Panel I: From,68.81,total connectedness: bottom-right cell of the block
+Table 4,11,Last trading hour Monthly expiry of Nifty 50 | Nifty 50,Panel I: Nifty 50,70.83,
+Table 4,11,Last trading hour Monthly expiry of Nifty 50 | Nifty 50,Panel I: Bank Nifty,29.17,
+Table 4,11,Last trading hour Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Nifty 50,37.27,
+Table 4,11,Last trading hour Monthly expiry of Nifty 50 | Bank Nifty,Panel I: Bank Nifty,62.73,
+Table 4,11,Last trading hour Monthly expiry of Nifty 50 | To,Panel I: From,66.44,total connectedness: bottom-right cell of the block
+Table 4,11,Weekly and monthly expiry of Bank Nifty | Nifty 50,Panel II: Nifty 50,62.55,
+Table 4,11,Weekly and monthly expiry of Bank Nifty | Nifty 50,Panel II: Bank Nifty,37.45,
+Table 4,11,Weekly and monthly expiry of Bank Nifty | Bank Nifty,Panel II: Nifty 50,35.57,
+Table 4,11,Weekly and monthly expiry of Bank Nifty | Bank Nifty,Panel II: Bank Nifty,64.43,
+Table 4,11,Weekly and monthly expiry of Bank Nifty | To,Panel II: From,73.02,total connectedness: bottom-right cell of the block
+Table 4,11,Monthly expiry of Bank Nifty | Nifty 50,Panel II: Nifty 50,62.87,
+Table 4,11,Monthly expiry of Bank Nifty | Nifty 50,Panel II: Bank Nifty,37.13,
+Table 4,11,Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Nifty 50,35.61,
+Table 4,11,Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Bank Nifty,64.39,
+Table 4,11,Monthly expiry of Bank Nifty | To,Panel II: From,72.74,total connectedness: bottom-right cell of the block
+Table 4,11,1st trading hour Monthly expiry of Bank Nifty | Nifty 50,Panel II: Nifty 50,62.44,
+Table 4,11,1st trading hour Monthly expiry of Bank Nifty | Nifty 50,Panel II: Bank Nifty,37.56,
+Table 4,11,1st trading hour Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Nifty 50,34.41,
+Table 4,11,1st trading hour Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Bank Nifty,65.59,
+Table 4,11,1st trading hour Monthly expiry of Bank Nifty | To,Panel II: From,70.97,total connectedness: bottom-right cell of the block
+Table 4,11,Mid-trading hour Monthly expiry of Bank Nifty | Nifty 50,Panel II: Nifty 50,66.03,
+Table 4,11,Mid-trading hour Monthly expiry of Bank Nifty | Nifty 50,Panel II: Bank Nifty,33.97,
+Table 4,11,Mid-trading hour Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Nifty 50,32.57,
+Table 4,11,Mid-trading hour Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Bank Nifty,67.43,
+Table 4,11,Mid-trading hour Monthly expiry of Bank Nifty | To,Panel II: From,66.54,total connectedness: bottom-right cell of the block
+Table 4,11,Last trading hour Monthly expiry of Bank Nifty | Nifty 50,Panel II: Nifty 50,61.19,
+Table 4,11,Last trading hour Monthly expiry of Bank Nifty | Nifty 50,Panel II: Bank Nifty,38.81,
+Table 4,11,Last trading hour Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Nifty 50,35.62,
+Table 4,11,Last trading hour Monthly expiry of Bank Nifty | Bank Nifty,Panel II: Bank Nifty,64.38,
+Table 4,11,Last trading hour Monthly expiry of Bank Nifty | To,Panel II: From,74.43,total connectedness: bottom-right cell of the block
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty 50: Observation,"23,039",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty 50: Median,"478,000",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty 50: w-statistics,"444,392,222.5",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty 50: p-value,0.000,
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | After,Nifty 50: Observation,"21,463",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | After,Nifty 50: Median,"634,000",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty Bank: Observation,"23,039",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty Bank: Median,"439,000",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty Bank: w-statistics,"538,810,985.5",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | Before,Nifty Bank: p-value,0.000,
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | After,Nifty Bank: Observation,"21,463",
+Table 5,12,Change in Volume Before and after the change in expiration of Nifty | After,Nifty Bank: Median,"380,000",
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: Observation,4680,
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: Median,"483,000",
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: w-statistics,"19,165,172.00",
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: p-value,0.000,
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | After,Nifty 50: Observation,4320,
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | After,Nifty 50: Median,"576,000",
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: Observation,4680,
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: Median,"405,000",
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: w-statistics,"21,613,964.5",
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: p-value,0.000,
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | After,Nifty Bank: Observation,4320,
+Table 5,12,Change in Volume on Wednesday Before and after the change in expiration of Bank Nifty | After,Nifty Bank: Median,"444,000",
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: Observation,4680,
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: Median,"469,000",
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: w-statistics,"16,357,754.5",
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty 50: p-value,0.000,
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | After,Nifty 50: Observation,4680,
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | After,Nifty 50: Median,"774,000",
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: Observation,4680,
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: Median,"425,000",
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: w-statistics,"21,478,045",
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: p-value,0.0011,
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | After,Nifty Bank: Observation,4680,
+Table 5,12,Change in Volume on Thursday Before and after the change in expiration of Bank Nifty | After,Nifty Bank: Median,"411,000",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty 50: Observation,"23,038",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty 50: Median,0.00024,
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty 50: w-statistics,"483,967,708.5",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty 50: p-value,0.000,
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | After,Nifty 50: Observation,"21,462",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | After,Nifty 50: Median,0.00026,
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: Observation,"23,038",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: Median,0.00034,
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: w-statistics,"500,287,483.5",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | Before,Nifty Bank: p-value,0.087,
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | After,Nifty Bank: Observation,"21,462",
+Table 6,13,Change in Volatility Before and after the change in expiration of Bank Nifty | After,Nifty Bank: Median,0.00034,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: Observation,4679,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: Median,0.00023,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: w-statistics,"18,633,563.00",
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: p-value,0.061,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | After,Nifty 50: Observation,4319,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | After,Nifty 50: Median,0.00023,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: Observation,4680,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: Median,0.00033,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: w-statistics,"207,455,847.5",
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: p-value,0.000,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | After,Nifty Bank: Observation,4319,
+Table 6,13,Change in Volatility on Wednesday Before and after the change in expiration of Nifty Bank | After,Nifty Bank: Median,0.00036,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: Observation,4679,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: Median,0.00024,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: w-statistics,"156,272,524.5",
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty 50: p-value,0.000,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | After,Nifty 50: Observation,4679,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | After,Nifty 50: Median,0.00027,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: Observation,4679,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: Median,0.00034,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: w-statistics,"2,174,645,383","larger than Observation before x after (4679 x 4679 = 21,893,041), so it cannot be a Mann-Whitney U as printed"
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | Before,Nifty Bank: p-value,0.079,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | After,Nifty Bank: Observation,4679,
+Table 6,13,Change in Volatility on Thursday Before and after the change in expiration of Nifty Bank | After,Nifty Bank: Median,0.00034,
+Section 4.3 text (about Table 5),12,"Nifty 50, all days",median volume % change,increased by 32%,"""Nifty 50 indexes median volume increased by 32%"""
+Section 4.3 text (about Table 5),12,"Nifty 50, Wednesday",median volume % change,19% higher,"""trading volume for Nifty 50 was 19% higher on Wednesday"""
+Section 4.3 text (about Table 5),12,"Nifty 50, Thursday",median volume % change,increases by 61%,"""the volume increases by 61% ... for Nifty 50 on Thursday""; Table 5 medians 469,000 to 774,000 imply about +65%"
+Section 4.3 text (about Table 5),12,"Bank Nifty, all days",median volume % change,decreases by 13%,"""the overall volume for Bank Nifty decreases by 13%"""
+Section 4.3 text (about Table 5),12,"Bank Nifty, Wednesday",median volume % change,increased by 9%,"""The median volume of Bank Nifty increased by 9% on Wednesday"""
+Section 4.3 text (about Table 5),12,"Bank Nifty, Thursday",median volume % change,reduced by 3%,"""and reduced by 3% on Thursday"""

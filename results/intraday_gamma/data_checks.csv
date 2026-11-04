@@ -1,0 +1,19 @@
+check,value
+panel days,937.0
+expiry days,200.0
+days before expiry,200.0
+ordinary days,537.0
+days dropped for a missing chain,0.0
+days whose chain is from the previous trading day (no look-ahead),937.0
+days whose chain skipped a missing bhavcopy (stale > 0),0.0
+days with a holiday re-dated contract,4.0
+closing-auction days (from 3 Aug 2026),59.0
+days without participant weights,0.0
+median strikes per chain (within +/-10%),85.0
+median share of chain rows with no IV from the price (filled),0.16911764705882354
+anchor rows,62779.0
+rows with zero or missing next-15-min RV,0.0
+rows with zero or missing next-30-min RV (incl. closing-auction windows),177.0
+rows with zero lagged 15-min RV,0.0
+rows where the 5-minute floor binds,0.0
+minimum minutes to 15:30 on the anchor grid,30.0

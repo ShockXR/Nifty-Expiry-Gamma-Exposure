@@ -1,0 +1,16 @@
+source,pair,period,days,share_days_different_sign,used_in_simulation,anchor_label,share_rounded_for_simulation
+daily_gex_panel.csv (fixed rules),US convention vs Pro,full sample,942,0.5509554140127388,True,US convention vs Pro (full sample),0.551
+daily_gex_panel.csv (fixed rules),US convention vs Pro,2023 to 2024,490,0.753061224489796,False,US convention vs Pro (2023 to 2024),0.753
+daily_gex_panel.csv (fixed rules),US convention vs Pro,2025 onward,452,0.33185840707964603,False,US convention vs Pro (2025 onward),0.332
+daily_gex_panel.csv (fixed rules),US convention vs Client mirror,full sample,942,0.14861995753715498,True,US convention vs Client mirror (full sample),0.149
+daily_gex_panel.csv (fixed rules),US convention vs Client mirror,2023 to 2024,490,0.12857142857142856,False,US convention vs Client mirror (2023 to 2024),0.129
+daily_gex_panel.csv (fixed rules),US convention vs Client mirror,2025 onward,452,0.17035398230088494,False,US convention vs Client mirror (2025 onward),0.17
+daily_gex_panel.csv (fixed rules),Pro vs Client mirror,full sample,942,0.470276008492569,True,Pro vs Client mirror (full sample),0.47
+daily_gex_panel.csv (fixed rules),Pro vs Client mirror,2023 to 2024,490,0.710204081632653,False,Pro vs Client mirror (2023 to 2024),0.71
+daily_gex_panel.csv (fixed rules),Pro vs Client mirror,2025 onward,452,0.21017699115044247,False,Pro vs Client mirror (2025 onward),0.21
+dealer_sign/sign_agreement.csv (estimated participant sign),estimated vs us,training 2023 to 2024 (direction from that period),461,0.8676789587852495,False,estimated vs us (2023 to 2024),0.868
+dealer_sign/sign_agreement.csv (estimated participant sign),estimated vs us,"test, expanding refits",452,0.8030973451327434,False,estimated vs us (2025 on),0.803
+dealer_sign/sign_agreement.csv (estimated participant sign),estimated vs pro,training 2023 to 2024 (direction from that period),461,0.30368763557483736,True,estimated sign vs Pro (2023 to 2024),0.304
+dealer_sign/sign_agreement.csv (estimated participant sign),estimated vs pro,"test, expanding refits",452,0.8407079646017699,True,estimated sign vs Pro (2025 on),0.841
+dealer_sign/sign_agreement.csv (estimated participant sign),estimated vs cmirror,training 2023 to 2024 (direction from that period),461,1.0,False,estimated vs cmirror (2023 to 2024),1.0
+dealer_sign/sign_agreement.csv (estimated participant sign),estimated vs cmirror,"test, expanding refits",452,0.9469026548672567,False,estimated vs cmirror (2025 on),0.947

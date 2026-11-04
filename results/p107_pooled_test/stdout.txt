@@ -1,0 +1,53 @@
+REAL DATA. P107 pooled test over Nifty, Bank Nifty, Fin Nifty: 604 common dates, 2023-08-10 to 2026-01-27.
+Check against p104/other_indices_same_dates.csv: 18 of 18 rows match.
+
+Primary (P1): pooled mean daily QLIKE differential, mcsGARCH minus hybrid_base, Driscoll-Kraay.
+  next15: pooled diff 0.012238 (pooled change -4.75%), DK se 0.001142, t 10.71, p 6.62e-25, lag 5, T 604
+  next30: pooled diff 0.012407 (pooled change -6.03%), DK se 0.001096, t 11.31, p 2.45e-27, lag 5, T 604
+
+Secondary (S1a): joint stationary bootstrap over dates, 9999 draws.
+  next15, block 10: boot sd 0.001141 (DK se 0.001142), p 0.0001
+  next15, block 5: boot sd 0.001118 (DK se 0.001142), p 0.0001
+  next15, block 20: boot sd 0.001188 (DK se 0.001142), p 0.0001
+  next30, block 10: boot sd 0.001068 (DK se 0.001096), p 0.0001
+  next30, block 5: boot sd 0.001069 (DK se 0.001096), p 0.0001
+  next30, block 20: boot sd 0.001107 (DK se 0.001096), p 0.0001
+
+Secondary (S1b): Wald test that the three mean differentials are equal.
+  next15: means [0.01364  0.010562 0.012512], F 1.473, p 0.2301
+  next30: means [0.014183 0.010633 0.012404], F 1.004, p 0.3672
+
+Secondary (S1c): pooled last hour.
+  last hour: pooled change -4.96%, t 3.85, p 6.52e-05
+
+Secondary (S1d): pooled expiry days (each index's own expiry days, equal weight per index).
+  next15: n [130  82  82], T 252, lag 4, pooled change -3.68%, t 3.25, p 0.000666
+  next30: n [130  82  82], T 252, lag 4, pooled change -4.49%, t 3.03, p 0.00133
+  last_hour: n [130  82  82], T 252, lag 4, pooled change +0.19%, t -0.06, p 0.525
+
+Secondary (S1e): pooled edge over mcsgarch_iv.
+  next15: pooled change vs mcsgarch_iv -2.51%, t 2.02, p 0.022
+  next30: pooled change vs mcsgarch_iv -3.02%, t 2.03, p 0.0213
+  last_hour: pooled change vs mcsgarch_iv -5.31%, t 1.47, p 0.0712
+
+Robustness: scaled differentials (R1), doubled bandwidth (R2).
+  R1 next15: average proportional gain 4.74%, t 10.67, p 9.19e-25
+  R2 next15: lag 10, t 10.94, p 7.51e-26
+  R1 next30: average proportional gain 6.02%, t 11.30, p 2.84e-27
+  R2 next30: lag 10, t 11.59, p 1.78e-28
+
+Exploratory.
+  E1 next15: Bank+Fin pooled change -4.55%, t 8.59, p 3.68e-17
+  E1 next30: Bank+Fin pooled change -5.70%, t 8.74, p 1.2e-17
+  E5 last-hour homogeneity: F 10.512, p 3.25e-05
+
+Correlation of daily loss differentials and effective number of indices.
+  next15 vs mcsgarch: Pearson [0.22  0.412 0.602], long-run [0.089 0.406 0.493], N_eff(design, long-run) 1.788, Kish 1.646
+  next30 vs mcsgarch: Pearson [-0.034  0.222  0.377], long-run [-0.172  0.203  0.338], N_eff(design, long-run) 2.410, Kish 2.179
+  last_hour vs mcsgarch: Pearson [0.022 0.058 0.447], long-run [-0.133 -0.005  0.543], N_eff(design, long-run) 2.599, Kish 2.221
+Verdict P1 primary: pooled gain confirmed
+Verdict S1a bootstrap: bootstrap agrees
+Verdict S1b homogeneity: no evidence that the gains differ (equality not rejected)
+Verdict S1c last hour: pooled last-hour gain supported
+Verdict S1d: pooled expiry-day gain supported
+Verdict S1e: pooled edge over mcsgarch_iv supported

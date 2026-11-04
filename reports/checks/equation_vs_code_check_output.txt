@@ -1,0 +1,37 @@
+PASS B76 gamma vs finite difference (call) | fd=1.243122e-03 code=1.243123e-03
+PASS B76 gamma vs finite difference (put) | fd=1.243122e-03 code=1.243123e-03
+PASS B76 put-call parity C-P = e^-rT (F-K)
+PASS B76 call delta vs finite difference
+PASS spot_gamma = gamma_F * (dF/dS)^2 vs finite difference in S | fd=1.258407e-03 code=1.258408e-03
+PASS gross GEX = Gamma*OI*L*S^2*0.01 (hand formula)
+PASS GEX = (delta change per 1% move, first order) x units x S | fd=6.9791e+10 code=6.9809e+10
+INFO  a full +/-0.5% (1%) bump gives -2.5% versus the first-order GEX for this 3-day ATM option (gamma changes over a 1% move)
+PASS sign rule us_convention: +1 calls, -1 puts
+PASS sign rules long_all / short_all
+PASS sign rules participant/client_mirror use per-type weights
+PASS participant weight = (long-short)/total OI
+PASS mirror flips sign
+PASS net GEX = sum(weight*gross)
+PASS SIGN_RULES module constant lists five rules
+PASS QLIKE minimised at f = y with value 0
+PASS QLIKE penalises under-prediction more than equal-ratio over-prediction
+PASS QLIKE scale-free: qlike(c*y, c*f) = qlike(y, f)
+PASS DM statistic and p equal independent reimplementation | stat code=-0.0925 ref=-0.0925
+INFO  DM empirical size at nominal 5%, n=792 days, 3000 reps: iid differentials 0.052, AR(1)=0.3 differentials 0.056
+PASS DM size iid differentials within 4% to 6% | 0.052
+PASS DM size AR(1)=0.3 differentials at most 8% (mild over-rejection from the Bartlett lag rule) | 0.056
+PASS DM 'greater' small p when model 2 has lower loss
+PASS RV mean = n*sigma^2 (Brownian)
+PASS bipower variation unbiased for sigma^2*n (no jumps)
+INFO  Rogers-Satchell mean / true bar variance with 60, 600, 6000 sub-steps per bar: 0.788, 0.929, 0.991
+PASS Rogers-Satchell ratio rises toward 1 as the sampling gets finer, within 5% at 6000 sub-steps
+PASS DY total connectedness = 100/N * sum off-diagonal of row-normalised GFEVD | code=25.8909 ref=25.8909
+PASS paper-scale total = 2x DY total for N=2
+PASS no dynamics, rho=0.85: cross share = rho^2/(1+rho^2) = 41.9% (doc claim) | code=41.94
+PASS mcsGARCH analytic multi-step variance forecast vs Monte Carlo | analytic=43.7868 mc=43.7813
+PASS standardised-t likelihood integrates to 1 with unit variance
+PASS expiry: Thursday 28 Aug 2025 then Tuesday 2 Sep 2025
+PASS expiry: holiday on Tuesday rolls back to Monday
+PASS HAR regressors use means of days t-5..t-1 and t-22..t-1
+
+32/32 checks passed

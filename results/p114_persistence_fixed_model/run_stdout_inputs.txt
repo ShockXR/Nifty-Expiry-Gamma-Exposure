@@ -1,0 +1,17 @@
+{
+  "nifty_1min.csv": {
+    "sha256": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+    "manifest": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+    "matches_manifest": true
+  },
+  "banknifty_1min.csv": {
+    "sha256": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+    "manifest": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+    "matches_manifest": true
+  },
+  "minute_bars_source.json": {
+    "sha256": "db96a03ba26721c8389e9f194df81728a97a537f9c3fd160b4160ea547b77ba8",
+    "manifest": "db96a03ba26721c8389e9f194df81728a97a537f9c3fd160b4160ea547b77ba8",
+    "matches_manifest": true
+  }
+}

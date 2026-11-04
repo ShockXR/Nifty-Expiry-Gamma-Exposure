@@ -1,0 +1,40 @@
+REAL DATA (third-party 1-minute bars; NSE official daily values where available)
+    index  first_day   last_day  days  median_flat_share  days_over_5pct  days_over_20pct official_from
+    nifty 2017-04-03 2026-11-02  2368           0.008000               8                3    2022-10-20
+banknifty 2017-01-02 2026-04-22  2297           0.000000               4                1    2022-10-20
+ finnifty 2021-08-04 2026-01-27   988           0.002667               6                6    2023-01-02
+   sensex 2023-01-02 2026-11-02   948           0.000000               0                0          none
+
+>20% flat:
+    index       date weekday  bars  returns  flat_minutes  flat_share  longest_flat_run_min longest_run_clock  flat_minutes_last20  flat_minutes_first360  high_eq_low_bars  high_diff_bp  low_diff_bp                official_check
+    nifty 2017-07-10     Mon   375      375           167    0.445333                    60    10:00 to 10:59                    0                    167               166           NaN          NaN no official file for this day
+    nifty 2021-02-24     Wed   375      375           303    0.808000                   238    10:07 to 14:04                   20                    288               303           NaN          NaN no official file for this day
+    nifty 2021-11-04     Thu    43       42            42    1.000000                    42    14:48 to 15:29                   20                     27                43           NaN          NaN no official file for this day
+banknifty 2017-07-10     Mon   375      375           181    0.482667                   110    09:25 to 11:14                    0                    181               181           NaN          NaN no official file for this day
+ finnifty 2021-08-07     Sat   312      307           148    0.482085                    66    10:01 to 11:06                    5                    144               147           NaN          NaN no official file for this day
+ finnifty 2021-08-21     Sat    56       55            55    1.000000                    55    10:22 to 11:16                    0                     55                56           NaN          NaN no official file for this day
+ finnifty 2021-11-04     Thu    43       42            42    1.000000                    42    14:48 to 15:29                   20                     27                43           NaN          NaN no official file for this day
+ finnifty 2021-11-13     Sat   374      373           142    0.380697                   112    09:15 to 11:06                    0                    142               141           NaN          NaN no official file for this day
+ finnifty 2022-01-08     Sat    68       68            68    1.000000                    68    09:15 to 10:22                    0                     68                68           NaN          NaN no official file for this day
+ finnifty 2022-01-22     Sat    29       29            29    1.000000                    29    09:15 to 09:43                    0                     29                29           NaN          NaN no official file for this day
+
+>5% flat:
+    index       date weekday  bars  returns  flat_minutes  flat_share  longest_flat_run_min longest_run_clock  flat_minutes_last20  flat_minutes_first360  high_eq_low_bars  high_diff_bp  low_diff_bp                official_check
+    nifty 2017-07-10     Mon   375      375           167    0.445333                    60    10:00 to 10:59                    0                    167               166           NaN          NaN no official file for this day
+    nifty 2017-09-20     Wed   375      375            20    0.053333                     1    09:59 to 09:59                    1                     19                 0           NaN          NaN no official file for this day
+    nifty 2020-03-13     Fri   375      375            51    0.136000                    44    09:22 to 10:05                    0                     51                51           NaN          NaN no official file for this day
+    nifty 2020-03-23     Mon   375      375            50    0.133333                    43    09:59 to 10:41                    0                     50                50           NaN          NaN no official file for this day
+    nifty 2021-02-24     Wed   375      375           303    0.808000                   238    10:07 to 14:04                   20                    288               303           NaN          NaN no official file for this day
+    nifty 2021-11-04     Thu    43       42            42    1.000000                    42    14:48 to 15:29                   20                     27                43           NaN          NaN no official file for this day
+    nifty 2022-03-07     Mon   372      371            40    0.107817                    25    09:57 to 10:21                    0                     40                38           NaN          NaN no official file for this day
+    nifty 2026-08-19     Wed   375      375            19    0.050667                    14    15:15 to 15:28                   15                      5                14           0.0          0.0          agrees (within 5 bp)
+banknifty 2017-07-10     Mon   375      375           181    0.482667                   110    09:25 to 11:14                    0                    181               181           NaN          NaN no official file for this day
+banknifty 2020-03-13     Fri   375      375            58    0.154667                    51    09:22 to 10:12                    0                     58                58           NaN          NaN no official file for this day
+banknifty 2020-03-23     Mon   375      375            57    0.152000                    50    09:59 to 10:48                    0                     57                57           NaN          NaN no official file for this day
+banknifty 2022-03-07     Mon   325      323            26    0.080495                    11    09:59 to 10:09                    0                     26                27           NaN          NaN no official file for this day
+ finnifty 2021-08-07     Sat   312      307           148    0.482085                    66    10:01 to 11:06                    5                    144               147           NaN          NaN no official file for this day
+ finnifty 2021-08-21     Sat    56       55            55    1.000000                    55    10:22 to 11:16                    0                     55                56           NaN          NaN no official file for this day
+ finnifty 2021-11-04     Thu    43       42            42    1.000000                    42    14:48 to 15:29                   20                     27                43           NaN          NaN no official file for this day
+ finnifty 2021-11-13     Sat   374      373           142    0.380697                   112    09:15 to 11:06                    0                    142               141           NaN          NaN no official file for this day
+ finnifty 2022-01-08     Sat    68       68            68    1.000000                    68    09:15 to 10:22                    0                     68                68           NaN          NaN no official file for this day
+ finnifty 2022-01-22     Sat    29       29            29    1.000000                    29    09:15 to 09:43                    0                     29                29           NaN          NaN no official file for this day

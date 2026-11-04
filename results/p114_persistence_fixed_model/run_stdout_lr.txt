@@ -1,0 +1,11 @@
+  LR before_inferred nifty F irf: LR 16.654, p 4.48e-05 (10s)
+  LR before_inferred nifty F ab: LR 15.839, p 6.9e-05 (4s)
+  LR before_inferred banknifty F irf: LR 12.820, p 0.000343 (8s)
+  LR before_inferred banknifty F ab: LR 12.534, p 0.0004 (4s)
+  LR before_stated nifty F irf: LR 0.102, p 0.749 (5s)
+  LR before_stated banknifty F irf: LR 22.848, p 1.75e-06 (7s)
+  LR before_inferred nifty ref ab: LR 16.230, p 5.61e-05 (2s)
+  LR before_inferred banknifty ref ab: LR 18.272, p 1.91e-05 (2s)
+  LR before_stated nifty ref ab: LR 14.382, p 0.000149 (2s)
+  LR before_stated banknifty ref ab: LR 3.629, p 0.0568 (2s)
+LR stage done in 0.8 min

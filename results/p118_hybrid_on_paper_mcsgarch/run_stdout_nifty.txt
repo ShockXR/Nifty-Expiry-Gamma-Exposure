@@ -1,0 +1,18 @@
+[REAL DATA] P118 hybrid on the paper's mcsGARCH, stage 1 (study), NIFTY: 14 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a979bc16298c9a096/data/processed/p118); workers 2
+market loaded: 942 days, 2023-01-02 00:00:00 to 2026-11-02 00:00:00 (61s)
+panels and datasets built (193s)
+  [1/14] NIFTY next15 seed 7 cpp: 19800 forecasts, 188s (elapsed 6.4 min)
+  [2/14] NIFTY next30 seed 7 cpp: 19008 forecasts, 176s (elapsed 6.4 min)
+  [3/14] NIFTY last_hour seed 7 cpp: 792 forecasts, 179s (elapsed 9.1 min)
+  [4/14] NIFTY next15 seed 101 cpp_base: 19800 forecasts, 503s (elapsed 14.7 min)
+  [5/14] NIFTY next30 seed 101 cpp: 19008 forecasts, 333s (elapsed 14.7 min)
+  [6/14] NIFTY next15 seed 102 cpp: 19800 forecasts, 191s (elapsed 17.9 min)
+  [7/14] NIFTY next30 seed 102 cpp: 19008 forecasts, 169s (elapsed 17.9 min)
+  [8/14] NIFTY next15 seed 103 cpp: 19800 forecasts, 197s (elapsed 20.8 min)
+  [9/14] NIFTY next30 seed 103 cpp: 19008 forecasts, 176s (elapsed 20.8 min)
+  [10/14] NIFTY next15 seed 104 cpp: 19800 forecasts, 194s (elapsed 24.0 min)
+  [11/14] NIFTY next30 seed 104 cpp: 19008 forecasts, 174s (elapsed 24.0 min)
+  [12/14] NIFTY next15 seed 7 cppall: 19800 forecasts, 217s (elapsed 27.4 min)
+  [13/14] NIFTY next30 seed 7 cppall: 19008 forecasts, 199s (elapsed 27.4 min)
+  [14/14] NIFTY last_hour seed 7 cppall: 792 forecasts, 163s (elapsed 30.1 min)
+stage 1 (NIFTY, study) done in 30.1 min

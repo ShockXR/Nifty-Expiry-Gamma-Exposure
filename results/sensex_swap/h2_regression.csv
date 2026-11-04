@@ -1,0 +1,13 @@
+data,spec,term,coef
+REAL DATA,H2 (weekday and Sensex-period effects),const,94.49908092439695
+REAL DATA,H2 (weekday and Sensex-period effects),either_expiry,-1.0109991129843552
+REAL DATA,H2 (weekday and Sensex-period effects),wd_Tue,0.38394674392989003
+REAL DATA,H2 (weekday and Sensex-period effects),wd_Wed,-0.8402487273551877
+REAL DATA,H2 (weekday and Sensex-period effects),wd_Thu,-0.5540219569978619
+REAL DATA,H2 (weekday and Sensex-period effects),wd_Fri,-0.0552094125454351
+REAL DATA,H2 (weekday and Sensex-period effects),period_sensex_tue,-0.8449409405304342
+REAL DATA,H2 (weekday and Sensex-period effects),period_sensex_thu,-0.7585067417940801
+REAL DATA,"descriptive: Sensex-period effects only, no weekday effects",const,94.22767602090757
+REAL DATA,"descriptive: Sensex-period effects only, no weekday effects",either_expiry,-0.8501870238293545
+REAL DATA,"descriptive: Sensex-period effects only, no weekday effects",period_sensex_tue,-0.8481272572716483
+REAL DATA,"descriptive: Sensex-period effects only, no weekday effects",period_sensex_thu,-0.771354957185856

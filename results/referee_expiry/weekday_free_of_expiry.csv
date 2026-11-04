@@ -1,0 +1,241 @@
+event,window,side,sample,weekday,weeks,weeks_weekday_free_of_every_expiry,weeks_weekday_free_of_nse_expiry,indices_expiring_on_it,free_in_every_week
+a,3 months,before,all weeks,Mon,13,10,10,FINNIFTY;MIDCPNIFTY,False
+a,3 months,before,all weeks,Tue,12,0,0,FINNIFTY;MIDCPNIFTY,False
+a,3 months,before,all weeks,Wed,13,2,2,BANKNIFTY;MIDCPNIFTY;NIFTY;SENSEX50,False
+a,3 months,before,all weeks,Thu,12,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,3 months,before,all weeks,Fri,13,0,13,BANKEX;SENSEX,False
+a,3 months,before,clean weekly weeks,Mon,10,8,8,FINNIFTY;MIDCPNIFTY,False
+a,3 months,before,clean weekly weeks,Tue,9,0,0,FINNIFTY,False
+a,3 months,before,clean weekly weeks,Wed,10,1,1,MIDCPNIFTY,False
+a,3 months,before,clean weekly weeks,Thu,10,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,3 months,before,clean weekly weeks,Fri,10,0,10,BANKEX;SENSEX,False
+a,3 months,after,all weeks,Mon,11,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+a,3 months,after,all weeks,Tue,10,0,0,FINNIFTY,False
+a,3 months,after,all weeks,Wed,13,3,3,BANKNIFTY,False
+a,3 months,after,all weeks,Thu,13,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,3 months,after,all weeks,Fri,13,0,11,BANKEX;MIDCPNIFTY;SENSEX,False
+a,3 months,after,clean weekly weeks,Mon,9,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+a,3 months,after,clean weekly weeks,Tue,8,0,0,FINNIFTY,False
+a,3 months,after,clean weekly weeks,Wed,10,0,0,BANKNIFTY,False
+a,3 months,after,clean weekly weeks,Thu,10,0,0,NIFTY;SENSEX50,False
+a,3 months,after,clean weekly weeks,Fri,10,0,9,BANKEX;MIDCPNIFTY;SENSEX,False
+a,6 months,before,all weeks,Mon,25,20,20,FINNIFTY;MIDCPNIFTY,False
+a,6 months,before,all weeks,Tue,23,0,0,FINNIFTY;MIDCPNIFTY,False
+a,6 months,before,all weeks,Wed,26,9,9,BANKNIFTY;MIDCPNIFTY;NIFTY;SENSEX50,False
+a,6 months,before,all weeks,Thu,24,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,6 months,before,all weeks,Fri,24,8,24,BANKEX;SENSEX,False
+a,6 months,before,clean weekly weeks,Mon,19,15,15,FINNIFTY;MIDCPNIFTY,False
+a,6 months,before,clean weekly weeks,Tue,17,0,0,FINNIFTY;MIDCPNIFTY,False
+a,6 months,before,clean weekly weeks,Wed,20,7,7,MIDCPNIFTY,False
+a,6 months,before,clean weekly weeks,Thu,20,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,6 months,before,clean weekly weeks,Fri,18,6,18,BANKEX;SENSEX,False
+a,6 months,after,all weeks,Mon,22,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+a,6 months,after,all weeks,Tue,23,0,0,FINNIFTY,False
+a,6 months,after,all weeks,Wed,26,6,6,BANKNIFTY,False
+a,6 months,after,all weeks,Thu,26,0,0,BANKNIFTY;NIFTY;SENSEX;SENSEX50,False
+a,6 months,after,all weeks,Fri,25,0,22,BANKEX;MIDCPNIFTY;SENSEX,False
+a,6 months,after,clean weekly weeks,Mon,19,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+a,6 months,after,clean weekly weeks,Tue,18,0,0,FINNIFTY,False
+a,6 months,after,clean weekly weeks,Wed,20,0,0,BANKNIFTY,False
+a,6 months,after,clean weekly weeks,Thu,20,0,0,NIFTY;SENSEX50,False
+a,6 months,after,clean weekly weeks,Fri,20,0,18,BANKEX;MIDCPNIFTY;SENSEX,False
+a,12 months,before,all weeks,Mon,50,44,44,FINNIFTY;MIDCPNIFTY,False
+a,12 months,before,all weeks,Tue,48,0,0,FINNIFTY;MIDCPNIFTY,False
+a,12 months,before,all weeks,Wed,50,32,32,BANKNIFTY;MIDCPNIFTY;NIFTY;SENSEX50,False
+a,12 months,before,all weeks,Thu,49,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,12 months,before,all weeks,Fri,50,34,50,BANKEX;SENSEX,False
+a,12 months,before,clean weekly weeks,Mon,38,33,33,FINNIFTY;MIDCPNIFTY,False
+a,12 months,before,clean weekly weeks,Tue,35,0,0,FINNIFTY;MIDCPNIFTY,False
+a,12 months,before,clean weekly weeks,Wed,38,25,25,MIDCPNIFTY,False
+a,12 months,before,clean weekly weeks,Thu,39,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+a,12 months,before,clean weekly weeks,Fri,37,25,37,BANKEX;SENSEX,False
+a,12 months,after,all weeks,Mon,45,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+a,12 months,after,all weeks,Tue,49,0,0,BANKNIFTY;FINNIFTY,False
+a,12 months,after,all weeks,Wed,49,6,6,BANKNIFTY;NIFTY;SENSEX50,False
+a,12 months,after,all weeks,Thu,50,0,0,BANKNIFTY;NIFTY;SENSEX;SENSEX50,False
+a,12 months,after,all weeks,Fri,49,0,39,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+a,12 months,after,clean weekly weeks,Mon,31,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+a,12 months,after,clean weekly weeks,Tue,32,0,0,FINNIFTY,False
+a,12 months,after,clean weekly weeks,Wed,34,0,0,BANKNIFTY,False
+a,12 months,after,clean weekly weeks,Thu,34,0,0,NIFTY;SENSEX;SENSEX50,False
+a,12 months,after,clean weekly weeks,Fri,33,0,28,BANKEX;MIDCPNIFTY;SENSEX,False
+b,3 months,before,all weeks,Mon,11,0,0,BANKEX;MIDCPNIFTY,False
+b,3 months,before,all weeks,Tue,13,0,0,FINNIFTY,False
+b,3 months,before,all weeks,Wed,13,3,3,BANKNIFTY,False
+b,3 months,before,all weeks,Thu,13,0,0,BANKNIFTY;NIFTY;SENSEX;SENSEX50,False
+b,3 months,before,all weeks,Fri,12,0,11,BANKEX;MIDCPNIFTY;SENSEX,False
+b,3 months,before,clean weekly weeks,Mon,10,0,0,BANKEX;MIDCPNIFTY,False
+b,3 months,before,clean weekly weeks,Tue,10,0,0,FINNIFTY,False
+b,3 months,before,clean weekly weeks,Wed,10,0,0,BANKNIFTY,False
+b,3 months,before,clean weekly weeks,Thu,10,0,0,NIFTY;SENSEX50,False
+b,3 months,before,clean weekly weeks,Fri,10,0,9,BANKEX;MIDCPNIFTY;SENSEX,False
+b,3 months,after,all weeks,Mon,11,0,0,BANKEX;MIDCPNIFTY,False
+b,3 months,after,all weeks,Tue,13,0,0,BANKNIFTY;FINNIFTY,False
+b,3 months,after,all weeks,Wed,11,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+b,3 months,after,all weeks,Thu,12,0,0,NIFTY;SENSEX;SENSEX50,False
+b,3 months,after,all weeks,Fri,11,0,8,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+b,3 months,after,clean weekly weeks,Mon,6,0,0,BANKEX;MIDCPNIFTY,False
+b,3 months,after,clean weekly weeks,Tue,7,0,0,FINNIFTY,False
+b,3 months,after,clean weekly weeks,Wed,7,0,0,BANKNIFTY,False
+b,3 months,after,clean weekly weeks,Thu,7,0,0,NIFTY;SENSEX;SENSEX50,False
+b,3 months,after,clean weekly weeks,Fri,6,0,4,BANKEX;MIDCPNIFTY;SENSEX,False
+b,6 months,before,all weeks,Mon,22,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+b,6 months,before,all weeks,Tue,23,0,0,FINNIFTY,False
+b,6 months,before,all weeks,Wed,26,6,6,BANKNIFTY,False
+b,6 months,before,all weeks,Thu,26,0,0,BANKNIFTY;NIFTY;SENSEX;SENSEX50,False
+b,6 months,before,all weeks,Fri,25,0,22,BANKEX;MIDCPNIFTY;SENSEX,False
+b,6 months,before,clean weekly weeks,Mon,19,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+b,6 months,before,clean weekly weeks,Tue,18,0,0,FINNIFTY,False
+b,6 months,before,clean weekly weeks,Wed,20,0,0,BANKNIFTY,False
+b,6 months,before,clean weekly weeks,Thu,20,0,0,NIFTY;SENSEX50,False
+b,6 months,before,clean weekly weeks,Fri,20,0,18,BANKEX;MIDCPNIFTY;SENSEX,False
+b,6 months,after,all weeks,Mon,23,0,0,BANKEX;MIDCPNIFTY,False
+b,6 months,after,all weeks,Tue,26,0,0,BANKNIFTY;FINNIFTY,False
+b,6 months,after,all weeks,Wed,23,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+b,6 months,after,all weeks,Thu,24,0,0,NIFTY;SENSEX;SENSEX50,False
+b,6 months,after,all weeks,Fri,24,0,17,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+b,6 months,after,clean weekly weeks,Mon,12,0,0,BANKEX;MIDCPNIFTY,False
+b,6 months,after,clean weekly weeks,Tue,14,0,0,FINNIFTY,False
+b,6 months,after,clean weekly weeks,Wed,14,0,0,BANKNIFTY,False
+b,6 months,after,clean weekly weeks,Thu,14,0,0,NIFTY;SENSEX;SENSEX50,False
+b,6 months,after,clean weekly weeks,Fri,13,0,10,BANKEX;MIDCPNIFTY;SENSEX,False
+b,12 months,before,all weeks,Mon,22,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+b,12 months,before,all weeks,Tue,23,0,0,FINNIFTY,False
+b,12 months,before,all weeks,Wed,26,6,6,BANKNIFTY,False
+b,12 months,before,all weeks,Thu,26,0,0,BANKNIFTY;NIFTY;SENSEX;SENSEX50,False
+b,12 months,before,all weeks,Fri,25,0,22,BANKEX;MIDCPNIFTY;SENSEX,False
+b,12 months,before,clean weekly weeks,Mon,19,0,0,BANKEX;FINNIFTY;MIDCPNIFTY,False
+b,12 months,before,clean weekly weeks,Tue,18,0,0,FINNIFTY,False
+b,12 months,before,clean weekly weeks,Wed,20,0,0,BANKNIFTY,False
+b,12 months,before,clean weekly weeks,Thu,20,0,0,NIFTY;SENSEX50,False
+b,12 months,before,clean weekly weeks,Fri,20,0,18,BANKEX;MIDCPNIFTY;SENSEX,False
+b,12 months,after,all weeks,Mon,34,0,0,BANKEX;MIDCPNIFTY,False
+b,12 months,after,all weeks,Tue,37,0,0,BANKNIFTY;FINNIFTY,False
+b,12 months,after,all weeks,Wed,33,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+b,12 months,after,all weeks,Thu,35,0,0,NIFTY;SENSEX;SENSEX50,False
+b,12 months,after,all weeks,Fri,33,0,24,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+b,12 months,after,clean weekly weeks,Mon,20,0,0,BANKEX;MIDCPNIFTY,False
+b,12 months,after,clean weekly weeks,Tue,22,0,0,FINNIFTY,False
+b,12 months,after,clean weekly weeks,Wed,22,0,0,BANKNIFTY,False
+b,12 months,after,clean weekly weeks,Thu,22,0,0,NIFTY;SENSEX;SENSEX50,False
+b,12 months,after,clean weekly weeks,Fri,20,0,16,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+c,3 months,before,all weeks,Mon,13,0,0,BANKEX;MIDCPNIFTY,False
+c,3 months,before,all weeks,Tue,13,0,0,BANKNIFTY;FINNIFTY,False
+c,3 months,before,all weeks,Wed,12,0,0,BANKNIFTY,False
+c,3 months,before,all weeks,Thu,13,0,0,NIFTY;SENSEX;SENSEX50,False
+c,3 months,before,all weeks,Fri,11,0,8,NIFTYNXT50;SENSEX,False
+c,3 months,before,clean weekly weeks,Mon,9,0,0,BANKEX;MIDCPNIFTY,False
+c,3 months,before,clean weekly weeks,Tue,9,0,0,FINNIFTY,False
+c,3 months,before,clean weekly weeks,Wed,9,0,0,BANKNIFTY,False
+c,3 months,before,clean weekly weeks,Thu,9,0,0,NIFTY;SENSEX;SENSEX50,False
+c,3 months,before,clean weekly weeks,Fri,8,0,7,NIFTYNXT50;SENSEX,False
+c,3 months,after,all weeks,Mon,13,10,10,BANKEX;MIDCPNIFTY,False
+c,3 months,after,all weeks,Tue,13,3,9,BANKNIFTY;FINNIFTY;SENSEX,False
+c,3 months,after,all weeks,Wed,11,10,10,BANKNIFTY,False
+c,3 months,after,all weeks,Thu,13,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+c,3 months,after,all weeks,Fri,13,6,11,NIFTYNXT50;SENSEX,False
+c,3 months,after,clean weekly weeks,Mon,10,8,8,BANKEX;MIDCPNIFTY,False
+c,3 months,after,clean weekly weeks,Tue,10,3,8,FINNIFTY;SENSEX,False
+c,3 months,after,clean weekly weeks,Wed,9,9,9,,True
+c,3 months,after,clean weekly weeks,Thu,10,0,0,NIFTY,False
+c,3 months,after,clean weekly weeks,Fri,10,5,10,SENSEX,False
+c,6 months,before,all weeks,Mon,24,0,0,BANKEX;MIDCPNIFTY,False
+c,6 months,before,all weeks,Tue,26,0,0,BANKNIFTY;FINNIFTY,False
+c,6 months,before,all weeks,Wed,24,0,0,BANKNIFTY;NIFTY;SENSEX50,False
+c,6 months,before,all weeks,Thu,25,0,0,NIFTY;SENSEX;SENSEX50,False
+c,6 months,before,all weeks,Fri,24,0,17,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+c,6 months,before,clean weekly weeks,Mon,14,0,0,BANKEX;MIDCPNIFTY,False
+c,6 months,before,clean weekly weeks,Tue,16,0,0,FINNIFTY,False
+c,6 months,before,clean weekly weeks,Wed,16,0,0,BANKNIFTY,False
+c,6 months,before,clean weekly weeks,Thu,16,0,0,NIFTY;SENSEX;SENSEX50,False
+c,6 months,before,clean weekly weeks,Fri,15,0,13,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+c,6 months,after,all weeks,Mon,24,21,21,BANKEX;MIDCPNIFTY,False
+c,6 months,after,all weeks,Tue,26,3,22,BANKNIFTY;FINNIFTY;SENSEX,False
+c,6 months,after,all weeks,Wed,23,20,20,BANKNIFTY;NIFTY,False
+c,6 months,after,all weeks,Thu,24,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+c,6 months,after,all weeks,Fri,24,17,22,NIFTYNXT50;SENSEX,False
+c,6 months,after,clean weekly weeks,Mon,16,14,14,BANKEX;MIDCPNIFTY,False
+c,6 months,after,clean weekly weeks,Tue,18,3,16,FINNIFTY;SENSEX,False
+c,6 months,after,clean weekly weeks,Wed,17,17,17,,True
+c,6 months,after,clean weekly weeks,Thu,18,0,0,NIFTY,False
+c,6 months,after,clean weekly weeks,Fri,16,11,16,SENSEX,False
+c,12 months,before,all weeks,Mon,46,0,0,BANKEX;MIDCPNIFTY,False
+c,12 months,before,all weeks,Tue,52,0,0,BANKNIFTY;FINNIFTY,False
+c,12 months,before,all weeks,Wed,48,4,4,BANKNIFTY;NIFTY;SENSEX50,False
+c,12 months,before,all weeks,Thu,50,0,0,BANKNIFTY;NIFTY;SENSEX;SENSEX50,False
+c,12 months,before,all weeks,Fri,47,0,36,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+c,12 months,before,clean weekly weeks,Mon,31,0,0,BANKEX;MIDCPNIFTY,False
+c,12 months,before,clean weekly weeks,Tue,33,0,0,FINNIFTY,False
+c,12 months,before,clean weekly weeks,Wed,33,0,0,BANKNIFTY,False
+c,12 months,before,clean weekly weeks,Thu,33,0,0,NIFTY;SENSEX;SENSEX50,False
+c,12 months,before,clean weekly weeks,Fri,31,0,25,BANKEX;MIDCPNIFTY;NIFTYNXT50;SENSEX,False
+c,12 months,after,all weeks,Mon,39,36,36,BANKEX;MIDCPNIFTY,False
+c,12 months,after,all weeks,Tue,41,3,37,BANKNIFTY;FINNIFTY;SENSEX,False
+c,12 months,after,all weeks,Wed,37,34,34,BANKNIFTY;NIFTY,False
+c,12 months,after,all weeks,Thu,39,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+c,12 months,after,all weeks,Fri,38,31,36,NIFTYNXT50;SENSEX,False
+c,12 months,after,clean weekly weeks,Mon,27,25,25,BANKEX;MIDCPNIFTY,False
+c,12 months,after,clean weekly weeks,Tue,29,3,27,FINNIFTY;SENSEX,False
+c,12 months,after,clean weekly weeks,Wed,28,28,28,,True
+c,12 months,after,clean weekly weeks,Thu,29,0,0,NIFTY,False
+c,12 months,after,clean weekly weeks,Fri,26,21,26,SENSEX,False
+d,3 months,before,all weeks,Mon,13,13,13,,True
+d,3 months,before,all weeks,Tue,13,0,13,SENSEX,False
+d,3 months,before,all weeks,Wed,12,12,12,,True
+d,3 months,before,all weeks,Thu,13,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,3 months,before,all weeks,Fri,12,12,12,,True
+d,3 months,before,clean weekly weeks,Mon,10,10,10,,True
+d,3 months,before,clean weekly weeks,Tue,10,0,10,SENSEX,False
+d,3 months,before,clean weekly weeks,Wed,10,10,10,,True
+d,3 months,before,clean weekly weeks,Thu,10,0,0,NIFTY,False
+d,3 months,before,clean weekly weeks,Fri,9,9,9,,True
+d,3 months,after,all weeks,Mon,13,12,12,NIFTY,False
+d,3 months,after,all weeks,Tue,12,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,3 months,after,all weeks,Wed,11,10,11,SENSEX,False
+d,3 months,after,all weeks,Thu,12,0,12,SENSEX,False
+d,3 months,after,all weeks,Fri,13,13,13,,True
+d,3 months,after,clean weekly weeks,Mon,9,9,9,,True
+d,3 months,after,clean weekly weeks,Tue,9,0,0,NIFTY,False
+d,3 months,after,clean weekly weeks,Wed,8,8,8,,True
+d,3 months,after,clean weekly weeks,Thu,9,0,9,SENSEX,False
+d,3 months,after,clean weekly weeks,Fri,9,9,9,,True
+d,6 months,before,all weeks,Mon,24,24,24,,True
+d,6 months,before,all weeks,Tue,26,0,26,SENSEX,False
+d,6 months,before,all weeks,Wed,25,23,23,NIFTY,False
+d,6 months,before,all weeks,Thu,24,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,6 months,before,all weeks,Fri,23,23,23,,True
+d,6 months,before,clean weekly weeks,Mon,16,16,16,,True
+d,6 months,before,clean weekly weeks,Tue,18,0,18,SENSEX,False
+d,6 months,before,clean weekly weeks,Wed,18,18,18,,True
+d,6 months,before,clean weekly weeks,Thu,18,0,0,NIFTY,False
+d,6 months,before,clean weekly weeks,Fri,15,15,15,,True
+d,6 months,after,all weeks,Mon,25,24,24,NIFTY,False
+d,6 months,after,all weeks,Tue,25,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,6 months,after,all weeks,Wed,24,21,24,SENSEX,False
+d,6 months,after,all weeks,Thu,23,0,23,SENSEX,False
+d,6 months,after,all weeks,Fri,26,26,26,,True
+d,6 months,after,clean weekly weeks,Mon,19,19,19,,True
+d,6 months,after,clean weekly weeks,Tue,19,0,0,NIFTY,False
+d,6 months,after,clean weekly weeks,Wed,18,16,18,SENSEX,False
+d,6 months,after,clean weekly weeks,Thu,17,0,17,SENSEX,False
+d,6 months,after,clean weekly weeks,Fri,19,19,19,,True
+d,12 months,before,all weeks,Mon,39,36,36,BANKEX;MIDCPNIFTY,False
+d,12 months,before,all weeks,Tue,41,3,37,BANKNIFTY;FINNIFTY;SENSEX,False
+d,12 months,before,all weeks,Wed,37,34,34,BANKNIFTY;NIFTY,False
+d,12 months,before,all weeks,Thu,39,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,12 months,before,all weeks,Fri,38,31,36,NIFTYNXT50;SENSEX,False
+d,12 months,before,clean weekly weeks,Mon,27,25,25,BANKEX;MIDCPNIFTY,False
+d,12 months,before,clean weekly weeks,Tue,29,3,27,FINNIFTY;SENSEX,False
+d,12 months,before,clean weekly weeks,Wed,28,28,28,,True
+d,12 months,before,clean weekly weeks,Thu,29,0,0,NIFTY,False
+d,12 months,before,clean weekly weeks,Fri,26,21,26,SENSEX,False
+d,12 months,after,all weeks,Mon,47,43,43,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,12 months,after,all weeks,Tue,44,0,0,BANKNIFTY;FINNIFTY;MIDCPNIFTY;NIFTY;NIFTYNXT50,False
+d,12 months,after,all weeks,Wed,46,41,46,SENSEX,False
+d,12 months,after,all weeks,Thu,43,0,43,SENSEX,False
+d,12 months,after,all weeks,Fri,45,45,45,,True
+d,12 months,after,clean weekly weeks,Mon,34,34,34,,True
+d,12 months,after,clean weekly weeks,Tue,34,0,0,NIFTY,False
+d,12 months,after,clean weekly weeks,Wed,33,30,33,SENSEX,False
+d,12 months,after,clean weekly weeks,Thu,31,0,31,SENSEX,False
+d,12 months,after,clean weekly weeks,Fri,33,33,33,,True

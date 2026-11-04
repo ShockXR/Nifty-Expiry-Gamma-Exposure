@@ -1,0 +1,52 @@
+                                       case  cross_share_pct
+0                      no dynamics, rho=0.5        20.000000
+1                     no dynamics, rho=0.85        41.944848
+2                     no dynamics, rho=0.95        47.437582
+3  series 2 leads series 1 by 0.3, rho=0.85        44.622569
+4  series 2 leads series 1 by 0.6, rho=0.85        48.200118
+5  series 2 leads series 1 by 0.9, rho=0.85        50.949460
+                                      min        max     median   total_dy  boot_ci_low  boot_ci_high   boot_sd
+sample                                                                                                         
+full session on 13 expiry days  15.244347  15.353263  15.258349  15.256274    13.381855     17.768413  1.150704
+full session on 64 days         16.660180  16.670340  16.669737  16.670340    15.421656     17.448078  0.502035
+one hour on 4 expiry days       18.409251  20.970617  19.392841  18.621606     9.715877     21.498520  3.159135
+   n_obs  true_total_dy   mean_est    sd_est       p2_5      p97_5  sd_paper_scale
+0    240      38.852695  38.338752  2.328881  33.054589  42.276018        4.657762
+1   1440      38.852695  38.730217  0.948655  36.795813  40.480032        1.897310
+2   4680      38.852695  38.822722  0.490723  37.815932  39.760391        0.981447
+3  23000      38.852695  38.848963  0.240223  38.386151  39.295307        0.480447
+                                                                                    rejection_rate_5pct  reps     mc_se
+scenario            design               variable variance_ratio test                                                  
+A: independent days all days 64 vs 59    rs0      1.00           day_bootstrap                 0.026667   150  0.013154
+                                                                 day_mwu                       0.060000   300  0.013711
+                                                                 hac_log                       0.053333   300  0.012973
+                                                                 minute_mwu                    0.693333   300  0.026622
+                                                  1.10           day_bootstrap                 0.293333   150  0.037174
+                                                                 day_mwu                       0.273333   300  0.025731
+                                                                 hac_log                       0.150000   300  0.020616
+                                                                 minute_mwu                    0.853333   300  0.020425
+                                                  1.25           day_bootstrap                 0.900000   150  0.024495
+                                                                 day_mwu                       0.876667   300  0.018984
+                                                                 hac_log                       0.490000   300  0.028862
+                                                                 minute_mwu                    0.996667   300  0.003328
+                                         volume   1.00           day_mwu                       0.056667   300  0.013349
+                                                                 hac_log                       0.100000   300  0.017321
+                                                                 minute_mwu                    0.870000   300  0.019416
+                                                  1.10           day_mwu                       0.060000   300  0.013711
+                                                                 hac_log                       0.110000   300  0.018065
+                                                                 minute_mwu                    0.890000   300  0.018065
+                                                  1.25           day_mwu                       0.076667   300  0.015361
+                                                                 hac_log                       0.150000   300  0.020616
+                                                                 minute_mwu                    0.893333   300  0.017822
+B: persistent days  expiry days 13 vs 12 rs0      1.00           day_mwu                       0.323333   300  0.027005
+                                                                 did_mwu_weeks                 0.016667   300  0.007391
+                                                                 did_welch_t_weeks             0.023333   300  0.008716
+                                                                 minute_mwu                    0.816667   300  0.022340
+                                                  1.10           day_mwu                       0.286667   300  0.026108
+                                                                 did_mwu_weeks                 0.103333   300  0.017574
+                                                                 did_welch_t_weeks             0.090000   300  0.016523
+                                                                 minute_mwu                    0.830000   300  0.021687
+                                                  1.25           day_mwu                       0.393333   300  0.028203
+                                                                 did_mwu_weeks                 0.486667   300  0.028857
+                                                                 did_welch_t_weeks             0.563333   300  0.028635
+                                                                 minute_mwu                    0.876667   300  0.018984

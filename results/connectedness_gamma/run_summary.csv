@@ -1,0 +1,29 @@
+key,value
+data,REAL DATA
+seed,20261102
+perm_seed_rule,"default_rng([20261102, 1, variant, draw])"
+boot_seed_rule,"default_rng([20261102, 2, variant, draw])"
+n_perm,5000
+n_boot,2000
+block_days,20
+min_days_per_state_per_stratum,5
+var_p_main,2
+H_main,10
+var_p_sensitivity_aic,10
+H_sensitivity,30
+session_rule,360_drop_last15
+sample_start,2023-01-03
+sample_end,2026-04-22
+n_days,809
+closing_auction_days_in_sample,0
+fast_vs_replication_check_max_abs_diff,2.0179413695586845e-12
+workers,4
+timing_load_s,10.7
+timing_mcsgarch_s,3.3
+timing_cross_products_s,1.9
+timing_draws_s,41.0
+timing_total_s,57.4
+n_days_multi_weekly,461
+n_days_single_weekly_thu,192
+n_days_single_weekly_tue,156
+n_nifty_expiry_days,173

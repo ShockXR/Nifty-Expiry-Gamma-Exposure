@@ -1,0 +1,2 @@
+index,bar_file,first_day,last_day,official_days,days_compared,official_days_without_bars,bar_days_not_official,days_under_370_bars,median_bars_per_day,high_within_5bp,low_within_5bp,open_within_5bp,high_median_abs_bp,low_median_abs_bp,close_median_abs_bp,close_p95_abs_bp,worst_high_or_low_bp
+Nifty Financial Services,finnifty_1min.csv,2023-01-02,2026-01-27,756,755,1,4,1,375.0,0.9894039735099338,0.9920529801324504,0.9894039735099338,0.0003033161921628391,0.000328183220599243,5.659535319739728,19.48987856808848,13.440860215054862

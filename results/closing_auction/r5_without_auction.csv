@@ -1,0 +1,15 @@
+sample,spec,rule,term,coef,p,n
+all days,momentum only,none,r_rod,-0.029414976655980567,0.015323211517193215,932
+all days,binary,us_convention,r_rod_x_neg,0.013031288220090708,0.5841111367020801,929
+all days,binary + VIX and size controls,us_convention,r_rod_x_neg,-0.0008334718820817621,0.9715053305824882,929
+all days,binary,participant_pro,r_rod_x_neg,-0.06819618208278541,0.00021579685586665392,929
+all days,binary + VIX and size controls,participant_pro,r_rod_x_neg,-0.049767226527903406,0.0028603849293124127,929
+all days,binary,client_mirror,r_rod_x_neg,-0.07197557554587107,3.0962949097438234e-05,929
+all days,binary + VIX and size controls,client_mirror,r_rod_x_neg,0.002836503672568808,0.9413711698454876,929
+before 3 Aug 2026,momentum only,none,r_rod,-0.030318870933002305,0.016524954913926193,869
+before 3 Aug 2026,binary,us_convention,r_rod_x_neg,0.005817706040968361,0.8032628080599491,866
+before 3 Aug 2026,binary + VIX and size controls,us_convention,r_rod_x_neg,-0.009740694296742342,0.6727900892965613,866
+before 3 Aug 2026,binary,participant_pro,r_rod_x_neg,-0.07217900975191267,7.665924087930218e-05,866
+before 3 Aug 2026,binary + VIX and size controls,participant_pro,r_rod_x_neg,-0.05284201959145268,0.001231558184119026,866
+before 3 Aug 2026,binary,client_mirror,r_rod_x_neg,-0.07165727093321843,5.148087801398335e-05,866
+before 3 Aug 2026,binary + VIX and size controls,client_mirror,r_rod_x_neg,0.004440694683696103,0.9083898385855258,866

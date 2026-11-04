@@ -1,0 +1,662 @@
+REAL DATA. P82: dealer sign estimated from data (revealed sign under a maintained hypothesis).
+Days with all inputs: 913 of 942 (2023-02-06 to 2026-11-02); expiry days 194; closing-auction days 63 (left out of outcome b). Training days (before 2025-01-01): 461; test days: 452 (outcome b: 389).
+Check (GEX is linear in the weights): panel Pro GEX / gross minus (pro_call*s_call + pro_put*s_put), max abs 2.1e-17; Client mirror 4.2e-17. Four categories' net shares sum to zero: max abs 8.8e-07 (calls), 6.0e-07 (puts).
+Call share of gross gamma s_call: mean 0.546, sd 0.039. Scale-free GEX / gross, sd over days: US 0.078, Pro 0.0208, Client mirror 0.0249; corr(Pro, Client mirror) 0.569.
+Mean gross GEX / 20-day median by trading days to expiry of the outcome day: 0: 1.71, 1: 1.24, 2: 0.99, 3: 0.74, 4: 0.52 (why the old R3 scaling is not used).
+
+== direction estimates (angle in degrees; 90% profile-LR set; shares family: only the side is identified)
+                                        sample            controls       family objective  n_days_a  n_days_b  angle_deg  lr_max              lr_set_90  lr_set_width_deg
+                         training 2023 to 2024                base       shares     joint       461       461      315.0 11.4027              226 to 44               179
+                         training 2023 to 2024                base       shares         a       461       461      135.0  1.8055             all angles               360
+                         training 2023 to 2024                base       shares         b       461       461      315.0 11.4027              226 to 44               179
+                         training 2023 to 2024                base participants     joint       461       461      272.0 11.0210             194 to 328               135
+                         training 2023 to 2024                base participants         a       461       461       29.0  8.3011              359 to 90                92
+                         training 2023 to 2024                base participants         b       461       461      272.0 11.0210             194 to 328               135
+                                   full sample                base       shares     joint       913       850      315.0  7.9754              226 to 44               179
+                                   full sample                base       shares         a       913       850      135.0  0.8183             all angles               360
+                                   full sample                base       shares         b       913       850      315.0  7.9754              226 to 44               179
+                                   full sample                base participants     joint       913       850      190.0 21.2821             178 to 217                40
+                                   full sample                base participants         a       913       850       21.0  3.7513             331 to 113               143
+                                   full sample                base participants         b       913       850      190.0 21.2821             178 to 217                40
+                  full sample, no auction days                base       shares     joint       850       850      315.0  7.9754              226 to 44               179
+                  full sample, no auction days                base       shares         a       850       850      135.0  1.6872             all angles               360
+                  full sample, no auction days                base       shares         b       850       850      315.0  7.9754              226 to 44               179
+                  full sample, no auction days                base participants     joint       850       850      190.0 21.2821             178 to 217                40
+                  full sample, no auction days                base participants         a       850       850       23.0  5.0239             338 to 103               126
+                  full sample, no auction days                base participants         b       850       850      190.0 21.2821             178 to 217                40
+                                   full sample base+auction_regime       shares     joint       913       913      315.0  9.3645              226 to 44               179
+                                   full sample base+auction_regime       shares         a       913       913      135.0  0.8183             all angles               360
+                                   full sample base+auction_regime       shares         b       913       913      315.0  9.3645              226 to 44               179
+                                   full sample base+auction_regime participants     joint       913       913      190.0 21.3845             178 to 215                38
+                                   full sample base+auction_regime participants         a       913       913       21.0  3.7513             331 to 113               143
+                                   full sample base+auction_regime participants         b       913       913      190.0 21.3845             178 to 215                38
+                         training 2023 to 2024         base+regime       shares     joint       461       461      315.0 11.1602              226 to 44               179
+                         training 2023 to 2024         base+regime       shares         a       461       461      135.0  1.3954             all angles               360
+                         training 2023 to 2024         base+regime       shares         b       461       461      315.0 11.1602              226 to 44               179
+                         training 2023 to 2024         base+regime participants     joint       461       461      268.0 10.8144             193 to 328               136
+                         training 2023 to 2024         base+regime participants         a       461       461       29.0  7.0101              357 to 93                97
+                         training 2023 to 2024         base+regime participants         b       461       461      268.0 10.8144             193 to 328               136
+                                   full sample         base+regime       shares     joint       913       850      315.0  7.0163              226 to 44               179
+                                   full sample         base+regime       shares         a       913       850      135.0  0.5445             all angles               360
+                                   full sample         base+regime       shares         b       913       850      315.0  7.0163              226 to 44               179
+                                   full sample         base+regime participants     joint       913       850      193.0 24.9307             182 to 216                35
+                                   full sample         base+regime participants         a       913       850       12.0  6.3763              340 to 78                99
+                                   full sample         base+regime participants         b       913       850      193.0 24.9307             182 to 216                35
+                         training 2023 to 2024       base+gross_oi       shares     joint       461       461      315.0  3.9333   46 to 224; 226 to 44               358
+                         training 2023 to 2024       base+gross_oi       shares         a       461       461      135.0  3.0704              46 to 224               179
+                         training 2023 to 2024       base+gross_oi       shares         b       461       461      315.0  3.9333              226 to 44               179
+                         training 2023 to 2024       base+gross_oi participants     joint       461       461       38.0  5.5927 210 to 314; 358 to 115               223
+                         training 2023 to 2024       base+gross_oi participants         a       461       461       38.0  5.5927             358 to 115               118
+                         training 2023 to 2024       base+gross_oi participants         b       461       461      263.0  3.5204             183 to 339               157
+                                   full sample       base+gross_oi       shares     joint       913       850      315.0  4.3800              226 to 44               179
+                                   full sample       base+gross_oi       shares         a       913       850      135.0  1.2136             all angles               360
+                                   full sample       base+gross_oi       shares         b       913       850      315.0  4.3800              226 to 44               179
+                                   full sample       base+gross_oi participants     joint       913       850      191.0 17.9291             179 to 215                37
+                                   full sample       base+gross_oi participants         a       913       850       83.0  1.2351             all angles               360
+                                   full sample       base+gross_oi participants         b       913       850      191.0 17.9291             179 to 215                37
+training 2023 to 2024, R3 scaling (comparison)                base       shares     joint       461       461       12.0  4.0227             299 to 113               175
+training 2023 to 2024, R3 scaling (comparison)                base       shares         a       461       461       74.0  2.7364             340 to 146               167
+training 2023 to 2024, R3 scaling (comparison)                base       shares         b       461       461      341.0  3.8355              297 to 57               121
+training 2023 to 2024, R3 scaling (comparison)                base participants     joint       461       461      312.0 10.2395             262 to 333                72
+training 2023 to 2024, R3 scaling (comparison)                base participants         a       461       461       21.0  3.8285             341 to 108               128
+training 2023 to 2024, R3 scaling (comparison)                base participants         b       461       461      312.0 10.2395             262 to 332                71
+          full sample, R3 scaling (comparison)                base       shares     joint       913       850       52.0  7.5889   11 to 86; 266 to 283                94
+          full sample, R3 scaling (comparison)                base       shares         a       913       850       52.0  7.5889               11 to 86                76
+          full sample, R3 scaling (comparison)                base       shares         b       913       850      275.0  5.0408             218 to 308                91
+          full sample, R3 scaling (comparison)                base participants     joint       913       850      217.0 13.1915             186 to 266                81
+          full sample, R3 scaling (comparison)                base participants         a       913       850        3.0  1.7758             all angles               360
+          full sample, R3 scaling (comparison)                base participants         b       913       850      217.0 13.1915             186 to 266                81
+
+== block-bootstrap bands (base controls); share_same_side = share of draws within 90 degrees of the estimate
+               sample       family objective  angle_deg  boot_angle_lo  boot_angle_hi  boot_w1_lo  boot_w1_hi  boot_w2_lo  boot_w2_hi  boot_share_same_side
+training 2023 to 2024       shares     joint      315.0          135.0          315.0 -7.0711e-01      0.7071     -0.7071      0.7071                 0.705
+training 2023 to 2024       shares         a      135.0          315.0          135.0 -7.0711e-01      0.7071     -0.7071      0.7071                 0.800
+training 2023 to 2024       shares         b      315.0          135.0          315.0 -7.0711e-01      0.7071     -0.7071      0.7071                 0.850
+training 2023 to 2024 participants     joint      272.0          186.0           69.0 -8.8295e-01      0.9945     -0.9703      0.9903                 0.515
+training 2023 to 2024 participants         a       29.0          338.0           90.0  6.1232e-17      0.9986     -0.3746      0.9925                 0.990
+training 2023 to 2024 participants         b      272.0          158.0           19.0 -9.7815e-01      0.9781     -0.9903      0.8480                 0.810
+          full sample       shares     joint      315.0          135.0          315.0 -7.0711e-01      0.7071     -0.7071      0.7071                 0.635
+          full sample       shares         a      135.0          315.0          135.0 -7.0711e-01      0.7071     -0.7071      0.7071                 0.815
+          full sample       shares         b      315.0          135.0          315.0 -7.0711e-01      0.7071     -0.7071      0.7071                 0.770
+          full sample participants     joint      190.0           61.0          314.0 -9.9985e-01      0.9063     -0.8387      0.8192                 0.850
+          full sample participants         a       21.0          318.0          116.0 -4.3837e-01      0.9925     -0.6691      0.9962                 0.925
+          full sample participants         b      190.0          158.0          241.0 -9.9985e-01     -0.4848     -0.8746      0.3746                 0.985
+
+== unrestricted loadings theta (direction = -theta; shares: theta on US-convention GEX), HAC Wald test of theta = 0
+                                        sample            controls       family objective  theta1    se1  theta2    se2  wald_df     wald_p
+                         training 2023 to 2024                base       shares         a  0.5194 0.5667     NaN    NaN      1.0 3.5939e-01
+                         training 2023 to 2024                base       shares         b -0.3297 0.1059     NaN    NaN      1.0 1.8522e-03
+                         training 2023 to 2024                base participants         a -3.2559 1.7982 -1.8193 1.8870      2.0 5.8150e-02
+                         training 2023 to 2024                base participants         b -0.0209 0.9060  0.6974 0.2802      2.0 2.9087e-03
+                                   full sample                base       shares         a  0.2204 0.2935     NaN    NaN      1.0 4.5266e-01
+                                   full sample                base       shares         b -0.2000 0.0954     NaN    NaN      1.0 3.6130e-02
+                                   full sample                base participants         a -1.2932 1.3209 -0.5068 1.7107      2.0 1.8264e-01
+                                   full sample                base participants         b  1.3400 0.6154  0.2404 0.2607      2.0 4.3420e-06
+                  full sample, no auction days                base       shares         a  0.3315 0.3073     NaN    NaN      1.0 2.8083e-01
+                  full sample, no auction days                base       shares         b -0.2000 0.0954     NaN    NaN      1.0 3.6130e-02
+                  full sample, no auction days                base participants         a -1.4713 1.3395 -0.6362 1.7346      2.0 1.1079e-01
+                  full sample, no auction days                base participants         b  1.3400 0.6154  0.2404 0.2607      2.0 4.3420e-06
+                                   full sample base+auction_regime       shares         a  0.2204 0.2935     NaN    NaN      1.0 4.5266e-01
+                                   full sample base+auction_regime       shares         b -0.2182 0.0896     NaN    NaN      1.0 1.4914e-02
+                                   full sample base+auction_regime participants         a -1.2932 1.3209 -0.5068 1.7107      2.0 1.8264e-01
+                                   full sample base+auction_regime participants         b  1.3892 0.6079  0.2330 0.2576      2.0 1.8908e-06
+                         training 2023 to 2024         base+regime       shares         a  0.4595 0.5438     NaN    NaN      1.0 3.9806e-01
+                         training 2023 to 2024         base+regime       shares         b -0.3388 0.1037     NaN    NaN      1.0 1.0893e-03
+                         training 2023 to 2024         base+regime participants         a -3.1340 1.8824 -1.7653 1.8320      2.0 7.7412e-02
+                         training 2023 to 2024         base+regime participants         b  0.0244 0.9087  0.6939 0.2804      2.0 2.8791e-03
+                                   full sample         base+regime       shares         a  0.1802 0.2824     NaN    NaN      1.0 5.2329e-01
+                                   full sample         base+regime       shares         b -0.2094 0.0986     NaN    NaN      1.0 3.3728e-02
+                                   full sample         base+regime participants         a -2.3785 1.4958 -0.4914 1.6940      2.0 3.3756e-02
+                                   full sample         base+regime participants         b  1.6212 0.6437  0.3778 0.2092      2.0 3.9088e-06
+                         training 2023 to 2024       base+gross_oi       shares         a  0.6643 0.5622     NaN    NaN      1.0 2.3733e-01
+                         training 2023 to 2024       base+gross_oi       shares         b -0.2199 0.1108     NaN    NaN      1.0 4.7173e-02
+                         training 2023 to 2024       base+gross_oi participants         a -2.2088 1.8257 -1.7447 1.7909      2.0 1.5756e-01
+                         training 2023 to 2024       base+gross_oi participants         b  0.0768 0.9395  0.5949 0.3397      2.0 1.8510e-01
+                                   full sample       base+gross_oi       shares         a  0.2621 0.2849     NaN    NaN      1.0 3.5773e-01
+                                   full sample       base+gross_oi       shares         b -0.1578 0.0820     NaN    NaN      1.0 5.4436e-02
+                                   full sample       base+gross_oi participants         a -0.0990 1.3262 -0.7696 1.5455      2.0 6.9743e-01
+                                   full sample       base+gross_oi participants         b  1.4515 0.6041  0.2907 0.2881      2.0 1.1989e-04
+training 2023 to 2024, R3 scaling (comparison)                base       shares         a -0.2450 0.4371 -0.8527 0.5560      2.0 1.7558e-01
+training 2023 to 2024, R3 scaling (comparison)                base       shares         b -0.2814 0.1564  0.0970 0.2743      2.0 1.4270e-01
+training 2023 to 2024, R3 scaling (comparison)                base participants         a -2.8270 1.7301 -1.1067 1.6992      2.0 1.4502e-01
+training 2023 to 2024, R3 scaling (comparison)                base participants         b -1.1292 0.8318  1.2706 0.5295      2.0 5.5386e-02
+          full sample, R3 scaling (comparison)                base       shares         a -0.5433 0.2719 -0.7034 0.3314      2.0 1.3447e-02
+          full sample, R3 scaling (comparison)                base       shares         b -0.0224 0.1457  0.2447 0.1736      2.0 2.8833e-01
+          full sample, R3 scaling (comparison)                base participants         a -1.1165 1.1739 -0.0527 1.3969      2.0 3.3978e-01
+          full sample, R3 scaling (comparison)                base participants         b  0.7243 0.5706  0.5531 0.4865      2.0 1.1165e-02
+
+== which reference directions are inside the 90% LR set
+                                        sample            controls       family objective in_set: US convention in_set: reverse US in_set: Pro in_set: Client mirror in_set: FII+DII in_set: reverse Pro in_set: Client
+                         training 2023 to 2024                base       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024                base       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024                base       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024                base participants     joint                   NaN                NaN       False                 False           False               False           True
+                         training 2023 to 2024                base participants         a                   NaN                NaN        True                  True           False               False          False
+                         training 2023 to 2024                base participants         b                   NaN                NaN       False                 False           False               False           True
+                                   full sample                base       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample                base       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample                base       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample                base participants     joint                   NaN                NaN       False                 False           False                True          False
+                                   full sample                base participants         a                   NaN                NaN        True                  True           False               False          False
+                                   full sample                base participants         b                   NaN                NaN       False                 False           False                True          False
+                  full sample, no auction days                base       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                  full sample, no auction days                base       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                  full sample, no auction days                base       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                  full sample, no auction days                base participants     joint                   NaN                NaN       False                 False           False                True          False
+                  full sample, no auction days                base participants         a                   NaN                NaN        True                  True           False               False          False
+                  full sample, no auction days                base participants         b                   NaN                NaN       False                 False           False                True          False
+                                   full sample base+auction_regime       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample base+auction_regime       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample base+auction_regime       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample base+auction_regime participants     joint                   NaN                NaN       False                 False           False                True          False
+                                   full sample base+auction_regime participants         a                   NaN                NaN        True                  True           False               False          False
+                                   full sample base+auction_regime participants         b                   NaN                NaN       False                 False           False                True          False
+                         training 2023 to 2024         base+regime       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024         base+regime       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024         base+regime       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024         base+regime participants     joint                   NaN                NaN       False                 False           False               False           True
+                         training 2023 to 2024         base+regime participants         a                   NaN                NaN        True                  True           False               False          False
+                         training 2023 to 2024         base+regime participants         b                   NaN                NaN       False                 False           False               False           True
+                                   full sample         base+regime       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample         base+regime       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample         base+regime       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample         base+regime participants     joint                   NaN                NaN       False                 False           False               False          False
+                                   full sample         base+regime participants         a                   NaN                NaN        True                 False           False               False          False
+                                   full sample         base+regime participants         b                   NaN                NaN       False                 False           False               False          False
+                         training 2023 to 2024       base+gross_oi       shares     joint                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024       base+gross_oi       shares         a                 False               True         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024       base+gross_oi       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                         training 2023 to 2024       base+gross_oi participants     joint                   NaN                NaN        True                  True           False               False           True
+                         training 2023 to 2024       base+gross_oi participants         a                   NaN                NaN        True                  True           False               False          False
+                         training 2023 to 2024       base+gross_oi participants         b                   NaN                NaN       False                 False           False               False           True
+                                   full sample       base+gross_oi       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample       base+gross_oi       shares         a                  True               True         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample       base+gross_oi       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+                                   full sample       base+gross_oi participants     joint                   NaN                NaN       False                 False           False                True          False
+                                   full sample       base+gross_oi participants         a                   NaN                NaN        True                  True            True                True           True
+                                   full sample       base+gross_oi participants         b                   NaN                NaN       False                 False           False                True          False
+training 2023 to 2024, R3 scaling (comparison)                base       shares     joint                  True              False         NaN                   NaN             NaN                 NaN            NaN
+training 2023 to 2024, R3 scaling (comparison)                base       shares         a                 False               True         NaN                   NaN             NaN                 NaN            NaN
+training 2023 to 2024, R3 scaling (comparison)                base       shares         b                  True              False         NaN                   NaN             NaN                 NaN            NaN
+training 2023 to 2024, R3 scaling (comparison)                base participants     joint                   NaN                NaN       False                 False           False               False           True
+training 2023 to 2024, R3 scaling (comparison)                base participants         a                   NaN                NaN        True                  True           False               False          False
+training 2023 to 2024, R3 scaling (comparison)                base participants         b                   NaN                NaN       False                 False           False               False           True
+          full sample, R3 scaling (comparison)                base       shares     joint                 False              False         NaN                   NaN             NaN                 NaN            NaN
+          full sample, R3 scaling (comparison)                base       shares         a                 False              False         NaN                   NaN             NaN                 NaN            NaN
+          full sample, R3 scaling (comparison)                base       shares         b                 False              False         NaN                   NaN             NaN                 NaN            NaN
+          full sample, R3 scaling (comparison)                base participants     joint                   NaN                NaN       False                 False           False               False          False
+          full sample, R3 scaling (comparison)                base participants         a                   NaN                NaN        True                  True            True                True           True
+          full sample, R3 scaling (comparison)                base participants         b                   NaN                NaN       False                 False           False               False          False
+
+== fixed rules in the forecasting template (in-sample, HAC; theory says coef < 0)
+               sample    controls eq    rule    coef  se_hac          p  theory_sign_ok  signal_to_noise other_gex_term  other_gex_coef  other_gex_p     r2  r2_baseline   n
+training 2023 to 2024        base  a      us  0.5194  0.5667 3.5939e-01           False           0.0756   GEX x expiry         -0.4554       0.4787 0.4586       0.4560 461
+training 2023 to 2024        base  a     pro -4.4698  1.9183 1.9803e-02            True           0.1265   GEX x expiry          6.9109       0.0255 0.4685       0.4560 461
+training 2023 to 2024        base  a cmirror -2.5505  1.7741 1.5055e-01            True           0.1407   GEX x expiry          1.5377       0.3982 0.4632       0.4560 461
+training 2023 to 2024        base  b      us -0.3297  0.1059 1.8522e-03            True           0.2813      GEX level         30.6747       0.0199 0.0609       0.0236 461
+training 2023 to 2024        base  b     pro  1.4511  0.9246 1.1656e-01           False           0.1386      GEX level        -54.5635       0.2900 0.0350       0.0236 461
+training 2023 to 2024        base  b cmirror  0.6931  0.2028 6.3280e-04           False           0.1816      GEX level        -60.4326       0.1067 0.0562       0.0236 461
+          full sample        base  a      us  0.2204  0.2935 4.5266e-01           False           0.0346   GEX x expiry          0.3311       0.3567 0.4754       0.4745 913
+          full sample        base  a     pro -1.6430  0.8946 6.6263e-02            True           0.0631   GEX x expiry          3.7116       0.0174 0.4791       0.4745 913
+          full sample        base  a cmirror -1.1608  1.2521 3.5386e-01            True           0.0689   GEX x expiry          1.5898       0.2954 0.4766       0.4745 913
+          full sample        base  b      us -0.2000  0.0954 3.6130e-02            True           0.1406      GEX level         20.5201       0.0068 0.0322       0.0147 850
+          full sample        base  b     pro  1.6773  0.4557 2.3233e-04           False           0.1593      GEX level        -77.7437       0.0017 0.0458       0.0147 850
+          full sample        base  b cmirror  0.5559  0.1810 2.1280e-03           False           0.1501      GEX level        -55.6784       0.0397 0.0359       0.0147 850
+          full sample base+regime  a      us  0.1802  0.2824 5.2329e-01           False           0.0284   GEX x expiry          0.4244       0.2424 0.4826       0.4817 913
+          full sample base+regime  a     pro -2.7069  1.0363 9.0019e-03            True           0.1046   GEX x expiry          5.6975       0.0089 0.4887       0.4817 913
+          full sample base+regime  a cmirror -1.4092  1.2715 2.6774e-01            True           0.0839   GEX x expiry          1.6546       0.2775 0.4841       0.4817 913
+          full sample base+regime  b      us -0.2094  0.0986 3.3728e-02            True           0.1473      GEX level         18.8563       0.0116 0.0373       0.0223 850
+          full sample base+regime  b     pro  2.0996  0.5502 1.3559e-04           False           0.1994      GEX level        -64.6914       0.0367 0.0506       0.0223 850
+          full sample base+regime  b cmirror  0.6832  0.1544 9.6533e-06           False           0.1847      GEX level        -46.1503       0.0953 0.0435       0.0223 850
+
+[9s] direction estimates done
+== Kalman time-varying loadings: MLE on 2023 to 2024 (q = per-day drift variance of the scaled loadings)
+      family eq  n_loadings   sigma2      q  llf_train  llf_train_q0  lr_q_vs_0  p_q_eq_0
+      shares  a           1   0.2256 0.0004  -343.3031     -347.1979     7.7894    0.0026
+      shares  b           1 278.0756 0.2531 -1956.7425    -1958.2085     2.9319    0.0434
+participants  a           2   0.2221 0.0002  -339.5866     -342.9444     6.7156    0.0048
+participants  b           2 282.9332 0.0608 -1954.1543    -1954.3599     0.4112    0.2607
+
+== Kalman filtered direction: strength (Wald of theta_t = 0) and drift
+      family eq   period  days  median_wald_theta0  share_days_wald_gt_90pct  w1_first  w1_last  w2_first  w2_last  p_us_side_first  p_us_side_last  p_us_side_mean
+participants  a training   461              0.6869                    0.0738   -0.5601  -0.3186    0.8284  -0.9479              NaN             NaN             NaN
+participants  a     test   452              1.4232                    0.0111   -0.5371  -0.9990   -0.8435  -0.0443              NaN             NaN             NaN
+participants  b training   461              0.9503                    0.0586   -0.7917   0.8594    0.6110  -0.5113              NaN             NaN             NaN
+participants  b     test   389              2.7374                    0.1517    0.8601  -0.9778   -0.5101   0.2095              NaN             NaN             NaN
+      shares  a training   461              0.7219                    0.1605    0.7071  -0.7071   -0.7071   0.7071           1.0000          0.1524          0.5017
+      shares  a     test   452              0.6590                    0.1549   -0.7071  -0.7071    0.7071   0.7071           0.1564          0.0721          0.4105
+      shares  b training   461              2.3572                    0.4620    0.7071  -0.7071   -0.7071   0.7071           0.5644          0.3879          0.8821
+      shares  b     test   389              0.2915                    0.0746   -0.7071  -0.7071    0.7071   0.7071           0.3833          0.3956          0.5479
+
+[17s] rolling and Kalman done
+== expanding-window direction at each out-of-sample refit (joint objective)
+refit_date       family  angle_joint      w1      w2  angle_lo  angle_hi  share_same_side  angle_a  angle_b   lr_a    lr_b
+2025-01-01       shares        315.0  0.7071 -0.7071     135.0     315.0            0.675    135.0    315.0 1.8055 11.4027
+2025-01-01 participants        272.0  0.0349 -0.9994     203.0      64.0            0.585     29.0    272.0 8.3011 11.0210
+2025-01-30       shares        315.0  0.7071 -0.7071     135.0     315.0            0.710    135.0    315.0 1.4474 12.3132
+2025-01-30 participants        260.0 -0.1736 -0.9848     112.0      59.0            0.535     32.0    260.0 6.5632 11.7108
+2025-03-03       shares        315.0  0.7071 -0.7071     135.0     315.0            0.730    135.0    315.0 1.9172 13.7506
+2025-03-03 participants        264.0 -0.1045 -0.9945     107.0      58.0            0.610     44.0    264.0 3.6174 14.9474
+2025-04-03       shares        315.0  0.7071 -0.7071     135.0     315.0            0.690    135.0    315.0 1.9045 14.6158
+2025-04-03 participants        261.0 -0.1564 -0.9877     114.0      62.0            0.745     51.0    261.0 2.9765 15.6997
+2025-05-08       shares        315.0  0.7071 -0.7071     135.0     315.0            0.695    135.0    315.0 1.3637 11.6400
+2025-05-08 participants        207.0 -0.8910 -0.4540      53.0     334.0            0.645     29.0    207.0 2.1380 10.3018
+2025-06-06       shares        315.0  0.7071 -0.7071     135.0     315.0            0.770    135.0    315.0 0.6419 12.1295
+2025-06-06 participants        201.0 -0.9336 -0.3584      54.0     348.0            0.640     18.0    201.0 2.1960 10.7864
+2025-07-07       shares        315.0  0.7071 -0.7071     135.0     315.0            0.810    135.0    315.0 0.5969 13.1704
+2025-07-07 participants        199.0 -0.9455 -0.3256      32.0     351.0            0.595     10.0    199.0 5.2189 12.1267
+2025-08-05       shares        315.0  0.7071 -0.7071     135.0     315.0            0.805    135.0    315.0 0.7410 13.2304
+2025-08-05 participants        195.0 -0.9659 -0.2588      54.0     353.0            0.600     16.0    195.0 4.0556 14.2376
+2025-09-05       shares        315.0  0.7071 -0.7071     135.0     315.0            0.785    135.0    315.0 0.3495 14.3218
+2025-09-05 participants        195.0 -0.9659 -0.2588      55.0     339.0            0.670     18.0    195.0 3.8151 15.5231
+2025-10-07       shares        315.0  0.7071 -0.7071     135.0     315.0            0.840    135.0    315.0 0.7879 14.9800
+2025-10-07 participants        195.0 -0.9659 -0.2588      42.0     351.0            0.655     16.0    195.0 3.6773 16.2532
+2025-11-10       shares        315.0  0.7071 -0.7071     135.0     315.0            0.830    135.0    315.0 0.5572 13.7161
+2025-11-10 participants        198.0 -0.9511 -0.3090      57.0     352.0            0.670     15.0    198.0 3.5660 15.0137
+2025-12-09       shares        315.0  0.7071 -0.7071     135.0     315.0            0.795    135.0    315.0 0.5996 12.9325
+2025-12-09 participants        198.0 -0.9511 -0.3090      40.0     351.0            0.605     12.0    198.0 3.9812 15.3954
+2026-01-08       shares        315.0  0.7071 -0.7071     135.0     315.0            0.750    135.0    315.0 0.4516 13.5024
+2026-01-08 participants        198.0 -0.9511 -0.3090      74.0     350.0            0.625      9.0    198.0 4.3426 15.2605
+2026-02-10       shares        315.0  0.7071 -0.7071     135.0     315.0            0.795    135.0    315.0 0.7704 13.3353
+2026-02-10 participants        195.0 -0.9659 -0.2588      69.0     356.0            0.675     16.0    195.0 3.8588 16.9351
+2026-03-12       shares        315.0  0.7071 -0.7071     135.0     315.0            0.770    135.0    315.0 0.8934 12.0982
+2026-03-12 participants        194.0 -0.9703 -0.2419      53.0     322.0            0.740     18.0    194.0 3.4837 18.6718
+2026-04-16       shares        315.0  0.7071 -0.7071     135.0     315.0            0.755    135.0    315.0 1.0726  9.1670
+2026-04-16 participants        191.0 -0.9816 -0.1908      89.0     317.0            0.865     19.0    191.0 3.6427 19.4096
+2026-05-18       shares        315.0  0.7071 -0.7071     135.0     315.0            0.735    135.0    315.0 1.0221  9.4985
+2026-05-18 participants        190.0 -0.9848 -0.1736      62.0     310.0            0.835     21.0    190.0 3.3552 21.6982
+2026-06-17       shares        315.0  0.7071 -0.7071     135.0     315.0            0.735    135.0    315.0 1.2227  9.0543
+2026-06-17 participants        189.0 -0.9877 -0.1564      79.0     250.0            0.895     26.0    189.0 3.5934 25.0034
+2026-07-17       shares        315.0  0.7071 -0.7071     135.0     315.0            0.665    135.0    315.0 1.4379  8.1168
+2026-07-17 participants        190.0 -0.9848 -0.1736      81.0     294.0            0.860     26.0    190.0 4.6363 21.3253
+2026-08-17       shares        315.0  0.7071 -0.7071     135.0     315.0            0.675    135.0    315.0 0.7360  7.9754
+2026-08-17 participants        190.0 -0.9848 -0.1736      77.0     313.0            0.860     21.0    190.0 4.4244 21.2821
+2026-09-16       shares        315.0  0.7071 -0.7071     135.0     315.0            0.630    135.0    315.0 0.8412  7.9754
+2026-09-16 participants        190.0 -0.9848 -0.1736      85.0     264.0            0.895     21.0    190.0 4.3636 21.2821
+2026-10-16       shares        315.0  0.7071 -0.7071     135.0     315.0            0.730    135.0    315.0 0.9222  7.9754
+2026-10-16 participants        190.0 -0.9848 -0.1736      87.0     314.0            0.870     25.0    190.0 3.8457 21.2821
+
+== out-of-sample mean loss (a: QLIKE of realized variance; b: squared error, bp^2), % vs baseline without dealer sign
+                              sample eq variant                   model  n_days  mean_loss  pct_vs_none  p_better_than_none
+                       all test days  a    free                 cmirror     452     0.1394       1.7362              0.8983
+                       all test days  a    free        est_participants     452     0.1392       1.5881              0.8430
+                       all test days  a    free est_participants_frozen     452     0.1394       1.7294              0.8998
+                       all test days  a    free              est_shares     452     0.1377       0.4789              0.8438
+                       all test days  a    free       est_shares_frozen     452     0.1377       0.4789              0.8438
+                       all test days  a    free     kalman_participants     452     0.1377       0.4547              0.5408
+                       all test days  a    free           kalman_shares     452     0.1322      -3.5337              0.0997
+                       all test days  a    free                    none     452     0.1371       0.0000                 NaN
+                       all test days  a    free                     pro     452     0.1380       0.6811              0.6832
+                       all test days  a    free                      us     452     0.1377       0.4789              0.8438
+                       all test days  a  signed                 cmirror     452     0.1394       1.7362              0.8983
+                       all test days  a  signed        est_participants     452     0.1384       0.9760              0.8825
+                       all test days  a  signed est_participants_frozen     452     0.1376       0.3942              0.7404
+                       all test days  a  signed              est_shares     452     0.1372       0.1375              0.7709
+                       all test days  a  signed       est_shares_frozen     452     0.1372       0.1375              0.7709
+                       all test days  a  signed                    none     452     0.1371       0.0000                 NaN
+                       all test days  a  signed                     pro     452     0.1380       0.6811              0.6832
+                       all test days  a  signed                      us     452     0.1372       0.1375              0.7709
+                       all test days  b    free                 cmirror     389   304.4517       0.0663              0.5081
+                       all test days  b    free        est_participants     389   297.1591      -2.3306              0.2504
+                       all test days  b    free est_participants_frozen     389   304.8256       0.1891              0.5229
+                       all test days  b    free              est_shares     389   307.3096       1.0056              0.6776
+                       all test days  b    free       est_shares_frozen     389   307.3096       1.0056              0.6776
+                       all test days  b    free     kalman_participants     389   303.0406      -0.3975              0.4495
+                       all test days  b    free           kalman_shares     389   314.1576       3.2564              0.8424
+                       all test days  b    free                    none     389   304.2501       0.0000                 NaN
+                       all test days  b    free                     pro     389   288.3544      -5.2245              0.0028
+                       all test days  b    free                      us     389   307.3096       1.0056              0.6776
+                       all test days  b  signed                 cmirror     389   304.0561      -0.0638              0.4742
+                       all test days  b  signed        est_participants     389   297.1591      -2.3306              0.2504
+                       all test days  b  signed est_participants_frozen     389   304.8256       0.1891              0.5229
+                       all test days  b  signed              est_shares     389   307.3096       1.0056              0.6776
+                       all test days  b  signed       est_shares_frozen     389   307.3096       1.0056              0.6776
+                       all test days  b  signed                    none     389   304.2501       0.0000                 NaN
+                       all test days  b  signed                     pro     389   299.4712      -1.5707              0.0296
+                       all test days  b  signed                      us     389   307.3096       1.0056              0.6776
+test days before the closing auction  a    free                 cmirror     389     0.1414       1.6880              0.8618
+test days before the closing auction  a    free        est_participants     389     0.1407       1.1762              0.7477
+test days before the closing auction  a    free est_participants_frozen     389     0.1414       1.6923              0.8648
+test days before the closing auction  a    free              est_shares     389     0.1392       0.0663              0.5671
+test days before the closing auction  a    free       est_shares_frozen     389     0.1392       0.0663              0.5671
+test days before the closing auction  a    free     kalman_participants     389     0.1377      -1.0182              0.4187
+test days before the closing auction  a    free           kalman_shares     389     0.1344      -3.3845              0.1351
+test days before the closing auction  a    free                    none     389     0.1391       0.0000                 NaN
+test days before the closing auction  a    free                     pro     389     0.1393       0.1397              0.5351
+test days before the closing auction  a    free                      us     389     0.1392       0.0663              0.5671
+test days before the closing auction  a  signed                 cmirror     389     0.1414       1.6880              0.8618
+test days before the closing auction  a  signed        est_participants     389     0.1403       0.9026              0.8413
+test days before the closing auction  a  signed est_participants_frozen     389     0.1397       0.4695              0.7494
+test days before the closing auction  a  signed              est_shares     389     0.1391       0.0554              0.6196
+test days before the closing auction  a  signed       est_shares_frozen     389     0.1391       0.0554              0.6196
+test days before the closing auction  a  signed                    none     389     0.1391       0.0000                 NaN
+test days before the closing auction  a  signed                     pro     389     0.1393       0.1397              0.5351
+test days before the closing auction  a  signed                      us     389     0.1391       0.0554              0.6196
+test days before the closing auction  b    free                 cmirror     389   304.4517       0.0663              0.5081
+test days before the closing auction  b    free        est_participants     389   297.1591      -2.3306              0.2504
+test days before the closing auction  b    free est_participants_frozen     389   304.8256       0.1891              0.5229
+test days before the closing auction  b    free              est_shares     389   307.3096       1.0056              0.6776
+test days before the closing auction  b    free       est_shares_frozen     389   307.3096       1.0056              0.6776
+test days before the closing auction  b    free     kalman_participants     389   303.0406      -0.3975              0.4495
+test days before the closing auction  b    free           kalman_shares     389   314.1576       3.2564              0.8424
+test days before the closing auction  b    free                    none     389   304.2501       0.0000                 NaN
+test days before the closing auction  b    free                     pro     389   288.3544      -5.2245              0.0028
+test days before the closing auction  b    free                      us     389   307.3096       1.0056              0.6776
+test days before the closing auction  b  signed                 cmirror     389   304.0561      -0.0638              0.4742
+test days before the closing auction  b  signed        est_participants     389   297.1591      -2.3306              0.2504
+test days before the closing auction  b  signed est_participants_frozen     389   304.8256       0.1891              0.5229
+test days before the closing auction  b  signed              est_shares     389   307.3096       1.0056              0.6776
+test days before the closing auction  b  signed       est_shares_frozen     389   307.3096       1.0056              0.6776
+test days before the closing auction  b  signed                    none     389   304.2501       0.0000                 NaN
+test days before the closing auction  b  signed                     pro     389   299.4712      -1.5707              0.0296
+test days before the closing auction  b  signed                      us     389   307.3096       1.0056              0.6776
+
+== Diebold-Mariano: estimated-sign GEX vs fixed rules, theory-signed template (primary: all test days; Holm over the tests that exist)
+                              sample eq               estimated fixed_rule  n_days  identical_forecasts  pct_est_vs_rule  dm_stat  p_est_better  p_two_sided  p_est_better_holm_primary  p_two_sided_holm_primary
+                       all test days  a        est_participants         us     452                False       8.3740e-01  -0.9372        0.8254       0.3492                        1.0                       1.0
+                       all test days  a        est_participants        pro     452                False       2.9296e-01  -0.2304        0.5911       0.8179                        1.0                       1.0
+                       all test days  a        est_participants    cmirror     452                False      -7.4722e-01   0.5354        0.2963       0.5926                        1.0                       1.0
+                       all test days  a est_participants_frozen         us     452                False       2.5639e-01  -0.4114        0.6595       0.6810                        NaN                       NaN
+                       all test days  a est_participants_frozen        pro     452                False      -2.8491e-01   0.1861        0.4262       0.8525                        NaN                       NaN
+                       all test days  a est_participants_frozen    cmirror     452                False      -1.3191e+00   1.1132        0.1331       0.2662                        NaN                       NaN
+                       all test days  a              est_shares         us     452                 True       0.0000e+00      NaN           NaN          NaN                        NaN                       NaN
+                       all test days  a              est_shares        pro     452                False      -5.3992e-01   0.3725        0.3548       0.7097                        1.0                       1.0
+                       all test days  a              est_shares    cmirror     452                False      -1.5715e+00   1.1825        0.1188       0.2376                        1.0                       1.0
+                       all test days  a       est_shares_frozen         us     452                 True       0.0000e+00      NaN           NaN          NaN                        NaN                       NaN
+                       all test days  a       est_shares_frozen        pro     452                False      -5.3992e-01   0.3725        0.3548       0.7097                        NaN                       NaN
+                       all test days  a       est_shares_frozen    cmirror     452                False      -1.5715e+00   1.1825        0.1188       0.2376                        NaN                       NaN
+                       all test days  b        est_participants         us     389                False      -3.3030e+00   1.0939        0.1373       0.2747                        1.0                       1.0
+                       all test days  b        est_participants        pro     389                False      -7.7207e-01   0.2301        0.4091       0.8182                        1.0                       1.0
+                       all test days  b        est_participants    cmirror     389                False      -2.2683e+00   0.7805        0.2178       0.4356                        1.0                       1.0
+                       all test days  b est_participants_frozen         us     389                False      -8.0831e-01   0.2929        0.3849       0.7697                        NaN                       NaN
+                       all test days  b est_participants_frozen        pro     389                False       1.7879e+00  -0.5284        0.7012       0.5976                        NaN                       NaN
+                       all test days  b est_participants_frozen    cmirror     389                False       2.5308e-01  -0.0921        0.5367       0.9267                        NaN                       NaN
+                       all test days  b              est_shares         us     389                 True       6.6613e-14      NaN           NaN          NaN                        NaN                       NaN
+                       all test days  b              est_shares        pro     389                False       2.6174e+00  -1.1413        0.8728       0.2544                        1.0                       1.0
+                       all test days  b              est_shares    cmirror     389                False       1.0700e+00  -0.5413        0.7057       0.5886                        1.0                       1.0
+                       all test days  b       est_shares_frozen         us     389                 True       6.6613e-14      NaN           NaN          NaN                        NaN                       NaN
+                       all test days  b       est_shares_frozen        pro     389                False       2.6174e+00  -1.1413        0.8728       0.2544                        NaN                       NaN
+                       all test days  b       est_shares_frozen    cmirror     389                False       1.0700e+00  -0.5413        0.7057       0.5886                        NaN                       NaN
+test days before the closing auction  a        est_participants         us     389                False       8.4673e-01  -0.8738        0.8086       0.3828                        NaN                       NaN
+test days before the closing auction  a        est_participants        pro     389                False       7.6187e-01  -0.5437        0.7065       0.5870                        NaN                       NaN
+test days before the closing auction  a        est_participants    cmirror     389                False      -7.7234e-01   0.4960        0.3101       0.6202                        NaN                       NaN
+test days before the closing auction  a est_participants_frozen         us     389                False       4.1383e-01  -0.5921        0.7229       0.5541                        NaN                       NaN
+test days before the closing auction  a est_participants_frozen        pro     389                False       3.2933e-01  -0.1922        0.5762       0.8477                        NaN                       NaN
+test days before the closing auction  a est_participants_frozen    cmirror     389                False      -1.1983e+00   0.8935        0.1861       0.3722                        NaN                       NaN
+test days before the closing auction  a              est_shares         us     389                 True      -2.2204e-14      NaN           NaN          NaN                        NaN                       NaN
+test days before the closing auction  a              est_shares        pro     389                False      -8.4150e-02   0.0520        0.4793       0.9586                        NaN                       NaN
+test days before the closing auction  a              est_shares    cmirror     389                False      -1.6055e+00   1.0618        0.1445       0.2890                        NaN                       NaN
+test days before the closing auction  a       est_shares_frozen         us     389                 True      -2.2204e-14      NaN           NaN          NaN                        NaN                       NaN
+test days before the closing auction  a       est_shares_frozen        pro     389                False      -8.4150e-02   0.0520        0.4793       0.9586                        NaN                       NaN
+test days before the closing auction  a       est_shares_frozen    cmirror     389                False      -1.6055e+00   1.0618        0.1445       0.2890                        NaN                       NaN
+test days before the closing auction  b        est_participants         us     389                False      -3.3030e+00   1.0939        0.1373       0.2747                        NaN                       NaN
+test days before the closing auction  b        est_participants        pro     389                False      -7.7207e-01   0.2301        0.4091       0.8182                        NaN                       NaN
+test days before the closing auction  b        est_participants    cmirror     389                False      -2.2683e+00   0.7805        0.2178       0.4356                        NaN                       NaN
+test days before the closing auction  b est_participants_frozen         us     389                False      -8.0831e-01   0.2929        0.3849       0.7697                        NaN                       NaN
+test days before the closing auction  b est_participants_frozen        pro     389                False       1.7879e+00  -0.5284        0.7012       0.5976                        NaN                       NaN
+test days before the closing auction  b est_participants_frozen    cmirror     389                False       2.5308e-01  -0.0921        0.5367       0.9267                        NaN                       NaN
+test days before the closing auction  b              est_shares         us     389                 True       6.6613e-14      NaN           NaN          NaN                        NaN                       NaN
+test days before the closing auction  b              est_shares        pro     389                False       2.6174e+00  -1.1413        0.8728       0.2544                        NaN                       NaN
+test days before the closing auction  b              est_shares    cmirror     389                False       1.0700e+00  -0.5413        0.7057       0.5886                        NaN                       NaN
+test days before the closing auction  b       est_shares_frozen         us     389                 True       6.6613e-14      NaN           NaN          NaN                        NaN                       NaN
+test days before the closing auction  b       est_shares_frozen        pro     389                False       2.6174e+00  -1.1413        0.8728       0.2544                        NaN                       NaN
+test days before the closing auction  b       est_shares_frozen    cmirror     389                False       1.0700e+00  -0.5413        0.7057       0.5886                        NaN                       NaN
+
+== Diebold-Mariano, free-coefficient template (sign-free: a rule and its reverse forecast identically)
+eq               estimated fixed_rule  identical_forecasts  pct_est_vs_rule  p_est_better  p_two_sided
+ a        est_participants         us                False       1.1040e+00        0.7510       0.4980
+ a        est_participants        pro                False       9.0090e-01        0.7419       0.5161
+ a        est_participants    cmirror                False      -1.4558e-01        0.4271       0.8542
+ a est_participants_frozen         us                False       1.2446e+00        0.8160       0.3680
+ a est_participants_frozen        pro                False       1.0412e+00        0.7230       0.5540
+ a est_participants_frozen    cmirror                False      -6.7054e-03        0.4185       0.8369
+ a              est_shares         us                 True       1.1102e-13           NaN          NaN
+ a              est_shares        pro                False      -2.0084e-01        0.4479       0.8958
+ a              est_shares    cmirror                False      -1.2359e+00        0.1850       0.3700
+ a       est_shares_frozen         us                 True       1.1102e-13           NaN          NaN
+ a       est_shares_frozen        pro                False      -2.0084e-01        0.4479       0.8958
+ a       est_shares_frozen    cmirror                False      -1.2359e+00        0.1850       0.3700
+ a     kalman_participants         us                False      -2.4007e-02        0.4978       0.9956
+ a     kalman_participants        pro                False      -2.2480e-01        0.4791       0.9581
+ a     kalman_participants    cmirror                False      -1.2596e+00        0.4073       0.8146
+ a           kalman_shares         us                False      -3.9934e+00        0.0772       0.1544
+ a           kalman_shares        pro                False      -4.1862e+00        0.0766       0.1532
+ a           kalman_shares    cmirror                False      -5.1799e+00        0.0800       0.1599
+ b        est_participants         us                False      -3.3030e+00        0.1373       0.2747
+ b        est_participants        pro                False       3.0534e+00        0.8265       0.3469
+ b        est_participants    cmirror                False      -2.3953e+00        0.0172       0.0343
+ b est_participants_frozen         us                False      -8.0831e-01        0.3849       0.7697
+ b est_participants_frozen        pro                False       5.7121e+00        0.9380       0.1239
+ b est_participants_frozen    cmirror                False       1.2281e-01        0.9976       0.0048
+ b              est_shares         us                 True       6.6613e-14           NaN          NaN
+ b              est_shares        pro                False       6.5736e+00        0.9863       0.0274
+ b              est_shares    cmirror                False       9.3870e-01        0.6327       0.7346
+ b       est_shares_frozen         us                 True       6.6613e-14           NaN          NaN
+ b       est_shares_frozen        pro                False       6.5736e+00        0.9863       0.0274
+ b       est_shares_frozen    cmirror                False       9.3870e-01        0.6327       0.7346
+ b     kalman_participants         us                False      -1.3891e+00        0.3415       0.6830
+ b     kalman_participants        pro                False       5.0931e+00        0.9680       0.0640
+ b     kalman_participants    cmirror                False      -4.6347e-01        0.4266       0.8533
+ b           kalman_shares         us                False       2.2284e+00        0.8503       0.2993
+ b           kalman_shares        pro                False       8.9484e+00        0.9938       0.0124
+ b           kalman_shares    cmirror                False       3.1880e+00        0.9472       0.1055
+
+== theory-signed template: share of refits in which the GEX term had the theory sign (else it was set to 0)
+eq                   model  refits  share_refits_theory_sign  share_refits_set_to_zero
+ a                      us      22                       0.0                       1.0
+ a                     pro      22                       1.0                       0.0
+ a                 cmirror      22                       1.0                       0.0
+ a              est_shares      22                       0.0                       1.0
+ a       est_shares_frozen      22                       0.0                       1.0
+ a        est_participants      22                       0.0                       1.0
+ a est_participants_frozen      22                       0.0                       1.0
+ b                      us      22                       1.0                       0.0
+ b                     pro      22                       0.0                       1.0
+ b                 cmirror      22                       0.0                       1.0
+ b              est_shares      22                       1.0                       0.0
+ b       est_shares_frozen      22                       1.0                       0.0
+ b        est_participants      22                       1.0                       0.0
+ b est_participants_frozen      22                       1.0                       0.0
+
+== sign agreement between estimated-sign GEX and the fixed rules
+      family fixed_rule                                             period  n_days  share_same_sign  share_est_negative  share_rule_negative    corr
+      shares         us training 2023 to 2024 (direction from that period)     461           1.0000              0.0759               0.0759  1.0000
+      shares         us                             test, expanding refits     452           1.0000              0.1571               0.1571  1.0000
+      shares        pro training 2023 to 2024 (direction from that period)     461           0.2581              0.0759               0.7570 -0.2309
+      shares        pro                             test, expanding refits     452           0.6659              0.1571               0.2168 -0.0806
+      shares    cmirror training 2023 to 2024 (direction from that period)     461           0.8677              0.0759               0.0694 -0.1854
+      shares    cmirror                             test, expanding refits     452           0.8296              0.1571               0.0133 -0.1510
+participants         us training 2023 to 2024 (direction from that period)     461           0.1323              0.9306               0.0759  0.1823
+participants         us                             test, expanding refits     452           0.1969              0.9381               0.1571  0.0925
+participants        pro training 2023 to 2024 (direction from that period)     461           0.6963              0.9306               0.7570 -0.4236
+participants        pro                             test, expanding refits     452           0.1593              0.9381               0.2168 -0.5821
+participants    cmirror training 2023 to 2024 (direction from that period)     461           0.0000              0.9306               0.0694 -0.9998
+participants    cmirror                             test, expanding refits     452           0.0531              0.9381               0.0133 -0.8589
+
+[24s] out-of-sample done
+== robustness, out of sample (theory-signed template); pct = % loss difference, negative = first model better
+                                        robustness                         comparison    eq  n_days         pct  p_est_better  p_two_sided identical_forecasts  angle_deg  angle_a  angle_b
+            auction days left out of both outcomes                    cmirror vs none     a     389  1.6880e+00        0.8618          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes           est_participants vs none     a     389  9.0260e-01        0.8413          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                 est_shares vs none     a     389  5.5394e-02        0.6196          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                        pro vs none     a     389  1.3966e-01        0.5351          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                         us vs none     a     389  5.5394e-02        0.6196          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                    cmirror vs none     b     389 -6.3778e-02        0.4742          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes           est_participants vs none     b     389 -2.3306e+00        0.2504          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                 est_shares vs none     b     389  1.0056e+00        0.6776          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                        pro vs none     b     389 -1.5707e+00        0.0296          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes                         us vs none     b     389  1.0056e+00        0.6776          NaN                 NaN        NaN      NaN      NaN
+            auction days left out of both outcomes             est_participants vs us     a     389  8.4673e-01        0.8086       0.3828               False        NaN      NaN      NaN
+            auction days left out of both outcomes            est_participants vs pro     a     389  7.6187e-01        0.7065       0.5870               False        NaN      NaN      NaN
+            auction days left out of both outcomes        est_participants vs cmirror     a     389 -7.7234e-01        0.3101       0.6202               False        NaN      NaN      NaN
+            auction days left out of both outcomes                   est_shares vs us     a     389 -2.2204e-14           NaN          NaN                True        NaN      NaN      NaN
+            auction days left out of both outcomes                  est_shares vs pro     a     389 -8.4150e-02        0.4793       0.9586               False        NaN      NaN      NaN
+            auction days left out of both outcomes              est_shares vs cmirror     a     389 -1.6055e+00        0.1445       0.2890               False        NaN      NaN      NaN
+            auction days left out of both outcomes             est_participants vs us     b     389 -3.3030e+00        0.1373       0.2747               False        NaN      NaN      NaN
+            auction days left out of both outcomes            est_participants vs pro     b     389 -7.7207e-01        0.4091       0.8182               False        NaN      NaN      NaN
+            auction days left out of both outcomes        est_participants vs cmirror     b     389 -2.2683e+00        0.2178       0.4356               False        NaN      NaN      NaN
+            auction days left out of both outcomes                   est_shares vs us     b     389  6.6613e-14           NaN          NaN                True        NaN      NaN      NaN
+            auction days left out of both outcomes                  est_shares vs pro     b     389  2.6174e+00        0.8728       0.2544               False        NaN      NaN      NaN
+            auction days left out of both outcomes              est_shares vs cmirror     b     389  1.0700e+00        0.7057       0.5886               False        NaN      NaN      NaN
+            auction days left out of both outcomes       last refit direction, shares joint     839         NaN           NaN          NaN                 NaN      315.0    135.0    315.0
+            auction days left out of both outcomes last refit direction, participants joint     839         NaN           NaN          NaN                 NaN      190.0     26.0    190.0
+auction days kept in outcome b as their own regime                    cmirror vs none     a     452  1.7362e+00        0.8983          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime           est_participants vs none     a     452  9.7601e-01        0.8825          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                 est_shares vs none     a     452  1.3747e-01        0.7709          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                        pro vs none     a     452  6.8106e-01        0.6832          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                         us vs none     a     452  1.3747e-01        0.7709          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                    cmirror vs none     b     452  2.3331e-01        0.6137          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime           est_participants vs none     b     452 -1.3418e+00        0.3131          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                 est_shares vs none     b     452  6.3731e-01        0.6360          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                        pro vs none     b     452 -4.5999e-01        0.2932          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                         us vs none     b     452  6.3731e-01        0.6360          NaN                 NaN        NaN      NaN      NaN
+auction days kept in outcome b as their own regime             est_participants vs us     a     452  8.3740e-01        0.8254       0.3492               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime            est_participants vs pro     a     452  2.9296e-01        0.5911       0.8179               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime        est_participants vs cmirror     a     452 -7.4722e-01        0.2963       0.5926               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                   est_shares vs us     a     452  0.0000e+00           NaN          NaN                True        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                  est_shares vs pro     a     452 -5.3992e-01        0.3548       0.7097               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime              est_shares vs cmirror     a     452 -1.5715e+00        0.1188       0.2376               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime             est_participants vs us     b     452 -1.9666e+00        0.2105       0.4209               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime            est_participants vs pro     b     452 -8.8588e-01        0.3675       0.7350               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime        est_participants vs cmirror     b     452 -1.5714e+00        0.2471       0.4942               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                   est_shares vs us     b     452  4.4409e-14           NaN          NaN                True        NaN      NaN      NaN
+auction days kept in outcome b as their own regime                  est_shares vs pro     b     452  1.1024e+00        0.7183       0.5635               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime              est_shares vs cmirror     b     452  4.0306e-01        0.5971       0.8058               False        NaN      NaN      NaN
+auction days kept in outcome b as their own regime       last refit direction, shares joint     902         NaN           NaN          NaN                 NaN      315.0    135.0    315.0
+auction days kept in outcome b as their own regime last refit direction, participants joint     902         NaN           NaN          NaN                 NaN      190.0     25.0    190.0
+         expiry-regime and days-to-expiry controls                    cmirror vs none     a     452  1.2945e+00        0.8279          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls           est_participants vs none     a     452  6.4792e-01        0.6581          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                 est_shares vs none     a     452  7.3387e-02        0.6453          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                        pro vs none     a     452  1.9103e-01        0.5355          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                         us vs none     a     452  7.3387e-02        0.6453          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                    cmirror vs none     b     389  6.0319e-01        0.7499          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls           est_participants vs none     b     389 -1.9514e+00        0.2216          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                 est_shares vs none     b     389  2.1614e+00        0.8753          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                        pro vs none     b     389 -1.9532e-01        0.3838          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                         us vs none     b     389  2.1614e+00        0.8753          NaN                 NaN        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls             est_participants vs us     a     452  5.7412e-01        0.6409       0.7183               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls            est_participants vs pro     a     452  4.5603e-01        0.6337       0.7327               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls        est_participants vs cmirror     a     452 -6.3829e-01        0.3297       0.6593               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                   est_shares vs us     a     452 -4.4409e-14           NaN          NaN                True        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                  est_shares vs pro     a     452 -1.1742e-01        0.4780       0.9560               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls              est_shares vs cmirror     a     452 -1.2055e+00        0.1824       0.3649               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls             est_participants vs us     b     389 -4.0257e+00        0.1212       0.2425               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls            est_participants vs pro     b     389 -1.7595e+00        0.2488       0.4977               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls        est_participants vs cmirror     b     389 -2.5393e+00        0.1301       0.2602               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                   est_shares vs us     b     389 -7.7716e-14           NaN          NaN                True        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls                  est_shares vs pro     b     389  2.3613e+00        0.8879       0.2242               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls              est_shares vs cmirror     b     389  1.5488e+00        0.7820       0.4359               False        NaN      NaN      NaN
+         expiry-regime and days-to-expiry controls       last refit direction, shares joint     902         NaN           NaN          NaN                 NaN      315.0    135.0    315.0
+         expiry-regime and days-to-expiry controls last refit direction, participants joint     902         NaN           NaN          NaN                 NaN      193.0     14.0    193.0
+            open-interest and gross-level controls                    cmirror vs none     a     452  1.8028e+00        0.9199          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls           est_participants vs none     a     452  1.4690e+00        0.8700          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                 est_shares vs none     a     452  2.1362e-01        0.8671          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                        pro vs none     a     452  8.6268e-01        0.7229          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                         us vs none     a     452  2.1362e-01        0.8671          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                    cmirror vs none     b     389 -1.0246e-01        0.4406          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls           est_participants vs none     b     389 -3.0513e+00        0.1434          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                 est_shares vs none     b     389 -5.0107e-01        0.3721          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                        pro vs none     b     389 -1.0831e+00        0.0128          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls                         us vs none     b     389 -5.0107e-01        0.3721          NaN                 NaN        NaN      NaN      NaN
+            open-interest and gross-level controls             est_participants vs us     a     452  1.2527e+00        0.8224       0.3552               False        NaN      NaN      NaN
+            open-interest and gross-level controls            est_participants vs pro     a     452  6.0115e-01        0.7749       0.4503               False        NaN      NaN      NaN
+            open-interest and gross-level controls        est_participants vs cmirror     a     452 -3.2784e-01        0.4107       0.8214               False        NaN      NaN      NaN
+            open-interest and gross-level controls                   est_shares vs us     a     452 -2.2204e-14           NaN          NaN                True        NaN      NaN      NaN
+            open-interest and gross-level controls                  est_shares vs pro     a     452 -6.4351e-01        0.3349       0.6699               False        NaN      NaN      NaN
+            open-interest and gross-level controls              est_shares vs cmirror     a     452 -1.5610e+00        0.1014       0.2028               False        NaN      NaN      NaN
+            open-interest and gross-level controls             est_participants vs us     b     389 -2.5631e+00        0.1701       0.3401               False        NaN      NaN      NaN
+            open-interest and gross-level controls            est_participants vs pro     b     389 -1.9897e+00        0.2327       0.4653               False        NaN      NaN      NaN
+            open-interest and gross-level controls        est_participants vs cmirror     b     389 -2.9519e+00        0.1158       0.2316               False        NaN      NaN      NaN
+            open-interest and gross-level controls                   est_shares vs us     b     389 -4.9960e-13           NaN          NaN                True        NaN      NaN      NaN
+            open-interest and gross-level controls                  est_shares vs pro     b     389  5.8842e-01        0.6462       0.7075               False        NaN      NaN      NaN
+            open-interest and gross-level controls              est_shares vs cmirror     b     389 -3.9902e-01        0.3934       0.7868               False        NaN      NaN      NaN
+            open-interest and gross-level controls       last refit direction, shares joint     902         NaN           NaN          NaN                 NaN      315.0    135.0    315.0
+            open-interest and gross-level controls last refit direction, participants joint     902         NaN           NaN          NaN                 NaN      191.0     87.0    191.0
+        old R3 scaling (net / 20-day median gross)                    cmirror vs none     a     452  8.0191e-01        0.8062          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)           est_participants vs none     a     452  1.0395e+00        0.8887          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                 est_shares vs none     a     452  6.5762e-01        0.7207          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                        pro vs none     a     452  1.0736e+00        0.8156          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                         us vs none     a     452  2.3507e-01        0.8640          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                    cmirror vs none     b     389 -8.5393e-02        0.4387          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)           est_participants vs none     b     389 -9.7668e-02        0.4883          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                 est_shares vs none     b     389  1.0749e+00        0.7547          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                        pro vs none     b     389 -1.4973e+00        0.0130          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                         us vs none     b     389  1.1581e+00        0.7737          NaN                 NaN        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)             est_participants vs us     a     452  8.0254e-01        0.8050       0.3901               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)            est_participants vs pro     a     452 -3.3702e-02        0.4894       0.9787               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)        est_participants vs cmirror     a     452  2.3569e-01        0.6347       0.7307               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                   est_shares vs us     a     452  4.2156e-01        0.6399       0.7202               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                  est_shares vs pro     a     452 -4.1152e-01        0.3802       0.7605               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)              est_shares vs cmirror     a     452 -1.4314e-01        0.4552       0.9105               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)             est_participants vs us     b     389 -1.2414e+00        0.3450       0.6900               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)            est_participants vs pro     b     389  1.4209e+00        0.6666       0.6669               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)        est_participants vs cmirror     b     389 -1.2286e-02        0.4984       0.9968               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                   est_shares vs us     b     389 -8.2251e-02        0.4792       0.9584               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)                  est_shares vs pro     b     389  2.6113e+00        0.9420       0.1159               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)              est_shares vs cmirror     b     389  1.1613e+00        0.8102       0.3795               False        NaN      NaN      NaN
+        old R3 scaling (net / 20-day median gross)       last refit direction, shares joint     902         NaN           NaN          NaN                 NaN       54.0     54.0    275.0
+        old R3 scaling (net / 20-day median gross) last refit direction, participants joint     902         NaN           NaN          NaN                 NaN      217.0      6.0    217.0
+
+[26s] robustness done
+== placebo: outcome days shuffled against the GEX series (placebo_p = share of draws at least as extreme as real)
+                                                                                                                                                           statistic     real  placebo_median  placebo_q05  placebo_q95  placebo_p  n_perm
+                                                                                                                                                     lr_joint_shares   7.9754          2.5305   1.2257e-01      11.6893     0.1393     200
+                                                                                                                                                         lr_a_shares   0.8183          0.4792   1.3767e-03       3.6578     0.3632     200
+                                                                                                                                                         lr_b_shares   7.9754          1.5205   6.8052e-03      11.1391     0.1244     200
+                                                                                                                                               lr_joint_participants  21.2821          5.0261   1.2066e+00      16.1159     0.0050     200
+                                                                                                                                                   lr_a_participants   3.7513          1.4116   7.6024e-02       5.2948     0.1443     200
+                                                                                                                                                   lr_b_participants  21.2821          4.1853   4.6068e-01      14.6277     0.0050     200
+                                                                                                                                        oos_pct_a_est_shares_vs_none   0.1375          0.2453  -8.4191e-01       1.2478     0.3930     200
+                                                                                                                                  oos_pct_a_est_participants_vs_none   0.9760          0.2717  -7.8549e-01       1.5753     0.8259     200
+                                                                                                                                        oos_pct_b_est_shares_vs_none   1.0056          0.7344  -9.5181e-01       2.4247     0.6368     200
+                                                                                                                                  oos_pct_b_est_participants_vs_none  -2.3306          0.9660  -1.5865e+00       4.2838     0.0299     200
+                                                                                                                                                 theta_norm_a_shares   0.2204          0.1657   8.8713e-03       0.4540     0.3532     200
+                                                                                                                                                 theta_norm_b_shares   0.2000          0.1209   7.6520e-03       0.3150     0.2687     200
+                                                                                                                                             lr_set_width_deg_shares 179.0000        360.0000   1.7900e+02     360.0000        NaN     200
+                                                                                                                                           theta_norm_a_participants   1.3890          1.1308   2.8576e-01       2.3894     0.4080     200
+                                                                                                                                           theta_norm_b_participants   1.3613          0.8318   2.7701e-01       1.7135     0.1741     200
+                                                                                                                                       lr_set_width_deg_participants  40.0000        106.5000   3.4950e+01     360.0000        NaN     200
+                                                                                                                 kalman_share_test_days_wald_gt_90pct_a_participants   0.0111          0.0000   0.0000e+00       0.1509     0.2857      20
+kalman_drift_test_p_a_participants (LR test of q = 0; placebo_p = share of placebo fits with a p-value at least as small; share of placebo fits with p < 0.05: 0.00)   0.0048          1.0000   2.9406e-01       1.0000     0.0476      20
+                                                                                                                 kalman_share_test_days_wald_gt_90pct_b_participants   0.1517          0.0636   0.0000e+00       1.0000     0.3810      20
+kalman_drift_test_p_b_participants (LR test of q = 0; placebo_p = share of placebo fits with a p-value at least as small; share of placebo fits with p < 0.05: 0.45)   0.2607          0.1435   1.2872e-03       0.5250     0.6667      20
+                                                                                                                       kalman_share_test_days_wald_gt_90pct_a_shares   0.1549          0.0277   0.0000e+00       0.8865     0.4286      20
+      kalman_drift_test_p_a_shares (LR test of q = 0; placebo_p = share of placebo fits with a p-value at least as small; share of placebo fits with p < 0.05: 0.00)   0.0026          1.0000   2.6897e-01       1.0000     0.0476      20
+                                                                                                                       kalman_share_test_days_wald_gt_90pct_b_shares   0.0746          0.0535   0.0000e+00       0.7293     0.4762      20
+      kalman_drift_test_p_b_shares (LR test of q = 0; placebo_p = share of placebo fits with a p-value at least as small; share of placebo fits with p < 0.05: 0.40)   0.0434          0.1787   3.0733e-05       1.0000     0.4286      20
+
+[113s] placebo done
+== SYNTHETIC outcomes on the real regressors with known weights (true angle uniform; snr = signal sd / noise sd)
+      family    identified  snr  reps  detect_rate_5pct  share_correct_side  median_abs_error_deg  share_error_lt_30deg  coverage_90_lr_set  median_set_width_deg  median_abs_error_a_only  median_abs_error_b_only  null_lr_crit_95
+participants 2-D direction 0.00   200             0.050               0.460               92.6636                 0.165               0.670                 272.0                  85.5163                  94.9853           8.4085
+participants 2-D direction 0.05   200             0.355               0.940               22.2174                 0.675               0.880                 106.0                  29.9638                  32.8963           8.4085
+participants 2-D direction 0.10   200             0.950               1.000                9.0049                 0.865               0.870                  55.0                  10.5658                  14.5690           8.4085
+participants 2-D direction 0.20   200             1.000               1.000                4.5269                 0.985               0.910                  27.0                   5.7750                   5.3339           8.4085
+      shares     side only 0.00   200             0.050               0.605                   NaN                   NaN               0.945                 360.0                      NaN                      NaN           5.5058
+      shares     side only 0.05   200             0.555               0.985                   NaN                   NaN               1.000                 179.0                      NaN                      NaN           5.5058
+      shares     side only 0.10   200             0.980               1.000                   NaN                   NaN               1.000                 179.0                      NaN                      NaN           5.5058
+      shares     side only 0.20   200             1.000               1.000                   NaN                   NaN               1.000                 179.0                      NaN                      NaN           5.5058
+
+== SYNTHETIC, no effect, other seeds (share_correct_side should be near 0.5)
+      family  seed  reps  share_correct_side  coverage_90_lr_set  binomial_se_of_share
+      shares  1000   200               0.460               0.925                0.0354
+participants  1000   200               0.480               0.745                0.0354
+      shares  1001   200               0.500               0.880                0.0354
+participants  1001   200               0.520               0.710                0.0354
+      shares  1002   200               0.475               0.910                0.0354
+participants  1002   200               0.530               0.690                0.0354
+      shares  1003   200               0.475               0.890                0.0354
+participants  1003   200               0.500               0.680                0.0354
+      shares  1004   200               0.455               0.915                0.0354
+participants  1004   200               0.500               0.685                0.0354
+
+== for scale: in-sample signal-to-noise of the fixed rules on REAL DATA (full sample)
+eq    rule  signal_to_noise
+ a      us           0.0346
+ a     pro           0.0631
+ a cmirror           0.0689
+ b      us           0.1406
+ b     pro           0.1593
+ b cmirror           0.1501
+
+[119s] finished. Files in results/dealer_sign/

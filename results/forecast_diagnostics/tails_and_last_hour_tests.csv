@@ -1,0 +1,34 @@
+target,model,top1pct_share_of_qlike,dm_two_sided_p,mean_loss_diff,n_days
+next15,mcsgarch,0.28310362016556345,,,
+next15,har,0.272569318673914,,,
+next15,vix,0.2361502842180733,,,
+next15,implied,0.19856646215082382,,,
+next15,linear_base,0.27610310760352663,,,
+next15,lgbm_base,0.2896841080539558,,,
+next15,hybrid_base,0.28180352246714147,,,
+next15,hybrid_gex_participant,0.2840747150408751,,,
+next15,hybrid_gex_gross,0.2842865012531461,,,
+next30,mcsgarch,0.2716106753313016,,,
+next30,har,0.26842615763976885,,,
+next30,vix,0.2337707699594293,,,
+next30,implied,0.17971600322862868,,,
+next30,linear_base,0.25978446958804113,,,
+next30,lgbm_base,0.2866518151410995,,,
+next30,hybrid_base,0.26376354179802486,,,
+next30,hybrid_gex_participant,0.2640722611377576,,,
+next30,hybrid_gex_gross,0.26334468403503775,,,
+last_hour,mcsgarch,0.33625601301793456,,,
+last_hour,har,0.3147584144557537,,,
+last_hour,vix,0.18430533405726426,,,
+last_hour,implied,0.1770252775371643,,,
+last_hour,linear_base,0.3250643519550336,,,
+last_hour,lgbm_base,0.3204692828780003,,,
+last_hour,hybrid_base,0.33622894382768126,,,
+last_hour,hybrid_gex_participant,0.3436814461183517,,,
+last_hour,hybrid_gex_gross,0.34648531038173874,,,
+last_hour,hybrid_base vs har (all days),,0.0069906423885047735,-0.01986607912496822,792.0
+last_hour,lgbm_base vs har (all days),,0.04695811143072979,-0.01951389452115551,792.0
+last_hour,hybrid_base vs har (before 3 Aug 2026),,0.010045035521884274,-0.01806131148396629,729.0
+last_hour,lgbm_base vs har (before 3 Aug 2026),,0.22229328528447018,-0.00849369920789275,729.0
+last_hour,hybrid_base vs har (expiry days),,0.03861140152650701,-0.04288176131745446,169.0
+last_hour,lgbm_base vs har (expiry days),,0.1557271942393706,-0.029794902044318936,169.0

@@ -1,0 +1,15 @@
+data,analysis,grid,n_specs,best_spec,best_MAD15,best_K2,best_OUT3,best_MAD10a,held_out_MAD15,p_best_mad15,n_specs_meeting_b,p_b,n_specs_meeting_c,p_c,rule_reproduced,rule_partly_a,rule_partly_b,rule_partly_c,verdict
+REAL DATA,window A,"all 5,440",5440,GC|logvar|C|p=5|H=5,5.34447,8,23.1447,4.20417,6.72113,0.002997,0,,0,,False,False,False,False,not reproduced
+REAL DATA,window B,"all 5,440",5440,GC|logvar|C|p=bic|H=5,5.28074,6,19.2299,4.43088,7.18503,0.002997,0,,0,,False,False,False,False,not reproduced
+REAL DATA,window ST,"all 5,440",5440,GC|logvar|C|p=bic|H=11,6.06679,5,25.2479,4.54073,6.81518,0.030969,0,,0,,False,False,False,False,not reproduced
+REAL DATA,window as a dimension,"all 16,320",16320,GC|logvar|C|p=bic|H=5|W=B,5.28074,6,19.2299,4.43088,6.91454,0.00599401,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset","(i) paper's written method: GR, cvar or cvol, S or C",224,GR|cvol|S|p=10|H=100,7.17402,2,18.114,6.74356,8.17163,0.037962,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(ii) all GR (Diebold-Yilmaz 2012),1088,GR|logvar|C|p=5|H=5,5.36515,8,23.1426,4.24258,7.21915,0.002997,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iii) decomposition GR,1088,GR|logvar|C|p=5|H=5,5.36515,8,23.1426,4.24258,7.21915,0.002997,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iii) decomposition GU,1088,GU|absret|S|p=aic|H=1,17.9516,0,13.8802,16.0214,30.9136,0.27972,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iii) decomposition GC,1088,GC|logvar|C|p=5|H=5,5.34447,8,23.1447,4.20417,6.72113,0.002997,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iii) decomposition CN,1088,CN|cvol|R|p=5|H=100,10.5383,4,40.4225,8.81664,14.2052,0.541459,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iii) decomposition CB,1088,CB|logvar|C|p=10|H=20,8.87141,2,21.9596,9.91882,15.3275,0.0989011,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iv) construction S,2240,GC|logvar|S|p=aic|H=100,6.67299,4,17.9931,5.3054,8.95599,0.0559441,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iv) construction C,2240,GC|logvar|C|p=5|H=5,5.34447,8,23.1447,4.20417,5.3697,0.000999001,0,,0,,False,False,False,False,not reproduced
+REAL DATA,"window A, subset",(iv) construction R,960,GR|logvar|R|p=5|H=1,7.97319,4,36.0312,4.89722,8.07902,0.210789,0,,0,,False,False,False,False,not reproduced

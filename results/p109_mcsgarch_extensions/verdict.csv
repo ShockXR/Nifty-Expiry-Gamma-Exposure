@@ -1,0 +1,2 @@
+study,verdict,beats_mcsgarch_next15,beats_mcsgarch_next30,share_next15,share_next30,share_low_next15,share_low_next30,share_high_next15,share_high_next30
+P109,supported: recovers most of the gain (interval above one half at both horizons),True,True,1.1779139707395856,1.0787423524705748,0.8464538542121457,0.7998584221013952,1.6747681861925294,1.3249596859136852

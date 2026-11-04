@@ -1,0 +1,74 @@
+registered (all days) two-index before_inferred nifty done 10s
+registered (all days) two-index before_inferred banknifty done 11s
+registered (all days) two-index after nifty done 11s
+registered (all days) two-index after banknifty done 12s
+minus >20% flat days two-index before_inferred nifty done 15s
+minus >20% flat days two-index before_inferred banknifty done 15s
+minus >20% flat days two-index after nifty done 16s
+minus >20% flat days two-index after banknifty done 16s
+minus >5% flat days two-index before_inferred nifty done 19s
+minus >5% flat days two-index before_inferred banknifty done 20s
+minus >5% flat days two-index after nifty done 20s
+minus >5% flat days two-index after banknifty done 21s
+registered (all days) one-index before_inferred done 28s
+registered (all days) one-index after done 28s
+minus >20% flat days one-index before_inferred done 30s
+minus >20% flat days one-index after done 31s
+minus >5% flat days one-index before_inferred done 33s
+minus >5% flat days one-index after done 33s
+                                grid               variant                                                                 days_dropped          window     index model  n_days    alpha     beta     hl_irf        loglik
+          two-index (P114 fit stage) registered (all days)                                                                              before_inferred     nifty   ref      64 0.024618 0.973451 358.639153 -30870.418408
+          two-index (P114 fit stage) registered (all days)                                                                              before_inferred     nifty     F      64 0.028192 0.964285 141.054131 -31096.392644
+          two-index (P114 fit stage) registered (all days)                                                                              before_inferred banknifty   ref      64 0.032148 0.963582 161.967227 -30798.742620
+          two-index (P114 fit stage) registered (all days)                                                                              before_inferred banknifty     F      64 0.038319 0.947242  62.663176 -30928.682145
+          two-index (P114 fit stage) registered (all days)                                                                                        after     nifty   ref      59 0.049822 0.940655  72.437374 -28343.425481
+          two-index (P114 fit stage) registered (all days)                                                                                        after     nifty     F      59 0.066291 0.888866  17.910408 -28097.368606
+          two-index (P114 fit stage) registered (all days)                                                                                        after banknifty   ref      59 0.053802 0.928103  37.958853 -28525.960563
+          two-index (P114 fit stage) registered (all days)                                                                                        after banknifty     F      59 0.082476 0.845899  10.474042 -28083.249370
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04 before_inferred     nifty   ref      64 0.024619 0.973449 358.479220 -30870.919652
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04 before_inferred     nifty     F      64 0.028191 0.964287 141.069976 -31096.435517
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04 before_inferred banknifty   ref      64 0.032153 0.963564 161.481022 -30799.682610
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04 before_inferred banknifty     F      64 0.038307 0.947276  62.757618 -30929.370680
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04           after     nifty   ref      59 0.049822 0.940649  72.394312 -28344.032407
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04           after     nifty     F      59 0.066294 0.888856  17.907301 -28097.459840
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04           after banknifty   ref      59 0.053818 0.928062  37.906390 -28526.174932
+          two-index (P114 fit stage)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04           after banknifty     F      59 0.082382 0.846100  10.492176 -28082.670346
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07 before_inferred     nifty   ref      64 0.024604 0.973470 359.358087 -30866.517986
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07 before_inferred     nifty     F      64 0.028198 0.964315 141.641650 -31100.944254
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07 before_inferred banknifty   ref      64 0.032077 0.963736 165.230499 -30779.138550
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07 before_inferred banknifty     F      64 0.038202 0.947593  63.711468 -30935.442650
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07           after     nifty   ref      59 0.049821 0.940611  72.090453 -28348.608560
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07           after     nifty     F      59 0.066249 0.888986  17.948753 -28090.693061
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07           after banknifty   ref      59 0.053816 0.928087  37.954751 -28523.679331
+          two-index (P114 fit stage)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07           after banknifty     F      59 0.082438 0.846026  10.489960 -28076.676826
+one-index Nifty (P114 rolling, P117) registered (all days)                                                                              before_inferred     nifty   ref      64 0.024613 0.973458 359.037765 -30869.004189
+one-index Nifty (P114 rolling, P117) registered (all days)                                                                              before_inferred     nifty     F      64 0.028192 0.964284 141.033113 -31096.306979
+one-index Nifty (P114 rolling, P117) registered (all days)                                                                                        after     nifty   ref      59 0.049819 0.940647  72.356521 -28344.954596
+one-index Nifty (P114 rolling, P117) registered (all days)                                                                                        after     nifty     F      59 0.066287 0.888870  17.911240 -28097.214850
+one-index Nifty (P114 rolling, P117)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04 before_inferred     nifty   ref      64 0.024619 0.973449 358.479220 -30870.919652
+one-index Nifty (P114 rolling, P117)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04 before_inferred     nifty     F      64 0.028191 0.964287 141.069976 -31096.435517
+one-index Nifty (P114 rolling, P117)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04           after     nifty   ref      59 0.049822 0.940649  72.394312 -28344.032407
+one-index Nifty (P114 rolling, P117)  minus >20% flat days                                             2017-07-10;2021-02-24;2021-11-04           after     nifty     F      59 0.066294 0.888856  17.907301 -28097.459840
+one-index Nifty (P114 rolling, P117)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07 before_inferred     nifty   ref      64 0.024604 0.973470 359.358087 -30866.517986
+one-index Nifty (P114 rolling, P117)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07 before_inferred     nifty     F      64 0.028198 0.964315 141.641650 -31100.944254
+one-index Nifty (P114 rolling, P117)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07           after     nifty   ref      59 0.049821 0.940611  72.090453 -28348.608560
+one-index Nifty (P114 rolling, P117)   minus >5% flat days 2017-07-10;2017-09-20;2020-03-13;2020-03-23;2021-02-24;2021-11-04;2022-03-07           after     nifty     F      59 0.066249 0.888986  17.948753 -28090.693061
+                                grid               variant     index model     after  before_inferred  delta_log_hl  fall_factor  d_rho_irf
+one-index Nifty (P114 rolling, P117)  minus >20% flat days     nifty     F 17.907301       141.069976     -2.064048     7.877791  -0.033067
+one-index Nifty (P114 rolling, P117)  minus >20% flat days     nifty   ref 72.394312       358.479220     -1.599743     4.951759  -0.007597
+one-index Nifty (P114 rolling, P117)   minus >5% flat days     nifty     F 17.948753       141.641650     -2.065780     7.891448  -0.033000
+one-index Nifty (P114 rolling, P117)   minus >5% flat days     nifty   ref 72.090453       359.358087     -1.606398     4.984822  -0.007642
+one-index Nifty (P114 rolling, P117) registered (all days)     nifty     F 17.911240       141.033113     -2.063566     7.874000  -0.033057
+one-index Nifty (P114 rolling, P117) registered (all days)     nifty   ref 72.356521       359.037765     -1.601822     4.962065  -0.007605
+          two-index (P114 fit stage)  minus >20% flat days banknifty     F 10.492176        62.757618     -1.788650     5.981373  -0.052944
+          two-index (P114 fit stage)  minus >20% flat days banknifty   ref 37.906390       161.481022     -1.449268     4.259995  -0.013836
+          two-index (P114 fit stage)  minus >20% flat days     nifty     F 17.907301       141.069976     -2.064048     7.877791  -0.033067
+          two-index (P114 fit stage)  minus >20% flat days     nifty   ref 72.394312       358.479220     -1.599743     4.951759  -0.007597
+          two-index (P114 fit stage)   minus >5% flat days banknifty     F 10.489960        63.711468     -1.803946     6.073566  -0.053121
+          two-index (P114 fit stage)   minus >5% flat days banknifty   ref 37.954751       165.230499     -1.470947     4.353355  -0.013910
+          two-index (P114 fit stage)   minus >5% flat days     nifty     F 17.948753       141.641650     -2.065780     7.891448  -0.033000
+          two-index (P114 fit stage)   minus >5% flat days     nifty   ref 72.090453       359.358087     -1.606398     4.984822  -0.007642
+          two-index (P114 fit stage) registered (all days) banknifty     F 10.474042        62.663176     -1.788874     5.982712  -0.053035
+          two-index (P114 fit stage) registered (all days) banknifty   ref 37.958853       161.967227     -1.450891     4.266916  -0.013824
+          two-index (P114 fit stage) registered (all days)     nifty     F 17.910408       141.054131     -2.063762     7.875540  -0.033059
+          two-index (P114 fit stage) registered (all days)     nifty   ref 72.437374       358.639153     -1.599594     4.951024  -0.007592

@@ -1,0 +1,17 @@
+P114 plan checks (REAL DATA, reference model only; no extended model is fitted)
+  before_stated nifty: 82 days, 360 minutes, alpha 0.04813307627443056, beta 0.9500599572766221
+  before_stated banknifty: 82 days, 360 minutes, alpha 0.05863144122840562, beta 0.9313576237947783
+  before_inferred nifty: 64 days, 360 minutes, alpha 0.024618088614128956, beta 0.97345106312989
+  before_inferred banknifty: 64 days, 360 minutes, alpha 0.03214789126566381, beta 0.9635817009158573
+  after nifty: 59 days, 360 minutes, alpha 0.04982190170896999, beta 0.9406548181912517
+  after banknifty: 59 days, 360 minutes, alpha 0.053802195591933305, beta 0.9281030288975249
+1. Table 2 reference: 24 of 24 values (omega, alpha, beta, nu) identical to the committed file
+2. LR of equal alpha + beta, reference, before_inferred nifty: this code 16.2299 (common half-life 189.1), committed 16.2299 (common half-life 189.1)
+2. LR of equal alpha + beta, reference, before_inferred banknifty: this code 18.2722 (common half-life 93.8), committed 18.2722 (common half-life 93.8)
+2. LR of equal alpha + beta, reference, before_stated nifty: this code 14.3819 (common half-life 161.7), committed 14.3819 (common half-life 161.7)
+2. LR of equal alpha + beta, reference, before_stated banknifty: this code 3.6290 (common half-life 53.0), committed 3.6290 (common half-life 53.0)
+3. nifty: one-index grid 1783 days, two-index grid 1782 days (to 2024-06-30); only in the one-index grid: 1 days (2021-02-24); only in the two-index grid: 0 days
+3. banknifty: one-index grid 1844 days, two-index grid 1782 days (to 2024-06-30); only in the one-index grid: 62 days (2017-01-02, 2017-01-03, 2017-01-04 ...); only in the two-index grid: 0 days
+4. P109 Nifty block 150: 1050 forecast rows x 18 columns (mcsgarch, x1_har, x2_overnight, x3_todayrv, x4_leverage, x5_calibration, combination, comb_no_x1, comb_no_x2, comb_no_x3, comb_no_x4, comb_no_x5); identical cells 18900 of 18900; parameter file identical: True
+4. P109 Nifty block 927: 750 forecast rows x 18 columns (mcsgarch, x1_har, x2_overnight, x3_todayrv, x4_leverage, x5_calibration, combination, comb_no_x1, comb_no_x2, comb_no_x3, comb_no_x4, comb_no_x5); identical cells 13500 of 13500; parameter file identical: True
+done in 20s

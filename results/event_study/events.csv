@@ -1,0 +1,7 @@
+event,description,last_old_expiry,first_new_expiry,event_week
+a,Bank Nifty weekly expiry moves Thursday to Wednesday,2023-08-24,2023-09-06,2023-09-04
+b,Bank Nifty monthly expiry moves Thursday to Wednesday (paper's event),2024-02-29,2024-03-27,2024-03-04
+c,Bank Nifty weekly options stop (SEBI measures of 20 Nov 2024); Nifty keeps weeklies,2024-11-13,,2024-11-18
+c2,Bank Nifty monthly expiry moves Wednesday to last Thursday,2024-12-24,2025-01-30,2025-01-27
+d,Nifty weekly expiry moves Thursday to Tuesday (monthlies of both indices to Tuesday),2025-08-21,2025-09-02,2025-09-01
+e,"Closing auction sets the official close (frozen index before 15:29; found in the minute bars, not the bhavcopy)",,,2026-08-03

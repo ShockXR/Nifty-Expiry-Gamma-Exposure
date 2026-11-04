@@ -1,0 +1,13 @@
+Model name,Pvalue,in_mcs,subset
+naive_prevday,0.0,False,all
+naive_last,0.0,False,all
+mcsgarch,0.0,False,all
+vix,0.026,False,all
+lgbm_gex,0.512,True,all
+lgbm_base,0.561,True,all
+hybrid_gex_participant,0.66,True,all
+hybrid_gex,0.793,True,all
+hybrid_gex_oracle,0.9,True,all
+hybrid_gex_us,0.9,True,all
+har,0.983,True,all
+hybrid_base,1.0,True,all

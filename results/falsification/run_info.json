@@ -1,0 +1,44 @@
+{
+  "label": "REAL DATA",
+  "seed": 20261102,
+  "permutation_seeds": "numpy default_rng([20261102, task_index]); the task index is in each row of t1_permutation_*.csv",
+  "sign_cloud_seed": "numpy default_rng([20261102, 3])",
+  "permutations": 2000,
+  "newey_west_lags": 5,
+  "workers": 4,
+  "seconds": 269.0,
+  "inputs": {
+    "daily_market.csv": "b9f57f0875240996",
+    "daily_gex_panel.csv": "f0be1a255eb3fde0"
+  },
+  "samples": {
+    "full": "2023-01-02 to 2026-11-02, closing-auction days (from 2026-08-03) are their own regime",
+    "pre_auction": "2023-01-02 to 2026-07-31"
+  },
+  "split": "A = to 2024-12-31, B = after",
+  "banknifty": {
+    "days": 810,
+    "first_day": "2023-01-02",
+    "last_day": "2026-04-22",
+    "expiry_days": 115,
+    "f2_days": 809,
+    "expiry_days_by_regime": {
+      "multi_weekly": 98,
+      "single_weekly_thu": 10,
+      "single_weekly_tue": 7
+    },
+    "days_in_common_with_nifty_f2": 800,
+    "corr_r_rod_nifty_banknifty": 0.8765827828463894,
+    "corr_r_last_nifty_banknifty": 0.8331158310880896,
+    "share_days_same_gex_sign_us_convention": 0.8406524466750314,
+    "share_days_same_gex_sign_participant_pro": 0.9824341279799247,
+    "share_days_same_gex_sign_client_mirror": 0.998745294855709
+  },
+  "tests_family_A": 78,
+  "tests_family_B": 742,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5"
+  }
+}

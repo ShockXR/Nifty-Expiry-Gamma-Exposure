@@ -1,0 +1,13 @@
+Model name,Pvalue,in_mcs,subset
+mcsgarch,0.0,False,expiry
+naive_prevday,0.002,False,expiry
+naive_last,0.002,False,expiry
+vix,0.518,True,expiry
+hybrid_gex_us,0.788,True,expiry
+hybrid_gex_oracle,0.815,True,expiry
+har,0.815,True,expiry
+lgbm_base,0.815,True,expiry
+lgbm_gex,0.815,True,expiry
+hybrid_base,0.815,True,expiry
+hybrid_gex,0.983,True,expiry
+hybrid_gex_participant,1.0,True,expiry

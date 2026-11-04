@@ -1,0 +1,47 @@
+{
+  "study": "P113",
+  "label": "REAL DATA (third-party 1-minute bars validated against NSE official daily values)",
+  "plan": "docs/prereg/P113_CONNECTEDNESS_SETTINGS.md",
+  "plan_commit": "313a3ac0c1e12529c99ef61d5d2a60060b6f7a75 2026-11-03T09:45:09+00:00",
+  "inputs_sha256": {
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b477a596cc36e816cc5b31f8c74a0682c2817168ffc552d250",
+    "data/raw/banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+    "results/replication_nse/expiry_calendar.csv": "6551c12cfdee7fe612b37e20e3d11fd2dfbea9b0076473db795dd1ff2514f36a",
+    "results/replication_nse/rekey_blind.csv": "898be73e1169766d8ca4d864b64ae87d7b227de6e063a6331cb098d5276923b5",
+    "results/replication_nse/tables34_connectedness.csv": "08564489ee9aac819af629884d21864b52a810841899fe1aee423571a30c94c3"
+  },
+  "python": "3.13.18",
+  "numpy": "2.5.3",
+  "pandas": "3.0.5",
+  "n_specs_per_window": 5440,
+  "n_distinct_result_vectors_window_A": 4336,
+  "n_specs_with_missing_cell": {
+    "A": 0,
+    "B": 0,
+    "ST": 0
+  },
+  "baseline_reproduces_committed": true,
+  "n_perm": 1000,
+  "n_boot": 999,
+  "seed": 113,
+  "windows": {
+    "A": [
+      "2022-11-14",
+      "2023-02-10"
+    ],
+    "B": [
+      "2022-11-22",
+      "2023-02-20"
+    ],
+    "ST": [
+      "2023-11-01",
+      "2024-02-29"
+    ]
+  },
+  "after": [
+    "2024-03-01",
+    "2024-05-31"
+  ],
+  "rolling_window_minutes": 200,
+  "run_seconds": 147.7
+}

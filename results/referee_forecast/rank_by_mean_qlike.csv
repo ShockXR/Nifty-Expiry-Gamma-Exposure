@@ -1,0 +1,10 @@
+target,subset,lowest_mean_qlike,hybrid_base_rank_by_mean,mcsgarch_rank_by_mean,models
+next15,all,hybrid_gex_us,3,26,32
+next15,expiry,hybrid_gex_participant,2,23,32
+next15,pre_auction,hybrid_gex_participant,6,25,32
+next30,all,hybrid_v1gex,7,26,32
+next30,expiry,hybrid_gex_participant,7,24,32
+next30,pre_auction,hybrid_v1gex,6,26,32
+last_hour,all,linear_v1,9,26,32
+last_hour,expiry,linear_v1,2,19,32
+last_hour,pre_auction,linear_gex_us,8,25,32

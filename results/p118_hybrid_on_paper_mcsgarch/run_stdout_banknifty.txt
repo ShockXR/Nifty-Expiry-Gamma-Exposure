@@ -1,0 +1,14 @@
+[REAL DATA] P118 hybrid on the paper's mcsGARCH, stage 1 (study), BANKNIFTY: 10 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/.claude/worktrees/agent-a979bc16298c9a096/data/processed/p118); workers 2
+market loaded: 810 days, 2023-01-02 00:00:00 to 2026-04-22 00:00:00 (55s)
+panels and datasets built (145s)
+  [1/10] BANKNIFTY next15 seed 7 cpp_base: 16500 forecasts, 235s (elapsed 6.3 min)
+  [2/10] BANKNIFTY next30 seed 7 cpp_base: 15840 forecasts, 197s (elapsed 6.3 min)
+  [3/10] BANKNIFTY next15 seed 101 cpp: 16500 forecasts, 152s (elapsed 8.2 min)
+  [4/10] BANKNIFTY next30 seed 101 cpp: 15840 forecasts, 124s (elapsed 8.4 min)
+  [5/10] BANKNIFTY next15 seed 102 cpp: 16500 forecasts, 144s (elapsed 10.6 min)
+  [6/10] BANKNIFTY next30 seed 102 cpp: 15840 forecasts, 124s (elapsed 10.6 min)
+  [7/10] BANKNIFTY next15 seed 103 cpp: 16500 forecasts, 143s (elapsed 12.9 min)
+  [8/10] BANKNIFTY next30 seed 103 cpp: 15840 forecasts, 129s (elapsed 12.9 min)
+  [9/10] BANKNIFTY next15 seed 104 cpp: 16500 forecasts, 140s (elapsed 15.1 min)
+  [10/10] BANKNIFTY next30 seed 104 cpp: 15840 forecasts, 120s (elapsed 15.1 min)
+stage 1 (BANKNIFTY, study) done in 15.1 min

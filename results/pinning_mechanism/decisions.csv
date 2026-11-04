@@ -1,0 +1,6 @@
+candidate,role,gamma,p_used,cond1_within_regime,placebo_flags,cond2_no_flag,share_explained_s,cond3_between_regime,decision
+C1,primary,0.022358258399326078,0.0099161252490687,False,P4,False,0.05882826789635554,False,not supported; falsified (significant wrong sign)
+C2,secondary,-0.0011748882183908876,0.9053767403182204,False,none,True,-0.002625043939038491,False,not supported
+C3,secondary,0.04100751644399078,0.003678806197224374,False,none,True,-0.09975359678278817,False,not supported; significant wrong sign (not a pre-stated falsifier for this candidate)
+C5,secondary,-0.027974786384123485,0.00992611083657648,True,none,True,-0.030854160382024657,False,matters day to day but not for the regime pattern
+C6,secondary,0.01142245550463266,0.5564894861162664,False,none,True,0.04987393959946954,False,not supported

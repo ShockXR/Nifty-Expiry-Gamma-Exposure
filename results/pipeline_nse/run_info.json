@@ -1,0 +1,34 @@
+{
+  "source": "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute Nifty bars validated against NSE daily values",
+  "args": {
+    "source": "nse",
+    "raw": "data/raw",
+    "days": 500,
+    "kappa": 0.5,
+    "participant_noise": 0.1,
+    "seed": 7,
+    "oi_unit": "keep_units",
+    "start": "2023-01-01",
+    "end": null,
+    "min_coverage": 0.95,
+    "rate": 0.065,
+    "lot_size": null,
+    "targets": [
+      "next15",
+      "next30",
+      "last_hour"
+    ],
+    "tune": false,
+    "out": null
+  },
+  "seconds": 500.2,
+  "config": null,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "lightgbm": "4.7.0",
+    "arch": "8.0.0",
+    "scipy": "1.18.1"
+  }
+}

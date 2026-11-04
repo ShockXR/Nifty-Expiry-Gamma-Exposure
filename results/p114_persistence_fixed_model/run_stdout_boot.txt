@@ -1,0 +1,10 @@
+P114 bootstrap: 8 keys, 400 draws each, workers 1
+  before_inferred nifty: 342s (elapsed 5.7 min)
+  after nifty: 298s (elapsed 10.7 min)
+  before_inferred banknifty: 338s (elapsed 16.3 min)
+  after banknifty: 303s (elapsed 21.3 min)
+  before_stated nifty: 192s (elapsed 24.5 min)
+  before_stated banknifty: 204s (elapsed 27.9 min)
+  before_p108 nifty: 152s (elapsed 30.5 min)
+  before_p108 banknifty: 168s (elapsed 33.3 min)
+bootstrap done in 33.3 min

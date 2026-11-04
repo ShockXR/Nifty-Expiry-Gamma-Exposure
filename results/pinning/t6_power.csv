@@ -1,0 +1,141 @@
+design,grid_pts,n1,n0,model,effect,true_mean_shift_pts,power_5pct
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.0,-0.015848853061878998,0.048
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.05,-0.5789609921808889,0.1645
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.1,-1.1284104215848867,0.4595
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.15,-1.682910804592776,0.784
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.2,-2.245246149073985,0.94625
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.25,-2.8076464480336547,0.99225
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.3,-3.3808958127144173,0.99875
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.4,-4.495189722223669,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.5,-5.643585224513724,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pinned share,0.6,-6.75339096909492,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.0,0.0021405862732368774,0.05425
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.05,-0.6284401699602995,0.21175
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.1,-1.2525330390864866,0.65075
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.15,-1.8854490910417194,0.9595
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.2,-2.4969537353988684,0.9995
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.25,-3.1291215820895353,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.3,-3.754418522475289,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.4,-5.00030809497491,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.5,-6.252763363555655,1.0
+Nifty expiry vs non-expiry (P1),50.0,200,739,pull,0.6,-7.497679164624413,1.0
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.0,-0.02295611704007605,0.05525
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.05,-0.556764385143909,0.083
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.1,-1.1202542590580062,0.18775
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.15,-1.6747898698496382,0.3425
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.2,-2.235470108712942,0.54425
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.25,-2.7946533484737373,0.726
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.3,-3.3704043603304044,0.8705
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.4,-4.488405066962422,0.9815
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.5,-5.6106654768362105,0.99975
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pinned share,0.6,-6.7507986727748674,1.0
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.0,0.003462497519656438,0.05675
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.05,-0.629261287940686,0.09425
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.1,-1.2515108837861675,0.2525
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.15,-1.8696552882733464,0.501
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.2,-2.515719388279967,0.76975
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.25,-3.1349438538421133,0.932
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.3,-3.7413041160355256,0.9915
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.4,-4.997859895198991,1.0
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.5,-6.261021873959271,1.0
+"Nifty expiry days, positive vs negative gamma, us_convention (P2)",50.0,97,103,pull,0.6,-7.498938875789291,1.0
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.0,-0.011551151068053045,0.04675
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.05,-0.5516646871906374,0.0775
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.1,-1.105943828133654,0.17475
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.15,-1.6946508766197912,0.36475
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.2,-2.2424937123223394,0.55025
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.25,-2.8103975728212482,0.7425
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.3,-3.3688540758375485,0.86675
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.4,-4.475069834721582,0.98375
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.5,-5.634017541391623,0.999
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pinned share,0.6,-6.737450921503388,1.0
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.0,0.010521465454187862,0.0475
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.05,-0.6349139072362959,0.09675
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.1,-1.2501759804697539,0.24325
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.15,-1.8662237822683974,0.495
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.2,-2.5101043732479784,0.7765
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.25,-3.112376277851311,0.92975
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.3,-3.749246404935466,0.99175
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.4,-5.004069484158555,1.0
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.5,-6.2548921586725985,1.0
+"Nifty expiry days, positive vs negative gamma, participant_pro (P2)",50.0,101,99,pull,0.6,-7.508881934890146,1.0
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.0,0.014315950040780123,0.05225
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.05,-0.561377723894875,0.0625
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.1,-1.1288934724070891,0.09825
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.15,-1.6962363042327198,0.145
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.2,-2.2542600448911756,0.218
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.25,-2.8076448812508286,0.327
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.3,-3.3835287273686756,0.43925
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.4,-4.494548910576819,0.67575
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.5,-5.620131660575098,0.86675
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pinned share,0.6,-6.75953620424099,0.9685
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.0,-0.003624081261898837,0.05375
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.05,-0.6271430956600614,0.06525
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.1,-1.268573801685326,0.09975
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.15,-1.877135672005716,0.1675
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.2,-2.496788395025863,0.2685
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.25,-3.1227328720059973,0.39425
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.3,-3.759279704998079,0.5345
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.4,-5.004871900118603,0.7955
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.5,-6.244137382917428,0.9555
+"Nifty expiry days, positive vs negative gamma, client_mirror (P2)",50.0,181,19,pull,0.6,-7.5066694704049794,0.996
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.0,-0.005333770869558663,0.05175
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.05,-0.555815889967926,0.10025
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.1,-1.111475019077858,0.242
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.15,-1.705236832028186,0.49
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.2,-2.253819219851838,0.719
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.25,-2.8106701493915995,0.868
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.3,-3.3627026902180077,0.95875
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.4,-4.523535318945946,0.9995
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.5,-5.615905375911854,1.0
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pinned share,0.6,-6.749539339674234,1.0
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.0,0.000901774043255088,0.05225
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.05,-0.6259944946955969,0.12475
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.1,-1.2426268119312969,0.37075
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.15,-1.8755759436049146,0.72125
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.2,-2.500781841201796,0.9515
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.25,-3.1217383977305406,0.99775
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.3,-3.7585825971081395,1.0
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.4,-4.996623820544352,1.0
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.5,-6.258688007207104,1.0
+Nifty multi_weekly expiry vs non-expiry,50.0,98,364,pull,0.6,-7.495009531588898,1.0
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.0,0.014597492338722873,0.0535
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.05,-0.5861766374739084,0.07925
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.1,-1.0771623398099717,0.122
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.15,-1.667179225720984,0.23175
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.2,-2.2403769879095083,0.36325
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.25,-2.807502022427162,0.516
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.3,-3.370688951048873,0.67275
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.4,-4.530802246868001,0.889
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.5,-5.647931337695294,0.97125
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pinned share,0.6,-6.757830482758025,0.99825
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.0,-0.005281386377502528,0.05
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.05,-0.6076549248911025,0.0785
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.1,-1.2358319711631154,0.172
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.15,-1.859042814499798,0.37225
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.2,-2.4873896237841677,0.624
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.25,-3.109124901226915,0.847
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.3,-3.736236312238164,0.96225
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.4,-4.998686045424825,1.0
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.5,-6.249100864359676,1.0
+Nifty single_weekly_thu expiry vs non-expiry,50.0,41,151,pull,0.6,-7.496009412337671,1.0
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.0,0.01463433063228159,0.0515
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.05,-0.5558679022438309,0.08025
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.1,-1.1375325973552766,0.1765
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.15,-1.7214552922123918,0.34325
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.2,-2.249837250226104,0.5055
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.25,-2.7825176776924874,0.677
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.3,-3.3910035652851036,0.8365
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.4,-4.505758322615073,0.97175
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.5,-5.622467944641622,0.99675
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pinned share,0.6,-6.762161765811182,1.0
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.0,-0.019266446268254356,0.04825
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.05,-0.6229131355668631,0.0935
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.1,-1.2613221463714872,0.25475
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.15,-1.8703658921747337,0.53225
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.2,-2.479905068282614,0.787
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.25,-3.1073966373106785,0.958
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.3,-3.764180502168644,0.9965
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.4,-4.999349551533555,1.0
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.5,-6.249350937690231,1.0
+Nifty single_weekly_tue expiry vs non-expiry,50.0,61,224,pull,0.6,-7.506809844756282,1.0

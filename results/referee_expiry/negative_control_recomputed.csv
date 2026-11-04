@@ -1,0 +1,16 @@
+window,variant,group,rows,rows_estimable,share_hac_p_below_0.05,share_mwu_p_below_0.05,share_boot_ci_excludes_0,rows_with_placebo_p,share_placebo_p_below_0.05,share_nonoverlap_p_below_0.05,share_prediction_t_p_below_0.05,share_wild_cluster_p_below_0.05,median_wild_cluster_G
+3 months,published Friday rows,negative control (Friday),35,35,0.2,0.02857142857142857,0.14285714285714285,35,0.05714285714285714,0.0,0.0,0.14285714285714285,6.0
+3 months,Sensex expiry Fridays dropped,negative control (Friday),35,9,0.0,0.0,0.0,9,0.0,0.0,0.0,0.0,0.0
+3 months,Fridays with any index expiry dropped,negative control (Friday),35,9,0.0,0.0,0.0,9,0.0,0.0,0.0,0.0,0.0
+3 months,"Fridays with any index expiry dropped, baseline without expiry days",negative control (Friday),35,9,0.0,0.0,0.0,9,0.1111111111111111,0.0,0.1111111111111111,0.0,0.0
+3 months,treated or spillover weekdays (published rows),treated,267,267,0.30711610486891383,0.0898876404494382,0.21722846441947566,231,0.12987012987012986,0.0,0.08658008658008658,0.1471861471861472,6.0
+6 months,published Friday rows,negative control (Friday),35,35,0.34285714285714286,0.05714285714285714,0.2571428571428571,35,0.08571428571428572,0.0,0.14285714285714285,0.17142857142857143,10.0
+6 months,Sensex expiry Fridays dropped,negative control (Friday),35,9,0.3333333333333333,0.0,0.2222222222222222,9,0.0,0.0,0.1111111111111111,0.0,0.0
+6 months,Fridays with any index expiry dropped,negative control (Friday),35,9,0.3333333333333333,0.0,0.2222222222222222,9,0.0,0.0,0.1111111111111111,0.0,0.0
+6 months,"Fridays with any index expiry dropped, baseline without expiry days",negative control (Friday),35,9,0.1111111111111111,0.0,0.1111111111111111,9,0.0,0.0,0.0,0.0,0.0
+6 months,treated or spillover weekdays (published rows),treated,267,267,0.24344569288389514,0.11610486891385768,0.20599250936329588,267,0.13857677902621723,0.0,0.09737827715355805,0.11610486891385768,10.0
+12 months,published Friday rows,negative control (Friday),35,35,0.45714285714285713,0.2571428571428571,0.4,0,,0.0,,0.2571428571428571,19.0
+12 months,Sensex expiry Fridays dropped,negative control (Friday),35,9,0.5555555555555556,0.5555555555555556,0.4444444444444444,0,,0.0,,0.4444444444444444,0.0
+12 months,Fridays with any index expiry dropped,negative control (Friday),35,9,0.5555555555555556,0.5555555555555556,0.4444444444444444,0,,0.0,,0.4444444444444444,0.0
+12 months,"Fridays with any index expiry dropped, baseline without expiry days",negative control (Friday),35,9,0.4444444444444444,0.2222222222222222,0.4444444444444444,0,,0.0,,0.1111111111111111,0.0
+12 months,treated or spillover weekdays (published rows),treated,267,267,0.20224719101123595,0.15355805243445692,0.18726591760299627,0,,0.0,,0.12734082397003746,16.0

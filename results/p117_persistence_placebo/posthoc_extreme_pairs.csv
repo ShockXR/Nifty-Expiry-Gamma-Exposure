@@ -1,0 +1,37 @@
+data,index,model,set,delta_actual,category,pairs_at_or_below_actual,before_at_bound,changes_straddled,first_before_start,last_before_start
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,primary,-1.6018219919260268,contains a day with more than 20% flat bars,64,64,,2020-11-24,2021-02-24
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,primary,-1.6018219919260268,straddles another calendar change,165,123,"c 72, c2 91, d 165, e 61",2024-03-01,2025-04-15
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,primary,-1.6018219919260268,straddles no calendar change,4,0,,2021-09-03,2021-10-22
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,clean,-1.6018219919260268,contains a day with more than 20% flat bars,64,64,,2020-11-24,2021-02-24
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,clean,-1.6018219919260268,straddles another calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,clean,-1.6018219919260268,straddles no calendar change,4,0,,2021-09-03,2021-10-22
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,literal,-1.6018219919260268,contains a day with more than 20% flat bars,64,64,,2020-11-24,2021-02-24
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,literal,-1.6018219919260268,straddles another calendar change,165,123,"c 72, c2 91, d 165, e 61",2024-03-01,2025-04-15
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,ref,literal,-1.6018219919260268,straddles no calendar change,4,0,,2021-09-03,2021-10-22
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,primary,-2.063566241324424,contains a day with more than 20% flat bars,40,40,,2020-12-29,2021-02-24
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,primary,-2.063566241324424,straddles another calendar change,88,0,"c 52, c2 52, d 88, e 25",2024-03-01,2025-03-13
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,primary,-2.063566241324424,straddles no calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,clean,-2.063566241324424,contains a day with more than 20% flat bars,40,40,,2020-12-29,2021-02-24
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,clean,-2.063566241324424,straddles another calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,clean,-2.063566241324424,straddles no calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,literal,-2.063566241324424,contains a day with more than 20% flat bars,40,40,,2020-12-29,2021-02-24
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,literal,-2.063566241324424,straddles another calendar change,95,0,"a 7, c 52, c2 52, d 88, e 25",2022-05-20,2025-03-13
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),nifty,F,literal,-2.063566241324424,straddles no calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,primary,-1.4699113312959824,contains a day with more than 20% flat bars,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,primary,-1.4699113312959824,straddles another calendar change,64,56,"c 64, c2 64, d 64",2024-03-05,2024-06-11
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,primary,-1.4699113312959824,straddles no calendar change,65,0,,2021-08-12,2021-11-18
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,clean,-1.4699113312959824,contains a day with more than 20% flat bars,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,clean,-1.4699113312959824,straddles another calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,clean,-1.4699113312959824,straddles no calendar change,65,0,,2021-08-12,2021-11-18
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,literal,-1.4699113312959824,contains a day with more than 20% flat bars,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,literal,-1.4699113312959824,straddles another calendar change,98,56,"a 34, c 64, c2 64, d 64",2022-06-24,2024-06-11
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,ref,literal,-1.4699113312959824,straddles no calendar change,65,0,,2021-08-12,2021-11-18
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,primary,-1.7812666944168625,contains a day with more than 20% flat bars,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,primary,-1.7812666944168625,straddles another calendar change,24,0,"c 24, c2 24, d 24",2024-03-04,2024-04-09
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,primary,-1.7812666944168625,straddles no calendar change,86,0,,2020-02-18,2021-10-28
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,clean,-1.7812666944168625,contains a day with more than 20% flat bars,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,clean,-1.7812666944168625,straddles another calendar change,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,clean,-1.7812666944168625,straddles no calendar change,86,0,,2020-02-18,2021-10-28
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,literal,-1.7812666944168625,contains a day with more than 20% flat bars,0,0,,,
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,literal,-1.7812666944168625,straddles another calendar change,100,0,"a 76, c 24, c2 24, d 24",2022-04-28,2024-04-09
+REAL DATA (third-party 1-minute bars validated against NSE official daily values),banknifty,F,literal,-1.7812666944168625,straddles no calendar change,86,0,,2020-02-18,2021-10-28

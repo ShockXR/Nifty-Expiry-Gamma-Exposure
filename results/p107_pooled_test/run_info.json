@@ -1,0 +1,90 @@
+{
+  "study": "P107 pooled three-index test of the forecasting hybrid",
+  "label": "REAL DATA",
+  "prereg_file": "docs/prereg/P107_POOLED_THREE_INDEX.md",
+  "plan_commit": "eb8580af15d0ddbd6e875887440a2d73fbd663c4",
+  "code_commit_at_run": "eb8580af15d0ddbd6e875887440a2d73fbd663c4",
+  "script_sha256": "da7ddacb9aa6bf753d58460e71389bd8f54b3792a8f526b7c39a0b9f42772627",
+  "script_differs_from_code_commit": true,
+  "command": "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p107_pooled_test.py run",
+  "inputs": {
+    "Nifty/next15": {
+      "file": "results/pipeline_nse_v2/forecasts_next15.csv",
+      "sha256": "6e42630dea375b4d80faf4612b8b3237797da19bdd24bf6a87551b6ce69f252d"
+    },
+    "Nifty/next30": {
+      "file": "results/pipeline_nse_v2/forecasts_next30.csv",
+      "sha256": "8a07a63c0c1c5c6d767ab068342324db0fb36af76002345dfb9f7fb62b1e7a55"
+    },
+    "Nifty/last_hour": {
+      "file": "results/pipeline_nse_v2/forecasts_last_hour.csv",
+      "sha256": "e9010659d0e33201da718153994002f43400a775bb0306ed7e8c9a2d0df15c4b"
+    },
+    "Bank Nifty/next15": {
+      "file": "results/pipeline_nse_banknifty/forecasts_next15.csv",
+      "sha256": "42dd620699eb548ed093c3380be760d584d2c9c8694031c203a48ab00f6b2718"
+    },
+    "Bank Nifty/next30": {
+      "file": "results/pipeline_nse_banknifty/forecasts_next30.csv",
+      "sha256": "4b8639b26e9e2c0964c0245760db0f79bca8ec05679df4a3e3a82a27b4195233"
+    },
+    "Bank Nifty/last_hour": {
+      "file": "results/pipeline_nse_banknifty/forecasts_last_hour.csv",
+      "sha256": "c0898ed05597339807f377a29fe2d652cf5ae998085fa58c7bc4258f0522b2d0"
+    },
+    "Fin Nifty/next15": {
+      "file": "results/pipeline_nse_finnifty/forecasts_next15.csv",
+      "sha256": "8bc9c00d47030a7009ccf45a6bf07bad8a7525061819648e63e67414c23c1ce8"
+    },
+    "Fin Nifty/next30": {
+      "file": "results/pipeline_nse_finnifty/forecasts_next30.csv",
+      "sha256": "6f02b4b7a6edc32b36636e95b5619e7008d3920f581bb2270c631ffd02bee7ac"
+    },
+    "Fin Nifty/last_hour": {
+      "file": "results/pipeline_nse_finnifty/forecasts_last_hour.csv",
+      "sha256": "92e40b6ff1cc11ae24a2b4d571fbf189e39963d88e5b294b1e39b27962386beb"
+    }
+  },
+  "common_dates": {
+    "n": 604,
+    "first": "2023-08-10",
+    "last": "2026-01-27"
+  },
+  "seeds": {
+    "bootstrap": {
+      "10": [
+        107,
+        10
+      ],
+      "5": [
+        107,
+        5
+      ],
+      "20": [
+        107,
+        20
+      ]
+    }
+  },
+  "bootstrap_draws": 9999,
+  "mean_block": 10,
+  "robust_blocks": [
+    5,
+    20
+  ],
+  "dk_lag_all_days": 5,
+  "placebo_shifts_trading_days": {
+    "banknifty": 21,
+    "finnifty": 42
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "platform": "Linux-6.18.44-fc-v230-x86_64-with-glibc2.39",
+    "statsmodels": "0.15.0"
+  },
+  "run_seconds": 12.5,
+  "run_finished_utc": "2026-11-03T05:47:34Z"
+}

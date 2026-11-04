@@ -1,0 +1,22 @@
+{
+  "source": "REAL DATA: results/pipeline_nse_v2 (NSE bhavcopy chains), NSE participant-wise OI, validated 1-minute bars",
+  "seconds": 118.6,
+  "args": {
+    "run": "results/pipeline_nse_v2",
+    "raw": "data/raw",
+    "out": "results/dealer_sign",
+    "n_boot": 200,
+    "n_perm": 200,
+    "n_perm_kalman": 20,
+    "n_synth": 200,
+    "seed": 82
+  },
+  "test_start": "2025-01-01",
+  "auction_start": "2026-08-03",
+  "refit_every": 21,
+  "rolling_window": 250,
+  "bootstrap_block": 10,
+  "angles": "0 to 359 degrees, step 1",
+  "gex_measure": "scale-free: net / gross GEX of the same chain; log(gross / 20-day median) as a control",
+  "outcome_b_rows": "closing-auction days (from 2026-08-03) left out"
+}

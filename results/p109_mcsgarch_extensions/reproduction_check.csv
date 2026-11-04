@@ -1,0 +1,14 @@
+check,rows_committed,rows_rebuilt,y_n_identical,y_max_abs_rel_diff,mcsgarch_n_identical,mcsgarch_max_abs_rel_diff,mcsgarch_daily_max_abs_rel_diff,hybrid_daily_max_abs_rel_diff,seed_sets_averaged
+NIFTY next15 vs results/pipeline_nse_v2/forecasts_next15.csv,19800,19800,19800.0,0.0,19800.0,0.0,,,
+NIFTY next30 vs results/pipeline_nse_v2/forecasts_next30.csv,19008,19008,19008.0,0.0,19008.0,0.0,,,
+NIFTY last_hour vs results/pipeline_nse_v2/forecasts_last_hour.csv,792,792,792.0,0.0,792.0,0.0,,,
+BANKNIFTY next15 vs results/pipeline_nse_banknifty/forecasts_next15.csv,16500,16500,16500.0,0.0,16500.0,0.0,,,
+BANKNIFTY next30 vs results/pipeline_nse_banknifty/forecasts_next30.csv,15840,15840,15840.0,0.0,15840.0,0.0,,,
+FINNIFTY next15 vs results/pipeline_nse_finnifty/forecasts_next15.csv,15100,15100,15100.0,0.0,15100.0,0.0,,,
+FINNIFTY next30 vs results/pipeline_nse_finnifty/forecasts_next30.csv,14496,14496,14496.0,0.0,14496.0,0.0,,,
+NIFTY next15: P106 daily QLIKE of mcsGARCH vs this study's,792,792,,,,,0.0,,
+NIFTY next15: P99 seed-7 hybrid daily QLIKE vs this study's hybrid,792,792,,,,,,0.0,21.0
+NIFTY next30: P106 daily QLIKE of mcsGARCH vs this study's,792,792,,,,,0.0,,
+NIFTY next30: P99 seed-7 hybrid daily QLIKE vs this study's hybrid,792,792,,,,,,0.0,21.0
+NIFTY last_hour: P106 daily QLIKE of mcsGARCH vs this study's,792,792,,,,,0.0,,
+NIFTY last_hour: P99 seed-7 hybrid daily QLIKE vs this study's hybrid,792,792,,,,,,0.0,21.0

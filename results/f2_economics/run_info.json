@@ -1,0 +1,93 @@
+{
+  "study": "P90 F2 economics",
+  "label": "REAL DATA",
+  "prereg_file": "docs/prereg/P90_F2_ECONOMICS.md",
+  "prereg_commit": "236e3dba89ea8abd6bb6ec275e3e4210460c6dc9",
+  "verdict": "not economically meaningful (no net edge)",
+  "dsr_primary": 1.3861116541801853e-12,
+  "seeds": {
+    "P": [
+      20261102,
+      90,
+      0
+    ],
+    "S1": [
+      20261102,
+      90,
+      1
+    ],
+    "S2": [
+      20261102,
+      90,
+      2
+    ],
+    "D": [
+      20261102,
+      90,
+      3
+    ]
+  },
+  "bootstrap": {
+    "B": 10000,
+    "mean_block": 5,
+    "method": "stationary (Politis and Romano 1994), percentile"
+  },
+  "trials": {
+    "N_primary": 824,
+    "N_sensitivity": [
+      82,
+      824,
+      3624
+    ],
+    "V": 0.011222517262812629,
+    "T": 389
+  },
+  "samples": {
+    "train": [
+      "2023-01-02",
+      "2024-12-31"
+    ],
+    "test": [
+      "2025-01-01",
+      "2026-07-31"
+    ],
+    "auction_from": "2026-08-03"
+  },
+  "costs": {
+    "slippage_base_bp_per_side": 1.0,
+    "grid": [
+      0.0,
+      0.5,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "notional_rs": 1500000.0,
+    "brokerage_rs_per_order": 20.0
+  },
+  "replication_r5": {
+    "coef": -0.06819618208278541,
+    "p": 0.00021579685586665392,
+    "n": 929,
+    "coef_on_disk": -0.0681961820827854,
+    "p_on_disk": 0.0002157968558666,
+    "n_on_disk": 929,
+    "abs_diff_coef": 1.3877787807814457e-17,
+    "ok": true
+  },
+  "input_sha256_16": {
+    "results/pipeline_nse_v2/daily_market.csv": "b9f57f0875240996",
+    "results/pipeline_nse_v2/daily_gex_panel.csv": "f0be1a255eb3fde0",
+    "data/raw/nifty_1min.csv": "8ab19906a0a350b4",
+    "results/momentum_gex/regressions.csv": "ccb8b3e005577067",
+    "results/falsification/t7_family_A_original_tests.csv": "a32c6e75711fb02c"
+  },
+  "versions": {
+    "python": "3.13.18",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "statsmodels": "0.15.0",
+    "scipy": "1.18.1"
+  },
+  "runtime_seconds": 3.6
+}
