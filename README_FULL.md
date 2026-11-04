@@ -16,7 +16,7 @@
 
 ## How this work was done
 
-Shreyan directed the project; the code, analyses and documents were produced with extensive AI assistance (Claude, by Anthropic), and most commits list Claude as author. The checks described as independent (the referee-style review in `docs/INDEPENDENT_REVIEW.md`, the blind re-key in `docs/REKEY_CHECK.md` and later referee reports) were done by separate AI agents, not by people. Every number comes from code and data in this repository: `python scripts/reproduce_all.py` regenerates the main pipeline and the earlier studies, and each later registered study's document gives its own commands (see `docs/REPRODUCIBILITY.md`). "Pre-registered" or "registered" here means an analysis plan committed to git before that study's results were computed (no external registry); only the two forward tests (`docs/prereg/FORWARD_TEST.md` and `docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md`) were committed before their data existed.
+The project is the joint work of Shreyan Thanki, Atharva Bhardwaj and Arjun Bino Nair; the code, analyses and documents were produced with extensive AI assistance (Claude, by Anthropic), and most commits list Claude as author. The checks described as independent (the referee-style review in `docs/INDEPENDENT_REVIEW.md`, the blind re-key in `docs/REKEY_CHECK.md` and later referee reports) were done by separate AI agents, not by people. Every number comes from code and data in this repository: `python scripts/reproduce_all.py` regenerates the main pipeline and the earlier studies, and each later registered study's document gives its own commands (see `docs/REPRODUCIBILITY.md`). "Pre-registered" or "registered" here means an analysis plan committed to git before that study's results were computed (no external registry); only the two forward tests (`docs/prereg/FORWARD_TEST.md` and `docs/prereg/P112_FORWARD_MCSGARCH_FIXES.md`) were committed before their data existed.
 
 ## Why this question
 
@@ -138,4 +138,4 @@ Full list with verification status in [docs/LITERATURE_REVIEW.md](docs/LITERATUR
 
 ## Author
 
-Shreyan Thanki ([@ShockXR](https://github.com/ShockXR))
+Shreyan Thanki, Atharva Bhardwaj and Arjun Bino Nair. Repository: [@ShockXR](https://github.com/ShockXR)
