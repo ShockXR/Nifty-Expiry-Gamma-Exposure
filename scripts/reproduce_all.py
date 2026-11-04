@@ -230,6 +230,13 @@ OPTIONAL = {  # studies added later; run if the script exists
                           "results/p118_hybrid_on_paper_mcsgarch/run_stdout_finnifty.txt"),
     "p118_analyze": ([PY, "experiments/p118_hybrid_on_paper_mcsgarch.py", "analyze", "--plan-commit", "49d19ce2779451e13cbf868d325a651c4da6a1f4"], "results/p118_hybrid_on_paper_mcsgarch/",
                      "results/p118_hybrid_on_paper_mcsgarch/analyze_stdout.txt"),
+    # A5 perturbation reruns of the hybrid (docs/A5_PERTURBATION.md; plan docs/prereg/A5_PERTURBATION.md): the 12
+    # registered perturbations of hybrid_base at next30, about 30 minutes on one core. Needs data/raw and
+    # results/pipeline_nse_v2 (the baseline run is checked against its forecasts). The committed run used
+    # --stop-after 33 (a wall-clock cap of the backtest pass); this step runs the full list.
+    "a5_perturbation_next30": ([PY, "experiments/a5_perturbation.py", "--target", "next30", "--perturbation", "all",
+                                "--out", "results/a5_perturbation"],
+                               "results/a5_perturbation/", "results/a5_perturbation/run_stdout_next30.txt"),
     "test_ledger": ([PY, "scripts/build_test_ledger.py"], "results/test_ledger.csv"),
     "number_trace": ([PY, "scripts/trace_numbers.py", "--quiet"], "results/number_trace/"),
 }
@@ -257,6 +264,7 @@ REGISTERED_RESULTS = {
     "P116_BENCHMARK_AS_PRINTED": "p116_benchmark_as_printed",
     "P117_PERSISTENCE_PLACEBO": "p117_persistence_placebo",
     "P118_HYBRID_ON_PAPER_MCSGARCH": "p118_hybrid_on_paper_mcsgarch",
+    "A5_PERTURBATION": "a5_perturbation",
 }
 # Forward tests use data after 2 November 2026 and run with scripts/forward_test.py, not here.
 FORWARD_TESTS = ("FORWARD_TEST", "P112_FORWARD_MCSGARCH_FIXES")

@@ -27,3 +27,24 @@ jobs:
           python -m pip install ".[download]" pytest
       - name: Run the tests (synthetic fixtures only, no market data needed)
         run: python -m pytest -q
+
+  pytest-pinned:
+    # The exact versions in requirements-tested.txt, which produced the committed results.
+    # The three jobs above install the newest versions instead.
+    runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install the pinned versions and the package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-tested.txt pytest
+          python -m pip install -e . --no-deps
+      - name: Run the tests (synthetic fixtures only, no market data needed)
+        run: python -m pytest -q

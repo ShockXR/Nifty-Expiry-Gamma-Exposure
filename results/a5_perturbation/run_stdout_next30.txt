@@ -1,0 +1,18 @@
+[REAL DATA] A5 perturbation study, target next30, runs ['baseline', 'lr_half', 'lr_double', 'leaves_7', 'leaves_31', 'min_leaf_half', 'min_leaf_double', 'noise_10', 'noise_25', 'block_42', 'min_train_250', 'single_seed']
+[REAL DATA] settings identical to the headline run
+market loaded: 942 days, 2023-01-02 00:00:00 to 2026-11-02 00:00:00 (120s)
+dataset next30 built: 22584 rows (399s)
+  baseline         days  792 QLIKE hybrid 0.200910 mcsgarch 0.217551 gain +7.649% DM 7.94 p 3.57e-15 PASS 0s REPRODUCED EXACTLY (elapsed 6.7 min)
+  lr_half          days  792 QLIKE hybrid 0.200256 mcsgarch 0.217551 gain +7.950% DM 7.82 p 8.51e-15 PASS 237s (elapsed 10.6 min)
+  lr_double        days  792 QLIKE hybrid 0.199872 mcsgarch 0.217551 gain +8.126% DM 7.38 p 1.94e-13 PASS 64s (elapsed 11.7 min)
+  leaves_7         days  792 QLIKE hybrid 0.200770 mcsgarch 0.217551 gain +7.714% DM 7.40 p 1.74e-13 PASS 114s (elapsed 13.6 min)
+  leaves_31        days  792 QLIKE hybrid 0.200664 mcsgarch 0.217551 gain +7.762% DM 7.99 p 2.40e-15 PASS 107s (elapsed 15.3 min)
+  min_leaf_half    days  792 QLIKE hybrid 0.200039 mcsgarch 0.217551 gain +8.049% DM 7.06 p 1.87e-12 PASS 100s (elapsed 17.0 min)
+  min_leaf_double  days  792 QLIKE hybrid 0.201145 mcsgarch 0.217551 gain +7.541% DM 7.36 p 2.32e-13 PASS 111s (elapsed 18.9 min)
+  noise_10         days  792 QLIKE hybrid 0.200022 mcsgarch 0.217551 gain +8.057% DM 7.22 p 5.94e-13 PASS 152s (elapsed 21.4 min)
+  noise_25         days  792 QLIKE hybrid 0.201260 mcsgarch 0.217551 gain +7.488% DM 7.27 p 4.44e-13 PASS 130s (elapsed 23.6 min)
+  block_42         days  792 QLIKE hybrid 0.203295 mcsgarch 0.219984 gain +7.587% DM 7.76 p 1.32e-14 PASS 45s (elapsed 24.3 min)
+  min_train_250    days  692 QLIKE hybrid 0.207003 mcsgarch 0.224911 gain +7.962% DM 7.63 p 3.93e-14 PASS 123s (elapsed 26.4 min)
+  single_seed      days  792 QLIKE hybrid 0.201330 mcsgarch 0.217551 gain +7.456% DM 7.89 p 4.89e-15 PASS 37s (elapsed 27.0 min)
+done in 27.0 min
+EXIT 0

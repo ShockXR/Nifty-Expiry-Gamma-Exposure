@@ -1009,6 +1009,8 @@ def main():
     ap.add_argument("--out", default=str(ROOT / "results" / "referee_expiry"))
     ap.add_argument("--boot", type=int, default=4999)
     ap.add_argument("--fetch-nse", action="store_true", help="download NSE's full F&O bhavcopies (about 15 minutes) and stop")
+    ap.add_argument("--end", default="2026-11-02", help="last raw-data date read by the event-study loader (the committed "
+                    "run's snapshot ended on 2026-11-02); 'none' reads everything on disk")
     a = ap.parse_args()
     t0 = time.time()
     raw, ext_dir, out = Path(a.raw), Path(a.ext), Path(a.out)
@@ -1019,7 +1021,7 @@ def main():
     L = ["REAL DATA (BSE calendar reported, not verified). Referee response on the expiry evidence: M8, M9, M10. POST HOC.", ""]
 
     # ------------------------------------------------------------------ data, exactly as in the event study
-    D = es.build_data(raw)
+    D = es.build_data(raw, None if str(a.end).lower() == "none" else pd.Timestamp(a.end))
     daily, expiries = D["daily"], D["expiries"]
     events = es.define_events(D["changes"], D["auction_start"])
     ev = events.set_index("event")["event_week"]

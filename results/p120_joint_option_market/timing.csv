@@ -1,0 +1,17 @@
+data,index,target,seed,variants,n_variants,seconds,rows,pid
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next30,7,optionmkt,1,297.1,15840,7553
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next15,7,optionmkt,1,357.9,16500,7552
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next15,101,optionmkt,1,383.5,16500,10114
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next30,101,optionmkt,1,323.7,15840,10573
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next30,102,optionmkt,1,185.8,15840,12708
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next15,102,optionmkt,1,218.7,16500,12704
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next30,103,optionmkt,1,133.0,15840,14279
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next15,103,optionmkt,1,168.4,16500,14091
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next30,104,optionmkt,1,108.2,15840,15359
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,next15,104,optionmkt,1,130.4,16500,15348
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,last_hour,7,full+optionmkt,2,109.2,660,16117
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,last_hour,101,full+optionmkt,2,105.7,660,16253
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,last_hour,102,full+optionmkt,2,92.8,660,16987
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,last_hour,103,full+optionmkt,2,95.1,660,17151
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",BANKNIFTY,last_hour,104,full+optionmkt,2,92.2,660,17685
+"REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",NIFTY,next15,7,optionmkt,1,122.0,19800,18347

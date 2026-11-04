@@ -1,0 +1,209 @@
+{
+  "source": "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",
+  "data": "REAL DATA: NSE bhavcopy, participant OI and India VIX; third-party 1-minute index bars validated against NSE daily values",
+  "study": "P120 joint option market (docs/prereg/P120_JOINT_OPTION_MARKET.md)",
+  "plan_commit": "30da69ea0ca6030569693ad410880b5361450193",
+  "analysis_commit": "5f68709835f58b2c823707e6360308dcb74822ca",
+  "commands": [
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p120_joint_option_market.py run --index BANKNIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p120_joint_option_market.py run --index FINNIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p120_joint_option_market.py run --index NIFTY --workers 2",
+    "PYTHONPATH=src OMP_NUM_THREADS=1 python experiments/p120_joint_option_market.py analyze --plan-commit <plan commit>"
+  ],
+  "variant": "optionmkt",
+  "drop_set": [
+    "log_impvar_day",
+    "log_impvar_to_exp",
+    "log_iv_m21",
+    "log_fwdvar_day",
+    "exp_premium",
+    "term_slope",
+    "skew_near",
+    "smile_near",
+    "skew_m21",
+    "log_pcr_oi_near",
+    "log_pcr_vol_near",
+    "log_pcr_oi_all",
+    "vrp_w",
+    "abs_ret_today_sd",
+    "log_mcs_iv",
+    "log_implied_window",
+    "log_vix"
+  ],
+  "pipeline_settings": {
+    "source": "nse",
+    "start": "2023-01-01",
+    "min_coverage": 0.95,
+    "rate": 0.065,
+    "oi_unit": "keep_units",
+    "lot_size": null,
+    "tune": false,
+    "tune_every": 3,
+    "n_seeds": 5,
+    "seed": 7,
+    "min_train": 150,
+    "block": 21,
+    "mcs_refit_every": 21,
+    "holdout_start": "2025-07-01"
+  },
+  "synthetic_settings": null,
+  "seeds": {
+    "all": [
+      7,
+      101,
+      102,
+      103,
+      104
+    ],
+    "primary_sample": "daily QLIKE averaged over seed sets 7, 101, 102, 103, 104",
+    "lgbm_seeds": {
+      "7": [
+        7,
+        1007,
+        2007,
+        3007,
+        4007
+      ],
+      "101": [
+        101,
+        1101,
+        2101,
+        3101,
+        4101
+      ],
+      "102": [
+        102,
+        1102,
+        2102,
+        3102,
+        4102
+      ],
+      "103": [
+        103,
+        1103,
+        2103,
+        3103,
+        4103
+      ],
+      "104": [
+        104,
+        1104,
+        2104,
+        3104,
+        4104
+      ]
+    }
+  },
+  "margin_points": 1.0,
+  "sensitivity_margin_points": 0.5,
+  "alpha": 0.05,
+  "bootstrap": {
+    "reps": 10000,
+    "mean_block_days": 10.0,
+    "seed": 120
+  },
+  "influence_dates": [
+    "2024-06-04",
+    "2024-06-05"
+  ],
+  "top_share": 0.01,
+  "reference_files_sha256": {
+    "results/p106_gain_decomposition/daily_losses_nifty_last_hour_s7.csv": "68f042a58e0ab096abfbd4a56cc6b00de881c7239fe242fecd31aab07a57c2de",
+    "results/p106_gain_decomposition/daily_losses_nifty_next15_s101.csv": "66f456e43fa5446ad4d549cf44c2059a67571ab777019168662dbbd1487a0b7c",
+    "results/p106_gain_decomposition/daily_losses_nifty_next15_s102.csv": "32fb9dd6b786df2cf3a426e4be0d2a9f60510420d4d2c5451347325d0516cc9f",
+    "results/p106_gain_decomposition/daily_losses_nifty_next15_s103.csv": "31ebb5836e52b1c1cb0db15d3c75c0f2f42e642697b54ec0b24eac82422972ea",
+    "results/p106_gain_decomposition/daily_losses_nifty_next15_s104.csv": "e2cc88d4baffa6c3b19119c662a10d4da36179025b15180dc2d6b4e56dc1f53f",
+    "results/p106_gain_decomposition/daily_losses_nifty_next15_s7.csv": "41a6a177922e0bcc34b6475f771b89c55ad87cfbdcf2a1c846ac4055ff126026",
+    "results/p106_gain_decomposition/daily_losses_nifty_next30_s101.csv": "b5338d4d9ffb10e20435a0309269cd48d0da01136d560eae2480c20bd8e7e0c5",
+    "results/p106_gain_decomposition/daily_losses_nifty_next30_s102.csv": "870662f42188679bf552b4152af456ffb4d01a961039351e1152f29edd254a96",
+    "results/p106_gain_decomposition/daily_losses_nifty_next30_s103.csv": "4be920ab1ab0545e94c9dd10e75ec0412732e3670431459ba7c542ce7a3d8e7f",
+    "results/p106_gain_decomposition/daily_losses_nifty_next30_s104.csv": "f488509f8c95d3d39835a633ca8a991441b9c59c2962356f915dd4b150ba77ef",
+    "results/p106_gain_decomposition/daily_losses_nifty_next30_s7.csv": "250e01280d75769db5a6e7671fcb1ed1e90a66f16d67a8be69c0d7d524860554",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next15_s101.csv": "98c02c787d4bbb3d6a6d6154e90fe14a5520ab55034caa6e604327b71a059fa6",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next15_s102.csv": "1ec9bf1390dcb09f7c40d1000ea567f3cef98b6352f4c2102f3c42aae60d916d",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next15_s103.csv": "fd06723aaa2cdce006548e186017798efea8edd86e576cfcc71964ba7fc1c0a0",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next15_s104.csv": "d8c2e14e9ef9bd4d9c703285b10232a8c5ff455be05a32ebe8f50e84effaba06",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next15_s7.csv": "7dc4b6c71fb52cb7a8d7177eb07164926a797a0b5f3bf87f21216a46cb587d22",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next30_s101.csv": "3468860d61981a37bed973baf5e06ebfb100ec89178134b3bad47537a7877bff",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next30_s102.csv": "0405ec70427c8203ba7802524acd261f4afa2462c37d209205fe31fc910f7480",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next30_s103.csv": "4d91a5c02251b75a156711b8c6ed03f018a90d08076ba4f3b72abadaec7ef016",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next30_s104.csv": "3bc58fd99a44fbd91d7823ed8f96f15c660ebee544a424a25bac01e5cb66b3ee",
+    "results/p110_gain_stress_test/daily_losses_banknifty_next30_s7.csv": "ffae0ee7499544b88517c72137717387ab8c08ac2606e6120f1580d32b8de65a",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next15_s101.csv": "bc3bae41bca2f7909da7115017ddf0bb4821e40f5c22434ea7ed285b11d2a04c",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next15_s102.csv": "bbbc1d7e49893c74ee47ca257ae31d2a8c90ec77859a73de33e1e6a82e418afe",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next15_s103.csv": "aacafcf2b9ef87e79bb646e064f455803926057c458e9fea8f1b16892eceabd0",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next15_s104.csv": "7c9f541a3d4654fa08fc7fd5924e242364d68b550646380c2f61075398c7e926",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next15_s7.csv": "2203165ec5a7401d5e13568751c31de452f5050106ee418d10eaf16f4704a807",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next30_s101.csv": "086394af57522958a58e1ec92cb81548e0380426cbe019ce2c9c3680ec8deb48",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next30_s102.csv": "96424a1449de5583c04d44e4a25219f021efad7df5b554a49eed2c8398114f17",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next30_s103.csv": "d5408637248e2b41674ccadf89626088c975eedc833a4405e585a7e1162292d4",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next30_s104.csv": "f685a9bdcb11a9a61d1553c2bfdc871d03c5db75543fa8c5b404cb81ea0ca5d8",
+    "results/p110_gain_stress_test/daily_losses_finnifty_next30_s7.csv": "0599abfe5cfa2a02911deea98326b64f9542e984a4736c8c5b5764ad6f14b7e2",
+    "results/seed_bootstrap/daily_losses_last_hour.csv": "9590901f4a2ddeef2ab2f990ef1fadeaec1e4a1f16927b65e774d8d8bcc7e408"
+  },
+  "daily_loss_files_written": [
+    "daily_losses_banknifty_last_hour_s7.csv",
+    "daily_losses_banknifty_last_hour_s101.csv",
+    "daily_losses_banknifty_last_hour_s102.csv",
+    "daily_losses_banknifty_last_hour_s103.csv",
+    "daily_losses_banknifty_last_hour_s104.csv",
+    "daily_losses_banknifty_next15_s7.csv",
+    "daily_losses_banknifty_next15_s101.csv",
+    "daily_losses_banknifty_next15_s102.csv",
+    "daily_losses_banknifty_next15_s103.csv",
+    "daily_losses_banknifty_next15_s104.csv",
+    "daily_losses_banknifty_next30_s7.csv",
+    "daily_losses_banknifty_next30_s101.csv",
+    "daily_losses_banknifty_next30_s102.csv",
+    "daily_losses_banknifty_next30_s103.csv",
+    "daily_losses_banknifty_next30_s104.csv"
+  ],
+  "input_sha256": {
+    "NIFTY": {
+      "nifty_1min.csv": "5c596bfd0e1bf838f4eb47ced2dcc71f030367786bfc2046c2c8e7cd565d2103",
+      "index_daily.csv": "a594508c92d8b19c93cba6a50a8861018e49b476550dcdb51387e26b7c45f738",
+      "india_vix.csv": "14650b08d629ef1ab7149882ad561be8f87a0f8c3d035197c82bc767c8d08567",
+      "bhavcopy/ (945 files)": "70d0bbb83d493bff4c0074f8ad2822192b0ada21808ef24c10343f4c8fa7bb41",
+      "participant_oi/ (945 files)": "b5386e1051d73726d4eb027b81980167f14dab18a41b38a6236ab0aabb1fae38",
+      "manifest_check": {
+        "files_matching_manifest": 1888,
+        "files_differing": 3,
+        "files_not_in_manifest": 2
+      }
+    },
+    "BANKNIFTY": {
+      "banknifty_1min.csv": "83babf6fbabc14c6078f53432246c67b7a8a77b603c901346a84b2e2c944823b",
+      "index_daily.csv": "a594508c92d8b19c93cba6a50a8861018e49b476550dcdb51387e26b7c45f738",
+      "india_vix.csv": "14650b08d629ef1ab7149882ad561be8f87a0f8c3d035197c82bc767c8d08567",
+      "bhavcopy/ (945 files)": "70d0bbb83d493bff4c0074f8ad2822192b0ada21808ef24c10343f4c8fa7bb41",
+      "participant_oi/ (945 files)": "b5386e1051d73726d4eb027b81980167f14dab18a41b38a6236ab0aabb1fae38",
+      "manifest_check": {
+        "files_matching_manifest": 1889,
+        "files_differing": 2,
+        "files_not_in_manifest": 2
+      }
+    }
+  },
+  "seconds_stage1_jobs": 2923.7,
+  "stage1_wall_clock": {
+    "NIFTY": {
+      "start_utc": "2026-11-04T02:38:51Z",
+      "end_utc": "2026-11-04T02:43:19Z",
+      "minutes": 4.5
+    },
+    "BANKNIFTY": {
+      "start_utc": "2026-11-04T02:12:09Z",
+      "end_utc": "2026-11-04T02:37:54Z",
+      "minutes": 25.8
+    }
+  },
+  "seconds_stage2": 3.3,
+  "python": "3.13.18",
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "lightgbm": "4.7.0",
+    "arch": "8.0.0",
+    "scipy": "1.18.1"
+  }
+}

@@ -1,0 +1,6 @@
+[REAL DATA] P120 joint option market, stage 1, NIFTY: 1 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/data/processed/p120); workers 1
+market loaded: 942 days, 2023-01-02 00:00:00 to 2026-11-02 00:00:00 (47s)
+panels and datasets built (193s)
+  [1/1] NIFTY next15 seed 7 optionmkt: 19800 forecasts, 122s (elapsed 5.3 min)
+stage 1 (NIFTY) done in 5.3 min
+EXIT 0

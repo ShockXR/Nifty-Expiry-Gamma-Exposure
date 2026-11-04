@@ -1,0 +1,7 @@
+target,benchmark,n_days,n_alternatives,share_alternatives_with_lower_mean_loss,best_alternative_by_t,its_gain_pct,best_alternative_by_gain,best_gain_pct,t_spa,spa_p_consistent,spa_p_lower,spa_p_upper,reality_check_p,draws,mean_block_days,seed
+next15,mcsgarch,660,32,0.75,hybrid_gex_client,4.525585088487693,hybridiv_gex_us,6.535292181760877,9.002640682833517,0.0,0.0,0.0,0.6244,5000,10.0,9700001
+next15,hybrid_base,660,32,0.375,hybrid_gex_gross,0.8414052364978941,hybridiv_gex_us,2.721928223507275,2.8526313465841016,0.0272,0.0254,0.0348,0.7828,5000,10.0,9700001
+next30,mcsgarch,660,32,0.78125,hybrid_gex_gross,5.233223732442638,hybridiv_gex_participant,8.052478289255461,7.966157614433035,0.0,0.0,0.0,0.4898,5000,10.0,9700001
+next30,hybrid_base,660,32,0.3125,hybridiv_gex_participant,3.179959090859219,hybridiv_gex_participant,3.179959090859219,1.8963970890276793,0.205,0.1494,0.2794,0.7636,5000,10.0,9700001
+last_hour,mcsgarch,660,31,0.8387096774193549,hybrid_gex_us,8.297676323966364,linear_gex_us,12.12715773779055,5.645906282952643,0.0,0.0,0.0,0.5666,5000,10.0,9700001
+last_hour,hybrid_base,660,31,0.4838709677419355,linear_gex_us,4.371159554943748,linear_gex_us,4.371159554943748,1.359998854700216,0.5186,0.4008,0.6562,0.8762,5000,10.0,9700001

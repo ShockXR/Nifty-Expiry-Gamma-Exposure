@@ -37,7 +37,7 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | Synthetic market with a switchable dealer-gamma effect | `niftygex.simulate` | used for all validation |
 | Forecast ladder, walk-forward, QLIKE/MSE, Diebold-Mariano, Model Confidence Set, GEX ablation | `niftygex.forecast`, `niftygex.evaluation` | experiment E4 |
 
-753 tests at the time of writing, run with `pytest` (also on every pull request through GitHub Actions): 743 pass, 7 are skipped when `data/raw` is absent (they check real Bank Nifty and Fin Nifty data) and 3 are expected failures that pin known defects listed in `reports/CODE_AUDIT.md` (a full run on 3 November 2026 after the validation audit; 708 passed before it).
+840 tests at the time of writing, run with `pytest` (also on every pull request through GitHub Actions, including one job with the pinned versions): 830 pass, 7 are skipped when `data/raw` is absent (they check real Bank Nifty and Fin Nifty data; with the raw data present 834 pass and 3 are skipped) and 3 are expected failures that pin known defects listed in `reports/CODE_AUDIT.md` (a full run on 4 November 2026 after the second backtest round; 777 passed after the GEX input checks, 743 after the validation audit of 3 November and 708 before it).
 
 ## Documents
 
@@ -58,6 +58,14 @@ A well-studied mechanism is option dealers' hedging. When dealers are net short 
 | [docs/DEALER_SIGN.md](docs/DEALER_SIGN.md) | **Real data:** estimating the dealer sign from the market's response (a negative result) |
 | [docs/INTRADAY_GAMMA.md](docs/INTRADAY_GAMMA.md) | **Real data:** expiry-day gamma re-priced minute by minute |
 | [docs/INDEPENDENT_REVIEW.md](docs/INDEPENDENT_REVIEW.md) | A referee-style review of the real-data results, and what changed because of it |
+| [docs/BACKTEST_EXTENDED.md](docs/BACKTEST_EXTENDED.md) | **Real data:** the hybrid's gain by regime, under other losses, against data snooping and on Bank Nifty and Fin Nifty |
+| [docs/NULL_WORLD_SIZE_TEST.md](docs/NULL_WORLD_SIZE_TEST.md) | **Synthetic:** does the walk-forward invent a gain over mcsGARCH when mcsGARCH is the true model? |
+| [reports/BACKTEST_ROUND2_SUMMARY.md](reports/BACKTEST_ROUND2_SUMMARY.md) | Summary of the second backtest and validation round, with links to each report |
+| [reports/BACKTEST_EXTENDED_REVIEW.md](reports/BACKTEST_EXTENDED_REVIEW.md) | Independent check of the extended backtest statistics |
+| [reports/REPRODUCTION_RERUN.md](reports/REPRODUCTION_RERUN.md) | Rerun of the quick reproduction steps against the committed outputs |
+| [reports/POST_MERGE_HEALTH.md](reports/POST_MERGE_HEALTH.md) | Repository health after the merge: tests, number trace, CI and raw-data integrity |
+| [reports/PR4_GEX_REVIEW.md](reports/PR4_GEX_REVIEW.md) | Review of the GEX engine's input checks on real option chains |
+| [reports/LIVE_DEMO_2026-11-04.md](reports/LIVE_DEMO_2026-11-04.md) | Live demonstration on 4 November 2026 and the forward-test guard check |
 | [results/live/](results/live/) | **Real data:** a forecast frozen before the 3 November 2026 expiry, scored after the close |
 | [notebooks/01_real_data_tour.ipynb](notebooks/01_real_data_tour.ipynb) | **Real data:** a guided tour with charts (option chain, GEX profile, an expiry day, the scoreboard) |
 | [docs/DATA_ACQUISITION.md](docs/DATA_ACQUISITION.md) | How the real data are downloaded and checked |
@@ -83,7 +91,8 @@ python experiments/paper_checks.py
 python experiments/inference_checks.py
 python experiments/power_study.py --reps 8 --days 500
 
-# Real data (see docs/DATA_ACQUISITION.md)
+# Real data (see docs/DATA_ACQUISITION.md). The download scripts need the "requests" package, which is in the optional "download" group:
+pip install -e ".[download]"
 python scripts/download_nse.py --start 2023-01-01 --end 2026-11-02 --out data/raw
 python scripts/fetch_minute_bars.py
 python scripts/validate_minute_bars.py

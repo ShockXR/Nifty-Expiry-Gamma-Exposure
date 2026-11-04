@@ -1,0 +1,20 @@
+[REAL DATA] P120 joint option market, stage 1, BANKNIFTY: 15 jobs to run (0 already in /home/user/nifty-expiry-gamma-exposure/data/processed/p120); workers 2
+market loaded: 810 days, 2023-01-02 00:00:00 to 2026-04-22 00:00:00 (46s)
+panels and datasets built (153s)
+  [1/15] BANKNIFTY next15 seed 7 optionmkt: 16500 forecasts, 358s (elapsed 8.5 min)
+  [2/15] BANKNIFTY next30 seed 7 optionmkt: 15840 forecasts, 297s (elapsed 8.5 min)
+  [3/15] BANKNIFTY next15 seed 101 optionmkt: 16500 forecasts, 384s (elapsed 13.9 min)
+  [4/15] BANKNIFTY next30 seed 101 optionmkt: 15840 forecasts, 324s (elapsed 13.9 min)
+  [5/15] BANKNIFTY next15 seed 102 optionmkt: 16500 forecasts, 219s (elapsed 17.5 min)
+  [6/15] BANKNIFTY next30 seed 102 optionmkt: 15840 forecasts, 186s (elapsed 17.5 min)
+  [7/15] BANKNIFTY next15 seed 103 optionmkt: 16500 forecasts, 168s (elapsed 19.8 min)
+  [8/15] BANKNIFTY next30 seed 103 optionmkt: 15840 forecasts, 133s (elapsed 19.8 min)
+  [9/15] BANKNIFTY next15 seed 104 optionmkt: 16500 forecasts, 130s (elapsed 21.9 min)
+  [10/15] BANKNIFTY next30 seed 104 optionmkt: 15840 forecasts, 108s (elapsed 21.9 min)
+  [11/15] BANKNIFTY last_hour seed 7 full+optionmkt: 660 forecasts, 109s (elapsed 23.4 min)
+  [12/15] BANKNIFTY last_hour seed 101 full+optionmkt: 660 forecasts, 106s (elapsed 23.7 min)
+  [13/15] BANKNIFTY last_hour seed 102 full+optionmkt: 660 forecasts, 93s (elapsed 25.0 min)
+  [14/15] BANKNIFTY last_hour seed 103 full+optionmkt: 660 forecasts, 95s (elapsed 25.3 min)
+  [15/15] BANKNIFTY last_hour seed 104 full+optionmkt: 660 forecasts, 92s (elapsed 26.5 min)
+stage 1 (BANKNIFTY) done in 26.5 min
+EXIT 0
