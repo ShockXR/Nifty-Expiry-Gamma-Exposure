@@ -56,7 +56,7 @@ Evidence that no committed GEX panel changes (OUR CHECK): none of the six commit
 git checkout main
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-tested.txt pytest && pip install -e . --no-deps
-OMP_NUM_THREADS=1 python -m pytest -q -p no:cacheprovider      # expect 777 passed, 7 skipped, 3 xfailed
+OMP_NUM_THREADS=1 python -m pytest -q -p no:cacheprovider      # expect 830 passed, 7 skipped, 3 xfailed (834 passed, 3 skipped with data/raw)
 python scripts/trace_numbers.py                                 # expect 664 MATCH, 0 MISMATCH
 ```
 
